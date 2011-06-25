@@ -1,0 +1,30 @@
+#Console2Window.insidebar toolbarbutton image {
+	max-width: 16px;
+	max-height: 16px;
+}
+#JSConsoleWindow.insidebar toolbarbutton image {
+	max-width: 20px;
+	max-height: 20px;
+}
+
+#Console2Window.insidebar #ToolbarMode toolbarbutton label {
+	display: none;
+}
+#Console2Window.insidebar #ToolbarMode toolbarbutton image {
+	margin-right: 3px;
+}
+
+#ConsoleBox.insidebar { 
+	margin: 0; 
+}
+
+/* These are so message rows don't get a ridiculous width, the first are just for the dots (supposedly) pointing to the part of the code that's errored */
+#JSConsoleWindow.insidebar .console-row-code > box,
+#JSConsoleWindow.insidebar .console-row spacer { 
+	display: none;
+}
+#JSConsoleWindow.insidebar .console-row-file .console-error-source,
+#JSConsoleWindow.insidebar .console-row-file {
+	display: block !important;
+	width: auto !important;
+}

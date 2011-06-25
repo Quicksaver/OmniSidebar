@@ -1,0 +1,63 @@
+<!ENTITY addonsSidebar.label "Add-ons Manager">
+<!ENTITY addonsSidebar.tooltip "Open the Add-ons Manager in the Sidebar">
+<!ENTITY DOMInspectorSidebar.label "DOM Inspector">
+<!ENTITY DOMInspectorSidebar.tooltip "Open the DOM Inspector in the Sidebar">
+<!ENTITY BlankSidebar.label "Blank Page">
+<!ENTITY BlankSidebar.tooltip "Open a blank page in the Sidebar">
+<!ENTITY URISidebar.label "">
+<!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
+<!ENTITY URISidebar.buttonLabel "Go">
+
+<!ENTITY omnisidebarToolbar.label "Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.label "Twin Sidebar Toolbar">
+<!ENTITY omnisidebarOptions.title "OmniSidebar Options">
+
+<!ENTITY omnisidebarButton.label "Sidebar">
+<!ENTITY omnisidebarButtonMain.label "Main Sidebar">
+<!ENTITY omnisidebarButtonTwin.label "Twin Sidebar">
+<!ENTITY omnisidebarButton.tooltip "Open Sidebar">
+<!ENTITY omnisidebarButtonMain.tooltip "Open Main Sidebar">
+<!ENTITY omnisidebarButtonTwin.tooltip "Open Twin Sidebar">
+<!ENTITY omnisidebarButtonClose.tooltip "Close Sidebar">
+<!ENTITY omnisidebarButtonMainClose.tooltip "Close Main Sidebar">
+<!ENTITY omnisidebarButtonTwinClose.tooltip "Close Twin Sidebar">
+
+<!ENTITY omnisidebarOptMisc.label "Global">
+<!ENTITY omnisidebarOptgroupMain.label "Main Sidebar Position">
+<!ENTITY omnisidebarOptgroupTwin.label "Twin Sidebar Position">
+<!ENTITY omnisidebarOptgroupicons.label "SideToolbar Buttons Iconset">
+<!ENTITY omnisidebarOptgroupgen.label "Appearance">
+<!ENTITY omnisidebarOptgroupbtns.label "Additional Buttons (open in the sidebar)">
+<!ENTITY omnisidebarOptgroupperformance.label "Performance">
+<!ENTITY omnisidebarOptgroupstyle.label "Sidebars style">
+<!ENTITY omnisidebarOptgroupdev.label "Developer Tools">
+<!ENTITY omnisidebarOptgroupkeyset.label "Sidebar Keyboard Shortcut">
+
+<!ENTITY omnisidebarOptdevTools.label "Activate Developers SideToolbar">
+
+<!ENTITY omnisidebarOptkeysetItem0.label "Main: Ctrl+Shift + S              Twin: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem1.label "Main: Ctrl+Alt + S                 Twin: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem2.label "Main: Ctrl+Shift + L              Twin: Ctrl+Alt+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem3.label "Main: Ctrl+Shift + S              Twin: Ctrl+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem4.label "Main: Ctrl+Shift + L              Twin: Ctrl+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem5.label "Main: Ctrl + F6                      Twin: Ctrl+Shift + F6">
+<!ENTITY omnisidebarOptkeysetItem6.label "Main: Ctrl+Shift + PageUp   Twin: Ctrl+Shift + PageDown">
+
+<!ENTITY omnisidebarOptsidebars.leftlabel "Place on the left">
+<!ENTITY omnisidebarOptsidebars.rightlabel "Place on the right">
+<!ENTITY omnisidebarOptsidebars.twinlabel "Enable the Twin Sidebar on the opposite side">
+<!ENTITY omnisidebarOptrenderabove.label "Undock from the browser window and auto-hide it">
+<!ENTITY omnisidebarOpttitleButton.label "Sidebar menu dropdown in title">
+
+<!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
+<!ENTITY omnisidebarOptdisablefx.label "Disable visual effects (sliding transitions when auto-hiding)">
+
+<!ENTITY omnisidebarOptalternatebtns.label "Alternate SideToolbar button style">
+<!ENTITY omnisidebarOpthideheadertoolbar.label "Hide SideToolbar">
+<!ENTITY omnisidebarOpthideheadertitle.label "Hide sidebar title">
+<!ENTITY omnisidebarOpthideheaderdock.label "Hide docking button">
+<!ENTITY omnisidebarOpthideheaderclose.label "Hide close button">
+
+<!ENTITY omnisidebarOptcoloricons.nochangelabel "Default (no change)">
+<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
+<!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">

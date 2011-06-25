@@ -1,0 +1,270 @@
+/* Buttons */
+@import url("chrome://omnisidebar-os/skin/icons.css");
+
+#omnisidebar_button, #omnisidebar_button-twin { list-style-image: url("chrome://omnisidebar/skin/osb-button.png"); }
+
+#omnisidebar_button:not([movetoright]):not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
+#omnisidebar_button:not([movetoright])[updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
+#omnisidebar_button:not([movetoright]):not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
+#omnisidebar_button:not([movetoright])[updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
+
+#omnisidebar_button-twin:not([movetoleft]):not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
+#omnisidebar_button-twin:not([movetoleft])[updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
+#omnisidebar_button-twin:not([movetoleft]):not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
+#omnisidebar_button-twin:not([movetoleft])[updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
+
+#omnisidebar_button[movetoright]:not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
+#omnisidebar_button[movetoright][updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
+#omnisidebar_button[movetoright]:not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
+#omnisidebar_button[movetoright][updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
+
+#omnisidebar_button-twin[movetoleft]:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
+#omnisidebar_button-twin[movetoleft][updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
+#omnisidebar_button-twin[movetoleft]:not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
+#omnisidebar_button-twin[movetoleft][updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
+
+#omnisidebar_button > .toolbarbutton-icon,
+#omnisidebar_button-twin > .toolbarbutton-icon {
+	max-width: 16px;
+	max-height: 16px;
+}
+
+.omnisidebar-docker {
+	list-style-image: url("chrome://omnisidebar/skin/undock-button.png"); 
+	-moz-image-region: rect(0px 16px 16px 0px);
+	-moz-appearance: none;
+	border-radius: 3px;
+	border: 1px solid rgba(0,0,0,0);
+	padding: 1px;
+}
+.omnisidebar-docker[omnisidebardock] {
+	-moz-image-region: rect(0px 32px 16px 16px);
+}
+.omnisidebar-docker image {
+	width: 16px;
+	height: 16px;
+}
+.omnisidebar-docker:hover {
+	border: 1px solid rgba(0,0,0,.2);
+	background-color: rgba(0,0,0,.1);
+	box-shadow: 0px 0px 3px rgba(0,0,0,.2) inset, 0px 0px 2px rgba(255,255,255,0.4);
+}
+
+.omnisidebar-devTools-button {
+	-moz-appearance: none;
+	border: none;
+	padding: 1px;
+	background: none;
+	margin-left: 3px;
+	list-style-image: url("chrome://omnisidebar/skin/devTools-button.png");
+	-moz-image-region: rect(0px 24px 24px 0px);
+}
+.omnisidebar-devTools-button[checked] {
+	-moz-image-region: rect(0px 48px 24px 24px);
+}
+.omnisidebar-devTools-button:hover {
+	-moz-image-region: rect(24px 24px 48px 0px);
+}
+.omnisidebar-devTools-button[checked]:hover {
+	-moz-image-region: rect(24px 48px 48px 24px);
+}
+.omnisidebar-devTools-button image {
+	width: 22px;
+	height: 22px;
+}
+
+.omnisidebarURIGo {
+	min-width: 0;
+}
+
+/* Sidebar */
+.omnisidebar-toolbar .toolbarbutton-1 {
+	-moz-appearance: toolbarbutton;
+	margin: 0 2px 0 2px;
+	padding: 1px 5px 1px 5px;
+}
+.omnisidebar-toolbar .toolbarbutton-1[checked="true"],
+.omnisidebar-toolbar .toolbarbutton-1:active {
+	margin: 0 2px 0 2px;
+	padding: 1px 5px 1px 5px !important; /* This !important is for some themes to dimension the button correctly */
+}
+.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
+	max-width: 17px;
+	max-height: 17px;
+}
+
+.omnisidebar-toolbar { 
+	-moz-appearance: none;
+	border: none;
+	padding: 1px 3px;
+}
+#main-window[sizemode="fullscreen"] .omnisidebar-toolbar { 
+	visibility: visible; 
+}
+
+.sidebar-header {
+	max-height: none;
+	padding: 0;
+	overflow: hidden;
+}
+.sidebar-box[noclose] .sidebar-header {
+	padding-right: 3px;
+}
+
+.sidebar-splitter {
+	border: 0;
+	-moz-border-end: 1px solid #A9B7C9;
+	min-width: 0;
+	width: 3px;
+	background-color: transparent;
+	-moz-margin-start: -3px;
+	position: relative;
+}
+
+/* Hide a bunch of stuff */
+.sidebar-box[notitle] .sidebar-title,
+.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton,
+.sidebar-box[nodock] .omnisidebar-docker,
+.sidebar-box[customizing] .sidebar-title,
+.sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton,
+.sidebar-box[customizing] .omnisidebar-docker,
+.sidebar-box[customizing] .omnisidebar-devTools-button,
+.sidebar-box[customizing] .omnisidebar-devToolbar,
+.omnisidebar-toolbar toolbarbutton[disabled] {
+	display: none !important;
+	/* The !important tag is necessary to hide the devToolbars */
+}
+
+.sidebar-box:not([notitle]):not([customizing]) .header-spacer {
+	display: none;
+}
+.sidebar-box[notitle]:not([customizing]) .header-spacer {
+	display: -moz-box;
+}
+.sidebar-title {
+	text-align: center;
+	padding: 0;
+	margin: 1px 3px;
+}
+.sidebar-box:not([noTitleButton]) .sidebar-title:hover,
+.sidebar-box:not([noTitleButton]) .sidebar-title[active] {
+	-moz-appearance: menulist;
+}
+
+/* Sidebar size, position and animation */
+.sidebar-box[renderabove],
+.sidebar-box[customizing],
+.sidebar-box[customizing][hidden="true"] {
+	-moz-appearance: none;
+	position: fixed;
+	overflow: visible !important;
+	/* Compatibility with Memory Fox: !important tag in the overflow property, already talked to the developer and he will fix it in his extension himself in future versions
+	so this is just for compatibility with past versions, maybe I will remove it in the future since those versions don't even seem to be available anyway
+	for now I'll leave it because the latest version still has the issue;
+	tried to conditionally set it via javascript but I couldn't get it to detect memory fox and still apply the change */
+	background: none;
+}
+.sidebar-box[renderabove] .omnisidebar_resize_box {
+	opacity: 0;
+}
+.sidebar-box[customizing],
+.sidebar-box[customizing][hidden="true"] {
+	display: -moz-box;
+}
+#sidebar-box[customizing]:not([renderabove]):not([movetoright]),
+#sidebar-box-twin[customizing]:not([renderabove])[movetoleft] {
+	left: 0px;
+}
+#sidebar-box[customizing]:not([renderabove])[movetoright],
+#sidebar-box-twin[customizing]:not([renderabove]):not([movetoleft]) {
+	right: 0px;
+}
+
+.omnisidebar_resize_box {
+	position: relative;
+	overflow: hidden;
+	z-index: 5;
+}
+
+.sidebar-box[renderabove] .omnisidebar_resize_box:hover,
+.sidebar-box[renderabove][nohide] .omnisidebar_resize_box,
+.sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
+	opacity: 1;
+}
+#sidebar-box[renderabove]:not([movetoright]) .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove][movetoleft] .omnisidebar_resize_box {
+	left: 3px;
+}
+#sidebar-box[renderabove][movetoright] .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove]:not([movetoleft]) .omnisidebar_resize_box {
+	right: 3px;
+}
+
+#sidebar-box[renderabove]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box {
+	-moz-transition: left .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s;
+}
+#sidebar-box[renderabove][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box {
+	-moz-transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s;
+}
+#sidebar-box[renderabove]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
+#sidebar-box-twin[renderabove][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
+	-moz-transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
+}
+#sidebar-box[renderabove][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
+#sidebar-box-twin[renderabove]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
+	-moz-transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
+}
+
+.sidebar-box[customizing] .sidebar-header,
+.sidebar-box[customizing] .omnisidebar-toolbar {
+	display: -moz-box;
+	visibility: visible;
+}
+.sidebar-box[customizing] .sidebar-browser {
+	display: none;
+}
+
+#main-window[sizemode='normal'] .sidebar-box[renderabove] { 
+	border: 1px solid rgba(0,0,0,0); 
+	border-top: none;
+}
+
+/* Renderabove resizer */
+.omnisidebar_resizer {
+	height: auto;
+	width: 3px;
+}
+#sidebar-box:not([movetoright]) .omnisidebar_resizer,
+#sidebar-box-twin[movetoleft] .omnisidebar_resizer {
+	border-left: 1px solid rgb(169, 183, 201);
+}
+#sidebar-box[movetoright] .omnisidebar_resizer,
+#sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
+	border-right: 1px solid rgb(169, 183, 201);
+}
+.sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
+.sidebar-splitter[disabled]:hover {
+	cursor: ew-resize !important;
+}
+
+/* Tricks needed */
+.sidebar-header,
+.sidebar-browser,
+.omnisidebar-toolbar,
+.omnisidebar_resize_box,
+.omnisidebar_resize_sidebar {
+	width: 100%;
+	max-width: none;
+	min-width: 0;
+	height: 100%;
+}
+
+.sidebar-splitter[renderabove] {
+	display: none;
+}
+
+.sidebar-browser {
+	background-color: window;
+}

@@ -1,0 +1,18 @@
+content   omnisidebar                    chrome/content/
+locale    omnisidebar      en-US         chrome/locale/en-US/
+skin      omnisidebar      classic/1.0   chrome/skin/common/
+skin      omnisidebar-os   classic/1.0   chrome/skin/linux/
+skin      omnisidebar-os   classic/1.0   chrome/skin/win/     os=WINNT
+skin      omnisidebar-os   classic/1.0   chrome/skin/mac/     os=Darwin
+
+overlay   chrome://browser/content/browser.xul          chrome://omnisidebar/content/overlay.xul
+overlay   chrome://global/content/customizeToolbar.xul  chrome://omnisidebar/content/customize.xul
+overlay   chrome://omnisidebar/content/options.xul      chrome://omnisidebar/content/optionsnotlinux.xul   os=Darwin os=WINNT
+
+style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/overlay.css
+style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/Fx4.css   appversion<5
+style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/Fx5.css   appversion>=5
+style chrome://global/content/customizeToolbar.xul chrome://omnisidebar/skin/overlay.css
+style about:addons                                 chrome://omnisidebar/skin/addons.css
+style chrome://global/content/console.xul          chrome://omnisidebar/skin/console.css
+style chrome://console2/content/console2.xul       chrome://omnisidebar/skin/console.css

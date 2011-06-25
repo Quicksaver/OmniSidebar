@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+			id="omnisidebar-options-window"
+			title="&omnisidebarOptions.title;">
+
+	<script id="omnisidebar_options_script" type="application/x-javascript" src="chrome://omnisidebar/content/options.js"/>
+	
+	<prefpane>
+		<preferences>
+			<preference id="pref-mainSidebar" name="extensions.omnisidebar.mainSidebar" type="string"/>
+			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
+			<preference id="pref-renderabove" name="extensions.omnisidebar.renderabove" type="bool"/>
+			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
+			<preference id="pref-hideheadertoolbar" name="extensions.omnisidebar.hideheadertoolbar" type="bool"/>
+			<preference id="pref-hideheadertitle" name="extensions.omnisidebar.hideheadertitle" type="bool"/>
+			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
+			<preference id="pref-hideheaderclose" name="extensions.omnisidebar.hideheaderclose" type="bool"/>
+			<preference id="pref-titleButton" name="extensions.omnisidebar.titleButton" type="bool"/>
+			<preference id="pref-hideheadertoolbarTwin" name="extensions.omnisidebar.hideheadertoolbarTwin" type="bool"/>
+			<preference id="pref-hideheadertitleTwin" name="extensions.omnisidebar.hideheadertitleTwin" type="bool"/>
+			<preference id="pref-hideheaderdockTwin" name="extensions.omnisidebar.hideheaderdockTwin" type="bool"/>
+			<preference id="pref-hideheadercloseTwin" name="extensions.omnisidebar.hideheadercloseTwin" type="bool"/>
+			<preference id="pref-titleButtonTwin" name="extensions.omnisidebar.titleButtonTwin" type="bool"/>
+			<preference id="pref-alternatebtns" name="extensions.omnisidebar.alternatebtns" type="bool"/>
+			<preference id="pref-alternatebtnsTwin" name="extensions.omnisidebar.alternatebtnsTwin" type="bool"/>
+			<preference id="pref-disablefx" name="extensions.omnisidebar.disablefx" type="bool"/>
+			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
+			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
+			<preference id="pref-glassStyle" name="extensions.omnisidebar.glassStyle" type="bool"/>
+			<preference id="pref-devTools" name="extensions.omnisidebar.devTools" type="bool"/>
+			<preference id="pref-devToolsTwin" name="extensions.omnisidebar.devToolsTwin" type="bool"/>
+			<preference id="pref-chosenkeyset" name="extensions.omnisidebar.chosenkeyset" type="int"/>
+		</preferences>
+		
+		<tabbox id="omnisidebarTabBox" >
+			<tabs id="tabsElement">
+				<tab id="mainTab" label="&omnisidebarButtonMain.label;"/>
+				<tab id="twinTab" label="&omnisidebarButtonTwin.label;"/>
+				<tab id="miscTab" label="&omnisidebarOptMisc.label;"/>
+			</tabs>
+			
+			<tabpanels id="tabPanels" >
+				<tabpanel id="mainTab" orient="vertical">
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupMain.label;"/>
+						<vbox align="start">
+							<radiogroup preference="pref-mainSidebar">
+								<hbox >
+									<radio label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
+									<radio label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
+								</hbox>
+							</radiogroup>
+							<checkbox label="&omnisidebarOptrenderabove.label;" preference="pref-renderabove"/>
+						</vbox>
+					</groupbox>
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupgen.label;"/>
+						<vbox align="start">
+							<checkbox label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
+							<checkbox label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbar"/>
+							<checkbox id="hideTitleCheckbox" oncommand="omnisidebarOptions.toggleTitle();" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
+							<checkbox id="titleButtonCheckbox" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
+							<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
+							<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
+						</vbox>
+					</groupbox>
+					<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
+						<caption label="&omnisidebarOptgroupicons.label;"/>
+						<radiogroup preference="pref-coloricons">
+							<hbox>
+								<radio label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
+								<radio label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+								<radio label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
+							</hbox>
+						</radiogroup>
+					</groupbox>
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupdev.label;"/>
+						<checkbox label="&omnisidebarOptdevTools.label;" preference="pref-devTools"/>
+					</groupbox>
+				</tabpanel>
+				
+				<tabpanel id="twinTab" orient="vertical">
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupTwin.label;"/>
+						<vbox align="start">
+							<checkbox id="twinCheckbox" oncommand="omnisidebarOptions.toggleTwin();" label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
+							<checkbox class="toggleTwin" label="&omnisidebarOptrenderabove.label;" preference="pref-renderaboveTwin"/>
+						</vbox>
+					</groupbox>
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupgen.label;"/>
+						<vbox align="start">
+							<checkbox class="toggleTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
+							<checkbox class="toggleTwin" label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbarTwin"/>
+							<checkbox id="hideTitleTwinCheckbox" oncommand="omnisidebarOptions.toggleTitleTwin();" class="toggleTwin" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
+							<checkbox class="toggleTwin" id="titleButtonTwinCheckbox" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
+							<checkbox class="toggleTwin" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
+							<checkbox class="toggleTwin" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
+						</vbox>
+					</groupbox>
+					<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
+						<caption label="&omnisidebarOptgroupicons.label;"/>
+						<radiogroup preference="pref-coloriconsTwin">
+							<hbox>
+								<radio class="toggleTwin" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
+								<radio class="toggleTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+								<radio class="toggleTwin" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
+							</hbox>
+						</radiogroup>
+					</groupbox>
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupdev.label;"/>
+						<checkbox class="toggleTwin" label="&omnisidebarOptdevTools.label;" preference="pref-devToolsTwin"/>
+					</groupbox>
+				</tabpanel>
+				
+				<tabpanel id="miscTab" orient="vertical">
+					<groupbox align="start">
+						<caption label="&omnisidebarOptgroupstyle.label;"/>
+						<checkbox label="&omnisidebarOptglassStyle.label;" preference="pref-glassStyle"/>
+					</groupbox>
+					<groupbox align="start">
+						<caption label="&omnisidebarOptgroupperformance.label;"/>
+						<checkbox label="&omnisidebarOptdisablefx.label;" preference="pref-disablefx"/>
+					</groupbox>
+					<groupbox align="center">
+						<caption label="&omnisidebarOptgroupkeyset.label;"/>
+						<menulist id="chosenkeyset-select" preference="pref-chosenkeyset">
+							<menupopup>
+								<menuitem id="keysetItem0" value="0" label="&omnisidebarOptkeysetItem0.label;"/>
+								<menuitem id="keysetItem1" value="1" label="&omnisidebarOptkeysetItem1.label;"/>
+								<menuitem id="keysetItem2" value="2" label="&omnisidebarOptkeysetItem2.label;"/>
+								<menuitem id="keysetItem3" value="3" label="&omnisidebarOptkeysetItem3.label;"/>
+								<menuitem id="keysetItem4" value="4" label="&omnisidebarOptkeysetItem4.label;"/>
+								<menuitem id="keysetItem5" value="5" label="&omnisidebarOptkeysetItem5.label;"/>
+								<menuitem id="keysetItem6" value="6" label="&omnisidebarOptkeysetItem6.label;"/>
+							</menupopup>
+						</menulist>
+					</groupbox>
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+	</prefpane>
+</prefwindow>

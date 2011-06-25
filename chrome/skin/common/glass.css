@@ -1,0 +1,499 @@
+/* Themed sidebars: bookmarks, history, download manager (DMT), update scan, feed sidebar, add-ons manager, error console (and Console²) and Stylish.
+Other sidebars should also be themed although probably not perfectly! */
+
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+/* Main window style and animation */
+.sidebar-box[renderabove] .omnisidebar_resize_box {
+	position: relative !important;
+}
+#main-window[sizemode='maximized'] .sidebar-box[renderabove] .omnisidebar_resize_box {
+	top: 1% !important;
+	height: 98% !important;
+}
+#main-window[sizemode='normal'] .sidebar-box[renderabove] .omnisidebar_resize_box {
+	top: 2% !important;
+	height: 96% !important;
+}
+#main-window[sizemode='fullscreen'] .sidebar-box[renderabove] .omnisidebar_resize_box {
+	top: 5% !important;
+	height: 90% !important;
+} 
+
+.sidebar-box[renderabove] .omnisidebar_resize_box {
+	box-shadow: 1px 0px 2px rgba(0,0,0,.4), 1px 0px 3px rgba(0,0,0,.4) inset, 1px 1px 6px rgba(0,0,0,.4) !important;
+	border: 1px solid rgba(0,0,0,.4) !important;
+}
+
+#sidebar-box:not([movetoright]) .omnisidebar_resize_box,
+#sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
+	border-left: 0 !important;
+	border-radius: 0 5px 5px 0 !important;
+}
+#sidebar-box[movetoright] .omnisidebar_resize_box,
+#sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
+	border-right: 0 !important;
+	border-radius: 5px 0 0 5px !important;
+}
+
+.omnisidebar_resizer {
+	border: none !important;
+}
+
+.sidebar-box[renderabove] .omnisidebar_resize_box,
+.sidebar-box:not([renderabove])[customizing] .sidebar-header {
+	background: rgba(0,0,0,0.25) url("chrome://omnisidebar/skin/glass_background.png") scroll no-repeat !important;
+	background-size: cover !important;
+}
+.sidebar-box[renderabove] .omnisidebar_resize_sidebar {
+	background: none !important;
+}
+
+/* Header styling */
+
+.sidebar-header {
+	-moz-appearance: none !important; 
+	-moz-binding: url("chrome://global/content/bindings/toolbar.xml#toolbar");
+	margin: 0 !important;
+	border: none !important;
+	color: black !important;
+	font-weight: bold !important;
+	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+	background: none !important;
+	background-clip: padding-box !important;
+}
+.sidebar-header > * {
+	background: none !important;
+}
+
+.sidebar-browser {
+	background: none !important;
+	padding: 1px 3px 4px 3px !important;
+}
+
+.omnisidebarURIBarMenu {
+	-moz-appearance: none !important;
+	background: rgba(50, 50, 50, 0.75) !important;
+	border: none !important;
+	border-radius: 5px !important;
+}
+
+}
+
+/* Search boxes */
+
+.insidebar #search-box,
+#downloadManager.insidebar #searchbox,
+.insidebar #navigator-toolbox #search-box,
+.insidebar #header-search,
+.insidebar #search-box #TextboxFilter,
+.insidebar #TextboxEval,
+.insidebar #styles-filter,
+.insidebar #tfURLBar,
+.omnisidebarURIBarMenu textbox {
+	-moz-appearance: none !important;
+	background: rgba(135,135,135,.5) !important;
+	border: 0 !important;
+	border-radius: 5px !important;
+	height: 20px !important;
+	color: black !important;
+	text-shadow: white 0 0 3px, white 0 0 3px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+}
+
+.insidebar #sidebar-search-label {
+	color: black !important;
+	text-shadow: white 0 0 3px, white 0 0 3px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+}
+
+#Console2Window.insidebar #search-box {
+	background: rgba(0, 0, 0, 0) !important;
+}
+
+/* Sidebar Main Stuff */
+
+.insidebar,
+.insidebar #dmtTopToolBox,
+.insidebar .toolbox-top #nav-bar,
+.insidebar #feedbar-preview {
+	-moz-appearance: none !important;
+	background: rgba(0, 0, 0, 0) !important;
+}
+
+.insidebar,
+.insidebar .toolbox-top #nav-bar,
+.insidebar #feedbar-preview {
+	padding: 8px !important;
+}
+
+.insidebar #sidebar-splitter,
+.insidebar #categories richlistitem[selected="true"] {
+	border-color: rgb(174, 183, 196) !important;
+	background-color: rgba(255, 255, 255, 0.57) !important;
+}
+
+.insidebar toolbox,
+.insidebar toolbar {
+	-moz-appearance: none !important;
+	background: rgba(0, 0, 0, 0) !important;
+	margin: 0 !important;
+	border: none !important;
+}
+
+.insidebar #dmtTopToolBox,
+.insidebar #dmtDownloadFrom,
+.insidebar #dmtDownloadTo,
+.insidebar #dmtDownloadDate,
+.insidebar #feedbar-preview,
+.insidebar #StatusText,
+.insidebar #feed-sidebar-statusbar,
+.insidebar #updates-container,
+.insidebar richlistbox:last-child:after,
+.insidebar #userstyles-heading,
+.insidebar domi-panel label.viewer-title {
+	color: black !important;
+	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+}
+
+.insidebar #bookmarks-view,
+.insidebar #historyTree,
+.insidebar #downloadView,
+.insidebar #updatescan-bookmarks-view,
+.insidebar #sidebar-notify #feed_tree {
+	margin: 7px !important;
+}
+.insidebar #ConsoleBox {
+	margin-top: 7px !important;
+}
+
+.insidebar #bookmarks-view,
+.insidebar #historyTree,
+.insidebar #updatescan-bookmarks-view {
+	padding-top: 5px !important;
+}
+.insidebar #sidebar-notify #feed_tree {
+	padding-top: 2px !important;
+}
+
+.insidebar #bookmarks-view,
+.insidebar #historyTree,
+.insidebar #downloadView,
+.insidebar #updatescan-bookmarks-view,
+.insidebar #sidebar-notify #feed_tree,
+.insidebar #view-port-container,
+.insidebar #ConsoleBox,
+.insidebar #styles {
+	-moz-appearance: none !important;
+	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(50% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
+	border: 1px solid rgb(174, 183, 196) !important;
+	border-radius: 5px !important;
+}
+
+.insidebar #dmtTopToolBox {
+	border-top: none !important;
+	background: -moz-linear-gradient(90deg,rgba(100,100,100,.1),transparent)!important;
+}
+
+.insidebar #dmtTopToolBar,
+.insidebar #dmtDownloadInfoBar,
+.insidebar #feedbar-loading-text-container {
+	-moz-appearance: none !important;
+	border: none !important;
+}
+
+.insidebar #dmtDownloadInfoBar {
+	padding-right: 6px !important;
+	padding-bottom: 3px !important;
+}
+
+#downloadManager.insidebar #searchbox {
+	margin-right: 5px !important;
+	width: 250px !important;
+}
+
+.insidebar #preview-splitter {
+	background: rgba(255,255,255,.5) !important;
+	height: 3px !important;
+	min-height: 1px !important;
+}
+
+.insidebar #feedbarTooltipSummaryGroupbox {
+	-moz-appearance: none !important;
+	border-style: solid !important;
+	border-width: 1px! important;
+	padding: 3px !important;
+	margin: 0px !important;
+}
+
+.insidebar #feedbar-loading-text-container {
+	overflow: hidden !important;
+}
+
+.insidebar #splPanels { 
+	background: rgba(255,255,255,.5) !important;
+	width: 3px !important;
+	min-width: 1px !important;
+}
+.insidebar domi-panel .viewer-pane-box-1 {
+	border: 1px solid rgba(255,255,255,.5) !important;
+}
+
+/* Buttons */
+.sidebar-box .sidebar-title:hover,
+.sidebar-box .sidebar-title[active] {
+	padding: 0 !important;
+}
+
+.insidebar .toolbox-top toolbarbutton#all-toggle image {
+	display: none !important;
+}
+
+#UpdateScan-window.insidebar #new-button {
+	margin-left: 8px !important;
+}
+
+#UpdateScan-window.insidebar toolbarbutton,
+#UpdateScan-window.insidebar button {
+	padding: 2px 5px !important;
+}
+#UpdateScan-window.insidebar button {
+	padding: 0 2px !important;
+}
+
+#UpdateScan-window.insidebar toolbarbutton image {
+	max-width: 18px !important;
+	max-height: 18px !important;
+}
+
+#UpdateScan-window.insidebar button {
+	min-width: 0 !important;
+}
+
+.insidebar #clearListButton {
+	min-width: 0 !important;
+	margin-left: 5px !important;
+}
+
+.insidebar #downloadView button {
+	margin: 0 2px 0 2px !important;
+	opacity: 0.8 !important;
+}
+
+.insidebar #downloadView button:hover {
+	opacity: 1 !important;
+}
+
+.insidebar #ConsoleToolbox > * {
+	padding: 3px 0 !important;
+}
+
+.insidebar #ConsoleToolbox toolbarbutton {
+	padding: 1px 5px 1px 5px !important;
+}
+
+.insidebar #ConsoleToolbox #ToolbarMode toolbarbutton image {
+	margin: 1px 0 1px 0 !important;
+}
+
+#JSConsoleWindow.insidebar #console-toolbox toolbarbutton {
+	margin: 1px !important;
+	padding: 1px 0px 1px 4px !important;
+}
+
+#stylish-manage-standalone.insidebar button,
+#stylish-manage-standalone.insidebar menulist {
+	min-width: 0 !important;
+	min-height: 0 !important;
+	width: auto !important;
+	height: auto !important;
+	padding: 1px 3px !important;
+}
+
+#history-panel.insidebar #viewButton > hbox {
+	padding: 1px !important;
+}
+
+.insidebar #navigator-toolbox #search-toggle,
+.insidebar #navigator-toolbox #all-toggle {
+	padding: 2px 7px !important;
+}
+
+.insidebar #bxURLBar toolbarbutton:not(#btnSelecting):not(#btnFind) {
+	padding: 2px 5px !important;
+}
+.insidebar #tbxInsToolbox #bxURLBar toolbarbutton {
+	padding: 0 2px !important;
+}
+.insidebar #tbxInsToolbox #mbrInspectorMain > menu {
+	padding: 0 !important;
+}
+.insidebar #bxPanelSet .viewer-list,
+.insidebar #bxPanelSet .viewer-menu {
+	padding: 3px !important;
+}
+.insidebar #bxURLBar toolbarbutton:not(#btnSelecting):not(#btnFind) image {
+	display: none !important;
+}
+
+.omnisidebarURIBarMenu button.omnisidebarURIGo {
+	padding: 0 2px !important;
+}
+
+#addons-page.insidebar toolbarbutton.header-button:not(.nav-button) {
+	margin: 0 5px !important;
+}
+#addons-page.insidebar toolbarbutton.header-button.nav-button {
+	margin: 0 0 !important;
+}
+#addons-page.insidebar #back-btn {
+	border-radius: 4.5px 0 0 4.5px !important;
+}
+#addons-page.insidebar #forward-btn {
+	border-radius: 0 4.5px 4.5px 0 !important;
+}
+#addons-page.insidebar button.addon-control {
+	margin: 1px 2px 2px 2px !important;
+	padding: 0 2px 0 2px !important;
+}
+
+/* Tooltips */
+
+.insidebar tooltip {
+	-moz-appearance: tooltip !important;
+	background: rgba(255,255,255,.8) !important;
+	color: black !important;
+	text-shadow: white 0.3px 0.3px 0.3px !important;
+	border-radius: 1px !important;
+}
+
+/* Tree text format */
+
+.insidebar .sidebar-placesTree,
+.insidebar #feedbar_tree_container {
+	border: 0 !important;
+	margin-top: 3px !important;
+}
+
+.insidebar .sidebar-placesTreechildren::-moz-tree-row,
+.insidebar #feedbar_tree_container::-moz-tree-row {
+	border: 0 !important;
+}
+
+.insidebar .sidebar-placesTreechildren::-moz-tree-row(selected),
+.insidebar .sidebar-placesTreechildren::-moz-tree-row(hover),
+.insidebar #feedbar_tree_container::-moz-tree-row(hover),
+.insidebar #feedbar_tree_container::-moz-tree-row(selected),
+.insidebar #feedbar_tree_container::-moz-tree-cell(selected),
+.insidebar #downloadView > richlistitem[selected=true],
+.insidebar #downloadView > richlistitem:hover,
+.insidebar .view-pane richlistitem:hover,
+.insidebar .view-pane richlistitem[selected="true"],
+.insidebar #ConsoleBox richlistitem:hover,
+.insidebar #ConsoleBox richlistitem[selected="true"],
+.insidebar #styles richlistitem:hover,
+.insidebar #styles richlistitem[selected="true"] {
+	color: black !important;
+	background: rgba(255,255,255,.3) !important;
+}
+
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container) {
+	font-weight: bold !important;
+}
+
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open),
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open, selected),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container, open),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container, open, selected) {
+	color: black !important;
+}
+
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, hover),
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(leaf),
+.insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(leaf, hover),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container, hover),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(leaf),
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(leaf, hover)  {
+	color: black !important;
+}
+
+.insidebar #downloadView > richlistitem {
+	color: black !important;
+}
+
+.insidebar #bookmarks-view-children::-moz-tree-separator,
+.insidebar .sidebar-placesTreechildren::-moz-tree-separator,
+.insidebar #feedbar_tree_container::-moz-tree-separator {
+	border-top: 1px solid rgb(174, 183, 196) !important;
+	border-bottom: none !important;
+}
+
+.insidebar #downloadView richlistitem:not(:first-child),
+.insidebar .view-pane richlistitem:not(:first-child),
+.insidebar #ConsoleBox richlistitem:not(:first-child),
+.insidebar #styles richlistitem:not(:first-child) {
+	-moz-border-top-colors: rgba(0, 0, 0, 0.1) rgba(255, 255, 255, 0.1) !important;
+	-moz-border-bottom-colors: rgba(255, 255, 255, 0.1) !important;
+	border-top-width: 2px !important;
+	border-bottom-width: 1px !important;
+	border-top-style: solid !important;
+	border-bottom-style: solid !important;
+}
+
+.insidebar #downloadView richlistitem:first-child,
+.insidebar .view-pane richlistitem:first-child,
+.insidebar #ConsoleBox richlistitem:first-child,
+.insidebar #styles richlistitem:first-child {
+	-moz-border-top-colors: rgba(255, 255, 255, 0.1) !important;
+	-moz-border-bottom-colors: rgba(255, 255, 255, 0.1) !important;
+	border-top-width: 1px !important;
+	border-bottom-width: 1px !important;
+	border-top-style: solid !important;
+	border-bottom-style: solid !important;
+}
+
+/*--Scrollbars by makondo--*/
+
+.insidebar scrollbar * { 
+	-moz-appearance: none !important;
+	background: none !important; 
+}
+
+.insidebar scrollbar { 
+	-moz-appearance: none !important;
+	background: none !important;
+	border: none !important; 
+}
+
+.insidebar scrollcorner { 
+	-moz-appearance: none !important;
+	background: none !important; 
+	width: 0 !important;
+	height: 0 !important; 
+}
+
+.insidebar scrollbar thumb { 
+	-moz-appearance: none !important; 
+	min-height: 50px !important;
+	width: 0 !important;
+	border: none !important;
+	background:  transparent url("data:image/gif;base64,R0lGODlhBwDCAbMAAAsLC7q6uqSkpICAgFdXV+Li4rCwsCgoKMzMzFlZWa6urkhISUVFRt3d3ZeWlRETEywAAAAABwDCAUAE/vA9QKkIpRgCbt4dpnHeGH6kCJarmqKnyb6yG7fwfNNGsv+6oE2YGxqLyFoSp2wyFbwo8OiUEqvTJDTr9F2ZPYBCYUAoEo9Lo7H9Wqng91Le5cbt9Lv75oXn/3iBe4MibX6Ch4Rzdn2LV4YwBgIOAgNoX40amWGKWJ16KpuAJZCeiaeOqAWloKkZrKOqraautLazuLG1uYi7ure/vJ88or3AxrjFw8h5yqF8zNGEa1sJBAwLDAcPBgYBAQJvDXWY0J/OWsHqyJmw5rLox8vzsuvl9B/xwvXS/Pjy/gLWcvdvn69+BwvSISgQ4EB7cPRBTNjQoC2GFPMhdMjRoseJJh1BcqoocmHJjR+5YAyJ8uQ9ki1jFpSokgMZBGa8CFAQwMCAAxEAADs=") center no-repeat !important; 
+	opacity: .2 !important; 
+}
+
+.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
+	margin-left: 0px !important; 
+	margin-right: 1px !important; 
+}
+
+.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] { 
+	margin-right: 1px !important; 
+}
+
+.insidebar scrollbarbutton {
+	border: none !important;
+	background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA4klEQVR42jXPPaqDQBAH8CWdJ3hd6kD6QO4gYuEBBMEP0EIFP0BEz+CKjZ0nSKGlvPeQgIWVHsQixGiKzYyQ4rf8dxh2Zkkcx4ckSQhyXfcHfe9oP8IwPJVleZum6TGO46MoilsQBKe9QdO0KzT8DsPA5nl+o77vGdTugCM8z1Pf95emaV5d163gVdf10/M8pqrqkYiiSBVFWSilK9jyPN+yLFtkWWa6rh+J4zhXaPqDeaxt2w280zRlgiDcoyji9iUtyzobhvFfVdWKMJumed6XhG9yGGzbvkiSRBFmrMELhw9B4Yc3YgC0lAAAAABJRU5ErkJggg==) center no-repeat !important;
+	opacity: .2 !important; 
+}
