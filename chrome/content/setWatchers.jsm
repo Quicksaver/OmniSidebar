@@ -24,7 +24,11 @@ setWatchers = function(obj) {
 			},
 			setter = function (newval) {
 				for(var i=0; i<this.propertiesWatched[prop].handlers.length; i++) {
-					this.propertiesWatched[prop].handlers[i].call(this, prop, this.propertiesWatched[prop].value, newval);
+					try { this.propertiesWatched[prop].handlers[i].call(this, prop, this.propertiesWatched[prop].value, newval); }
+					catch(ex) {
+						var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+						consoleService.logStringMessage(ex);
+					}
 				}
 				return this.propertiesWatched[prop].value = newval;
 			};
@@ -128,7 +132,11 @@ setWatchers = function(obj) {
 		if(typeof(el.attributesWatched[attr]) == 'undefined') { return; }
 		
 		for(var i=0; i<el.attributesWatched[attr].handlers.length; i++) {
-			el.attributesWatched[attr].handlers[i].call(el, attr, el.attributesWatched[attr].value, newval);
+			try { el.attributesWatched[attr].handlers[i].call(el, attr, el.attributesWatched[attr].value, newval); }
+			catch(ex) {
+				var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+				consoleService.logStringMessage(ex);
+			}
 		}
 		
 		el.attributesWatched[attr].value = newval;
