@@ -1648,7 +1648,7 @@ var omnisidebar = {
 		}
 		
 		var groupBroadcasters = document.getElementsByAttribute('group', group);
-		for(var i=0; i<groupBroadcasters.length; i++) {
+		broadcasterLoop: for(var i=0; i<groupBroadcasters.length; i++) {
 			if(groupBroadcasters[i].localName != 'broadcaster'
 			|| groupBroadcasters[i].id.indexOf('BlankSidebar') > -1
 			|| groupBroadcasters[i].id.indexOf('URISidebar') > -1
@@ -1659,6 +1659,12 @@ var omnisidebar = {
 			
 			var newEntry = document.createElement('menuitem');
 			newEntry.id = 'menu' + groupBroadcasters[i].id;
+			
+			// Bugfix: Multiple entries, I have no idea why this would happen, but it does with the DragIt add-on
+			for(var j=0; j<menu.childNodes.length; j++) {
+				if(menu.childNodes[j].id == newEntry.id) { continue broadcasterLoop; }
+			}
+			
 			newEntry.setAttribute('observes', groupBroadcasters[i].id);
 			if(newEntry.getAttribute('label') == '') {
 				newEntry.setAttribute('label', groupBroadcasters[i].getAttribute('sidebartitle'));
