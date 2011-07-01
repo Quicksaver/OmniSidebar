@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<!DOCTYPE window [
+  <!ENTITY % optionsDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+  %optionsDTD;
+  <!ENTITY % platformDTD SYSTEM "chrome://omnisidebar-os/locale/overlay.dtd">
+  %platformDTD;
+]>
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			id="omnisidebar-options-window"
 			title="&omnisidebarOptions.title;">
@@ -69,14 +74,18 @@
 					</groupbox>
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupgen.label;"/>
-						<vbox align="start">
-							<checkbox label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
-							<checkbox label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbar"/>
-							<checkbox id="hideTitleCheckbox" oncommand="omnisidebarOptions.toggleTitle();" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
-							<checkbox id="titleButtonCheckbox" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
-							<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
-							<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
-						</vbox>
+						<hbox align="center">
+							<vbox align="start">
+								<checkbox label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
+								<checkbox id="hideTitleCheckbox" oncommand="omnisidebarOptions.toggleTitle();" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
+								<checkbox id="titleButtonCheckbox" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
+							</vbox>
+							<vbox align="start">
+								<checkbox label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbar"/>
+								<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
+								<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
+							</vbox>
+						</hbox>
 					</groupbox>
 					<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
 						<caption label="&omnisidebarOptgroupicons.label;"/>
@@ -115,14 +124,18 @@
 					</groupbox>
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupgen.label;"/>
-						<vbox align="start">
-							<checkbox class="toggleTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
-							<checkbox class="toggleTwin" label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbarTwin"/>
-							<checkbox id="hideTitleTwinCheckbox" oncommand="omnisidebarOptions.toggleTitleTwin();" class="toggleTwin" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
-							<checkbox class="toggleTwin" id="titleButtonTwinCheckbox" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
-							<checkbox class="toggleTwin" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
-							<checkbox class="toggleTwin" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
-						</vbox>
+						<hbox align="center">	
+							<vbox align="start">
+								<checkbox class="toggleTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
+								<checkbox id="hideTitleTwinCheckbox" oncommand="omnisidebarOptions.toggleTitleTwin();" class="toggleTwin" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
+								<checkbox class="toggleTwin" id="titleButtonTwinCheckbox" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
+							</vbox>
+							<vbox align="start">
+								<checkbox class="toggleTwin" label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbarTwin"/>
+								<checkbox class="toggleTwin" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
+								<checkbox class="toggleTwin" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
+							</vbox>
+						</hbox>
 					</groupbox>
 					<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
 						<caption label="&omnisidebarOptgroupicons.label;"/>

@@ -1,5 +1,9 @@
 content   omnisidebar                    chrome/content/
-locale    omnisidebar      en-US         chrome/locale/en-US/
+
+locale    omnisidebar      en-US         chrome/locale/en-US/common/
+locale    omnisidebar-os   en-US         chrome/locale/en-US/win/
+locale    omnisidebar-os   en-US         chrome/locale/en-US/mac/     os=Darwin
+
 skin      omnisidebar      classic/1.0   chrome/skin/common/
 skin      omnisidebar-os   classic/1.0   chrome/skin/linux/
 skin      omnisidebar-os   classic/1.0   chrome/skin/win/     os=WINNT

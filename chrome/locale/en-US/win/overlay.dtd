@@ -1,0 +1,7 @@
+<!ENTITY omnisidebarOptkeysetItem0.label "Main: Ctrl+Shift + S              Twin: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem1.label "Main: Ctrl+Alt + S                 Twin: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem2.label "Main: Ctrl+Shift + L              Twin: Ctrl+Alt+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem3.label "Main: Ctrl+Shift + S              Twin: Ctrl+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem4.label "Main: Ctrl+Shift + L              Twin: Ctrl+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem5.label "Main: Ctrl + F6                      Twin: Ctrl+Shift + F6">
+<!ENTITY omnisidebarOptkeysetItem6.label "Main: Ctrl+Shift + PageUp   Twin: Ctrl+Shift + PageDown">

@@ -4,7 +4,7 @@
     <em:id>osb@quicksaver</em:id>
     <em:type>2</em:type>
     <em:name>OmniSidebar</em:name>
-    <em:version>0.7.10</em:version>
+    <em:version>0.8</em:version>
     <em:creator>Quicksaver</em:creator>
     <em:description>Gain control over your sidebar!</em:description>
 	<em:optionsURL>chrome://omnisidebar/content/options.xul</em:optionsURL> 
