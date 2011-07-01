@@ -164,7 +164,7 @@
 	tried to conditionally set it via javascript but I couldn't get it to detect memory fox and still apply the change */
 	background: none;
 }
-.sidebar-box[renderabove] .omnisidebar_resize_box {
+.sidebar-box[renderabove="autohide"] .omnisidebar_resize_box {
 	opacity: 0;
 }
 .sidebar-box[customizing],
@@ -186,34 +186,35 @@
 	z-index: 5;
 }
 
-.sidebar-box[renderabove] .omnisidebar_resize_box:hover,
+.sidebar-box[renderabove="autohide"] .omnisidebar_resize_box:hover,
+.sidebar-box[renderabove]:not([renderabove="autohide"]) .omnisidebar_resize_box,
 .sidebar-box[renderabove][nohide] .omnisidebar_resize_box,
 .sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
 	opacity: 1;
 }
-#sidebar-box[renderabove]:not([movetoright]) .omnisidebar_resize_box,
-#sidebar-box-twin[renderabove][movetoleft] .omnisidebar_resize_box {
+#sidebar-box[renderabove="autohide"]:not([movetoright]) .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove="autohide"][movetoleft] .omnisidebar_resize_box {
 	left: 3px;
 }
-#sidebar-box[renderabove][movetoright] .omnisidebar_resize_box,
-#sidebar-box-twin[renderabove]:not([movetoleft]) .omnisidebar_resize_box {
+#sidebar-box[renderabove="autohide"][movetoright] .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) .omnisidebar_resize_box {
 	right: 3px;
 }
 
-#sidebar-box[renderabove]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box,
-#sidebar-box-twin[renderabove][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box {
+#sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box {
 	-moz-transition: left .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s;
 }
-#sidebar-box[renderabove][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box,
-#sidebar-box-twin[renderabove]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box {
+#sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box,
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box {
 	-moz-transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s;
 }
-#sidebar-box[renderabove]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
-#sidebar-box-twin[renderabove][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
+#sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
+#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
 	-moz-transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
 }
-#sidebar-box[renderabove][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
-#sidebar-box-twin[renderabove]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
+#sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
 	-moz-transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
 }
 

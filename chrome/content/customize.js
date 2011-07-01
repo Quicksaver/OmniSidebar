@@ -2,6 +2,8 @@ var omnisidebar = {
 	init: function() {
 		window.removeEventListener("load", omnisidebar.init, false);
 		
+		Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
+		
 		//Show/hide the buttons
 		omnisidebar.twinSidebar = Application.prefs.get('extensions.omnisidebar.twinSidebar');
 		omnisidebar.stylish = Application.prefs.get('extensions.omnisidebar.stylish');
@@ -63,20 +65,6 @@ var omnisidebar = {
 		else {
 			omnisidebar.buttonlabel = omnisidebar.strings.getString('omnisidebarButtonlabel');
 			omnisidebar.buttontooltip = omnisidebar.strings.getString('omnisidebarButtonTooltip');
-		}
-	},
-	
-	hideIt: function(el, show) {
-		if(typeof(el) == 'string') {
-			var el = document.getElementById(el);
-		}
-		if(el == null || typeof(el) != 'object' || el != '[object XULElement]') { return; }
-		
-		if(!show) {
-			el.setAttribute('collapsed', 'true');
-		}
-		else {
-			el.removeAttribute('collapsed');
 		}
 	}
 };

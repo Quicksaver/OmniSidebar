@@ -3,6 +3,9 @@ var omnisidebar = {
 	preinit: function() {
 		omnisidebar.initialized = false;
 		
+		Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
+		Components.utils.import("resource://gre/modules/AddonManager.jsm");
+		
 		omnisidebar.hideIt(document.getElementById('sidebar-box'), false);
 		omnisidebar.hideIt(document.getElementById('sidebar-box-twin'), false);
 		
@@ -18,10 +21,9 @@ var omnisidebar = {
 		omnisidebar.dragging = false;
 		omnisidebar.customizing = false;
 		omnisidebar.listeningResize = false;
+		omnisidebar.autoClosing = false;
 		omnisidebar.twined = false;
 		omnisidebar.ssuri = '';
-		
-		Components.utils.import("chrome://omnisidebar/content/setWatchers.jsm", omnisidebar);
 		
 		omnisidebar.keysets = [
 			{ key: 'S', mod: 'accel shift', key_twin: 'S', mod_twin: 'accel alt shift' },
@@ -51,6 +53,8 @@ var omnisidebar = {
 		omnisidebar.prefs.twinSidebar.events.addListener("change", function() { omnisidebar.toggleTwin(); });
 		omnisidebar.prefs.renderabove.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.renderaboveTwin.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.prefs.undockMode.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.prefs.undockModeTwin.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.hideheadertoolbar.events.addListener("change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.hideheadertitle.events.addListener("change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.hideheaderdock.events.addListener("change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
@@ -93,7 +97,7 @@ var omnisidebar = {
 		omnisidebar.setlast();
 		omnisidebar.sidebar.addEventListener('DOMContentLoaded', omnisidebar.setlast, true);
 		omnisidebar.sidebar_twin.addEventListener('DOMContentLoaded', omnisidebar.setlast, true);
-						
+		
 		// Show the sidebar toolbar when customizing
 		omnisidebar.setWatchers(omnisidebar.toolbar);
 		omnisidebar.toolbar.addAttributeWatcher('customizing', omnisidebar.customize);
@@ -135,6 +139,13 @@ var omnisidebar = {
 	
 	// Remove listeners on window unload
 	deinit: function() {
+		// Autoclose feature: we can't have the sidebars open when we restart
+		if(omnisidebar.autoClosing) { 
+			window.removeEventListener('focus', omnisidebar.autoClose, true);
+			if(!omnisidebar.box.hidden && omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') { toggleSidebar(); }
+			if(!omnisidebar.box_twin.hidden && omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') { omnisidebar.toggleSidebarTwin(); }
+		}
+		
 		// Button update listeners
 		omnisidebar.unload(true);
 		
@@ -143,6 +154,8 @@ var omnisidebar = {
 		omnisidebar.prefs.twinSidebar.events.removeListener("change", function() { omnisidebar.toggleTwin(); });
 		omnisidebar.prefs.renderabove.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.renderaboveTwin.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.prefs.undockMode.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.prefs.undockModeTwin.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.hideheadertoolbar.events.removeListener("change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.hideheadertitle.events.removeListener("change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefs.hideheaderdock.events.removeListener("change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
@@ -248,6 +261,8 @@ var omnisidebar = {
 			twinSidebar: Application.prefs.get('extensions.omnisidebar.twinSidebar'), // Show twin sidebar
 			renderabove: Application.prefs.get('extensions.omnisidebar.renderabove'), // Render the sidebar above the webpage
 			renderaboveTwin: Application.prefs.get('extensions.omnisidebar.renderaboveTwin'), // Render the twin sidebar above the webpage
+			undockMode: Application.prefs.get('extensions.omnisidebar.undockMode'), // Render the sidebar above the webpage: mode
+			undockModeTwin: Application.prefs.get('extensions.omnisidebar.undockModeTwin'), // Render the twin sidebar above the webpage: mode
 			hideheadertoolbar: Application.prefs.get('extensions.omnisidebar.hideheadertoolbar'), // Hide the sidebar toolbar
 			hideheadertitle: Application.prefs.get('extensions.omnisidebar.hideheadertitle'), // Hide sidebar title
 			hideheaderdock: Application.prefs.get('extensions.omnisidebar.hideheaderdock'), // Hide sidebar docking button
@@ -889,11 +904,13 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box[renderabove] { width: ' + omnisidebar.width + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([movetoright]) { left: -' + omnisidebar.width + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][movetoright] { right: -' + omnisidebar.width + 'px; }\n';
-			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([movetoright]) #omnisidebar_resizebox:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]):not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + omnisidebar.width + 'px !important; }\n';
-			omnisidebar.sscode += '	#sidebar-box[renderabove][movetoright] #omnisidebar_resizebox:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"])[movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide][movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar_resizebox { right: ' + omnisidebar.width + 'px !important; }\n';
@@ -901,7 +918,8 @@ var omnisidebar = {
 			
 			// Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
 			if(typeof(TreeStyleTabWindowHelper) != 'undefined') {
-				omnisidebar.sscode += '	#sidebar-box[renderabove] #omnisidebar_resizebox:hover { z-index: 200 !important; }\n';
+				omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"] #omnisidebar_resizebox:hover,\n';
+				omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]) #omnisidebar_resizebox { z-index: 200 !important; }\n';
 			}
 		}
 		
@@ -909,11 +927,13 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove] { width: ' + omnisidebar.width_twin + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([movetoleft]) { right: -' + omnisidebar.width_twin + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][movetoleft] { left: -' + omnisidebar.width_twin + 'px; }\n';
-			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([movetoleft]) #omnisidebar_resizebox-twin:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + omnisidebar.width_twin + 'px !important; }\n';
-			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][movetoleft] #omnisidebar_resizebox-twin:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"])[movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide][movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[customizing][movetoleft] #omnisidebar_resizebox-twin { left: ' + omnisidebar.width_twin + 'px !important; }\n';
@@ -921,7 +941,8 @@ var omnisidebar = {
 			
 			// Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
 			if(typeof(TreeStyleTabWindowHelper) != 'undefined') {
-				omnisidebar.sscode += '	#sidebar-box-twin[renderabove] #omnisidebar_resizebox-twin:hover { z-index: 200 !important; }\n';
+				omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"] #omnisidebar_resizebox-twin:hover,\n';
+				omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]) #omnisidebar_resizebox-twin { z-index: 200 !important; }\n';
 			}
 		}
 		
@@ -1049,7 +1070,7 @@ var omnisidebar = {
 	// Set the sidebar above the webpage box; everything goes in the resizebox to enable resizing while in this mode
 	setabove: function() {
 		if(omnisidebar.prefs.renderabove.value) {
-			omnisidebar.box.setAttribute('renderabove', true);
+			omnisidebar.box.setAttribute('renderabove', omnisidebar.prefs.undockMode.value);
 			omnisidebar.splitter.setAttribute('renderabove', 'true');
 			
 			omnisidebar.header = omnisidebar.resizesidebar.appendChild(omnisidebar.header);
@@ -1078,7 +1099,7 @@ var omnisidebar = {
 		}
 		
 		if(omnisidebar.prefs.renderaboveTwin.value) {
-			omnisidebar.box_twin.setAttribute('renderabove', true);
+			omnisidebar.box_twin.setAttribute('renderabove', omnisidebar.prefs.undockModeTwin.value);
 			omnisidebar.splitter_twin.setAttribute('renderabove', 'true');
 			
 			omnisidebar.header_twin = omnisidebar.resizesidebar_twin.appendChild(omnisidebar.header_twin);
@@ -1106,24 +1127,54 @@ var omnisidebar = {
 			omnisidebar.splitter.removeEventListener('mousedown', omnisidebar.dragStart, false);
 		}
 		
+		// Auto-close feature
+		if( (omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose')
+		||  (omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') ) {
+			if(!omnisidebar.autoClosing) {
+				window.addEventListener('focus', omnisidebar.autoClose, true);
+				omnisidebar.autoClosing = true;
+			}
+		} else if(omnisidebar.autoClosing) {
+			window.removeEventListener('focus', omnisidebar.autoClose, true);
+			omnisidebar.autoClosing = false;
+		}
+		
 		// rendersidebar() needs to be called everytime the window is resized so the sidebars are properly resized as well
-		// This is done in a timer to prevent excessive calls
+		// This is done in a timer to prevent excessive calls when resizing
 		if(omnisidebar.prefs.renderabove.value || omnisidebar.prefs.renderaboveTwin.value) {
 			if(!omnisidebar.listeningResize) {
-				window.addEventListener('resize', function() {
-					omnisidebar.resizeTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-					omnisidebar.resizeTimer.init(omnisidebar.rendersidebar, 1000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-				}, false);
+				window.addEventListener('resize', omnisidebar.resizeListener, false);
+				
+				// An issue with LessChromeHD, when shown the urlbar is blocked by the sidebars
+				// Here's to hoping nothing else is affected by this
+				AddonManager.addAddonListener(omnisidebar.lessChromeListener);
+				AddonManager.getAddonByID('lessChrome.HD@prospector.labs.mozilla', function(addon) {
+					if(addon && addon.isActive) { gNavToolbox.style.zIndex = '250'; }
+				});
+				
 				omnisidebar.listeningResize = true;
 			}
-		} else {
-			if(omnisidebar.listeningResize) {
-				window.removeEventListener('resize', function() {
-					omnisidebar.resizeTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-					omnisidebar.resizeTimer.init(omnisidebar.rendersidebar, 1000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-				}, false);
-				omnisidebar.listeningResize = false;
-			}
+		} else if(omnisidebar.listeningResize) {
+			window.removeEventListener('resize', omnisidebar.resizeListener, false);
+			
+			AddonManager.removeAddonListener(omnisidebar.lessChromeListener);
+			gNavToolbox.style.zIndex = '';
+			
+			omnisidebar.listeningResize = false;
+		}
+	},
+	
+	resizeListener: function() {
+		omnisidebar.resizeTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+		omnisidebar.resizeTimer.init(omnisidebar.rendersidebar, 750, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+	},
+	
+	lessChromeListener: {
+		onEnabled: function(addon) { 
+			if(addon.id == 'lessChrome.HD@prospector.labs.mozilla') { gNavToolbox.style.zIndex = '250'; }
+		},
+		onDisabled: function(addon) {
+			if(addon.id == 'lessChrome.HD@prospector.labs.mozilla') { gNavToolbox.style.zIndex = ''; }
 		}
 	},
 	
@@ -1519,21 +1570,6 @@ var omnisidebar = {
 		return true;
 	},
 		
-	// Used to show/hide toolbarbuttons (but in theory it should collapse whatever I want, just like I do with the sidebar box at startup)
-	hideIt: function(el, show) {
-		if(typeof(el) == 'string') {
-			var el = document.getElementById(el);
-		}
-		if(!el || typeof(el) != 'object' || el != '[object XULElement]') { return; }
-		
-		if(!show) {
-			el.setAttribute('collapsed', 'true');
-		}
-		else {
-			el.removeAttribute('collapsed');
-		}
-	},
-	
 	// Stop LessChrome from showing the toolbox when the sidebar menus are triggered
 	cancelLessChrome: function(e) {
 		// Omnisidebar popup menus (and a few from right-clicks)
@@ -1543,24 +1579,14 @@ var omnisidebar = {
 		|| e.target.id == 'omnisidebarURIBarMenu'
 		|| e.target.id == 'omnisidebarURIBarMenu-twin'
 		// Right-clicking the header
-		|| (e.target.triggerNode && omnisidebar.clickCameFromHeader(e.target.triggerNode) )
+		|| (e.target.triggerNode && (omnisidebar.hasAncestor(e.target.triggerNode, omnisidebar.header) || omnisidebar.hasAncestor(e.target.triggerNode, omnisidebar.header_twin)) )
 		// Right-clicking elements in the actual sidebars
 		|| (e.target.ownerDocument && 
 			( (omnisidebar.sidebar.contentDocument && omnisidebar.sidebar.contentDocument == e.target.ownerDocument) 
-			|| (omnisdebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument == e.target.ownerDocument) )
+			|| (omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument == e.target.ownerDocument) )
 		) ) {
 			e.preventDefault();
 		}
-	},
-	
-	clickCameFromHeader: function(aNode) {
-		var node = aNode;
-		if(node.id && (node.id == 'sidebar-header' || node.id == 'sidebar-header-twin')) { return true; }
-		while(node.parentNode) {
-			node = node.parentNode;
-			if(node.id && (node.id == 'sidebar-header' || node.id == 'sidebar-header-twin')) { return true; }
-		}
-		return false;
 	},
 	
 	// Sets toolbar context menu omnisidebar options item according to what called it
@@ -1785,6 +1811,27 @@ var omnisidebar = {
 		}
 	},
 	
+	autoClose: function(e) {
+		omnisidebar.autoCloseTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+		omnisidebar.autoCloseTimer.init(function() {
+			var focusedNode = document.commandDispatcher.focusedElement || e.target;
+			
+			if(!omnisidebar.box.hidden && omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') {
+				if(!omnisidebar.hasAncestor(focusedNode, omnisidebar.box)
+				&& !omnisidebar.hasAncestor(focusedNode, document.getElementById('omnisidebarURIBarMenu')) ) {
+					toggleSidebar();
+				}
+			}
+			
+			if(!omnisidebar.box_twin.hidden && omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') {
+				if(!omnisidebar.hasAncestor(focusedNode, omnisidebar.box_twin)
+				&& !omnisidebar.hasAncestor(focusedNode, document.getElementById('omnisidebarURIBarMenu-twin')) ) {
+					omnisidebar.toggleSidebarTwin();
+				}
+			}
+		}, 100, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+	},
+	
 	// toggleSidebar(), sidebarOnLoad() and fireSidebarFocusedEvent() modified for the twin sidebar
 	toggleSidebarTwin: function(commandID, forceOpen) {
 		if(!omnisidebar.initialized) {
@@ -1815,7 +1862,7 @@ var omnisidebar = {
 					omnisidebar.button_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonTwinTooltip'));
 				}
 				omnisidebar.splitter_twin.hidden = true;
-				if(content) {
+				if(content && (omnisidebar.box.hidden || !omnisidebar.prefs.renderabove.value || omnisidebar.prefs.undockMode.value != 'autoclose') ) {
 					content.focus();
 				}
 			} else {
@@ -1851,10 +1898,7 @@ var omnisidebar = {
 		omnisidebar.title_twin.setAttribute('value', title); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
 		omnisidebar.box_twin.setAttribute("src", url);
 		
-		// This happens sometimes, it still loads the sidebar though, we can't use a timer because it would probably be too late to send the load event
-		if(typeof(omnisidebar.sidebar_twin.contentDocument) == 'undefined') { return; } 
-	
-		if (omnisidebar.sidebar_twin.contentDocument.location.href != url) {
+		if (omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.location.href != url) {
 			omnisidebar.sidebar_twin.addEventListener("load", omnisidebar.sidebarTwinOnLoad, true);
 		} else {
 			omnisidebar.fireSidebarTwinFocusedEvent();
@@ -1864,7 +1908,16 @@ var omnisidebar = {
 	fireSidebarTwinFocusedEvent: function() {
 		var event = document.createEvent("Events");
 		event.initEvent("SidebarFocused", true, false);
-		omnisidebar.sidebar_twin.contentWindow.dispatchEvent(event);
+		if(omnisidebar.sidebar_twin.contentWindow) { omnisidebar.sidebar_twin.contentWindow.dispatchEvent(event); }
+		
+		// For the autoclose feature, we need to focus the sidebar on open or it won't be focused
+		if(omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') {
+			if(omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.documentElement) {
+				omnisidebar.sidebar_twin.contentDocument.documentElement.focus();
+			} else {
+				omnisidebar.box_twin.focus();
+			}
+		}
 	},
 	
 	sidebarTwinOnLoad: function(event) {
@@ -1907,7 +1960,7 @@ function toggleSidebar(commandID, forceOpen) {
 				}
 			}
 			sidebarSplitter.hidden = true;
-			if(content) {
+			if(content && (omnisidebar.box_twin.hidden || !omnisidebar.prefs.renderaboveTwin.value || omnisidebar.prefs.undockModeTwin.value != 'autoclose') ) {
 				content.focus();
 			}
 		} else {
@@ -1946,13 +1999,25 @@ function toggleSidebar(commandID, forceOpen) {
 	omnisidebar.title.setAttribute('value', title); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
 	sidebarBox.setAttribute("src", url);
 	
-	// This happens sometimes, it still loads the sidebar though, we can't use a timer because it would probably be too late to send the load event
-	if(typeof(sidebar.contentDocument) == 'undefined') { return; } // This happens sometimes, it still loads the sidebar though
-	
-	if (sidebar.contentDocument.location.href != url) {
+	if (sidebar.contentDocument && sidebar.contentDocument.location.href != url) {
 		sidebar.addEventListener("load", sidebarOnLoad, true);
 	} else {
 		fireSidebarFocusedEvent();
+	}
+}
+
+function fireSidebarFocusedEvent() {
+	var event = document.createEvent("Events");
+	event.initEvent("SidebarFocused", true, false);
+	if(omnisidebar.sidebar.contentWindow) { omnisidebar.sidebar.contentWindow.dispatchEvent(event); }
+	
+	// For the autoclose feature, we need to focus the sidebar on open or it won't be focused
+	if(omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') {
+		if(omnisidebar.sidebar.contentDocument && omnisidebar.sidebar.contentDocument.documentElement) {
+			omnisidebar.sidebar.contentDocument.documentElement.focus();
+		} else {
+			omnisidebar.box.focus();
+		}
 	}
 }
 

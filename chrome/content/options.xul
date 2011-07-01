@@ -13,6 +13,8 @@
 			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
 			<preference id="pref-renderabove" name="extensions.omnisidebar.renderabove" type="bool"/>
 			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
+			<preference id="pref-undockMode" name="extensions.omnisidebar.undockMode" type="string"/>
+			<preference id="pref-undockModeTwin" name="extensions.omnisidebar.undockModeTwin" type="string"/>
 			<preference id="pref-hideheadertoolbar" name="extensions.omnisidebar.hideheadertoolbar" type="bool"/>
 			<preference id="pref-hideheadertitle" name="extensions.omnisidebar.hideheadertitle" type="bool"/>
 			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
@@ -52,7 +54,17 @@
 									<radio label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
 								</hbox>
 							</radiogroup>
-							<checkbox label="&omnisidebarOptrenderabove.label;" preference="pref-renderabove"/>
+							<groupbox align="start">
+								<caption><checkbox id="aboveCheckbox" 
+									label="&omnisidebarOptrenderabove.label;" 
+									preference="pref-renderabove"
+									oncommand="omnisidebarOptions.toggleAbove();"/></caption>
+								<radiogroup preference="pref-undockMode">
+									<radio class="aboveCheckbox" label="&omnisidebarOptundockMode.autohide;" value="autohide"/>
+									<radio class="aboveCheckbox" label="&omnisidebarOptundockMode.autoclose;" value="autoclose"/>
+									<radio class="aboveCheckbox" label="&omnisidebarOptundockMode.noauto;" value="noauto"/>
+								</radiogroup>
+							</groupbox>
 						</vbox>
 					</groupbox>
 					<groupbox align="center">
@@ -87,7 +99,18 @@
 						<caption label="&omnisidebarOptgroupTwin.label;"/>
 						<vbox align="start">
 							<checkbox id="twinCheckbox" oncommand="omnisidebarOptions.toggleTwin();" label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
-							<checkbox class="toggleTwin" label="&omnisidebarOptrenderabove.label;" preference="pref-renderaboveTwin"/>
+							<groupbox align="start">
+								<caption><checkbox id="aboveTwinCheckbox" 
+									class="toggleTwin" 
+									label="&omnisidebarOptrenderabove.label;" 
+									preference="pref-renderaboveTwin"
+									oncommand="omnisidebarOptions.toggleAboveTwin();"/></caption>
+								<radiogroup preference="pref-undockModeTwin">
+									<radio class="aboveTwinCheckbox" label="&omnisidebarOptundockMode.autohide;" value="autohide"/>
+									<radio class="aboveTwinCheckbox" label="&omnisidebarOptundockMode.autoclose;" value="autoclose"/>
+									<radio class="aboveTwinCheckbox" label="&omnisidebarOptundockMode.noauto;" value="noauto"/>
+								</radiogroup>
+							</groupbox>
 						</vbox>
 					</groupbox>
 					<groupbox align="center">

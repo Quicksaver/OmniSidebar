@@ -21,6 +21,7 @@ var omnisidebarOptions = {
 		omnisidebarOptions.toggleTwin();
 		omnisidebarOptions.toggleTitle();
 		omnisidebarOptions.toggleTitleTwin();
+		omnisidebarOptions.toggleAbove();
 	},
 	
 	toggleTwin: function() {
@@ -35,6 +36,7 @@ var omnisidebarOptions = {
 				nodes[i].setAttribute('disabled', 'true');
 			}
 		}
+		omnisidebarOptions.toggleAboveTwin();
 	},
 	
 	toggleTitle: function() {
@@ -50,6 +52,30 @@ var omnisidebarOptions = {
 			document.getElementById('titleButtonTwinCheckbox').setAttribute('disabled', 'true');
 		} else {
 			document.getElementById('titleButtonTwinCheckbox').removeAttribute('disabled');
+		}
+	},
+	
+	toggleAbove: function() {
+		var checked = document.getElementById('aboveCheckbox').checked;
+		var els = document.getElementsByClassName('aboveCheckbox');
+		for(var i=0; i<els.length; i++) {
+			if(checked) {
+				els[i].removeAttribute('disabled');
+			} else {
+				els[i].setAttribute('disabled', 'true');
+			}
+		}
+	},
+	
+	toggleAboveTwin: function() {
+		var enable = (document.getElementById('twinCheckbox').checked && document.getElementById('aboveTwinCheckbox').checked);
+		var els = document.getElementsByClassName('aboveTwinCheckbox');
+		for(var i=0; i<els.length; i++) {
+			if(enable) {
+				els[i].removeAttribute('disabled');
+			} else {
+				els[i].setAttribute('disabled', 'true');
+			}
 		}
 	}
 }

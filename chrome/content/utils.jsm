@@ -1,4 +1,35 @@
-var EXPORTED_SYMBOLS = ["setWatchers"];
+var EXPORTED_SYMBOLS = ["setWatchers", "hasAncestor", "hideIt"];
+
+// Checks if aNode decends from aParent
+hasAncestor = function(aNode, aParent, aWindow) {
+	if(!aNode || !aParent) { return false; };
+	
+	if(aNode == aParent) { return true; }
+	
+	var ownDocument = aNode.ownerDocument || aNode.document;
+	if(ownDocument && ownDocument == aParent) { return true; }
+	if(aNode.compareDocumentPosition && (aNode.compareDocumentPosition(aParent) & aNode.DOCUMENT_POSITION_CONTAINS)) { return true; }
+	
+	var browsers = aParent.getElementsByTagName('browser');
+	for(var i=0; i<browsers.length; i++) {
+		if(hasAncestor(aNode, browsers[i].contentDocument, browsers[i].contentWindow)) { return true; }
+	}
+	
+	if(!aWindow) { return false; }
+	for(var i=0; i<aWindow.frames.length; i++) {
+		if(hasAncestor(aNode, aWindow.frames[i].document, aWindow.frames[i])) { return true; }
+	}
+	return false;
+};
+
+// in theory this should collapse whatever I want
+hideIt = function(aNode, show) {
+	if(!show) {
+		aNode.setAttribute('collapsed', 'true');
+	} else {
+		aNode.removeAttribute('collapsed');
+	}
+};
 
 // This acts as a replacement for the event DOM Attribute Modified, works for both attributes and object properties
 setWatchers = function(obj) {
@@ -217,4 +248,4 @@ setWatchers = function(obj) {
 		this.callAttributeWatchers(this, attr, null);
 		return ret;
 	};
-}
+};
