@@ -1871,6 +1871,13 @@ var omnisidebar = {
 			}
 			return;
 		}
+		
+		// Can't let both sidebars display the same page, it becomes unstable
+		var url = sidebarBroadcaster.getAttribute("sidebarurl");
+		if(omnisidebar.sidebar.getAttribute('src') == url && !omnisidebar.box.hidden) {
+			return;
+		}
+	
 		var broadcasters = document.getElementsByAttribute("group", "twinSidebar");
 		for (var i = 0; i < broadcasters.length; ++i) {
 			if (broadcasters[i].localName != "broadcaster") {
@@ -1887,11 +1894,12 @@ var omnisidebar = {
 			omnisidebar.button_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonTwinCloseTooltip'));
 		}
 		omnisidebar.splitter_twin.hidden = false;
-		var url = sidebarBroadcaster.getAttribute("sidebarurl");
+		
 		var title = sidebarBroadcaster.getAttribute("sidebartitle");
 		if (!title) {
 			title = sidebarBroadcaster.getAttribute("label");
 		}
+		
 		omnisidebar.sidebar_twin.setAttribute("src", url);
 		omnisidebar.box_twin.setAttribute("sidebarcommand", sidebarBroadcaster.id);
 		omnisidebar.title_twin.value = title;
@@ -1942,6 +1950,7 @@ function toggleSidebar(commandID, forceOpen) {
 		commandID = sidebarBox.getAttribute("sidebarcommand");
 	}
 	var sidebarBroadcaster = document.getElementById(commandID);
+	
 	var sidebar = document.getElementById("sidebar");
 	var sidebarTitle = document.getElementById("sidebar-title");
 	var sidebarSplitter = document.getElementById("sidebar-splitter");
@@ -1968,6 +1977,13 @@ function toggleSidebar(commandID, forceOpen) {
 		}
 		return;
 	}
+	
+	// Can't let both sidebars display the same page, it becomes unstable
+	var url = sidebarBroadcaster.getAttribute("sidebarurl");
+	if(omnisidebar.sidebar_twin.getAttribute('src') == url && !omnisidebar.box_twin.hidden) {
+		return;
+	}
+	
 	var broadcasters = document.getElementsByAttribute("group", "sidebar");
 	for (var i = 0; i < broadcasters.length; ++i) {
 		if (broadcasters[i].localName != "broadcaster") {
@@ -1988,11 +2004,12 @@ function toggleSidebar(commandID, forceOpen) {
 		}
 	}
 	sidebarSplitter.hidden = false;
-	var url = sidebarBroadcaster.getAttribute("sidebarurl");
+	
 	var title = sidebarBroadcaster.getAttribute("sidebartitle");
 	if (!title) {
 		title = sidebarBroadcaster.getAttribute("label");
 	}
+	
 	sidebar.setAttribute("src", url);
 	sidebarBox.setAttribute("sidebarcommand", sidebarBroadcaster.id);
 	sidebarTitle.value = title;
