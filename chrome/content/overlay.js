@@ -240,6 +240,7 @@ var omnisidebar = {
 		omnisidebar.resizer = document.getElementById('omnisidebar_resizer'); // Resizer bar while in renderabove
 		omnisidebar.devButton = document.getElementById('omnisidebar-devTools-button'); // Developer toolbarbutton
 		omnisidebar.devToolbar = document.getElementById('omnisidebarDevToolbar'); // Developer toolbarbutton
+		omnisidebar.stack = document.getElementById('stackSidebar'); // stack element for the customize screen
 		
 		omnisidebar.splitter_twin = document.getElementById('sidebar-splitter-twin'); // Splitter to resize the sidebar box
 		omnisidebar.box_twin = document.getElementById('sidebar-box-twin'); // Sidebar box
@@ -253,6 +254,7 @@ var omnisidebar = {
 		omnisidebar.resizer_twin = document.getElementById('omnisidebar_resizer-twin'); // Resizer bar while in renderabove
 		omnisidebar.dockbutton_twin = document.getElementById('omnisidebar_dock_button-twin'); // omnisidebar dock/undock button
 		omnisidebar.devButton_twin = document.getElementById('omnisidebar-devTools-button-twin'); // Developer toolbarbutton
+		omnisidebar.stack_twin = document.getElementById('stackSidebar-twin'); // stack element for the customize screen
 		
 		omnisidebar.prefs = {
 			lastcommand: Application.prefs.get('extensions.omnisidebar.lastcommand'), // Last opened sidebar
@@ -675,7 +677,7 @@ var omnisidebar = {
 		}
 	},
 	
-	// Add costumizing attribute to sidebar and show the twin sidebar toolbar even if it's not enabled
+	// Add costumizing attribute to sidebar and show the twin sidebar toolbar only if it's enabled or it has buttons
 	customize: function() {
 		if(arguments[2] == 'true') {
 			omnisidebar.box.setAttribute('customizing', 'true');
@@ -685,6 +687,10 @@ var omnisidebar = {
 				omnisidebar.hideIt(omnisidebar.customizingLabel_twin, true);
 				omnisidebar.hideIt(omnisidebar.box_twin, true);
 			}
+			omnisidebar.toolbar.setAttribute('flex', '1');
+			omnisidebar.toolbar_twin.setAttribute('flex', '1');
+			omnisidebar.stack.setAttribute('flex', '1');
+			omnisidebar.stack_twin.setAttribute('flex', '1');
 			omnisidebar.customizing = true;
 		}
 		else {
@@ -693,6 +699,10 @@ var omnisidebar = {
 			omnisidebar.hideIt(omnisidebar.customizingLabel, false);
 			omnisidebar.hideIt(omnisidebar.customizingLabel_twin, false);
 			omnisidebar.hideIt(omnisidebar.box_twin, omnisidebar.prefs.twinSidebar.value);
+			omnisidebar.toolbar.removeAttribute('flex');
+			omnisidebar.toolbar_twin.removeAttribute('flex');
+			omnisidebar.stack.removeAttribute('flex');
+			omnisidebar.stack_twin.removeAttribute('flex');
 			omnisidebar.customizing = false;
 		}
 		omnisidebar.rendersidebar();
@@ -1483,7 +1493,7 @@ var omnisidebar = {
 		for(var i=0; i<omnisidebar.devToolbar_twin.childNodes.length; i++) {
 			omnisidebar.devToolbar_twin.childNodes[i].id += '-twin';
 		}
-		omnisidebar.devToolbar_twin = omnisidebar.header_twin.insertBefore(omnisidebar.devToolbar_twin, omnisidebar.toolbar_twin);
+		omnisidebar.devToolbar_twin = omnisidebar.header_twin.insertBefore(omnisidebar.devToolbar_twin, omnisidebar.stack_twin);
 		omnisidebar.setToolbarButtons(omnisidebar.devToolbar_twin, true);
 		
 		if(omnisidebar.initialized) {

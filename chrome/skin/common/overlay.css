@@ -135,7 +135,8 @@
 	/* The !important tag is necessary to hide the devToolbars */
 }
 
-.sidebar-box:not([notitle]):not([customizing]) .header-spacer {
+.sidebar-box:not([notitle]):not([customizing]) .header-spacer,
+.sidebar-box[customizing] .header-spacer {
 	display: none;
 }
 .sidebar-box[notitle]:not([customizing]) .header-spacer {
@@ -149,6 +150,12 @@
 .sidebar-box:not([noTitleButton]) .sidebar-title:hover,
 .sidebar-box:not([noTitleButton]) .sidebar-title[active] {
 	-moz-appearance: menulist;
+}
+
+#sidebar-customizingLabel,
+#sidebar-customizingLabel-twin {
+	text-align: right;
+	margin: 5px 5px 6px 5px;
 }
 
 /* Sidebar size, position and animation */
