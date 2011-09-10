@@ -883,16 +883,18 @@ var omnisidebar = {
 		
 		// Bugfix for newly created profiles, needs a default value
 		// Bugfix: sometimes these values are set to 0, probably due to some browser resizing going on somewhere
-		if(!omnisidebar.box.getAttribute('width')) { 
+		var tempWidth = omnisidebar.box.getAttribute('width');
+		if(!tempWidth || tempWidth == '0') { 
 			var newWidth = omnisidebar.box.clientWidth || omnisidebar.width || 300;
 			omnisidebar.box.setAttribute('width', newWidth);
 		}
-		if(!omnisidebar.box_twin.getAttribute('width')) { 
+		var tempWidth = omnisidebar.box_twin.getAttribute('width');
+		if(!tempWidth || tempWidth == '0') { 
 			var newWidth = omnisidebar.box_twin.clientWidth || omnisidebar.width_twin || 300;
 			omnisidebar.box_twin.setAttribute('width', newWidth);
 		}
-		omnisidebar.width = omnisidebar.box.getAttribute('width');
-		omnisidebar.width_twin = omnisidebar.box_twin.getAttribute('width');
+		omnisidebar.width = parseInt(omnisidebar.box.getAttribute('width'));
+		omnisidebar.width_twin = parseInt(omnisidebar.box_twin.getAttribute('width'));
 		
 		omnisidebar.sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 		omnisidebar.sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
