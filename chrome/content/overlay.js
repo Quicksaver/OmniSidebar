@@ -3,7 +3,6 @@ var omnisidebar = {
 	preinit: function() {
 		omnisidebar.initialized = false;
 		
-		Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
 		Components.utils.import("resource://gre/modules/AddonManager.jsm");
 		
 		omnisidebar.hideIt(document.getElementById('sidebar-box'), false);
@@ -12,8 +11,8 @@ var omnisidebar = {
 		omnisidebar.initTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		omnisidebar.initTimer.init(omnisidebar.init, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
 		
-		window.removeEventListener("load", omnisidebar.preinit, false);
-		window.addEventListener("unload", omnisidebar.deinit, false);
+		omnisidebar.listenerAid.remove(window, "load", omnisidebar.preinit, false);
+		omnisidebar.listenerAid.add(window, "unload", omnisidebar.deinit, false);
 	},
 	
 	init: function() { 
@@ -49,31 +48,31 @@ var omnisidebar = {
 		}
 		
 		// Preferences monitors
-		omnisidebar.prefs.mainSidebar.events.addListener("change", function() { omnisidebar.moveSidebars(); });
-		omnisidebar.prefs.twinSidebar.events.addListener("change", function() { omnisidebar.toggleTwin(); });
-		omnisidebar.prefs.renderabove.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.renderaboveTwin.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.undockMode.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.undockModeTwin.events.addListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertoolbar.events.addListener("change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertitle.events.addListener("change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheaderdock.events.addListener("change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheaderclose.events.addListener("change", function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertoolbarTwin.events.addListener("change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertitleTwin.events.addListener("change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheaderdockTwin.events.addListener("change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadercloseTwin.events.addListener("change", function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.alternatebtns.events.addListener("change", function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.alternatebtnsTwin.events.addListener("change", function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.disablefx.events.addListener("change", function() { omnisidebar.toggleFX(); });
-		omnisidebar.prefs.coloricons.events.addListener("change", function() { omnisidebar.toggleIconsColor(); });
-		omnisidebar.prefs.coloriconsTwin.events.addListener("change", function() { omnisidebar.toggleIconsColor(); });
-		omnisidebar.prefs.glassStyle.events.addListener("change", function() { omnisidebar.toggleGlass(); });
-		omnisidebar.prefs.devTools.events.addListener("change", function() { omnisidebar.toggleDevTools(); });
-		omnisidebar.prefs.devToolsTwin.events.addListener("change", function() { omnisidebar.toggleDevTools(); });
-		omnisidebar.prefs.chosenKeyset.events.addListener("change", function() { omnisidebar.setKeysets(); });
-		omnisidebar.prefs.titleButton.events.addListener("change", function() { omnisidebar.toggleTitleButton(); });
-		omnisidebar.prefs.titleButtonTwin.events.addListener("change", function() { omnisidebar.toggleTitleButton(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.mainSidebar, "change", function() { omnisidebar.moveSidebars(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.twinSidebar, "change", function() { omnisidebar.toggleTwin(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.renderabove, "change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.renderaboveTwin, "change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.undockMode, "change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.undockModeTwin, "change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheadertoolbar, "change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheadertitle, "change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheaderdock, "change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheaderclose, "change", function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheadertoolbarTwin, "change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheadertitleTwin, "change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheaderdockTwin, "change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.hideheadercloseTwin, "change", function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.alternatebtns, "change", function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.alternatebtnsTwin, "change", function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.disablefx, "change", function() { omnisidebar.toggleFX(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.coloricons, "change", function() { omnisidebar.toggleIconsColor(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.coloriconsTwin, "change", function() { omnisidebar.toggleIconsColor(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.glassStyle, "change", function() { omnisidebar.toggleGlass(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.devTools, "change", function() { omnisidebar.toggleDevTools(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.devToolsTwin, "change", function() { omnisidebar.toggleDevTools(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.chosenKeyset, "change", function() { omnisidebar.setKeysets(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.titleButton, "change", function() { omnisidebar.toggleTitleButton(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.titleButtonTwin, "change", function() { omnisidebar.toggleTitleButton(); });
 		
 		// I guess Firefox has some defaults for these, they override the css set ones so we have to erase them
 		omnisidebar.sidebar.style.maxWidth = '';
@@ -84,19 +83,19 @@ var omnisidebar = {
 		omnisidebar.sidebar_twin.style.width = '';
 		
 		// Set up context menu onpopupshowing event to do both the predetermined action and omnisidebar's functions
-		omnisidebar.toolbarcontextmenu.addEventListener('popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
-		omnisidebar.appmenu.addEventListener('popupshowing', function(event) { omnisidebar.setAppMenu(event); }, false);
-		omnisidebar.viewtoolbars.addEventListener('popupshowing', function(event) { omnisidebar.setViewToolbarsMenu(event); }, false);
+		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
+		omnisidebar.listenerAid.add(omnisidebar.appmenu, 'popupshowing', function(event) { omnisidebar.setAppMenu(event); }, false);
+		omnisidebar.listenerAid.add(omnisidebar.viewtoolbars, 'popupshowing', function(event) { omnisidebar.setViewToolbarsMenu(event); }, false);
 		
 		// LessChrome compatibility fix: don't show the toolbox when our menus are the triggers
-		window.addEventListener("LessChromeShowing", omnisidebar.cancelLessChrome, false);
+		omnisidebar.listenerAid.add(window, "LessChromeShowing", omnisidebar.cancelLessChrome, false);
 		
 		// Apply initial preferences, these need to be here and in this order
 		omnisidebar.toggleConsole(); // Must come before toggleTwin() (setTwinBroadcasters())
 		omnisidebar.toggleTwin(); // Must come before setlast()
 		omnisidebar.setlast();
-		omnisidebar.sidebar.addEventListener('DOMContentLoaded', omnisidebar.setlast, true);
-		omnisidebar.sidebar_twin.addEventListener('DOMContentLoaded', omnisidebar.setlast, true);
+		omnisidebar.listenerAid.add(omnisidebar.sidebar, 'DOMContentLoaded', omnisidebar.setlast, true);
+		omnisidebar.listenerAid.add(omnisidebar.sidebar_twin, 'DOMContentLoaded', omnisidebar.setlast, true);
 		
 		// Show the sidebar toolbar when customizing
 		omnisidebar.setWatchers(omnisidebar.toolbar);
@@ -141,7 +140,6 @@ var omnisidebar = {
 	deinit: function() {
 		// Autoclose feature: we can't have the sidebars open when we restart
 		if(omnisidebar.autoClosing) { 
-			window.removeEventListener('focus', omnisidebar.autoClose, true);
 			if(!omnisidebar.box.hidden && omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') { toggleSidebar(); }
 			if(!omnisidebar.box_twin.hidden && omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') { omnisidebar.toggleSidebarTwin(); }
 		}
@@ -149,58 +147,12 @@ var omnisidebar = {
 		// Button update listeners
 		omnisidebar.unload(true);
 		
-		// Preferences listeners
-		omnisidebar.prefs.mainSidebar.events.removeListener("change", function() { omnisidebar.moveSidebars(); });
-		omnisidebar.prefs.twinSidebar.events.removeListener("change", function() { omnisidebar.toggleTwin(); });
-		omnisidebar.prefs.renderabove.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.renderaboveTwin.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.undockMode.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.undockModeTwin.events.removeListener("change", function() { omnisidebar.setabove(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertoolbar.events.removeListener("change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertitle.events.removeListener("change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheaderdock.events.removeListener("change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheaderclose.events.removeListener("change", function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertoolbarTwin.events.removeListener("change", function() { omnisidebar.toggleToolbar(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadertitleTwin.events.removeListener("change", function() { omnisidebar.toggletitle(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheaderdockTwin.events.removeListener("change", function() { omnisidebar.toggledockbutton(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.hideheadercloseTwin.events.removeListener("change", function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.alternatebtns.events.removeListener("change", function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.alternatebtnsTwin.events.removeListener("change", function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefs.disablefx.events.removeListener("change", function() { omnisidebar.toggleFX(); });
-		omnisidebar.prefs.coloricons.events.removeListener("change", function() { omnisidebar.toggleIconsColor(); });
-		omnisidebar.prefs.coloriconsTwin.events.removeListener("change", function() { omnisidebar.toggleIconsColor(); });
-		omnisidebar.prefs.glassStyle.events.removeListener("change", function() { omnisidebar.toggleGlass(); });
-		omnisidebar.prefs.devTools.events.removeListener("change", function() { omnisidebar.toggleDevTools(); });
-		omnisidebar.prefs.devToolsTwin.events.removeListener("change", function() { omnisidebar.toggleDevTools(); });
-		omnisidebar.prefs.chosenKeyset.events.removeListener("change", function() { omnisidebar.setKeysets(); });
-		omnisidebar.prefs.titleButton.events.removeListener("change", function() { omnisidebar.toggleTitleButton(); });
-		omnisidebar.prefs.titleButtonTwin.events.removeListener("change", function() { omnisidebar.toggleTitleButton(); });
-		
-		omnisidebar.sidebar.removeEventListener('DOMContentLoaded', omnisidebar.setlast, true);
-		omnisidebar.sidebar_twin.removeEventListener('DOMContentLoaded', omnisidebar.setlast, true);
-		
-		omnisidebar.toolbarcontextmenu.removeEventListener('popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
-		omnisidebar.appmenu.removeEventListener('popupshowing', function(event) { omnisidebar.setAppMenu(event); }, false);
-		omnisidebar.viewtoolbars.removeEventListener('popupshowing', function(event) { omnisidebar.setViewToolbarsMenu(event); }, false);
-		window.removeEventListener("LessChromeShowing", omnisidebar.cancelLessChrome, false);
-		
 		if(omnisidebar.listeningResize) {
-			window.removeEventListener('resize', function() {
-				omnisidebar.resizeTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-				omnisidebar.resizeTimer.init(omnisidebar.rendersidebar, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-			}, false);
+			AddonManager.removeAddonListener(omnisidebar.lessChromeListener);
 		}
 		
-		if(omnisidebar.listeningMouse) {
-			window.removeEventListener('mousemove', omnisidebar.getMouseCoords, false);
-		}
-		
-		if(omnisidebar.prefs.renderabove.value) {
-			omnisidebar.splitter_twin.removeEventListener('mousedown', omnisidebar.dragStart, false);
-		}
-		if(omnisidebar.prefs.renderaboveTwin.value) {
-			omnisidebar.splitter.removeEventListener('mousedown', omnisidebar.dragStart, false);
-		}
+		// Remove every event listener placed
+		omnisidebar.listenerAid.clean();
 	},
 	
 	// References elements inside omnisidebar for easier access everywhere
@@ -466,7 +418,7 @@ var omnisidebar = {
 			}
 			
 			// First half of fix for not closing the sidebar when clicking already checked buttons
-			toolbar.childNodes[i].removeEventListener('click', omnisidebar.preventClose, false);
+			omnisidebar.listenerAid.remove(toolbar.childNodes[i], 'click', omnisidebar.preventClose, false);
 			
 			// This ensures the buttons will only be checked when needed
 			toolbar.childNodes[i].removeAttribute('checked');
@@ -491,7 +443,7 @@ var omnisidebar = {
 			toolbar.childNodes[i].setAttribute('observes', toolbar.childNodes[i].getAttribute('observes'));
 			
 			// Second half of fix for not closing the sidebar when clicking already checked buttons
-			toolbar.childNodes[i].addEventListener('click', omnisidebar.preventClose, false);
+			omnisidebar.listenerAid.add(toolbar.childNodes[i], 'click', omnisidebar.preventClose, false);
 		}
 	},
 	
@@ -1093,7 +1045,7 @@ var omnisidebar = {
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebardockbutton'));
 			
 			omnisidebar.splitter_twin.setAttribute('disabled', 'true');
-			omnisidebar.splitter_twin.addEventListener('mousedown', omnisidebar.dragStart, false);
+			omnisidebar.listenerAid.add(omnisidebar.splitter_twin, 'mousedown', omnisidebar.dragStart, false);
 		}
 		else {
 			omnisidebar.box.removeAttribute('renderabove');
@@ -1107,7 +1059,7 @@ var omnisidebar = {
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
 			
 			omnisidebar.splitter_twin.removeAttribute('disabled');
-			omnisidebar.splitter_twin.removeEventListener('mousedown', omnisidebar.dragStart, false);
+			omnisidebar.listenerAid.remove(omnisidebar.splitter_twin, 'mousedown', omnisidebar.dragStart, false);
 		}
 		
 		if(omnisidebar.prefs.renderaboveTwin.value) {
@@ -1122,7 +1074,7 @@ var omnisidebar = {
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebardockbutton'));
 			
 			omnisidebar.splitter.setAttribute('disabled', 'true');
-			omnisidebar.splitter.addEventListener('mousedown', omnisidebar.dragStart, false);
+			omnisidebar.listenerAid.add(omnisidebar.splitter, 'mousedown', omnisidebar.dragStart, false);
 		}
 		else {
 			omnisidebar.box_twin.removeAttribute('renderabove');
@@ -1136,18 +1088,18 @@ var omnisidebar = {
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
 			
 			omnisidebar.splitter.removeAttribute('disabled');
-			omnisidebar.splitter.removeEventListener('mousedown', omnisidebar.dragStart, false);
+			omnisidebar.listenerAid.remove(omnisidebar.splitter, 'mousedown', omnisidebar.dragStart, false);
 		}
 		
 		// Auto-close feature
 		if( (omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose')
 		||  (omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') ) {
 			if(!omnisidebar.autoClosing) {
-				window.addEventListener('focus', omnisidebar.autoClose, true);
+				omnisidebar.listenerAid.add(window, 'focus', omnisidebar.autoClose, true);
 				omnisidebar.autoClosing = true;
 			}
 		} else if(omnisidebar.autoClosing) {
-			window.removeEventListener('focus', omnisidebar.autoClose, true);
+			omnisidebar.listenerAid.remove(window, 'focus', omnisidebar.autoClose, true);
 			omnisidebar.autoClosing = false;
 		}
 		
@@ -1155,7 +1107,7 @@ var omnisidebar = {
 		// This is done in a timer to prevent excessive calls when resizing
 		if(omnisidebar.prefs.renderabove.value || omnisidebar.prefs.renderaboveTwin.value) {
 			if(!omnisidebar.listeningResize) {
-				window.addEventListener('resize', omnisidebar.resizeListener, false);
+				omnisidebar.listenerAid.add(window, 'resize', omnisidebar.resizeListener, false);
 				
 				// An issue with LessChromeHD, when shown the urlbar is blocked by the sidebars
 				// Here's to hoping nothing else is affected by this
@@ -1167,7 +1119,7 @@ var omnisidebar = {
 				omnisidebar.listeningResize = true;
 			}
 		} else if(omnisidebar.listeningResize) {
-			window.removeEventListener('resize', omnisidebar.resizeListener, false);
+			omnisidebar.listenerAid.remove(window, 'resize', omnisidebar.resizeListener, false);
 			
 			AddonManager.removeAddonListener(omnisidebar.lessChromeListener);
 			gNavToolbox.style.zIndex = '';
@@ -1729,8 +1681,8 @@ var omnisidebar = {
 	dragStart: function(e) {
 		if(e.which != '1' || omnisidebar.customizing) { return; }
 		
-		window.addEventListener("mousemove", omnisidebar.drag, false);
-		window.addEventListener("mouseup", omnisidebar.dragEnd, false);
+		omnisidebar.listenerAid.add(window, "mousemove", omnisidebar.drag, false);
+		omnisidebar.listenerAid.add(window, "mouseup", omnisidebar.dragEnd, false);
 		
 		omnisidebar.dragging = true;
 		omnisidebar.dragalt = true;
@@ -1768,8 +1720,8 @@ var omnisidebar = {
 	},
 	
 	dragEnd: function(e) {
-		window.removeEventListener("mousemove", omnisidebar.drag, false);
-		window.removeEventListener("mouseup", omnisidebar.dragEnd, false);
+		omnisidebar.listenerAid.remove(window, "mousemove", omnisidebar.drag, false);
+		omnisidebar.listenerAid.remove(window, "mouseup", omnisidebar.dragEnd, false);
 		omnisidebar.dragging = false;
 		
 		if(typeof(omnisidebar.dragNewW) == 'undefined') { omnisidebar.dragNewW = omnisidebar.dragTarget.target.clientWidth; } // again, this should never happen
@@ -1919,7 +1871,7 @@ var omnisidebar = {
 		omnisidebar.box_twin.setAttribute("src", url);
 		
 		if (omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.location.href != url) {
-			omnisidebar.sidebar_twin.addEventListener("load", omnisidebar.sidebarTwinOnLoad, true);
+			omnisidebar.listenerAid.add(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true);
 		} else {
 			omnisidebar.fireSidebarTwinFocusedEvent();
 		}
@@ -1941,7 +1893,7 @@ var omnisidebar = {
 	},
 	
 	sidebarTwinOnLoad: function(event) {
-		omnisidebar.sidebar_twin.removeEventListener("load", omnisidebar.sidebarTwinOnLoad, true);
+		omnisidebar.listenerAid.remove(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true);
 		omnisidebar.twinOnLoadTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		omnisidebar.twinOnLoadTimer.init(omnisidebar.fireSidebarTwinFocusedEvent, 0, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
 	}
@@ -2050,4 +2002,5 @@ function fireSidebarFocusedEvent() {
 	}
 }
 
-window.addEventListener("load", omnisidebar.preinit, false);
+Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
+omnisidebar.listenerAid.add(window, "load", omnisidebar.preinit, false);

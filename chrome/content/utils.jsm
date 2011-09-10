@@ -1,4 +1,4 @@
-var EXPORTED_SYMBOLS = ["setWatchers", "hasAncestor", "hideIt"];
+var EXPORTED_SYMBOLS = ["setWatchers", "hasAncestor", "hideIt", "listenerAid"];
 
 // Checks if aNode decends from aParent
 hasAncestor = function(aNode, aParent, aWindow) {
@@ -248,4 +248,95 @@ setWatchers = function(obj) {
 		this.callAttributeWatchers(this, attr, null);
 		return ret;
 	};
+};
+
+// Object to aid in setting and removing all kind of listeners
+listenerAid = {
+	handlers: new Array(),
+	
+	add: function(obj, type, listener, capture) {
+		if(obj.addEventListener) {
+			for(var i=0; i<this.handlers.length; i++) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.handlers[i].listener.toSource() == listener.toSource()) {
+					return false;
+				}
+			}
+			
+			var newHandler = {
+				obj: obj,
+				type: type,
+				listener: listener,
+				capture: capture
+			};
+			this.handlers.push(newHandler);
+			var i = this.handlers.length -1;
+			this.handlers[i].obj.addEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
+		}
+		else if(obj.events && obj.events.addListener) {
+			for(var i=0; i<this.handlers.length; i++) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].listener.toSource() == listener.toSource()) {
+					return false;
+				}
+			}
+			
+			var newHandler = {
+				obj: obj,
+				type: type,
+				listener: listener
+			};
+			this.handlers.push(newHandler);
+			var i = this.handlers.length -1;
+			this.handlers[i].obj.events.addListener(this.handlers[i].type, this.handlers[i].listener);
+		}
+		
+		return true;
+	},
+	
+	remove: function(obj, type, listener, capture) {
+		if(obj.removeEventListener) {
+			var newHandler = {
+				obj: obj,
+				type: type,
+				listener: listener,
+				capture: capture
+			};
+			for(var i=0; i<this.handlers.length; i++) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.handlers[i].listener.toSource() == listener.toSource()) {
+					this.handlers[i].obj.removeEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
+					this.handlers.splice(i, 1);
+					return true;
+				}
+			}
+		}
+		else if(obj.events && obj.events.removeListener) {
+			var newHandler = {
+				obj: obj,
+				type: type,
+				listener: listener
+			};
+			for(var i=0; i<this.handlers.length; i++) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].listener.toSource() == listener.toSource()) {
+					this.handlers[i].obj.events.removeListener(this.handlers[i].type, this.handlers[i].listener);
+					this.handlers.splice(i, 1);
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	},
+	
+	clean: function() {
+		for(var i=0; i<this.handlers.length; i++) {
+			if(this.handlers[i].obj) {
+				if(this.handlers[i].obj.removeEventListener) {
+					this.handlers[i].obj.removeEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
+				}
+				else if(this.handlers[i].obj.events && this.handlers[i].obj.events.removeListener) {
+					this.handlers[i].obj.events.removeListener(this.handlers[i].type, this.handlers[i].listener);
+				}
+			}
+		}
+		return true;
+	}
 };
