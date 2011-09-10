@@ -869,11 +869,13 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([movetoright]) { left: -' + omnisidebar.width + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][movetoright] { right: -' + omnisidebar.width + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox[hover],\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]):not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + omnisidebar.width + 'px !important; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hover],\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"])[movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide][movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar_resizebox,\n';
@@ -883,6 +885,7 @@ var omnisidebar = {
 			// Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
 			if(typeof(TreeStyleTabWindowHelper) != 'undefined') {
 				omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"] #omnisidebar_resizebox:hover,\n';
+				omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"] #omnisidebar_resizebox[hover],\n';
 				omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]) #omnisidebar_resizebox { z-index: 200 !important; }\n';
 			}
 		}
@@ -892,11 +895,13 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([movetoleft]) { right: -' + omnisidebar.width_twin + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][movetoleft] { left: -' + omnisidebar.width_twin + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin[hover],\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + omnisidebar.width_twin + 'px !important; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin:hover,\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"])[movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide][movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar_resizebox-twin,\n';
@@ -906,6 +911,7 @@ var omnisidebar = {
 			// Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
 			if(typeof(TreeStyleTabWindowHelper) != 'undefined') {
 				omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"] #omnisidebar_resizebox-twin:hover,\n';
+				omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"] #omnisidebar_resizebox-twin[hover],\n';
 				omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]) #omnisidebar_resizebox-twin { z-index: 200 !important; }\n';
 			}
 		}
@@ -1896,6 +1902,23 @@ var omnisidebar = {
 		omnisidebar.listenerAid.remove(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true);
 		omnisidebar.twinOnLoadTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		omnisidebar.twinOnLoadTimer.init(omnisidebar.fireSidebarTwinFocusedEvent, 0, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+	},
+	
+	onDragEnter: function(box) {
+		box.setAttribute('hover', 'true');
+		omnisidebar.listenerAid.add(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
+		omnisidebar.listenerAid.add(window, "dragdrop", omnisidebar.onDragExitAll, false);
+	},
+	
+	onDragExit: function(box) {
+		box.removeAttribute('hover');
+	},
+	
+	onDragExitAll: function() {
+		omnisidebar.listenerAid.remove(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
+		omnisidebar.listenerAid.remove(window, "dragdrop", omnisidebar.onDragExitAll, false);
+		omnisidebar.resizebox.removeAttribute('hover');
+		omnisidebar.resizebox_twin.removeAttribute('hover');
 	}
 };
 

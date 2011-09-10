@@ -194,6 +194,7 @@
 }
 
 .sidebar-box[renderabove="autohide"] .omnisidebar_resize_box:hover,
+.sidebar-box[renderabove="autohide"] .omnisidebar_resize_box[hover],
 .sidebar-box[renderabove]:not([renderabove="autohide"]) .omnisidebar_resize_box,
 .sidebar-box[renderabove][nohide] .omnisidebar_resize_box,
 .sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
@@ -217,11 +218,15 @@
 	-moz-transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s;
 }
 #sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
-#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
+#sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover],
+#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
+#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover] {
 	-moz-transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
 }
 #sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
-#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover {
+#sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover],
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover]  {
 	-moz-transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
 }
 

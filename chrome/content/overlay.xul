@@ -289,7 +289,11 @@
 				insertafter="sidebar-throbber" />
 		</sidebarheader>
 		<browser id="sidebar" class="sidebar-browser" src="about:blank"/>
-		<hbox id="omnisidebar_resizebox" class="omnisidebar_resize_box" flex="1">
+		<hbox id="omnisidebar_resizebox" 
+			class="omnisidebar_resize_box" 
+			flex="1"
+			ondragenter="omnisidebar.onDragEnter(this);"
+			ondragexit="omnisidebar.onDragExit(this);">
 			<box id="omnisidebar_resizer" class="omnisidebar_resizer"
 				onmousedown="omnisidebar.dragStart(event, 'omnisidebar_resizer');"/>
 			<vbox id="omnisidebar_resizesidebar" class="omnisidebar_resize_sidebar" flex="1"/>
@@ -342,7 +346,11 @@
 					oncommand="omnisidebar.toggleabove(true);" />
 			</sidebarheader>
 			<browser id="sidebar-twin" class="sidebar-browser" flex="1" autoscroll="false" disablehistory="true" src="about:blank" />
-			<hbox id="omnisidebar_resizebox-twin" class="omnisidebar_resize_box" flex="1">
+			<hbox id="omnisidebar_resizebox-twin" 
+				class="omnisidebar_resize_box" 
+				flex="1"
+				ondragenter="omnisidebar.onDragEnter(this);"
+				ondragexit="omnisidebar.onDragExit(this);">
 				<box id="omnisidebar_resizer-twin" class="omnisidebar_resizer"
 					onmousedown="omnisidebar.dragStart(event, 'omnisidebar_resizer-twin');"/>
 				<vbox id="omnisidebar_resizesidebar-twin" class="omnisidebar_resize_sidebar" flex="1"/>
