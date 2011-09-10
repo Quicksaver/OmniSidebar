@@ -4,6 +4,12 @@ Other sidebars should also be themed although probably not perfectly! */
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
+/* Fix for bug #672028: white gradient in background in aero
+only needed when glass style is applied */
+#appcontent {
+	-moz-appearance: none !important;
+}
+
 /* Main window style and animation */
 .sidebar-box[renderabove] .omnisidebar_resize_box {
 	position: relative !important;
