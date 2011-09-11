@@ -257,7 +257,7 @@ listenerAid = {
 	add: function(obj, type, listener, capture) {
 		if(obj.addEventListener) {
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.handlers[i].listener.toSource() == listener.toSource()) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].listener, listener)) {
 					return false;
 				}
 			}
@@ -274,7 +274,7 @@ listenerAid = {
 		}
 		else if(obj.events && obj.events.addListener) {
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].listener.toSource() == listener.toSource()) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.compareListener(this.handlers[i].listener, listener)) {
 					return false;
 				}
 			}
@@ -301,7 +301,7 @@ listenerAid = {
 				capture: capture
 			};
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.handlers[i].listener.toSource() == listener.toSource()) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].listener, listener)) {
 					this.handlers[i].obj.removeEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
 					this.handlers.splice(i, 1);
 					return true;
@@ -315,7 +315,7 @@ listenerAid = {
 				listener: listener
 			};
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].listener.toSource() == listener.toSource()) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.compareListener(this.handlers[i].listener, listener)) {
 					this.handlers[i].obj.events.removeListener(this.handlers[i].type, this.handlers[i].listener);
 					this.handlers.splice(i, 1);
 					return true;
@@ -338,5 +338,12 @@ listenerAid = {
 			}
 		}
 		return true;
+	},
+	
+	compareListener: function(a, b) {
+		if(a == b || a.toSource() == b.toSource()) {
+			return true;
+		}
+		return false;
 	}
 };
