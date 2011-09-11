@@ -8,8 +8,7 @@ var omnisidebar = {
 		omnisidebar.hideIt(document.getElementById('sidebar-box'), false);
 		omnisidebar.hideIt(document.getElementById('sidebar-box-twin'), false);
 		
-		omnisidebar.initTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.initTimer.init(omnisidebar.init, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		omnisidebar.timerAid.init('init', omnisidebar.init, 500);
 		
 		omnisidebar.listenerAid.remove(window, "load", omnisidebar.preinit, false);
 		omnisidebar.listenerAid.add(window, "unload", omnisidebar.deinit, false);
@@ -257,13 +256,12 @@ var omnisidebar = {
 		
 	// onLoad and unLoad are used by the omnisidebar button to set up its listeners
 	onLoad: function() {
-		omnisidebar.onLoadTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		if(!omnisidebar.initialized) {
-			omnisidebar.onLoadTimer.init(omnisidebar.onLoad, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+			omnisidebar.timerAid.init('onLoad', omnisidebar.onLoad, 500);
 			return;
 		}
 		// on a timer so loading both osb and osb-twin buttons doesn't trigger the load functions twice unnecessarily
-		omnisidebar.onLoadTimer.init(omnisidebar.loadButton, 50, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		omnisidebar.timerAid.init('onLoad', omnisidebar.loadButton, 50);
 	},
 	
 	loadButton: function() {
@@ -405,8 +403,7 @@ var omnisidebar = {
 			omnisidebar.checkBroadcasters();
 		} else {
 			// Trick to check/uncheck as supposed to when exiting the customize screen
-			omnisidebar.toolbarTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-			omnisidebar.toolbarTimer.init(omnisidebar.checkBroadcasters, 100, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+			omnisidebar.timerAid.init('toolbar', omnisidebar.checkBroadcasters, 100);
 		}
 	},
 	
@@ -1135,8 +1132,7 @@ var omnisidebar = {
 	},
 	
 	resizeListener: function() {
-		omnisidebar.resizeTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.resizeTimer.init(omnisidebar.rendersidebar, 750, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		omnisidebar.timerAid.init('resize', omnisidebar.rendersidebar, 750);
 	},
 	
 	lessChromeListener: {
@@ -1370,8 +1366,7 @@ var omnisidebar = {
 		else {
 			omnisidebar.prefs.stylish.value = false;
 			// Had to set with a timeout, if you disabled stylish and restarted the button wouldn't be hidden
-			omnisidebar.toggleStylishTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-			omnisidebar.toggleStylishTimer.init(function() { omnisidebar.hideIt(omnisidebar.stylishbutton, false); }, 100, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+			omnisidebar.timerAid.init('toggleStylish', function() { omnisidebar.hideIt(omnisidebar.stylishbutton, false); }, 100);
 		}
 	},
 	
@@ -1587,34 +1582,31 @@ var omnisidebar = {
 			}
 		}
 		
-		omnisidebar.contextMenuTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.contextMenuTimer.init(function() {
+		omnisidebar.timerAid.init('contextMenu', function() {
 			omnisidebar.removeTotaltoolbarEntries(omnisidebar.toolbarcontextmenu);
 			
 			omnisidebar.contextmenuitemtoggle = omnisidebar.toolbarcontextmenu.insertBefore(omnisidebar.contextmenuitemtoggle, omnisidebar.toolbarcontextmenu.getElementsByAttribute('toolbarId', 'addon-bar')[0]);
 			omnisidebar.contextmenuitemtoggle_twin = omnisidebar.toolbarcontextmenu.insertBefore(omnisidebar.contextmenuitemtoggle_twin, omnisidebar.toolbarcontextmenu.getElementsByAttribute('toolbarId', 'addon-bar')[0]);
-		}, 50, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		}, 50);
 		
 	},
 	
 	setAppMenu: function() {
-		omnisidebar.appMenuTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.appMenuTimer.init(function() {
+		omnisidebar.timerAid.init('appMenu', function() {
 			omnisidebar.removeTotaltoolbarEntries(omnisidebar.appmenu);
 			
 			omnisidebar.appmenuitemtoggle = omnisidebar.appmenu.insertBefore(omnisidebar.appmenuitemtoggle, omnisidebar.appmenu.getElementsByAttribute('toolbarId', 'addon-bar')[0]);
 			omnisidebar.appmenuitemtoggle_twin = omnisidebar.appmenu.insertBefore(omnisidebar.appmenuitemtoggle_twin, omnisidebar.appmenu.getElementsByAttribute('toolbarId', 'addon-bar')[0]);
-		}, 50, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		}, 50);
 	},
 	
 	setViewToolbarsMenu: function() {
-		omnisidebar.viewToolbarsMenuTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.viewToolbarsMenuTimer.init(function() {
+		omnisidebar.timerAid.init('viewToolbarsMenu', function() {
 			omnisidebar.removeTotaltoolbarEntries(omnisidebar.viewtoolbars);
 			
 			omnisidebar.viewmenuitemtoggle = omnisidebar.viewtoolbars.insertBefore(omnisidebar.viewmenuitemtoggle, omnisidebar.viewtoolbars.getElementsByAttribute('toolbarId', 'addon-bar')[0]);
 			omnisidebar.viewmenuitemtoggle_twin = omnisidebar.viewtoolbars.insertBefore(omnisidebar.viewmenuitemtoggle_twin, omnisidebar.viewtoolbars.getElementsByAttribute('toolbarId', 'addon-bar')[0]);
-		}, 50, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		}, 50);
 	},
 	
 	// Compatibility fix for Totaltoolbar, we don't want all those entries in the context menu
@@ -1739,8 +1731,7 @@ var omnisidebar = {
 		
 		// Delayed removal of "nohide" attribute is so the sidebar won't hide itself just after we finished resizing 
 		// (finish resizing -> new values saved -> animations) and not (finish resizing -> animations -> new values saved)
-		omnisidebar.dragEndTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.dragEndTimer.init(function() { omnisidebar.dragTarget.target.removeAttribute('nohide', 'true'); }, 100, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		omnisidebar.timerAid.init('dragEnd', function() { omnisidebar.dragTarget.target.removeAttribute('nohide', 'true'); }, 100);
 	},
 	
 	drag: function(e) {
@@ -1782,8 +1773,7 @@ var omnisidebar = {
 	},
 	
 	autoClose: function(e) {
-		omnisidebar.autoCloseTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.autoCloseTimer.init(function() {
+		omnisidebar.timerAid.init('autoClose', function() {
 			var focusedNode = document.commandDispatcher.focusedElement || e.target;
 			
 			if(!omnisidebar.box.hidden && omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') {
@@ -1799,14 +1789,13 @@ var omnisidebar = {
 					omnisidebar.toggleSidebarTwin();
 				}
 			}
-		}, 100, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		}, 100);
 	},
 	
 	// toggleSidebar(), sidebarOnLoad() and fireSidebarFocusedEvent() modified for the twin sidebar
 	toggleSidebarTwin: function(commandID, forceOpen) {
 		if(!omnisidebar.initialized) {
-			omnisidebar.twinSidebarTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-			omnisidebar.twinSidebarTimer.init(function() { omnisidebar.toggleSidebarTwin(commandID, forceOpen); }, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+			omnisidebar.timerAid.init('twinSidebar', function() { omnisidebar.toggleSidebarTwin(commandID, forceOpen); }, 500);
 			return;
 		}
 		
@@ -1900,8 +1889,7 @@ var omnisidebar = {
 	
 	sidebarTwinOnLoad: function(event) {
 		omnisidebar.listenerAid.remove(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true);
-		omnisidebar.twinOnLoadTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.twinOnLoadTimer.init(omnisidebar.fireSidebarTwinFocusedEvent, 0, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		omnisidebar.timerAid.init('twinOnLoad', omnisidebar.fireSidebarTwinFocusedEvent, 0);
 	},
 	
 	onDragEnter: function(box) {
@@ -1927,8 +1915,7 @@ var omnisidebar = {
 // We can't use a single function for both sidebars because you can toggle it without arguments and then it wouldn't know which sidebar to send the command the
 function toggleSidebar(commandID, forceOpen) { 
 	if(!omnisidebar.initialized) {
-		omnisidebar.mainSidebarTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		omnisidebar.mainSidebarTimer.init(function() { toggleSidebar(commandID, forceOpen); }, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+		omnisidebar.timerAid.init('mainSidebar', function() { toggleSidebar(commandID, forceOpen); }, 500);
 		return;
 	}
 		
