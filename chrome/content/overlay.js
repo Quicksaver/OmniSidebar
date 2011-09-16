@@ -1036,6 +1036,13 @@ var omnisidebar = {
 	
 	// Set the sidebar above the webpage box; everything goes in the resizebox to enable resizing while in this mode
 	setabove: function() {
+		// Starting in Firefox 7 the resize mechanism when dragging a sidebar splitter is changed, it doesn't work the same way as before
+		// With two sidebars it completely screws up so I'm setting these all the time instead of conditionally as before to always handle resizes correctly
+		omnisidebar.splitter_twin.setAttribute('disabled', 'true');
+		omnisidebar.splitter.setAttribute('disabled', 'true');
+		omnisidebar.listenerAid.add(omnisidebar.splitter_twin, 'mousedown', omnisidebar.dragStart, false);
+		omnisidebar.listenerAid.add(omnisidebar.splitter, 'mousedown', omnisidebar.dragStart, false);
+			
 		if(omnisidebar.prefs.renderabove.value) {
 			omnisidebar.box.setAttribute('renderabove', omnisidebar.prefs.undockMode.value);
 			omnisidebar.splitter.setAttribute('renderabove', 'true');
@@ -1046,9 +1053,6 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton.setAttribute('omnisidebardock', 'true');
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebardockbutton'));
-			
-			omnisidebar.splitter_twin.setAttribute('disabled', 'true');
-			omnisidebar.listenerAid.add(omnisidebar.splitter_twin, 'mousedown', omnisidebar.dragStart, false);
 		}
 		else {
 			omnisidebar.box.removeAttribute('renderabove');
@@ -1060,9 +1064,6 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton.removeAttribute('omnisidebardock');
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
-			
-			omnisidebar.splitter_twin.removeAttribute('disabled');
-			omnisidebar.listenerAid.remove(omnisidebar.splitter_twin, 'mousedown', omnisidebar.dragStart, false);
 		}
 		
 		if(omnisidebar.prefs.renderaboveTwin.value) {
@@ -1075,9 +1076,6 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton_twin.setAttribute('omnisidebardock', 'true');
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebardockbutton'));
-			
-			omnisidebar.splitter.setAttribute('disabled', 'true');
-			omnisidebar.listenerAid.add(omnisidebar.splitter, 'mousedown', omnisidebar.dragStart, false);
 		}
 		else {
 			omnisidebar.box_twin.removeAttribute('renderabove');
@@ -1089,9 +1087,6 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton_twin.removeAttribute('omnisidebardock');
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
-			
-			omnisidebar.splitter.removeAttribute('disabled');
-			omnisidebar.listenerAid.remove(omnisidebar.splitter, 'mousedown', omnisidebar.dragStart, false);
 		}
 		
 		// Auto-close feature
@@ -1750,11 +1745,11 @@ var omnisidebar = {
 			omnisidebar.dragNewW = omnisidebar.dragTarget.dragoriw + (omnisidebar.dragcurx - omnisidebar.dragorix);
 		}
 		if(omnisidebar.dragNewW < 5) { omnisidebar.dragNewW = 5; } // we so don't want this...
-		else if(omnisidebar.dragNewW > omnisidebar.browser.clientWidth) { omnisidebar.dragNewW = omnisidebar.browser.clientWidth; } // or this
+		else if(omnisidebar.dragNewW > omnisidebar.browser.clientWidth -73) { omnisidebar.dragNewW = omnisidebar.browser.clientWidth -73; } // or this
 		
 		// If new width makes it overlap the other sidebar...
-		if(omnisidebar.dragNewW > omnisidebar.browser.clientWidth - omnisidebar.dragNotTarget.dragoriw) {
-			omnisidebar.dragOtherW = omnisidebar.browser.clientWidth - omnisidebar.dragNewW;
+		if(omnisidebar.dragNewW > omnisidebar.browser.clientWidth - omnisidebar.dragNotTarget.dragoriw -68) {
+			omnisidebar.dragOtherW = omnisidebar.browser.clientWidth - omnisidebar.dragNewW -68;
 		} else {
 			omnisidebar.dragOtherW = omnisidebar.dragNotTarget.dragoriw;
 		}
