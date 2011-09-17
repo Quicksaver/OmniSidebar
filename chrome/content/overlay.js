@@ -1,12 +1,14 @@
 var omnisidebar = {
+	initialized: false,
+	
 	// Delayed initialization, should improve startup performance (I can hardly tell the difference though)
 	preinit: function() {
-		omnisidebar.initialized = false;
-		
 		Components.utils.import("resource://gre/modules/AddonManager.jsm");
 		
 		omnisidebar.hideIt(document.getElementById('sidebar-box'), false);
 		omnisidebar.hideIt(document.getElementById('sidebar-box-twin'), false);
+		
+		omnisidebar.fixSimilarWeb();
 		
 		omnisidebar.timerAid.init('init', omnisidebar.init, 500);
 		
@@ -80,6 +82,10 @@ var omnisidebar = {
 		omnisidebar.sidebar_twin.style.maxWidth = '';
 		omnisidebar.sidebar_twin.style.minWidth = '5px';
 		omnisidebar.sidebar_twin.style.width = '';
+		
+		// Compatibility with the SimilarWeb add-on
+		// override the settings introduced by the SimilarWeb add-on (this is why it's on a timer, it still would set these once)
+		omnisidebar.timerAid.init('similarweb', omnisidebar.fixSimilarWeb, 0);
 		
 		// Set up context menu onpopupshowing event to do both the predetermined action and omnisidebar's functions
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
@@ -935,7 +941,14 @@ var omnisidebar = {
 	
 	// Sidebar display functions
 	rendersidebar: function() {
-		// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons			
+		omnisidebar.setHeaders();
+		omnisidebar.setHeight();
+		omnisidebar.setWidth();
+	},
+	
+	// Handles the headers visibility
+	// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons			
+	setHeaders: function() {
 		if((omnisidebar.prefs.hideheadertoolbar.value || !omnisidebar.toolbarhasbuttons()) 
 		&& omnisidebar.prefs.hideheadertitle.value 
 		&& omnisidebar.prefs.hideheaderdock.value 
@@ -947,7 +960,6 @@ var omnisidebar = {
 			omnisidebar.header.removeAttribute('hidden');
 		}
 		
-		// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons			
 		if((omnisidebar.prefs.hideheadertoolbarTwin.value || !omnisidebar.toolbarhasbuttons(true)) 
 		&& omnisidebar.prefs.hideheadertitleTwin.value 
 		&& omnisidebar.prefs.hideheaderdockTwin.value 
@@ -958,9 +970,6 @@ var omnisidebar = {
 		else {
 			omnisidebar.header_twin.removeAttribute('hidden');
 		}
-		
-		omnisidebar.setHeight();
-		omnisidebar.setWidth();
 	},
 	
 	// Checks if there are any (visible) buttons in the toolbar
@@ -1549,6 +1558,54 @@ var omnisidebar = {
 		}
 	},
 	
+	// SimilarWeb add-on: Do not auto-hide if the 'add site' dialog is opened
+	similarWebPopupShowing: function() {
+		if(!omnisidebar.box.hidden && omnisidebar.box.getAttribute('sidebarcommand') == 'viewSimilarWebSidebar') {
+			omnisidebar.setHover(omnisidebar.resizebox, true);
+		}
+		else if(!omnisidebar.box_twin.hidden && omnisidebar.box_twin.getAttribute('sidebarcommand') == 'viewSimilarWebSidebar-twin') {
+			omnisidebar.setHover(omnisidebar.resizebox_twin, true);
+		}
+	},
+	similarWebPopupHiding: function() {
+		omnisidebar.setHover(omnisidebar.resizebox, false);
+		omnisidebar.setHover(omnisidebar.resizebox_twin, false);
+	},
+	
+	// Bugfix: incompatibility with the SimilarWeb add-on, it has its own sidebar handling mechanism which I have to override
+	// I'm trying a radical approach, substituting all SimilarWeb functions related only to this subject with dummy functions, it doesn't break add-on functionality
+	fixSimilarWeb: function() {
+		if(typeof(similarweb) == 'undefined') { return; }
+		
+		// Replace a bunch of functions that would conflict with the sidebar's appearance and display
+		similarweb.overlay.checkRtlBrowser = function() { similarweb.overlay.strDirection = 'ltr'; };
+		similarweb.overlay.initSidebarAppearance = function() { return; };
+		similarweb.overlay.moveToRight = function() { return; };
+		similarweb.overlay.moveToLeft = function() { return; };
+		similarweb.sidebar.undoSidebarApperance = function() { return; };
+		similarweb.sidebar.setSidebarWidth = function() { return; };
+		
+		if(!omnisidebar.initialized) { return; }
+		
+		// bunch of properties that may have already been modified by SimilarWeb
+		omnisidebar.sidebar.style.maxWidth = '';
+		omnisidebar.sidebar.style.minWidth = '5px';
+		omnisidebar.sidebar.style.width = '';
+		omnisidebar.sidebar_twin.style.maxWidth = '';
+		omnisidebar.sidebar_twin.style.minWidth = '5px';
+		omnisidebar.sidebar_twin.style.width = '';
+		
+		omnisidebar.box.style.minWidth = '5px';
+		omnisidebar.box_twin.style.minWidth = '5px';
+		omnisidebar.hideIt(omnisidebar.splitter, (!omnisidebar.box.hidden && !omnisidebar.prefs.renderabove.value));
+		
+		// Do not auto-hide if the 'add site' dialog is opened
+		document.getElementById('pnlSimilarWebAddSite').setAttribute('onpopupshowing', 'omnisidebar.similarWebPopupShowing();');
+		document.getElementById('pnlSimilarWebAddSite').setAttribute('onpopuphiding', 'omnisidebar.similarWebPopupHiding();');
+		document.getElementById('pnlSimilarWebThankYou').setAttribute('onpopupshowing', 'omnisidebar.similarWebPopupShowing();');
+		document.getElementById('pnlSimilarWebThankYou').setAttribute('onpopuphiding', 'omnisidebar.similarWebPopupHiding();');
+	},
+	
 	// Sets toolbar context menu omnisidebar options item according to what called it
 	// The timers is so the menus are given enough time to be populated
 	setContextMenu: function(e) {
@@ -1768,19 +1825,21 @@ var omnisidebar = {
 	},
 	
 	autoClose: function(e) {
-		omnisidebar.timerAid.init('autoClose', function() {
+		omnisidebar.timerAid.init('autoClose', function(e) {
 			var focusedNode = document.commandDispatcher.focusedElement || e.target;
 			
 			if(!omnisidebar.box.hidden && omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') {
 				if(!omnisidebar.hasAncestor(focusedNode, omnisidebar.box)
-				&& !omnisidebar.hasAncestor(focusedNode, document.getElementById('omnisidebarURIBarMenu')) ) {
+				&& !omnisidebar.hasAncestor(focusedNode, document.getElementById('omnisidebarURIBarMenu'))
+				&& (omnisidebar.box.getAttribute('sidebarcommand') != 'viewSimilarWebSidebar' || !omnisidebar.hasAncestor(focusedNode, document.getElementById('boxSimilarWebFloatingPanels')) ) ) {
 					toggleSidebar();
 				}
 			}
 			
 			if(!omnisidebar.box_twin.hidden && omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') {
 				if(!omnisidebar.hasAncestor(focusedNode, omnisidebar.box_twin)
-				&& !omnisidebar.hasAncestor(focusedNode, document.getElementById('omnisidebarURIBarMenu-twin')) ) {
+				&& !omnisidebar.hasAncestor(focusedNode, document.getElementById('omnisidebarURIBarMenu-twin'))
+				&& (omnisidebar.box_twin.getAttribute('sidebarcommand') != 'viewSimilarWebSidebar-twin' || !omnisidebar.hasAncestor(focusedNode, document.getElementById('boxSimilarWebFloatingPanels')) ) ) {
 					omnisidebar.toggleSidebarTwin();
 				}
 			}
@@ -1804,6 +1863,10 @@ var omnisidebar = {
 			sidebarBroadcaster = document.getElementById(sidebarBroadcaster.getAttribute('observes'));
 		}
 		if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
+		
+		if(sidebarBroadcaster.id == 'viewSimilarWebSidebar-twin') {
+			omnisidebar.setHeaders();
+		}
 		
 		if (sidebarBroadcaster.getAttribute("checked") == "true") {
 			if (!forceOpen) {
@@ -1888,20 +1951,28 @@ var omnisidebar = {
 	},
 	
 	onDragEnter: function(box) {
-		box.setAttribute('hover', 'true');
+		omnisidebar.setHover(box, true);
 		omnisidebar.listenerAid.add(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.add(window, "dragdrop", omnisidebar.onDragExitAll, false);
 	},
 	
 	onDragExit: function(box) {
-		box.removeAttribute('hover');
+		omnisidebar.setHover(box, false);
 	},
 	
 	onDragExitAll: function() {
 		omnisidebar.listenerAid.remove(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.remove(window, "dragdrop", omnisidebar.onDragExitAll, false);
-		omnisidebar.resizebox.removeAttribute('hover');
-		omnisidebar.resizebox_twin.removeAttribute('hover');
+		omnisidebar.setHover(omnisidebar.resizebox, false);
+		omnisidebar.setHover(omnisidebar.resizebox_twin, false);
+	},
+	
+	setHover: function(box, hover) {
+		if(hover) {
+			box.setAttribute('hover', 'true');
+		} else {
+			box.removeAttribute('hover');
+		}
 	}
 };
 
@@ -1919,6 +1990,10 @@ function toggleSidebar(commandID, forceOpen) {
 		commandID = sidebarBox.getAttribute("sidebarcommand");
 	}
 	var sidebarBroadcaster = document.getElementById(commandID);
+	
+	if(sidebarBroadcaster.id == 'viewSimilarWebSidebar') {
+		omnisidebar.setHeaders();
+	}
 	
 	var sidebar = document.getElementById("sidebar");
 	var sidebarTitle = document.getElementById("sidebar-title");
@@ -2007,5 +2082,15 @@ function fireSidebarFocusedEvent() {
 	}
 }
 
+if(typeof(similarweb) != 'undefined') {
+	similarweb.overlay.checkRtlBrowser = function() { similarweb.overlay.strDirection = 'ltr'; };
+	similarweb.overlay.initSidebarAppearance = function() { return; };
+	similarweb.overlay.moveToRight = function() { return; };
+	similarweb.overlay.moveToLeft = function() { return; };
+	similarweb.sidebar.undoSidebarApperance = function() { return; };
+	similarweb.sidebar.setSidebarWidth = function() { return; };
+}
+
 Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
+omnisidebar.fixSimilarWeb();
 omnisidebar.listenerAid.add(window, "load", omnisidebar.preinit, false);

@@ -133,7 +133,8 @@ only needed when glass style is applied */
 }
 
 .insidebar #sidebar-splitter,
-.insidebar #categories richlistitem[selected="true"] {
+.insidebar #categories richlistitem[selected="true"],
+.insidebar .siteHistoryTabButton[selected="true"] {
 	border-color: rgb(174, 183, 196) !important;
 	background-color: rgba(255, 255, 255, 0.57) !important;
 }
@@ -161,6 +162,46 @@ only needed when glass style is applied */
 	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
 }
 
+.insidebar #boxTopSites .topSitesSiteLinklabel,
+.insidebar #boxSiteHistory *,
+.insidebar #allReviews *,
+.insidebar #boxRealResults .facebookSingleResult *,
+.insidebar #boxRelatedSites .siteDiv *,
+.insidebar .topSitesTop5Label,
+.insidebar #boxSiteInfo .newsResultBox * {
+	color: black !important;
+}
+
+.insidebar #boxSiteInfo .twitTextToUser,
+.insidebar #newReview .addReviewLink,
+.insidebar #newReview .addReviewBtn {
+	color: rgb(0, 151, 216) !important;
+}
+
+.insidebar #boxRelatedSites .siteDiv,
+.insidebar #boxTopSites .topSitesSingleSiteResultBox,
+.insidebar #boxSiteInfo .newsResultBox,
+.insidebar #boxSiteHistory .siteHistorySingleSite,
+.insidebar #boxSiteHistory .siteHistorySingleSiteInner,
+.insidebar #allReviews .reviewContainer,
+.insidebar #boxRealResults .facebookSingleResult {
+	background: none !important;
+	border: none !important;
+	color: black !important;
+	border-radius: 0px !important;
+}
+.insidebar #boxRelatedSites .siteDiv:hover,
+.insidebar #boxTopSites .topSitesSingleSiteResultBox:hover,
+.insidebar #boxSiteInfo .newsResultBox:hover,
+.insidebar #boxSiteHistory .siteHistorySingleSite:hover,
+.insidebar #allReviews .reviewContainer:hover,
+.insidebar #newReview .addReviewLink:hover,
+.insidebar #boxRealResults .facebookSingleResult:hover {
+	background: rgba(255,255,255,.3) !important;
+	border-left: none !important;
+	border-right: none !important;
+}
+
 .insidebar #bookmarks-view,
 .insidebar #historyTree,
 .insidebar #downloadView,
@@ -181,6 +222,28 @@ only needed when glass style is applied */
 	padding-top: 2px !important;
 }
 
+.insidebar #boxSiteHistory .siteHistorySingleSite,
+.insidebar #boxSiteHistory .siteHistorySingleSiteInner,
+.insidebar #boxSiteHistory .siteHistorySingleSiteInner:hover {
+	border: none !important;
+	padding: 1px !important;
+}
+.insidebar #boxRealResults .facebookSingleResult,
+.insidebar #boxRealResults .facebookSingleResult:hover {
+	padding: 3px !important;
+}
+.insidebar #boxRelatedSites .siteDiv,
+.insidebar #boxSiteInfo .newsResultBox {
+	margin: 0 !important;
+	padding: 2px !important;
+}
+.insidebar #allReviews .reviewContainer {
+	padding: 4px !important;
+}
+.insidebar #boxRelatedSites {
+	margin-top: 8px !important;
+}
+
 .insidebar #bookmarks-view,
 .insidebar #historyTree,
 .insidebar #downloadView,
@@ -188,7 +251,14 @@ only needed when glass style is applied */
 .insidebar #sidebar-notify #feed_tree,
 .insidebar #view-port-container,
 .insidebar #ConsoleBox,
-.insidebar #styles {
+.insidebar #styles,
+.insidebar #boxRelatedSitesFrame,
+.insidebar #boxNoRelatedFound,
+.insidebar #boxTopSites,
+.insidebar #boxSiteInfo,
+.insidebar #boxSiteHistory,
+.insidebar #boxSiteReview,
+.insidebar #boxFacebook {
 	-moz-appearance: none !important;
 	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(50% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
 	border: 1px solid rgb(174, 183, 196) !important;
@@ -242,6 +312,80 @@ only needed when glass style is applied */
 }
 .insidebar domi-panel .viewer-pane-box-1 {
 	border: 1px solid rgba(255,255,255,.5) !important;
+}
+
+#sbSimilarWebSidebar.insidebar .sidebarHeader {
+	background: none !important;
+	height: 26px !important;
+	min-height: 26px !important;
+}
+#sbSimilarWebSidebar.insidebar #btnClose {
+	display: none !important;
+}
+
+#sbSimilarWebSidebar.insidebar #stackTabsData {
+	background: none !important;
+}
+
+#sbSimilarWebSidebar.insidebar #separatorBox {
+	display: none !important;
+}
+
+#sbSimilarWebSidebar.insidebar #boxTabsTitle {
+	margin-left: 7px !important;
+}
+#sbSimilarWebSidebar.insidebar #boxTabsTitle * {
+	border-bottom: none !important;
+}
+#sbSimilarWebSidebar.insidebar #boxTabsTitle vbox:not(#shareBox) {
+	min-width: 24px !important;
+	background-position: center !important;
+}
+#sbSimilarWebSidebar.insidebar #boxTabsTitle vbox:not(#shareBox)[selected="true"] {
+	border-color: rgb(174, 183, 196) !important;
+	background-color: rgba(255, 255, 255, 0.57) !important;
+	border-radius: 5px 5px 0 0 !important;
+}
+
+.insidebar #sitehistory_tabs,
+.insidebar #sitehistory_tabs * {
+	background: none !important;
+}
+.insidebar .siteHistoryTabButton {
+	border: 1px solid transparent !important;
+	border-bottom-color: rgb(174, 183, 196) !important;
+}
+.insidebar .siteHistoryTabButton[selected="true"] {
+	border-radius: 5px 5px 0 0 !important;
+	border-bottom-color: transparent !important;
+	font-weight: bold !important;
+}
+.insidebar #boxSiteHistoryResults .sw_tab_spacer {
+	border-color: rgb(174, 183, 196) !important;
+}
+
+.insidebar #newReview .addReviewLink:hover,
+.insidebar #boxTopSites .topSitesSiteLinklabel:hover,
+.insidebar #boxSiteInfo .newsResultBox *:not(.twitTextToUser):hover {
+	text-decoration: none !important;
+}
+
+.insidebar .sidebarTitle {
+	background: rgba(255,255,255,.3) !important;
+	color: black !important;
+	font-weight: bold !important;
+}
+
+.insidebar #boxRelatedSites .siteHeadlineLinkText {
+	font-weight: bold !important;
+}
+.insidebar #boxRelatedSites .divForDescription,
+.insidebar #boxRelatedSites .siteUrlDiv {
+	font-size: 11px !important;
+}
+.insidebar #boxRelatedSites .siteUrlDiv {
+	bottom: 5px !important;
+	position: absolute !important;
 }
 
 /* Buttons */
@@ -362,6 +506,45 @@ only needed when glass style is applied */
 	padding: 0 2px 0 2px !important;
 }
 
+#sbSimilarWebSidebar.insidebar #btnOptionsMenu {
+	width: 34px !important;
+	height: 20px !important;
+	min-width: 34px !important;
+	min-height: 20px !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+#sbSimilarWebSidebar.insidebar #btnOptionsMenu:after {
+	content: url('chrome://similarweb/skin/Setting_icon.png') !important;
+}
+
+#sbSimilarWebSidebar.insidebar #btnShare {
+	width: 28px !important;
+	height: 20px !important;
+	min-width: 28px !important;
+	min-height: 20px !important;
+	margin-top: 0 !important;
+	margin-bottom: 2px !important;
+}
+#sbSimilarWebSidebar.insidebar #btnShare:after {
+	content: url("chrome://similarweb/content/images/Share_Right_REGULAR.png") !important;
+}
+
+.insidebar #btnAddSite {
+	width: 110px !important;
+	background: none !important;
+}
+.insidebar #btnAddSite:after {
+	content: url("chrome://similarweb/skin/add_site.png") " Add Similar Site" !important;
+	background: rgba(151, 152, 153, 0.05) -moz-linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
+	padding-top: 5px !important;
+	left: 25px !important;
+	position: relative !important;
+}
+#sbSimilarWebSidebar.insidebar #btnAddSite:after {
+	padding-top: 5px !important;
+}	
+
 /* Tooltips */
 
 .insidebar tooltip {
@@ -439,7 +622,13 @@ only needed when glass style is applied */
 .insidebar #downloadView richlistitem:not(:first-child),
 .insidebar .view-pane richlistitem:not(:first-child),
 .insidebar #ConsoleBox richlistitem:not(:first-child),
-.insidebar #styles richlistitem:not(:first-child) {
+.insidebar #styles richlistitem:not(:first-child),
+.insidebar #boxRelatedSites .siteDiv:not(:first-child),
+.insidebar #boxTopSites .topSitesResultBox:not(:first-child),
+.insidebar #boxSiteInfo .newsResultBox:not(:first-child),
+.insidebar #boxSiteHistory .siteHistorySingleSite:not(:first-child),
+.insidebar #allReviews .reviewContainer:not(:first-child),
+.insidebar #boxRealResults .facebookSingleResult:not(:first-child) {
 	-moz-border-top-colors: rgba(0, 0, 0, 0.1) rgba(255, 255, 255, 0.1) !important;
 	-moz-border-bottom-colors: rgba(255, 255, 255, 0.1) !important;
 	border-top-width: 2px !important;
@@ -451,7 +640,13 @@ only needed when glass style is applied */
 .insidebar #downloadView richlistitem:first-child,
 .insidebar .view-pane richlistitem:first-child,
 .insidebar #ConsoleBox richlistitem:first-child,
-.insidebar #styles richlistitem:first-child {
+.insidebar #styles richlistitem:first-child,
+.insidebar #boxRelatedSites .siteDiv:first-child,
+.insidebar #boxTopSites .topSitesResultBox:first-child,
+.insidebar #boxSiteInfo .newsResultBox:first-child,
+.insidebar #boxSiteHistory .siteHistorySingleSite:first-child,
+.insidebar #allReviews .reviewContainer:first-child,
+.insidebar #boxRealResults .facebookSingleResult:first-child {
 	-moz-border-top-colors: rgba(255, 255, 255, 0.1) !important;
 	-moz-border-bottom-colors: rgba(255, 255, 255, 0.1) !important;
 	border-top-width: 1px !important;
@@ -461,7 +656,7 @@ only needed when glass style is applied */
 }
 
 /*--Scrollbars by makondo--*/
-
+/* I honestly don't remember where I got these from... */
 .insidebar scrollbar * { 
 	-moz-appearance: none !important;
 	background: none !important; 
@@ -480,26 +675,66 @@ only needed when glass style is applied */
 	height: 0 !important; 
 }
 
-.insidebar scrollbar thumb { 
+.insidebar scrollbar thumb,
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > slider > thumb { 
 	-moz-appearance: none !important; 
+	border: none !important;
+	opacity: .2 !important; 
+	border-radius: 10px !important;
+}
+.insidebar scrollbar[orient="vertical"] thumb,
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > slider > thumb {
+	background: transparent url("data:image/gif;base64,R0lGODlhBwDCAbMAAAsLC7q6uqSkpICAgFdXV+Li4rCwsCgoKMzMzFlZWa6urkhISUVFRt3d3ZeWlRETEywAAAAABwDCAUAE/vA9QKkIpRgCbt4dpnHeGH6kCJarmqKnyb6yG7fwfNNGsv+6oE2YGxqLyFoSp2wyFbwo8OiUEqvTJDTr9F2ZPYBCYUAoEo9Lo7H9Wqng91Le5cbt9Lv75oXn/3iBe4MibX6Ch4Rzdn2LV4YwBgIOAgNoX40amWGKWJ16KpuAJZCeiaeOqAWloKkZrKOqraautLazuLG1uYi7ure/vJ88or3AxrjFw8h5yqF8zNGEa1sJBAwLDAcPBgYBAQJvDXWY0J/OWsHqyJmw5rLox8vzsuvl9B/xwvXS/Pjy/gLWcvdvn69+BwvSISgQ4EB7cPRBTNjQoC2GFPMhdMjRoseJJh1BcqoocmHJjR+5YAyJ8uQ9ki1jFpSokgMZBGa8CFAQwMCAAxEAADs=") center no-repeat !important; 
 	min-height: 50px !important;
 	width: 0 !important;
-	border: none !important;
-	background:  transparent url("data:image/gif;base64,R0lGODlhBwDCAbMAAAsLC7q6uqSkpICAgFdXV+Li4rCwsCgoKMzMzFlZWa6urkhISUVFRt3d3ZeWlRETEywAAAAABwDCAUAE/vA9QKkIpRgCbt4dpnHeGH6kCJarmqKnyb6yG7fwfNNGsv+6oE2YGxqLyFoSp2wyFbwo8OiUEqvTJDTr9F2ZPYBCYUAoEo9Lo7H9Wqng91Le5cbt9Lv75oXn/3iBe4MibX6Ch4Rzdn2LV4YwBgIOAgNoX40amWGKWJ16KpuAJZCeiaeOqAWloKkZrKOqraautLazuLG1uYi7ure/vJ88or3AxrjFw8h5yqF8zNGEa1sJBAwLDAcPBgYBAQJvDXWY0J/OWsHqyJmw5rLox8vzsuvl9B/xwvXS/Pjy/gLWcvdvn69+BwvSISgQ4EB7cPRBTNjQoC2GFPMhdMjRoseJJh1BcqoocmHJjR+5YAyJ8uQ9ki1jFpSokgMZBGa8CFAQwMCAAxEAADs=") center no-repeat !important; 
-	opacity: .2 !important; 
+}
+.insidebar scrollbar[orient="horizontal"] thumb {
+	background: transparent url("data:image/gif;base64,R0lGODlhwgEHAIcAAAsLCxETEygoKEVFRkhISVdXV1lZWYCAgJeWlaSkpK6urrCwsLq6uszMzN3d3eLi4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAP8ALAAAAADCAQcAQAj/ABMoUJCgoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIBcuWGAgwIKBA0eqVKlgpcuXMGPKXNlypsuaNnPizMlTZ8+bP2HuDEr05dCeR4sqTfqTqU2nSptGHQlVZtWnCQ4MANCygYMHYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3Rv26wMHDBBsBUC4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPkQUuYEC6tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fqhckKBCAQQOvfJMrX868ufPn0KNLn94WcAICAA4YMFCgu3fuBcB7Ph9Pvrz47uK3nw9fvr379+TXw59vHr58+vjn38/Pv/3+/gCyF+CA8RFoYHjy/XfgeOA1WOCBDiLYYIICABAQADs=") center no-repeat !important; 
+	min-width: 50px !important;
+	height: 0 !important;
 }
 
-.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
-	margin-left: 0px !important; 
+.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"],
+.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] {
+	margin-left: 0px !important;
 	margin-right: 1px !important; 
 }
 
-.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] { 
-	margin-right: 1px !important; 
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"],
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
+	width: auto !important;
+	min-width: 0px !important;
+	max-width: none !important;
+}
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] {
+	margin-top: 3px !important;
+}
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
+	margin-bottom: 3px !important;
 }
 
-.insidebar scrollbarbutton {
+.insidebar scrollbarbutton,
+#sbSimilarWebSidebar.insidebar scrollbarbutton {
 	border: none !important;
 	background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA4klEQVR42jXPPaqDQBAH8CWdJ3hd6kD6QO4gYuEBBMEP0EIFP0BEz+CKjZ0nSKGlvPeQgIWVHsQixGiKzYyQ4rf8dxh2Zkkcx4ckSQhyXfcHfe9oP8IwPJVleZum6TGO46MoilsQBKe9QdO0KzT8DsPA5nl+o77vGdTugCM8z1Pf95emaV5d163gVdf10/M8pqrqkYiiSBVFWSilK9jyPN+yLFtkWWa6rh+J4zhXaPqDeaxt2w280zRlgiDcoyji9iUtyzobhvFfVdWKMJumed6XhG9yGGzbvkiSRBFmrMELhw9B4Yc3YgC0lAAAAABJRU5ErkJggg==) center no-repeat !important;
 	opacity: .2 !important; 
+}
+
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > slider,
+#sbSimilarWebSidebar.insidebar:hover scrollbar[orient="vertical"] > slider,
+#sbSimilarWebSidebar.insidebar:hover scrollbar[orient="vertical"] > slider[disabled="true"] {
+	width: auto !important;
+	min-width: 0px !important;
+	max-width: none !important;
+	margin: 0 !important;
+}
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] > slider {
+	background: none !important;
+}
+
+#sbSimilarWebSidebar.insidebar scrollbar[orient="vertical"] {
+	width: auto !important;
+	min-width: 7px !important;
+	max-width: none !important;
+	margin-right: 4px !important;
 }
