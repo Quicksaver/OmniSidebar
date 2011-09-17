@@ -1613,10 +1613,10 @@ var omnisidebar = {
 		omnisidebar.hideIt(omnisidebar.splitter, (!omnisidebar.box.hidden && !omnisidebar.prefs.renderabove.value));
 		
 		// Do not auto-hide if the 'add site' dialog is opened
-		document.getElementById('pnlSimilarWebAddSite').setAttribute('onpopupshowing', 'omnisidebar.similarWebPopupShowing();');
-		document.getElementById('pnlSimilarWebAddSite').setAttribute('onpopuphiding', 'omnisidebar.similarWebPopupHiding();');
-		document.getElementById('pnlSimilarWebThankYou').setAttribute('onpopupshowing', 'omnisidebar.similarWebPopupShowing();');
-		document.getElementById('pnlSimilarWebThankYou').setAttribute('onpopuphiding', 'omnisidebar.similarWebPopupHiding();');
+		omnisidebar.listenerAid.add(document.getElementById('pnlSimilarWebAddSite'), 'popupshowing', omnisidebar.similarWebPopupShowing, false);
+		omnisidebar.listenerAid.add(document.getElementById('pnlSimilarWebAddSite'), 'popuphiding', omnisidebar.similarWebPopupHiding, false);
+		omnisidebar.listenerAid.add(document.getElementById('pnlSimilarWebThankYou'), 'popupshowing', omnisidebar.similarWebPopupShowing, false);
+		omnisidebar.listenerAid.add(document.getElementById('pnlSimilarWebThankYou'), 'popuphiding', omnisidebar.similarWebPopupHiding, false);
 	},
 	
 	// compatibility with MileWideBack
