@@ -281,3 +281,9 @@
 .sidebar-browser {
 	background-color: window;
 }
+
+#back-strip {
+	position: relative;
+	z-index: 2000;
+	opacity: 0.01;
+}

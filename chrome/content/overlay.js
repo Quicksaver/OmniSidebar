@@ -37,6 +37,10 @@ var omnisidebar = {
 		
 		omnisidebar.getelems();
 		
+		// Set initial hover calls
+		omnisidebar.resizebox.hovers = 0;
+		omnisidebar.resizebox_twin.hovers = 0;
+		
 		// Add the close button to the twin sidebar, it won't be added by the use of an overlay because I can't access browser.dtd for some reason
 		var closebtn = omnisidebar.header.getElementsByClassName('tabs-closebutton')[0].cloneNode(true);
 		closebtn.setAttribute('oncommand', 'omnisidebar.toggleSidebarTwin();');
@@ -86,6 +90,13 @@ var omnisidebar = {
 		// Compatibility with the SimilarWeb add-on
 		// override the settings introduced by the SimilarWeb add-on (this is why it's on a timer, it still would set these once)
 		omnisidebar.timerAid.init('similarweb', omnisidebar.fixSimilarWeb, 0);
+		
+		// MileWideBack compatibility fix
+		// hovering the back-strip will hover the sidebar
+		if(omnisidebar.milewideback) {
+			omnisidebar.listenerAid.add(omnisidebar.milewideback, 'mouseover', omnisidebar.milewidebackHover, false);
+			omnisidebar.listenerAid.add(omnisidebar.milewideback, 'mouseout', omnisidebar.milewidebackOut, false);
+		}
 		
 		// Set up context menu onpopupshowing event to do both the predetermined action and omnisidebar's functions
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
@@ -212,6 +223,8 @@ var omnisidebar = {
 		omnisidebar.dockbutton_twin = document.getElementById('omnisidebar_dock_button-twin'); // omnisidebar dock/undock button
 		omnisidebar.devButton_twin = document.getElementById('omnisidebar-devTools-button-twin'); // Developer toolbarbutton
 		omnisidebar.stack_twin = document.getElementById('stackSidebar-twin'); // stack element for the customize screen
+		
+		omnisidebar.milewideback = (typeof(MileWideBack) != 'undefined') ? document.getElementById('back-strip') : null; // MileWideBack Add-on
 		
 		omnisidebar.prefs = {
 			lastcommand: Application.prefs.get('extensions.omnisidebar.lastcommand'), // Last opened sidebar
@@ -1606,6 +1619,23 @@ var omnisidebar = {
 		document.getElementById('pnlSimilarWebThankYou').setAttribute('onpopuphiding', 'omnisidebar.similarWebPopupHiding();');
 	},
 	
+	// compatibility with MileWideBack
+	// keep the sidebar visible when hovering the strip if it's opened and auto-hiding
+	milewidebackHover: function() {
+		if(omnisidebar.prefs.mainSidebar.value == 'left'
+		&& !omnisidebar.box.hidden) {
+			omnisidebar.setHover(omnisidebar.resizebox, true);
+		}
+		else if(omnisidebar.prefs.mainSidebar.value == 'right'
+		&& !omnisidebar.box_twin.hidden) {
+			omnisidebar.setHover(omnisidebar.resizebox_twin, true);
+		}
+	},
+	milewidebackOut: function() {
+		omnisidebar.setHover(omnisidebar.resizebox, false);
+		omnisidebar.setHover(omnisidebar.resizebox_twin, false);
+	},
+	
 	// Sets toolbar context menu omnisidebar options item according to what called it
 	// The timers is so the menus are given enough time to be populated
 	setContextMenu: function(e) {
@@ -1969,9 +1999,15 @@ var omnisidebar = {
 	
 	setHover: function(box, hover) {
 		if(hover) {
+			box.hovers++;
 			box.setAttribute('hover', 'true');
 		} else {
-			box.removeAttribute('hover');
+			if(box.hovers > 0) {
+				box.hovers--;
+			}
+			if(box.hovers == 0) {
+				box.removeAttribute('hover');
+			}
 		}
 	}
 };
