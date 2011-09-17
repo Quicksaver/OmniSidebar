@@ -100,6 +100,7 @@ var omnisidebar = {
 		
 		// Set up context menu onpopupshowing event to do both the predetermined action and omnisidebar's functions
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
+		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popuphiding', function() { omnisidebar.setBothHovers(false); }, false);
 		omnisidebar.listenerAid.add(omnisidebar.appmenu, 'popupshowing', function(event) { omnisidebar.setAppMenu(event); }, false);
 		omnisidebar.listenerAid.add(omnisidebar.viewtoolbars, 'popupshowing', function(event) { omnisidebar.setViewToolbarsMenu(event); }, false);
 		
@@ -1581,8 +1582,7 @@ var omnisidebar = {
 		}
 	},
 	similarWebPopupHiding: function() {
-		omnisidebar.setHover(omnisidebar.resizebox, false);
-		omnisidebar.setHover(omnisidebar.resizebox_twin, false);
+		omnisidebar.setBothHovers(false);
 	},
 	
 	// Bugfix: incompatibility with the SimilarWeb add-on, it has its own sidebar handling mechanism which I have to override
@@ -1632,8 +1632,7 @@ var omnisidebar = {
 		}
 	},
 	milewidebackOut: function() {
-		omnisidebar.setHover(omnisidebar.resizebox, false);
-		omnisidebar.setHover(omnisidebar.resizebox_twin, false);
+		omnisidebar.setBothHovers(false);
 	},
 	
 	// Sets toolbar context menu omnisidebar options item according to what called it
@@ -1654,6 +1653,13 @@ var omnisidebar = {
 			// Compatibility fix for Totaltoolbar, setting all these options on omnisidebar's toolbars just doesn't work and I wantto prevent any possible errors from it
 			if(document.getElementById('tt-toolbar-properties')) {
 				document.getElementById('tt-toolbar-properties').setAttribute('disabled', 'true');
+			}
+			
+			if(omnisidebar.hasAncestor(e.originalTarget.triggerNode, omnisidebar.header)) {
+				omnisidebar.setHover(omnisidebar.resizebox, true);
+			}
+			else if(omnisidebar.hasAncestor(e.originalTarget.triggerNode, omnisidebar.header_twin)) {
+				omnisidebar.setHover(omnisidebar.resizebox_twin, true);
 			}
 		}
 		else { 
@@ -1993,8 +1999,12 @@ var omnisidebar = {
 	onDragExitAll: function() {
 		omnisidebar.listenerAid.remove(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.remove(window, "dragdrop", omnisidebar.onDragExitAll, false);
-		omnisidebar.setHover(omnisidebar.resizebox, false);
-		omnisidebar.setHover(omnisidebar.resizebox_twin, false);
+		omnisidebar.setBothHovers(false);
+	},
+	
+	setBothHovers: function(hover) {
+		omnisidebar.setHover(omnisidebar.resizebox, hover);
+		omnisidebar.setHover(omnisidebar.resizebox_twin, hover);
 	},
 	
 	setHover: function(box, hover) {
