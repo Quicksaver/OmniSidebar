@@ -262,6 +262,7 @@
 					observes="viewURISidebar" />
 			</toolbar>
 			<stack id="stackSidebar"
+				class="stackSidebar"
 				insertbefore="sidebar-title">
 				<label id="sidebar-customizingLabel" 
 					flex="1" 
@@ -313,7 +314,7 @@
 					oncommand="omnisidebar.toggleDevToolbar('twin');"
 					persist="checked"
 					collapsed="true"/>
-				<stack id="stackSidebar-twin">
+				<stack id="stackSidebar-twin" class="stackSidebar">
 					<label id="sidebar-customizingLabel-twin" 
 						flex="1" 
 						crop="end" 

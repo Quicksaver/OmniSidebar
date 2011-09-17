@@ -158,6 +158,10 @@
 	margin: 5px 5px 0 5px;
 }
 
+.sidebar-box:not([customizing]) .stackSidebar {
+	display: -moz-box;
+}
+
 /* Sidebar size, position and animation */
 .sidebar-box[renderabove],
 .sidebar-box[customizing],
