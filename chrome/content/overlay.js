@@ -875,6 +875,13 @@ var omnisidebar = {
 		omnisidebar.width = parseInt(omnisidebar.box.getAttribute('width'));
 		omnisidebar.width_twin = parseInt(omnisidebar.box_twin.getAttribute('width'));
 		
+		// even though I already replace the resizing methods in similarweb, 
+		// it still screws up the sidebar size sometimes when starting up so I'm hoping this fixes everything
+		if(typeof(similarweb) != 'undefined') {
+			similarweb.general.prefManager.setIntPref(similarweb.consts.PREF_SIDEBAR_WIDTH, omnisidebar.width);
+			similarweb.general.prefManager.setCharPref(similarweb.consts.PREF_PREV_WIDTH, omnisidebar.width);
+		}
+		
 		omnisidebar.sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 		omnisidebar.sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 		omnisidebar.sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
@@ -1592,7 +1599,7 @@ var omnisidebar = {
 		
 		// Replace a bunch of functions that would conflict with the sidebar's appearance and display
 		similarweb.overlay.checkRtlBrowser = function() { similarweb.overlay.strDirection = 'ltr'; };
-		similarweb.overlay.initSidebarAppearance = function() { return; };
+		similarweb.overlay.initSidebarAppearance = function() { similarweb.overlay.m_blnSidebarInitialized = true; };
 		similarweb.overlay.moveToRight = function() { return; };
 		similarweb.overlay.moveToLeft = function() { return; };
 		similarweb.sidebar.undoSidebarApperance = function() { return; };
@@ -2029,6 +2036,11 @@ function toggleSidebar(commandID, forceOpen) {
 	if(!omnisidebar.initialized) {
 		omnisidebar.timerAid.init('mainSidebar', function() { toggleSidebar(commandID, forceOpen); }, 500);
 		return;
+	}
+	
+	// SimilarWeb hides the splitter and I don't want that
+	if(typeof(similarweb) != 'undefined') {
+		omnisidebar.hideIt(omnisidebar.splitter, (!omnisidebar.box.hidden && !omnisidebar.prefs.renderabove.value));
 	}
 		
 	var sidebarBox = document.getElementById("sidebar-box");
