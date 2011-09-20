@@ -78,6 +78,9 @@ var omnisidebar = {
 		omnisidebar.listenerAid.add(omnisidebar.prefs.chosenKeyset, "change", function() { omnisidebar.setKeysets(); });
 		omnisidebar.listenerAid.add(omnisidebar.prefs.titleButton, "change", function() { omnisidebar.toggleTitleButton(); });
 		omnisidebar.listenerAid.add(omnisidebar.prefs.titleButtonTwin, "change", function() { omnisidebar.toggleTitleButton(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.alwaysAddons, "change", function() { omnisidebar.toggleAlways(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.alwaysConsole, "change", function() { omnisidebar.toggleAlways(); });
+		omnisidebar.listenerAid.add(omnisidebar.prefs.alwaysDMT, "change", function() { omnisidebar.toggleAlways(); });
 		
 		// I guess Firefox has some defaults for these, they override the css set ones so we have to erase them
 		omnisidebar.sidebar.style.maxWidth = '';
@@ -109,6 +112,7 @@ var omnisidebar = {
 		
 		// Apply initial preferences, these need to be here and in this order
 		omnisidebar.toggleConsole(); // Must come before toggleTwin() (setTwinBroadcasters())
+		omnisidebar.toggleDMT(); // Must come before toggleTwin() (setTwinBroadcasters())
 		omnisidebar.toggleTwin(); // Must come before setlast()
 		omnisidebar.setlast();
 		omnisidebar.listenerAid.add(omnisidebar.sidebar, 'DOMContentLoaded', omnisidebar.setlast, true);
@@ -140,6 +144,7 @@ var omnisidebar = {
 		omnisidebar.toggleIconsColor();
 		omnisidebar.rendersidebar();
 		omnisidebar.toggleStylish();
+		omnisidebar.toggleAlways();
 		
 		// Updates width values when sidebar is resized and button check states
 		omnisidebar.setWatchers(omnisidebar.box);
@@ -256,6 +261,9 @@ var omnisidebar = {
 			devToolsTwin: Application.prefs.get('extensions.omnisidebar.devToolsTwin'), // Activate developers toolbar
 			chosenKeyset: Application.prefs.get('extensions.omnisidebar.chosenkeyset'), // keyset definitions
 			stylish: Application.prefs.get('extensions.omnisidebar.stylish'), // To show/hide the stylish button in the customize dialog
+			alwaysAddons: Application.prefs.get('extensions.omnisidebar.alwaysAddons'), // always open the addons manager in the sidebar
+			alwaysConsole: Application.prefs.get('extensions.omnisidebar.alwaysConsole'), // always open the error console in the sidebar
+			alwaysDMT: Application.prefs.get('extensions.omnisidebar.alwaysDMT'), // always open the error console in the sidebar
 			keysets: [
 				Application.prefs.get('extensions.omnisidebar.keysets.0'),
 				Application.prefs.get('extensions.omnisidebar.keysets.1'),
@@ -1395,16 +1403,16 @@ var omnisidebar = {
 		}
 	},
 	
+	// sets a console broadcaster for opening the error console in the sidebar if Console2 has not been found
 	toggleConsole: function() {
-		if(document.getElementById('viewConsole2Sidebar') == null) {
+		if(!document.getElementById('viewConsole2Sidebar')) {
 			var consoleBroadcaster = document.createElement('broadcaster');
 			consoleBroadcaster.id = 'viewConsole2Sidebar';
 			consoleBroadcaster.setAttribute('label', omnisidebar.strings.getString('consoleSidebarLabel'));
-			consoleBroadcaster.setAttribute('toltiptext', omnisidebar.strings.getString('consoleSidebarTooltip'));
+			consoleBroadcaster.setAttribute('tooltiptext', omnisidebar.strings.getString('consoleSidebarTooltip'));
 			consoleBroadcaster.setAttribute('autoCheck', 'false');
 			consoleBroadcaster.setAttribute('type', 'checkbox');
 			consoleBroadcaster.setAttribute('group', 'sidebar');
-			consoleBroadcaster.setAttribute('autoCheck', 'false');
 			consoleBroadcaster.setAttribute('sidebarurl', 'chrome://global/content/console.xul');
 			consoleBroadcaster.setAttribute('sidebartitle', omnisidebar.strings.getString('consoleSidebarLabel'));
 			consoleBroadcaster.setAttribute('oncommand', 'toggleSidebar("viewConsole2Sidebar");');
@@ -1412,6 +1420,23 @@ var omnisidebar = {
 		}
 			
 		document.getElementById('console_sidebar_button').setAttribute('observes', 'viewConsole2Sidebar');
+	},
+	
+	// sets a download manager broadcaster for opening the downloads manager in the sidebar if dmt has not been found
+	toggleDMT: function() {
+		if(!document.getElementById('viewDmtSidebar')) {
+			var dmtBroadcaster = document.createElement('broadcaster');
+			dmtBroadcaster.id = 'viewDmtSidebar';
+			dmtBroadcaster.setAttribute('label', omnisidebar.strings.getString('dmtSidebarLabel'));
+			dmtBroadcaster.setAttribute('tooltiptext', omnisidebar.strings.getString('dmtSidebarTooltip'));
+			dmtBroadcaster.setAttribute('autoCheck', 'false');
+			dmtBroadcaster.setAttribute('type', 'checkbox');
+			dmtBroadcaster.setAttribute('group', 'sidebar');
+			dmtBroadcaster.setAttribute('sidebarurl', 'chrome://mozapps/content/downloads/downloads.xul');
+			dmtBroadcaster.setAttribute('sidebartitle', omnisidebar.strings.getString('dmtSidebarLabel'));
+			dmtBroadcaster.setAttribute('oncommand', 'toggleSidebar("viewDmtSidebar");');
+			document.getElementById('mainBroadcasterSet').appendChild(dmtBroadcaster);
+		}
 	},
 	
 	toggleDOMInspector: function(DOMInspectorBroadcaster) {
@@ -1463,6 +1488,58 @@ var omnisidebar = {
 			}
 		}
 	},
+	
+	// toggles what always opens in the sidebar
+	toggleAlways: function() {
+		if(omnisidebar.prefs.alwaysAddons.value) {
+			if(document.getElementById('Tools:Addons').getAttribute('oncommand')) {
+				document.getElementById('Tools:Addons')._command = document.getElementById('Tools:Addons').getAttribute('oncommand');
+			}
+			document.getElementById('Tools:Addons').removeAttribute('oncommand');
+			document.getElementById('Tools:Addons').setAttribute('command', 'viewAddonSidebar');
+		} else {
+			document.getElementById('Tools:Addons').removeAttribute('command');
+			if(document.getElementById('Tools:Addons')._command) {
+				document.getElementById('Tools:Addons').setAttribute('oncommand', document.getElementById('Tools:Addons')._command);
+			}
+		}
+		
+		if(omnisidebar.prefs.alwaysConsole.value) {
+			if(!omnisidebar._toJavaScriptConsole) {
+				omnisidebar._toJavaScriptConsole = toJavaScriptConsole;
+			}
+			toJavaScriptConsole = function() { toggleSidebar("viewConsole2Sidebar"); };
+			
+			if(typeof(toErrorConsole) != 'undefined') {
+				if(!omnisidebar._toErrorConsole) {
+					omnisidebar._toErrorConsole = toErrorConsole;
+				}
+				toErrorConsole = function() { toggleSidebar("viewConsole2Sidebar"); };
+			}
+		} else {
+			if(omnisidebar._toJavaScriptConsole) {
+				toJavaScriptConsole = omnisidebar._toJavaScriptConsole;
+			}
+			if(omnisidebar._toErrorConsole) {
+				toErrorConsole = omnisidebar._toErrorConsole;
+			}
+		}
+		
+		if(document.getElementById('Tools:Downloads').getAttribute('oncommand') == 'dmtToggleDownloadMgr(true,true);') { return; }
+		if(omnisidebar.prefs.alwaysDMT.value) {
+			if(document.getElementById('Tools:Downloads').getAttribute('oncommand')) {
+				document.getElementById('Tools:Downloads')._command = document.getElementById('Tools:Downloads').getAttribute('oncommand');
+			}
+			document.getElementById('Tools:Downloads').removeAttribute('oncommand');
+			document.getElementById('Tools:Downloads').setAttribute('command', 'viewDmtSidebar');
+		} else {
+			document.getElementById('Tools:Downloads').removeAttribute('command');
+			if(document.getElementById('Tools:Downloads')._command) {
+				document.getElementById('Tools:Downloads').setAttribute('oncommand', document.getElementById('Tools:Downloads')._command);
+			}
+		}
+			
+	},		
 	
 	// Clones the developer toolbar to the twin sidebar
 	cloneDevToolbar: function() {

@@ -37,6 +37,9 @@ pref("extensions.omnisidebar.devToolsTwin", false);
 pref("extensions.omnisidebar.glassStyle", false);
 pref("extensions.omnisidebar.disablefx", false);
 pref("extensions.omnisidebar.chosenkeyset", 0);
+pref("extensions.omnisidebar.alwaysAddons", false);
+pref("extensions.omnisidebar.alwaysConsole", false);
+pref("extensions.omnisidebar.alwaysDMT", false);
 
 // https://developer.mozilla.org/en/Localizing_extension_descriptions
 pref("extensions.osb@quicksaver.description", "chrome://omnisidebar/locale/overlay.properties");

@@ -7,6 +7,8 @@
 <!ENTITY URISidebar.label "">
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
+<!ENTITY omnisidebarConsole.label "Error Console">
+<!ENTITY omnisidebarDMT.label "Downloads">
 
 <!ENTITY omnisidebarToolbar.label "Sidebar Toolbar">
 <!ENTITY omnisidebarToolbarTwin.label "Twin Sidebar Toolbar">
@@ -32,6 +34,7 @@
 <!ENTITY omnisidebarOptgroupstyle.label "Sidebars style">
 <!ENTITY omnisidebarOptgroupdev.label "Developer Tools">
 <!ENTITY omnisidebarOptgroupkeyset.label "Sidebar Keyboard Shortcut">
+<!ENTITY omnisidebarOptgroupalways.label "Always open in the Sidebar">
 
 <!ENTITY omnisidebarOptdevTools.label "Activate Developers SideToolbar">
 

@@ -39,6 +39,9 @@
 			<preference id="pref-devTools" name="extensions.omnisidebar.devTools" type="bool"/>
 			<preference id="pref-devToolsTwin" name="extensions.omnisidebar.devToolsTwin" type="bool"/>
 			<preference id="pref-chosenkeyset" name="extensions.omnisidebar.chosenkeyset" type="int"/>
+			<preference id="pref-alwaysAddons" name="extensions.omnisidebar.alwaysAddons" type="bool"/>
+			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
+			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
 		</preferences>
 		
 		<tabbox id="omnisidebarTabBox" >
@@ -72,6 +75,7 @@
 							</groupbox>
 						</vbox>
 					</groupbox>
+					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupgen.label;"/>
 						<hbox align="center">
@@ -87,6 +91,7 @@
 							</vbox>
 						</hbox>
 					</groupbox>
+					
 					<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
 						<caption label="&omnisidebarOptgroupicons.label;"/>
 						<radiogroup preference="pref-coloricons">
@@ -97,6 +102,7 @@
 							</hbox>
 						</radiogroup>
 					</groupbox>
+					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupdev.label;"/>
 						<checkbox label="&omnisidebarOptdevTools.label;" preference="pref-devTools"/>
@@ -122,6 +128,7 @@
 							</groupbox>
 						</vbox>
 					</groupbox>
+					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupgen.label;"/>
 						<hbox align="center">	
@@ -137,6 +144,7 @@
 							</vbox>
 						</hbox>
 					</groupbox>
+					
 					<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
 						<caption label="&omnisidebarOptgroupicons.label;"/>
 						<radiogroup preference="pref-coloriconsTwin">
@@ -147,6 +155,7 @@
 							</hbox>
 						</radiogroup>
 					</groupbox>
+					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupdev.label;"/>
 						<checkbox class="toggleTwin" label="&omnisidebarOptdevTools.label;" preference="pref-devToolsTwin"/>
@@ -158,10 +167,19 @@
 						<caption label="&omnisidebarOptgroupstyle.label;"/>
 						<checkbox label="&omnisidebarOptglassStyle.label;" preference="pref-glassStyle"/>
 					</groupbox>
+					
 					<groupbox align="start">
 						<caption label="&omnisidebarOptgroupperformance.label;"/>
 						<checkbox label="&omnisidebarOptdisablefx.label;" preference="pref-disablefx"/>
 					</groupbox>
+					
+					<groupbox align="start">
+						<caption label="&omnisidebarOptgroupalways.label;"/>
+						<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
+						<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
+						<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
+					</groupbox>
+					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupkeyset.label;"/>
 						<menulist id="chosenkeyset-select" preference="pref-chosenkeyset">
