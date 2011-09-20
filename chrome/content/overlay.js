@@ -2128,15 +2128,6 @@ function fireSidebarFocusedEvent() {
 	}
 }
 
-if(typeof(similarweb) != 'undefined') {
-	similarweb.overlay.checkRtlBrowser = function() { similarweb.overlay.strDirection = 'ltr'; };
-	similarweb.overlay.initSidebarAppearance = function() { return; };
-	similarweb.overlay.moveToRight = function() { return; };
-	similarweb.overlay.moveToLeft = function() { return; };
-	similarweb.sidebar.undoSidebarApperance = function() { return; };
-	similarweb.sidebar.setSidebarWidth = function() { return; };
-}
-
 Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
 omnisidebar.fixSimilarWeb();
 omnisidebar.listenerAid.add(window, "load", omnisidebar.preinit, false);

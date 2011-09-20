@@ -10,6 +10,7 @@
 	<em:optionsURL>chrome://omnisidebar/content/options.xul</em:optionsURL> 
 	<em:iconURL>chrome://omnisidebar/skin/icon.png</em:iconURL>
 	<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
+	
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
