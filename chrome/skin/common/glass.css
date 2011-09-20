@@ -6,7 +6,7 @@ Other sidebars should also be themed although probably not perfectly! */
 
 /* Fix for bug #672028: white gradient in background in aero
 only needed when glass style is applied */
-#appcontent {
+#main-window:not([title*="application/pdf"]) #appcontent {
 	-moz-appearance: none !important;
 }
 
