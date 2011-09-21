@@ -2110,7 +2110,7 @@ function toggleSidebar(commandID, forceOpen) {
 	}
 	
 	// SimilarWeb hides the splitter and I don't want that
-	if(typeof(similarweb) != 'undefined') {
+	if(omnisidebar.splitter.collapsed) {
 		omnisidebar.hideIt(omnisidebar.splitter, (!omnisidebar.box.hidden && !omnisidebar.prefs.renderabove.value));
 	}
 		
