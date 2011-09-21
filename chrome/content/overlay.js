@@ -2041,12 +2041,20 @@ var omnisidebar = {
 		event.initEvent("SidebarFocused", true, false);
 		if(omnisidebar.sidebar_twin.contentWindow) { omnisidebar.sidebar_twin.contentWindow.dispatchEvent(event); }
 		
-		// For the autoclose feature, we need to focus the sidebar on open or it won't be focused
-		if(omnisidebar.prefs.renderaboveTwin.value && omnisidebar.prefs.undockModeTwin.value == 'autoclose') {
-			if(omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.documentElement) {
-				omnisidebar.sidebar_twin.contentDocument.documentElement.focus();
-			} else {
-				omnisidebar.box_twin.focus();
+		if(omnisidebar.prefs.renderaboveTwin.value) {
+			// For the autoclose feature, we need to focus the sidebar on open or it won't be focused
+			if(omnisidebar.prefs.undockModeTwin.value == 'autoclose') {
+				if(omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.documentElement) {
+					omnisidebar.sidebar_twin.contentDocument.documentElement.focus();
+				} else {
+					omnisidebar.box_twin.focus();
+				}
+			}
+			
+			// For the autohide feature, hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
+			else if(omnisidebar.prefs.undockModeTwin.value == 'autohide') {
+				omnisidebar.setHover(omnisidebar.resizebox_twin, true);
+				omnisidebar.timerAid.init('autohideSidebarTwin', function() { omnisidebar.setHover(omnisidebar.resizebox_twin, false); }, 1000);
 			}
 		}
 	},
@@ -2195,12 +2203,20 @@ function fireSidebarFocusedEvent() {
 	event.initEvent("SidebarFocused", true, false);
 	if(omnisidebar.sidebar.contentWindow) { omnisidebar.sidebar.contentWindow.dispatchEvent(event); }
 	
-	// For the autoclose feature, we need to focus the sidebar on open or it won't be focused
-	if(omnisidebar.prefs.renderabove.value && omnisidebar.prefs.undockMode.value == 'autoclose') {
-		if(omnisidebar.sidebar.contentDocument && omnisidebar.sidebar.contentDocument.documentElement) {
-			omnisidebar.sidebar.contentDocument.documentElement.focus();
-		} else {
-			omnisidebar.box.focus();
+	if(omnisidebar.prefs.renderabove.value) {
+		// For the autoclose feature, we need to focus the sidebar on open or it won't be focused
+		if(omnisidebar.prefs.undockMode.value == 'autoclose') {
+			if(omnisidebar.sidebar.contentDocument && omnisidebar.sidebar.contentDocument.documentElement) {
+				omnisidebar.sidebar.contentDocument.documentElement.focus();
+			} else {
+				omnisidebar.box.focus();
+			}
+		}
+		
+		// For the autohide feature, hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
+		else if(omnisidebar.prefs.undockMode.value == 'autohide') {
+			omnisidebar.setHover(omnisidebar.resizebox, true);
+			omnisidebar.timerAid.init('autohideSidebar', function() { omnisidebar.setHover(omnisidebar.resizebox, false); }, 1000);
 		}
 	}
 }
