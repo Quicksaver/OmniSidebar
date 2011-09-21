@@ -3,13 +3,13 @@ var omnisidebarOptions = {
 		window.removeEventListener("load", omnisidebarOptions.init, false);
 		
 		omnisidebarOptions.keysets = [
-			Application.prefs.get('extensions.omnisidebar.keysets.0'),
-			Application.prefs.get('extensions.omnisidebar.keysets.1'),
-			Application.prefs.get('extensions.omnisidebar.keysets.2'),
-			Application.prefs.get('extensions.omnisidebar.keysets.3'),
-			Application.prefs.get('extensions.omnisidebar.keysets.4'),
-			Application.prefs.get('extensions.omnisidebar.keysets.5'),
-			Application.prefs.get('extensions.omnisidebar.keysets.6')
+			Application.prefs.get('extensions.omnisidebar.keysets0'),
+			Application.prefs.get('extensions.omnisidebar.keysets1'),
+			Application.prefs.get('extensions.omnisidebar.keysets2'),
+			Application.prefs.get('extensions.omnisidebar.keysets3'),
+			Application.prefs.get('extensions.omnisidebar.keysets4'),
+			Application.prefs.get('extensions.omnisidebar.keysets5'),
+			Application.prefs.get('extensions.omnisidebar.keysets6')
 		];
 		
 		for(var i=0; i<omnisidebarOptions.keysets.length; i++) {

@@ -2,13 +2,13 @@
 pref("extensions.omnisidebar.lastcommand", "viewBlankSidebar");
 pref("extensions.omnisidebar.lastcommandTwin", "viewBlankSidebar-twin");
 pref("extensions.omnisidebar.stylish", false);
-pref("extensions.omnisidebar.keysets.0", true);
-pref("extensions.omnisidebar.keysets.1", true);
-pref("extensions.omnisidebar.keysets.2", true);
-pref("extensions.omnisidebar.keysets.3", true);
-pref("extensions.omnisidebar.keysets.4", true);
-pref("extensions.omnisidebar.keysets.5", true);
-pref("extensions.omnisidebar.keysets.6", true);
+pref("extensions.omnisidebar.keysets0", true);
+pref("extensions.omnisidebar.keysets1", true);
+pref("extensions.omnisidebar.keysets2", true);
+pref("extensions.omnisidebar.keysets3", true);
+pref("extensions.omnisidebar.keysets4", true);
+pref("extensions.omnisidebar.keysets5", true);
+pref("extensions.omnisidebar.keysets6", true);
 
 pref("extensions.omnisidebar.mainSidebar", 'left');
 pref("extensions.omnisidebar.renderabove", false);
