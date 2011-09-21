@@ -376,37 +376,9 @@ var omnisidebar = {
 			}
 		}
 		
-		omnisidebar.setcommand();
 		omnisidebar.setclass();
 	},
 	
-	setcommand: function() {
-		if(omnisidebar.button) { 
-			omnisidebar.button.setAttribute('command', omnisidebar.prefs.lastcommand.value);
-			omnisidebar.button.removeAttribute('disabled');
-			// This is necessary for updating check states
-			if(omnisidebar.box.getAttribute('sidebarcommand') == omnisidebar.prefs.lastcommand.value) {
-				omnisidebar.button.setAttribute('checked', 'true'); 
-			} else {
-				omnisidebar.button.removeAttribute('checked');
-			}
-		}
-		omnisidebar.keyset.setAttribute('command', omnisidebar.prefs.lastcommand.value);
-		
-		if(omnisidebar.prefs.twinSidebar.value) {
-			if(omnisidebar.button_twin) { 
-				omnisidebar.button_twin.setAttribute('command', omnisidebar.prefs.lastcommandTwin.value);
-				omnisidebar.button_twin.removeAttribute('disabled');
-				// This is necessary for updating check states
-				if(omnisidebar.box_twin.getAttribute('sidebarcommand') == omnisidebar.prefs.lastcommandTwin.value) {
-					omnisidebar.button_twin.setAttribute('checked', 'true'); 
-				} else {
-					omnisidebar.button_twin.removeAttribute('checked');
-				}
-			}
-			omnisidebar.keyset_twin.setAttribute('command', omnisidebar.prefs.lastcommandTwin.value);
-		}
-	},
 	
 	// Adds an 'insidebar' class tag to the opened page for easier costumization
 	setclass: function() {
@@ -529,7 +501,7 @@ var omnisidebar = {
 			var command = this.getAttribute('oncommand').split('(')[1].split(')')[0];
 			command = command.substr(1, command.length-2);
 			
-			if(this.getAttribute('oncommand').indexOf('toggleSidebarTwin') > -1) {
+			if(this.getAttribute('group') == 'twinSidebar') {
 				omnisidebar.toggleSidebarTwin(command, true);
 			} else {
 				toggleSidebar(command, true);
@@ -559,7 +531,15 @@ var omnisidebar = {
 				omnisidebar.button_twin.removeAttribute('feednew');
 			}
 		}
-				
+		else {
+			if(omnisidebar.button && !omnisidebar.box.hidden) {
+				omnisidebar.button.setAttribute('checked', 'true');
+			}
+			if(omnisidebar.button_twin && !omnisidebar.box_twin.hidden) {
+				omnisidebar.button_twin.setAttriute('checked', 'true');
+			}
+		}
+		
 		// Update Scanner Extension
 		if(omnisidebar.updscanbtn) {
 			if(omnisidebar.updscanbtn.parentNode.id == 'omnisidebarToolbar' || omnisidebar.updscanbtn.parentNode.id == 'omnisidebarToolbar-twin') {
@@ -741,7 +721,8 @@ var omnisidebar = {
 			omnisidebar.redoKeysets();
 		}
 		
-		// We need to remove and add the keyset element so the shortcuts update when changing the settings, so no use in setting them by in the overlay
+		// We need to remove and add the keyset element so the shortcuts update when changing the settings
+		// setting them in the overlay would cause it to only update the keyboard shortcuts after a restart
 		if(omnisidebar.keysetElement) {
 			document.getElementById('main-window').removeChild(omnisidebar.keysetElement);
 		}
@@ -750,7 +731,7 @@ var omnisidebar = {
 		
 		omnisidebar.keyset = document.createElement('key');
 		omnisidebar.keyset.id = 'omnisidebar_sidebarkey';
-		omnisidebar.keyset.setAttribute('command', omnisidebar.prefs.lastcommand.value);
+		omnisidebar.keyset.setAttribute('oncommand', 'toggleSidebar();');
 		var keyAttr = 'key';
 		if(omnisidebar.curKeyset.key.indexOf('VK_') === 0) {
 			keyAttr = 'keycode';
@@ -762,7 +743,7 @@ var omnisidebar = {
 		if(omnisidebar.prefs.twinSidebar.value) {
 			omnisidebar.keyset_twin = document.createElement('key');
 			omnisidebar.keyset_twin.id = 'omnisidebar_sidebarkey-twin';
-			omnisidebar.keyset_twin.setAttribute('command', omnisidebar.prefs.lastcommandTwin.value);
+			omnisidebar.keyset_twin.setAttribute('oncommand', 'omnisidebar.toggleSidebarTwin();');
 			var keyAttr = 'key';
 			if(omnisidebar.curKeyset.key_twin.indexOf('VK_') === 0) {
 				keyAttr = 'keycode';
@@ -1974,7 +1955,7 @@ var omnisidebar = {
 		}
 		
 		if (!commandID) {
-			commandID = omnisidebar.box_twin.getAttribute("sidebarcommand");
+			commandID = omnisidebar.box_twin.getAttribute("sidebarcommand") || omnisidebar.prefs.lastcommandTwin.value;
 		}
 		
 		var sidebarBroadcaster = document.getElementById(commandID);
@@ -1984,6 +1965,18 @@ var omnisidebar = {
 		}
 		if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
 		
+		// Can't let both sidebars display the same page, it becomes unstable
+		var url = sidebarBroadcaster.getAttribute("sidebarurl");
+		if(url != 'about:blank' && document.getElementById(omnisidebar.prefs.lastcommand.value).getAttribute('sidebarurl') == url) {
+			if(!omnisidebar.box.hidden) {
+				toggleSidebar(omnisidebar.prefs.lastcommand.value, true);
+				return;
+			} else {
+				omnisidebar.prefs.lastcommand.reset();
+			}
+		}
+		
+		// similarweb hides the header by default, I don't want that
 		if(sidebarBroadcaster.id == 'viewSimilarWebSidebar-twin') {
 			omnisidebar.setHeaders();
 		}
@@ -1997,6 +1990,7 @@ var omnisidebar = {
 				omnisidebar.box_twin.hidden = true;
 				if(omnisidebar.button_twin) {
 					omnisidebar.button_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonTwinTooltip'));
+					omnisidebar.button_twin.removeAttribute('checked');
 				}
 				omnisidebar.splitter_twin.hidden = true;
 				if(content && (omnisidebar.box.hidden || !omnisidebar.prefs.renderabove.value || omnisidebar.prefs.undockMode.value != 'autoclose') ) {
@@ -2006,12 +2000,6 @@ var omnisidebar = {
 				omnisidebar.fireSidebarTwinFocusedEvent();
 				omnisidebar.splitter_twin.hidden = false;
 			}
-			return;
-		}
-		
-		// Can't let both sidebars display the same page, it becomes unstable
-		var url = sidebarBroadcaster.getAttribute("sidebarurl");
-		if(omnisidebar.sidebar.getAttribute('src') == url && !omnisidebar.box.hidden) {
 			return;
 		}
 	
@@ -2029,13 +2017,11 @@ var omnisidebar = {
 		omnisidebar.box_twin.hidden = false;
 		if(omnisidebar.button_twin) {
 			omnisidebar.button_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonTwinCloseTooltip'));
+			omnisidebar.button_twin.setAttribute('checked', 'true');
 		}
 		omnisidebar.splitter_twin.hidden = false;
 		
-		var title = sidebarBroadcaster.getAttribute("sidebartitle");
-		if (!title) {
-			title = sidebarBroadcaster.getAttribute("label");
-		}
+		var title = sidebarBroadcaster.getAttribute("sidebartitle") || sidebarBroadcaster.getAttribute("label");
 		
 		omnisidebar.sidebar_twin.setAttribute("src", url);
 		omnisidebar.box_twin.setAttribute("sidebarcommand", sidebarBroadcaster.id);
@@ -2120,34 +2106,44 @@ function toggleSidebar(commandID, forceOpen) {
 		omnisidebar.hideIt(omnisidebar.splitter, (!omnisidebar.box.hidden && !omnisidebar.prefs.renderabove.value));
 	}
 		
-	var sidebarBox = document.getElementById("sidebar-box");
-	if (!commandID) {
-		commandID = sidebarBox.getAttribute("sidebarcommand");
+	if(!commandID) {
+		commandID = omnisidebar.box.getAttribute("sidebarcommand") || omnisidebar.prefs.lastcommand.value;
 	}
 	var sidebarBroadcaster = document.getElementById(commandID);
+	if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
 	
+	// Can't let both sidebars display the same page, it becomes unstable
+	var url = sidebarBroadcaster.getAttribute("sidebarurl");
+	if(url != 'about:blank' && document.getElementById(omnisidebar.prefs.lastcommandTwin.value).getAttribute('sidebarurl') == url) {
+		if(!omnisidebar.box_twin.hidden) {
+			omnisidebar.toggleSidebarTwin(omnisidebar.prefs.lastcommandTwin.value, true);
+			return;
+		} else {
+			omnisidebar.prefs.lastcommandTwin.reset();
+		}
+	}
+	
+	// similarweb hides the header by default, I don't want that
 	if(sidebarBroadcaster.id == 'viewSimilarWebSidebar') {
 		omnisidebar.setHeaders();
 	}
 	
-	var sidebar = document.getElementById("sidebar");
-	var sidebarTitle = document.getElementById("sidebar-title");
-	var sidebarSplitter = document.getElementById("sidebar-splitter");
-	if (sidebarBroadcaster && sidebarBroadcaster.getAttribute("checked") == "true") {
-		if (!forceOpen) {
+	if(sidebarBroadcaster && sidebarBroadcaster.getAttribute("checked") == "true") {
+		if(!forceOpen) {
 			sidebarBroadcaster.removeAttribute("checked");
-			sidebarBox.setAttribute("sidebarcommand", "");
-			sidebarTitle.value = "";
-			sidebar.setAttribute("src", "about:blank");
-			sidebarBox.hidden = true;
+			omnisidebar.box.setAttribute("sidebarcommand", "");
+			omnisidebar.title.value = "";
+			omnisidebar.sidebar.setAttribute("src", "about:blank");
+			omnisidebar.box.hidden = true;
 			if(omnisidebar.button) {
 				if(omnisidebar.prefs.twinSidebar.value) {
 					omnisidebar.button.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonMainTooltip'));
 				} else {
 					omnisidebar.button.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonTooltip'));
 				}
+				omnisidebar.button.removeAttribute('checked');
 			}
-			sidebarSplitter.hidden = true;
+			omnisidebar.splitter.hidden = true;
 			if(content && (omnisidebar.box_twin.hidden || !omnisidebar.prefs.renderaboveTwin.value || omnisidebar.prefs.undockModeTwin.value != 'autoclose') ) {
 				content.focus();
 			}
@@ -2157,43 +2153,35 @@ function toggleSidebar(commandID, forceOpen) {
 		return;
 	}
 	
-	// Can't let both sidebars display the same page, it becomes unstable
-	var url = sidebarBroadcaster.getAttribute("sidebarurl");
-	if(omnisidebar.sidebar_twin.getAttribute('src') == url && !omnisidebar.box_twin.hidden) {
-		return;
-	}
-	
 	var broadcasters = document.getElementsByAttribute("group", "sidebar");
-	for (var i = 0; i < broadcasters.length; ++i) {
-		if (broadcasters[i].localName != "broadcaster") {
+	for(var i = 0; i < broadcasters.length; ++i) {
+		if(broadcasters[i].localName != "broadcaster") {
 			continue;
 		}
-		if (broadcasters[i] != sidebarBroadcaster) {
+		if(broadcasters[i] != sidebarBroadcaster) {
 			broadcasters[i].removeAttribute("checked");
 		} else {
 			sidebarBroadcaster.setAttribute("checked", "true");
 		}
 	}
-	sidebarBox.hidden = false;
+	omnisidebar.box.hidden = false;
 	if(omnisidebar.button) {
 		if(omnisidebar.prefs.twinSidebar.value) {
 			omnisidebar.button.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonMainCloseTooltip'));
 		} else {
 			omnisidebar.button.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarButtonCloseTooltip'));
 		}
+		omnisidebar.button.setAttribute('checked', 'true');
 	}
-	sidebarSplitter.hidden = false;
+	omnisidebar.splitter.hidden = false;
 	
-	var title = sidebarBroadcaster.getAttribute("sidebartitle");
-	if (!title) {
-		title = sidebarBroadcaster.getAttribute("label");
-	}
+	var title = sidebarBroadcaster.getAttribute("sidebartitle") || sidebarBroadcaster.getAttribute("label");
 	
-	sidebar.setAttribute("src", url);
-	sidebarBox.setAttribute("sidebarcommand", sidebarBroadcaster.id);
-	sidebarTitle.value = title;
+	omnisidebar.sidebar.setAttribute("src", url);
+	omnisidebar.box.setAttribute("sidebarcommand", sidebarBroadcaster.id);
+	omnisidebar.title.value = title;
 	omnisidebar.title.setAttribute('value', title); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
-	sidebarBox.setAttribute("src", url);
+	omnisidebar.box.setAttribute("src", url);
 	
 	if (sidebar.contentDocument && sidebar.contentDocument.location.href != url) {
 		sidebar.addEventListener("load", sidebarOnLoad, true);

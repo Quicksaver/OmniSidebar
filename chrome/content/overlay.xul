@@ -22,15 +22,14 @@
 			label="&omnisidebarButton.label;"
 			tooltiptext="&omnisidebarButton.tooltip;" 
 			onload="omnisidebar.onLoad();"
-			command="viewBlankSidebar" />
+			oncommand="toggleSidebar();" />
 			
 		<toolbarbutton id="omnisidebar_button-twin" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional"
 			label="&omnisidebarButtonTwin.label;"
 			tooltiptext="&omnisidebarButtonTwin.tooltip;" 
 			onload="omnisidebar.onLoad(true);"
-			observes="viewBlankSidebar-twin"
-			command="true" />
+			oncommand="omnisidebar.toggleSidebarTwin();" />
 	</toolbarpalette>
 	
 	<popupset id="mainPopupSet">
