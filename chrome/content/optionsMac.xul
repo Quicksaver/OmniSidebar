@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<!DOCTYPE window [
+  <!ENTITY % optionsDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+  %optionsDTD;
+]>
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+			id="omnisidebar-options-window"
+			title="&omnisidebarOptions.title;">
+
+		<menuitem id="keysetItem0" label="&omnisidebarOptkeysetItem0.mac;"/>
+		<menuitem id="keysetItem1" label="&omnisidebarOptkeysetItem1.mac;"/>
+		<menuitem id="keysetItem2" label="&omnisidebarOptkeysetItem2.mac;"/>
+		<menuitem id="keysetItem3" label="&omnisidebarOptkeysetItem3.mac;"/>
+		<menuitem id="keysetItem4" label="&omnisidebarOptkeysetItem4.mac;"/>
+		<menuitem id="keysetItem5" label="&omnisidebarOptkeysetItem5.mac;"/>
+		<menuitem id="keysetItem6" label="&omnisidebarOptkeysetItem6.mac;"/>
+</prefwindow>

@@ -1,7 +1,0 @@
-<!ENTITY omnisidebarOptkeysetItem0.label "Main: Command+Shift + S              Twin: Command+Option+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem1.label "Main: Command+Option + S          Twin: Command+Option+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem2.label "Main: Command+Shift + L              Twin: Command+Option+Shift + L">
-<!ENTITY omnisidebarOptkeysetItem3.label "Main: Command+Shift + S              Twin: Command+Shift + L">
-<!ENTITY omnisidebarOptkeysetItem4.label "Main: Command+Shift + L              Twin: Command+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem5.label "Main: Command + F6                      Twin: Command+Shift + F6">
-<!ENTITY omnisidebarOptkeysetItem6.label "Main: Command+Shift + PageUp   Twin: Command+Shift + PageDown">

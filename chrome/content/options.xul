@@ -3,8 +3,6 @@
 <!DOCTYPE window [
   <!ENTITY % optionsDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
   %optionsDTD;
-  <!ENTITY % platformDTD SYSTEM "chrome://omnisidebar-os/locale/overlay.dtd">
-  %platformDTD;
 ]>
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			id="omnisidebar-options-window"
@@ -184,13 +182,13 @@
 						<caption label="&omnisidebarOptgroupkeyset.label;"/>
 						<menulist id="chosenkeyset-select" preference="pref-chosenkeyset">
 							<menupopup>
-								<menuitem id="keysetItem0" value="0" label="&omnisidebarOptkeysetItem0.label;"/>
-								<menuitem id="keysetItem1" value="1" label="&omnisidebarOptkeysetItem1.label;"/>
-								<menuitem id="keysetItem2" value="2" label="&omnisidebarOptkeysetItem2.label;"/>
-								<menuitem id="keysetItem3" value="3" label="&omnisidebarOptkeysetItem3.label;"/>
-								<menuitem id="keysetItem4" value="4" label="&omnisidebarOptkeysetItem4.label;"/>
-								<menuitem id="keysetItem5" value="5" label="&omnisidebarOptkeysetItem5.label;"/>
-								<menuitem id="keysetItem6" value="6" label="&omnisidebarOptkeysetItem6.label;"/>
+								<menuitem id="keysetItem0" value="0" label="&omnisidebarOptkeysetItem0.win;"/>
+								<menuitem id="keysetItem1" value="1" label="&omnisidebarOptkeysetItem1.win;"/>
+								<menuitem id="keysetItem2" value="2" label="&omnisidebarOptkeysetItem2.win;"/>
+								<menuitem id="keysetItem3" value="3" label="&omnisidebarOptkeysetItem3.win;"/>
+								<menuitem id="keysetItem4" value="4" label="&omnisidebarOptkeysetItem4.win;"/>
+								<menuitem id="keysetItem5" value="5" label="&omnisidebarOptkeysetItem5.win;"/>
+								<menuitem id="keysetItem6" value="6" label="&omnisidebarOptkeysetItem6.win;"/>
 							</menupopup>
 						</menulist>
 					</groupbox>
