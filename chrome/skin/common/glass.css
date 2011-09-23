@@ -5,8 +5,9 @@ Other sidebars should also be themed although probably not perfectly! */
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 /* Fix for bug #672028: white gradient in background in aero
-only needed when glass style is applied */
-#main-window:not([title*="application/pdf"]) #appcontent {
+only needed when glass style is applied,
+application/pdf is for when viewing pdf files, disablechrome="true" is for the add-on manager */
+#main-window:not([title*="application/pdf"]):not([disablechrome="true"]) #appcontent {
 	-moz-appearance: none !important;
 }
 
