@@ -181,7 +181,7 @@
 			oncommand="toggleSidebar('viewDOMInspectorSidebar');" />
 			
 		<broadcaster id="viewURISidebar"
-			label="&URISidebar.label;"
+			label=""
 			tooltiptext="&URISidebar.tooltip;"
 			autoCheck="false"
 			type="checkbox"
@@ -192,7 +192,7 @@
 			oncommand="omnisidebar.openURIBar(event, this, 'sidebar-header', 'omnisidebarURIBarMenu');" />
 			
 		<broadcaster id="viewURISidebar-twin"
-			label="&URISidebar.label;"
+			label=""
 			tooltiptext="&URISidebar.tooltip;"
 			autoCheck="false"
 			type="checkbox"

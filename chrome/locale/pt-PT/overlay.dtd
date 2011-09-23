@@ -4,7 +4,6 @@
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector na Barra Lateral">
 <!ENTITY BlankSidebar.label "Página em Branco">
 <!ENTITY BlankSidebar.tooltip "Abrir uma Página em Branco na Barra Lateral">
-<!ENTITY URISidebar.label "">
 <!ENTITY URISidebar.tooltip "Introduzir uma localização para abrir na barra lateral">
 <!ENTITY URISidebar.buttonLabel "Abrir">
 <!ENTITY omnisidebarConsole.label "Consola de Erros">

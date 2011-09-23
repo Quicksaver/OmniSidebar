@@ -4,7 +4,6 @@
 <!ENTITY DOMInspectorSidebar.tooltip "Öppna DOM Inspector i sidopanelen">
 <!ENTITY BlankSidebar.label "Tom sida">
 <!ENTITY BlankSidebar.tooltip "Öppna en tom sida i sidopanelen">
-<!ENTITY URISidebar.label "">
 <!ENTITY URISidebar.tooltip "Ange en plats att öppna i sidopanelen">
 <!ENTITY URISidebar.buttonLabel "Gå">
 <!ENTITY omnisidebarConsole.label "Felkonsol">

@@ -4,7 +4,6 @@
 <!ENTITY DOMInspectorSidebar.tooltip "Open the DOM Inspector in the Sidebar">
 <!ENTITY BlankSidebar.label "Blank Page">
 <!ENTITY BlankSidebar.tooltip "Open a blank page in the Sidebar">
-<!ENTITY URISidebar.label "">
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
 <!ENTITY omnisidebarConsole.label "Error Console">
