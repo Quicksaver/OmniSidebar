@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-  <Description about="urn:mozilla:install-manifest">
-    <em:id>osb@quicksaver</em:id>
-    <em:type>2</em:type>
-    <em:name>OmniSidebar</em:name>
-    <em:version>0.8.4</em:version>
-    <em:creator>Quicksaver</em:creator>
-    <em:description>Gain control over your sidebar!</em:description>
-	<em:optionsURL>chrome://omnisidebar/content/options.xul</em:optionsURL> 
-	<em:iconURL>chrome://omnisidebar/skin/icon.png</em:iconURL>
-	<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
-	
-    <em:targetApplication>
-      <Description>
-        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
-        <em:minVersion>4.0</em:minVersion>
-        <em:maxVersion>9.0a1</em:maxVersion>
-      </Description>
-    </em:targetApplication>
-  </Description>
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>osb@quicksaver</em:id>
+		<em:type>2</em:type>
+		<em:version>0.8.4</em:version>
+		<em:creator>Quicksaver</em:creator>
+		<em:optionsURL>chrome://omnisidebar/content/options.xul</em:optionsURL> 
+		<em:iconURL>chrome://omnisidebar/skin/icon.png</em:iconURL>
+		<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
+		
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
+				<em:minVersion>4.0</em:minVersion>
+				<em:maxVersion>9.0a1</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+		
+		<em:localized>
+			<Description>
+				<em:locale>en-US</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Gain control over your sidebar!</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>pt-PT</em:locale>
+				<em:name>Barra OmniLateral</em:name>
+				<em:description>Controle a sua Barra Lateral!</em:description>
+			</Description>
+		</em:localized>
+	</Description>
 </RDF>

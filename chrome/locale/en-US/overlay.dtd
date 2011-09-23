@@ -29,7 +29,6 @@
 <!ENTITY omnisidebarOptgroupTwin.label "Twin Sidebar">
 <!ENTITY omnisidebarOptgroupicons.label "SideToolbar Buttons Iconset">
 <!ENTITY omnisidebarOptgroupgen.label "Appearance">
-<!ENTITY omnisidebarOptgroupbtns.label "Additional Buttons (open in the sidebar)">
 <!ENTITY omnisidebarOptgroupperformance.label "Performance">
 <!ENTITY omnisidebarOptgroupstyle.label "Sidebars style">
 <!ENTITY omnisidebarOptgroupdev.label "Developer Tools">

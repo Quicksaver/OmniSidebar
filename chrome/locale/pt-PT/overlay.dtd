@@ -1,0 +1,75 @@
+<!ENTITY addonsSidebar.label "Gestor de Extras">
+<!ENTITY addonsSidebar.tooltip "Abrir o Gestor de Extras na Barra Lateral">
+<!ENTITY DOMInspectorSidebar.label "DOM Inspector">
+<!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector na Barra Lateral">
+<!ENTITY BlankSidebar.label "Página em Branco">
+<!ENTITY BlankSidebar.tooltip "Abrir uma Página em Branco na Barra Lateral">
+<!ENTITY URISidebar.label "">
+<!ENTITY URISidebar.tooltip "Introduzir uma localização para abrir na barra lateral">
+<!ENTITY URISidebar.buttonLabel "Abrir">
+<!ENTITY omnisidebarConsole.label "Consola de Erros">
+<!ENTITY omnisidebarDMT.label "Transferências">
+
+<!ENTITY omnisidebarToolbar.label "Barra de Ferramentas da Barra Lateral">
+<!ENTITY omnisidebarToolbarTwin.label "Barra de Ferramentas da Barra Lateral Gémea">
+<!ENTITY omnisidebarOptions.title "Opções da Barra OmniLateral">
+
+<!ENTITY omnisidebarButton.label "Barra Lateral">
+<!ENTITY omnisidebarButtonMain.label "Barra Lateral Principal">
+<!ENTITY omnisidebarButtonTwin.label "Barra Lateral Gémea">
+<!ENTITY omnisidebarButton.tooltip "Abrir a Barra Lateral">
+<!ENTITY omnisidebarButtonMain.tooltip "Abrir a Barra Lateral Principal">
+<!ENTITY omnisidebarButtonTwin.tooltip "Abrir a Barra Lateral Gémea">
+<!ENTITY omnisidebarButtonClose.tooltip "Fechar a Barra Lateral">
+<!ENTITY omnisidebarButtonMainClose.tooltip "Fechar a Barra Lateral Principal">
+<!ENTITY omnisidebarButtonTwinClose.tooltip "Fechar a Barra Lateral Gémea">
+
+<!ENTITY omnisidebarOptMisc.label "Geral">
+<!ENTITY omnisidebarOptgroupMain.label "Barra Lateral Principal">
+<!ENTITY omnisidebarOptgroupTwin.label "Barra Lateral Gémea">
+<!ENTITY omnisidebarOptgroupicons.label "Tipo de Botões da Barra de Ferramentas Lateral">
+<!ENTITY omnisidebarOptgroupgen.label "Aparência">
+<!ENTITY omnisidebarOptgroupperformance.label "Desempenho">
+<!ENTITY omnisidebarOptgroupstyle.label "Estilo das Barras Laterais">
+<!ENTITY omnisidebarOptgroupdev.label "Ferramentas de Programador">
+<!ENTITY omnisidebarOptgroupkeyset.label "Atalho de Teclado da Barra Lateral">
+<!ENTITY omnisidebarOptgroupalways.label "Abrir sempre na Barra Lateral">
+
+<!ENTITY omnisidebarOptdevTools.label "Ativar a Barra de Ferramentas de Programador da Barra Lateral">
+
+<!ENTITY omnisidebarOptsidebars.leftlabel "Colocar à esquerda">
+<!ENTITY omnisidebarOptsidebars.rightlabel "Colocar à direita">
+<!ENTITY omnisidebarOptsidebars.twinlabel "Ativar Barra Lateral Gémea no lado oposto">
+<!ENTITY omnisidebarOptrenderabove.label "Desacoplar da janela do navegador e">
+<!ENTITY omnisidebarOptundockMode.autohide "Esconder automaticamente para a margem">
+<!ENTITY omnisidebarOptundockMode.noauto "Só fechar quando comandada">
+<!ENTITY omnisidebarOptundockMode.autoclose "Fechar automaticamente quando perde foco">
+
+<!ENTITY omnisidebarOptglassStyle.label "Todas as Páginas Laterais com Estilo de Transparência">
+<!ENTITY omnisidebarOptdisablefx.label "Desativar efeitos visuais (transições quando esconde automaticamente)">
+
+<!ENTITY omnisidebarOptalternatebtns.label "Estilo alternativo dos botões da barra de ferramentas lateral">
+<!ENTITY omnisidebarOpthideheadertoolbar.label "Esconder a barra de ferramentas lateral">
+<!ENTITY omnisidebarOpthideheadertitle.label "Esconder o título da Barra Lateral">
+<!ENTITY omnisidebarOpttitleButton.label "Menu de seleção no título da Barra Lateral">
+<!ENTITY omnisidebarOpthideheaderdock.label "Esconder botão de acoplagem">
+<!ENTITY omnisidebarOpthideheaderclose.label "Esconder botão de fecho">
+
+<!ENTITY omnisidebarOptcoloricons.nochangelabel "Sem Mudança">
+<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
+<!ENTITY omnisidebarOptcoloricons.colorlabel "Coloridos">
+
+<!ENTITY omnisidebarOptkeysetItem0.win "Principal: Ctrl+Shift + S              Gémea: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem1.win "Principal: Ctrl+Alt + S                 Gémea: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem2.win "Principal: Ctrl+Shift + L              Gémea: Ctrl+Alt+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem3.win "Principal: Ctrl+Shift + S              Gémea: Ctrl+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem4.win "Principal: Ctrl+Shift + L              Gémea: Ctrl+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem5.win "Principal: Ctrl + F6                      Gémea: Ctrl+Shift + F6">
+<!ENTITY omnisidebarOptkeysetItem6.win "Principal: Ctrl+Shift + PageUp   Gémea: Ctrl+Shift + PageDown">
+<!ENTITY omnisidebarOptkeysetItem0.mac "Principal: Comando+Shift + S              Gémea: Comando+Opção+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem1.mac "Principal: Comando+Opção + S          Gémea: Comando+Opção+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem2.mac "Principal: Comando+Shift + L              Gémea: Comando+Opção+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem3.mac "Principal: Comando+Shift + S              Gémea: Comando+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem4.mac "Principal: Comando+Shift + L              Gémea: Comando+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem5.mac "Principal: Comando + F6                      Gémea: Comando+Shift + F6">
+<!ENTITY omnisidebarOptkeysetItem6.mac "Principal: Comando+Shift + PageUp   Gémea: Comando+Shift + PageDown">
