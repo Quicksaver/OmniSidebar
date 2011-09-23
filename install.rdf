@@ -29,6 +29,15 @@
 				<em:locale>pt-PT</em:locale>
 				<em:name>Barra OmniLateral</em:name>
 				<em:description>Controle a sua Barra Lateral!</em:description>
+				<em:translator>Quicksaver</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>sv-SE</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Ta kontroll över din sidopanel!</em:description>
+				<em:translator>Lakrits @ babelzilla</em:translator>
 			</Description>
 		</em:localized>
 	</Description>
