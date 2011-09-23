@@ -21,7 +21,6 @@ var omnisidebar = {
 		omnisidebar.dragging = false;
 		omnisidebar.customizing = false;
 		omnisidebar.listeningResize = false;
-		omnisidebar.autoClosing = false;
 		omnisidebar.twined = false;
 		omnisidebar.ssuri = '';
 		
@@ -161,15 +160,23 @@ var omnisidebar = {
 		omnisidebar.hideIt(omnisidebar.box_twin, omnisidebar.prefAid.twinSidebar);
 		
 		omnisidebar.initialized = true;
+		
+		// Autoclose feature: we can't have the sidebars open when we restart
+		if(!omnisidebar.box.hidden && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose') {
+			toggleSidebar();
+			omnisidebar.timerAid.cancel('mainSidebar');
+		}
+		if(!omnisidebar.box_twin.hidden && omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autoclose') {
+			omnisidebar.toggleSidebarTwin();
+			omnisidebar.timerAid.cancel('twinSidebar');
+		}
 	},
 	
 	// Remove listeners on window unload
 	deinit: function() {
 		// Autoclose feature: we can't have the sidebars open when we restart
-		if(omnisidebar.autoClosing) { 
-			if(!omnisidebar.box.hidden && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose') { toggleSidebar(); }
-			if(!omnisidebar.box_twin.hidden && omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autoclose') { omnisidebar.toggleSidebarTwin(); }
-		}
+		if(!omnisidebar.box.hidden && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose') { toggleSidebar(); }
+		if(!omnisidebar.box_twin.hidden && omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autoclose') { omnisidebar.toggleSidebarTwin(); }
 		
 		// Button update listeners
 		omnisidebar.unload(true);
@@ -1073,13 +1080,9 @@ var omnisidebar = {
 		// Auto-close feature
 		if( (omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose')
 		||  (omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autoclose') ) {
-			if(!omnisidebar.autoClosing) {
-				omnisidebar.listenerAid.add(window, 'focus', omnisidebar.autoClose, true);
-				omnisidebar.autoClosing = true;
-			}
-		} else if(omnisidebar.autoClosing) {
+			omnisidebar.listenerAid.add(window, 'focus', omnisidebar.autoClose, true);
+		} else {
 			omnisidebar.listenerAid.remove(window, 'focus', omnisidebar.autoClose, true);
-			omnisidebar.autoClosing = false;
 		}
 		
 		// rendersidebar() needs to be called everytime the window is resized so the sidebars are properly resized as well
@@ -1888,7 +1891,7 @@ var omnisidebar = {
 	},
 	
 	autoClose: function(e) {
-		omnisidebar.timerAid.init('autoClose', function(e) {
+		omnisidebar.timerAid.init('autoClose', function() {
 			var focusedNode = document.commandDispatcher.focusedElement || e.target;
 			
 			if(!omnisidebar.box.hidden && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose') {
@@ -2009,7 +2012,7 @@ var omnisidebar = {
 				if(omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.documentElement) {
 					omnisidebar.sidebar_twin.contentDocument.documentElement.focus();
 				} else {
-					omnisidebar.box_twin.focus();
+					omnisidebar.sidebar_twin.focus();
 				}
 			}
 			
@@ -2171,7 +2174,7 @@ function fireSidebarFocusedEvent() {
 			if(omnisidebar.sidebar.contentDocument && omnisidebar.sidebar.contentDocument.documentElement) {
 				omnisidebar.sidebar.contentDocument.documentElement.focus();
 			} else {
-				omnisidebar.box.focus();
+				omnisidebar.sidebar.focus();
 			}
 		}
 		
