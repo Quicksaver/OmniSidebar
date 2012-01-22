@@ -3,25 +3,45 @@
 
 #omnisidebar_button, #omnisidebar_button-twin { list-style-image: url("chrome://omnisidebar/skin/osb-button.png"); }
 
-#omnisidebar_button:not([movetoright]):not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
-#omnisidebar_button:not([movetoright])[updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
-#omnisidebar_button:not([movetoright]):not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
-#omnisidebar_button:not([movetoright])[updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
+:not(#TabsToolbar) #omnisidebar_button:not([movetoright]):not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
+:not(#TabsToolbar) #omnisidebar_button:not([movetoright])[updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
+:not(#TabsToolbar) #omnisidebar_button:not([movetoright]):not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
+:not(#TabsToolbar) #omnisidebar_button:not([movetoright])[updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
 
-#omnisidebar_button-twin:not([movetoleft]):not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
-#omnisidebar_button-twin:not([movetoleft])[updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
-#omnisidebar_button-twin:not([movetoleft]):not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
-#omnisidebar_button-twin:not([movetoleft])[updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
+:not(#TabsToolbar) #omnisidebar_button-twin:not([movetoleft]):not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
+:not(#TabsToolbar) #omnisidebar_button-twin:not([movetoleft])[updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
+:not(#TabsToolbar) #omnisidebar_button-twin:not([movetoleft]):not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
+:not(#TabsToolbar) #omnisidebar_button-twin:not([movetoleft])[updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
 
-#omnisidebar_button[movetoright]:not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
-#omnisidebar_button[movetoright][updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
-#omnisidebar_button[movetoright]:not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
-#omnisidebar_button[movetoright][updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
+:not(#TabsToolbar) #omnisidebar_button[movetoright]:not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
+:not(#TabsToolbar) #omnisidebar_button[movetoright][updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
+:not(#TabsToolbar) #omnisidebar_button[movetoright]:not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
+:not(#TabsToolbar) #omnisidebar_button[movetoright][updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
 
-#omnisidebar_button-twin[movetoleft]:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
-#omnisidebar_button-twin[movetoleft][updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
-#omnisidebar_button-twin[movetoleft]:not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
-#omnisidebar_button-twin[movetoleft][updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
+:not(#TabsToolbar) #omnisidebar_button-twin[movetoleft]:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
+:not(#TabsToolbar) #omnisidebar_button-twin[movetoleft][updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
+:not(#TabsToolbar) #omnisidebar_button-twin[movetoleft]:not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
+:not(#TabsToolbar) #omnisidebar_button-twin[movetoleft][updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
+
+#TabsToolbar #omnisidebar_button:not([movetoright]):not([updscannew]):not([feednew]) { -moz-image-region: rect(48px 24px 72px 0px); }
+#TabsToolbar #omnisidebar_button:not([movetoright])[updscannew]:not([feednew]) { -moz-image-region: rect(48px 48px 72px 24px); }
+#TabsToolbar #omnisidebar_button:not([movetoright]):not([updscannew])[feednew] { -moz-image-region: rect(48px 72px 72px 48px); }
+#TabsToolbar #omnisidebar_button:not([movetoright])[updscannew][feednew] { -moz-image-region: rect(48px 96px 72px 72px); }
+
+#TabsToolbar #omnisidebar_button-twin:not([movetoleft]):not([updscannew]):not([feednew]) { -moz-image-region: rect(72px 24px 96px 0px); }
+#TabsToolbar #omnisidebar_button-twin:not([movetoleft])[updscannew]:not([feednew]) { -moz-image-region: rect(72px 48px 96px 24px); }
+#TabsToolbar #omnisidebar_button-twin:not([movetoleft]):not([updscannew])[feednew] { -moz-image-region: rect(72px 72px 96px 48px); }
+#TabsToolbar #omnisidebar_button-twin:not([movetoleft])[updscannew][feednew] { -moz-image-region: rect(72px 96px 96px 72px); }
+
+#TabsToolbar #omnisidebar_button[movetoright]:not([updscannew]):not([feednew]) { -moz-image-region: rect(72px 24px 96px 0px); }
+#TabsToolbar #omnisidebar_button[movetoright][updscannew]:not([feednew]) { -moz-image-region: rect(72px 48px 96px 24px); }
+#TabsToolbar #omnisidebar_button[movetoright]:not([updscannew])[feednew] { -moz-image-region: rect(72px 72px 96px 48px); }
+#TabsToolbar #omnisidebar_button[movetoright][updscannew][feednew] { -moz-image-region: rect(72px 96px 96px 72px); }
+
+#TabsToolbar #omnisidebar_button-twin[movetoleft]:not([updscannew]):not([feednew]) { -moz-image-region: rect(48px 24px 72px 0px); }
+#TabsToolbar #omnisidebar_button-twin[movetoleft][updscannew]:not([feednew]) { -moz-image-region: rect(48px 48px 72px 24px); }
+#TabsToolbar #omnisidebar_button-twin[movetoleft]:not([updscannew])[feednew] { -moz-image-region: rect(48px 72px 72px 48px); }
+#TabsToolbar #omnisidebar_button-twin[movetoleft][updscannew][feednew] { -moz-image-region: rect(48px 96px 72px 72px); }
 
 #omnisidebar_button > .toolbarbutton-icon,
 #omnisidebar_button-twin > .toolbarbutton-icon {
