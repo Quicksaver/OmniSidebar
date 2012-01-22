@@ -16,8 +16,7 @@ overlay   chrome://omnisidebar/content/options.xul      chrome://omnisidebar/con
 overlay   chrome://omnisidebar/content/options.xul      chrome://omnisidebar/content/optionsMac.xul   os=Darwin
 
 style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/overlay.css
-style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/Fx4.css   appversion<5
-style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/Fx5.css   appversion>=5
+style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/Fx5.css
 style chrome://global/content/customizeToolbar.xul chrome://omnisidebar/skin/overlay.css
 style about:addons                                 chrome://omnisidebar/skin/addons.css
 style chrome://global/content/console.xul          chrome://omnisidebar/skin/console.css

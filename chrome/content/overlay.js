@@ -1356,13 +1356,13 @@ var omnisidebar = {
 			omnisidebar.sss.unregisterSheet(omnisidebar.glassuri, omnisidebar.sss.AGENT_SHEET);
 		}
 		
-		var appversion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
+		/*var appversion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
 		var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
 		if(versionChecker.compare(appversion, "5.0") < 0) {
 			omnisidebar.glassversionuri = omnisidebar.ios.newURI("chrome://omnisidebar/skin/glass-fx4.css", null, null);
-		} else {
+		} else {*/
 			omnisidebar.glassversionuri = omnisidebar.ios.newURI("chrome://omnisidebar/skin/glass-fx5.css", null, null);
-		}
+		/*}*/
 		
 		if(omnisidebar.prefAid.glassStyle && !omnisidebar.sss.sheetRegistered(omnisidebar.glassversionuri, omnisidebar.sss.AGENT_SHEET)) {
 			omnisidebar.sss.loadAndRegisterSheet(omnisidebar.glassversionuri, omnisidebar.sss.AGENT_SHEET);
