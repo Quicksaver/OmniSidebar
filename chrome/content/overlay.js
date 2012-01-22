@@ -2033,6 +2033,7 @@ var omnisidebar = {
 		omnisidebar.setHover(box, true);
 		omnisidebar.listenerAid.add(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.add(window, "dragdrop", omnisidebar.onDragExitAll, false);
+		omnisidebar.listenerAid.add(window, "dragend", omnisidebar.onDragExitAll, false);
 	},
 	
 	onDragExit: function(box) {
@@ -2042,6 +2043,7 @@ var omnisidebar = {
 	onDragExitAll: function() {
 		omnisidebar.listenerAid.remove(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.remove(window, "dragdrop", omnisidebar.onDragExitAll, false);
+		omnisidebar.listenerAid.remove(window, "dragend", omnisidebar.onDragExitAll, false);
 		omnisidebar.setBothHovers(false);
 	},
 	
