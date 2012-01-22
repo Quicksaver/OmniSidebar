@@ -6,10 +6,11 @@ Other sidebars should also be themed although probably not perfectly! */
 
 /* Fix for bug #672028: white gradient in background in aero
 only needed when glass style is applied,
-application/pdf is for when viewing pdf files, disablechrome="true" is for the add-on manager */
-#main-window:not([title*="application/pdf"]):not([disablechrome="true"]) #appcontent {
+application/pdf is for when viewing pdf files, disablechrome="true" is for the add-ons manager
+I'm disabling this for now, it screws up viewing pdf files and certain page layouts, gotta live with that white light bar thingy for now */
+/*#main-window:not([title*="application/pdf"]):not([disablechrome="true"]) #appcontent {
 	-moz-appearance: none !important;
-}
+}*/
 
 /* Main window style and animation */
 .sidebar-box[renderabove] .omnisidebar_resize_box {
