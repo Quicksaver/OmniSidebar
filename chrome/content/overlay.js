@@ -388,7 +388,7 @@ var omnisidebar = {
 			}
 			
 			// First half of fix for not closing the sidebar when clicking already checked buttons
-			omnisidebar.listenerAid.remove(toolbar.childNodes[i], 'click', omnisidebar.preventClose, false);
+			omnisidebar.listenerAid.remove(toolbar.childNodes[i], 'command', omnisidebar.preventClose, false);
 			
 			// This ensures the buttons will only be checked when needed
 			toolbar.childNodes[i].removeAttribute('checked');
@@ -413,7 +413,7 @@ var omnisidebar = {
 			toolbar.childNodes[i].setAttribute('observes', toolbar.childNodes[i].getAttribute('observes'));
 			
 			// Second half of fix for not closing the sidebar when clicking already checked buttons
-			omnisidebar.listenerAid.add(toolbar.childNodes[i], 'click', omnisidebar.preventClose, false);
+			omnisidebar.listenerAid.add(toolbar.childNodes[i], 'command', omnisidebar.preventClose, false);
 		}
 	},
 	
@@ -470,14 +470,16 @@ var omnisidebar = {
 	
 	// We not only not close the sidebar from buttons in the sidebar toolbar, we also send a sidebar focused event when clicking them
 	preventClose: function(e) {
-		if(e.button == 0 && this.getAttribute('checked') == 'true' && this.id != 'uri_sidebar_button' && this.id != 'uri_sidebar_button-twin') {
-			var command = this.getAttribute('oncommand').split('(')[1].split(')')[0];
-			command = command.substr(1, command.length-2);
-			
-			if(this.getAttribute('group') == 'twinSidebar') {
-				omnisidebar.toggleSidebarTwin(command, true);
-			} else {
-				toggleSidebar(command, true);
+		if(this.id != 'uri_sidebar_button' && this.id != 'uri_sidebar_button-twin') {
+			var command = this.getAttribute('oncommand');
+			if(command.indexOf('()') == -1) {
+				command = command.split("('")[1].split("')")[0];
+				
+				if(this.getAttribute('group') == 'twinSidebar') {
+					omnisidebar.toggleSidebarTwin(command, true);
+				} else {
+					toggleSidebar(command, true);
+				}
 			}
 			
 			e.preventDefault();
@@ -1037,7 +1039,7 @@ var omnisidebar = {
 		omnisidebar.splitter.setAttribute('disabled', 'true');
 		omnisidebar.listenerAid.add(omnisidebar.splitter_twin, 'mousedown', omnisidebar.dragStart, false);
 		omnisidebar.listenerAid.add(omnisidebar.splitter, 'mousedown', omnisidebar.dragStart, false);
-			
+		
 		if(omnisidebar.prefAid.renderabove) {
 			omnisidebar.box.setAttribute('renderabove', omnisidebar.prefAid.undockMode);
 			omnisidebar.splitter.setAttribute('renderabove', 'true');
@@ -1786,6 +1788,7 @@ var omnisidebar = {
 	// Populate the Sidebar view menus
 	populateSidebarMenu: function(menu, group) {
 		while(menu.firstChild) {
+			omnisidebar.listenerAid.remove(menu.firstChild, 'command', omnisidebar.preventClose, false);
 			menu.removeChild(menu.firstChild);
 		}
 		
@@ -1811,7 +1814,9 @@ var omnisidebar = {
 			if(newEntry.getAttribute('label') == '') {
 				newEntry.setAttribute('label', groupBroadcasters[i].getAttribute('sidebartitle'));
 			}
-			menu.appendChild(newEntry);
+			newEntry = menu.appendChild(newEntry);
+			
+			omnisidebar.listenerAid.add(newEntry, 'command', omnisidebar.preventClose, false);
 		}
 	},
 	
@@ -2110,7 +2115,7 @@ var omnisidebar = {
 // Small fix to toggleSidebar() to make it stop throwing an error
 // Since it's already here I modded it a bit too
 // We can't use a single function for both sidebars because you can toggle it without arguments and then it wouldn't know which sidebar to send the command the
-function toggleSidebar(commandID, forceOpen) { 
+function toggleSidebar(commandID, forceOpen) {
 	if(!omnisidebar.initialized) {
 		omnisidebar.timerAid.init('mainSidebar', function() { toggleSidebar(commandID, forceOpen); }, 500);
 		return;
