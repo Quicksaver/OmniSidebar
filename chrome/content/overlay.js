@@ -1156,8 +1156,16 @@ var omnisidebar = {
 		
 		if(!twin) {
 			omnisidebar.prefAid.renderabove = !omnisidebar.prefAid.renderabove;
+			if(omnisidebar.prefAid.undockMode == 'autohide') {
+				omnisidebar.setHover(omnisidebar.resizebox, true, 1);
+				omnisidebar.timerAid.init('toggleDock', function() { omnisidebar.setHover(omnisidebar.resizebox, false); }, 1000);
+			}
 		} else {
 			omnisidebar.prefAid.renderaboveTwin = !omnisidebar.prefAid.renderaboveTwin;
+			if(omnisidebar.prefAid.undockModeTwin == 'autohide') {
+				omnisidebar.setHover(omnisidebar.resizebox_twin, true, 1);
+				omnisidebar.timerAid.init('toggleDockTwin', function() { omnisidebar.setHover(omnisidebar.resizebox_twin, false); }, 1000);
+			}
 		}
 	},
 	
@@ -2080,7 +2088,7 @@ var omnisidebar = {
 		omnisidebar.setHover(omnisidebar.resizebox_twin, hover);
 	},
 	
-	setHover: function(box, hover) {
+	setHover: function(box, hover, force) {
 		if(hover) {
 			box.hovers++;
 			box.setAttribute('hover', 'true');
@@ -2091,6 +2099,10 @@ var omnisidebar = {
 			if(box.hovers == 0) {
 				box.removeAttribute('hover');
 			}
+		}
+		
+		if(force) {
+			box.hovers = force;
 		}
 	}
 };
