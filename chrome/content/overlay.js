@@ -55,6 +55,7 @@ var omnisidebar = {
 		if(omnisidebar.OS != 'WINNT' && omnisidebar.OS != 'Darwin') {
 			omnisidebar.prefAid.coloricons = 'default';
 		}
+		omnisidebar.OSCPU = Components.classes["@mozilla.org/network/protocol;1?name=http"].getService(Components.interfaces.nsIHttpProtocolHandler).oscpu;
 		
 		// Preferences monitors
 		omnisidebar.prefAid.listen('mainSidebar', function() { omnisidebar.moveSidebars(); });
@@ -243,6 +244,9 @@ var omnisidebar = {
 		omnisidebar.stack_twin = document.getElementById('stackSidebar-twin'); // stack element for the customize screen
 		
 		omnisidebar.milewideback = (typeof(MileWideBack) != 'undefined') ? document.getElementById('back-strip') : null; // MileWideBack Add-on
+		
+		omnisidebar.appmenuButton = document.getElementById('appmenu-button-container'); // firefox button container
+		omnisidebar.titleButtonBox = document.getElementById('titlebar-buttonbox'); // control buttons
 	},
 	
 	get button () { var b = document.getElementById('omnisidebar_button'); if(!b) { omnisidebar.unload(); } return b; }, // omnisidebar Open Sidebar button
@@ -630,6 +634,9 @@ var omnisidebar = {
 			omnisidebar.stack.removeAttribute('flex');
 			omnisidebar.stack_twin.removeAttribute('flex');
 			omnisidebar.customizing = false;
+		
+			// on customize the z-index of the controller buttons is reset, it won't work setting it without the timer
+			omnisidebar.timerAid.init('customizeLessChrome', omnisidebar.lessChromeEnabled, 10);
 		}
 		omnisidebar.rendersidebar();
 		omnisidebar.setTwinToolbarButtons();
@@ -1093,10 +1100,7 @@ var omnisidebar = {
 				
 				// An issue with LessChromeHD, when shown the urlbar is blocked by the sidebars
 				// Here's to hoping nothing else is affected by this
-				AddonManager.addAddonListener(omnisidebar.lessChromeListener);
-				AddonManager.getAddonByID('lessChrome.HD@prospector.labs.mozilla', function(addon) {
-					if(addon && addon.isActive) { gNavToolbox.style.zIndex = '250'; }
-				});
+				omnisidebar.lessChromeEnabled();
 				
 				omnisidebar.listeningResize = true;
 			}
@@ -1104,7 +1108,7 @@ var omnisidebar = {
 			omnisidebar.listenerAid.remove(window, 'resize', omnisidebar.resizeListener, false);
 			
 			AddonManager.removeAddonListener(omnisidebar.lessChromeListener);
-			gNavToolbox.style.zIndex = '';
+			omnisidebar.titlebarButtonBoxFixer(false);
 			
 			omnisidebar.listeningResize = false;
 		}
@@ -1114,12 +1118,36 @@ var omnisidebar = {
 		omnisidebar.timerAid.init('resize', omnisidebar.rendersidebar, 750);
 	},
 	
+	lessChromeEnabled: function() {
+		AddonManager.addAddonListener(omnisidebar.lessChromeListener);
+		AddonManager.getAddonByID('lessChrome.HD@prospector.labs.mozilla', function(addon) {
+			if(addon && addon.isActive) { omnisidebar.titlebarButtonBoxFixer(true); }
+		});
+	},
+	
 	lessChromeListener: {
 		onEnabled: function(addon) { 
-			if(addon.id == 'lessChrome.HD@prospector.labs.mozilla') { gNavToolbox.style.zIndex = '250'; }
+			if(addon.id == 'lessChrome.HD@prospector.labs.mozilla') { omnisidebar.titlebarButtonBoxFixer(true); }
 		},
 		onDisabled: function(addon) {
-			if(addon.id == 'lessChrome.HD@prospector.labs.mozilla') { gNavToolbox.style.zIndex = ''; }
+			if(addon.id == 'lessChrome.HD@prospector.labs.mozilla') { omnisidebar.titlebarButtonBoxFixer(false); }
+		}
+	},
+	
+	titlebarButtonBoxFixer: function(aEnabled) {
+		if(aEnabled) {
+			gNavToolbox.style.zIndex = '250';
+			// on windows xp the navtoolbox would be over the control buttons in the titlebar, making them unusable
+			if(omnisidebar.OSCPU == 'Windows NT 5.1') {
+				omnisidebar.appmenuButton.style.zIndex = '260';
+				omnisidebar.titleButtonBox.style.zIndex = '260';
+			}
+		} else {
+			gNavToolbox.style.zIndex = '';
+			if(omnisidebar.OSCPU == 'Windows NT 5.1') {
+				omnisidebar.appmenuButton.style.zIndex = '';
+				omnisidebar.titleButtonBox.style.zIndex = '1';
+			}
 		}
 	},
 	
