@@ -4,7 +4,9 @@
 .insidebar #dmtTopToolBar button,
 #UpdateScan-window.insidebar button,
 #UpdateScan-window.insidebar toolbarbutton,
-.insidebar .toolbox-top toolbarbutton#search-toggle,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button),
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker,
 .insidebar .toolbox-top toolbarbutton#all-toggle,
 #JSConsoleWindow.insidebar toolbarbutton,
 #Console2Window.insidebar toolbarbutton,
@@ -47,7 +49,9 @@
 .insidebar #dmtTopToolBar button[disabled="true"],
 #UpdateScan-window.insidebar button[disabled="true"],
 #UpdateScan-window.insidebar toolbarbutton[disabled="true"],
-.insidebar .toolbox-top toolbarbutton#search-toggle[disabled="true"],
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button)[disabled="true"],
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton[disabled="true"],
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker[disabled="true"],
 .insidebar .toolbox-top toolbarbutton#all-toggle[disabled="true"],
 #JSConsoleWindow.insidebar toolbarbutton[disabled="true"],
 #Console2Window.insidebar toolbarbutton[disabled="true"],
@@ -73,7 +77,9 @@
 .insidebar #dmtTopToolBar button[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #UpdateScan-window.insidebar button[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #UpdateScan-window.insidebar toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-.insidebar .toolbox-top toolbarbutton#search-toggle[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button)[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .insidebar .toolbox-top toolbarbutton#all-toggle[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #JSConsoleWindow.insidebar toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #Console2Window.insidebar toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
@@ -96,7 +102,9 @@
 .insidebar #dmtTopToolBar button[disabled="true"] > .toolbarbutton-icon,
 #UpdateScan-window.insidebar button > .toolbarbutton-icon,
 #UpdateScan-window.insidebar toolbarbutton[disabled="true"] > .toolbarbutton-icon,
-.insidebar .toolbox-top toolbarbutton#search-toggle[disabled="true"] > .toolbarbutton-icon,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button)[disabled="true"] > .toolbarbutton-icon,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton[disabled="true"] > .toolbarbutton-icon,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker[disabled="true"] > .toolbarbutton-icon,
 .insidebar .toolbox-top toolbarbutton#all-toggle[disabled="true"] > .toolbarbutton-icon,
 #JSConsoleWindow.insidebar toolbarbutton[disabled="true"] > .toolbarbutton-icon,
 #Console2Window.insidebar toolbarbutton[disabled="true"] > .toolbarbutton-icon,
@@ -125,7 +133,9 @@
 .insidebar #dmtTopToolBar button > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 #UpdateScan-window.insidebar button > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 #UpdateScan-window.insidebar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
-.insidebar .toolbox-top toolbarbutton#search-toggle > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button) > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .insidebar .toolbox-top toolbarbutton#all-toggle > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 #JSConsoleWindow.insidebar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 #Console2Window.insidebar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
@@ -148,7 +158,9 @@
 .insidebar #dmtTopToolBar button:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #UpdateScan-window.insidebar button:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #UpdateScan-window.insidebar toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
-.insidebar .toolbox-top toolbarbutton#search-toggle:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button):not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .insidebar .toolbox-top toolbarbutton#all-toggle:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #JSConsoleWindow.insidebar toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #Console2Window.insidebar toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -169,7 +181,9 @@
 .insidebar #dmtTopToolBar button:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 #UpdateScan-window.insidebar button:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 #UpdateScan-window.insidebar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
-.insidebar .toolbox-top toolbarbutton#search-toggle:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button):not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker:not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .insidebar .toolbox-top toolbarbutton#all-toggle:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 #JSConsoleWindow.insidebar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 #Console2Window.insidebar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
@@ -196,7 +210,9 @@
 .insidebar #dmtTopToolBar button > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 #UpdateScan-window.insidebar button > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 #UpdateScan-window.insidebar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
-.insidebar .toolbox-top toolbarbutton#search-toggle > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button) > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .insidebar .toolbox-top toolbarbutton#all-toggle > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 #JSConsoleWindow.insidebar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 #Console2Window.insidebar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
@@ -219,7 +235,9 @@
 .insidebar #dmtTopToolBar button:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #UpdateScan-window.insidebar button:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #UpdateScan-window.insidebar toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
-.insidebar .toolbox-top toolbarbutton#search-toggle:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button):hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .insidebar .toolbox-top toolbarbutton#all-toggle:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #JSConsoleWindow.insidebar toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #Console2Window.insidebar toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -242,7 +260,9 @@
 .insidebar #dmtTopToolBar button[open="true"] > .toolbarbutton-menubutton-dropmarker,
 #UpdateScan-window.insidebar button[open="true"] > .toolbarbutton-menubutton-dropmarker,
 #UpdateScan-window.insidebar toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
-.insidebar .toolbox-top toolbarbutton#search-toggle[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button)[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .insidebar .toolbox-top toolbarbutton#all-toggle[open="true"] > .toolbarbutton-menubutton-dropmarker,
 #JSConsoleWindow.insidebar toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
 #Console2Window.insidebar toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
@@ -265,7 +285,9 @@
 .insidebar #dmtTopToolBar button:not([type="menu-button"]):not([disabled="true"]):hover:active,
 #UpdateScan-window.insidebar button:not([type="menu-button"]):not([disabled="true"]):hover:active,
 #UpdateScan-window.insidebar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
-.insidebar .toolbox-top toolbarbutton#search-toggle:not([type="menu-button"]):not([disabled="true"]):hover:active,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button):not([type="menu-button"]):not([disabled="true"]):hover:active,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .insidebar .toolbox-top toolbarbutton#all-toggle:not([type="menu-button"]):not([disabled="true"]):hover:active,
 #JSConsoleWindow.insidebar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
 #Console2Window.insidebar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
@@ -289,7 +311,9 @@
 .insidebar #dmtTopToolBar button:not([type="menu-button"])[checked="true"],
 #UpdateScan-window.insidebar button:not([type="menu-button"])[checked="true"],
 #UpdateScan-window.insidebar toolbarbutton:not([type="menu-button"])[checked="true"],
-.insidebar .toolbox-top toolbarbutton#search-toggle:not([type="menu-button"])[checked="true"],
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button):not([type="menu-button"])[checked="true"],
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton:not([type="menu-button"])[checked="true"],
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker:not([type="menu-button"])[checked="true"],
 .insidebar .toolbox-top toolbarbutton#all-toggle:not([type="menu-button"])[checked="true"],
 #JSConsoleWindow.insidebar toolbarbutton:not([type="menu-button"])[checked="true"],
 #Console2Window.insidebar toolbarbutton:not([type="menu-button"])[checked="true"],
@@ -313,7 +337,9 @@
 .insidebar #dmtTopToolBar button[open="true"],
 #UpdateScan-window.insidebar button[open="true"],
 #UpdateScan-window.insidebar toolbarbutton[open="true"],
-.insidebar .toolbox-top toolbarbutton#search-toggle[open="true"],
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button)[open="true"],
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton[open="true"],
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker[open="true"],
 .insidebar .toolbox-top toolbarbutton#all-toggle[open="true"],
 #JSConsoleWindow.insidebar toolbarbutton[open="true"],
 #Console2Window.insidebar toolbarbutton[open="true"],
@@ -342,7 +368,9 @@
 .insidebar #dmtTopToolBar button[checked="true"]:not(:active):hover,
 #UpdateScan-window.insidebar button[checked="true"]:not(:active):hover,
 #UpdateScan-window.insidebar toolbarbutton[checked="true"]:not(:active):hover,
-.insidebar .toolbox-top toolbarbutton#search-toggle[checked="true"]:not(:active):hover,
+.insidebar .toolbox-top #nav-bar > toolbarbutton:not(#reload-button)[checked="true"]:not(:active):hover,
+.insidebar .toolbox-top #nav-bar #reload-button toolbarbutton[checked="true"]:not(:active):hover,
+.insidebar .toolbox-top #nav-bar #reload-button dropmarker[checked="true"]:not(:active):hover,
 .insidebar .toolbox-top toolbarbutton#all-toggle[checked="true"]:not(:active):hover,
 #JSConsoleWindow.insidebar toolbarbutton[checked="true"]:not(:active):hover,
 #Console2Window.insidebar toolbarbutton[checked="true"]:not(:active):hover,
@@ -362,4 +390,24 @@
 .insidebar #hideTabbarCheck[checked="true"]:not(:active):hover {
 	background-color: rgba(90%,90%,90%,.4) !important;
 	-moz-transition: background-color .4s !important;
+}
+
+.insidebar .toolbox-top #nav-bar > toolbarbutton#reload-button,
+.insidebar .toolbox-top #nav-bar > toolbarbutton#reload-button:hover,
+.insidebar .toolbox-top #nav-bar > toolbarbutton#reload-button:active,
+.insidebar .toolbox-top #nav-bar > toolbarbutton#reload-button[checked="true"] {
+	padding: 0px !important;
+	margin: 0px !important;
+	border: none !important;
+	-moz-appearance: none !important;
+	background: none !important;
+	box-shadow: none !important;
+}
+.insidebar .toolbox-top #nav-bar > toolbarbutton#reload-button toolbarbutton {
+	border-radius: 3.5px 0 0 3.5px !important;
+	margin-right: 0 !important;
+}
+.insidebar .toolbox-top #nav-bar > toolbarbutton#reload-button dropmarker {
+	border-radius: 0 3.5px 3.5px 0 !important;
+	margin-left: -1px !important;
 }
