@@ -99,7 +99,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #TextboxEval,
 .insidebar #styles-filter,
 .insidebar #tfURLBar,
-.omnisidebarURIBarMenu textbox {
+.omnisidebarURIBarMenu textbox,
+.insidebar #panoSearchBox {
 	-moz-appearance: none !important;
 	background: rgba(135,135,135,.5) !important;
 	border: 0 !important;
@@ -260,7 +261,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #boxSiteInfo,
 .insidebar #boxSiteHistory,
 .insidebar #boxSiteReview,
-.insidebar #boxFacebook {
+.insidebar #boxFacebook,
+.insidebar #panoTabGroupTree {
 	-moz-appearance: none !important;
 	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(50% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
 	border: 1px solid rgb(174, 183, 196) !important;
@@ -585,20 +587,25 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #ConsoleBox richlistitem:hover,
 .insidebar #ConsoleBox richlistitem[selected="true"],
 .insidebar #styles richlistitem:hover,
-.insidebar #styles richlistitem[selected="true"] {
+.insidebar #styles richlistitem[selected="true"],
+.insidebar #panoTabGroupTreeChildren::-moz-tree-row(selected),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-row(hover) {
 	color: black !important;
 	background: rgba(255,255,255,.3) !important;
 }
 
 .insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
-.insidebar #feedbar_tree_container::-moz-tree-cell-text(container) {
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container) {
 	font-weight: bold !important;
 }
 
 .insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open),
 .insidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open, selected),
 .insidebar #feedbar_tree_container::-moz-tree-cell-text(container, open),
-.insidebar #feedbar_tree_container::-moz-tree-cell-text(container, open, selected) {
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(container, open, selected),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, open),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, open, selected) {
 	color: black !important;
 }
 
@@ -609,7 +616,11 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #feedbar_tree_container::-moz-tree-cell-text(container),
 .insidebar #feedbar_tree_container::-moz-tree-cell-text(container, hover),
 .insidebar #feedbar_tree_container::-moz-tree-cell-text(leaf),
-.insidebar #feedbar_tree_container::-moz-tree-cell-text(leaf, hover)  {
+.insidebar #feedbar_tree_container::-moz-tree-cell-text(leaf, hover),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, hover),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(leaf),
+.insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(leaf, hover)  {
 	color: black !important;
 }
 
@@ -619,7 +630,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 
 .insidebar #bookmarks-view-children::-moz-tree-separator,
 .insidebar .sidebar-placesTreechildren::-moz-tree-separator,
-.insidebar #feedbar_tree_container::-moz-tree-separator {
+.insidebar #feedbar_tree_container::-moz-tree-separator,
+.insidebar #panoTabGroupTreeChildren::-moz-tree-separator {
 	border-top: 1px solid rgb(174, 183, 196) !important;
 	border-bottom: none !important;
 }

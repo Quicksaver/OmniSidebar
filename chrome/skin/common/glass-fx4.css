@@ -20,7 +20,8 @@
 #addons-page.insidebar .addon-control,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu,
 #sbSimilarWebSidebar.insidebar #btnShare,
-.insidebar #btnAddSite:after {
+.insidebar #btnAddSite:after,
+.insidebar #hideTabbarCheck {
 	-moz-appearance: none !important;
 	opacity: 1 !important;
 	background: rgba(151, 152, 153, 0.05) -moz-linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
@@ -55,7 +56,8 @@
 #addons-page.insidebar .addon-control[disabled="true"],
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu[disabled="true"],
 #sbSimilarWebSidebar.insidebar #btnShare[disabled="true"],
-.insidebar #btnAddSite[disabled="true"]:after {
+.insidebar #btnAddSite[disabled="true"]:after,
+.insidebar #hideTabbarCheck[disabled="true"] {
 	opacity: .8;
 }
 
@@ -80,6 +82,7 @@
 #addons-page.insidebar .addon-control[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 #sbSimilarWebSidebar.insidebar #btnShare[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.insidebar #hideTabbarCheck[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 
 #history-panel.insidebar #viewButton[disabled="true"] > .toolbarbutton-icon, 
 #downloadManager.insidebar #clearListButton[disabled="true"] > .toolbarbutton-icon,
@@ -101,7 +104,8 @@
 #addons-page.insidebar .header-button[disabled="true"] > .toolbarbutton-icon,
 #addons-page.insidebar .addon-control[disabled="true"] > .toolbarbutton-icon,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu[disabled="true"] > .toolbarbutton-icon,
-#sbSimilarWebSidebar.insidebar #btnShare[disabled="true"] > .toolbarbutton-icon {
+#sbSimilarWebSidebar.insidebar #btnShare[disabled="true"] > .toolbarbutton-icon,
+.insidebar #hideTabbarCheck[disabled="true"] > .toolbarbutton-icon {
 	opacity: .5;
 }
 
@@ -126,7 +130,8 @@
 #addons-page.insidebar .addon-control:not([checked="true"]):not([disabled="true"]):hover,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu:not([checked="true"]):not([disabled="true"]):hover,
 #sbSimilarWebSidebar.insidebar #btnShare:not([checked="true"]):not([disabled="true"]):hover,
-.insidebar #btnAddSite:not([checked="true"]):not([disabled="true"]):hover:after {
+.insidebar #btnAddSite:not([checked="true"]):not([disabled="true"]):hover:after,
+.insidebar #hideTabbarCheck:not([checked="true"]):not([disabled="true"]):hover {
 	background-color: hsla(190,60%,70%,.5) !important;
 	border-color: hsla(190,50%,65%,.8) hsla(190,50%,50%,.8) hsla(190,50%,40%,.8) !important;
 	box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 0 0 1.5px rgba(255,255,255,.1) inset, 0 1px 0 rgba(0,0,0,.1), 0 0 3.5px hsl(190,90%,80%) !important;
@@ -154,6 +159,7 @@
 #addons-page.insidebar .addon-control > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 #sbSimilarWebSidebar.insidebar #btnShare > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.insidebar #hideTabbarCheck > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 
 #history-panel.insidebar #viewButton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]), 
 #downloadManager.insidebar #clearListButton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -176,6 +182,7 @@
 #addons-page.insidebar .addon-control:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 #sbSimilarWebSidebar.insidebar #btnShare:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar #hideTabbarCheck:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
 #history-panel.insidebar #viewButton[open="true"] > .toolbarbutton-menubutton-dropmarker, 
 #downloadManager.insidebar #clearListButton[open="true"] > .toolbarbutton-menubutton-dropmarker,
@@ -198,6 +205,7 @@
 #addons-page.insidebar .addon-control[open="true"] > .toolbarbutton-menubutton-dropmarker,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu[open="true"] > .toolbarbutton-menubutton-dropmarker,
 #sbSimilarWebSidebar.insidebar #btnShare[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.insidebar #hideTabbarCheck[open="true"] > .toolbarbutton-menubutton-dropmarker,
 
 #history-panel.insidebar #viewButton:not([type="menu-button"]):not([disabled="true"]):hover:active, 
 #downloadManager.insidebar #clearListButton:not([type="menu-button"]):not([disabled="true"]):hover:active,
@@ -221,6 +229,7 @@
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu:not([type="menu-button"]):not([disabled="true"]):hover:active,
 #sbSimilarWebSidebar.insidebar #btnShare:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .insidebar #btnAddSite:not([type="menu-button"]):not([disabled="true"]):hover:active:after,
+.insidebar #hideTabbarCheck:not([type="menu-button"]):not([disabled="true"]):hover:active,
 
 #history-panel.insidebar #viewButton:not([type="menu-button"])[checked="true"], 
 #downloadManager.insidebar #clearListButton:not([type="menu-button"])[checked="true"],
@@ -244,6 +253,7 @@
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu:not([type="menu-button"])[checked="true"],
 #sbSimilarWebSidebar.insidebar #btnShare:not([type="menu-button"])[checked="true"],
 .insidebar #btnAddSite:not([type="menu-button"])[checked="true"]:after,
+.insidebar #hideTabbarCheck:not([type="menu-button"])[checked="true"],
 
 #history-panel.insidebar #viewButton[open="true"], 
 #downloadManager.insidebar #clearListButton[open="true"],
@@ -266,7 +276,8 @@
 #addons-page.insidebar .addon-control[open="true"],
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu[open="true"],
 #sbSimilarWebSidebar.insidebar #btnShare[open="true"],
-.insidebar #btnAddSite[open="true"]:after {
+.insidebar #btnAddSite[open="true"]:after,
+.insidebar #hideTabbarCheck[open="true"] {
 	background-color: hsla(190,60%,70%,.5) !important;
 	border-color: rgba(0,0,0,.65) rgba(0,0,0,.55) rgba(0,0,0,.7) !important;
 	box-shadow: 0 0 6.5px rgba(255,255,255,.3) inset, 0 0 2px rgba(255,255,255,.1) inset, 0 1px 0 rgba(0,0,0,.1) !important;
@@ -294,7 +305,8 @@
 #addons-page.insidebar .addon-control[checked="true"]:not(:active):hover,
 #sbSimilarWebSidebar.insidebar #btnOptionsMenu[checked="true"]:not(:active):hover,
 #sbSimilarWebSidebar.insidebar #btnShare[checked="true"]:not(:active):hover,
-.insidebar #btnAddSite[checked="true"]:not(:active):hover:after {
+.insidebar #btnAddSite[checked="true"]:not(:active):hover:after,
+.insidebar #hideTabbarCheck[checked="true"]:not(:active):hover {
 	background-color: hsla(190,60%,70%,.75) !important;
 	-moz-transition: background-color .4s !important;
 }

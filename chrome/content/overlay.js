@@ -2054,7 +2054,7 @@ var omnisidebar = {
 			
 			// For the autohide feature, hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
 			else if(omnisidebar.prefAid.undockModeTwin == 'autohide') {
-				omnisidebar.setHover(omnisidebar.resizebox_twin, true);
+				omnisidebar.setHover(omnisidebar.resizebox_twin, true, 1);
 				omnisidebar.timerAid.init('autohideSidebarTwin', function() { omnisidebar.setHover(omnisidebar.resizebox_twin, false); }, 1000);
 			}
 		}
@@ -2222,7 +2222,7 @@ function fireSidebarFocusedEvent() {
 		
 		// For the autohide feature, hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
 		else if(omnisidebar.prefAid.undockMode == 'autohide') {
-			omnisidebar.setHover(omnisidebar.resizebox, true);
+			omnisidebar.setHover(omnisidebar.resizebox, true, 1);
 			omnisidebar.timerAid.init('autohideSidebar', function() { omnisidebar.setHover(omnisidebar.resizebox, false); }, 1000);
 		}
 	}
