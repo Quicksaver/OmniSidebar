@@ -1,0 +1,65 @@
+<!ENTITY addonsSidebar.label "附加组件管理器">
+<!ENTITY addonsSidebar.tooltip "在侧栏中打开附加组件管理器">
+<!ENTITY DOMInspectorSidebar.label "DOM Inspector">
+<!ENTITY DOMInspectorSidebar.tooltip "在侧栏中打开DOM Inspector">
+<!ENTITY BlankSidebar.label "空白页">
+<!ENTITY BlankSidebar.tooltip "在侧栏中打开空白页">
+<!ENTITY URISidebar.tooltip "输入要在侧栏中载入的地址">
+<!ENTITY URISidebar.buttonLabel "转到">
+<!ENTITY omnisidebarConsole.label "错误控制台">
+<!ENTITY omnisidebarDMT.label "下载">
+<!ENTITY omnisidebarToolbar.label "侧栏工具栏">
+<!ENTITY omnisidebarToolbarTwin.label "副侧栏工具栏">
+<!ENTITY omnisidebarOptions.title "OmniSidebar 选项">
+<!ENTITY omnisidebarButton.label "侧栏">
+<!ENTITY omnisidebarButtonMain.label "主侧栏">
+<!ENTITY omnisidebarButtonTwin.label "副侧栏">
+<!ENTITY omnisidebarButton.tooltip "打开侧栏">
+<!ENTITY omnisidebarButtonMain.tooltip "打开主侧栏">
+<!ENTITY omnisidebarButtonTwin.tooltip "打开副侧栏">
+<!ENTITY omnisidebarButtonClose.tooltip "关闭侧栏">
+<!ENTITY omnisidebarButtonMainClose.tooltip "关闭主侧栏">
+<!ENTITY omnisidebarButtonTwinClose.tooltip "关闭副侧栏">
+<!ENTITY omnisidebarOptMisc.label "全局">
+<!ENTITY omnisidebarOptgroupMain.label "主侧栏">
+<!ENTITY omnisidebarOptgroupTwin.label "副侧栏">
+<!ENTITY omnisidebarOptgroupicons.label "侧栏工具栏按钮">
+<!ENTITY omnisidebarOptgroupgen.label "外观">
+<!ENTITY omnisidebarOptgroupperformance.label "性能">
+<!ENTITY omnisidebarOptgroupstyle.label "侧栏风格">
+<!ENTITY omnisidebarOptgroupdev.label "开发工具">
+<!ENTITY omnisidebarOptgroupkeyset.label "侧栏键盘快捷键">
+<!ENTITY omnisidebarOptgroupalways.label "总是在侧栏中打开">
+<!ENTITY omnisidebarOptdevTools.label "激活开发者侧栏工具">
+<!ENTITY omnisidebarOptsidebars.leftlabel "放于左侧">
+<!ENTITY omnisidebarOptsidebars.rightlabel "放于右侧">
+<!ENTITY omnisidebarOptsidebars.twinlabel "在另一侧启用副侧栏">
+<!ENTITY omnisidebarOptrenderabove.label "从浏览器窗口取消停靠">
+<!ENTITY omnisidebarOptundockMode.autohide "自动隐藏">
+<!ENTITY omnisidebarOptundockMode.noauto "只在命令时关闭">
+<!ENTITY omnisidebarOptundockMode.autoclose "失去焦点时自动关闭">
+<!ENTITY omnisidebarOptglassStyle.label "对所有侧栏应用玻璃样式">
+<!ENTITY omnisidebarOptdisablefx.label "禁用视觉效果（自动隐藏时滑动）">
+<!ENTITY omnisidebarOptalternatebtns.label "替换侧栏工具栏按钮样式">
+<!ENTITY omnisidebarOpthideheadertoolbar.label "隐藏侧栏工具栏">
+<!ENTITY omnisidebarOpthideheadertitle.label "隐藏侧栏标题">
+<!ENTITY omnisidebarOpttitleButton.label "从标题栏下拉侧栏菜单">
+<!ENTITY omnisidebarOpthideheaderdock.label "隐藏停靠按钮">
+<!ENTITY omnisidebarOpthideheaderclose.label "隐藏关闭按钮">
+<!ENTITY omnisidebarOptcoloricons.nochangelabel "默认（无变动）">
+<!ENTITY omnisidebarOptcoloricons.ff4label "FireFox">
+<!ENTITY omnisidebarOptcoloricons.colorlabel "多彩">
+<!ENTITY omnisidebarOptkeysetItem0.win "主: Ctrl+Shift + S 副: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem1.win "主: Ctrl+Alt + S 副: Ctrl+Alt+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem2.win "主: Ctrl+Shift + L 副: Ctrl+Alt+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem3.win "主: Ctrl+Shift + S 副: Ctrl+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem4.win "主: Ctrl+Shift + L 副: Ctrl+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem5.win "主: Ctrl + F6 副: Ctrl+Shift + F6">
+<!ENTITY omnisidebarOptkeysetItem6.win "主: Ctrl+Shift + PageUp 副: Ctrl+Shift + PageDown">
+<!ENTITY omnisidebarOptkeysetItem0.mac "主: Command+Shift + S 副: Command+Option+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem1.mac "主: Command+Option + S 副: Command+Option+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem2.mac "主: Command+Shift + L 副: Command+Option+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem3.mac "主: Command+Shift + S 副: Command+Shift + L">
+<!ENTITY omnisidebarOptkeysetItem4.mac "主: Command+Shift + L 副: Command+Shift + S">
+<!ENTITY omnisidebarOptkeysetItem5.mac "主: Command + F6 副: Command+Shift + F6">
+<!ENTITY omnisidebarOptkeysetItem6.mac "主: Command+Shift + PageUp 副: Command+Shift + PageDown">

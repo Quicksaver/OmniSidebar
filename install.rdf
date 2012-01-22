@@ -19,9 +19,25 @@
 		
 		<em:localized>
 			<Description>
+				<em:locale>de</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Übernehmen Sie die Kontrolle über Ihre Sidebar!</em:description>
+				<em:translator>Archaeopteryx - BabelZilla</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>en-US</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Gain control over your sidebar!</em:description>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>fr</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Prenez le contrôle de votre panneau latéral!</em:description>
+				<em:translator>Jojaba - BabelZilla</em:translator>
 			</Description>
 		</em:localized>
 		<em:localized>
@@ -38,6 +54,14 @@
 				<em:name>OmniSidebar</em:name>
 				<em:description>Ta kontroll över din sidopanel!</em:description>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>sv-SE</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>获得对侧栏的更高控制!</em:description>
+				<em:translator>http://t.qq.com/HeartBlade</em:translator>
 			</Description>
 		</em:localized>
 	</Description>
