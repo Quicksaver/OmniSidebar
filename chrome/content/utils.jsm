@@ -1,4 +1,4 @@
-var EXPORTED_SYMBOLS = ["setWatchers", "hasAncestor", "hideIt", "listenerAid", "timerAid", "prefAid"];
+var EXPORTED_SYMBOLS = ["setWatchers", "hasAncestor", "hideIt", "modifyFunction", "listenerAid", "timerAid", "prefAid"];
 
 // Checks if aNode decends from aParent
 hasAncestor = function(aNode, aParent, aWindow) {
@@ -29,6 +29,27 @@ hideIt = function(aNode, show) {
 	} else {
 		aNode.removeAttribute('collapsed');
 	}
+};
+
+// allows me to modify a function quickly from within my scripts
+// Note to self, this returns anonymous functions, make sure this doesn't become an issue when modifying certain functions
+modifyFunction = function(aOriginal, aArray) {
+	var newCode = aOriginal.toString();
+	for(var i=0; i < aArray.length; i++) {
+		newCode = newCode.replace(aArray[i][0], aArray[i][1]);
+	}
+	
+	var listArguments = newCode.substring(newCode.indexOf('(')+1, newCode.indexOf(')'));
+	var arrayArguments = (listArguments == '') ? [] : listArguments.split(', ');
+	// trim whitespaces from arguments if for some reason they exist
+	for(var e=0; e < arrayArguments.length; e++) {
+		arrayArguments[e] = arrayArguments[e].replace(/^\s*([\S\s]*?)\s*$/, '$1');
+	}
+	
+	newCode = newCode.substring(newCode.indexOf('{')+1, newCode.lastIndexOf('}'));
+	
+	var ret = new Function(arrayArguments, newCode);
+	return ret;
 };
 
 // This acts as a replacement for the event DOM Attribute Modified, works for both attributes and object properties
@@ -448,3 +469,4 @@ prefAid = {
 		this._prefObjects[pref].reset();
 	}
 };
+		
