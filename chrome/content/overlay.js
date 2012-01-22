@@ -106,6 +106,18 @@ var omnisidebar = {
 			omnisidebar.listenerAid.add(omnisidebar.milewideback, 'mouseout', omnisidebar.milewidebackOut, false);
 		}
 		
+		// we need to override the autoclose feature from delicious
+		// and also its setting of the ctrl-alt-b key
+		if(omnisidebar.delicious) {
+			omnisidebar.prefAid.init(omnisidebar, 'ybookmarks@yahoo', ['sidebar.pinned', 'keybindings.sidebar.key']);
+			omnisidebar.prefAid['sidebar.pinned'] = true;
+			omnisidebar.prefAid['keybindings.sidebar.key'] = '';
+			document.getElementById('viewBookmarksSidebarKb').setAttribute('key', '');
+		}
+		
+		omnisidebar.setWatchers(omnisidebar.resizebox);
+		omnisidebar.setWatchers(omnisidebar.resizebox_twin);
+		
 		// Set up context menu onpopupshowing event to do both the predetermined action and omnisidebar's functions
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popuphiding', function() { omnisidebar.setBothHovers(false); }, false);
@@ -186,6 +198,10 @@ var omnisidebar = {
 			AddonManager.removeAddonListener(omnisidebar.lessChromeListener);
 		}
 		
+		if(omnisidebar.delicious) {
+			omnisidebar.prefAid.reset('keybindings.sidebar.key');
+		}
+		
 		// Remove every event listener placed
 		omnisidebar.listenerAid.clean();
 	},
@@ -244,6 +260,7 @@ var omnisidebar = {
 		omnisidebar.stack_twin = document.getElementById('stackSidebar-twin'); // stack element for the customize screen
 		
 		omnisidebar.milewideback = (typeof(MileWideBack) != 'undefined') ? document.getElementById('back-strip') : null; // MileWideBack Add-on
+		omnisidebar.delicious = (typeof(deliciousService) != 'undefined') ? true : false; // delicious add-on enabled
 		
 		omnisidebar.appmenuButton = document.getElementById('appmenu-button-container'); // firefox button container
 		omnisidebar.titleButtonBox = document.getElementById('titlebar-buttonbox'); // control buttons
@@ -1050,6 +1067,8 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton.setAttribute('omnisidebardock', 'true');
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebardockbutton'));
+			
+			omnisidebar.resizebox.addPropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		else {
 			omnisidebar.box.removeAttribute('renderabove');
@@ -1061,6 +1080,8 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton.removeAttribute('omnisidebardock');
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
+			
+			omnisidebar.resizebox.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		
 		if(omnisidebar.prefAid.renderaboveTwin) {
@@ -1073,6 +1094,8 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton_twin.setAttribute('omnisidebardock', 'true');
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebardockbutton'));
+			
+			omnisidebar.resizebox_twin.addPropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		else {
 			omnisidebar.box_twin.removeAttribute('renderabove');
@@ -1084,6 +1107,8 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton_twin.removeAttribute('omnisidebardock');
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
+			
+			omnisidebar.resizebox_twin.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		
 		// Auto-close feature
@@ -1701,6 +1726,20 @@ var omnisidebar = {
 	},
 	milewidebackOut: function() {
 		omnisidebar.setBothHovers(false);
+	},
+	
+	// compatibility with delicious, it has the bad habit of hiding my box and also removing the addWatcher funcitons for some reason
+	boxNeverHidden: function() {
+		if(omnisidebar.prefAid.renderabove) {
+			omnisidebar.resizebox.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
+			omnisidebar.resizebox.hidden = false;
+			omnisidebar.resizebox.addPropertyWatcher('hidden', omnisidebar.boxNeverHidden);
+		}
+		if(omnisidebar.prefAid.renderaboveTwin) {
+			omnisidebar.resizebox_twin.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
+			omnisidebar.resizebox_twin.hidden = false;
+			omnisidebar.resizebox_twin.addPropertyWatcher('hidden', omnisidebar.boxNeverHidden);
+		}
 	},
 	
 	// Sets toolbar context menu omnisidebar options item according to what called it

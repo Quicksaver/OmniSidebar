@@ -21,3 +21,4 @@ style chrome://global/content/customizeToolbar.xul chrome://omnisidebar/skin/ove
 style about:addons                                 chrome://omnisidebar/skin/addons.css
 style chrome://global/content/console.xul          chrome://omnisidebar/skin/console.css
 style chrome://console2/content/console2.xul       chrome://omnisidebar/skin/console.css
+style chrome://ybookmarks/content/ybsidebar.xul    chrome://omnisidebar/skin/ybookmarks.css
