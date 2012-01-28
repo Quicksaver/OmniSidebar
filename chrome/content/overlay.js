@@ -1073,6 +1073,8 @@ var omnisidebar = {
 			omnisidebar.resizebox.addPropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		else {
+			omnisidebar.resizebox.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
+			
 			omnisidebar.box.removeAttribute('renderabove');
 			omnisidebar.splitter.removeAttribute('renderabove');
 			
@@ -1082,8 +1084,6 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton.removeAttribute('omnisidebardock');
 			omnisidebar.dockbutton.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
-			
-			omnisidebar.resizebox.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		
 		if(omnisidebar.prefAid.renderaboveTwin) {
@@ -1100,6 +1100,8 @@ var omnisidebar = {
 			omnisidebar.resizebox_twin.addPropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		else {
+			omnisidebar.resizebox_twin.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
+			
 			omnisidebar.box_twin.removeAttribute('renderabove');
 			omnisidebar.splitter_twin.removeAttribute('renderabove');
 			
@@ -1109,8 +1111,6 @@ var omnisidebar = {
 			
 			omnisidebar.dockbutton_twin.removeAttribute('omnisidebardock');
 			omnisidebar.dockbutton_twin.setAttribute('tooltiptext', omnisidebar.strings.getString('omnisidebarundockbutton'));
-			
-			omnisidebar.resizebox_twin.removePropertyWatcher('hidden', omnisidebar.boxNeverHidden);
 		}
 		
 		// Auto-close feature
