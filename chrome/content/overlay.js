@@ -2054,6 +2054,9 @@ var omnisidebar = {
 		}
 		if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
 		
+		// stops closing the sidebar when quickly toggling between sidebars in auto-close mode
+		if(omnisidebar.timerAid.getTimer('toggleSidebarTwin_'+commandID)) { return; }
+		
 		// Can't let both sidebars display the same page, it becomes unstable
 		var url = sidebarBroadcaster.getAttribute("sidebarurl");
 		if(url != 'about:blank' && document.getElementById(omnisidebar.prefAid.lastcommand).getAttribute('sidebarurl') == url) {
@@ -2127,6 +2130,11 @@ var omnisidebar = {
 		}
 		
 		omnisidebar.toggleSwitcher(omnisidebar.switcher_twin);
+		
+		// stops closing the sidebar when quickly toggling between sidebars in auto-close mode
+		if(omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autoclose') {
+			omnisidebar.timerAid.init('toggleSidebarTwin_'+commandID, function() {}, 100);
+		}
 	},
 	
 	fireSidebarTwinFocusedEvent: function() {
@@ -2259,6 +2267,9 @@ function toggleSidebar(commandID, forceOpen) {
 	var sidebarBroadcaster = document.getElementById(commandID);
 	if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
 	
+	// stops closing the sidebar when quickly toggling between sidebars in auto-close mode
+	if(omnisidebar.timerAid.getTimer('toggleSidebar_'+commandID)) { return; }
+	
 	// Can't let both sidebars display the same page, it becomes unstable
 	var url = sidebarBroadcaster.getAttribute("sidebarurl");
 	if(url != 'about:blank' && document.getElementById(omnisidebar.prefAid.lastcommandTwin).getAttribute('sidebarurl') == url) {
@@ -2339,6 +2350,11 @@ function toggleSidebar(commandID, forceOpen) {
 	}
 	
 	omnisidebar.toggleSwitcher(omnisidebar.switcher);
+	
+	// stops closing the sidebar when quickly toggling between sidebars in auto-close mode
+	if(omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose') {
+		omnisidebar.timerAid.init('toggleSidebar_'+commandID, function() {}, 100);
+	}
 }
 
 function fireSidebarFocusedEvent() {
