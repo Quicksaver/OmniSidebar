@@ -292,6 +292,7 @@
 		<hbox id="omnisidebar_resizebox" 
 			class="omnisidebar_resize_box" 
 			flex="1"
+			onmouseout="omnisidebar.hidingSidebar(this);"
 			ondragenter="omnisidebar.onDragEnter(this);"
 			ondragexit="omnisidebar.onDragExit(this);">
 			<box id="omnisidebar_resizer" class="omnisidebar_resizer"
@@ -349,6 +350,7 @@
 			<hbox id="omnisidebar_resizebox-twin" 
 				class="omnisidebar_resize_box" 
 				flex="1"
+				onmouseout="omnisidebar.hidingSidebar(this);"
 				ondragenter="omnisidebar.onDragEnter(this);"
 				ondragexit="omnisidebar.onDragExit(this);">
 				<box id="omnisidebar_resizer-twin" class="omnisidebar_resizer"
@@ -358,6 +360,22 @@
 		</vbox>
 		
 		<splitter id="sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter" hidden="true" insertafter="appcontent" />
+		
+		<hbox id="omnisidebar_switch"
+			class="omnisidebar_switch"
+			onmouseover="omnisidebar.switchMouseOver(omnisidebar.resizebox);"
+			onmouseout="omnisidebar.switchMouseOut(omnisidebar.resizebox);"
+			ondragenter="omnisidebar.switchMouseOver(omnisidebar.resizebox);"
+			ondragexit="omnisidebar.switchMouseOut(omnisidebar.resizebox);"
+			insertbefore="appcontent"/>
+			
+		<hbox id="omnisidebar_switch-twin"
+			class="omnisidebar_switch"
+			onmouseover="omnisidebar.switchMouseOver(omnisidebar.resizebox_twin);"
+			onmouseout="omnisidebar.switchMouseOut(omnisidebar.resizebox_twin);"
+			ondragenter="omnisidebar.switchMouseOver(omnisidebar.resizebox_twin);"
+			ondragexit="omnisidebar.switchMouseOut(omnisidebar.resizebox_twin);"
+			insertafter="appcontent"/>
 	</hbox>
 	
 </overlay>

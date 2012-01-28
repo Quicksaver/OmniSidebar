@@ -87,6 +87,10 @@ var omnisidebarOptions = {
 		} else {
 			document.getElementById('transparencyCheckbox').setAttribute('disabled', true);
 		}
+	},
+	
+	onlyNumbers: function(v) {
+		return parseInt(v || 0);
 	}
 }
 

@@ -42,6 +42,8 @@
 			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
 			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
 			<preference id="pref-forceOpen" name="extensions.omnisidebar.forceOpen" type="bool"/>
+			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
+			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
 		</preferences>
 		
 		<tabbox id="omnisidebarTabBox" >
@@ -174,6 +176,18 @@
 					
 					<groupbox align="start">
 						<caption label="&omnisidebarOptgroupfeatures.label;"/>
+						<hbox>
+							<label value="&omnisidebarOptshowDelay.label;"/>
+							<textbox id="showDelayTextbox" class="textbox" size="3" maxlength="5" style="text-align: center;"
+								preference="pref-showDelay" 
+								onsynctopreference="return omnisidebarOptions.onlyNumbers(this.value);"/>
+				        </hbox>
+						<hbox>
+							<label value="&omnisidebarOpthideDelay.label;"/>
+							<textbox id="hideDelayTextbox" class="textbox" size="3" maxlength="5" style="text-align: center;"
+								preference="pref-hideDelay" 
+								onsynctopreference="return omnisidebarOptions.onlyNumbers(this.value);"/>
+				        </hbox>
 						<checkbox label="&omnisidebarOptforceOpen.label;" preference="pref-forceOpen"/>
 					</groupbox>
 					

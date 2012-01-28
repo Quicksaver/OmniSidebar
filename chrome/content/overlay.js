@@ -38,7 +38,7 @@ var omnisidebar = {
 		omnisidebar.prefAid.init(omnisidebar, 'omnisidebar', [
 			'lastcommand', 'mainSidebar', 'renderabove', 'undockMode', 'hideheadertoolbar', 'hideheadertitle', 'hideheaderdock', 'hideheaderclose', 'alternatebtns', 'coloricons', 'titleButton', 'devTools',
 			'lastcommandTwin', 'twinSidebar', 'renderaboveTwin', 'undockModeTwin', 'hideheadertoolbarTwin', 'hideheadertitleTwin', 'hideheaderdockTwin', 'hideheadercloseTwin', 'alternatebtnsTwin', 'coloriconsTwin', 'titleButtonTwin', 'devToolsTwin',
-			'fx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen', 'transparency',
+			'fx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen', 'transparency', 'showDelay', 'hideDelay',
 			'chosenkeyset', 'keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
 		
 		// Set initial hover calls
@@ -246,6 +246,7 @@ var omnisidebar = {
 		omnisidebar.devButton = document.getElementById('omnisidebar-devTools-button'); // Developer toolbarbutton
 		omnisidebar.devToolbar = document.getElementById('omnisidebarDevToolbar'); // Developer toolbarbutton
 		omnisidebar.stack = document.getElementById('stackSidebar'); // stack element for the customize screen
+		omnisidebar.switcher = document.getElementById('omnisidebar_switch'); // switch hidden element at the margin
 		
 		omnisidebar.splitter_twin = document.getElementById('sidebar-splitter-twin'); // Splitter to resize the sidebar box
 		omnisidebar.box_twin = document.getElementById('sidebar-box-twin'); // Sidebar box
@@ -260,6 +261,7 @@ var omnisidebar = {
 		omnisidebar.dockbutton_twin = document.getElementById('omnisidebar_dock_button-twin'); // omnisidebar dock/undock button
 		omnisidebar.devButton_twin = document.getElementById('omnisidebar-devTools-button-twin'); // Developer toolbarbutton
 		omnisidebar.stack_twin = document.getElementById('stackSidebar-twin'); // stack element for the customize screen
+		omnisidebar.switcher_twin = document.getElementById('omnisidebar_switch-twin'); // switch hidden element at the margin
 		
 		omnisidebar.milewideback = (typeof(MileWideBack) != 'undefined') ? document.getElementById('back-strip') : null; // MileWideBack Add-on
 		omnisidebar.delicious = (typeof(deliciousService) != 'undefined') ? true : false; // delicious add-on enabled
@@ -882,12 +884,14 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box[renderabove][movetoright] { right: -' + omnisidebar.width + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox:hover,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox[hover],\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox[hiding],\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]):not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + omnisidebar.width + 'px !important; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox:hover,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hover],\n';
+			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hiding],\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"])[movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide][movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar_resizebox,\n';
@@ -908,12 +912,14 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][movetoleft] { left: -' + omnisidebar.width_twin + 'px; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin:hover,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin[hover],\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin[hiding],\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + omnisidebar.width_twin + 'px !important; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin:hover,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hiding],\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"])[movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide][movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar_resizebox-twin,\n';
@@ -1006,16 +1012,19 @@ var omnisidebar = {
 		if(omnisidebar.prefAid.mainSidebar == 'right') {
 			omnisidebar.box.setAttribute('movetoright', 'true');
 			omnisidebar.splitter.setAttribute('movetoright', 'true');
+			omnisidebar.switcher.setAttribute('movetoright', 'true');
 			if(omnisidebar.button) {
 				omnisidebar.button.setAttribute('movetoright', 'true');
 			}
 			
-			omnisidebar.box = omnisidebar.browser.insertBefore(omnisidebar.box, omnisidebar.browser.lastChild);
+			omnisidebar.switcher = omnisidebar.browser.insertBefore(omnisidebar.switcher, omnisidebar.browser.lastChild);
+			omnisidebar.box = omnisidebar.browser.insertBefore(omnisidebar.box, omnisidebar.switcher);
 			omnisidebar.splitter = omnisidebar.browser.insertBefore(omnisidebar.splitter, omnisidebar.box);
 			omnisidebar.resizer = omnisidebar.resizebox.insertBefore(omnisidebar.resizer, omnisidebar.resizesidebar);
 			
 			omnisidebar.box_twin.setAttribute('movetoleft', 'true');
 			omnisidebar.splitter_twin.setAttribute('movetoleft', 'true');
+			omnisidebar.switcher_twin.setAttribute('movetoleft', 'true');
 			if(omnisidebar.button_twin) {
 				omnisidebar.button_twin.setAttribute('movetoleft', 'true');
 			}
@@ -1023,10 +1032,12 @@ var omnisidebar = {
 			omnisidebar.splitter_twin = omnisidebar.browser.insertBefore(omnisidebar.splitter_twin, omnisidebar.browser.firstChild.nextSibling);
 			omnisidebar.box_twin = omnisidebar.browser.insertBefore(omnisidebar.box_twin, omnisidebar.splitter_twin);
 			omnisidebar.resizer_twin = omnisidebar.resizebox_twin.insertBefore(omnisidebar.resizer_twin, omnisidebar.resizesidebar_twin.nextSibling);
+			omnisidebar.switcher_twin = omnisidebar.browser.insertBefore(omnisidebar.switcher_twin, omnisidebar.box_twin);
 		}
 		else {
 			omnisidebar.box.removeAttribute('movetoright');
 			omnisidebar.splitter.removeAttribute('movetoright');
+			omnisidebar.switcher.removeAttribute('movetoright');
 			if(omnisidebar.button) {
 				omnisidebar.button.removeAttribute('movetoright');
 			}
@@ -1034,15 +1045,18 @@ var omnisidebar = {
 			omnisidebar.splitter = omnisidebar.browser.insertBefore(omnisidebar.splitter, omnisidebar.browser.firstChild.nextSibling);
 			omnisidebar.box = omnisidebar.browser.insertBefore(omnisidebar.box, omnisidebar.splitter);
 			omnisidebar.resizer = omnisidebar.resizebox.insertBefore(omnisidebar.resizer, omnisidebar.resizesidebar.nextSibling);
+			omnisidebar.switcher = omnisidebar.browser.insertBefore(omnisidebar.switcher, omnisidebar.box.nextSibling);
 			
 			omnisidebar.box_twin.removeAttribute('movetoleft');
 			omnisidebar.splitter_twin.removeAttribute('movetoleft');
+			omnisidebar.switcher_twin.removeAttribute('movetoleft');
 			if(omnisidebar.button_twin) {
 				omnisidebar.button_twin.removeAttribute('movetoleft');
 			}
 			
 			omnisidebar.box_twin = omnisidebar.browser.insertBefore(omnisidebar.box_twin, omnisidebar.browser.lastChild);
-			omnisidebar.splitter_twin = omnisidebar.browser.insertBefore(omnisidebar.splitter_twin, omnisidebar.box_twin);
+			omnisidebar.switcher_twin = omnisidebar.browser.insertBefore(omnisidebar.switcher_twin, omnisidebar.box_twin);
+			omnisidebar.splitter_twin = omnisidebar.browser.insertBefore(omnisidebar.splitter_twin, omnisidebar.switcher_twin);
 			omnisidebar.resizer_twin = omnisidebar.resizebox_twin.insertBefore(omnisidebar.resizer_twin, omnisidebar.resizesidebar_twin);
 		}
 		
@@ -1051,6 +1065,16 @@ var omnisidebar = {
 			findbartweak.moveTop();
 		}
 	},
+	
+	// displays or hides a switcher according to if it's needed
+	toggleSwitcher: function(aSwitch) {
+		var show = false;
+		if( (aSwitch == omnisidebar.switcher && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autohide' && !omnisidebar.box.hidden)
+		||  (aSwitch == omnisidebar.switcher_twin && omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autohide' && !omnisidebar.box_twin.hidden)) {
+			show = true;
+		}
+		omnisidebar.hideIt(aSwitch, show);
+	},		
 	
 	// Set the sidebar above the webpage box; everything goes in the resizebox to enable resizing while in this mode
 	setabove: function() {
@@ -1143,6 +1167,9 @@ var omnisidebar = {
 			
 			omnisidebar.listeningResize = false;
 		}
+		
+		omnisidebar.toggleSwitcher(omnisidebar.switcher);
+		omnisidebar.toggleSwitcher(omnisidebar.switcher_twin);
 	},
 	
 	resizeListener: function() {
@@ -1985,7 +2012,7 @@ var omnisidebar = {
 		} else {
 			omnisidebar.dragNotTarget.target.setAttribute('width', omnisidebar.dragOtherW);
 		}
-	},
+	},	
 	
 	autoClose: function(e) {
 		omnisidebar.timerAid.init('autoClose', function() {
@@ -2062,6 +2089,8 @@ var omnisidebar = {
 				omnisidebar.fireSidebarTwinFocusedEvent();
 				omnisidebar.splitter_twin.hidden = false;
 			}
+			
+			omnisidebar.toggleSwitcher(omnisidebar.switcher_twin);
 			return;
 		}
 	
@@ -2096,6 +2125,8 @@ var omnisidebar = {
 		} else {
 			omnisidebar.fireSidebarTwinFocusedEvent();
 		}
+		
+		omnisidebar.toggleSwitcher(omnisidebar.switcher_twin);
 	},
 	
 	fireSidebarTwinFocusedEvent: function() {
@@ -2127,7 +2158,7 @@ var omnisidebar = {
 	},
 	
 	onDragEnter: function(box) {
-		omnisidebar.setHover(box, true);
+		omnisidebar.setHover(box, true, 1);
 		omnisidebar.listenerAid.add(gBrowser, "dragenter", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.add(window, "dragdrop", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.add(window, "dragend", omnisidebar.onDragExitAll, false);
@@ -2135,6 +2166,7 @@ var omnisidebar = {
 	
 	onDragExit: function(box) {
 		omnisidebar.setHover(box, false);
+		omnisidebar.hidingSidebar(box);
 	},
 	
 	onDragExitAll: function() {
@@ -2142,6 +2174,45 @@ var omnisidebar = {
 		omnisidebar.listenerAid.remove(window, "dragdrop", omnisidebar.onDragExitAll, false);
 		omnisidebar.listenerAid.remove(window, "dragend", omnisidebar.onDragExitAll, false);
 		omnisidebar.setBothHovers(false);
+		omnisidebar.hidingSidebar(omnisidebar.resizebox);
+		omnisidebar.hidingSidebar(omnisidebar.resizebox_twin);
+	},
+	
+	// delays auto hiding of the sidebar
+	hidingSidebar: function(box) {
+		if(box == omnisidebar.resizebox && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autohide') {
+			box.setAttribute('hiding', 'true');
+			omnisidebar.timerAid.init('hidingSidebar', function() {
+				omnisidebar.resizebox.removeAttribute('hiding');
+			}, omnisidebar.prefAid.hideDelay);
+		}
+		
+		else if(box == omnisidebar.resizebox_twin && omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autohide') {
+			box.setAttribute('hiding', 'true');
+			omnisidebar.timerAid.init('hidingSidebarTwin', function() {
+				omnisidebar.resizebox_twin.removeAttribute('hiding');
+			}, omnisidebar.prefAid.hideDelay);
+		}
+	},
+	
+	// handles mousing over the sidebar switch
+	switchMouseOver: function(box) {
+		if(box == omnisidebar.resizebox) {
+			var hover = (omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autohide') ? true : false;
+		} else {
+			var hover = (omnisidebar.prefAid.renderaboveTwin && omnisidebar.prefAid.undockModeTwin == 'autohide') ? true : false;
+		}
+		
+		if(hover) {
+			omnisidebar.timerAid.init('switchMouseOver', function() {
+				omnisidebar.setHover(box, true);
+			}, omnisidebar.prefAid.showDelay);
+		}
+	},
+	
+	switchMouseOut: function(box) {
+		omnisidebar.timerAid.cancel('switchMouseOver');
+		omnisidebar.setHover(box, false);
 	},
 	
 	setBothHovers: function(hover) {
@@ -2162,7 +2233,7 @@ var omnisidebar = {
 			}
 		}
 		
-		if(force) {
+		if(force || force === 0) {
 			box.hovers = force;
 		}
 	}
@@ -2226,6 +2297,8 @@ function toggleSidebar(commandID, forceOpen) {
 		} else {
 			fireSidebarFocusedEvent();
 		}
+		
+		omnisidebar.toggleSwitcher(omnisidebar.switcher);
 		return;
 	}
 	
@@ -2264,6 +2337,8 @@ function toggleSidebar(commandID, forceOpen) {
 	} else {
 		fireSidebarFocusedEvent();
 	}
+	
+	omnisidebar.toggleSwitcher(omnisidebar.switcher);
 }
 
 function fireSidebarFocusedEvent() {

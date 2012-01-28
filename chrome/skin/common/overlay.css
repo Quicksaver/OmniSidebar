@@ -219,6 +219,7 @@
 
 .sidebar-box[renderabove="autohide"] .omnisidebar_resize_box:hover,
 .sidebar-box[renderabove="autohide"] .omnisidebar_resize_box[hover],
+.sidebar-box[renderabove="autohide"] .omnisidebar_resize_box[hiding],
 .sidebar-box[renderabove]:not([renderabove="autohide"]) .omnisidebar_resize_box,
 .sidebar-box[renderabove][nohide] .omnisidebar_resize_box,
 .sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
@@ -226,11 +227,11 @@
 }
 #sidebar-box[renderabove="autohide"]:not([movetoright]) .omnisidebar_resize_box,
 #sidebar-box-twin[renderabove="autohide"][movetoleft] .omnisidebar_resize_box {
-	left: 3px;
+	left: 0px;
 }
 #sidebar-box[renderabove="autohide"][movetoright] .omnisidebar_resize_box,
 #sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) .omnisidebar_resize_box {
-	right: 3px;
+	right: 0px;
 }
 
 #sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box,
@@ -243,14 +244,18 @@
 }
 #sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
 #sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover],
+#sidebar-box[renderabove="autohide"]:not([movetoright]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hiding],
 #sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
-#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover] {
+#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover],
+#sidebar-box-twin[renderabove="autohide"][movetoleft]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hiding]  {
 	-moz-transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
 }
 #sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
 #sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover],
+#sidebar-box[renderabove="autohide"][movetoright]:not([disablefx]):not([nohide]) .omnisidebar_resize_box[hiding],
 #sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box:hover,
-#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover]  {
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hover],
+#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]):not([disablefx]):not([nohide]) .omnisidebar_resize_box[hiding]   {
 	-moz-transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s;
 }
 
@@ -266,6 +271,22 @@
 #main-window[sizemode='normal'] .sidebar-box[renderabove] { 
 	border: 1px solid rgba(0,0,0,0); 
 	border-top: none;
+}
+
+.omnisidebar_switch {
+	position: fixed;
+	background: none;
+	height: 100%;
+	width: 3px;
+	z-index: 3;
+}
+#omnisidebar_switch:not([movetoright]),
+#omnisidebar_switch-twin[movetoleft] {
+	left: 0px;
+}
+#omnisidebar_switch[movetoright],
+#omnisidebar_switch-twin:not([movetoleft]) {
+	right: 0px;
 }
 
 /* Renderabove resizer */
