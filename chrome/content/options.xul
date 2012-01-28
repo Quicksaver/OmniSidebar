@@ -40,6 +40,7 @@
 			<preference id="pref-alwaysAddons" name="extensions.omnisidebar.alwaysAddons" type="bool"/>
 			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
 			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
+			<preference id="pref-forceOpen" name="extensions.omnisidebar.forceOpen" type="bool"/>
 		</preferences>
 		
 		<tabbox id="omnisidebarTabBox" >
@@ -164,6 +165,11 @@
 					<groupbox align="start">
 						<caption label="&omnisidebarOptgroupstyle.label;"/>
 						<checkbox label="&omnisidebarOptglassStyle.label;" preference="pref-glassStyle"/>
+					</groupbox>
+					
+					<groupbox align="start">
+						<caption label="&omnisidebarOptgroupfeatures.label;"/>
+						<checkbox label="&omnisidebarOptforceOpen.label;" preference="pref-forceOpen"/>
 					</groupbox>
 					
 					<groupbox align="start">

@@ -38,7 +38,7 @@ var omnisidebar = {
 		omnisidebar.prefAid.init(omnisidebar, 'omnisidebar', [
 			'lastcommand', 'mainSidebar', 'renderabove', 'undockMode', 'hideheadertoolbar', 'hideheadertitle', 'hideheaderdock', 'hideheaderclose', 'alternatebtns', 'coloricons', 'titleButton', 'devTools',
 			'lastcommandTwin', 'twinSidebar', 'renderaboveTwin', 'undockModeTwin', 'hideheadertoolbarTwin', 'hideheadertitleTwin', 'hideheaderdockTwin', 'hideheadercloseTwin', 'alternatebtnsTwin', 'coloriconsTwin', 'titleButtonTwin', 'devToolsTwin',
-			'disablefx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish',
+			'disablefx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen',
 			'chosenkeyset', 'keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
 		
 		// Set initial hover calls
@@ -487,7 +487,7 @@ var omnisidebar = {
 	
 	// We not only not close the sidebar from buttons in the sidebar toolbar, we also send a sidebar focused event when clicking them
 	preventClose: function(e) {
-		if(this.id != 'uri_sidebar_button' && this.id != 'uri_sidebar_button-twin') {
+		if(omnisidebar.prefAid.forceOpen && this.id != 'uri_sidebar_button' && this.id != 'uri_sidebar_button-twin') {
 			var command = this.getAttribute('oncommand');
 			if(command.indexOf('()') == -1) {
 				// it could be either single quotes or double quotes here, don't forget, this takes care of both

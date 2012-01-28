@@ -28,6 +28,7 @@
 <!ENTITY omnisidebarOptgroupTwin.label "Twin Sidebar">
 <!ENTITY omnisidebarOptgroupicons.label "SideToolbar Buttons Iconset">
 <!ENTITY omnisidebarOptgroupgen.label "Appearance">
+<!ENTITY omnisidebarOptgroupfeatures.label "Features">
 <!ENTITY omnisidebarOptgroupperformance.label "Performance">
 <!ENTITY omnisidebarOptgroupstyle.label "Sidebars style">
 <!ENTITY omnisidebarOptgroupdev.label "Developer Tools">
@@ -45,6 +46,7 @@
 <!ENTITY omnisidebarOptundockMode.autoclose "Auto-close when it loses focus">
 
 <!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
+<!ENTITY omnisidebarOptforceOpen.label "Menu entries and SideToolbar buttons don't close the sidebar">
 <!ENTITY omnisidebarOptdisablefx.label "Disable visual effects (sliding transitions when auto-hiding)">
 
 <!ENTITY omnisidebarOptalternatebtns.label "Alternate SideToolbar button style">
