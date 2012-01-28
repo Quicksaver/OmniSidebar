@@ -1,7 +1,5 @@
-var EXPORTED_SYMBOLS = ["setWatchers", "hasAncestor", "hideIt", /*"modifyFunction", */"listenerAid", "timerAid", "prefAid"];
-
 // Checks if aNode decends from aParent
-hasAncestor = function(aNode, aParent, aWindow) {
+var hasAncestor = function(aNode, aParent, aWindow) {
 	if(!aNode || !aParent) { return false; };
 	
 	if(aNode == aParent) { return true; }
@@ -23,7 +21,7 @@ hasAncestor = function(aNode, aParent, aWindow) {
 };
 
 // in theory this should collapse whatever I want
-hideIt = function(aNode, show) {
+var hideIt = function(aNode, show) {
 	if(!show) {
 		aNode.setAttribute('collapsed', 'true');
 	} else {
@@ -33,7 +31,8 @@ hideIt = function(aNode, show) {
 
 // allows me to modify a function quickly from within my scripts
 // Note to self, this returns anonymous functions, make sure this doesn't become an issue when modifying certain functions
-/*modifyFunction = function(aOriginal, aArray) {
+// commenting this out for now as I'm not using it yet in this add-on
+/*var modifyFunction = function(aOriginal, aArray) {
 	var newCode = aOriginal.toString();
 	for(var i=0; i < aArray.length; i++) {
 		newCode = newCode.replace(aArray[i][0], aArray[i][1]);
@@ -53,7 +52,7 @@ hideIt = function(aNode, show) {
 };*/
 
 // This acts as a replacement for the event DOM Attribute Modified, works for both attributes and object properties
-setWatchers = function(obj) {
+var setWatchers = function(obj) {
 	// Properties part, works by replacing the get and set accessor methods of a property with custom ones
 	if(	typeof(obj) != 'object' 
 		|| typeof(obj.addPropertyWatcher) != 'undefined'
@@ -270,7 +269,7 @@ setWatchers = function(obj) {
 };
 
 // Object to aid in setting and removing all kind of listeners
-listenerAid = {
+var listenerAid = {
 	handlers: new Array(),
 	
 	add: function(obj, type, listener, capture) {
@@ -368,26 +367,26 @@ listenerAid = {
 };
 
 // Object to aid in setting, initializing and cancelling timers
-timerAid = {
+var timerAid = {
 	timers: {},
 	
-	init: function(name, func, delay, type) {
-		this.cancel(name);
+	init: function(aName, aFunc, aDelay, aType) {
+		this.cancel(aName);
 		
-		var type = this.switchType(type);
+		var type = this.switchType(aType);
 		var self = this;
-		this.timers[name] = {
+		this.timers[aName] = {
 			object: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
-			handler: func
+			handler: aFunc
 		};
 		if(type == Components.interfaces.nsITimer.TYPE_ONE_SHOT) {
-			this.timers[name].object.init(function(aSubject, aTopic, aData) {
-				self.timers[name].handler(aSubject, aTopic, aData);
-				self.cancel(name);
-			}, delay, type);
+			this.timers[aName].object.init(function(aSubject, aTopic, aData) {
+				self.timers[aName].handler(aSubject, aTopic, aData);
+				self.cancel(aName);
+			}, aDelay, type);
 		}
 		else {
-			this.timers[name].object.init(this.timers[name].handler, delay, type);
+			this.timers[aName].object.init(this.timers[aName].handler, delay, type);
 		}
 	},
 	
@@ -411,9 +410,9 @@ timerAid = {
 		var newTimer = {};
 		newTimer.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		newTimer.switchType = this.switchType;
-		newTimer.init = function(func, delay, type) {
-			var type = this.switchType(type);
-			this.timer.init(func, delay, type);
+		newTimer.init = function(aFunc, aDelay, aType) {
+			var type = this.switchType(aType);
+			this.timer.init(aFunc, aDelay, type);
 		}
 		newTimer.cancel = function() {
 			this.timer.cancel();
@@ -437,10 +436,12 @@ timerAid = {
 				return Components.interfaces.nsITimer.TYPE_ONE_SHOT;
 				break;
 		}
+		
+		return false;
 	}
 };
 
-prefAid = {
+var prefAid = {
 	_prefObjects: {},
 	init: function(obj, branch, prefList) {
 		var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);

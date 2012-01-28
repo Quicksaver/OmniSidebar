@@ -2272,6 +2272,7 @@ function fireSidebarFocusedEvent() {
 	}
 }
 
-Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
+omnisidebar.mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+omnisidebar.mozIJSSubScriptLoader.loadSubScript("chrome://omnisidebar/content/utils.jsm", omnisidebar);
 omnisidebar.fixSimilarWeb();
 omnisidebar.listenerAid.add(window, "load", omnisidebar.preinit, false);
