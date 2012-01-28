@@ -281,7 +281,7 @@ var omnisidebar = {
 			return;
 		}
 		// on a timer so loading both osb and osb-twin buttons doesn't trigger the load functions twice unnecessarily
-		omnisidebar.timerAid.init('onLoad', omnisidebar.loadButton, 50);
+		omnisidebar.timerAid.init('loadButton', omnisidebar.loadButton, 50);
 	},
 	
 	loadButton: function() {
