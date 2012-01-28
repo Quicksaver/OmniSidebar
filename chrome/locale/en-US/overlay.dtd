@@ -46,8 +46,9 @@
 <!ENTITY omnisidebarOptundockMode.autoclose "Auto-close when it loses focus">
 
 <!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
+<!ENTITY omnisidebarOpttransparency.label "Enable transparency">
 <!ENTITY omnisidebarOptforceOpen.label "Menu entries and SideToolbar buttons don't close the sidebar">
-<!ENTITY omnisidebarOptdisablefx.label "Disable visual effects (sliding transitions when auto-hiding)">
+<!ENTITY omnisidebarOptdisablefx.label "Enable visual effects (sliding transitions when auto-hiding)">
 
 <!ENTITY omnisidebarOptalternatebtns.label "Alternate SideToolbar button style">
 <!ENTITY omnisidebarOpthideheadertoolbar.label "Hide SideToolbar">

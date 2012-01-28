@@ -22,6 +22,7 @@ var omnisidebarOptions = {
 		omnisidebarOptions.toggleTitle();
 		omnisidebarOptions.toggleTitleTwin();
 		omnisidebarOptions.toggleAbove();
+		omnisidebarOptions.toggleGlass();
 	},
 	
 	toggleTwin: function() {
@@ -76,6 +77,15 @@ var omnisidebarOptions = {
 			} else {
 				els[i].setAttribute('disabled', 'true');
 			}
+		}
+	},
+	
+	toggleGlass: function() {
+		var checked = document.getElementById('glassCheckbox').checked;
+		if(checked) {
+			document.getElementById('transparencyCheckbox').removeAttribute('disabled');
+		} else {
+			document.getElementById('transparencyCheckbox').setAttribute('disabled', true);
 		}
 	}
 }

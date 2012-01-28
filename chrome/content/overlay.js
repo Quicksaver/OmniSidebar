@@ -38,7 +38,7 @@ var omnisidebar = {
 		omnisidebar.prefAid.init(omnisidebar, 'omnisidebar', [
 			'lastcommand', 'mainSidebar', 'renderabove', 'undockMode', 'hideheadertoolbar', 'hideheadertitle', 'hideheaderdock', 'hideheaderclose', 'alternatebtns', 'coloricons', 'titleButton', 'devTools',
 			'lastcommandTwin', 'twinSidebar', 'renderaboveTwin', 'undockModeTwin', 'hideheadertoolbarTwin', 'hideheadertitleTwin', 'hideheaderdockTwin', 'hideheadercloseTwin', 'alternatebtnsTwin', 'coloriconsTwin', 'titleButtonTwin', 'devToolsTwin',
-			'disablefx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen',
+			'fx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen', 'transparency',
 			'chosenkeyset', 'keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
 		
 		// Set initial hover calls
@@ -74,7 +74,8 @@ var omnisidebar = {
 		omnisidebar.prefAid.listen('hideheadercloseTwin', function() { omnisidebar.toggleclose(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefAid.listen('alternatebtns', function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
 		omnisidebar.prefAid.listen('alternatebtnsTwin', function() { omnisidebar.togglebuttons(); omnisidebar.rendersidebar(); });
-		omnisidebar.prefAid.listen('disablefx', function() { omnisidebar.toggleFX(); });
+		omnisidebar.prefAid.listen('fx', function() { omnisidebar.toggleFX(); });
+		omnisidebar.prefAid.listen('transparency', function() { omnisidebar.toggleTransparency(); });
 		omnisidebar.prefAid.listen('coloricons', function() { omnisidebar.toggleIconsColor(); });
 		omnisidebar.prefAid.listen('coloriconsTwin', function() { omnisidebar.toggleIconsColor(); });
 		omnisidebar.prefAid.listen('glassStyle', function() { omnisidebar.toggleGlass(); });
@@ -158,6 +159,7 @@ var omnisidebar = {
 		omnisidebar.toggleclose();
 		omnisidebar.togglebuttons();
 		omnisidebar.toggleFX();
+		omnisidebar.toggleTransparency();
 		omnisidebar.toggleIconsColor();
 		omnisidebar.rendersidebar();
 		omnisidebar.toggleStylish();
@@ -1357,13 +1359,24 @@ var omnisidebar = {
 	},
 	
 	toggleFX: function() {
-		if(omnisidebar.prefAid.disablefx) {
+		if(!omnisidebar.prefAid.fx) {
 			omnisidebar.box.setAttribute('disablefx', 'true');
 			omnisidebar.box_twin.setAttribute('disablefx', 'true');
 		}
 		else {
 			omnisidebar.box.removeAttribute('disablefx');
 			omnisidebar.box_twin.removeAttribute('disablefx');
+		}
+	},
+	
+	toggleTransparency: function() {
+		if(omnisidebar.prefAid.transparency) {
+			omnisidebar.box.removeAttribute('noTransparency');
+			omnisidebar.box_twin.removeAttribute('noTransparency');
+		}
+		else {
+			omnisidebar.box.setAttribute('noTransparency', 'true');
+			omnisidebar.box_twin.setAttribute('noTransparency', 'true');
 		}
 	},
 	

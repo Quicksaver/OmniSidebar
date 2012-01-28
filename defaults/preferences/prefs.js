@@ -35,7 +35,8 @@ pref("extensions.omnisidebar.coloriconsTwin", 'default');
 pref("extensions.omnisidebar.devToolsTwin", false);
 
 pref("extensions.omnisidebar.glassStyle", false);
-pref("extensions.omnisidebar.disablefx", false);
+pref("extensions.omnisidebar.fx", true);
+pref("extensions.omnisidebar.transparency", true);
 pref("extensions.omnisidebar.chosenkeyset", 0);
 pref("extensions.omnisidebar.alwaysAddons", false);
 pref("extensions.omnisidebar.alwaysConsole", false);

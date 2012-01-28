@@ -49,12 +49,25 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 	border: none !important;
 }
 
-.sidebar-box[renderabove] .omnisidebar_resize_box,
-.sidebar-box:not([renderabove])[customizing] .sidebar-header {
+.sidebar-box[renderabove]:not([noTransparency]) .omnisidebar_resize_box,
+.sidebar-box:not([renderabove]):not([noTransparency])[customizing] .sidebar-header,
+.sidebar-box:not([renderabove]):not([noTransparency]) {
 	background: rgba(0,0,0,0.25) url("chrome://omnisidebar/skin/glass_background.png") scroll no-repeat !important;
 	background-size: cover !important;
 }
+.sidebar-box[renderabove][noTransparency] .omnisidebar_resize_box,
+.sidebar-box:not([renderabove])[noTransparency][customizing] .sidebar-header,
+.sidebar-box:not([renderabove])[noTransparency] {
+	background: rgba(128,128,128,1) url("chrome://omnisidebar/skin/glass_background.png") scroll no-repeat !important;
+	background-size: cover !important;
+}
+
 .sidebar-box[renderabove] .omnisidebar_resize_sidebar {
+	background: none !important;
+}
+
+.sidebar-browser {
+	padding: 1px 3px 4px 3px !important;
 	background: none !important;
 }
 
@@ -73,11 +86,6 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 }
 .sidebar-header > * {
 	background: none !important;
-}
-
-.sidebar-browser {
-	background: none !important;
-	padding: 1px 3px 4px 3px !important;
 }
 
 .omnisidebarURIBarMenu {

@@ -30,10 +30,11 @@
 			<preference id="pref-titleButtonTwin" name="extensions.omnisidebar.titleButtonTwin" type="bool"/>
 			<preference id="pref-alternatebtns" name="extensions.omnisidebar.alternatebtns" type="bool"/>
 			<preference id="pref-alternatebtnsTwin" name="extensions.omnisidebar.alternatebtnsTwin" type="bool"/>
-			<preference id="pref-disablefx" name="extensions.omnisidebar.disablefx" type="bool"/>
+			<preference id="pref-fx" name="extensions.omnisidebar.fx" type="bool"/>
 			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
 			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
 			<preference id="pref-glassStyle" name="extensions.omnisidebar.glassStyle" type="bool"/>
+			<preference id="pref-transparency" name="extensions.omnisidebar.transparency" type="bool"/>
 			<preference id="pref-devTools" name="extensions.omnisidebar.devTools" type="bool"/>
 			<preference id="pref-devToolsTwin" name="extensions.omnisidebar.devToolsTwin" type="bool"/>
 			<preference id="pref-chosenkeyset" name="extensions.omnisidebar.chosenkeyset" type="int"/>
@@ -164,7 +165,11 @@
 				<tabpanel id="miscTab" orient="vertical">
 					<groupbox align="start">
 						<caption label="&omnisidebarOptgroupstyle.label;"/>
-						<checkbox label="&omnisidebarOptglassStyle.label;" preference="pref-glassStyle"/>
+						<checkbox id="glassCheckbox"
+							label="&omnisidebarOptglassStyle.label;" 
+							preference="pref-glassStyle" 
+							oncommand="omnisidebarOptions.toggleGlass();"/>
+						<checkbox id="transparencyCheckbox" label="&omnisidebarOpttransparency.label;" preference="pref-transparency"/>
 					</groupbox>
 					
 					<groupbox align="start">
@@ -174,7 +179,7 @@
 					
 					<groupbox align="start">
 						<caption label="&omnisidebarOptgroupperformance.label;"/>
-						<checkbox label="&omnisidebarOptdisablefx.label;" preference="pref-disablefx"/>
+						<checkbox label="&omnisidebarOptdisablefx.label;" preference="pref-fx"/>
 					</groupbox>
 					
 					<groupbox align="start">
