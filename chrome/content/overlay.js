@@ -1435,7 +1435,9 @@ var omnisidebar = {
 	
 	// sets a download manager broadcaster for opening the downloads manager in the sidebar if dmt has not been found
 	toggleDMT: function() {
+		omnisidebar.DMT = true;
 		if(!document.getElementById('viewDmtSidebar')) {
+			omnisidebar.DMT = false;
 			var dmtBroadcaster = document.createElement('broadcaster');
 			dmtBroadcaster.id = 'viewDmtSidebar';
 			dmtBroadcaster.setAttribute('label', omnisidebar.strings.getString('dmtSidebarLabel'));

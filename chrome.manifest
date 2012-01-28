@@ -12,11 +12,11 @@ skin      omnisidebar-os   classic/1.0   chrome/skin/linux/
 skin      omnisidebar-os   classic/1.0   chrome/skin/win/     os=WINNT
 skin      omnisidebar-os   classic/1.0   chrome/skin/mac/     os=Darwin
 
-overlay   chrome://browser/content/browser.xul          chrome://omnisidebar/content/overlay.xul
-overlay   chrome://global/content/customizeToolbar.xul  chrome://omnisidebar/content/customize.xul
-overlay   chrome://omnisidebar/content/options.xul      chrome://omnisidebar/content/optionsnotlinux.xul   os=Darwin os=WINNT
-
-overlay   chrome://omnisidebar/content/options.xul      chrome://omnisidebar/content/optionsMac.xul   os=Darwin
+overlay   chrome://browser/content/browser.xul             chrome://omnisidebar/content/overlay.xul
+overlay   chrome://global/content/customizeToolbar.xul     chrome://omnisidebar/content/customize.xul
+overlay   chrome://mozapps/content/downloads/downloads.xul chrome://omnisidebar/content/dmgr.xul
+overlay   chrome://omnisidebar/content/options.xul         chrome://omnisidebar/content/optionsnotlinux.xul   os=Darwin os=WINNT
+overlay   chrome://omnisidebar/content/options.xul         chrome://omnisidebar/content/optionsMac.xul   os=Darwin
 
 style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/overlay.css
 style chrome://browser/content/browser.xul         chrome://omnisidebar/skin/Fx5.css
