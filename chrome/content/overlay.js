@@ -490,7 +490,9 @@ var omnisidebar = {
 		if(this.id != 'uri_sidebar_button' && this.id != 'uri_sidebar_button-twin') {
 			var command = this.getAttribute('oncommand');
 			if(command.indexOf('()') == -1) {
-				command = command.split("('")[1].split("')")[0];
+				// it could be either single quotes or double quotes here, don't forget, this takes care of both
+				command = command.split("(")[1].split(")")[0];
+				command = command.substr(1, command.length-2);
 				
 				if(this.getAttribute('group') == 'twinSidebar') {
 					omnisidebar.toggleSidebarTwin(command, true);
