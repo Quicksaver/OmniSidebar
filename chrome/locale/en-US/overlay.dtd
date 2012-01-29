@@ -48,7 +48,7 @@
 <!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
 <!ENTITY omnisidebarOpttransparency.label "Enable transparency">
 <!ENTITY omnisidebarOptforceOpen.label "Menu entries and SideToolbar buttons don't close the sidebar">
-<!ENTITY omnisidebarOptdisablefx.label "Enable visual effects (sliding transitions when auto-hiding)">
+<!ENTITY omnisidebarOptfx.label "Enable transition effects">
 <!ENTITY omnisidebarOptshowDelay.label "Delay sidebar auto-showing by (msec): ">
 <!ENTITY omnisidebarOpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
 <!ENTITY omnisidebarOptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">

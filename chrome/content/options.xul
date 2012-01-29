@@ -195,7 +195,7 @@
 					
 					<groupbox align="start">
 						<caption label="&omnisidebarOptgroupperformance.label;"/>
-						<checkbox label="&omnisidebarOptdisablefx.label;" preference="pref-fx"/>
+						<checkbox label="&omnisidebarOptfx.label;" preference="pref-fx"/>
 					</groupbox>
 					
 					<groupbox align="start">
