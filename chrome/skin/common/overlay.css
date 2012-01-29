@@ -1,5 +1,6 @@
 /* Buttons */
 @import url("chrome://omnisidebar-os/skin/icons.css");
+@import url("chrome://omnisidebar-os/skin/os.css");
 
 #omnisidebar_button, #omnisidebar_button-twin { list-style-image: url("chrome://omnisidebar/skin/osb-button.png"); }
 
@@ -277,7 +278,6 @@
 	position: fixed;
 	background: none;
 	height: 100%;
-	width: 3px;
 	z-index: 3;
 }
 #omnisidebar_switch:not([movetoright]),

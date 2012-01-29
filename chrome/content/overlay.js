@@ -120,9 +120,10 @@ var omnisidebar = {
 		omnisidebar.setWatchers(omnisidebar.resizebox_twin);
 		
 		// Set up context menu onpopupshowing event to do both the predetermined action and omnisidebar's functions
+		// the OSX version of firefox doesn't have the appmenu, so I have to check for that
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popupshowing', function(event) { omnisidebar.setContextMenu(event); }, false);
 		omnisidebar.listenerAid.add(omnisidebar.toolbarcontextmenu, 'popuphiding', function() { omnisidebar.setBothHovers(false); }, false);
-		omnisidebar.listenerAid.add(omnisidebar.appmenu, 'popupshowing', function(event) { omnisidebar.setAppMenu(event); }, false);
+		if(omnisidebar.appmenu) { omnisidebar.listenerAid.add(omnisidebar.appmenu, 'popupshowing', function(event) { omnisidebar.setAppMenu(event); }, false); }
 		omnisidebar.listenerAid.add(omnisidebar.viewtoolbars, 'popupshowing', function(event) { omnisidebar.setViewToolbarsMenu(event); }, false);
 		
 		// LessChrome compatibility fix: don't show the toolbox when our menus are the triggers
@@ -1005,6 +1006,13 @@ var omnisidebar = {
 		omnisidebar.width = parseInt(omnisidebar.box.getAttribute('width'));
 		omnisidebar.width_twin = parseInt(omnisidebar.box_twin.getAttribute('width'));
 		
+		// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
+		// I'm not supporting other versions of OSX, just this one isn't simple as it is
+		var moveBy = 0;
+		if(omnisidebar.OS == 'Darwin') {
+			moveBy = -1;
+		}
+		
 		// even though I already replace the resizing methods in similarweb, 
 		// it still screws up the sidebar size sometimes when starting up so I'm hoping this fixes everything
 		if(typeof(similarweb) != 'undefined') {
@@ -1028,14 +1036,14 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]):not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide]:not([movetoright]) #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar_resizebox,\n';
-			omnisidebar.sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + omnisidebar.width + 'px !important; }\n';
+			omnisidebar.sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + (omnisidebar.width +moveBy) + 'px !important; }\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox:hover,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hover],\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hiding],\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"])[movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][nohide][movetoright] #omnisidebar_resizebox,\n';
 			omnisidebar.sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar_resizebox,\n';
-			omnisidebar.sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar_resizebox { right: ' + omnisidebar.width + 'px !important; }\n';
+			omnisidebar.sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar_resizebox { right: ' + (omnisidebar.width +moveBy) + 'px !important; }\n';
 			// The !important tags are necessary
 			
 			// Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
@@ -1056,14 +1064,14 @@ var omnisidebar = {
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
-			omnisidebar.sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + omnisidebar.width_twin + 'px !important; }\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + (omnisidebar.width_twin +moveBy) + 'px !important; }\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin:hover,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hiding],\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"])[movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][nohide][movetoleft] #omnisidebar_resizebox-twin,\n';
 			omnisidebar.sscode += '	#sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar_resizebox-twin,\n';
-			omnisidebar.sscode += '	#sidebar-box-twin[customizing][movetoleft] #omnisidebar_resizebox-twin { left: ' + omnisidebar.width_twin + 'px !important; }\n';
+			omnisidebar.sscode += '	#sidebar-box-twin[customizing][movetoleft] #omnisidebar_resizebox-twin { left: ' + (omnisidebar.width_twin +moveBy) + 'px !important; }\n';
 			// The !important tags are necessary
 			
 			// Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
@@ -1337,13 +1345,13 @@ var omnisidebar = {
 			gNavToolbox.style.zIndex = '250';
 			// on windows xp the navtoolbox would be over the control buttons in the titlebar, making them unusable
 			if(omnisidebar.OSCPU == 'Windows NT 5.1') {
-				omnisidebar.appmenuButton.style.zIndex = '260';
+				if(omnisidebar.appmenuButton) { omnisidebar.appmenuButton.style.zIndex = '260'; }
 				omnisidebar.titleButtonBox.style.zIndex = '260';
 			}
 		} else {
 			gNavToolbox.style.zIndex = '';
 			if(omnisidebar.OSCPU == 'Windows NT 5.1') {
-				omnisidebar.appmenuButton.style.zIndex = '';
+				if(omnisidebar.appmenuButton) { omnisidebar.appmenuButton.style.zIndex = ''; }
 				omnisidebar.titleButtonBox.style.zIndex = '1';
 			}
 		}
@@ -1414,7 +1422,7 @@ var omnisidebar = {
 			omnisidebar.splitter_twin.hidden = true;
 		}
 		omnisidebar.hideIt(omnisidebar.contextmenuitemtoggle_twin, omnisidebar.prefAid.twinSidebar);
-		omnisidebar.hideIt(omnisidebar.appmenuitemtoggle_twin, omnisidebar.prefAid.twinSidebar);
+		if(omnisidebar.appmenuitemtoggle_twin) { omnisidebar.hideIt(omnisidebar.appmenuitemtoggle_twin, omnisidebar.prefAid.twinSidebar); }
 		omnisidebar.hideIt(omnisidebar.viewmenuitemtoggle_twin, omnisidebar.prefAid.twinSidebar);
 		omnisidebar.hideIt(document.getElementById('viewTwinSidebarMenuMenu'), omnisidebar.prefAid.twinSidebar);
 		omnisidebar.btnLabels();
@@ -1426,23 +1434,23 @@ var omnisidebar = {
 		
 		if(omnisidebar.prefAid.hideheadertoolbar) {
 			omnisidebar.contextmenuitemtoggle.removeAttribute('checked');
-			omnisidebar.appmenuitemtoggle.removeAttribute('checked');
+			if(omnisidebar.appmenuitemtoggle) { omnisidebar.appmenuitemtoggle.removeAttribute('checked'); }
 			omnisidebar.viewmenuitemtoggle.removeAttribute('checked');
 		}
 		else {
 			omnisidebar.contextmenuitemtoggle.setAttribute('checked', 'true');
-			omnisidebar.appmenuitemtoggle.setAttribute('checked', 'true');
+			if(omnisidebar.appmenuitemtoggle) { omnisidebar.appmenuitemtoggle.setAttribute('checked', 'true'); }
 			omnisidebar.viewmenuitemtoggle.setAttribute('checked', 'true');
 		}
 		
 		if(omnisidebar.prefAid.hideheadertoolbarTwin) {
 			omnisidebar.contextmenuitemtoggle_twin.removeAttribute('checked');
-			omnisidebar.appmenuitemtoggle_twin.removeAttribute('checked');
+			if(omnisidebar.appmenuitemtoggle_twin) { omnisidebar.appmenuitemtoggle_twin.removeAttribute('checked'); }
 			omnisidebar.viewmenuitemtoggle_twin.removeAttribute('checked');
 		}
 		else {
 			omnisidebar.contextmenuitemtoggle_twin.setAttribute('checked', 'true');
-			omnisidebar.appmenuitemtoggle_twin.setAttribute('checked', 'true');
+			if(omnisidebar.appmenuitemtoggle_twin) { omnisidebar.appmenuitemtoggle_twin.setAttribute('checked', 'true'); }
 			omnisidebar.viewmenuitemtoggle_twin.setAttribute('checked', 'true');
 		}
 	},
