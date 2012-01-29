@@ -443,6 +443,8 @@ var timerAid = {
 
 var prefAid = {
 	_prefObjects: {},
+	length: 0,
+	
 	init: function(obj, branch, prefList) {
 		var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
 		this._listenerAid = obj.listenerAid;
@@ -456,6 +458,7 @@ var prefAid = {
 	_setPref: function(pref) {
 		this.__defineGetter__(pref, function() { return this._prefObjects[pref].value; });
 		this.__defineSetter__(pref, function(v) { return this._prefObjects[pref].value = v; });
+		this.length++;
 	},
 	
 	listen: function(pref, handler) {

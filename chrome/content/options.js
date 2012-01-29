@@ -1,19 +1,11 @@
 var omnisidebarOptions = {
 	init: function() {
-		window.removeEventListener("load", omnisidebarOptions.init, false);
+		omnisidebarOptions.listenerAid.remove(window, "load", omnisidebarOptions.init, false);
 		
-		omnisidebarOptions.keysets = [
-			Application.prefs.get('extensions.omnisidebar.keysets0'),
-			Application.prefs.get('extensions.omnisidebar.keysets1'),
-			Application.prefs.get('extensions.omnisidebar.keysets2'),
-			Application.prefs.get('extensions.omnisidebar.keysets3'),
-			Application.prefs.get('extensions.omnisidebar.keysets4'),
-			Application.prefs.get('extensions.omnisidebar.keysets5'),
-			Application.prefs.get('extensions.omnisidebar.keysets6')
-		];
+		omnisidebarOptions.prefAid.init(omnisidebarOptions, 'omnisidebar', ['keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
 		
-		for(var i=0; i<omnisidebarOptions.keysets.length; i++) {
-			if(!omnisidebarOptions.keysets[i].value) {
+		for(var i=0; i<omnisidebarOptions.prefAid.length; i++) {
+			if(!omnisidebarOptions.prefAid['keysets'+i]) {
 				document.getElementById('keysetItem'+i).setAttribute('hidden', 'true');
 			}
 		}
@@ -90,8 +82,10 @@ var omnisidebarOptions = {
 	},
 	
 	onlyNumbers: function(v) {
-		return parseInt(v || 0);
+		return Math.max(parseInt(v || 0), 0);
 	}
 }
 
-window.addEventListener("load", omnisidebarOptions.init, false);
+omnisidebarOptions.mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+omnisidebarOptions.mozIJSSubScriptLoader.loadSubScript("chrome://omnisidebar/content/utils.jsm", omnisidebarOptions);
+omnisidebarOptions.listenerAid.add(window, "load", omnisidebarOptions.init, false);

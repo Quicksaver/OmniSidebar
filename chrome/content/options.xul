@@ -181,12 +181,14 @@
 							<label value="&omnisidebarOptshowDelay.label;"/>
 							<textbox id="showDelayTextbox" class="textbox" size="3" maxlength="5" style="text-align: center;"
 								preference="pref-showDelay" 
+								onkeydown="omnisidebarOptions.timerAid.init('keydown', function () { document.getElementById('showDelayTextbox').value = omnisidebarOptions.onlyNumbers(document.getElementById('showDelayTextbox').value); }, 0);"
 								onsynctopreference="return omnisidebarOptions.onlyNumbers(this.value);"/>
 				        </hbox>
 						<hbox>
 							<label value="&omnisidebarOpthideDelay.label;"/>
 							<textbox id="hideDelayTextbox" class="textbox" size="3" maxlength="5" style="text-align: center;"
 								preference="pref-hideDelay" 
+								onkeydown="omnisidebarOptions.timerAid.init('keydown', function () { document.getElementById('hideDelayTextbox').value = omnisidebarOptions.onlyNumbers(document.getElementById('hideDelayTextbox').value); }, 0);"
 								onsynctopreference="return omnisidebarOptions.onlyNumbers(this.value);"/>
 				        </hbox>
 						<checkbox label="&omnisidebarOptforceOpen.label;" preference="pref-forceOpen"/>
