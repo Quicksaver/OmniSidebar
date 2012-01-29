@@ -632,7 +632,11 @@ var omnisidebar = {
 			if(command.indexOf('()') == -1) {
 				// it could be either single quotes or double quotes here, don't forget, this takes care of both
 				command = command.split("(")[1].split(")")[0];
-				command = command.substr(1, command.length-2);
+				if(command == 'this.id') {
+					command = this.id;
+				} else {
+					command = command.substr(1, command.length-2);
+				}
 				
 				if(this.getAttribute('group') == 'twinSidebar') {
 					omnisidebar.toggleSidebarTwin(command, true);
@@ -670,7 +674,7 @@ var omnisidebar = {
 				omnisidebar.button.setAttribute('checked', 'true');
 			}
 			if(omnisidebar.button_twin && !omnisidebar.box_twin.hidden) {
-				omnisidebar.button_twin.setAttriute('checked', 'true');
+				omnisidebar.button_twin.setAttribute('checked', 'true');
 			}
 		}
 		
