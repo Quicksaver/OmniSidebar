@@ -25,7 +25,8 @@
 .insidebar #btnAddSite:after,
 .insidebar #hideTabbarCheck,
 .insidebar #ybsidebar-tags-sort-menu,
-.insidebar #ybsidebar-bookmarks-sort-menu {
+.insidebar #ybsidebar-bookmarks-sort-menu,
+.insidebar #bookmarks-dustbox {
 	-moz-appearance: none !important;
 	opacity: 1 !important;
 	background: rgba(151, 152, 153, 0.05) -moz-linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
@@ -72,7 +73,8 @@
 .insidebar #btnAddSite[disabled="true"]:after,
 .insidebar #hideTabbarCheck[disabled="true"],
 .insidebar #ybsidebar-tags-sort-menu[disabled="true"],
-.insidebar #ybsidebar-bookmarks-sort-menu[disabled="true"] {
+.insidebar #ybsidebar-bookmarks-sort-menu[disabled="true"],
+.insidebar #bookmarks-dustbox[disabled="true"] {
 	opacity: .8;
 }
 
@@ -102,6 +104,7 @@
 .insidebar #hideTabbarCheck[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .insidebar #ybsidebar-tags-sort-menu[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .insidebar #ybsidebar-bookmarks-sort-menu[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.insidebar #bookmarks-dustbox[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 
 #history-panel.insidebar #viewButton[disabled="true"] > .toolbarbutton-icon, 
 #downloadManager.insidebar #clearListButton[disabled="true"] > .toolbarbutton-icon,
@@ -128,7 +131,8 @@
 #sbSimilarWebSidebar.insidebar #btnShare[disabled="true"] > .toolbarbutton-icon,
 .insidebar #hideTabbarCheck[disabled="true"] > .toolbarbutton-icon,
 .insidebar #ybsidebar-tags-sort-menu[disabled="true"] > .toolbarbutton-icon,
-.insidebar #ybsidebar-bookmarks-sort-menu[disabled="true"] > .toolbarbutton-icon {
+.insidebar #ybsidebar-bookmarks-sort-menu[disabled="true"] > .toolbarbutton-icon,
+.insidebar #bookmarks-dustbox[disabled="true"] > .toolbarbutton-icon {
 	opacity: .5;
 }
 
@@ -162,6 +166,7 @@
 .insidebar #hideTabbarCheck > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .insidebar #ybsidebar-tags-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .insidebar #ybsidebar-bookmarks-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.insidebar #bookmarks-dustbox > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 
 #history-panel.insidebar #viewButton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]), 
 #downloadManager.insidebar #clearListButton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -187,6 +192,7 @@
 .insidebar #hideTabbarCheck:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .insidebar #ybsidebar-tags-sort-menu:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .insidebar #ybsidebar-bookmarks-sort-menu:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar #bookmarks-dustbox:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
 #history-panel.insidebar #viewButton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover, 
 #downloadManager.insidebar #clearListButton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
@@ -212,7 +218,8 @@
 .insidebar #btnAddSite:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover:after,
 .insidebar #hideTabbarCheck:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .insidebar #ybsidebar-tags-sort-menu:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
-.insidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
+.insidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.insidebar #bookmarks-dustbox:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
 	background-color: hsla(190,60%,70%,.5) !important;
 	border-color: hsla(190,50%,65%,.8) hsla(190,50%,50%,.8) hsla(190,50%,40%,.8) !important;
 	box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 0 0 1.5px rgba(255,255,255,.1) inset, 0 0 3.5px hsl(190,90%,80%) !important;
@@ -245,6 +252,7 @@
 .insidebar #hideTabbarCheck > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .insidebar #ybsidebar-tags-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .insidebar #ybsidebar-bookmarks-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.insidebar #bookmarks-dustbox > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 
 #history-panel.insidebar #viewButton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]), 
 #downloadManager.insidebar #clearListButton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -272,6 +280,7 @@
 .insidebar #hideTabbarCheck:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .insidebar #ybsidebar-tags-sort-menu:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .insidebar #ybsidebar-bookmarks-sort-menu:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.insidebar #bookmarks-dustbox:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
 #history-panel.insidebar #viewButton[open="true"] > .toolbarbutton-menubutton-dropmarker, 
 #downloadManager.insidebar #clearListButton[open="true"] > .toolbarbutton-menubutton-dropmarker,
@@ -299,6 +308,7 @@
 .insidebar #hideTabbarCheck[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .insidebar #ybsidebar-tags-sort-menu[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .insidebar #ybsidebar-bookmarks-sort-menu[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.insidebar #bookmarks-dustbox[open="true"] > .toolbarbutton-menubutton-dropmarker,
 
 #history-panel.insidebar #viewButton:not([type="menu-button"]):not([disabled="true"]):hover:active, 
 #downloadManager.insidebar #clearListButton:not([type="menu-button"]):not([disabled="true"]):hover:active,
@@ -327,6 +337,7 @@
 .insidebar #hideTabbarCheck:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .insidebar #ybsidebar-tags-sort-menu:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .insidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"]):not([disabled="true"]):hover:active,
+.insidebar #bookmarks-dustbox:not([type="menu-button"]):not([disabled="true"]):hover:active,
 
 #history-panel.insidebar #viewButton:not([type="menu-button"])[checked="true"], 
 #downloadManager.insidebar #clearListButton:not([type="menu-button"])[checked="true"],
@@ -355,6 +366,7 @@
 .insidebar #hideTabbarCheck:not([type="menu-button"])[checked="true"],
 .insidebar #ybsidebar-tags-sort-menu:not([type="menu-button"])[checked="true"],
 .insidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"])[checked="true"],
+.insidebar #bookmarks-dustbox:not([type="menu-button"])[checked="true"],
 
 #history-panel.insidebar #viewButton[open="true"], 
 #downloadManager.insidebar #clearListButton[open="true"],
@@ -382,7 +394,8 @@
 .insidebar #btnAddSite[open="true"]:after,
 .insidebar #hideTabbarCheck[open="true"],
 .insidebar #ybsidebar-tags-sort-menu[open="true"],
-.insidebar #ybsidebar-bookmarks-sort-menu[open="true"] {
+.insidebar #ybsidebar-bookmarks-sort-menu[open="true"],
+.insidebar #bookmarks-dustbox[open="true"] {
 	background-color: transparent !important;
 	border-color: rgba(0,0,0,.65) rgba(0,0,0,.55) rgba(0,0,0,.5) !important;
 	box-shadow: 0 0 6.5px rgba(0,0,0,.4) inset, 0 0 2px rgba(0,0,0,.4) inset,  0 1px 0 rgba(200,200,200,.4) !important;
@@ -415,7 +428,8 @@
 .insidebar #btnAddSite[checked="true"]:not(:active):hover:after,
 .insidebar #hideTabbarCheck[checked="true"]:not(:active):hover,
 .insidebar #ybsidebar-tags-sort-menu[checked="true"]:not(:active):hover,
-.insidebar #ybsidebar-bookmarks-sort-menu[checked="true"]:not(:active):hover {
+.insidebar #ybsidebar-bookmarks-sort-menu[checked="true"]:not(:active):hover,
+.insidebar #bookmarks-dustbox[checked="true"]:not(:active):hover {
 	background-color: rgba(90%,90%,90%,.4) !important;
 	-moz-transition: background-color .4s !important;
 }

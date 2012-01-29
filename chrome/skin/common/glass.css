@@ -171,7 +171,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar richlistbox:last-child:after,
 .insidebar #userstyles-heading,
 .insidebar domi-panel label.viewer-title,
-.insidebar #ybSidebarPanel {
+.insidebar #ybSidebarPanel,
+.insidebar #bookmarks-content-label {
 	color: black !important;
 	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
 }
@@ -220,7 +221,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #historyTree,
 .insidebar #downloadView,
 .insidebar #updatescan-bookmarks-view,
-.insidebar #sidebar-notify #feed_tree {
+.insidebar #sidebar-notify #feed_tree,
+.insidebar #bookmarks-content-box {
 	margin: 7px !important;
 }
 .insidebar #ConsoleBox {
@@ -275,7 +277,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #boxFacebook,
 .insidebar #panoTabGroupTree,
 .insidebar #ybbookmarks-tree-tags,
-.insidebar #ybbookmarks-tree-bookmarks {
+.insidebar #ybbookmarks-tree-bookmarks,
+.insidebar #bookmarks-content-box {
 	-moz-appearance: none !important;
 	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(50% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
 	border: 1px solid rgb(174, 183, 196) !important;
@@ -305,7 +308,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 }
 
 .insidebar #preview-splitter,
-.insidebar .ybsidebar-tree-container splitter {
+.insidebar .ybsidebar-tree-container splitter,
+.insidebar #bookmarks-panes-splitter {
 	background: rgba(255,255,255,.5) !important;
 	height: 3px !important;
 	min-height: 1px !important;
@@ -611,7 +615,9 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #ybbookmarks-tree-tags treechildren::-moz-tree-row(selected),
 .insidebar #ybbookmarks-tree-tags treechildren::-moz-tree-row(hover),
 .insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(selected),
-.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(hover) {
+.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(hover),
+.insidebar #places-content-view treechildren::-moz-tree-row(selected),
+.insidebar #places-content-view treechildren::-moz-tree-row(hover) {
 	color: black !important;
 	background: rgba(255,255,255,.3) !important;
 }
@@ -620,7 +626,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #feedbar_tree_container::-moz-tree-cell-text(container),
 .insidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container),
 .insidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container),
-.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container) {
+.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(container) {
 	font-weight: bold !important;
 }
 
@@ -633,7 +640,9 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container, open),
 .insidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container, open, selected),
 .insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open),
-.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open, selected) {
+.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open, selected),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(container, open),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(container, open, selected) {
 	color: black !important;
 }
 
@@ -656,7 +665,11 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container),
 .insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, hover),
 .insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(leaf),
-.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(leaf, hover) {
+.insidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(leaf, hover),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(container),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(container, hover),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(leaf),
+.insidebar #places-content-view treechildren::-moz-tree-cell-text(leaf, hover) {
 	color: black !important;
 }
 
@@ -669,7 +682,8 @@ I'm disabling this for now, it screws up viewing pdf files and certain page layo
 .insidebar #feedbar_tree_container::-moz-tree-separator,
 .insidebar #panoTabGroupTreeChildren::-moz-tree-separator,
 .insidebar #ybbookmarks-tree-tags::-moz-tree-separator,
-.insidebar #ybbookmarks-tree-bookmarks::-moz-tree-separator {
+.insidebar #ybbookmarks-tree-bookmarks::-moz-tree-separator,
+.insidebar #places-content-view treechildren::-moz-tree-separator {
 	border-top: 1px solid rgb(174, 183, 196) !important;
 	border-bottom: none !important;
 }
