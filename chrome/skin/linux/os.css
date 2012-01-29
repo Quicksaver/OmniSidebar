@@ -1,3 +1,6 @@
 .omnisidebar_switch {
 	width: 3px;
 }
+.sidebar-title {
+	border: 4px solid rgba(0,0,0,0);
+}

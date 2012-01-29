@@ -1009,7 +1009,7 @@ var omnisidebar = {
 		// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 		// I'm not supporting other versions of OSX, just this one isn't simple as it is
 		var moveBy = 0;
-		if(omnisidebar.OS == 'Darwin') {
+		if(omnisidebar.OS != 'WINNT') {
 			moveBy = -1;
 		}
 		
