@@ -49,7 +49,7 @@ var omnisidebarOptions = {
 	},
 	
 	toggleTitleTwin: function() {
-		if(document.getElementById('hideTitleTwinCheckbox').checked) {
+		if(document.getElementById('hideTitleTwinCheckbox').checked || !document.getElementById('twinCheckbox').checked) {
 			document.getElementById('titleButtonTwinCheckbox').setAttribute('disabled', 'true');
 		} else {
 			document.getElementById('titleButtonTwinCheckbox').removeAttribute('disabled');
