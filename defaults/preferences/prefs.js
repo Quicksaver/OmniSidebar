@@ -42,8 +42,8 @@ pref("extensions.omnisidebar.alwaysAddons", false);
 pref("extensions.omnisidebar.alwaysConsole", false);
 pref("extensions.omnisidebar.alwaysDMT", false);
 pref("extensions.omnisidebar.forceOpen", false);
-pref("extensions.omnisidebar.showDelay", 0);
-pref("extensions.omnisidebar.hideDelay", 0);
+pref("extensions.omnisidebar.showDelay", 250);
+pref("extensions.omnisidebar.hideDelay", 250);
 pref("extensions.omnisidebar.keepPrivate", false);
 
 // https://developer.mozilla.org/en/Localizing_extension_descriptions
