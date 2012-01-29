@@ -2,7 +2,8 @@ var omnisidebar = {
 	init: function() {
 		window.removeEventListener("load", omnisidebar.init, false);
 		
-		Components.utils.import("chrome://omnisidebar/content/utils.jsm", omnisidebar);
+		omnisidebar.mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+		omnisidebar.mozIJSSubScriptLoader.loadSubScript("chrome://omnisidebar/content/utils.jsm", omnisidebar);
 		
 		//Show/hide the buttons
 		omnisidebar.twinSidebar = Application.prefs.get('extensions.omnisidebar.twinSidebar');
