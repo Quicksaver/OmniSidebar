@@ -44,6 +44,7 @@
 			<preference id="pref-forceOpen" name="extensions.omnisidebar.forceOpen" type="bool"/>
 			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
 			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
+			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
 		</preferences>
 		
 		<tabbox id="omnisidebarTabBox" >
@@ -189,6 +190,7 @@
 								onsynctopreference="return omnisidebarOptions.onlyNumbers(this.value);"/>
 				        </hbox>
 						<checkbox label="&omnisidebarOptforceOpen.label;" preference="pref-forceOpen"/>
+						<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
 					</groupbox>
 					
 					<groupbox align="start">

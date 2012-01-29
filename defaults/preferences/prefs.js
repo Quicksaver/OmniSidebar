@@ -44,6 +44,7 @@ pref("extensions.omnisidebar.alwaysDMT", false);
 pref("extensions.omnisidebar.forceOpen", false);
 pref("extensions.omnisidebar.showDelay", 0);
 pref("extensions.omnisidebar.hideDelay", 0);
+pref("extensions.omnisidebar.keepPrivate", false);
 
 // https://developer.mozilla.org/en/Localizing_extension_descriptions
 pref("extensions.osb@quicksaver.description", "chrome://omnisidebar/locale/overlay.properties");

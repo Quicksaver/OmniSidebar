@@ -51,6 +51,7 @@
 <!ENTITY omnisidebarOptdisablefx.label "Enable visual effects (sliding transitions when auto-hiding)">
 <!ENTITY omnisidebarOptshowDelay.label "Delay sidebar auto-showing by (msec): ">
 <!ENTITY omnisidebarOpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
+<!ENTITY omnisidebarOptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">
 
 <!ENTITY omnisidebarOptalternatebtns.label "Alternate SideToolbar button style">
 <!ENTITY omnisidebarOpthideheadertoolbar.label "Hide SideToolbar">

@@ -470,4 +470,50 @@ var prefAid = {
 		this._prefObjects[pref].reset();
 	}
 };
+
+
+// Private browsing mode listener as on https://developer.mozilla.org/En/Supporting_private_browsing_mode, with a few modifications
+var PrivateBrowsingListener = {
+	OS: null,
+	autoStarted: false,
+	inPrivateBrowsing: false, // whether we are in private browsing mode
+	watcher: null, // the watcher object
+	
+	init: function(aWatcher) {
+		this.watcher = aWatcher;
+		
+		this.OS = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+		this.OS.addObserver(this, "private-browsing", false);
+		this.OS.addObserver(this, "quit-application", false);
+		
+		var pbs = Components.classes["@mozilla.org/privatebrowsing;1"].getService(Components.interfaces.nsIPrivateBrowsingService);
+		this.inPrivateBrowsing = pbs.privateBrowsingEnabled;
+		this.autoStarted = pbs.autoStarted;
+		if(this.autoStarted && this.watcher && "autoStarted" in this.watcher) {
+			this.watcher.autoStarted();
+		}
+	},
+	
+	observe: function(aSubject, aTopic, aData) {
+		if(aTopic == "private-browsing") {
+			if(aData == "enter") {
+				this.inPrivateBrowsing = true;
+				if(this.watcher && "onEnter" in this.watcher) {
+					this.watcher.onEnter();
+				}
+			} else if(aData == "exit") {
+				this.inPrivateBrowsing = false;
+				if(this.watcher && "onExit" in this.watcher) {
+					this.watcher.onExit();
+				}
+			}
+		} else if(aTopic == "quit-application") {
+			this.OS.removeObserver(this, "quit-application");
+			this.OS.removeObserver(this, "private-browsing");
+			if(this.watcher && "onQuit" in this.watcher) {
+				this.watcher.onQuit();
+			}
+		}
+	}
+};  
 		

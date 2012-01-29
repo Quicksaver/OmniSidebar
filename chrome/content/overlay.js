@@ -38,7 +38,7 @@ var omnisidebar = {
 		omnisidebar.prefAid.init(omnisidebar, 'omnisidebar', [
 			'lastcommand', 'mainSidebar', 'renderabove', 'undockMode', 'hideheadertoolbar', 'hideheadertitle', 'hideheaderdock', 'hideheaderclose', 'alternatebtns', 'coloricons', 'titleButton', 'devTools',
 			'lastcommandTwin', 'twinSidebar', 'renderaboveTwin', 'undockModeTwin', 'hideheadertoolbarTwin', 'hideheadertitleTwin', 'hideheaderdockTwin', 'hideheadercloseTwin', 'alternatebtnsTwin', 'coloriconsTwin', 'titleButtonTwin', 'devToolsTwin',
-			'fx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen', 'transparency', 'showDelay', 'hideDelay',
+			'fx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen', 'transparency', 'showDelay', 'hideDelay', 'keepPrivate',
 			'chosenkeyset', 'keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
 		
 		// Set initial hover calls
@@ -171,10 +171,10 @@ var omnisidebar = {
 		omnisidebar.box.addAttributeWatcher('width', omnisidebar.setWidth);
 		omnisidebar.box_twin.addAttributeWatcher('width', omnisidebar.setWidth);
 		
-		omnisidebar.hideIt(omnisidebar.box, true);
-		omnisidebar.hideIt(omnisidebar.box_twin, omnisidebar.prefAid.twinSidebar);
-		
 		omnisidebar.initialized = true;
+		
+		// Initiate private browsing watcher
+		omnisidebar.privateWatcher.init();
 		
 		// Autoclose feature: we can't have the sidebars open when we restart
 		if(!omnisidebar.box.hidden && omnisidebar.prefAid.renderabove && omnisidebar.prefAid.undockMode == 'autoclose') {
@@ -275,7 +275,143 @@ var omnisidebar = {
 	get stylishbutton () { return document.getElementById('stylish_sidebar_button'); }, // omnisidebar sidebar Stylish toolbar button
 	get updscanbtn () { return document.getElementById('tools-updatescan-button'); }, // Update Scan button
 	get feedbtn () { return document.getElementById('feedbar-button'); }, // Feed Sidebar button
+	
+	privateWatcher: {
+		init: function() {
+			if(omnisidebar.timerAid.getTimer('mainSidebar') || omnisidebar.timerAid.getTimer('twinSidebar')) {
+				omnisidebar.timerAid.init('privateDelay', function() {
+					omnisidebar.privateWatcher.init();
+				}, 250);
+				return;
+			}
+			
+			omnisidebar.PrivateBrowsingListener.init(omnisidebar.privateWatcher);
+			
+			// Placing these here as to not show the sidebars before it's time
+			omnisidebar.hideIt(omnisidebar.box, true);
+			omnisidebar.hideIt(omnisidebar.box_twin, omnisidebar.prefAid.twinSidebar);
+		},
 		
+		// override native firefox behavior with this statement outside of the init loop
+		mainStateBefore: document.getElementById('sidebar-box').hidden,
+		autoStarted: function() {
+			this.twinStateBefore = omnisidebar.box_twin.hidden;
+			this.mainLastBefore = omnisidebar.prefAid.lastcommand;
+			this.twinLastBefore = omnisidebar.prefAid.lastcommandTwin;
+			
+			if(!omnisidebar.prefAid.keepPrivate) {
+				if(!omnisidebar.box.hidden) {
+					toggleSidebar();
+				}
+				if(!omnisidebar.box_twin.hidden) {
+					omnisidebar.toggleSidebarTwin();
+				}
+				omnisidebar.prefAid.reset('lastcommand');
+				omnisidebar.prefAid.reset('lastcommandTwin');
+			}
+			else {
+				omnisidebar.timerAid.init('enterPrivate', function() {
+					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateBefore) {
+						toggleSidebar(omnisidebar.privateWatcher.mainLastBefore);
+					}
+					if(omnisidebar.box_twin.hidden != omnisidebar.privateWatcher.twinStateBefore) {
+						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastBefore);
+					}
+				}, 0);
+			}
+		},
+		
+		onEnter: function() {
+			this.mainStateBefore = omnisidebar.box.hidden;
+			this.twinStateBefore = omnisidebar.box_twin.hidden;
+			this.mainLastBefore = omnisidebar.prefAid.lastcommand;
+			this.twinLastBefore = omnisidebar.prefAid.lastcommandTwin;
+			
+			if(!omnisidebar.prefAid.keepPrivate) {
+				if(!omnisidebar.box.hidden) {
+					toggleSidebar();
+				}
+				if(!omnisidebar.box_twin.hidden) {
+					omnisidebar.toggleSidebarTwin();
+				}
+				omnisidebar.prefAid.reset('lastcommand');
+				omnisidebar.prefAid.reset('lastcommandTwin');
+			}
+			else {
+				omnisidebar.timerAid.init('enterPrivate', function() {
+					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateBefore) {
+						toggleSidebar(omnisidebar.privateWatcher.mainLastBefore);
+					}
+					if(omnisidebar.box_twin.hidden != omnisidebar.privateWatcher.twinStateBefore) {
+						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastBefore);
+					}
+				}, 0);
+			}
+		},
+		
+		onExit: function() {
+			if(!omnisidebar.prefAid.keepPrivate) {
+				if(omnisidebar.box.hidden != this.mainStateBefore || omnisidebar.prefAid.lastcommand != this.mainLastBefore) {
+					toggleSidebar(this.mainLastBefore);
+				}
+				if(omnisidebar.box_twin.hidden != this.twinStateBefore || omnisidebar.prefAid.lastcommandTwin != this.twinLastBefore) {
+					omnisidebar.toggleSidebarTwin(this.twinLastBefore);
+				}
+				omnisidebar.prefAid.lastcommand = this.mainLastBefore;
+				omnisidebar.prefAid.lastcommandTwin = this.twinLastBefore;
+			}
+			else {
+				this.mainStateAfter = omnisidebar.box.hidden;
+				this.twinStateAfter = omnisidebar.box_twin.hidden;
+				this.mainLastAfter = omnisidebar.prefAid.lastcommand;
+				this.twinLastAfter = omnisidebar.prefAid.lastcommandTwin;
+				omnisidebar.timerAid.init('exitPrivate', function() {
+					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateAfter 
+					|| omnisidebar.prefAid.lastcommand != omnisidebar.privateWatcher.mainLastAfter
+					|| omnisidebar.box.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommand) {
+						toggleSidebar(omnisidebar.privateWatcher.mainLastAfter);
+					}
+					if(omnisidebar.box_twin.hidden != omnisidebar.privateWatcher.twinStateAfter 
+					|| omnisidebar.prefAid.lastcommandTwin != omnisidebar.privateWatcher.twinLastAfter
+					|| omnisidebar.box_twin.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommandTwin) {
+						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastAfter);
+					}
+				}, 0);
+			}
+		},
+		
+		onQuit: function() {
+			if(!omnisidebar.prefAid.keepPrivate) {
+				if(omnisidebar.box.hidden != this.mainStateBefore || omnisidebar.prefAid.lastcommand != this.mainLastBefore) {
+					toggleSidebar(this.mainLastBefore);
+				}
+				if(omnisidebar.box_twin.hidden != this.twinStateBefore || omnisidebar.prefAid.lastcommandTwin != this.twinLastBefore) {
+					omnisidebar.toggleSidebarTwin(this.twinLastBefore);
+				}
+				omnisidebar.prefAid.lastcommand = this.mainLastBefore;
+				omnisidebar.prefAid.lastcommandTwin = this.twinLastBefore;
+			}
+			else {
+				this.mainStateAfter = omnisidebar.box.hidden;
+				this.twinStateAfter = omnisidebar.box_twin.hidden;
+				this.mainLastAfter = omnisidebar.prefAid.lastcommand;
+				this.twinLastAfter = omnisidebar.prefAid.lastcommandTwin;
+				omnisidebar.timerAid.init('exitPrivate', function() {
+					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateAfter 
+					|| omnisidebar.prefAid.lastcommand != omnisidebar.privateWatcher.mainLastAfter
+					|| omnisidebar.box.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommand) {
+						toggleSidebar(omnisidebar.privateWatcher.mainLastAfter);
+					}
+					if(omnisidebar.box_twin.hidden != omnisidebar.privateWatcher.twinStateAfter 
+					|| omnisidebar.prefAid.lastcommandTwin != omnisidebar.privateWatcher.twinLastAfter
+					|| omnisidebar.box_twin.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommandTwin) {
+						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastAfter);
+					}
+				}, 0);
+			}
+		}
+	},
+	
 	// onLoad and unLoad are used by the omnisidebar button to set up its listeners
 	onLoad: function() {
 		if(!omnisidebar.initialized) {
@@ -2039,7 +2175,7 @@ var omnisidebar = {
 	// toggleSidebar(), sidebarOnLoad() and fireSidebarFocusedEvent() modified for the twin sidebar
 	toggleSidebarTwin: function(commandID, forceOpen) {
 		if(!omnisidebar.initialized) {
-			omnisidebar.timerAid.init('twinSidebar', function() { omnisidebar.toggleSidebarTwin(commandID, forceOpen); }, 500);
+			omnisidebar.timerAid.init('twinSidebar', function() { omnisidebar.toggleSidebarTwin(commandID, forceOpen); }, 250);
 			return;
 		}
 		
@@ -2252,7 +2388,7 @@ var omnisidebar = {
 // We can't use a single function for both sidebars because you can toggle it without arguments and then it wouldn't know which sidebar to send the command the
 function toggleSidebar(commandID, forceOpen) {
 	if(!omnisidebar.initialized) {
-		omnisidebar.timerAid.init('mainSidebar', function() { toggleSidebar(commandID, forceOpen); }, 500);
+		omnisidebar.timerAid.init('mainSidebar', function() { toggleSidebar(commandID, forceOpen); }, 250);
 		return;
 	}
 	
