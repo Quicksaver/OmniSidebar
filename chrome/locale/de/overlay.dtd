@@ -25,6 +25,7 @@
 <!ENTITY omnisidebarOptgroupTwin.label "Zweite Sidebar">
 <!ENTITY omnisidebarOptgroupicons.label "Symbol-Darstellung">
 <!ENTITY omnisidebarOptgroupgen.label "Anzeige">
+<!ENTITY omnisidebarOptgroupfeatures.label "Verhalten">
 <!ENTITY omnisidebarOptgroupperformance.label "Leistung">
 <!ENTITY omnisidebarOptgroupstyle.label "Sidebar-Stil">
 <!ENTITY omnisidebarOptgroupdev.label "Entwicklerwerkzeuge">
@@ -39,7 +40,12 @@
 <!ENTITY omnisidebarOptundockMode.noauto "nur auf Befehl ausblenden">
 <!ENTITY omnisidebarOptundockMode.autoclose "automatisch beim Verlieren des Fokus ausblenden">
 <!ENTITY omnisidebarOptglassStyle.label "Glass-Stil auf alle Sidebars anwenden">
-<!ENTITY omnisidebarOptdisablefx.label "Visuelle Effekte deaktivieren (Gleiteffekte beim automatischen Ausblenden)">
+<!ENTITY omnisidebarOpttransparency.label "Transparenz verwenden">
+<!ENTITY omnisidebarOptforceOpen.label "Menüeinträge und Sidebar-Symbolleiste schließen Sidebar nicht">
+<!ENTITY omnisidebarOptfx.label "Übergangseffekte verwenden">
+<!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms): ">
+<!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms): ">
+<!ENTITY omnisidebarOptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
 <!ENTITY omnisidebarOptalternatebtns.label "Alternativen Stil für Symbole in Sidebar verwenden">
 <!ENTITY omnisidebarOpthideheadertoolbar.label "Symbolleiste in Sidebar ausblenden">
 <!ENTITY omnisidebarOpthideheadertitle.label "Sidebar-Titel ausblenden">

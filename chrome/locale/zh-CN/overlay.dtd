@@ -25,6 +25,7 @@
 <!ENTITY omnisidebarOptgroupTwin.label "副侧栏">
 <!ENTITY omnisidebarOptgroupicons.label "侧栏工具栏按钮">
 <!ENTITY omnisidebarOptgroupgen.label "外观">
+<!ENTITY omnisidebarOptgroupfeatures.label "特性">
 <!ENTITY omnisidebarOptgroupperformance.label "性能">
 <!ENTITY omnisidebarOptgroupstyle.label "侧栏风格">
 <!ENTITY omnisidebarOptgroupdev.label "开发工具">
@@ -39,7 +40,12 @@
 <!ENTITY omnisidebarOptundockMode.noauto "只在命令时关闭">
 <!ENTITY omnisidebarOptundockMode.autoclose "失去焦点时自动关闭">
 <!ENTITY omnisidebarOptglassStyle.label "对所有侧栏应用玻璃样式">
-<!ENTITY omnisidebarOptdisablefx.label "禁用视觉效果（自动隐藏时滑动）">
+<!ENTITY omnisidebarOpttransparency.label "启用透明">
+<!ENTITY omnisidebarOptforceOpen.label "菜单项和侧栏工具栏按钮不关闭侧栏">
+<!ENTITY omnisidebarOptfx.label "启用过渡效果">
+<!ENTITY omnisidebarOptshowDelay.label "侧栏自动显示延时(毫秒):">
+<!ENTITY omnisidebarOpthideDelay.label "侧栏自动隐藏延时(毫秒):">
+<!ENTITY omnisidebarOptkeepPrivate.label "隐私浏览模式沿用侧栏状态">
 <!ENTITY omnisidebarOptalternatebtns.label "替换侧栏工具栏按钮样式">
 <!ENTITY omnisidebarOpthideheadertoolbar.label "隐藏侧栏工具栏">
 <!ENTITY omnisidebarOpthideheadertitle.label "隐藏侧栏标题">

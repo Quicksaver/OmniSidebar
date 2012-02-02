@@ -25,6 +25,7 @@
 <!ENTITY omnisidebarOptgroupTwin.label "Panneau latéral secondaire">
 <!ENTITY omnisidebarOptgroupicons.label "Jeu d'icônes boutons de la barre d'outils latérale">
 <!ENTITY omnisidebarOptgroupgen.label "Apparence">
+<!ENTITY omnisidebarOptgroupfeatures.label "Fonctionnalités">
 <!ENTITY omnisidebarOptgroupperformance.label "Performance">
 <!ENTITY omnisidebarOptgroupstyle.label "Style des panneaux latéraux">
 <!ENTITY omnisidebarOptgroupdev.label "Outils de développeurs">
@@ -39,7 +40,12 @@
 <!ENTITY omnisidebarOptundockMode.noauto "Uniquement fermer à la commande">
 <!ENTITY omnisidebarOptundockMode.autoclose "Fermer automatiquement quand il perd le focus">
 <!ENTITY omnisidebarOptglassStyle.label "Appliquer le style verre pour tous les panneaux latéraux">
-<!ENTITY omnisidebarOptdisablefx.label "Désactiver les effets visuels (glissement lors du masquage automatique)">
+<!ENTITY omnisidebarOpttransparency.label "Activé la transparence">
+<!ENTITY omnisidebarOptforceOpen.label "Les entrées de menu et les boutons de barre d'outils latérale ne ferment pas le panneau latéral">
+<!ENTITY omnisidebarOptfx.label "Activer les effets de transition">
+<!ENTITY omnisidebarOptshowDelay.label "Délai d'affichage automatique du panneau latéral (en msec) :">
+<!ENTITY omnisidebarOpthideDelay.label "Délai de masquage automatique du panneau latéral (en msec) :">
+<!ENTITY omnisidebarOptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
 <!ENTITY omnisidebarOptalternatebtns.label "Style alternatif du bouton de la barre d'outils latérale">
 <!ENTITY omnisidebarOpthideheadertoolbar.label "Masquer la barre d'outils latérale">
 <!ENTITY omnisidebarOpthideheadertitle.label "Masquer le titre du panneau latéral">
