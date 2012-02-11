@@ -10,10 +10,9 @@ var omnisidebar = {
 		
 		omnisidebar.fixSimilarWeb();
 		
-		omnisidebar.timerAid.init('init', omnisidebar.init, 500);
+		omnisidebar.timerAid.init('startup', omnisidebar.init, 500);
 		
-		omnisidebar.listenerAid.remove(window, "load", omnisidebar.preinit, false);
-		omnisidebar.listenerAid.add(window, "unload", omnisidebar.deinit, false);
+		omnisidebar.listenerAid.add(window, "unload", omnisidebar.deinit, false, true);
 	},
 	
 	init: function() { 
@@ -35,7 +34,7 @@ var omnisidebar = {
 		];
 		
 		omnisidebar.getelems();
-		omnisidebar.prefAid.init(omnisidebar, 'omnisidebar', [
+		omnisidebar.prefAid.init('omnisidebar', [
 			'lastcommand', 'mainSidebar', 'renderabove', 'undockMode', 'hideheadertoolbar', 'hideheadertitle', 'hideheaderdock', 'hideheaderclose', 'alternatebtns', 'coloricons', 'titleButton', 'devTools',
 			'lastcommandTwin', 'twinSidebar', 'renderaboveTwin', 'undockModeTwin', 'hideheadertoolbarTwin', 'hideheadertitleTwin', 'hideheaderdockTwin', 'hideheadercloseTwin', 'alternatebtnsTwin', 'coloriconsTwin', 'titleButtonTwin', 'devToolsTwin',
 			'fx', 'glassStyle', 'alwaysAddons', 'alwaysConsole', 'alwaysDMT', 'stylish', 'forceOpen', 'transparency', 'showDelay', 'hideDelay', 'keepPrivate',
@@ -98,7 +97,7 @@ var omnisidebar = {
 		
 		// Compatibility with the SimilarWeb add-on
 		// override the settings introduced by the SimilarWeb add-on (this is why it's on a timer, it still would set these once)
-		omnisidebar.timerAid.init('similarweb', omnisidebar.fixSimilarWeb, 0);
+		omnisidebar.aSync(omnisidebar.fixSimilarWeb);
 		
 		// MileWideBack compatibility fix
 		// hovering the back-strip will hover the sidebar
@@ -279,7 +278,7 @@ var omnisidebar = {
 	
 	privateWatcher: {
 		init: function() {
-			if(omnisidebar.timerAid.getTimer('mainSidebar') || omnisidebar.timerAid.getTimer('twinSidebar')) {
+			if(omnisidebar.timerAid.mainSidebar || omnisidebar.timerAid.twinSidebar) {
 				omnisidebar.timerAid.init('privateDelay', function() {
 					omnisidebar.privateWatcher.init();
 				}, 250);
@@ -311,14 +310,14 @@ var omnisidebar = {
 				omnisidebar.prefAid.reset('lastcommandTwin');
 			}
 			else {
-				omnisidebar.timerAid.init('enterPrivate', function() {
+				omnisidebar.aSync(function() {
 					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateBefore) {
 						toggleSidebar(omnisidebar.privateWatcher.mainLastBefore);
 					}
 					if(omnisidebar.box_twin.hidden != omnisidebar.privateWatcher.twinStateBefore) {
 						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastBefore);
 					}
-				}, 0);
+				});
 			}
 		},
 		
@@ -339,14 +338,14 @@ var omnisidebar = {
 				omnisidebar.prefAid.reset('lastcommandTwin');
 			}
 			else {
-				omnisidebar.timerAid.init('enterPrivate', function() {
+				omnisidebar.aSync(function() {
 					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateBefore) {
 						toggleSidebar(omnisidebar.privateWatcher.mainLastBefore);
 					}
 					if(omnisidebar.box_twin.hidden != omnisidebar.privateWatcher.twinStateBefore) {
 						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastBefore);
 					}
-				}, 0);
+				});
 			}
 		},
 		
@@ -366,7 +365,7 @@ var omnisidebar = {
 				this.twinStateAfter = omnisidebar.box_twin.hidden;
 				this.mainLastAfter = omnisidebar.prefAid.lastcommand;
 				this.twinLastAfter = omnisidebar.prefAid.lastcommandTwin;
-				omnisidebar.timerAid.init('exitPrivate', function() {
+				omnisidebar.aSync(function() {
 					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateAfter 
 					|| omnisidebar.prefAid.lastcommand != omnisidebar.privateWatcher.mainLastAfter
 					|| omnisidebar.box.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommand) {
@@ -377,7 +376,7 @@ var omnisidebar = {
 					|| omnisidebar.box_twin.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommandTwin) {
 						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastAfter);
 					}
-				}, 0);
+				});
 			}
 		},
 		
@@ -397,7 +396,7 @@ var omnisidebar = {
 				this.twinStateAfter = omnisidebar.box_twin.hidden;
 				this.mainLastAfter = omnisidebar.prefAid.lastcommand;
 				this.twinLastAfter = omnisidebar.prefAid.lastcommandTwin;
-				omnisidebar.timerAid.init('exitPrivate', function() {
+				omnisidebar.aSync(function() {
 					if(omnisidebar.box.hidden != omnisidebar.privateWatcher.mainStateAfter 
 					|| omnisidebar.prefAid.lastcommand != omnisidebar.privateWatcher.mainLastAfter
 					|| omnisidebar.box.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommand) {
@@ -408,7 +407,7 @@ var omnisidebar = {
 					|| omnisidebar.box_twin.getAttribute('sidebarcommand') != omnisidebar.prefAid.lastcommandTwin) {
 						omnisidebar.toggleSidebarTwin(omnisidebar.privateWatcher.twinLastAfter);
 					}
-				}, 0);
+				});
 			}
 		}
 	},
@@ -2070,7 +2069,7 @@ var omnisidebar = {
 		if(e.which != '1' || omnisidebar.customizing) { return; }
 		
 		omnisidebar.listenerAid.add(window, "mousemove", omnisidebar.drag, false);
-		omnisidebar.listenerAid.add(window, "mouseup", omnisidebar.dragEnd, false);
+		omnisidebar.listenerAid.add(window, "mouseup", omnisidebar.dragEnd, false, true);
 		
 		omnisidebar.dragging = true;
 		omnisidebar.dragalt = true;
@@ -2109,7 +2108,6 @@ var omnisidebar = {
 	
 	dragEnd: function(e) {
 		omnisidebar.listenerAid.remove(window, "mousemove", omnisidebar.drag, false);
-		omnisidebar.listenerAid.remove(window, "mouseup", omnisidebar.dragEnd, false);
 		omnisidebar.dragging = false;
 		
 		if(typeof(omnisidebar.dragNewW) == 'undefined') { omnisidebar.dragNewW = omnisidebar.dragTarget.target.clientWidth; } // again, this should never happen
@@ -2203,7 +2201,7 @@ var omnisidebar = {
 		if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
 		
 		// stops closing the sidebar when quickly toggling between sidebars in auto-close mode
-		if(omnisidebar.timerAid.getTimer('toggleSidebarTwin_'+commandID)) { return; }
+		if(omnisidebar.timerAid['toggleSidebarTwin_'+commandID]) { return; }
 		
 		// Can't let both sidebars display the same page, it becomes unstable
 		var url = sidebarBroadcaster.getAttribute("sidebarurl");
@@ -2272,7 +2270,7 @@ var omnisidebar = {
 		omnisidebar.box_twin.setAttribute("src", url);
 		
 		if (omnisidebar.sidebar_twin.contentDocument && omnisidebar.sidebar_twin.contentDocument.location.href != url) {
-			omnisidebar.listenerAid.add(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true);
+			omnisidebar.listenerAid.add(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true, true);
 		} else {
 			omnisidebar.fireSidebarTwinFocusedEvent();
 		}
@@ -2309,8 +2307,7 @@ var omnisidebar = {
 	},
 	
 	sidebarTwinOnLoad: function(event) {
-		omnisidebar.listenerAid.remove(omnisidebar.sidebar_twin, "load", omnisidebar.sidebarTwinOnLoad, true);
-		omnisidebar.timerAid.init('twinOnLoad', omnisidebar.fireSidebarTwinFocusedEvent, 0);
+		omnisidebar.aSync(omnisidebar.fireSidebarTwinFocusedEvent);
 	},
 	
 	onDragEnter: function(box) {
@@ -2416,7 +2413,7 @@ function toggleSidebar(commandID, forceOpen) {
 	if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
 	
 	// stops closing the sidebar when quickly toggling between sidebars in auto-close mode
-	if(omnisidebar.timerAid.getTimer('toggleSidebar_'+commandID)) { return; }
+	if(omnisidebar.timerAid['toggleSidebar_'+commandID]) { return; }
 	
 	// Can't let both sidebars display the same page, it becomes unstable
 	var url = sidebarBroadcaster.getAttribute("sidebarurl");
@@ -2531,4 +2528,4 @@ function fireSidebarFocusedEvent() {
 omnisidebar.mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
 omnisidebar.mozIJSSubScriptLoader.loadSubScript("chrome://omnisidebar/content/utils.jsm", omnisidebar);
 omnisidebar.fixSimilarWeb();
-omnisidebar.listenerAid.add(window, "load", omnisidebar.preinit, false);
+omnisidebar.listenerAid.add(window, "load", omnisidebar.preinit, false, true);

@@ -1,8 +1,6 @@
 var omnisidebarOptions = {
 	init: function() {
-		omnisidebarOptions.listenerAid.remove(window, "load", omnisidebarOptions.init, false);
-		
-		omnisidebarOptions.prefAid.init(omnisidebarOptions, 'omnisidebar', ['keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
+		omnisidebarOptions.prefAid.init('omnisidebar', ['keysets0', 'keysets1', 'keysets2', 'keysets3', 'keysets4', 'keysets5', 'keysets6']);
 		
 		for(var i=0; i<omnisidebarOptions.prefAid.length; i++) {
 			if(!omnisidebarOptions.prefAid['keysets'+i]) {
@@ -88,4 +86,4 @@ var omnisidebarOptions = {
 
 omnisidebarOptions.mozIJSSubScriptLoader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
 omnisidebarOptions.mozIJSSubScriptLoader.loadSubScript("chrome://omnisidebar/content/utils.jsm", omnisidebarOptions);
-omnisidebarOptions.listenerAid.add(window, "load", omnisidebarOptions.init, false);
+omnisidebarOptions.listenerAid.add(window, "load", omnisidebarOptions.init, false, true);

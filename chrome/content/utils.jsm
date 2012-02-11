@@ -31,7 +31,6 @@ var hideIt = function(aNode, show) {
 
 // allows me to modify a function quickly from within my scripts
 // Note to self, this returns anonymous functions, make sure this doesn't become an issue when modifying certain functions
-// commenting this out for now as I'm not using it yet in this add-on
 var modifyFunction = function(aOriginal, aArray) {
 	var newCode = aOriginal.toString();
 	for(var i=0; i < aArray.length; i++) {
@@ -272,7 +271,7 @@ var setWatchers = function(obj) {
 var listenerAid = {
 	handlers: new Array(),
 	
-	add: function(obj, type, listener, capture) {
+	add: function(obj, type, listener, capture, oneTime) {
 		if(obj.addEventListener) {
 			for(var i=0; i<this.handlers.length; i++) {
 				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].listener, listener)) {
@@ -284,11 +283,43 @@ var listenerAid = {
 				obj: obj,
 				type: type,
 				listener: listener,
-				capture: capture
+				capture: capture,
+				removeSelf: null,
+				aid: null
 			};
 			this.handlers.push(newHandler);
 			var i = this.handlers.length -1;
 			this.handlers[i].obj.addEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
+			
+			if(oneTime) {
+				if(!this.handlers[i].obj._listenerAidHandlers) {
+					this.handlers[i].obj._listenerAidHandlers = [];
+				}
+				this.handlers[i].obj._listenerAidHandlers.push(this.handlers[i]);
+				this.handlers[i].aid = this;
+				this.handlers[i].removeSelf = function(e) {
+					var targets = ['target', 'originalTarget', 'currentTarget'];
+					for(var a = 0; a < targets.length; a++) {
+						if(!e[targets[a]] || !e[targets[a]]._listenerAidHandlers) {
+							continue;
+						}
+						
+						for(var i = 0; i < e[targets[a]]._listenerAidHandlers.length; i++) {
+							if(e[targets[a]]._listenerAidHandlers[i].obj == e[targets[a]] // supposedly this would always return true?
+							&& e[targets[a]]._listenerAidHandlers[i].type == e.type
+								&& ((e[targets[a]]._listenerAidHandlers[i].capture && e.eventPhase == e.CAPTURING_PHASE)
+								|| (!e[targets[a]]._listenerAidHandlers[i].capture && e.eventPhase != e.CAPTURING_PHASE))
+							) {
+								e[targets[a]]._listenerAidHandlers[i].aid.remove(e[targets[a]], e[targets[a]]._listenerAidHandlers[i].type, e[targets[a]]._listenerAidHandlers[i].listener, e[targets[a]]._listenerAidHandlers[i].capture);
+								e[targets[a]]._listenerAidHandlers[i].aid.remove(e[targets[a]], e[targets[a]]._listenerAidHandlers[i].type, e[targets[a]]._listenerAidHandlers[i].removeSelf, e[targets[a]]._listenerAidHandlers[i].capture);
+								e[targets[a]]._listenerAidHandlers.splice(i, 1);
+								return;
+							}
+						}
+					}
+				};
+				this.add(this.handlers[i].obj, this.handlers[i].type, this.handlers[i].removeSelf, this.handlers[i].capture);
+			}
 		}
 		else if(obj.events && obj.events.addListener) {
 			for(var i=0; i<this.handlers.length; i++) {
@@ -366,52 +397,57 @@ var listenerAid = {
 	}
 };
 
+// this lets me run functions asyncronously, basically it's a one shot timer with a delay of 0msec
+var aSync = function(aFunc, aName) {
+	if(!aName) {
+		var timerObj = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+		timerObj.init(aFunc, 0, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+	} else {
+		this.timerAid.init(aName, aFunc, 0);
+	}
+	return true;
+}
+
 // Object to aid in setting, initializing and cancelling timers
 var timerAid = {
-	timers: {},
+	_timers: {},
 	
 	init: function(aName, aFunc, aDelay, aType) {
 		this.cancel(aName);
 		
-		var type = this.switchType(aType);
+		var type = this._switchType(aType);
 		var self = this;
-		this.timers[aName] = {
+		this._timers[aName] = {
 			object: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
 			handler: aFunc
 		};
 		if(type == Components.interfaces.nsITimer.TYPE_ONE_SHOT) {
-			this.timers[aName].object.init(function(aSubject, aTopic, aData) {
-				self.timers[aName].handler(aSubject, aTopic, aData);
+			this._timers[aName].object.init(function(aSubject, aTopic, aData) {
+				self._timers[aName].handler(aSubject, aTopic, aData);
 				self.cancel(aName);
 			}, aDelay, type);
 		}
 		else {
-			this.timers[aName].object.init(this.timers[aName].handler, delay, type);
+			this._timers[aName].object.init(this._timers[aName].handler, aDelay, type);
 		}
+		this.__defineGetter__(aName, function() { return this._timers[aName]; });
 	},
 	
 	cancel: function(name) {
-		if(this.timers[name]) {
-			this.timers[name].object.cancel();
-			this.timers[name] = null;
+		if(this._timers[name]) {
+			this._timers[name].object.cancel();
+			this._timers[name] = null;
 			return true;
 		}
 		return false;
 	},
 	
-	getTimer: function(name) {
-		if(this.timers[name]) {
-			return this.timers[name].object;
-		}
-		return null;
-	},
-	
-	newTimer: function() {
+	create: function() {
 		var newTimer = {};
 		newTimer.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		newTimer.switchType = this.switchType;
+		newTimer._switchType = this._switchType;
 		newTimer.init = function(aFunc, aDelay, aType) {
-			var type = this.switchType(aType);
+			var type = this._switchType(aType);
 			this.timer.init(aFunc, aDelay, type);
 		}
 		newTimer.cancel = function() {
@@ -420,7 +456,7 @@ var timerAid = {
 		return newTimer;
 	},
 			
-	switchType: function(type) {
+	_switchType: function(type) {
 		switch(type) {
 			case 'slack':
 				return Components.interfaces.nsITimer.TYPE_REPEATING_SLACK;
@@ -443,11 +479,11 @@ var timerAid = {
 
 var prefAid = {
 	_prefObjects: {},
+	_listenerAid: this.listenerAid,
 	length: 0,
 	
-	init: function(obj, branch, prefList) {
+	init: function(branch, prefList) {
 		var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
-		this._listenerAid = obj.listenerAid;
 		
 		for(var i=0; i<prefList.length; i++) {
 			this._prefObjects[prefList[i]] = Application.prefs.get('extensions.'+branch+'.' + prefList[i]);
@@ -473,7 +509,6 @@ var prefAid = {
 		this._prefObjects[pref].reset();
 	}
 };
-
 
 // Private browsing mode listener as on https://developer.mozilla.org/En/Supporting_private_browsing_mode, with a few modifications
 var PrivateBrowsingListener = {
@@ -518,5 +553,4 @@ var PrivateBrowsingListener = {
 			}
 		}
 	}
-};  
-		
+};
