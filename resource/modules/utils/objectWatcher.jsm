@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.2';
+moduleAid.VERSION = '2.1.3';
 moduleAid.LAZY = true;
 
 // objectWatcher - This acts as a replacement for the event DOM Attribute Modified, works for both attributes and object properties
@@ -185,9 +185,9 @@ this.objectWatcher = {
 						obj._propWatchers.disconnect();
 						
 						var continueHandlers = true;
-						for(var h=0; h<obj._propWatchers.attributes[attr].handlers.length; h++) {
-							if(obj._propWatchers.attributes[attr].handlers[h].capture) {
-								try { continueHandlers = obj._propWatchers.attributes[attr].handlers[h].handler(obj, attr, e.prevValue, e.newValue); }
+						for(var h=0; h<obj._propWatchers.attributes[attr].length; h++) {
+							if(obj._propWatchers.attributes[attr][h].capture) {
+								try { continueHandlers = obj._propWatchers.attributes[attr][h].handler(obj, attr, e.prevValue, e.newValue); }
 								catch(ex) { Cu.reportError(ex); }
 								if(!continueHandlers) {
 									toggleAttribute(obj, attr, e.attrChange != e.ADDITION, e.prevValue);
@@ -197,9 +197,9 @@ this.objectWatcher = {
 						}
 						
 						if(continueHandlers) {
-							for(var h=0; h<obj._propWatchers.attributes[attr].handlers.length; h++) {
-								if(!obj._propWatchers.attributes[attr].handlers[h].capture) {
-									try { obj._propWatchers.attributes[attr].handlers[h].handler(obj, attr, e.prevValue, e.newValue); }
+							for(var h=0; h<obj._propWatchers.attributes[attr].length; h++) {
+								if(!obj._propWatchers.attributes[attr][h].capture) {
+									try { obj._propWatchers.attributes[attr][h].handler(obj, attr, e.prevValue, e.newValue); }
 									catch(ex) { Cu.reportError(ex); }
 								}
 							}

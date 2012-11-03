@@ -20,7 +20,7 @@ this.self = this;
 //	moduleAid.UNLOADMODULE - (function) to be executed on module unloading
 //	moduleAid.LAZY - (bool) vital modules that should be the last ones to be unloaded (like the utils) should have this set to true
 this.moduleAid = {
-	version: '2.2.0',
+	version: '2.2.1',
 	modules: [],
 	moduleVars: {},
 	
@@ -88,7 +88,6 @@ this.moduleAid = {
 					scopeVars.push(v);
 				}
 				Globals.moduleCache[aModule] = { vars: scopeVars };
-				delete tempScope;
 			}
 			this.modules[i].vars = Globals.moduleCache[aModule].vars;
 		}

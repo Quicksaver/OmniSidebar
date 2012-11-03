@@ -447,7 +447,7 @@ this.unloadMainSidebar = function() {
 	}
 };
 
-moduleAid.LOADMODULE = function() { window.toJavaScriptConsole();
+moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/windowFixes');
 	
 	overlayAid.overlayWindow(window, "mainSidebar", null, loadMainSidebar, unloadMainSidebar);

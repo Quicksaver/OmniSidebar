@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.0';
+moduleAid.VERSION = '2.0.1';
 moduleAid.LAZY = true;
 
 // styleAid - handle loading and unloading of stylesheets in a quick and easy way
@@ -42,7 +42,8 @@ this.styleAid = {
 			uri: Services.io.newURI(path, null, null)
 		}) -1;
 		if(!Services.stylesheet.sheetRegistered(this.sheets[i].uri, Services.stylesheet.AGENT_SHEET)) {
-			Services.stylesheet.loadAndRegisterSheet(this.sheets[i].uri, Services.stylesheet.AGENT_SHEET);
+			try { Services.stylesheet.loadAndRegisterSheet(this.sheets[i].uri, Services.stylesheet.AGENT_SHEET); }
+			catch(ex) { Cu.reportError(ex); doLog(path); }
 		}
 		return true;
 	},
@@ -66,7 +67,8 @@ this.styleAid = {
 				}
 			}
 			if(Services.stylesheet.sheetRegistered(uri, Services.stylesheet.AGENT_SHEET)) {
-				Services.stylesheet.unregisterSheet(uri, Services.stylesheet.AGENT_SHEET);
+				try { Services.stylesheet.unregisterSheet(uri, Services.stylesheet.AGENT_SHEET); }
+				catch(ex) { Cu.reportError(ex); }
 			}
 			return true;
 		}
