@@ -187,10 +187,11 @@
 	
 	.inSidebar #btnAddSite:after {
 		content: url("chrome://similarweb/skin/add_site.png") " Add Similar Site" !important;
-		background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
 		padding-top: 5px !important;
 		left: 25px !important;
 		position: relative !important;
+		background: rgba(151, 152, 153, 0.05) -moz-linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
+		background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important; /* Firefox 16+ */
 	}
 	
 	#sbSimilarWebSidebar.inSidebar #btnAddSite:after {

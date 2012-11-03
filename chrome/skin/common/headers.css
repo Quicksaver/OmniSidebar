@@ -39,11 +39,11 @@
 	}
 	
 	.sidebar-splitter {
-		border: 0;
-		-moz-border-end: 1px solid #A9B7C9;
-		min-width: 0;
+		border: 0 !important;
+		-moz-border-end: 1px solid #A9B7C9 !important;
+		min-width: 0 !important;
 		width: 3px;
-		background-color: transparent;
+		background-color: transparent !important;
 		-moz-margin-start: -3px;
 		position: relative;
 	}

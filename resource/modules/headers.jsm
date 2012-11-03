@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -42,7 +42,7 @@ this.toggleButtonStyle = function() {
 	toggleAttribute(mainSidebar.toolbar, 'alternatebtns', !UNLOADED && prefAid.alternatebtns);
 	toggleAttribute(twinSidebar.toolbar, 'alternatebtns', !UNLOADED && prefAid.alternatebtnsTwin);
 	
-	styleAid.loadIf('alternatebtns', 'FF5', false, prefAid.alternatebtns || (prefAid.twinSidebar && prefAid.alternatebtnsTwin));
+	styleAid.loadIf('alternatebtns', 'Ff5', false, prefAid.alternatebtns || (prefAid.twinSidebar && prefAid.alternatebtnsTwin));
 };
 
 this.toggleIconsColor = function() {
