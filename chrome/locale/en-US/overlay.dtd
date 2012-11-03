@@ -6,8 +6,11 @@
 <!ENTITY BlankSidebar.tooltip "Open a blank page in the Sidebar">
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
-<!ENTITY omnisidebarConsole.label "Error Console">
-<!ENTITY omnisidebarDMT.label "Downloads">
+
+<!ENTITY consoleSidebar.label "Error Console">
+<!ENTITY consoleSidebar.tooltip "Open the Error Console in the Sidebar">
+<!ENTITY dmtSidebar.label "Downloads">
+<!ENTITY dmtSidebar.tooltip "Display the Progress of Ongoing Downloads">
 
 <!ENTITY omnisidebarToolbar.label "Sidebar Toolbar">
 <!ENTITY omnisidebarToolbarTwin.label "Twin Sidebar Toolbar">
@@ -22,59 +25,3 @@
 <!ENTITY omnisidebarButtonClose.tooltip "Close Sidebar">
 <!ENTITY omnisidebarButtonMainClose.tooltip "Close Main Sidebar">
 <!ENTITY omnisidebarButtonTwinClose.tooltip "Close Twin Sidebar">
-
-<!ENTITY omnisidebarOptMisc.label "Global">
-<!ENTITY omnisidebarOptgroupMain.label "Main Sidebar">
-<!ENTITY omnisidebarOptgroupTwin.label "Twin Sidebar">
-<!ENTITY omnisidebarOptgroupicons.label "SideToolbar Buttons Iconset">
-<!ENTITY omnisidebarOptgroupgen.label "Appearance">
-<!ENTITY omnisidebarOptgroupfeatures.label "Features">
-<!ENTITY omnisidebarOptgroupperformance.label "Performance">
-<!ENTITY omnisidebarOptgroupstyle.label "Sidebars style">
-<!ENTITY omnisidebarOptgroupdev.label "Developer Tools">
-<!ENTITY omnisidebarOptgroupkeyset.label "Sidebar Keyboard Shortcut">
-<!ENTITY omnisidebarOptgroupalways.label "Always open in the Sidebar">
-
-<!ENTITY omnisidebarOptdevTools.label "Activate Developers SideToolbar">
-
-<!ENTITY omnisidebarOptsidebars.leftlabel "Place on the left">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Place on the right">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Enable the Twin Sidebar on the opposite side">
-<!ENTITY omnisidebarOptrenderabove.label "Undock from the browser window and">
-<!ENTITY omnisidebarOptundockMode.autohide "Auto-hide to the side">
-<!ENTITY omnisidebarOptundockMode.noauto "Only close on command">
-<!ENTITY omnisidebarOptundockMode.autoclose "Auto-close when it loses focus">
-
-<!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
-<!ENTITY omnisidebarOpttransparency.label "Enable transparency">
-<!ENTITY omnisidebarOptforceOpen.label "Menu entries and SideToolbar buttons don't close the sidebar">
-<!ENTITY omnisidebarOptfx.label "Enable transition effects">
-<!ENTITY omnisidebarOptshowDelay.label "Delay sidebar auto-showing by (msec): ">
-<!ENTITY omnisidebarOpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
-<!ENTITY omnisidebarOptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">
-
-<!ENTITY omnisidebarOptalternatebtns.label "Alternate SideToolbar button style">
-<!ENTITY omnisidebarOpthideheadertoolbar.label "Hide SideToolbar">
-<!ENTITY omnisidebarOpthideheadertitle.label "Hide sidebar title">
-<!ENTITY omnisidebarOpttitleButton.label "Sidebar menu dropdown in title">
-<!ENTITY omnisidebarOpthideheaderdock.label "Hide docking button">
-<!ENTITY omnisidebarOpthideheaderclose.label "Hide close button">
-
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Default (no change)">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">
-
-<!ENTITY omnisidebarOptkeysetItem0.win "Main: Ctrl+Shift + S              Twin: Ctrl+Alt+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem1.win "Main: Ctrl+Alt + S                 Twin: Ctrl+Alt+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem2.win "Main: Ctrl+Shift + L              Twin: Ctrl+Alt+Shift + L">
-<!ENTITY omnisidebarOptkeysetItem3.win "Main: Ctrl+Shift + S              Twin: Ctrl+Shift + L">
-<!ENTITY omnisidebarOptkeysetItem4.win "Main: Ctrl+Shift + L              Twin: Ctrl+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem5.win "Main: Ctrl + F6                      Twin: Ctrl+Shift + F6">
-<!ENTITY omnisidebarOptkeysetItem6.win "Main: Ctrl+Shift + PageUp   Twin: Ctrl+Shift + PageDown">
-<!ENTITY omnisidebarOptkeysetItem0.mac "Main: Command+Shift + S              Twin: Command+Option+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem1.mac "Main: Command+Option + S          Twin: Command+Option+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem2.mac "Main: Command+Shift + L              Twin: Command+Option+Shift + L">
-<!ENTITY omnisidebarOptkeysetItem3.mac "Main: Command+Shift + S              Twin: Command+Shift + L">
-<!ENTITY omnisidebarOptkeysetItem4.mac "Main: Command+Shift + L              Twin: Command+Shift + S">
-<!ENTITY omnisidebarOptkeysetItem5.mac "Main: Command + F6                      Twin: Command+Shift + F6">
-<!ENTITY omnisidebarOptkeysetItem6.mac "Main: Command+Shift + PageUp   Twin: Command+Shift + PageDown">

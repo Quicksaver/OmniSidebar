@@ -1,0 +1,8 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://similarweb/content/similarweb.xul") {
+	
+	#sbSimilarWebSidebar.inSidebar #btnClose {
+		display: none !important;
+	}
+
+}

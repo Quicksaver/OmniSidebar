@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="menusTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<menupopup id="toolbar-context-menu">
+	
+		<menuitem id="toggle_sidebartoolbar_context-twin" 
+			observes="toggleSideToolbar-twin"/>
+			
+	</menupopup>
+	
+	<menupopup id="appmenu_customizeMenu">
+	
+		<menuitem id="toggle_sidebartoolbar_appmenu-twin" 
+			observes="toggleSideToolbar-twin"/>
+			
+	</menupopup>
+	
+	<menu id="viewToolbarsMenu">
+		
+		<menupopup id="omnisidebar_viewToolbarsMenuPopup-twin" hidden="true">
+			<menuitem id="toggle_sidebartoolbar_viewtoolbars-twin"
+				observes="toggleSideToolbar-twin"/>
+		</menupopup>
+			
+	</menu>
+	
+	<menupopup id="menu_viewPopup">
+		
+		<menu id="viewSidebarMenuMenu"
+			label="&omnisidebarButtonMain.label;" />
+		
+		<menu id="viewTwinSidebarMenuMenu"
+			label="&omnisidebarButtonTwin.label;"
+			accesskey="w"
+			insertafter="viewSidebarMenuMenu">
+			<menupopup id="viewTwinSidebarMenu"
+				twinSidebar="true"
+				onpopupshowing="objName.populateSidebarMenu(this);"/>
+		</menu>
+		
+	</menupopup>
+	
+</overlay>

@@ -1,0 +1,106 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	.omnisidebar-docker {
+		list-style-image: url("chrome://omnisidebar/skin/undock-button.png"); 
+		-moz-image-region: rect(0px 16px 16px 0px);
+		-moz-appearance: none !important;
+		border-radius: 3px !important;
+		border: 1px solid rgba(0,0,0,0) !important;
+		padding: 1px !important;
+	}
+	.omnisidebar-docker[sidebarDocked] {
+		-moz-image-region: rect(0px 32px 16px 16px);
+	}
+	.omnisidebar-docker image {
+		width: 16px;
+		height: 16px;
+	}
+	.omnisidebar-docker:hover {
+		border: 1px solid rgba(0,0,0,.2) !important;
+		background-color: rgba(0,0,0,.1) !important;
+		box-shadow: 0px 0px 3px rgba(0,0,0,.2) inset, 0px 0px 2px rgba(255,255,255,0.4) !important;
+	}
+	
+	/* Hide a bunch of stuff */
+	.sidebar-box[nodock] .omnisidebar-docker,
+	.sidebar-box[customizing] .omnisidebar-docker {
+		display: none;
+	}
+	
+	/* Sidebar size, position and animation */
+	.sidebar-box[renderabove] {
+		-moz-appearance: none !important;
+		position: fixed;
+		overflow: visible !important;
+		/* Compatibility with Memory Fox: !important tag in the overflow property, already talked to the developer and he will fix it in his extension himself in future versions
+		so this is just for compatibility with past versions, maybe I will remove it in the future since those versions don't even seem to be available anyway
+		for now I'll leave it because the latest version still has the issue;
+		tried to conditionally set it via javascript but I couldn't get it to detect memory fox and still apply the change */
+		background: none;
+	}
+	
+	.omnisidebar_resize_box {
+		position: relative;
+		overflow: hidden;
+		z-index: 5;
+	}
+	
+	.sidebar-box[renderabove]:not([renderabove="autohide"]) .omnisidebar_resize_box,
+	.sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
+		opacity: 1;
+	}
+	
+	#main-window[sizemode='normal'] .sidebar-box[renderabove] { 
+		border: 1px solid rgba(0,0,0,0); 
+		border-top: none;
+	}
+	
+	.omnisidebar_switch {
+		position: fixed;
+		background: none;
+		height: 100%;
+		z-index: 3;
+	}
+	#omnisidebar_switch:not([movetoright]),
+	#omnisidebar_switch-twin[movetoleft] {
+		left: 0px;
+	}
+	#omnisidebar_switch[movetoright],
+	#omnisidebar_switch-twin:not([movetoleft]) {
+		right: 0px;
+	}
+	
+	/* Renderabove resizer */
+	.omnisidebar_resizer {
+		height: auto;
+		width: 3px;
+	}
+	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
+	#sidebar-box-twin[movetoleft] .omnisidebar_resizer {
+		border-left: 1px solid rgb(169, 183, 201);
+	}
+	#sidebar-box[movetoright] .omnisidebar_resizer,
+	#sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
+		border-right: 1px solid rgb(169, 183, 201);
+	}
+	.sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
+	.sidebar-splitter[disabled]:hover {
+		cursor: ew-resize !important;
+	}
+	
+	/* Tricks needed */
+	.omnisidebar_resize_box,
+	.omnisidebar_resize_sidebar {
+		width: 100% !important;
+		max-width: none !important;
+		min-width: 0 !important;
+		height: 100% !important;
+	}
+	
+	/* It would hide the resizer if it was very narrow */
+	.omnisidebar_resize_sidebar {
+		overflow-x: hidden;
+	}
+
+}

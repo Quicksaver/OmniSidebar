@@ -1,0 +1,13 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://stylish/content/manage-standalone.xul?sidebar") {
+	
+	#stylish-manage-standalone.inSidebar button,
+	#stylish-manage-standalone.inSidebar menulist {
+		min-width: 0 !important;
+		min-height: 0 !important;
+		width: auto !important;
+		height: auto !important;
+		padding: 1px 3px !important;
+	}
+	
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="renderAboveDockerTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<sidebarheader id="sidebar-header-twin">
+		
+		<toolbarbutton id="omnisidebar_dock_button-twin"
+			class="omnisidebar-docker"
+			insertafter="sidebar-throbber-twin"
+			oncommand="objName.toggleAbove(true);" />
+			
+	</sidebarheader>
+	
+</overlay>

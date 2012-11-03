@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="headers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<broadcasterset id="mainBroadcasterSet">
+	
+		<broadcaster id="toggleSideToolbar"
+			label="&omnisidebarToolbar.label;"
+			type="checkbox"
+			oncommand="objName.toggleToolbar(false);" />
+			
+	</broadcasterset>
+	
+	<vbox id="sidebar-box" class="chromeclass-extrachrome sidebar-box">
+		<sidebarheader id="sidebar-header"
+			class="sidebar-header"
+			context="toolbar-context-menu">
+			<label id="sidebar-title"
+				class="sidebar-title" />
+			<stack id="stackSidebar"
+				class="stackSidebar"
+				insertbefore="sidebar-title">
+				<label id="sidebar-customizingLabel"
+					flex="1"
+					crop="end"
+					value="&omnisidebarButtonMain.label;"
+					collapsed="true" />
+				<toolbar id="omnisidebarToolbar"
+					class="omnisidebar-toolbar"
+					toolbarname="&omnisidebarToolbar.label;"
+					customizable="true"
+					mode="icons"
+					context="toolbar-context-menu"
+					toolboxid="navigator-toolbox"
+					coloricons="default" />
+			</stack>
+			<label id="omnisidebar-header-spacer"
+				class="header-spacer"
+				flex="1"
+				context="toolbar-context-menu"
+				insertbefore="sidebar-title"/>
+		</sidebarheader>
+		<browser id="sidebar" class="sidebar-browser" />
+	</vbox>
+	
+</overlay>

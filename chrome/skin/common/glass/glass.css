@@ -1,0 +1,99 @@
+/* Themed sidebars: bookmarks, history, download manager (DMT), update scan, feed sidebar, add-ons manager, stylish, error console (and Console²), DOMInspector and SimilarWeb.
+Other sidebars should also be themed although probably not perfectly! */
+
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	/* Fix for bug #672028: white gradient in background in aero
+	only needed when glass style is applied,
+	application/pdf is for when viewing pdf files, disablechrome="true" is for the add-ons manager
+	I'm disabling this for now, it screws up viewing pdf files and certain page layouts, gotta live with that white light bar thingy for now */
+	/*#main-window:not([title*="application/pdf"]):not([disablechrome="true"]) #appcontent {
+		-moz-appearance: none !important;
+	}*/
+	
+	/* Main window style and animation */
+	#main-window[sizemode='maximized'] .sidebar-box[renderabove] .omnisidebar_resize_box {
+		top: 1% !important;
+		height: 98% !important;
+	}
+	#main-window[sizemode='normal'] .sidebar-box[renderabove] .omnisidebar_resize_box {
+		top: 2% !important;
+		height: 96% !important;
+	}
+	#main-window[sizemode='fullscreen'] .sidebar-box[renderabove] .omnisidebar_resize_box {
+		top: 5% !important;
+		height: 90% !important;
+	} 
+	
+	.sidebar-box[renderabove] .omnisidebar_resize_box {
+		box-shadow: 1px 0px 2px rgba(0,0,0,.4), 1px 0px 3px rgba(0,0,0,.4) inset, 1px 1px 6px rgba(0,0,0,.4) !important;
+		border: 1px solid rgba(0,0,0,.4) !important;
+	}
+	
+	#sidebar-box:not([movetoright]) .omnisidebar_resize_box,
+	#sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
+		border-left: 0 !important;
+		border-radius: 0 5px 5px 0 !important;
+	}
+	#sidebar-box[movetoright] .omnisidebar_resize_box,
+	#sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
+		border-right: 0 !important;
+		border-radius: 5px 0 0 5px !important;
+	}
+	
+	.omnisidebar_resizer {
+		border: none !important;
+	}
+	
+	.sidebar-box[renderabove]:not([noTransparency]) .omnisidebar_resize_box,
+	.sidebar-box:not([renderabove]):not([noTransparency])[customizing] .sidebar-header,
+	.sidebar-box:not([renderabove]):not([noTransparency]) {
+		background: rgba(0,0,0,0.25) url("chrome://omnisidebar/skin/glass/glass_background.png") scroll no-repeat !important;
+		background-size: cover !important;
+	}
+	.sidebar-box[renderabove][noTransparency] .omnisidebar_resize_box,
+	.sidebar-box:not([renderabove])[noTransparency][customizing] .sidebar-header,
+	.sidebar-box:not([renderabove])[noTransparency] {
+		background: rgba(128,128,128,1) url("chrome://omnisidebar/skin/glass/glass_background.png") scroll no-repeat !important;
+		background-size: cover !important;
+	}
+	
+	.sidebar-box[renderabove] .omnisidebar_resize_sidebar {
+		background: none !important;
+	}
+	
+	.sidebar-browser {
+		padding: 1px 3px 4px 3px !important;
+		background: none !important;
+	}
+	
+	/* Header styling */
+	
+	.sidebar-header {
+		-moz-appearance: none !important; 
+		-moz-binding: url("chrome://global/content/bindings/toolbar.xml#toolbar") !important;
+		margin: 0 !important;
+		border: none !important;
+		color: black !important;
+		font-weight: bold !important;
+		text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+		background: none !important;
+		background-clip: padding-box !important;
+	}
+	.sidebar-header > * {
+		background: none !important;
+	}
+	
+	.omnisidebarURIBarMenu {
+		-moz-appearance: none !important;
+		background: rgba(50, 50, 50, 0.75) !important;
+		border: none !important;
+		border-radius: 5px !important;
+	}
+	
+	.omnisidebarURIBarMenu button.omnisidebarURIGo {
+		padding: 0 2px !important;
+	}
+
+}

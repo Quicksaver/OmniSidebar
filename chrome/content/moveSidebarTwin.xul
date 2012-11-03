@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="moveSidebarTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<vbox id="sidebar-box-twin" movetoleft="true" insertbefore="appcontent" />
+	<splitter id="sidebar-splitter-twin" movetoleft="true" insertbefore="appcontent" />
+	<hbox id="omnisidebar_switch-twin" movetoleft="true" insertbefore="appcontent" />
+	<box id="omnisidebar_resizer-twin" insertafter="omnisidebar_resizesidebar-twin" />
+	
+</overlay>

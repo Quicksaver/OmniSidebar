@@ -1,9 +1,28 @@
-/* Linux Icon Set */
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul"), url("chrome://global/content/customizeToolbar.xul") {
+	/* Linux Icon Set */
+	
+	/* Set default FF4 icons */
+	#addons_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(0px 24px 24px 0px) !important;
+	}
+	#stylish_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(0px 48px 24px 24px) !important;
+	}
+	
+	#console_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 24px 24px 0px) !important;
+	}
+	#dominspector-sidebar-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 48px 24px 24px) !important;
+	}
+	.uri-sidebar-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 72px 24px 48px) !important;
+	}
 
-/* Set default FF4 icons */
-#addons_sidebar_button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(0px 24px 24px 0px); }
-#stylish_sidebar_button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(0px 48px 24px 24px); }
-
-.console-sidebar-button { list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png"); -moz-image-region: rect(0px 24px 24px 0px); }
-.dominspector-sidebar-button { list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png"); -moz-image-region: rect(0px 48px 24px 24px); }
-.uri-sidebar-button { list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png"); -moz-image-region: rect(0px 72px 24px 48px); }
+}

@@ -1,0 +1,45 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://mozapps/content/downloads/downloads.xul") {
+	
+	.inSidebar #dmtTopToolBox {
+		-moz-appearance: none !important;
+		background: rgba(0, 0, 0, 0) !important;
+	}
+	
+	.inSidebar #dmtTopToolBox {
+		border-top: none !important;
+		background: -moz-linear-gradient(90deg, rgba(100,100,100,.1), transparent) !important;
+		background: linear-gradient(180deg, rgba(100,100,100,.1), transparent) !important; /* Firefox 16+ */
+	}
+	
+	.inSidebar #dmtTopToolBar,
+	.inSidebar #dmtDownloadInfoBar {
+		-moz-appearance: none !important;
+		border: none !important;
+	}
+	
+	.inSidebar #dmtDownloadInfoBar {
+		padding-right: 6px !important;
+		padding-bottom: 3px !important;
+	}
+	
+	#downloadManager.inSidebar #searchbox {
+		margin-right: 5px !important;
+		width: 250px !important;
+	}
+	
+	.inSidebar #clearListButton {
+		min-width: 0 !important;
+		margin-left: 5px !important;
+	}
+	
+	.inSidebar #downloadView button {
+		margin: 0 2px 0 2px !important;
+		opacity: 0.8 !important;
+	}
+	
+	.inSidebar #downloadView button:hover {
+		opacity: 1 !important;
+	}
+	
+}

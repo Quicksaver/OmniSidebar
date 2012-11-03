@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<overlay id="omnisidebar-dmgr-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script id="omnisidebar_dmgr_overlay_script" type="application/x-javascript" src="chrome://omnisidebar/content/dmgr.js"/>
-</overlay>

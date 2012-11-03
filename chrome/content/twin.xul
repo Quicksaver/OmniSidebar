@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="twinSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+	
+		<toolbarbutton id="omnisidebar_button-twin" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
+			label="&omnisidebarButtonTwin.label;"
+			tooltiptext="&omnisidebarButtonTwin.tooltip;" 
+			onload="objName.buttonLabels(this, true);"
+			oncommand="toggleSidebar(this);" />
+			
+	</toolbarpalette>
+	
+	<broadcasterset id="mainBroadcasterSet">
+	
+		<broadcaster id="viewBlankSidebar-twin"
+			label="&BlankSidebar.label;"
+			tooltiptext="&BlankSidebar.tooltip;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="about:blank"
+			sidebartitle="&BlankSidebar.label;"
+			oncommand="toggleSidebar(this, false, true);" />
+			
+	</broadcasterset>
+	
+	<hbox id="browser">
+	
+		<vbox id="sidebar-box-twin" hidden="true" class="chromeclass-extrachrome" persist="src width sidebarcommand" insertafter="appcontent">
+			<sidebarheader id="sidebar-header-twin"
+				align="center">
+				<label id="sidebar-title-twin"
+					persist="value"
+					flex="1" 
+					crop="end" 
+					control="sidebar-twin"/>
+				<image id="sidebar-throbber-twin" />
+				<toolbarbutton class="tabs-closebutton" tooltiptext="&omnisidebarButtonClose.tooltip;" oncommand="toggleSidebar(null, false, true);" />
+			</sidebarheader>
+			<browser id="sidebar-twin" flex="1" autoscroll="false" disablehistory="true" src="about:blank" />
+		</vbox>
+		
+		<splitter id="sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter" hidden="true" insertafter="appcontent" />
+		
+	</hbox>
+	
+</overlay>

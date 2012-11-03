@@ -6,8 +6,10 @@
 <!ENTITY BlankSidebar.tooltip "Leere Seite in der Sidebar öffnen">
 <!ENTITY URISidebar.tooltip "Eine zu öffnende Adresse eintippen">
 <!ENTITY URISidebar.buttonLabel "Öffnen">
-<!ENTITY omnisidebarConsole.label "Fehlerkonsole">
-<!ENTITY omnisidebarDMT.label "Downloads">
+<!ENTITY consoleSidebar.label "Fehlerkonsole">
+<!ENTITY consoleSidebar.tooltip "Fehlerkonsole in der Sidebar öffnen">
+<!ENTITY dmtSidebar.label "Downloads">
+<!ENTITY dmtSidebar.tooltip "Download-Fortschritt anzeigen">
 <!ENTITY omnisidebarToolbar.label "Sidebar-Symbolleiste">
 <!ENTITY omnisidebarToolbarTwin.label "Symbolleiste für zweite Sidebar">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
@@ -20,52 +22,3 @@
 <!ENTITY omnisidebarButtonClose.tooltip "Sidebar schließen">
 <!ENTITY omnisidebarButtonMainClose.tooltip "Erste Sidebar schließen">
 <!ENTITY omnisidebarButtonTwinClose.tooltip "Zweite Sidebar schließen">
-<!ENTITY omnisidebarOptMisc.label "Allgemein">
-<!ENTITY omnisidebarOptgroupMain.label "Erste Sidebar">
-<!ENTITY omnisidebarOptgroupTwin.label "Zweite Sidebar">
-<!ENTITY omnisidebarOptgroupicons.label "Symbol-Darstellung">
-<!ENTITY omnisidebarOptgroupgen.label "Anzeige">
-<!ENTITY omnisidebarOptgroupfeatures.label "Verhalten">
-<!ENTITY omnisidebarOptgroupperformance.label "Leistung">
-<!ENTITY omnisidebarOptgroupstyle.label "Sidebar-Stil">
-<!ENTITY omnisidebarOptgroupdev.label "Entwicklerwerkzeuge">
-<!ENTITY omnisidebarOptgroupkeyset.label "Sidebar-Tastaturkürzel">
-<!ENTITY omnisidebarOptgroupalways.label "Immer in der Sidebar öffnen">
-<!ENTITY omnisidebarOptdevTools.label "Entwicklersymbolleiste anzeigen">
-<!ENTITY omnisidebarOptsidebars.leftlabel "Auf der linken Seite anzeigen">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Auf der rechten Seite anzeigen">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Zweite Sidebar auf der gegenüberliegenden Seite aktivieren">
-<!ENTITY omnisidebarOptrenderabove.label "Aus dem Browserfenster herauslösen und…">
-<!ENTITY omnisidebarOptundockMode.autohide "automatisch seitwärts ausblenden">
-<!ENTITY omnisidebarOptundockMode.noauto "nur auf Befehl ausblenden">
-<!ENTITY omnisidebarOptundockMode.autoclose "automatisch beim Verlieren des Fokus ausblenden">
-<!ENTITY omnisidebarOptglassStyle.label "Glass-Stil auf alle Sidebars anwenden">
-<!ENTITY omnisidebarOpttransparency.label "Transparenz verwenden">
-<!ENTITY omnisidebarOptforceOpen.label "Menüeinträge und Sidebar-Symbolleiste schließen Sidebar nicht">
-<!ENTITY omnisidebarOptfx.label "Übergangseffekte verwenden">
-<!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms): ">
-<!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms): ">
-<!ENTITY omnisidebarOptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
-<!ENTITY omnisidebarOptalternatebtns.label "Alternativen Stil für Symbole in Sidebar verwenden">
-<!ENTITY omnisidebarOpthideheadertoolbar.label "Symbolleiste in Sidebar ausblenden">
-<!ENTITY omnisidebarOpthideheadertitle.label "Sidebar-Titel ausblenden">
-<!ENTITY omnisidebarOpttitleButton.label "Sidebar-Menü in Titelleiste anzeigen">
-<!ENTITY omnisidebarOpthideheaderdock.label "Schaltfläche zum Herauslösen ausblenden">
-<!ENTITY omnisidebarOpthideheaderclose.label "„Schließen“-Schaltfläche ausblenden">
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (keine Veränderung)">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Farbenfroh">
-<!ENTITY omnisidebarOptkeysetItem0.win "Erste: Strg+Umschalt + S             Zweite: Strg+Alt+Umschalt + S">
-<!ENTITY omnisidebarOptkeysetItem1.win "Erste: Strg+Alt + S                  Zweite: Strg+Alt+Umschalt + S">
-<!ENTITY omnisidebarOptkeysetItem2.win "Erste: Strg+Umschalt + L             Zweite: Strg+Alt+Umschalt + L">
-<!ENTITY omnisidebarOptkeysetItem3.win "Erste: Strg+Umschalt + S             Zweite: Strg+Umschalt + L">
-<!ENTITY omnisidebarOptkeysetItem4.win "Erste: Strg+Umschalt + L             Zweite: Strg+Umschalt + S">
-<!ENTITY omnisidebarOptkeysetItem5.win "Erste: Strg + F6                     Zweite: Strg+Umschalt + F6">
-<!ENTITY omnisidebarOptkeysetItem6.win "Erste: Strg+Umschalt + BildAuf       Zweite: Strg+Umschalt + BildAb">
-<!ENTITY omnisidebarOptkeysetItem0.mac "Erste: Cmd+Umschalt + S              Zweite: Cmd+Wahl+Umschalt + S">
-<!ENTITY omnisidebarOptkeysetItem1.mac "Erste: Cmd+Wahl + S                  Zweite: Cmd+Wahl+Umschalt + S">
-<!ENTITY omnisidebarOptkeysetItem2.mac "Erste: Cmd+Umschalt + L              Zweite: Cmd+Wahl+Umschalt + L">
-<!ENTITY omnisidebarOptkeysetItem3.mac "Erste: Cmd+Umschalt + S              Zweite: Cmd+Umschalt + L">
-<!ENTITY omnisidebarOptkeysetItem4.mac "Erste: Cmd+Umschalt + L              Zweite: Cmd+Umschalt + S">
-<!ENTITY omnisidebarOptkeysetItem5.mac "Erste: Cmd + F6                      Zweite: Cmd+Umschalt + F6">
-<!ENTITY omnisidebarOptkeysetItem6.mac "Erste: Cmd+Umschalt + BildAuf        Zweite: Cmd+Umschalt + BildAb">

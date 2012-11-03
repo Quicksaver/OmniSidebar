@@ -1,0 +1,305 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/* Search boxes */
+
+.omnisidebarURIBarMenu textbox,
+.inSidebar #search-box,
+#downloadManager.inSidebar #searchbox,
+.inSidebar #navigator-toolbox #search-box,
+.inSidebar #header-search,
+.inSidebar #search-box #TextboxFilter,
+.inSidebar #TextboxEval,
+.inSidebar #styles-filter,
+.inSidebar #tfURLBar,
+.inSidebar #panoSearchBox,
+.inSidebar .ybsidebar-search2 {
+	-moz-appearance: none !important;
+	background: rgba(135,135,135,.5) !important;
+	border: 0 !important;
+	border-radius: 5px !important;
+	height: 20px !important;
+	color: black !important;
+	text-shadow: white 0 0 3px, white 0 0 3px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+	outline-width: 0 !important;
+}
+
+.inSidebar #sidebar-search-label {
+	color: black !important;
+	text-shadow: white 0 0 3px, white 0 0 3px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+}
+
+
+/* Backgrounds and dimensions */
+
+.inSidebar {
+	-moz-appearance: none !important;
+	background: rgba(0, 0, 0, 0) !important;
+	padding: 8px !important;
+}
+
+.inSidebar #dmtTopToolBox,
+.inSidebar #dmtDownloadFrom,
+.inSidebar #dmtDownloadTo,
+.inSidebar #dmtDownloadDate,
+.inSidebar #feedbar-preview,
+.inSidebar #StatusText,
+.inSidebar #feed-sidebar-statusbar,
+.inSidebar #updates-container,
+.inSidebar richlistbox:last-child:after,
+.inSidebar #userstyles-heading,
+.inSidebar domi-panel label.viewer-title,
+.inSidebar #ybSidebarPanel,
+.inSidebar #bookmarks-content-label {
+	color: black !important;
+	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+}
+
+.inSidebar #bookmarks-view,
+.inSidebar #historyTree,
+.inSidebar #downloadView,
+.inSidebar #updatescan-bookmarks-view,
+.inSidebar #sidebar-notify #feed_tree,
+.inSidebar #bookmarks-content-box {
+	margin: 7px !important;
+}
+
+.inSidebar #bookmarks-view,
+.inSidebar #historyTree,
+.inSidebar #downloadView,
+.inSidebar #updatescan-bookmarks-view,
+.inSidebar #sidebar-notify #feed_tree,
+.inSidebar #view-port-container,
+.inSidebar #ConsoleBox,
+.inSidebar #styles,
+.inSidebar #boxRelatedSitesFrame,
+.inSidebar #boxNoRelatedFound,
+.inSidebar #boxTopSites,
+.inSidebar #boxSiteInfo,
+.inSidebar #boxSiteHistory,
+.inSidebar #boxSiteReview,
+.inSidebar #boxFacebook,
+.inSidebar #panoTabGroupTree,
+.inSidebar #ybbookmarks-tree-tags,
+.inSidebar #ybbookmarks-tree-bookmarks,
+.inSidebar #bookmarks-content-box {
+	-moz-appearance: none !important;
+	border: 1px solid rgb(174, 183, 196) !important;
+	border-radius: 5px !important;
+	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
+	background: rgba(255, 255, 255, 0.35) linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important; /* Firefox 16+ */
+}
+
+
+/* Tooltips */
+
+.inSidebar tooltip {
+	-moz-appearance: tooltip !important;
+	background: rgba(255,255,255,.8) !important;
+	color: black !important;
+	text-shadow: white 0.3px 0.3px 0.3px !important;
+	border-radius: 1px !important;
+}
+
+
+/* Tree text format */
+
+.inSidebar .sidebar-placesTree,
+.inSidebar #feedbar_tree_container {
+	border: 0 !important;
+	margin-top: 3px !important;
+}
+
+.inSidebar .sidebar-placesTreechildren::-moz-tree-row,
+.inSidebar #feedbar_tree_container::-moz-tree-row {
+	border: 0 !important;
+}
+
+.inSidebar .sidebar-placesTreechildren::-moz-tree-row(selected),
+.inSidebar .sidebar-placesTreechildren::-moz-tree-row(hover),
+.inSidebar #feedbar_tree_container::-moz-tree-row(hover),
+.inSidebar #feedbar_tree_container::-moz-tree-row(selected),
+.inSidebar #feedbar_tree_container::-moz-tree-cell(selected),
+.inSidebar #downloadView > richlistitem[selected=true],
+.inSidebar #downloadView > richlistitem:hover,
+.inSidebar .view-pane richlistitem:hover,
+.inSidebar .view-pane richlistitem[selected="true"],
+.inSidebar #ConsoleBox richlistitem:hover,
+.inSidebar #ConsoleBox richlistitem[selected="true"],
+.inSidebar #styles richlistitem:hover,
+.inSidebar #styles richlistitem[selected="true"],
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-row(selected),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-row(hover),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-row(selected),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-row(hover),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(selected),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(hover),
+.inSidebar #places-content-view treechildren::-moz-tree-row(selected),
+.inSidebar #places-content-view treechildren::-moz-tree-row(hover) {
+	color: black !important;
+	background: rgba(255,255,255,.3) !important;
+}
+
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(container),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container) {
+	font-weight: bold !important;
+}
+
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open),
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open, selected),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(container, open),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(container, open, selected),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, open),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, open, selected),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container, open),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container, open, selected),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open, selected),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open, selected) {
+	color: black !important;
+}
+
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, hover),
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(leaf),
+.inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(leaf, hover),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(container),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(container, hover),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(leaf),
+.inSidebar #feedbar_tree_container::-moz-tree-cell-text(leaf, hover),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, hover),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(leaf),
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(leaf, hover),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(container, hover),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(leaf),
+.inSidebar #ybbookmarks-tree-tags treechildren::-moz-tree-cell-text(leaf, hover),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, hover),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(leaf),
+.inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(leaf, hover),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, hover),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf),
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf, hover) {
+	color: black !important;
+}
+
+.inSidebar #downloadView > richlistitem {
+	color: black !important;
+}
+
+.inSidebar #bookmarks-view-children::-moz-tree-separator,
+.inSidebar .sidebar-placesTreechildren::-moz-tree-separator,
+.inSidebar #feedbar_tree_container::-moz-tree-separator,
+.inSidebar #panoTabGroupTreeChildren::-moz-tree-separator,
+.inSidebar #ybbookmarks-tree-tags::-moz-tree-separator,
+.inSidebar #ybbookmarks-tree-bookmarks::-moz-tree-separator,
+.inSidebar #places-content-view treechildren::-moz-tree-separator {
+	border-top: 1px solid rgb(174, 183, 196) !important;
+	border-bottom: none !important;
+}
+
+.inSidebar #downloadView richlistitem:not(:first-child),
+.inSidebar .view-pane richlistitem:not(:first-child),
+.inSidebar #ConsoleBox richlistitem:not(:first-child),
+.inSidebar #styles richlistitem:not(:first-child),
+.inSidebar #boxRelatedSites .siteDiv:not(:first-child),
+.inSidebar #boxTopSites .topSitesResultBox:not(:first-child),
+.inSidebar #boxSiteInfo .newsResultBox:not(:first-child),
+.inSidebar #boxSiteHistory .siteHistorySingleSite:not(:first-child),
+.inSidebar #allReviews .reviewContainer:not(:first-child),
+.inSidebar #boxRealResults .facebookSingleResult:not(:first-child) {
+	-moz-border-top-colors: rgba(0, 0, 0, 0.1) rgba(255, 255, 255, 0.1) !important;
+	-moz-border-bottom-colors: rgba(255, 255, 255, 0.1) !important;
+	border-top-width: 2px !important;
+	border-bottom-width: 1px !important;
+	border-top-style: solid !important;
+	border-bottom-style: solid !important;
+}
+
+.inSidebar #downloadView richlistitem:first-child,
+.inSidebar .view-pane richlistitem:first-child,
+.inSidebar #ConsoleBox richlistitem:first-child,
+.inSidebar #styles richlistitem:first-child,
+.inSidebar #boxRelatedSites .siteDiv:first-child,
+.inSidebar #boxTopSites .topSitesResultBox:first-child,
+.inSidebar #boxSiteInfo .newsResultBox:first-child,
+.inSidebar #boxSiteHistory .siteHistorySingleSite:first-child,
+.inSidebar #allReviews .reviewContainer:first-child,
+.inSidebar #boxRealResults .facebookSingleResult:first-child {
+	-moz-border-top-colors: rgba(255, 255, 255, 0.1) !important;
+	-moz-border-bottom-colors: rgba(255, 255, 255, 0.1) !important;
+	border-top-width: 1px !important;
+	border-bottom-width: 1px !important;
+	border-top-style: solid !important;
+	border-bottom-style: solid !important;
+}
+
+
+/*--Scrollbars by makondo--*/
+/* I honestly don't remember where I got these from... */
+.inSidebar scrollbar * { 
+	-moz-appearance: none !important;
+	background: none !important; 
+}
+
+.inSidebar scrollbar { 
+	-moz-appearance: none !important;
+	background: none !important;
+	border: none !important; 
+}
+
+.inSidebar scrollcorner { 
+	-moz-appearance: none !important;
+	background: none !important; 
+	width: 0 !important;
+	height: 0 !important; 
+}
+
+.inSidebar scrollbar thumb,
+#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > slider > thumb { 
+	-moz-appearance: none !important; 
+	border: none !important;
+	opacity: .2 !important; 
+	border-radius: 10px !important;
+}
+.inSidebar scrollbar[orient="vertical"] thumb,
+#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > slider > thumb {
+	background: transparent url("data:image/gif;base64,R0lGODlhBwDCAbMAAAsLC7q6uqSkpICAgFdXV+Li4rCwsCgoKMzMzFlZWa6urkhISUVFRt3d3ZeWlRETEywAAAAABwDCAUAE/vA9QKkIpRgCbt4dpnHeGH6kCJarmqKnyb6yG7fwfNNGsv+6oE2YGxqLyFoSp2wyFbwo8OiUEqvTJDTr9F2ZPYBCYUAoEo9Lo7H9Wqng91Le5cbt9Lv75oXn/3iBe4MibX6Ch4Rzdn2LV4YwBgIOAgNoX40amWGKWJ16KpuAJZCeiaeOqAWloKkZrKOqraautLazuLG1uYi7ure/vJ88or3AxrjFw8h5yqF8zNGEa1sJBAwLDAcPBgYBAQJvDXWY0J/OWsHqyJmw5rLox8vzsuvl9B/xwvXS/Pjy/gLWcvdvn69+BwvSISgQ4EB7cPRBTNjQoC2GFPMhdMjRoseJJh1BcqoocmHJjR+5YAyJ8uQ9ki1jFpSokgMZBGa8CFAQwMCAAxEAADs=") center no-repeat !important; 
+	min-height: 50px !important;
+	width: 0 !important;
+}
+.inSidebar scrollbar[orient="horizontal"] thumb {
+	background: transparent url("data:image/gif;base64,R0lGODlhwgEHAIcAAAsLCxETEygoKEVFRkhISVdXV1lZWYCAgJeWlaSkpK6urrCwsLq6uszMzN3d3eLi4gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAP8ALAAAAADCAQcAQAj/ABMoUJCgoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIBcuWGAgwIKBA0eqVKlgpcuXMGPKXNlypsuaNnPizMlTZ8+bP2HuDEr05dCeR4sqTfqTqU2nSptGHQlVZtWnCQ4MANCygYMHYMOKHUu2rNmzaNOqXcu2rdu3cOPKnUu3rt27ePPq3Rv26wMHDBBsBUC4sOHDiBMrXsy4sePHkCNLnky5suXLmDNr3sy5s+fPkQUuYEC6tOnTqFOrXs26tevXsGPLnk27tu3buHPr3s27t+/fqhckKBCAQQOvfJMrX868ufPn0KNLn94WcAICAA4YMFCgu3fuBcB7Ph9Pvrz47uK3nw9fvr379+TXw59vHr58+vjn38/Pv/3+/gCyF+CA8RFoYHjy/XfgeOA1WOCBDiLYYIICABAQADs=") center no-repeat !important; 
+	min-width: 50px !important;
+	height: 0 !important;
+}
+
+.inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"],
+.inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] {
+	margin-left: 0px !important;
+	margin-right: 1px !important; 
+}
+
+.inSidebar scrollbarbutton,
+#sbSimilarWebSidebar.inSidebar scrollbarbutton {
+	border: none !important;
+	background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA4klEQVR42jXPPaqDQBAH8CWdJ3hd6kD6QO4gYuEBBMEP0EIFP0BEz+CKjZ0nSKGlvPeQgIWVHsQixGiKzYyQ4rf8dxh2Zkkcx4ckSQhyXfcHfe9oP8IwPJVleZum6TGO46MoilsQBKe9QdO0KzT8DsPA5nl+o77vGdTugCM8z1Pf95emaV5d163gVdf10/M8pqrqkYiiSBVFWSilK9jyPN+yLFtkWWa6rh+J4zhXaPqDeaxt2w280zRlgiDcoyji9iUtyzobhvFfVdWKMJumed6XhG9yGGzbvkiSRBFmrMELhw9B4Yc3YgC0lAAAAABJRU5ErkJggg==) center no-repeat !important;
+	opacity: .2 !important; 
+}
+
+/* Other stuff */
+
+.inSidebar toolbox,
+.inSidebar toolbar {
+	-moz-appearance: none !important;
+	background: rgba(0, 0, 0, 0) !important;
+	margin: 0 !important;
+	border: none !important;
+}

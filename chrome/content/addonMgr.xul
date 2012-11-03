@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="addonMgr-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<broadcasterset id="mainBroadcasterSet">
+		
+		<broadcaster id="viewAddonSidebar"
+			label="&addonsSidebar.label;"
+			tooltiptext="&addonsSidebar.tooltip;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="about:addons"
+			sidebartitle="&addonsSidebar.label;"
+			oncommand="toggleSidebar(this);" />
+		
+	</broadcasterset>
+	
+	<menupopup id="viewSidebarMenu">
+		
+		<menuitem id="menu_addonsSidebar"
+			accesskey="A"
+			observes="viewAddonSidebar" />
+			
+	</menupopup>
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+		
+		<toolbarbutton id="addons_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			label="&addonsSidebar.label;"
+			tooltiptext="&addonsSidebar.tooltip;"
+			observes="viewAddonSidebar" />
+		
+	</toolbarpalette>
+	
+</overlay>

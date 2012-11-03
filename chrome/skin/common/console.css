@@ -1,30 +1,35 @@
-#Console2Window.insidebar toolbarbutton image {
-	max-width: 16px;
-	max-height: 16px;
-}
-#JSConsoleWindow.insidebar toolbarbutton image {
-	max-width: 20px;
-	max-height: 20px;
-}
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://global/content/console.xul"), url("chrome://console2/content/console2.xul") {
+	
+	#Console2Window.inSidebar toolbarbutton image {
+		max-width: 16px !important;
+		max-height: 16px !important;
+	}
+	#JSConsoleWindow.inSidebar toolbarbutton image {
+		max-width: 20px !important;
+		max-height: 20px !important;
+	}
+	
+	#Console2Window.inSidebar #ToolbarMode toolbarbutton label {
+		display: none !important;
+	}
+	#Console2Window.inSidebar #ToolbarMode toolbarbutton image {
+		margin-right: 3px !important;
+	}
+	
+	#ConsoleBox.inSidebar { 
+		margin: 0 !important; 
+	}
+	
+	/* These are so message rows don't get a ridiculous width, the first are just for the dots (supposedly) pointing to the part of the code that's errored */
+	#JSConsoleWindow.inSidebar .console-row-code > box,
+	#JSConsoleWindow.inSidebar .console-row spacer { 
+		display: none !important;
+	}
+	#JSConsoleWindow.inSidebar .console-row-file .console-error-source,
+	#JSConsoleWindow.inSidebar .console-row-file {
+		display: block !important;
+		width: auto !important;
+	}
 
-#Console2Window.insidebar #ToolbarMode toolbarbutton label {
-	display: none;
-}
-#Console2Window.insidebar #ToolbarMode toolbarbutton image {
-	margin-right: 3px;
-}
-
-#ConsoleBox.insidebar { 
-	margin: 0; 
-}
-
-/* These are so message rows don't get a ridiculous width, the first are just for the dots (supposedly) pointing to the part of the code that's errored */
-#JSConsoleWindow.insidebar .console-row-code > box,
-#JSConsoleWindow.insidebar .console-row spacer { 
-	display: none;
-}
-#JSConsoleWindow.insidebar .console-row-file .console-error-source,
-#JSConsoleWindow.insidebar .console-row-file {
-	display: block !important;
-	width: auto !important;
 }

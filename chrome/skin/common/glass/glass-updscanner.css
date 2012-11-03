@@ -1,0 +1,29 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://updatescan/content/updatescan.xul") {
+	
+	.inSidebar #updatescan-bookmarks-view {
+		padding-top: 5px !important;
+	}
+	
+	#UpdateScan-window.inSidebar #new-button {
+		margin-left: 8px !important;
+	}
+	
+	#UpdateScan-window.inSidebar toolbarbutton,
+	#UpdateScan-window.inSidebar button {
+		padding: 2px 5px !important;
+	}
+	#UpdateScan-window.inSidebar button {
+		padding: 0 2px !important;
+	}
+	
+	#UpdateScan-window.inSidebar toolbarbutton image {
+		max-width: 18px !important;
+		max-height: 18px !important;
+	}
+	
+	#UpdateScan-window.inSidebar button {
+		min-width: 0 !important;
+	}
+	
+}

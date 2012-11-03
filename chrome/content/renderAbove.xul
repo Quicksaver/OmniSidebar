@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="renderAbove-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<splitter id="sidebar-splitter" collapsed="true" />
+	<splitter id="sidebar-splitter-twin" disabled="true" onmousedown="objName.dragStart(event);" />
+	
+	<vbox id="sidebar-box">
+	
+		<hbox id="omnisidebar_resizebox" 
+			class="omnisidebar_resize_box" 
+			flex="1">
+			<vbox id="omnisidebar_resizesidebar"
+				class="omnisidebar_resize_sidebar"
+				flex="1"
+				getchildrenof="sidebar-box" />
+			<box id="omnisidebar_resizer"
+				class="omnisidebar_resizer"
+				onmousedown="objName.dragStart(event);"/>
+		</hbox>
+		
+	</vbox>
+	
+</overlay>

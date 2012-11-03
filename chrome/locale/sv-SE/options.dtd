@@ -1,0 +1,36 @@
+<!ENTITY addonsSidebar.label "Tilläggshanteraren">
+<!ENTITY omnisidebarConsole.label "Felkonsol">
+<!ENTITY omnisidebarDMT.label "Filhämtningar">
+<!ENTITY omnisidebarOptions.title "OmniSidebar: Inställningar">
+<!ENTITY omnisidebarButtonMain.label "Huvudsidopanelen">
+<!ENTITY omnisidebarButtonTwin.label "Tvillingsidopanelen">
+<!ENTITY omnisidebarOptMisc.label "Allmänt">
+<!ENTITY omnisidebarOptgroupMain.label "Huvudsidopanelen">
+<!ENTITY omnisidebarOptgroupTwin.label "Tvillingsidopanelen">
+<!ENTITY omnisidebarOptgroupicons.label "Ikonuppsättning för sidopanelens verktygsfält">
+<!ENTITY omnisidebarOptgroupgen.label "Utseende">
+<!ENTITY omnisidebarOptgroupfeatures.label "Funktioner">
+<!ENTITY omnisidebarOptgroupperformance.label "Prestanda">
+<!ENTITY omnisidebarOptgroupstyle.label "Sidopanelsformat">
+<!ENTITY omnisidebarOptgroupalways.label "Öppna alltid i sidopanelen">
+<!ENTITY omnisidebarOptsidebars.leftlabel "Placera på vänster sida">
+<!ENTITY omnisidebarOptsidebars.rightlabel "Placera på höger sida">
+<!ENTITY omnisidebarOptsidebars.twinlabel "Aktivera tvillingsidopanelen på motsatt sida">
+<!ENTITY omnisidebarOptrenderabove.label "Koppla loss från webbläsarfönstret och">
+<!ENTITY omnisidebarOptundockMode.autohide "Dölj automatiskt">
+<!ENTITY omnisidebarOptundockMode.noauto "Stäng endast på kommando">
+<!ENTITY omnisidebarOptundockMode.autoclose "Stäng automatiskt vid förlorat fokus">
+<!ENTITY omnisidebarOptglassStyle.label "Använd en glaseffekt på alla sidopaneler">
+<!ENTITY omnisidebarOptfx.label "Aktivera övergångseffekter">
+<!ENTITY omnisidebarOptshowDelay.label "Fördröj automatisk visning av sidopanelen med (ms):">
+<!ENTITY omnisidebarOpthideDelay.label "Fördröj automatisk döljning av sidopanelen med (ms):">
+<!ENTITY omnisidebarOptkeepPrivate.label "Behåll sidopanelens tillstånd i Privat surfning-läget">
+<!ENTITY omnisidebarOptalternatebtns.label "Alternativa knappar för sidopanelsfältet">
+<!ENTITY omnisidebarOpthideheadertoolbar.label "Dölj sidopanelsfältet">
+<!ENTITY omnisidebarOpthideheadertitle.label "Dölj sidopanelens rubrik">
+<!ENTITY omnisidebarOpttitleButton.label "Rullgardinsmeny i sidopanelens rubrik">
+<!ENTITY omnisidebarOpthideheaderdock.label "Dölj dockningsknappen">
+<!ENTITY omnisidebarOpthideheaderclose.label "Dölj stängknappen">
+<!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (ingen ändring)">
+<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
+<!ENTITY omnisidebarOptcoloricons.colorlabel "Färgglad">

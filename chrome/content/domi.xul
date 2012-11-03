@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="domi-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<broadcasterset id="mainBroadcasterSet">
+		
+		<broadcaster id="viewDOMInspectorSidebar"
+			label="&DOMInspectorSidebar.label;"
+			tooltiptext="&DOMInspectorSidebar.tooltip;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://inspector/content/inspector.xul"
+			sidebartitle="&DOMInspectorSidebar.label;"
+			oncommand="toggleSidebar(this);" />
+		
+	</broadcasterset>
+	
+	<menupopup id="viewSidebarMenu">
+		
+		<menuitem id="menu_domiSidebar"
+			accesskey="I"
+			observes="viewDOMInspectorSidebar" />
+			
+	</menupopup>
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+		
+		<toolbarbutton id="dominspector_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			observes="viewDOMInspectorSidebar" />
+		
+	</toolbarpalette>
+		
+</overlay>

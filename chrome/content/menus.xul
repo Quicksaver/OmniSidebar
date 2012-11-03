@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="menus-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<menupopup id="toolbar-context-menu">
+	
+		<menuitem id="toggle_sidebartoolbar_context" 
+			observes="toggleSideToolbar"/>
+		
+		<menuseparator id="omnisidebar_contextSeparator"
+			hidden="true"/>
+		<menuitem id="omnisidebar_contextOptions"
+			label="&omnisidebarOptions.title;"
+			oncommand="objName.openOptions();"
+			hidden="true"/>
+			
+	</menupopup>
+	
+	<menupopup id="appmenu_customizeMenu">
+	
+		<menuitem id="toggle_sidebartoolbar_appmenu" 
+			observes="toggleSideToolbar"/>
+			
+		<menuitem id="omnisidebar_menuoptions_tools"
+			label="&omnisidebarOptions.title;"
+			oncommand="objName.openOptions();"
+			insertafter="appmenu_preferences"/>
+			
+	</menupopup>
+	
+	<menu id="viewToolbarsMenu">
+		
+		<menupopup id="omnisidebar_viewToolbarsMenuPopup" hidden="true">
+			<menuitem id="toggle_sidebartoolbar_viewtoolbars"
+				observes="toggleSideToolbar"/>
+		</menupopup>
+			
+	</menu>
+	
+	<menupopup id="menu_ToolsPopup">
+	
+		<menuitem id="omnisidebar_menuoptions_viewmenu"
+			label="&omnisidebarOptions.title;"
+			oncommand="objName.openOptions();"
+			insertbefore="prefSep"/>
+			
+	</menupopup>
+	
+	<menupopup id="viewSidebarMenu"
+		onpopupshowing="objName.menuItemsCheck(this);" />
+	
+</overlay>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="dmtSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<broadcasterset id="mainBroadcasterSet">
+	
+		<broadcaster id="viewDmSidebar"
+			label="&dmtSidebar.label;"
+			tooltiptext="&dmtSidebar.tooltip;" 
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://mozapps/content/downloads/downloads.xul"
+			sidebartitle="&dmtSidebar.label;"
+			oncommand="toggleSidebar(this);" />
+			
+	</broadcasterset>
+	
+	<menupopup id="viewSidebarMenu">
+		
+		<menuitem id="menu_dmSidebar"
+			accesskey="D"
+			observes="viewDmSidebar" />
+			
+	</menupopup>
+	
+</overlay>

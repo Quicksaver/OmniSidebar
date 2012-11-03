@@ -3,18 +3,19 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>osb@quicksaver</em:id>
 		<em:type>2</em:type>
-		<em:version>0.9.1</em:version>
+		<em:version>0.x</em:version>
 		<em:creator>Quicksaver</em:creator>
 		<em:optionsURL>chrome://omnisidebar/content/options.xul</em:optionsURL> 
 		<em:iconURL>chrome://omnisidebar/skin/icon.png</em:iconURL>
 		<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
 		<em:name>OmniSidebar</em:name>
+		<em:bootstrap>true</em:bootstrap>
 		
 		<em:targetApplication>
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
-				<em:minVersion>4.0</em:minVersion>
-				<em:maxVersion>13.0a1</em:maxVersion>
+				<em:minVersion>8.0</em:minVersion>
+				<em:maxVersion>19.0a1</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 		

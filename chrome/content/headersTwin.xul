@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="headersTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<broadcasterset id="mainBroadcasterSet">
+	
+		<broadcaster id="toggleSideToolbar-twin"
+			label="&omnisidebarToolbarTwin.label;"
+			type="checkbox"
+			oncommand="objName.toggleToolbar(true);" />
+			
+	</broadcasterset>
+	
+	<vbox id="sidebar-box-twin" class="chromeclass-extrachrome sidebar-box">
+		<sidebarheader id="sidebar-header-twin"
+			class="sidebar-header"
+			context="toolbar-context-menu">
+			<label id="sidebar-title-twin"
+				class="sidebar-title" />
+			<stack id="stackSidebar-twin"
+				class="stackSidebar"
+				insertbefore="sidebar-title-twin">
+				<label id="sidebar-customizingLabel-twin"
+					flex="1"
+					crop="end"
+					value="&omnisidebarButtonTwin.label;"
+					collapsed="true" />
+				<toolbar id="omnisidebarToolbar-twin"
+					class="omnisidebar-toolbar"
+					toolbarname="&omnisidebarToolbarTwin.label;"
+					customizable="true"
+					mode="icons"
+					context="toolbar-context-menu"
+					toolboxid="navigator-toolbox"
+					coloricons="default" />
+			</stack>
+			<label id="omnisidebar-header-spacer-twin"
+				class="header-spacer"
+				flex="1"
+				context="toolbar-context-menu"
+				insertbefore="sidebar-title-twin"/>
+		</sidebarheader>
+		<browser id="sidebar-twin" class="sidebar-browser" />
+	</vbox>
+	
+</overlay>

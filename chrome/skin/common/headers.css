@@ -1,0 +1,135 @@
+@import url("chrome://omnisidebar-os/skin/icons.css"); /* Buttons */
+
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	/* Headers */
+	/* Everything related to toolbarbuttons takes an !important tag */
+	.omnisidebar-toolbar .toolbarbutton-1 {
+		-moz-appearance: toolbarbutton !important;
+		margin: 0 2px 0 2px !important;
+		padding: 1px 5px 1px 5px !important;
+	}
+	.omnisidebar-toolbar .toolbarbutton-1[checked="true"],
+	.omnisidebar-toolbar .toolbarbutton-1:active {
+		margin: 0 2px 0 2px !important;
+		padding: 1px 5px 1px 5px !important; /* This !important is for some themes to dimension the button correctly */
+	}
+	.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
+		max-width: 17px !important;
+		max-height: 17px !important;
+	}
+	
+	.omnisidebar-toolbar { 
+		-moz-appearance: none !important; /* without !important the changes won't take effect */
+		border: none !important;
+		padding: 1px 3px;
+	}
+	#main-window[sizemode="fullscreen"] .omnisidebar-toolbar { 
+		visibility: visible; 
+	}
+	
+	.sidebar-header {
+		max-height: none !important;
+		padding: 0;
+		overflow: hidden;
+	}
+	.sidebar-box[noclose] .sidebar-header {
+		padding-right: 3px;
+	}
+	
+	.sidebar-splitter {
+		border: 0;
+		-moz-border-end: 1px solid #A9B7C9;
+		min-width: 0;
+		width: 3px;
+		background-color: transparent;
+		-moz-margin-start: -3px;
+		position: relative;
+	}
+	
+	/* Hide a bunch of stuff */
+	#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
+	#sidebar-throbber-twin,
+	.sidebar-box[notitle] .sidebar-title,
+	.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton,
+	.sidebar-box[customizing] .sidebar-title,
+	.sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton,
+	.omnisidebar-toolbar toolbarbutton[disabled] {
+		display: none !important;
+	}
+	
+	.sidebar-box:not([notitle]):not([customizing]) .header-spacer,
+	.sidebar-box[customizing] .header-spacer {
+		display: none;
+	}
+	.sidebar-box[notitle]:not([customizing]) .header-spacer {
+		display: -moz-box;
+	}
+	.sidebar-box .sidebar-title {
+		text-align: center;
+		padding: 0 !important;
+		margin: 1px 3px !important;
+	}
+	
+	#sidebar-customizingLabel,
+	#sidebar-customizingLabel-twin {
+		text-align: right;
+		margin: 5px 5px 0 5px !important;
+	}
+	
+	.sidebar-box:not([customizing]) .stackSidebar {
+		display: -moz-box;
+	}
+	
+	/* Sidebar size, position and animation */
+	.sidebar-box[customizing],
+	.sidebar-box[customizing][hidden="true"] {
+		-moz-appearance: none;
+		position: fixed;
+		overflow: visible !important;
+		/* Compatibility with Memory Fox: !important tag in the overflow property, already talked to the developer and he will fix it in his extension himself in future versions
+		so this is just for compatibility with past versions, maybe I will remove it in the future since those versions don't even seem to be available anyway
+		for now I'll leave it because the latest version still has the issue;
+		tried to conditionally set it via javascript but I couldn't get it to detect memory fox and still apply the change */
+		background: none;
+	}
+	
+	.sidebar-box[customizing],
+	.sidebar-box[customizing][hidden="true"] {
+		display: -moz-box;
+	}
+	#sidebar-box[customizing]:not([renderabove]):not([movetoright]),
+	#sidebar-box-twin[customizing]:not([renderabove])[movetoleft] {
+		left: 0px;
+	}
+	#sidebar-box[customizing]:not([renderabove])[movetoright],
+	#sidebar-box-twin[customizing]:not([renderabove]):not([movetoleft]) {
+		right: 0px;
+	}
+	
+	
+	.sidebar-box[customizing] .sidebar-header,
+	.sidebar-box[customizing] .omnisidebar-toolbar {
+		display: -moz-box;
+		visibility: visible;
+	}
+	.sidebar-box[customizing] .sidebar-browser {
+		display: none;
+	}
+	
+	/* Tricks needed */
+	.sidebar-header,
+	.sidebar-browser,
+	.omnisidebar-toolbar {
+		width: 100%;
+		max-width: none;
+		min-width: 0;
+		height: 100% !important;
+	}
+	
+	.sidebar-browser {
+		background-color: window;
+	}
+	
+}

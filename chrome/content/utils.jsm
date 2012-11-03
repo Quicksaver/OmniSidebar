@@ -34,7 +34,7 @@ var hideIt = function(aNode, show) {
 var modifyFunction = function(aOriginal, aArray) {
 	var newCode = aOriginal.toString();
 	for(var i=0; i < aArray.length; i++) {
-		newCode = newCode.replace(aArray[i][0], aArray[i][1]);
+		newCode = newCode.replace(aArray[i][0], aArray[i][1].replace("{([objName])}", objName));
 	}
 	
 	var listArguments = newCode.substring(newCode.indexOf('(')+1, newCode.indexOf(')'));
@@ -269,12 +269,23 @@ var setWatchers = function(obj) {
 
 // Object to aid in setting and removing all kind of listeners
 var listenerAid = {
-	handlers: new Array(),
+	handlers: [],
+	owner: this,
 	
-	add: function(obj, type, listener, capture, oneTime) {
+	// if maxTriggers is set to the boolean false, it acts as a switch to not bind the function to our object
+	// but if it's set to anything else it will bind the function,
+	// thus I can't have an unbound function with maxTriggers
+	add: function(obj, type, aListener, capture, maxTriggers) {
+		var unboundListener = this.modifyListener(aListener, maxTriggers, true);
+		var listener = this.modifyListener(aListener, maxTriggers);
+		
 		if(obj.addEventListener) {
+			if(maxTriggers === true) {
+				maxTriggers = 1;
+			}
+			
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].listener, listener)) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].unboundListener, unboundListener)) {
 					return false;
 				}
 			}
@@ -282,48 +293,20 @@ var listenerAid = {
 			var newHandler = {
 				obj: obj,
 				type: type,
+				unboundListener: unboundListener,
 				listener: listener,
 				capture: capture,
-				removeSelf: null,
-				aid: null
+				maxTriggers: (maxTriggers) ? maxTriggers : null,
+				triggerCount: (maxTriggers) ? 0 : null
 			};
 			this.handlers.push(newHandler);
 			var i = this.handlers.length -1;
-			this.handlers[i].obj.addEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
 			
-			if(oneTime) {
-				if(!this.handlers[i].obj._listenerAidHandlers) {
-					this.handlers[i].obj._listenerAidHandlers = [];
-				}
-				this.handlers[i].obj._listenerAidHandlers.push(this.handlers[i]);
-				this.handlers[i].aid = this;
-				this.handlers[i].removeSelf = function(e) {
-					var targets = ['target', 'originalTarget', 'currentTarget'];
-					for(var a = 0; a < targets.length; a++) {
-						if(!e[targets[a]] || !e[targets[a]]._listenerAidHandlers) {
-							continue;
-						}
-						
-						for(var i = 0; i < e[targets[a]]._listenerAidHandlers.length; i++) {
-							if(e[targets[a]]._listenerAidHandlers[i].obj == e[targets[a]] // supposedly this would always return true?
-							&& e[targets[a]]._listenerAidHandlers[i].type == e.type
-								&& ((e[targets[a]]._listenerAidHandlers[i].capture && e.eventPhase == e.CAPTURING_PHASE)
-								|| (!e[targets[a]]._listenerAidHandlers[i].capture && e.eventPhase != e.CAPTURING_PHASE))
-							) {
-								e[targets[a]]._listenerAidHandlers[i].aid.remove(e[targets[a]], e[targets[a]]._listenerAidHandlers[i].type, e[targets[a]]._listenerAidHandlers[i].listener, e[targets[a]]._listenerAidHandlers[i].capture);
-								e[targets[a]]._listenerAidHandlers[i].aid.remove(e[targets[a]], e[targets[a]]._listenerAidHandlers[i].type, e[targets[a]]._listenerAidHandlers[i].removeSelf, e[targets[a]]._listenerAidHandlers[i].capture);
-								e[targets[a]]._listenerAidHandlers.splice(i, 1);
-								return;
-							}
-						}
-					}
-				};
-				this.add(this.handlers[i].obj, this.handlers[i].type, this.handlers[i].removeSelf, this.handlers[i].capture);
-			}
+			this.handlers[i].obj.addEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
 		}
 		else if(obj.events && obj.events.addListener) {
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.compareListener(this.handlers[i].listener, listener)) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.compareListener(this.handlers[i].unboundListener, aListener)) {
 					return false;
 				}
 			}
@@ -331,6 +314,7 @@ var listenerAid = {
 			var newHandler = {
 				obj: obj,
 				type: type,
+				unboundListener: unboundListener,
 				listener: listener
 			};
 			this.handlers.push(newHandler);
@@ -341,16 +325,12 @@ var listenerAid = {
 		return true;
 	},
 	
-	remove: function(obj, type, listener, capture) {
+	remove: function(obj, type, aListener, capture, maxTriggers) {
+		var unboundListener = this.modifyListener(aListener, maxTriggers, true);
+			
 		if(obj.removeEventListener) {
-			var newHandler = {
-				obj: obj,
-				type: type,
-				listener: listener,
-				capture: capture
-			};
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].listener, listener)) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.handlers[i].capture == capture && this.compareListener(this.handlers[i].unboundListener, unboundListener)) {
 					this.handlers[i].obj.removeEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
 					this.handlers.splice(i, 1);
 					return true;
@@ -358,13 +338,8 @@ var listenerAid = {
 			}
 		}
 		else if(obj.events && obj.events.removeListener) {
-			var newHandler = {
-				obj: obj,
-				type: type,
-				listener: listener
-			};
 			for(var i=0; i<this.handlers.length; i++) {
-				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.compareListener(this.handlers[i].listener, listener)) {
+				if(this.handlers[i].obj == obj && this.handlers[i].type == type && this.compareListener(this.handlers[i].unboundListener, unboundListener)) {
 					this.handlers[i].obj.events.removeListener(this.handlers[i].type, this.handlers[i].listener);
 					this.handlers.splice(i, 1);
 					return true;
@@ -394,23 +369,68 @@ var listenerAid = {
 			return true;
 		}
 		return false;
+	},
+	
+	modifyListener: function(listener, maxTriggers, forceUnbound) {
+		var newListener = listener;
+		
+		if(maxTriggers) {
+			newListener = modifyFunction(listener, [
+				['{',
+				<![CDATA[
+				{
+					var targets = ['target', 'originalTarget', 'currentTarget'];
+					if(typeof(event) != 'undefined') {
+						var e = event;
+					} else if(typeof(e) == 'undefined') {
+						var e = arguments[0];
+					}
+					
+					mainRemoveListenerLoop:
+					for(var a = 0; a < targets.length; a++) {
+						for(var i = 0; i < this.listenerAid.handlers.length; i++) {
+							if(this.listenerAid.handlers[i].obj == e[targets[a]]
+							&& this.listenerAid.handlers[i].type == e.type
+								&& ((this.listenerAid.handlers[i].capture && e.eventPhase == e.CAPTURING_PHASE)
+								|| (!this.listenerAid.handlers[i].capture && e.eventPhase != e.CAPTURING_PHASE))
+							&& this.listenerAid.compareListener(this.listenerAid.handlers[i].unboundListener, arguments.callee)) {
+								this.listenerAid.handlers[i].triggerCount++;
+								if(this.listenerAid.handlers[i].triggerCount == this.listenerAid.handlers[i].maxTriggers) {
+									this.listenerAid.remove(e[targets[a]], this.listenerAid.handlers[i].type, this.listenerAid.handlers[i].unboundListener, this.listenerAid.handlers[i].capture);
+									break mainRemoveListenerLoop;
+								}
+							}
+						}
+					}
+				]]>
+				],
+				
+				// This is just so my editor correctly assumes the pairs of {}, it has nothing to do with the add-on itself
+				['}',
+				<![CDATA[
+				}
+				]]>
+				]
+			]);
+		}
+		
+		if(maxTriggers !== false && !forceUnbound) {
+			newListener = newListener.bind(this.owner);
+		}
+		return newListener;
 	}
 };
 
 // this lets me run functions asyncronously, basically it's a one shot timer with a delay of 0msec
-var aSync = function(aFunc, aName) {
-	if(!aName) {
-		var timerObj = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		timerObj.init(aFunc, 0, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-	} else {
-		this.timerAid.init(aName, aFunc, 0);
-	}
-	return true;
+var aSync = function(aFunc) {
+	var timerObj = timerAid.create(aFunc, 0);
+	return timerObj;
 }
 
 // Object to aid in setting, initializing and cancelling timers
 var timerAid = {
 	_timers: {},
+	owner: this,
 	
 	init: function(aName, aFunc, aDelay, aType) {
 		this.cancel(aName);
@@ -418,41 +438,39 @@ var timerAid = {
 		var type = this._switchType(aType);
 		var self = this;
 		this._timers[aName] = {
-			object: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
+			timer: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
 			handler: aFunc
 		};
-		if(type == Components.interfaces.nsITimer.TYPE_ONE_SHOT) {
-			this._timers[aName].object.init(function(aSubject, aTopic, aData) {
-				self._timers[aName].handler(aSubject, aTopic, aData);
+		this._timers[aName].timer.init(function(aSubject, aTopic, aData) {
+			self._timers[aName].handler.call(self.owner, aSubject, aTopic, aData);
+			if(aSubject.type == Components.interfaces.nsITimer.TYPE_ONE_SHOT) {
 				self.cancel(aName);
-			}, aDelay, type);
-		}
-		else {
-			this._timers[aName].object.init(this._timers[aName].handler, aDelay, type);
-		}
+			}
+		}, aDelay, type);
+		
 		this.__defineGetter__(aName, function() { return this._timers[aName]; });
+		return this._timers[aName];
 	},
 	
 	cancel: function(name) {
 		if(this._timers[name]) {
-			this._timers[name].object.cancel();
+			this._timers[name].timer.cancel();
 			this._timers[name] = null;
 			return true;
 		}
 		return false;
 	},
 	
-	create: function() {
-		var newTimer = {};
-		newTimer.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-		newTimer._switchType = this._switchType;
-		newTimer.init = function(aFunc, aDelay, aType) {
-			var type = this._switchType(aType);
-			this.timer.init(aFunc, aDelay, type);
-		}
-		newTimer.cancel = function() {
-			this.timer.cancel();
-		}
+	create: function(aFunc, aDelay, aType) {
+		var type = this._switchType(aType);
+		var newTimer = {
+			timer: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
+			handler: aFunc.bind(this.owner),
+			cancel: function() {
+				this.timer.cancel();
+			}
+		};
+		newTimer.timer.init(newTimer.handler, aDelay, type);
 		return newTimer;
 	},
 			
@@ -479,10 +497,10 @@ var timerAid = {
 
 var prefAid = {
 	_prefObjects: {},
-	_listenerAid: this.listenerAid,
 	length: 0,
 	
 	init: function(branch, prefList) {
+		// Don't do Application as some kind of this.fuel, as it keeps an array of all current prefs and it's unnecessary to keep all that in the code
 		var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
 		
 		for(var i=0; i<prefList.length; i++) {
@@ -498,11 +516,11 @@ var prefAid = {
 	},
 	
 	listen: function(pref, handler) {
-		this._listenerAid.add(this._prefObjects[pref], "change", handler);
+		listenerAid.add(this._prefObjects[pref], "change", handler);
 	},
 	
 	unlisten: function(pref, handler) {
-		this._listenerAid.remove(this._prefObjects[pref], "change", handler);
+		listenerAid.remove(this._prefObjects[pref], "change", handler);
 	},
 	
 	reset: function(pref) {
@@ -552,5 +570,100 @@ var PrivateBrowsingListener = {
 				this.watcher.onQuit();
 			}
 		}
+	}
+};
+
+// Quick method to load subscripts into the context of "this"
+var moduleAid = {
+	_loadedModules: ["chrome://"+objPathString+"/content/utils.jsm"],
+	owner: this,
+	loader: mozIJSSubScriptLoader,
+	
+	load: function(aPath) {
+		if(this.loaded(aPath)) {
+			return false;
+		}
+		
+		if(!this.loader) {
+			this.loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
+		}
+		this.loader.loadSubScript(aPath, this.owner);
+		this.push(aPath);
+		return true;
+	},
+	
+	loaded: function(aPath) {
+		for(var i = 0; i < this._loadedModules.length; i++) {
+			if(this._loadedModules[i] == aPath) {
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	push: function(aPath) {
+		this._loadedModules.push(aPath);
+	}
+};
+var mozIJSSubScriptLoader = null;
+
+// This allows me to handle loading and unloading of stylesheets in a quick and easy way
+var styleAid = {
+	sss: null,
+	ios: null,
+	_loadedSheets: [],
+	
+	init: function() {
+		this.sss = Components.classes["@mozilla.org/content/style-sheet-service;1"].getService(Components.interfaces.nsIStyleSheetService);
+		this.ios = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+		this.init = function() { return false; };
+		return true;
+	},
+	
+	load: function(aName, aPath) {
+		this.init();
+		var path = this.convert(aPath);
+		
+		this.unload(aName, path);
+		this._loadedSheets.push({
+			name: aName,
+			path: path,
+			uri: this.ios.newURI(path, null, null)
+		});
+		var i = this._loadedSheets.length -1;
+		if(!this.sss.sheetRegistered(this._loadedSheets[i].uri, this.sss.AGENT_SHEET)) {
+			this.sss.loadAndRegisterSheet(this._loadedSheets[i].uri, this.sss.AGENT_SHEET);
+		}
+		return true;
+	},
+	
+	unload: function(aName, aPath) {
+		this.init();
+		
+		if(typeof(aName) == 'array') {
+			for(var a = 0; a < aName.length; a++) {
+				this.unload(aName[a]);
+			}
+			return true;
+		};
+		
+		var path = this.convert(aPath);
+		for(var i = 0; i < this._loadedSheets.length; i++) {
+			if(this._loadedSheets[i].name == aName || (path && path == this._loadedSheets[i].path)) {
+				if(this.sss.sheetRegistered(this._loadedSheets[i].uri, this.sss.AGENT_SHEET)) {
+					this.sss.unregisterSheet(this._loadedSheets[i].uri, this.sss.AGENT_SHEET);
+				}
+				this._loadedSheets.splice(i, 1);
+				return true;
+			}
+		}
+		return false;
+	},
+	
+	convert: function(aPath) {
+		if(aPath && aPath.indexOf("chrome://") != 0 && aPath.indexOf("data:text/css") != 0) {
+			return 'data:text/css,' + encodeURIComponent(aPath);
+		}
+		return aPath;
 	}
 };

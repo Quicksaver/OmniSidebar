@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="autoHide-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<hbox id="browser">
+	
+		<hbox id="omnisidebar_switch"
+			class="omnisidebar_switch"
+			onmouseover="objName.switchMouseOver(objName.mainSidebar);"
+			onmouseout="objName.switchMouseOut(objName.mainSidebar);"
+			ondragenter="objName.switchMouseOver(objName.mainSidebar);"
+			ondragexit="objName.switchMouseOut(objName.mainSidebar);"
+			insertbefore="appcontent"/>
+		
+	</hbox>
+	
+	<hbox id="omnisidebar_resizebox" 
+		onmouseout="objName.hidingSidebar(objName.mainSidebar);"
+		ondragenter="objName.onDragEnter(objName.mainSidebar);"
+		ondragexit="objName.onDragExit(objName.mainSidebar);" />
+	
+</overlay>

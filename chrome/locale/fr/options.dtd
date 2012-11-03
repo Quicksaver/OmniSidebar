@@ -1,0 +1,36 @@
+<!ENTITY addonsSidebar.label "Gestionnaire de modules">
+<!ENTITY omnisidebarConsole.label "Console d'erreurs">
+<!ENTITY omnisidebarDMT.label "Téléchargements">
+<!ENTITY omnisidebarOptions.title "Options d'OmniSidebar">
+<!ENTITY omnisidebarButtonMain.label "Panneau latéral principal">
+<!ENTITY omnisidebarButtonTwin.label "Panneau latéral secondaire">
+<!ENTITY omnisidebarOptMisc.label "Général">
+<!ENTITY omnisidebarOptgroupMain.label "Panneau latéral principal">
+<!ENTITY omnisidebarOptgroupTwin.label "Panneau latéral secondaire">
+<!ENTITY omnisidebarOptgroupicons.label "Jeu d'icônes boutons de la barre d'outils latérale">
+<!ENTITY omnisidebarOptgroupgen.label "Apparence">
+<!ENTITY omnisidebarOptgroupfeatures.label "Fonctionnalités">
+<!ENTITY omnisidebarOptgroupperformance.label "Performance">
+<!ENTITY omnisidebarOptgroupstyle.label "Style des panneaux latéraux">
+<!ENTITY omnisidebarOptgroupalways.label "Toujours ouvrir dans le panneau latéral">
+<!ENTITY omnisidebarOptsidebars.leftlabel "Placer à gauche">
+<!ENTITY omnisidebarOptsidebars.rightlabel "Placer à droite">
+<!ENTITY omnisidebarOptsidebars.twinlabel "Activer le panneau latéral secondaire du côté opposé">
+<!ENTITY omnisidebarOptrenderabove.label "Détacher de la fenêtre du navigateur et">
+<!ENTITY omnisidebarOptundockMode.autohide "Masquer automatiquement de côté">
+<!ENTITY omnisidebarOptundockMode.noauto "Uniquement fermer à la commande">
+<!ENTITY omnisidebarOptundockMode.autoclose "Fermer automatiquement quand il perd le focus">
+<!ENTITY omnisidebarOptglassStyle.label "Appliquer le style verre pour tous les panneaux latéraux">
+<!ENTITY omnisidebarOptfx.label "Activer les effets de transition">
+<!ENTITY omnisidebarOptshowDelay.label "Délai d'affichage automatique du panneau latéral (en msec) :">
+<!ENTITY omnisidebarOpthideDelay.label "Délai de masquage automatique du panneau latéral (en msec) :">
+<!ENTITY omnisidebarOptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
+<!ENTITY omnisidebarOptalternatebtns.label "Style alternatif du bouton de la barre d'outils latérale">
+<!ENTITY omnisidebarOpthideheadertoolbar.label "Masquer la barre d'outils latérale">
+<!ENTITY omnisidebarOpthideheadertitle.label "Masquer le titre du panneau latéral">
+<!ENTITY omnisidebarOpttitleButton.label "Menu déroulant du panneau latéral dans le titre">
+<!ENTITY omnisidebarOpthideheaderdock.label "Masquer le bouton d'ancrage">
+<!ENTITY omnisidebarOpthideheaderclose.label "Masquer le bouton de fermeture">
+<!ENTITY omnisidebarOptcoloricons.nochangelabel "Défaut (pas de modification)">
+<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
+<!ENTITY omnisidebarOptcoloricons.colorlabel "Multicolore">

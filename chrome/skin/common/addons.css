@@ -1,172 +1,179 @@
-.insidebar .text-link {
-	-moz-binding: url("chrome://omnisidebar/content/addons.xbl#text-link");
-}
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("about:addons") {
+	
+	.inSidebar .text-link {
+		-moz-binding: url("chrome://omnisidebar/content/addons.xbl#text-link") !important;
+	}
+	
+	#addons-page.inSidebar > hbox:not(#header) {
+		-moz-box-orient: vertical !important;
+	}
+	
+	.inSidebar #header {
+		font-size: 10px !important;
+	}
+	
+	.inSidebar #back-btn,
+	.inSidebar #forward-btn {
+		display: -moz-box !important;
+	}
+	
+	.inSidebar #header-search {
+		width: 115px !important;
+	}
+	
+	.inSidebar #categories {
+		display: table-row !important;
+	}
+	
+	.inSidebar #categories .scrollbox-innerbox {
+		overflow: hidden !important;
+		margin-left: 5px !important;
+	}
+	
+	.inSidebar .category:not([disabled="true"]):not([persist="hidden"]):not([hidden="true"]) {
+		display: table-cell !important;
+	}
+	
+	.inSidebar .category[disabled="true"], 
+	.inSidebar .category[persist="hidden"], 
+	.inSidebar .category[hidden="true"],
+	.inSidebar #category-userstyles {
+		display: none !important;
+	}
+	
+	.inSidebar .category-name,
+	.inSidebar .category-badge {
+		display: none !important;
+	}
+	
+	.inSidebar .category image {
+		margin: 0 !important;
+	}
+	
+	.inSidebar .category[selected="true"] {
+		border-bottom: none !important;
+		border-right: 1px solid rgb(195,206,223) !important;
+		border-top: 1px solid rgb(195,206,223) !important;
+		border-left: 1px solid rgb(195,206,223) !important;
+		border-radius: 5px 5px 0 0 !important;
+	}
+	
+	.inSidebar .category {
+		padding: 4px !important;
+		height: 46px !important;
+	}
+	
+	.inSidebar #view-port-container {
+		height: 1700px !important;
+	}
+	
+	.inSidebar .view-pane {
+		font-size: 9px !important;
+	}
+	
+	.inSidebar .basicinfo-container {
+		width: 100% !important;
+		display: table-cell !important;
+	}
+	
+	.inSidebar .disabled-postfix,
+	.inSidebar .update-postfix {
+		font-size: 9px !important;
+	}
+	
+	.inSidebar .view-pane richlistitem {
+		padding: 0 5px 0 5px !important;
+	}
+	
+	.inSidebar .addon .content-container { 
+		margin: 3px 0 !important; 
+		height: 42px !important; 
+	}
+	
+	.inSidebar .warning,
+	.inSidebar .error,
+	.inSidebar .pending {
+		margin-left: 0 !important;
+	}	
+	
+	.inSidebar .warning-icon,
+	.inSidebar .pending-icon,
+	.inSidebar .error-icon {
+		width: 13px !important;
+		height: 13px !important;
+	}
+	
+	.inSidebar .list .name-container {
+		font-size: 12px !important;
+	}
+	
+	.inSidebar .list image {
+		max-width: 22px !important;
+		max-height: 22px !important;
+	}
+	
+	.inSidebar .list button {
+		margin: 1px 2px 2px 2px !important;
+		padding: 0 2px 0 2px !important;
+	}
+	
+	.inSidebar .list richlistitem .description {
+		display: none !important;
+	}
+	
+	.inSidebar .list richlistitem .description-container {
+		margin: 0 !important;
+	}
+	
+	.inSidebar #updates-list .date-updated { 
+		font-size: 8px !important; 
+	}
+	.inSidebar #updates-list .name-container { 
+		font-size: 11px !important; 
+	}
+	.inSidebar #updates-list .control-container { 
+		font-size: 8px !important; 
+	}
+	
+	.inSidebar .detail-view-container {
+		padding: 0px 4px 0 0 !important;
+	}
+	
+	.inSidebar #detail-notifications {
+		margin: 5px 0px 5px 8px !important;
+	}
+	
+	.inSidebar #detail-screenshot {
+		max-width: 100px !important;
+		max-height: 100px !important;
+		margin-right: 2px !important;
+	}
+	
+	.inSidebar #detail-autoUpdate radio {
+		margin: 2px 0px 2px 0px !important;
+	}
+	
+	.inSidebar #detail-autoUpdate radio .radio-label-box {
+		margin-left: 0px !important;
+		padding-left: 0px !important;
+	}
+	
+	.inSidebar #detail-findUpdates-btn {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		font-size: 9px !important;
+	}
+	
+	.inSidebar #detail-icon {
+		margin-left: 4px !important;
+		margin-right: 5px !important;
+		max-width: 25px !important;
+		max-height: 25px !important;
+	}
+	
+	.inSidebar #detail-grid .detail-row-label {
+		margin-left: 0 !important;
+	}
 
-#addons-page.insidebar  > hbox:not(#header) {
-	-moz-box-orient: vertical;
-}
-
-.insidebar #header {
-	font-size: 10px;
-}
-
-.insidebar #back-btn,
-.insidebar #forward-btn {
-	display: -moz-box;
-}
-
-.insidebar #header-search {
-	width: 115px;
-}
-
-.insidebar #categories {
-	display: table-row;
-}
-
-.insidebar #categories .scrollbox-innerbox {
-	overflow: hidden;
-	margin-left: 5px;
-}
-
-.insidebar .category:not([disabled]):not([persist]) {
-	display: table-cell;
-}
-
-.insidebar .category[disabled="true"], 
-.insidebar .category[persist="hidden"] {
-	display: none;
-}
-
-.insidebar .category-name,
-.insidebar .category-badge {
-	display: none;
-}
-
-.insidebar .category image {
-	margin: 0;
-}
-
-.insidebar .category[selected="true"] {
-	border-bottom: none;
-	border-right: 1px solid rgb(195,206,223);
-	border-top: 1px solid rgb(195,206,223);
-	border-left: 1px solid rgb(195,206,223);
-	border-radius: 5px 5px 0 0;
-}
-
-.insidebar .category {
-	padding: 4px;
-	height: 46px;
-}
-
-.insidebar #view-port-container {
-	height: 1700px;
-}
-
-.insidebar .view-pane {
-	font-size: 9px;
-}
-
-.insidebar .basicinfo-container {
-	width: 100%;
-	display: table-cell;
-}
-
-.insidebar .disabled-postfix,
-.insidebar .update-postfix {
-	font-size: 9px;
-}
-
-.insidebar .view-pane richlistitem {
-	padding: 0 5px 0 5px;
-}
-
-.insidebar .addon .content-container { 
-	margin: 3px 0; 
-	height: 42px; 
-}
-
-.insidebar .warning,
-.insidebar .error,
-.insidebar .pending {
-	margin-left: 0;
-}	
-
-.insidebar .warning-icon,
-.insidebar .pending-icon,
-.insidebar .error-icon {
-	width: 13px;
-	height: 13px;
-}
-
-.insidebar .list .name-container {
-	font-size: 12px;
-}
-
-.insidebar .list image {
-	max-width: 22px;
-	max-height: 22px;
-}
-
-.insidebar .list button {
-	margin: 1px 2px 2px 2px;
-	padding: 0 2px 0 2px;
-}
-
-.insidebar .list richlistitem .description {
-	display: none;
-}
-
-.insidebar .list richlistitem .description-container {
-	margin: 0;
-}
-
-.insidebar #updates-list .date-updated { 
-	font-size: 8px; 
-}
-.insidebar #updates-list .name-container { 
-	font-size: 11px; 
-}
-.insidebar #updates-list .control-container { 
-	font-size: 8px; 
-}
-
-.insidebar .detail-view-container {
-	padding: 0px 4px 0 0;
-}
-
-.insidebar #detail-notifications {
-	margin: 5px 0px 5px 8px;
-}
-
-.insidebar #detail-screenshot {
-	max-width: 100px;
-	max-height: 100px;
-	margin-right: 2px;
-}
-
-.insidebar #detail-autoUpdate radio {
-	margin: 2px 0px 2px 0px;
-}
-
-.insidebar #detail-autoUpdate radio .radio-label-box {
-	margin-left: 0px;
-	padding-left: 0px;
-}
-
-.insidebar #detail-findUpdates-btn {
-	margin-left: 0;
-	margin-right: 0;
-	font-size: 9px;
-}
-
-.insidebar #detail-icon {
-	margin-left: 4px;
-	margin-right: 5px;
-	max-width: 25px;
-	max-height: 25px;
-}
-
-.insidebar #detail-grid .detail-row-label {
-	margin-left: 0;
 }

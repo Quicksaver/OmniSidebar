@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="goURIMainTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<broadcasterset id="mainBroadcasterSet">
+			
+		<broadcaster id="viewURISidebar-twin"
+			autoCheck="false"
+			type="checkbox"
+			goButton="omnisidbarURIGo-twin"
+			textbar="omnisidebarURIBar-twin"
+			anchor="sidebar-header-twin"
+			menu="omnisidebarURIBarMenu-twin"
+			group="sidebar"
+			sidebarurl="about:blank"
+			sidebartitle="about:blank"
+			oncommand="toggleSidebar(this);" />
+	
+	</broadcasterset>
+
+	<popupset id="mainPopupSet">
+		
+		<menupopup id="omnisidebarURIBarMenu-twin"
+			class="omnisidebarURIBarMenu"
+			ignorekeys="true"
+			broadcaster="viewURISidebar-twin"
+			onpopupshown="objName.resetURIBar(this);"
+			onpopuphiding="objName.blurURIBar(this);">
+			<hbox>
+				<textbox id="omnisidebarURIBar-twin"
+					type="autocomplete" 
+					flex="1"
+					broadcaster="viewURISidebar-twin"
+					onkeydown="return objName.keydownURIBar(event, this);"/>
+				<button id="omnisidbarURIGo-twin" 
+					class="omnisidebarURIGo"
+					label="&URISidebar.buttonLabel;"
+					broadcaster="viewURISidebar-twin"
+					oncommand="objName.loadURIBar(this);"/>
+			</hbox>
+		</menupopup>
+	
+	</popupset>
+	
+	<toolbar id="omnisidebarToolbar-twin">
+		
+		<toolbarbutton id="uri_sidebar_button-twin" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
+			removable="false"
+			position="1"
+			label=""
+			tooltiptext="&URISidebar.tooltip;"
+			broadcaster="viewURISidebar-twin"
+			oncommand="objName.openURIBar(this);" />
+	
+	</toolbar>
+	
+</overlay>

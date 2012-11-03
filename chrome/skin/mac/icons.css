@@ -1,34 +1,86 @@
-/* Mac Icon Set */
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul"), url("chrome://global/content/customizeToolbar.xul") {
+	/* Mac Icon Set */
+	
+	/* Set default FF4 icons */
+	#addons_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(0px 96px 24px 72px) !important;
+	}
+	#stylish_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(0px 120px 24px 96px) !important;
+	}
+	
+	#console_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 24px 24px 0px) !important;
+	}
+	#dominspector-sidebar-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 48px 24px 24px) !important;
+	}
+	.uri-sidebar-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 72px 24px 48px) !important;
+	}
+	
+	/* FF4 icons */
+	.omnisidebar-toolbar[coloricons="ff4"] #tools-updatescan-button:not([status="CHANGE"]):not([status="CHANGE_DISABLED"]):not([status="NO_CHANGE_DISABLED"]) {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(0px 144px 24px 120px) !important;
+	}
+	
+	/* Color icons */
+	.omnisidebar-toolbar[coloricons="color"] #bookmarks-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(24px 24px 48px 0px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #history-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(24px 48px 48px 24px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #downloads-button {
+		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
+		-moz-image-region: rect(24px 72px 48px 48px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #addons_sidebar_button {
+		-moz-image-region: rect(24px 96px 48px 72px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #stylish_sidebar_button {
+		-moz-image-region: rect(24px 120px 48px 96px) !important;
+	}
+	
+	.omnisidebar-toolbar[coloricons="color"] #console_sidebar_button {
+		-moz-image-region: rect(24px 24px 48px 0px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #dominspector-sidebar-button {
+		-moz-image-region: rect(24px 48px 48px 24px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] .uri-sidebar-button {
+		-moz-image-region: rect(24px 72px 48px 48px) !important;
+	}
+	
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button {
+		list-style-image: url(chrome://omnisidebar-os/skin/feed.png) !important;
+		-moz-image-region: rect(0px, 24px, 24px, 0px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover:active, 
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover,
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover:active, 
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover {
+		-moz-image-region: rect(48px, 24px, 72px, 0px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"], {
+		-moz-image-region: rect(24px, 24px, 48px, 0px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:hover,
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:active,
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"][checked="true"] {
+		-moz-image-region: rect(72px, 24px, 96px, 0px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"] {
+		-moz-image-region: rect(0px, 24px, 24px, 0px) !important;
+	}
 
-/* Set default FF4 icons */
-#addons_sidebar_button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(0px 96px 24px 72px); }
-#stylish_sidebar_button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(0px 120px 24px 96px); }
-
-.console-sidebar-button { list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png"); -moz-image-region: rect(0px 24px 24px 0px); }
-.dominspector-sidebar-button { list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png"); -moz-image-region: rect(0px 48px 24px 24px); }
-.uri-sidebar-button { list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png"); -moz-image-region: rect(0px 72px 24px 48px); }
-
-/* FF4 icons */
-.omnisidebar-toolbar[coloricons="ff4"] #tools-updatescan-button:not([status="CHANGE"]):not([status="CHANGE_DISABLED"]):not([status="NO_CHANGE_DISABLED"]) { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(0px 144px 24px 120px); }
-
-/* Color icons */
-.omnisidebar-toolbar[coloricons="color"] #bookmarks-button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(24px 24px 48px 0px); }
-.omnisidebar-toolbar[coloricons="color"] #history-button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(24px 48px 48px 24px); }
-.omnisidebar-toolbar[coloricons="color"] #downloads-button { list-style-image: url("chrome://omnisidebar-os/skin/buttons.png"); -moz-image-region: rect(24px 72px 48px 48px); }
-.omnisidebar-toolbar[coloricons="color"] #addons_sidebar_button { -moz-image-region: rect(24px 96px 48px 72px); }
-.omnisidebar-toolbar[coloricons="color"] #stylish_sidebar_button { -moz-image-region: rect(24px 120px 48px 96px); }
-
-.omnisidebar-toolbar[coloricons="color"] .console-sidebar-button { -moz-image-region: rect(24px 24px 48px 0px); }
-.omnisidebar-toolbar[coloricons="color"] .dominspector-sidebar-button { -moz-image-region: rect(24px 48px 48px 24px); }
-.omnisidebar-toolbar[coloricons="color"] .uri-sidebar-button { -moz-image-region: rect(24px 72px 48px 48px); }
-
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button { list-style-image: url(chrome://omnisidebar-os/skin/feed.png); -moz-image-region: rect(0px, 24px, 24px, 0px); }
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover:active, 
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover,
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover:active, 
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover { -moz-image-region: rect(48px, 24px, 72px, 0px); }
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"], { -moz-image-region: rect(24px, 24px, 48px, 0px); }
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:hover,
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:active,
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"][checked="true"] { -moz-image-region: rect(72px, 24px, 96px, 0px); }
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"] { -moz-image-region: rect(0px, 24px, 24px, 0px); }
+}

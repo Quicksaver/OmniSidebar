@@ -1,0 +1,47 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://feedbar/content/sidebar.xul") {
+
+	.inSidebar .toolbox-top #nav-bar,
+	.inSidebar #feedbar-preview {
+		-moz-appearance: none !important;
+		background: rgba(0, 0, 0, 0) !important;
+		padding: 8px !important;
+	}
+	
+	.inSidebar #sidebar-notify #feed_tree {
+		padding-top: 2px !important;
+	}
+	
+	.inSidebar #feedbar-loading-text-container {
+		-moz-appearance: none !important;
+		border: none !important;
+	}
+	
+	.inSidebar #preview-splitter {
+		background: rgba(255,255,255,.5) !important;
+		height: 3px !important;
+		min-height: 1px !important;
+	}
+	
+	.inSidebar #feedbarTooltipSummaryGroupbox {
+		-moz-appearance: none !important;
+		border-style: solid !important;
+		border-width: 1px! important;
+		padding: 3px !important;
+		margin: 0px !important;
+	}
+	
+	.inSidebar #feedbar-loading-text-container {
+		overflow: hidden !important;
+	}
+	
+	.inSidebar .toolbox-top toolbarbutton#all-toggle image {
+		display: none !important;
+	}
+	
+	.inSidebar #navigator-toolbox #search-toggle,
+	.inSidebar #navigator-toolbox #all-toggle {
+		padding: 2px 7px !important;
+	}
+
+}

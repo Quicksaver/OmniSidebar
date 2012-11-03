@@ -1,0 +1,36 @@
+<!ENTITY addonsSidebar.label "Add-ons-Manager">
+<!ENTITY omnisidebarConsole.label "Fehlerkonsole">
+<!ENTITY omnisidebarDMT.label "Downloads">
+<!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
+<!ENTITY omnisidebarButtonMain.label "Erste Sidebar">
+<!ENTITY omnisidebarButtonTwin.label "Zweite Sidebar">
+<!ENTITY omnisidebarOptMisc.label "Allgemein">
+<!ENTITY omnisidebarOptgroupMain.label "Erste Sidebar">
+<!ENTITY omnisidebarOptgroupTwin.label "Zweite Sidebar">
+<!ENTITY omnisidebarOptgroupicons.label "Symbol-Darstellung">
+<!ENTITY omnisidebarOptgroupgen.label "Anzeige">
+<!ENTITY omnisidebarOptgroupfeatures.label "Verhalten">
+<!ENTITY omnisidebarOptgroupperformance.label "Leistung">
+<!ENTITY omnisidebarOptgroupstyle.label "Sidebar-Stil">
+<!ENTITY omnisidebarOptgroupalways.label "Immer in der Sidebar öffnen">
+<!ENTITY omnisidebarOptsidebars.leftlabel "Auf der linken Seite anzeigen">
+<!ENTITY omnisidebarOptsidebars.rightlabel "Auf der rechten Seite anzeigen">
+<!ENTITY omnisidebarOptsidebars.twinlabel "Zweite Sidebar auf der gegenüberliegenden Seite aktivieren">
+<!ENTITY omnisidebarOptrenderabove.label "Aus dem Browserfenster herauslösen und…">
+<!ENTITY omnisidebarOptundockMode.autohide "automatisch seitwärts ausblenden">
+<!ENTITY omnisidebarOptundockMode.noauto "nur auf Befehl ausblenden">
+<!ENTITY omnisidebarOptundockMode.autoclose "automatisch beim Verlieren des Fokus ausblenden">
+<!ENTITY omnisidebarOptglassStyle.label "Glass-Stil auf alle Sidebars anwenden">
+<!ENTITY omnisidebarOptfx.label "Übergangseffekte verwenden">
+<!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms): ">
+<!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms): ">
+<!ENTITY omnisidebarOptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
+<!ENTITY omnisidebarOptalternatebtns.label "Alternativen Stil für Symbole in Sidebar verwenden">
+<!ENTITY omnisidebarOpthideheadertoolbar.label "Symbolleiste in Sidebar ausblenden">
+<!ENTITY omnisidebarOpthideheadertitle.label "Sidebar-Titel ausblenden">
+<!ENTITY omnisidebarOpttitleButton.label "Sidebar-Menü in Titelleiste anzeigen">
+<!ENTITY omnisidebarOpthideheaderdock.label "Schaltfläche zum Herauslösen ausblenden">
+<!ENTITY omnisidebarOpthideheaderclose.label "„Schließen“-Schaltfläche ausblenden">
+<!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (keine Veränderung)">
+<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
+<!ENTITY omnisidebarOptcoloricons.colorlabel "Farbenfroh">

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="menuTitleTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<label id="sidebar-title-twin"
+		TitleButton="true"
+		onclick="objName.openSidebarMenu(event, 'openTwinSidebarMenu');"/>
+	
+	<popupset id="mainPopupSet">
+		
+		<menupopup id="openTwinSidebarMenu"
+			target="sidebar-title-twin"
+			box="sidebar-box-twin"
+			twinSidebar="true"
+			onpopupshowing="objName.populateSidebarMenu(this);"
+			onpopuphiding="objName.closeSidebarMenu(this);"/>
+			
+	</popupset>
+	
+</overlay>

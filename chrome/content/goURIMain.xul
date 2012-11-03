@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="goURIMain-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
+	
+	<broadcasterset id="mainBroadcasterSet">
+			
+		<broadcaster id="viewURISidebar"
+			autoCheck="false"
+			type="checkbox"
+			goButton="omnisidbarURIGo"
+			textbar="omnisidebarURIBar"
+			anchor="sidebar-header"
+			menu="omnisidebarURIBarMenu"
+			group="sidebar"
+			sidebarurl="about:blank"
+			sidebartitle="about:blank"
+			oncommand="toggleSidebar(this);" />
+	
+	</broadcasterset>
+
+	<popupset id="mainPopupSet">
+		
+		<menupopup id="omnisidebarURIBarMenu"
+			class="omnisidebarURIBarMenu"
+			ignorekeys="true"
+			broadcaster="viewURISidebar"
+			onpopupshown="objName.resetURIBar(this);"
+			onpopuphiding="objName.blurURIBar(this);">
+			<hbox>
+				<textbox id="omnisidebarURIBar"
+					type="autocomplete" 
+					flex="1"
+					broadcaster="viewURISidebar"
+					onkeydown="return objName.keydownURIBar(event, this);"/>
+				<button id="omnisidbarURIGo" 
+					class="omnisidebarURIGo"
+					label="&URISidebar.buttonLabel;"
+					broadcaster="viewURISidebar"
+					oncommand="objName.loadURIBar(this);"/>
+			</hbox>
+		</menupopup>
+	
+	</popupset>
+	
+	<toolbar id="omnisidebarToolbar">
+		
+		<toolbarbutton id="uri_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
+			removable="false"
+			position="1"
+			label=""
+			tooltiptext="&URISidebar.tooltip;"
+			broadcaster="viewURISidebar"
+			oncommand="objName.openURIBar(this);" />
+	
+	</toolbar>
+	
+</overlay>

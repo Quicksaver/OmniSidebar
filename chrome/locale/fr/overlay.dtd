@@ -6,8 +6,10 @@
 <!ENTITY BlankSidebar.tooltip "Ouvrir une page vierge dans le panneau latéral">
 <!ENTITY URISidebar.tooltip "Indiquez un emplacement à ouvrir dans le panneau latéral">
 <!ENTITY URISidebar.buttonLabel "Go">
-<!ENTITY omnisidebarConsole.label "Console d'erreurs">
-<!ENTITY omnisidebarDMT.label "Téléchargements">
+<!ENTITY consoleSidebar.label "Console d'erreurs">
+<!ENTITY consoleSidebar.tooltip "Ouvrir la console d'erreurs dans le panneau latéral">
+<!ENTITY dmtSidebar.label "Téléchargements">
+<!ENTITY dmtSidebar.tooltip "Afficher la progression des téléchargements en cours">
 <!ENTITY omnisidebarToolbar.label "Barre d'outils du panneau latéral">
 <!ENTITY omnisidebarToolbarTwin.label "Barre d'outils du panneau latéral secondaire">
 <!ENTITY omnisidebarOptions.title "Options d'OmniSidebar">
@@ -20,52 +22,3 @@
 <!ENTITY omnisidebarButtonClose.tooltip "Fermer le panneau latéral">
 <!ENTITY omnisidebarButtonMainClose.tooltip "Fermer le panneau latéral principal">
 <!ENTITY omnisidebarButtonTwinClose.tooltip "Fermer le anneau latéral secondaire">
-<!ENTITY omnisidebarOptMisc.label "Général">
-<!ENTITY omnisidebarOptgroupMain.label "Panneau latéral principal">
-<!ENTITY omnisidebarOptgroupTwin.label "Panneau latéral secondaire">
-<!ENTITY omnisidebarOptgroupicons.label "Jeu d'icônes boutons de la barre d'outils latérale">
-<!ENTITY omnisidebarOptgroupgen.label "Apparence">
-<!ENTITY omnisidebarOptgroupfeatures.label "Fonctionnalités">
-<!ENTITY omnisidebarOptgroupperformance.label "Performance">
-<!ENTITY omnisidebarOptgroupstyle.label "Style des panneaux latéraux">
-<!ENTITY omnisidebarOptgroupdev.label "Outils de développeurs">
-<!ENTITY omnisidebarOptgroupkeyset.label "Raccourci clavier">
-<!ENTITY omnisidebarOptgroupalways.label "Toujours ouvrir dans le panneau latéral">
-<!ENTITY omnisidebarOptdevTools.label "Activer la barre d'outils latérale de développeurs">
-<!ENTITY omnisidebarOptsidebars.leftlabel "Placer à gauche">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Placer à droite">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Activer le panneau latéral secondaire du côté opposé">
-<!ENTITY omnisidebarOptrenderabove.label "Détacher de la fenêtre du navigateur et">
-<!ENTITY omnisidebarOptundockMode.autohide "Masquer automatiquement de côté">
-<!ENTITY omnisidebarOptundockMode.noauto "Uniquement fermer à la commande">
-<!ENTITY omnisidebarOptundockMode.autoclose "Fermer automatiquement quand il perd le focus">
-<!ENTITY omnisidebarOptglassStyle.label "Appliquer le style verre pour tous les panneaux latéraux">
-<!ENTITY omnisidebarOpttransparency.label "Activé la transparence">
-<!ENTITY omnisidebarOptforceOpen.label "Les entrées de menu et les boutons de barre d'outils latérale ne ferment pas le panneau latéral">
-<!ENTITY omnisidebarOptfx.label "Activer les effets de transition">
-<!ENTITY omnisidebarOptshowDelay.label "Délai d'affichage automatique du panneau latéral (en msec) :">
-<!ENTITY omnisidebarOpthideDelay.label "Délai de masquage automatique du panneau latéral (en msec) :">
-<!ENTITY omnisidebarOptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
-<!ENTITY omnisidebarOptalternatebtns.label "Style alternatif du bouton de la barre d'outils latérale">
-<!ENTITY omnisidebarOpthideheadertoolbar.label "Masquer la barre d'outils latérale">
-<!ENTITY omnisidebarOpthideheadertitle.label "Masquer le titre du panneau latéral">
-<!ENTITY omnisidebarOpttitleButton.label "Menu déroulant du panneau latéral dans le titre">
-<!ENTITY omnisidebarOpthideheaderdock.label "Masquer le bouton d'ancrage">
-<!ENTITY omnisidebarOpthideheaderclose.label "Masquer le bouton de fermeture">
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Défaut (pas de modification)">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Multicolore">
-<!ENTITY omnisidebarOptkeysetItem0.win "Principal : Ctrl+Maj + S              Secondaire : Ctrl+Alt+Maj + S">
-<!ENTITY omnisidebarOptkeysetItem1.win "Principal : Ctrl+Maj + S              Secondaire : Ctrl+Alt+Maj + S">
-<!ENTITY omnisidebarOptkeysetItem2.win "Principal : Ctrl+Maj + L              Secondaire : Ctrl+Alt+Maj + L">
-<!ENTITY omnisidebarOptkeysetItem3.win "Principal : Ctrl+Maj + S              Secondaire : Ctrl+Alt+Maj + L">
-<!ENTITY omnisidebarOptkeysetItem4.win "Principal : Ctrl+Maj + L              Secondaire : Ctrl+Alt+Maj + S">
-<!ENTITY omnisidebarOptkeysetItem5.win "Principal : Ctrl + F6                      Secondaire : Ctrl+Maj + F6">
-<!ENTITY omnisidebarOptkeysetItem6.win "Principal : Ctrl+Maj + Monter              Secondaire : Ctrl+Alt+Maj + Descendre">
-<!ENTITY omnisidebarOptkeysetItem0.mac "Principal : Comans+Maj + S              Secondaire : Command+Alt+Maj + S">
-<!ENTITY omnisidebarOptkeysetItem1.mac "Principal : Command+Maj + S              Secondaire : Command+Alt+Maj + S">
-<!ENTITY omnisidebarOptkeysetItem2.mac "Principal : Command+Maj + L              Secondaire : Command+Alt+Maj + L">
-<!ENTITY omnisidebarOptkeysetItem3.mac "Principal : Command+Maj + S              Secondaire : Command+Alt+Maj + L">
-<!ENTITY omnisidebarOptkeysetItem4.mac "Principal : Command+Maj + L              Secondaire : Command+Alt+Maj + S">
-<!ENTITY omnisidebarOptkeysetItem5.mac "Principal : Command + F6                      Secondaire : Command+Maj + F6">
-<!ENTITY omnisidebarOptkeysetItem6.mac "Principal : Command+Maj + Monter              Secondaire : Command+Alt+Maj + Descendre">

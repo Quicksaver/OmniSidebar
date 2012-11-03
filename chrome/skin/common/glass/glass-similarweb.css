@@ -1,0 +1,231 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://similarweb/content/similarweb.xul") {
+	
+	.inSidebar .siteHistoryTabButton[selected="true"] {
+		border-color: rgb(174, 183, 196) !important;
+		background-color: rgba(255, 255, 255, 0.57) !important;
+	}
+	
+	.inSidebar #boxTopSites .topSitesSiteLinklabel,
+	.inSidebar #boxSiteHistory *,
+	.inSidebar #allReviews *,
+	.inSidebar #boxRealResults .facebookSingleResult *,
+	.inSidebar #boxRelatedSites .siteDiv *,
+	.inSidebar .topSitesTop5Label,
+	.inSidebar #boxSiteInfo .newsResultBox * {
+		color: black !important;
+	}
+	
+	.inSidebar #boxSiteInfo .twitTextToUser,
+	.inSidebar #newReview .addReviewLink,
+	.inSidebar #newReview .addReviewBtn {
+		color: rgb(0, 151, 216) !important;
+	}
+	
+	.inSidebar #boxRelatedSites .siteDiv,
+	.inSidebar #boxTopSites .topSitesSingleSiteResultBox,
+	.inSidebar #boxSiteInfo .newsResultBox,
+	.inSidebar #boxSiteHistory .siteHistorySingleSite,
+	.inSidebar #boxSiteHistory .siteHistorySingleSiteInner,
+	.inSidebar #allReviews .reviewContainer,
+	.inSidebar #boxRealResults .facebookSingleResult {
+		background: none !important;
+		border: none !important;
+		color: black !important;
+		border-radius: 0px !important;
+	}
+	
+	.inSidebar #boxRelatedSites .siteDiv:hover,
+	.inSidebar #boxTopSites .topSitesSingleSiteResultBox:hover,
+	.inSidebar #boxSiteInfo .newsResultBox:hover,
+	.inSidebar #boxSiteHistory .siteHistorySingleSite:hover,
+	.inSidebar #allReviews .reviewContainer:hover,
+	.inSidebar #newReview .addReviewLink:hover,
+	.inSidebar #boxRealResults .facebookSingleResult:hover {
+		background: rgba(255,255,255,.3) !important;
+		border-left: none !important;
+		border-right: none !important;
+	}
+	
+	.inSidebar #boxSiteHistory .siteHistorySingleSite,
+	.inSidebar #boxSiteHistory .siteHistorySingleSiteInner,
+	.inSidebar #boxSiteHistory .siteHistorySingleSiteInner:hover {
+		border: none !important;
+		padding: 1px !important;
+	}
+	
+	.inSidebar #boxRealResults .facebookSingleResult,
+	.inSidebar #boxRealResults .facebookSingleResult:hover {
+		padding: 3px !important;
+	}
+	
+	.inSidebar #boxRelatedSites .siteDiv,
+	.inSidebar #boxSiteInfo .newsResultBox {
+		margin: 0 !important;
+		padding: 2px !important;
+	}
+	
+	.inSidebar #allReviews .reviewContainer {
+		padding: 4px !important;
+	}
+	
+	.inSidebar #boxRelatedSites {
+		margin-top: 8px !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar .sidebarHeader {
+		background: none !important;
+		height: 26px !important;
+		min-height: 26px !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #separatorBox {
+		display: none !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #boxTabsTitle {
+		margin-left: 7px !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #boxTabsTitle * {
+		border-bottom: none !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #boxTabsTitle vbox:not(#shareBox) {
+		min-width: 24px !important;
+		background-position: center !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #boxTabsTitle vbox:not(#shareBox)[selected="true"] {
+		border-color: rgb(174, 183, 196) !important;
+		background-color: rgba(255, 255, 255, 0.57) !important;
+		border-radius: 5px 5px 0 0 !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #stackTabsData,
+	.inSidebar #sitehistory_tabs,
+	.inSidebar #sitehistory_tabs *,
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > slider {
+		background: none !important;
+	}
+	
+	.inSidebar .siteHistoryTabButton {
+		border: 1px solid transparent !important;
+		border-bottom-color: rgb(174, 183, 196) !important;
+	}
+	
+	.inSidebar .siteHistoryTabButton[selected="true"] {
+		border-radius: 5px 5px 0 0 !important;
+		border-bottom-color: transparent !important;
+		font-weight: bold !important;
+	}
+	
+	.inSidebar #boxSiteHistoryResults .sw_tab_spacer {
+		border-color: rgb(174, 183, 196) !important;
+	}
+	
+	.inSidebar #newReview .addReviewLink:hover,
+	.inSidebar #boxTopSites .topSitesSiteLinklabel:hover,
+	.inSidebar #boxSiteInfo .newsResultBox *:not(.twitTextToUser):hover {
+		text-decoration: none !important;
+	}
+	
+	.inSidebar .sidebarTitle {
+		background: rgba(255,255,255,.3) !important;
+		color: black !important;
+		font-weight: bold !important;
+	}
+	
+	.inSidebar #boxRelatedSites .siteHeadlineLinkText {
+		font-weight: bold !important;
+	}
+	
+	.inSidebar #boxRelatedSites .divForDescription,
+	.inSidebar #boxRelatedSites .siteUrlDiv {
+		font-size: 11px !important;
+	}
+	
+	.inSidebar #boxRelatedSites .siteUrlDiv {
+		bottom: 5px !important;
+		position: absolute !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #btnOptionsMenu {
+		width: 34px !important;
+		height: 20px !important;
+		min-width: 34px !important;
+		min-height: 20px !important;
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #btnOptionsMenu:after {
+		content: url('chrome://similarweb/skin/Setting_icon.png') !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #btnShare {
+		width: 28px !important;
+		height: 20px !important;
+		min-width: 28px !important;
+		min-height: 20px !important;
+		margin-top: 0 !important;
+		margin-bottom: 2px !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #btnShare:after {
+		content: url("chrome://similarweb/content/images/Share_Right_REGULAR.png") !important;
+	}
+	
+	.inSidebar #btnAddSite {
+		width: 110px !important;
+		background: none !important;
+	}
+	
+	.inSidebar #btnAddSite.addSiteButtonNoResults {
+		width: 165px !important;
+	}
+	
+	.inSidebar #btnAddSite:after {
+		content: url("chrome://similarweb/skin/add_site.png") " Add Similar Site" !important;
+		background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
+		padding-top: 5px !important;
+		left: 25px !important;
+		position: relative !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar #btnAddSite:after {
+		padding-top: 5px !important;
+	}	
+	
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"],
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
+		width: auto !important;
+		min-width: 0px !important;
+		max-width: none !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] {
+		margin-top: 3px !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"] {
+		margin-bottom: 3px !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] > slider,
+	#sbSimilarWebSidebar.inSidebar:hover scrollbar[orient="vertical"] > slider,
+	#sbSimilarWebSidebar.inSidebar:hover scrollbar[orient="vertical"] > slider[disabled="true"] {
+		width: auto !important;
+		min-width: 0px !important;
+		max-width: none !important;
+		margin: 0 !important;
+	}
+	
+	#sbSimilarWebSidebar.inSidebar scrollbar[orient="vertical"] {
+		width: auto !important;
+		min-width: 7px !important;
+		max-width: none !important;
+		margin-right: 4px !important;
+	}
+
+}

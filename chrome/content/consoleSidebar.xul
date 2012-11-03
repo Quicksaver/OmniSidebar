@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="consoleSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<!-- the console broadcaster won't be used if it finds Console2 to be active -->
+
 	<broadcasterset id="mainBroadcasterSet">
-		<broadcaster id="viewConsoleSidebar"
+	
+		<broadcaster id="viewConsole1Sidebar"
 			label="&consoleSidebar.label;"
 			tooltiptext="&consoleSidebar.tooltip;" 
 			autoCheck="false"
@@ -10,6 +12,16 @@
 			group="sidebar"
 			sidebarurl="chrome://global/content/console.xul"
 			sidebartitle="&consoleSidebar.label;"
-			oncommand="toggleSidebar('viewConsoleSidebar');" />
+			oncommand="toggleSidebar(this);" />
+			
 	</broadcasterset>
+	
+	<menupopup id="viewSidebarMenu">
+		
+		<menuitem id="menu_console1Sidebar"
+			accesskey="E"
+			observes="viewConsole1Sidebar" />
+			
+	</menupopup>
+	
 </overlay>
