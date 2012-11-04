@@ -39,13 +39,23 @@
 	}
 	
 	.sidebar-splitter {
-		border: 0 !important;
-		-moz-border-end: 1px solid #A9B7C9 !important;
+		border: none;
 		min-width: 0 !important;
 		width: 3px;
 		background-color: transparent !important;
 		-moz-margin-start: -3px;
 		position: relative;
+	}
+	
+	#sidebar-splitter.sidebar-splitter:not([movetoright]),
+	#sidebar-splitter-twin.sidebar-splitter[movetoleft] {
+		border-left: none;
+		border-right: 1px solid rgb(169, 183, 201);
+	}
+	#sidebar-splitter.sidebar-splitter[movetoright],
+	#sidebar-splitter-twin.sidebar-splitter:not([movetoleft]) {
+		border-left: 1px solid rgb(169, 183, 201);
+		border-right: none;
 	}
 	
 	/* Hide a bunch of stuff */

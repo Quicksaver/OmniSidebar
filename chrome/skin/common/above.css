@@ -79,9 +79,11 @@
 	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
 	#sidebar-box-twin[movetoleft] .omnisidebar_resizer {
 		border-left: 1px solid rgb(169, 183, 201);
+		border-right: none;
 	}
 	#sidebar-box[movetoright] .omnisidebar_resizer,
 	#sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
+		border-left: none;
 		border-right: 1px solid rgb(169, 183, 201);
 	}
 	.sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
