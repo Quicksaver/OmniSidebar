@@ -48,7 +48,7 @@
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
 			removable="false"
 			position="1"
-			label=""
+			label="&URISidebar.buttonLabel;"
 			tooltiptext="&URISidebar.tooltip;"
 			broadcaster="viewURISidebar-twin"
 			oncommand="objName.openURIBar(this);" />

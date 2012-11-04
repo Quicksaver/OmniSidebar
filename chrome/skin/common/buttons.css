@@ -96,7 +96,15 @@
 	}
 	
 	
-	:not(#TabsToolbar) .adequate-size .toolbarbutton-icon { height: 24px; }
-	#TabsToolbar .adequate-size .toolbarbutton-icon { height: 16px; }
+	#navigator-toolbox[iconsize="small"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon,
+	#navigator-toolbox[mode="full"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon {
+		height: 18px;
+	}
+	#navigator-toolbox:not([mode="full"])[iconsize="large"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon { height: 24px; }
+	
+	#TabsToolbar .sidebarController.adequate-size .toolbarbutton-icon { height: 16px; }
+	#TabsToolbar :not(.sidebarController).adequate-size .toolbarbutton-icon { height: 20px; }
+	
+	#navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
 
 }

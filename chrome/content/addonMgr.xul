@@ -27,7 +27,7 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		
 		<toolbarbutton id="addons_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
 			observes="viewAddonSidebar" />

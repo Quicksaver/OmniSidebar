@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.8';
+moduleAid.VERSION = '2.1.9';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -716,17 +716,21 @@ this.overlayAid = {
 					
 					case 'removeToolbar':
 						if(action.node && action.toolboxid) {
-							var addExternal = true;
 							var toolbox = aWindow.document.getElementById(action.toolboxid);
 							if(toolbox) {
-								for(var t=0; t<toolbox.externalToolbars.length; t++) {
-									if(toolbox.externalToolbars[t] == action.node) {
-										addExternal = false;
-										break;
+								action.node.setAttribute('mode', toolbox.getAttribute('mode'));
+								
+								if(toolbox != action.node.parentNode) {
+									var addExternal = true;
+									for(var t=0; t<toolbox.externalToolbars.length; t++) {
+										if(toolbox.externalToolbars[t] == action.node) {
+											addExternal = false;
+											break;
+										}
 									}
-								}
-								if(addExternal) {
-									toolbox.externalToolbars.push(action.node);
+									if(addExternal) {
+										toolbox.externalToolbars.push(action.node);
+									}
 								}
 							}
 						}
@@ -993,26 +997,36 @@ this.overlayAid = {
 	},
 	
 	addToolbars: function(aWindow, node) {
-		if(node.nodeName == 'toolbar' && node.id && node.getAttribute('toolboxid') && node.parentNode && node.parentNode.nodeName != 'toolbox') {
-			var addExternal = true;
-			var toolbox = aWindow.document.getElementById(node.getAttribute('toolboxid'));
-			if(toolbox) {
-				for(var t=0; t<toolbox.externalToolbars.length; t++) {
-					if(toolbox.externalToolbars[t] == node) {
-						addExternal = false;
-						break;
-					}
-				}
-				if(addExternal) {
-					toolbox.externalToolbars.push(node);
-				}
+		if(node.nodeName == 'toolbar' && node.id) {
+			var toolbox = null;
+			if(node.getAttribute('toolboxid')) {
+				toolbox = aWindow.document.getElementById(node.getAttribute('toolboxid'));
+			} else if(node.parentNode && node.parentNode.nodeName == 'toolbox') {
+				toolbox = node.parentNode;
 			}
 			
-			this.traceBack(aWindow, {
-				action: 'addToolbar',
-				node: node,
-				toolboxid: node.getAttribute('toolboxid')
-			});
+			if(toolbox) {
+				node.setAttribute('mode', toolbox.getAttribute('mode'));
+				
+				if(toolbox != node.parentNode) {
+					var addExternal = true;
+					for(var t=0; t<toolbox.externalToolbars.length; t++) {
+						if(toolbox.externalToolbars[t] == node) {
+							addExternal = false;
+							break;
+						}
+					}
+					if(addExternal) {
+						toolbox.externalToolbars.push(node);
+					}
+					
+					this.traceBack(aWindow, {
+						action: 'addToolbar',
+						node: node,
+						toolboxid: node.getAttribute('toolboxid')
+					});
+				}
+			}
 		}
 		
 		for(var nc=0; nc<node.childNodes.length; nc++) {
@@ -1021,13 +1035,15 @@ this.overlayAid = {
 	},
 	
 	removeToolbars: function(aWindow, node) {
-		if(node.nodeName == 'toolbar' && node.id && node.getAttribute('toolboxid') && node.parentNode && node.parentNode.nodeName != 'toolbox') {
-			var toolbox = aWindow.document.getElementById(node.getAttribute('toolboxid'));
-			if(toolbox) {
-				for(var et=0; et<toolbox.externalToolbars.length; et++) {
-					if(toolbox.externalToolbars[et] == node) {
-						toolbox.externalToolbars.splice(et, 1);
-						break;
+		if(node.nodeName == 'toolbar' && node.id && (node.getAttribute('toolboxid') || node.parentNode.nodeName == 'toolbox')) {
+			if(node.getAttribute('toolboxid') && node.parentNode && node.parentNode.nodeName != 'toolbox') {
+				var toolbox = aWindow.document.getElementById(node.getAttribute('toolboxid'));
+				if(toolbox) {
+					for(var et=0; et<toolbox.externalToolbars.length; et++) {
+						if(toolbox.externalToolbars[et] == node) {
+							toolbox.externalToolbars.splice(et, 1);
+							break;
+						}
 					}
 				}
 			}
@@ -1035,7 +1051,7 @@ this.overlayAid = {
 			this.traceBack(aWindow, {
 				action: 'removeToolbar',
 				node: node,
-				toolboxid: node.getAttribute('toolboxid')
+				toolboxid: node.getAttribute('toolboxid') || node.parentNode.id
 			});
 		}
 		

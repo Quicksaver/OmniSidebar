@@ -5,7 +5,8 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 	
 		<toolbarbutton id="omnisidebar_button-twin" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
+			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController adequate-size"
+			unloaded="true"
 			label="&omnisidebarButtonTwin.label;"
 			tooltiptext="&omnisidebarButtonTwin.tooltip;" 
 			onload="objName.buttonLabels(this, true);"

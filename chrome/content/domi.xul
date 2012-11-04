@@ -27,7 +27,9 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		
 		<toolbarbutton id="dominspector_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional"
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
+			label="&DOMInspectorSidebar.label;"
+			tooltiptext="&DOMInspectorSidebar.tooltip;"
 			observes="viewDOMInspectorSidebar" />
 		
 	</toolbarpalette>

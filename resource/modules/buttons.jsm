@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -58,6 +58,7 @@ this.customizeButtonModifiers = function() {
 this.buttonLabels = function(btn, onLoad) {
 	if(!btn) { return; }
 	
+	btn.removeAttribute('unloaded');
 	if(btn == mainSidebar.button) {
 		var box = mainSidebar.box;
 		var check = !box || box.hidden || customizing;

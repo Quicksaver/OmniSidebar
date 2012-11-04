@@ -16,7 +16,7 @@
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
-	#dominspector-sidebar-button {
+	#dominspector_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
