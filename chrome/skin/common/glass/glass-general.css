@@ -81,7 +81,8 @@
 .inSidebar #panoTabGroupTree,
 .inSidebar #ybbookmarks-tree-tags,
 .inSidebar #ybbookmarks-tree-bookmarks,
-.inSidebar #bookmarks-content-box {
+.inSidebar #bookmarks-content-box,
+.inSidebar #RIL_sidebar {
 	-moz-appearance: none !important;
 	border: 1px solid rgb(174, 183, 196) !important;
 	border-radius: 5px !important;
@@ -134,7 +135,9 @@
 .inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(selected),
 .inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(hover),
 .inSidebar #places-content-view treechildren::-moz-tree-row(selected),
-.inSidebar #places-content-view treechildren::-moz-tree-row(hover) {
+.inSidebar #places-content-view treechildren::-moz-tree-row(hover),
+
+.inSidebar .RIL_row:hover {
 	color: black !important;
 	background: rgba(255,255,255,.3) !important;
 }
@@ -159,9 +162,7 @@
 .inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open),
 .inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-cell-text(container, open, selected),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open),
-.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open, selected) {
-	color: black !important;
-}
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open, selected),
 
 .inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
 .inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, hover),
@@ -186,9 +187,7 @@
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, hover),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf),
-.inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf, hover) {
-	color: black !important;
-}
+.inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf, hover),
 
 .inSidebar #downloadView > richlistitem {
 	color: black !important;

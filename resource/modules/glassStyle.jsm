@@ -14,6 +14,7 @@ moduleAid.LOADMODULE = function() {
 	styleAid.load('glassStyleAddons', 'glass/glass-addons');
 	styleAid.load('glassStyleStylish', 'glass/glass-stylish');
 	styleAid.load('glassStyleDOMInspector', 'glass/glass-domi');
+	styleAid.load('glassStylePocket', 'glass/glass-pocket');
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -30,4 +31,5 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('glassStyleAddons');
 	styleAid.unload('glassStyleStylish');
 	styleAid.unload('glassStyleDOMInspector');
+	styleAid.unload('glassStylePocket');
 };
