@@ -6,7 +6,6 @@
 	
 		<toolbarbutton id="omnisidebar_button-twin" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController adequate-size"
-			unloaded="true"
 			label="&omnisidebarButtonTwin.label;"
 			tooltiptext="&omnisidebarButtonTwin.tooltip;" 
 			onload="objName.buttonLabels(this, true);"

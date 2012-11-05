@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -54,11 +54,10 @@ this.customizeButtonModifiers = function() {
 };
 
 // Keep the button label and tooltip when the observe attribute changes
-// Don't add this to VARSLIST so the replacement in UNLOADMODULE takes hold
 this.buttonLabels = function(btn, onLoad) {
 	if(!btn) { return; }
 	
-	btn.removeAttribute('unloaded');
+	aSync(function() { btn.setAttribute('loaded', 'true'); });
 	if(btn == mainSidebar.button) {
 		var box = mainSidebar.box;
 		var check = !box || box.hidden || customizing;

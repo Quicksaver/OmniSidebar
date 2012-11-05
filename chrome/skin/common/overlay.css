@@ -5,9 +5,9 @@
 	
 	/* Tricks needed */
 	/* prevent showing the full firefox iconset on the buttons before the stylsheet with their actual images loads */
-	#omnisidebar_button[unloaded="true"] .toolbarbutton-icon,
-	#omnisidebar_button-twin[unloaded="true"] .toolbarbutton-icon {
-		height: 0px;
+	#omnisidebar_button:not([loaded]) .toolbarbutton-icon,
+	#omnisidebar_button-twin:not([loaded]) .toolbarbutton-icon {
+		height: 0px !important;
 	}
 	
 }
