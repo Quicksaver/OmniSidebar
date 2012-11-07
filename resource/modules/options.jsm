@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('mainMenuPopup', function() { return $('mainKeyset-menupopup'); });
 this.__defineGetter__('twinMenuPopup', function() { return $('twinKeyset-menupopup'); });
@@ -114,6 +114,10 @@ moduleAid.LOADMODULE = function() {
 	if(Services.appinfo.OS == 'WINNT' || Services.appinfo.OS == 'Darwin') {
 		$('omnisidebar_coloroption').removeAttribute('hidden');
 		$('omnisidebar_coloroptionTwin').removeAttribute('hidden');
+		
+		if(Services.appinfo.OS == 'Darwin') {
+			overlayAid.overlayWindow(window, 'optionsMac');
+		}
 	}
 	
 	fillKeycodes();

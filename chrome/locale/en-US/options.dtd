@@ -49,7 +49,7 @@
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">
 
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Sidebar Keyboard Shortcut">
-<!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
+<!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
 <!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
 <!ENTITY omnisidebarOptKeyboardShortcut.command "Command">

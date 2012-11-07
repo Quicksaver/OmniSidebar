@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
+<overlay id="optionsMac-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<checkbox id="accelCheckboxMain" label="&omnisidebarOptKeyboardShortcut.command;"/>
+	<checkbox id="altCheckboxMain" label="&omnisidebarOptKeyboardShortcut.option;"/>
+	<checkbox id="accelCheckboxTwin" label="&omnisidebarOptKeyboardShortcut.command;"/>
+	<checkbox id="altCheckboxTwin" label="&omnisidebarOptKeyboardShortcut.option;"/>
+	
+</overlay>

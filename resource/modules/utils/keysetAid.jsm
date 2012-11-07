@@ -1,13 +1,32 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 moduleAid.LAZY = true;
 
+// keysetAid - handles editable keysets for the add-on
+//	register(key) - registers a keyset from object key
+//		key - (obj):
+//			id - (string) id for the key element
+//			(either this or oncommand) command - (string) id of command element to trigger
+//			(either this or command) oncommand - (string) action to perform
+//			keycode - (string) either a key to press (e.g. 'A') or a keycode to watch for (e.g. 'VK_F8'); some keys/keycodes don't work, see below notes.
+//			accel: (bool) true if control key (command key on mac) should be pressed
+//			shift: (bool) true if shift key should be pressed
+//			alt: (bool) true if alt key (options key on mac) should be pressed
+//	unregister(key) - unregisters a keyset
+//		see register()
+//	compareKeys(a, b, justModifiers) - compares two keysets, returns true if they have the same specs (keycode and modifiers), returns false otherwise
+//		a - (obj) keyset to compare, see register()
+//		b - (obj) keyset to compare, see register()
+//		(optional) justModifiers - if true only the modifiers will be compared and the keycode will be ignored, defaults to false
+//	exists(key, ignore) - returns (bool) true if key with provided keycode and modifiers already exists, returns (bool) false otherwise. Returns null if no browser window is opened.
+//		(optional) ignore - if true, keysets registered by this object are ignored, defaults to false
+//		see register()
 this.keysetAid = {
 	registered: [],
 	queued: [],
 	
 	// Numbers don't work, only managed to customize Ctrl+Alt+1 and Ctrl+Alt+6, probably because Ctrl+Alt -> AltGr and Shift+Number inserts an alternate char in most keyboards
-	// Ctrl+Page Up/Down toggles tabs.
 	unusable: [
+		// Ctrl+Page Up/Down toggles tabs.
 		{
 			id: 'native_togglesTabs',
 			accel: true,
@@ -21,7 +40,40 @@ this.keysetAid = {
 			shift: false,
 			alt: false,
 			keycode: 'VK_PAGE_DOWN'
+		},
+		// Ctrl+F4 closes current tab
+		// Alt+F4 closes current window
+		{
+			id: 'close_current_tab',
+			accel: true,
+			shift: false,
+			alt: false,
+			keycode: 'VK_F4'
+		},
+		{
+			id: 'close_current_window',
+			accel: false,
+			shift: false,
+			alt: true,
+			keycode: 'VK_F4'
+		},
+		// F10 Toggles menu bar
+		{
+			id: 'toggle_menubar',
+			accel: false,
+			shift: false,
+			alt: false,
+			keycode: 'VK_F10'
+		},
+		// F7 toggle caret browsing
+		{
+			id: 'toggle_caret_browsing',
+			accel: false,
+			shift: false,
+			alt: false,
+			keycode: 'VK_F7'
 		}
+		
 	],
 	
 	// Restricts available key combos, I'm setting all displaying keys and other common ones to at least need the Ctrl key
@@ -74,6 +126,16 @@ this.keysetAid = {
 		}
 	},
 	
+	compareKeys: function(a, b, justModifiers) {
+		if((a.keycode == b.keycode || justModifiers)
+		&& a.accel == b.accel
+		&& a.shift == b.shift
+		&& a.alt == b.alt) {
+			return true;
+		}
+		return false;
+	},
+	
 	prepareKey: function(key) {
 		var newKey = {
 			id: key.id || null,
@@ -85,16 +147,6 @@ this.keysetAid = {
 			alt: key.alt || false
 		};
 		return newKey;
-	},
-	
-	compareKeys: function(a, b, justModifiers) {
-		if((a.keycode == b.keycode || justModifiers)
-		&& a.accel == b.accel
-		&& a.shift == b.shift
-		&& a.alt == b.alt) {
-			return true;
-		}
-		return false;
 	},
 	
 	getAllSets: function(aWindow) {
@@ -217,6 +269,7 @@ this.keysetAid = {
 	
 	exists: function(key, ignore, allSets) {
 		if(!allSets) { allSets = this.getAllSets(); }
+		if(!allSets) { return null; }
 		
 		for(var k=0; k<allSets.length; k++) {
 			if(ignore && allSets[k].self) {
