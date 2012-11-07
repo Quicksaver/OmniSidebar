@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.browser = $('browser');
 
@@ -223,6 +223,8 @@ this.setAbove = function(bar) {
 		if(!UNLOADED && !bar.box.hidden) {
 			fireSidebarFocusedEvent(bar.twin);
 		}
+	} else {
+		dispatch(bar.box, { type: 'sidebarDocked', cancelable: false });
 	}
 };
 
@@ -243,7 +245,6 @@ moduleAid.LOADMODULE = function() {
 		function() { window[objName].toggleDockerStatus(window[objName].twinSidebar); }
 	);
 	moduleAid.load('autohide');
-	moduleAid.load('autoclose');
 	
 	listenerAid.add(window, 'sidebarWidthChanged', setAboveWidth);
 	
@@ -286,7 +287,6 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('undockMode', setUndockModeMain);
 	prefAid.unlisten('undockModeTwin', setUndockModeTwin);
 	
-	moduleAid.unload('autoclose');
 	moduleAid.unload('autohide');
 	if(UNLOADED) {
 		styleAid.unload('aboveSheet');

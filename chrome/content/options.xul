@@ -13,6 +13,8 @@
 			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
 			<preference id="pref-undockMode" name="extensions.omnisidebar.undockMode" type="string"/>
 			<preference id="pref-undockModeTwin" name="extensions.omnisidebar.undockModeTwin" type="string"/>
+			<preference id="pref-autoClose" name="extensions.omnisidebar.autoClose" type="bool"/>
+			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
 			<preference id="pref-hideheadertoolbar" name="extensions.omnisidebar.hideheadertoolbar" type="bool"/>
 			<preference id="pref-hideheadertitle" name="extensions.omnisidebar.hideheadertitle" type="bool"/>
 			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
@@ -75,7 +77,7 @@
 									preference="pref-renderabove"/></caption>
 								<radiogroup preference="pref-undockMode">
 									<radio dependson="pref-renderabove" label="&omnisidebarOptundockMode.autohide;" value="autohide"/>
-									<radio dependson="pref-renderabove" label="&omnisidebarOptundockMode.autoclose;" value="autoclose"/>
+									<checkbox label="&omnisidebarOptundockMode.autoclose;" preference="pref-autoClose"/>
 									<radio dependson="pref-renderabove" label="&omnisidebarOptundockMode.noauto;" value="noauto"/>
 								</radiogroup>
 							</groupbox>
@@ -208,7 +210,7 @@
 									preference="pref-renderaboveTwin"/></caption>
 								<radiogroup preference="pref-undockModeTwin">
 									<radio dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.autohide;" value="autohide"/>
-									<radio dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.autoclose;" value="autoclose"/>
+									<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptundockMode.autoclose;" preference="pref-autoCloseTwin"/>
 									<radio dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.noauto;" value="noauto"/>
 								</radiogroup>
 							</groupbox>

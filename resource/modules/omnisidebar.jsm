@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.customizing = false;
 
@@ -35,6 +35,7 @@ this.mainSidebar = {
 	lastCommandReset: function() { return prefAid.reset('lastcommand'); },
 	get above () { return prefAid.renderabove; },
 	get undockMode () { return prefAid.undockMode; },
+	get autoClose () { return prefAid.autoClose; },
 	get switcher () { return $('omnisidebar_switch'); },
 	get goURI () { return $('viewURISidebar'); }
 };
@@ -72,6 +73,7 @@ this.twinSidebar = {
 	lastCommandReset: function() { return prefAid.reset('lastcommandTwin'); },
 	get above () { return prefAid.renderaboveTwin; },
 	get undockMode () { return prefAid.undockModeTwin; },
+	get autoClose () { return prefAid.autoCloseTwin; },
 	get switcher () { return $('omnisidebar_switch-twin'); },
 	get goURI () { return $('viewURISidebar-twin'); }
 };

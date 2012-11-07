@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -194,9 +194,11 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('menus');
 	moduleAid.load('renderAbove');
 	moduleAid.load('goURI');
+	moduleAid.load('autoclose');
 };
 
 moduleAid.UNLOADMODULE = function() {
+	moduleAid.unload('autoclose');
 	moduleAid.unload('goURI');
 	moduleAid.unload('renderAbove');
 	moduleAid.unload('menus');
