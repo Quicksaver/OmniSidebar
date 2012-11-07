@@ -119,7 +119,7 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, "change", dependsOn.changed, false);
 	
-	if(UNLOADED && UNLOADED != APP_SHUTDOWN) {
+	if(UNLOADED) {
 		window.close();
 	}
 };

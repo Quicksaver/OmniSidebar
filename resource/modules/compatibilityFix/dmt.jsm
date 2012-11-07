@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.DMTbackups = {};
 
@@ -109,7 +109,7 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrFix);
 	
-	if(UNLOADED && UNLOADED != APP_SHUTDOWN) {
+	if(UNLOADED) {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') { closeSidebar(twinSidebar); }
 	}

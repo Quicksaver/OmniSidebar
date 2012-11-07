@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.addonMgrBackups = null;
 
@@ -62,10 +62,8 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('alwaysAddons', toggleAlwaysAddons);
 	
 	if(UNLOADED) {
-		if(UNLOADED != APP_SHUTDOWN) {
-			if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') { closeSidebar(mainSidebar); }
-			if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') { closeSidebar(twinSidebar); }
-		}
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') { closeSidebar(twinSidebar); }
 		styleAid.unload('addonMgrSidebar');
 	}
 	

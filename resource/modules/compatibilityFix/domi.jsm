@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.doDOMICommand = function() {
 	delete holdBroadcasters.domi;
@@ -40,10 +40,8 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	if(UNLOADED) {
-		if(UNLOADED != APP_SHUTDOWN) {
-			if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewDOMInspectorSidebar') { closeSidebar(mainSidebar); }
-			if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewDOMInspectorSidebar') { closeSidebar(twinSidebar); }
-		}
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewDOMInspectorSidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewDOMInspectorSidebar') { closeSidebar(twinSidebar); }
 	}
 	
 	overlayAid.removeOverlayWindow(window, 'domi');

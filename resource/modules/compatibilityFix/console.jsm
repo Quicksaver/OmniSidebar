@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.whichConsole = '1';
 this.consoleBackups = {};
@@ -87,10 +87,8 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('alwaysConsole', toggleAlwaysConsole);
 	
 	if(UNLOADED) {
-		if(UNLOADED != APP_SHUTDOWN) {
-			if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewConsole1Sidebar') { closeSidebar(mainSidebar); }
-			if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewConsole1Sidebar') { closeSidebar(twinSidebar); }
-		}
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewConsole1Sidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewConsole1Sidebar') { closeSidebar(twinSidebar); }
 		styleAid.unload('consoleFix');
 	}
 };
