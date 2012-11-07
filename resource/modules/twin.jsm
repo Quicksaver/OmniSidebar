@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
@@ -102,13 +102,13 @@ moduleAid.LOADMODULE = function() {
 		}
 	);
 	
-	twinTriggers.__defineGetter__('twinButton', function() { return twinSidebar.button; });
-	blankTriggers.__defineGetter__('twinButton', function() { return twinSidebar.button; });
+	twinTriggers.__defineGetter__('twinCommand', function() { return $('cmd_twinSidebar'); });
+	blankTriggers.__defineGetter__('twinCommand', function() { return $('cmd_twinSidebar'); });
 };
 
 moduleAid.UNLOADMODULE = function() {
-	delete twinTriggers.twinButton;
-	delete blankTriggers.twinButton;
+	delete twinTriggers.twinCommand;
+	delete blankTriggers.twinCommand;
 	
 	listenerAid.remove(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);
 	

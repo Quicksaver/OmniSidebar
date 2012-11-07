@@ -47,3 +47,20 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Default (no change)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">
+
+<!ENTITY omnisidebarOptKeyboardShortcut.caption "Sidebar Keyboard Shortcut">
+<!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
+<!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
+<!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
+<!ENTITY omnisidebarOptKeyboardShortcut.command "Command">
+<!ENTITY omnisidebarOptKeyboardShortcut.option "Option">
+<!ENTITY omnisidebarOptKeyboardShortcut.none "None">
+<!ENTITY omnisidebarOptKeyboardShortcut.spacebar "Spacebar">
+<!ENTITY omnisidebarOptKeyboardShortcut.pageup "Page Up">
+<!ENTITY omnisidebarOptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY omnisidebarOptKeyboardShortcut.end "End">
+<!ENTITY omnisidebarOptKeyboardShortcut.home "Home">
+<!ENTITY omnisidebarOptKeyboardShortcut.left "Left">
+<!ENTITY omnisidebarOptKeyboardShortcut.up "Up">
+<!ENTITY omnisidebarOptKeyboardShortcut.right "Right">
+<!ENTITY omnisidebarOptKeyboardShortcut.down "Down">

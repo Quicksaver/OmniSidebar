@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.6';
+moduleAid.VERSION = '2.0.7';
 moduleAid.LAZY = true;
 
 // window - Similarly to windowMediator.callOnMostRecent, the window property returns the most recent navigator:browser window object
@@ -33,6 +33,8 @@ this.__defineGetter__('stringsAid', function() { delete this.stringsAid; moduleA
 
 // objectWatcher - This acts as a replacement for the event DOM Attribute Modified, works for both attributes and object properties
 this.__defineGetter__('objectWatcher', function() { delete this.objectWatcher; moduleAid.load('utils/objectWatcher'); return objectWatcher; });
+
+this.__defineGetter__('keysetAid', function() { windowMediator; delete this.keysetAid; moduleAid.load('utils/keysetAid'); return keysetAid; });
 
 // xmlHttpRequest() - aid for quickly using the nsIXMLHttpRequest interface
 this.xmlHttpRequest = function(url, callback, method, async) { loadSandboxTools(); return xmlHttpRequest(url, callback, method, async); };

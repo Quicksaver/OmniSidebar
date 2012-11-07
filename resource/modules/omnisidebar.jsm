@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.customizing = false;
 
@@ -492,7 +492,7 @@ moduleAid.LOADMODULE = function() {
 		mainSidebar.close.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonCloseTooltip'));
 	}
 	
-	blankTriggers.__defineGetter__('mainButton', function() { return mainSidebar.button; });
+	blankTriggers.__defineGetter__('mainCommand', function() { return $('cmd_mainSidebar'); });
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -500,7 +500,7 @@ moduleAid.UNLOADMODULE = function() {
 		setclass(mainSidebar.sidebar);
 	}
 	
-	delete blankTriggers.mainButton;
+	delete blankTriggers.mainCommand;
 	
 	if(mainSidebar.close._tooltiptext) {
 		mainSidebar.close.setAttribute('tooltiptext', mainSidebar.close._tooltiptext);

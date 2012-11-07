@@ -1,10 +1,10 @@
-moduleAid.VERSION = '2.1.1';
+moduleAid.VERSION = '2.1.2';
 moduleAid.LAZY = true;
 
 // windowMediator - Aid object to help with window tasks involving window-mediator and window-watcher
 // getEnumerator(aType) - returns an nsISimpleEnumerator object with all windows of aType
 //	(optional) aType - (string) window type to get, defaults to null (all)
-// callOnMostRecent(aCallback, aType) - calls aCallback passing it the most recent window of aType as an argument
+// callOnMostRecent(aCallback, aType) - calls aCallback passing it the most recent window of aType as an argument. If successful it returns the return value of aCallback.
 //	aCallback - (function(window)) to be called on window
 //	(optional) aType - type of windows to execute aCallback on, defaults to null (all)
 // callOnAll(aCallback, aType, aURI, beforeComplete) - goes through every opened browser window of aType and executes aCallback on it
@@ -35,8 +35,9 @@ this.windowMediator = {
 		var type = aType || null;
 		var window = Services.wm.getMostRecentWindow(aType);
 		if(window) {
-			aCallback(window);
+			return aCallback(window);
 		}
+		return null;
 	},
 	
 	// expects aCallback() and sets its this as the window

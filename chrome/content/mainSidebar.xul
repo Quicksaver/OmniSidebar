@@ -2,6 +2,12 @@
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="mainSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
+	<commandset id="mainCommandSet">
+		
+		<command id="cmd_mainSidebar" oncommand="toggleSidebar(this);"/>
+		
+	</commandset>
+	
 	<toolbarpalette id="BrowserToolbarPalette">
 	
 		<toolbarbutton id="omnisidebar_button" 
@@ -9,7 +15,7 @@
 			label="&omnisidebarButton.label;"
 			tooltiptext="&omnisidebarButton.tooltip;" 
 			onload="objName.buttonLabels(this, true);"
-			oncommand="toggleSidebar(this);" />
+			command="cmd_mainSidebar" />
 			
 	</toolbarpalette>
 	

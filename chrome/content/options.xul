@@ -42,6 +42,14 @@
 			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
 			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
 			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
+			<preference id="pref-mainKeysetKeycode" name="extensions.omnisidebar.mainKeysetKeycode" type="string"/>
+			<preference id="pref-mainKeysetAccel" name="extensions.omnisidebar.mainKeysetAccel" type="bool"/>
+			<preference id="pref-mainKeysetShift" name="extensions.omnisidebar.mainKeysetShift" type="bool"/>
+			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
+			<preference id="pref-twinKeysetKeycode" name="extensions.omnisidebar.twinKeysetKeycode" type="string"/>
+			<preference id="pref-twinKeysetAccel" name="extensions.omnisidebar.twinKeysetAccel" type="bool"/>
+			<preference id="pref-twinKeysetShift" name="extensions.omnisidebar.twinKeysetShift" type="bool"/>
+			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
 		</preferences>
 		
 		<tabbox id="omnisidebarTabBox" >
@@ -107,6 +115,88 @@
 					<groupbox align="center">
 						<checkbox dependson="!pref-hideheadertoolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
 					</groupbox>
+					
+					<groupbox align="center">
+						<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
+						<hbox>
+							<checkbox id="accelCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-mainKeysetAccel"/>
+							<checkbox id="altCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-mainKeysetAlt"/>
+							<checkbox id="shiftCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-mainKeysetShift"/>
+							<menulist id="mainKeyset-menu" oncommand="objName.fillKeycodes('main');" preference="pref-mainKeysetKeycode">
+								<menupopup id="mainKeyset-menupopup">
+									<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
+									<menuitem value="A" label="A"/>
+									<menuitem value="B" label="B"/>
+									<menuitem value="C" label="C"/>
+									<menuitem value="D" label="D"/>
+									<menuitem value="E" label="E"/>
+									<menuitem value="F" label="F"/>
+									<menuitem value="G" label="G"/>
+									<menuitem value="H" label="H"/>
+									<menuitem value="I" label="I"/>
+									<menuitem value="J" label="J"/>
+									<menuitem value="K" label="K"/>
+									<menuitem value="L" label="L"/>
+									<menuitem value="M" label="M"/>
+									<menuitem value="N" label="N"/>
+									<menuitem value="O" label="O"/>
+									<menuitem value="P" label="P"/>
+									<menuitem value="Q" label="Q"/>
+									<menuitem value="R" label="R"/>
+									<menuitem value="S" label="S"/>
+									<menuitem value="T" label="T"/>
+									<menuitem value="U" label="U"/>
+									<menuitem value="V" label="V"/>
+									<menuitem value="W" label="W"/>
+									<menuitem value="X" label="X"/>
+									<menuitem value="Y" label="Y"/>
+									<menuitem value="Z" label="Z"/>
+									<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
+									<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
+									<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
+									<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
+									<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
+									<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
+									<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
+									<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
+									<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
+									<menuitem value="." label="."/>
+									<menuitem value="," label=","/>
+									<menuitem value=";" label=";"/>
+									<menuitem value="/" label="/"/>
+									<menuitem value="\" label="\"/>
+									<menuitem value="=" label="="/>
+									<menuitem value="+" label="+"/>
+									<menuitem value="-" label="-"/>
+									<menuitem value="*" label="*"/>
+									<menuitem value="VK_F1" label="F1"/>
+									<menuitem value="VK_F2" label="F2"/>
+									<menuitem value="VK_F3" label="F3"/>
+									<menuitem value="VK_F4" label="F4"/>
+									<menuitem value="VK_F5" label="F5"/>
+									<menuitem value="VK_F6" label="F6"/>
+									<menuitem value="VK_F7" label="F7"/>
+									<menuitem value="VK_F8" label="F8"/>
+									<menuitem value="VK_F9" label="F9"/>
+									<menuitem value="VK_F10" label="F10"/>
+									<menuitem value="VK_F11" label="F11"/>
+									<menuitem value="VK_F12" label="F12"/>
+									<menuitem value="VK_F13" label="F13"/>
+									<menuitem value="VK_F14" label="F14"/>
+									<menuitem value="VK_F15" label="F15"/>
+									<menuitem value="VK_F16" label="F16"/>
+									<menuitem value="VK_F17" label="F17"/>
+									<menuitem value="VK_F18" label="F18"/>
+									<menuitem value="VK_F19" label="F19"/>
+									<menuitem value="VK_F20" label="F20"/>
+									<menuitem value="VK_F21" label="F21"/>
+									<menuitem value="VK_F22" label="F22"/>
+									<menuitem value="VK_F23" label="F23"/>
+									<menuitem value="VK_F24" label="F24"/>
+								</menupopup>
+							</menulist>
+						</hbox>
+					</groupbox>
 				</tabpanel>
 				
 				<tabpanel id="twinTab" orient="vertical">
@@ -157,6 +247,88 @@
 					
 					<groupbox align="center">
 						<checkbox dependson="pref-twinSidebar,!pref-hideheadertoolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
+					</groupbox>
+					
+					<groupbox align="center">
+						<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
+						<hbox>
+							<checkbox id="accelCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-twinKeysetAccel"/>
+							<checkbox id="altCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-twinKeysetAlt"/>
+							<checkbox id="shiftCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-twinKeysetShift"/>
+							<menulist id="twinKeyset-menu" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" preference="pref-twinKeysetKeycode">
+								<menupopup id="twinKeyset-menupopup">
+									<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
+									<menuitem value="A" label="A"/>
+									<menuitem value="B" label="B"/>
+									<menuitem value="C" label="C"/>
+									<menuitem value="D" label="D"/>
+									<menuitem value="E" label="E"/>
+									<menuitem value="F" label="F"/>
+									<menuitem value="G" label="G"/>
+									<menuitem value="H" label="H"/>
+									<menuitem value="I" label="I"/>
+									<menuitem value="J" label="J"/>
+									<menuitem value="K" label="K"/>
+									<menuitem value="L" label="L"/>
+									<menuitem value="M" label="M"/>
+									<menuitem value="N" label="N"/>
+									<menuitem value="O" label="O"/>
+									<menuitem value="P" label="P"/>
+									<menuitem value="Q" label="Q"/>
+									<menuitem value="R" label="R"/>
+									<menuitem value="S" label="S"/>
+									<menuitem value="T" label="T"/>
+									<menuitem value="U" label="U"/>
+									<menuitem value="V" label="V"/>
+									<menuitem value="W" label="W"/>
+									<menuitem value="X" label="X"/>
+									<menuitem value="Y" label="Y"/>
+									<menuitem value="Z" label="Z"/>
+									<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
+									<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
+									<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
+									<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
+									<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
+									<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
+									<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
+									<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
+									<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
+									<menuitem value="." label="."/>
+									<menuitem value="," label=","/>
+									<menuitem value=";" label=";"/>
+									<menuitem value="/" label="/"/>
+									<menuitem value="\" label="\"/>
+									<menuitem value="=" label="="/>
+									<menuitem value="+" label="+"/>
+									<menuitem value="-" label="-"/>
+									<menuitem value="*" label="*"/>
+									<menuitem value="VK_F1" label="F1"/>
+									<menuitem value="VK_F2" label="F2"/>
+									<menuitem value="VK_F3" label="F3"/>
+									<menuitem value="VK_F4" label="F4"/>
+									<menuitem value="VK_F5" label="F5"/>
+									<menuitem value="VK_F6" label="F6"/>
+									<menuitem value="VK_F7" label="F7"/>
+									<menuitem value="VK_F8" label="F8"/>
+									<menuitem value="VK_F9" label="F9"/>
+									<menuitem value="VK_F10" label="F10"/>
+									<menuitem value="VK_F11" label="F11"/>
+									<menuitem value="VK_F12" label="F12"/>
+									<menuitem value="VK_F13" label="F13"/>
+									<menuitem value="VK_F14" label="F14"/>
+									<menuitem value="VK_F15" label="F15"/>
+									<menuitem value="VK_F16" label="F16"/>
+									<menuitem value="VK_F17" label="F17"/>
+									<menuitem value="VK_F18" label="F18"/>
+									<menuitem value="VK_F19" label="F19"/>
+									<menuitem value="VK_F20" label="F20"/>
+									<menuitem value="VK_F21" label="F21"/>
+									<menuitem value="VK_F22" label="F22"/>
+									<menuitem value="VK_F23" label="F23"/>
+									<menuitem value="VK_F24" label="F24"/>
+								</menupopup>
+							</menulist>
+						</hbox>
 					</groupbox>
 				</tabpanel>
 				

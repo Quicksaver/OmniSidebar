@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.0';
+var defaultsVersion = '1.0.1';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -43,7 +43,16 @@ var prefList = {
 	
 	alwaysAddons: false,
 	alwaysConsole: false,
-	alwaysDMT: false
+	alwaysDMT: false,
+	
+	mainKeysetKeycode: 'VK_F8',
+	mainKeysetAccel: false,
+	mainKeysetShift: false,
+	mainKeysetAlt: false,
+	twinKeysetKeycode: 'VK_F8',
+	twinKeysetAccel: false,
+	twinKeysetShift: true,
+	twinKeysetAlt: false
 };
 
 function startAddon(window) {
@@ -91,6 +100,7 @@ function toggleGlass() {
 
 function onStartup(aReason) {
 	moduleAid.load('compatibilityFix/sandboxFixes');
+	moduleAid.load('keysets');
 	
 	prefAid.listen('moveSidebars', toggleMoveSidebars);
 	prefAid.listen('glassStyle', toggleGlass);
@@ -136,5 +146,6 @@ function onShutdown(aReason) {
 	prefAid.unlisten('moveSidebars', toggleMoveSidebars);
 	prefAid.unlisten('glassStyle', toggleGlass);
 	
+	moduleAid.unload('keysets');
 	moduleAid.unload('compatibilityFix/sandboxFixes');
 }
