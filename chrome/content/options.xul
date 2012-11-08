@@ -11,8 +11,8 @@
 			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
 			<preference id="pref-renderabove" name="extensions.omnisidebar.renderabove" type="bool"/>
 			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
-			<preference id="pref-undockMode" name="extensions.omnisidebar.undockMode" type="string"/>
-			<preference id="pref-undockModeTwin" name="extensions.omnisidebar.undockModeTwin" type="string"/>
+			<preference id="pref-autoHide" name="extensions.omnisidebar.autoHide" type="bool"/>
+			<preference id="pref-autoHideTwin" name="extensions.omnisidebar.autoHideTwin" type="bool"/>
 			<preference id="pref-autoClose" name="extensions.omnisidebar.autoClose" type="bool"/>
 			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
 			<preference id="pref-hideheadertoolbar" name="extensions.omnisidebar.hideheadertoolbar" type="bool"/>
@@ -75,11 +75,8 @@
 								<caption><checkbox id="aboveCheckbox" 
 									label="&omnisidebarOptrenderabove.label;" 
 									preference="pref-renderabove"/></caption>
-								<radiogroup preference="pref-undockMode">
-									<radio dependson="pref-renderabove" label="&omnisidebarOptundockMode.autohide;" value="autohide"/>
-									<checkbox label="&omnisidebarOptundockMode.autoclose;" preference="pref-autoClose"/>
-									<radio dependson="pref-renderabove" label="&omnisidebarOptundockMode.noauto;" value="noauto"/>
-								</radiogroup>
+								<checkbox dependson="pref-renderabove" label="&omnisidebarOptundockMode.autohide;" preference="pref-autoHide"/>
+								<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
 							</groupbox>
 						</vbox>
 					</groupbox>
@@ -208,11 +205,8 @@
 									label="&omnisidebarOptrenderabove.label;"
 									dependson="pref-twinSidebar"
 									preference="pref-renderaboveTwin"/></caption>
-								<radiogroup preference="pref-undockModeTwin">
-									<radio dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.autohide;" value="autohide"/>
-									<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptundockMode.autoclose;" preference="pref-autoCloseTwin"/>
-									<radio dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.noauto;" value="noauto"/>
-								</radiogroup>
+								<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.autohide;" preference="pref-autoHideTwin"/>
+								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptautoClose.label;" preference="pref-autoCloseTwin"/>
 							</groupbox>
 						</vbox>
 					</groupbox>

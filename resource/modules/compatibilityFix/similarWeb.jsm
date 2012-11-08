@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // SimilarWeb is the most aweful add-on I've seen in terms of controlling the sidebar and imposing itself on the browser layout... it's just aweful.
 // Why it even resizes the sidebar on startup is beyond comprehension!
@@ -16,14 +16,14 @@ this.swPopupShowing = function() {
 	&& !mainSidebar.box.hidden
 	&& mainSidebar.box.getAttribute('sidebarcommand') == 'viewSimilarWebSidebar'
 	&& mainSidebar.above
-	&& mainSidebar.undockMode == 'autohide') {
+	&& mainSidebar.autoHide) {
 		setHover(mainSidebar, true);
 	}
 	else if(twinSidebar.box
 	&& !twinSidebar.box.hidden
 	&& twinSidebar.box.getAttribute('sidebarcommand') == 'viewSimilarWebSidebar'
 	&& twinSidebar.above
-	&& twinSidebar.undockMode == 'autohide') {
+	&& twinSidebar.autoHide) {
 		setHover(twinSidebar, true);
 	}
 };

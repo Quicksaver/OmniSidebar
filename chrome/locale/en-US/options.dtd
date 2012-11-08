@@ -24,8 +24,7 @@
 <!ENTITY omnisidebarOptsidebars.twinlabel "Enable the Twin Sidebar on the opposite side">
 <!ENTITY omnisidebarOptrenderabove.label "Undock from the browser window and">
 <!ENTITY omnisidebarOptundockMode.autohide "Auto-hide to the side">
-<!ENTITY omnisidebarOptundockMode.noauto "Only close on command">
-<!ENTITY omnisidebarOptundockMode.autoclose "Auto-close when it loses focus">
+<!ENTITY omnisidebarOptautoClose.label "Close/Hide the sidebar when it loses focus">
 
 <!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
 <!ENTITY omnisidebarOptfx.label "Enable transition effects">

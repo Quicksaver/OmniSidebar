@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.browser = $('browser');
 
@@ -139,10 +139,10 @@ this.setAboveWidth = function() {
 		sscode += '	#sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box[renderabove]:not([movetoright]) { left: -' + mainSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box[renderabove][movetoright] { right: -' + mainSidebar.width + 'px; }\n';
-		sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"]):not([movetoright]) #omnisidebar_resizebox,\n';
+		sscode += '	#sidebar-box[renderabove]:not([autohide]):not([movetoright]) #omnisidebar_resizebox,\n';
 		sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar_resizebox,\n';
 		sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
-		sscode += '	#sidebar-box[renderabove]:not([renderabove="autohide"])[movetoright] #omnisidebar_resizebox,\n';
+		sscode += '	#sidebar-box[renderabove]:not([autohide])[movetoright] #omnisidebar_resizebox,\n';
 		sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar_resizebox,\n';
 		sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar_resizebox { right: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
 	}
@@ -151,10 +151,10 @@ this.setAboveWidth = function() {
 		sscode += '	#sidebar-box-twin[renderabove] { width: ' + twinSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box-twin[renderabove]:not([movetoleft]) { right: -' + twinSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box-twin[renderabove][movetoleft] { left: -' + twinSidebar.width + 'px; }\n';
-		sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
+		sscode += '	#sidebar-box-twin[renderabove]:not([autohide]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 		sscode += '	#sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 		sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
-		sscode += '	#sidebar-box-twin[renderabove]:not([renderabove="autohide"])[movetoleft] #omnisidebar_resizebox-twin,\n';
+		sscode += '	#sidebar-box-twin[renderabove]:not([autohide])[movetoleft] #omnisidebar_resizebox-twin,\n';
 		sscode += '	#sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar_resizebox-twin,\n';
 		sscode += '	#sidebar-box-twin[customizing][movetoleft] #omnisidebar_resizebox-twin { left: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
 	}
@@ -211,7 +211,7 @@ this.loadRenderAboveTwin = function(window) {
 };
 
 this.setAbove = function(bar) {
-	toggleAttribute(bar.box, 'renderabove', bar.above, bar.undockMode);
+	toggleAttribute(bar.box, 'renderabove', bar.above);
 	
 	toggleDockerStatus(bar);
 	
@@ -226,14 +226,6 @@ this.setAbove = function(bar) {
 	} else {
 		dispatch(bar.box, { type: 'sidebarDocked', cancelable: false });
 	}
-};
-
-this.setUndockModeMain = function() {
-	toggleAttribute(mainSidebar.box, 'renderabove', mainSidebar.above, mainSidebar.undockMode);
-};
-
-this.setUndockModeTwin = function() {
-	toggleAttribute(twinSidebar.box, 'renderabove', twinSidebar.above, twinSidebar.undockMode);
 };
 
 moduleAid.LOADMODULE = function() {
@@ -252,8 +244,6 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('hideheaderdockTwin', toggleDockers);
 	prefAid.listen('renderabove', toggleRenderAbove);
 	prefAid.listen('renderaboveTwin', toggleRenderAbove);
-	prefAid.listen('undockMode', setUndockModeMain);
-	prefAid.listen('undockModeTwin', setUndockModeTwin);
 	
 	toggleDockers(true);
 	toggleRenderAbove();
@@ -284,8 +274,6 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('hideheaderdockTwin', toggleDockers);
 	prefAid.unlisten('renderabove', toggleRenderAbove);
 	prefAid.unlisten('renderaboveTwin', toggleRenderAbove);
-	prefAid.unlisten('undockMode', setUndockModeMain);
-	prefAid.unlisten('undockModeTwin', setUndockModeTwin);
 	
 	moduleAid.unload('autohide');
 	if(UNLOADED) {

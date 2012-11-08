@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.notifyMovedSidebars = function(window) {
 	dispatch(window, { type: 'SidebarsMoved', cancelable: false });
@@ -17,14 +17,14 @@ this.moveSidebars = function() {
 		twinWhereTo = null;
 	} else {
 		if(prefAid.renderabove) {
-			mainWhereTo = (prefAid.undockMode == 'autohide') ? 'autoHide' : 'renderAbove';
+			mainWhereTo = prefAid.autoHide ? 'autoHide' : 'renderAbove';
 		} else {
 			mainWhereTo = 'mainSidebar';
 		}
 		
 		if(prefAid.twinSidebar) {
 			if(prefAid.renderaboveTwin) {
-				twinWhereTo = (prefAid.undockModeTwin == 'autohide') ? 'autoHideTwin' : 'renderAboveTwin';
+				twinWhereTo = prefAid.autoHideTwin ? 'autoHideTwin' : 'renderAboveTwin';
 			} else {
 				twinWhereTo = 'twin';
 			}
@@ -59,9 +59,9 @@ this.moveSidebars = function() {
 moduleAid.LOADMODULE = function() {
 	prefAid.listen('twinSidebar', moveSidebars);
 	prefAid.listen('renderabove', moveSidebars);
-	prefAid.listen('undockMode', moveSidebars);
+	prefAid.listen('autoHide', moveSidebars);
 	prefAid.listen('renderaboveTwin', moveSidebars);
-	prefAid.listen('undockModeTwin', moveSidebars);
+	prefAid.listen('autoHideTwin', moveSidebars);
 	
 	moveSidebars();
 };
@@ -69,9 +69,9 @@ moduleAid.LOADMODULE = function() {
 moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('twinSidebar', moveSidebars);
 	prefAid.unlisten('renderabove', moveSidebars);
-	prefAid.unlisten('undockMode', moveSidebars);
+	prefAid.unlisten('autoHide', moveSidebars);
 	prefAid.unlisten('renderaboveTwin', moveSidebars);
-	prefAid.unlisten('undockModeTwin', moveSidebars);
+	prefAid.unlisten('autoHideTwin', moveSidebars);
 	
 	moveSidebars();
 };

@@ -1,9 +1,11 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.1.0';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
 this.setAutoHide = function(bar) {
-	if(bar.undockMode != 'autohide') {
+	toggleAttribute(bar.box, 'autohide', bar.autoHide);
+	
+	if(!bar.autoHide) {
 		removeAttribute(bar.resizeBox, 'hover');
 		delete bar.resizeBox.hovers;
 	} else {
@@ -28,7 +30,7 @@ this.showOnFocus = function(e) {
 	var bar = e.detail.bar;
 	
 	// hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
-	if(bar.above && bar.undockMode == 'autohide') {
+	if(bar.above && bar.autoHide) {
 		setHover(bar, true, 1);
 		timerAid.init('autohideSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
 	}
@@ -97,22 +99,22 @@ this.setAutoHideWidth = function() {
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
-	if(prefAid.renderabove && prefAid.undockMode == 'autohide' && mainSidebar.width) {
-		sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox:hover,\n';
-		sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove="autohide"]:not([movetoright]) #omnisidebar_resizebox[hiding] { left: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
-		sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox:hover,\n';
-		sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove="autohide"][movetoright] #omnisidebar_resizebox[hiding] { right: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
+	if(prefAid.renderabove && prefAid.autoHide && mainSidebar.width) {
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox:hover,\n';
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]) #omnisidebar_resizebox[hover],\n';
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox[hiding] { left: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox:hover,\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright] #omnisidebar_resizebox[hover],\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox[hiding] { right: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
 	}
 	
-	if(prefAid.renderaboveTwin && prefAid.undockModeTwin == 'autohide' && twinSidebar.width) {
-		sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin:hover,\n';
-		sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove="autohide"]:not([movetoleft]) #omnisidebar_resizebox-twin[hiding] { right: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
-		sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin:hover,\n';
-		sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove="autohide"][movetoleft] #omnisidebar_resizebox-twin[hiding] { left: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
+	if(prefAid.renderaboveTwin && prefAid.autoHideTwin && twinSidebar.width) {
+		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin:hover,\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]) #omnisidebar_resizebox-twin[hover],\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { right: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin:hover,\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { left: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
 	}
 	
 	sscode += '}';
@@ -151,7 +153,7 @@ this.hidingSidebar = function(bar) {
 
 // handles mousing over the sidebar switch
 this.switchMouseOver = function(bar) {
-	var hover = bar.above && bar.undockMode == 'autohide';
+	var hover = bar.above && bar.autoHide;
 	
 	if(hover) {
 		timerAid.init('switchMouseOver', function() {
@@ -176,17 +178,20 @@ this.setHover = function(bar, hover, force) {
 	if(hover) {
 		bar.resizeBox.hovers++;
 		bar.resizeBox.setAttribute('hover', 'true');
-	} else {
-		if(bar.resizeBox.hovers > 0) {
+		bar.box.removeAttribute('dontReHover');
+		if(force != undefined && typeof(force) == 'number') {
+			bar.resizeBox.hovers = force;
+		}
+	}
+	else {
+		if(force != undefined && typeof(force) == 'number') {
+			bar.resizeBox.hovers = force;
+		} else if(bar.resizeBox.hovers > 0) {
 			bar.resizeBox.hovers--;
 		}
 		if(bar.resizeBox.hovers == 0) {
 			bar.resizeBox.removeAttribute('hover');
 		}
-	}
-	
-	if(force || force === 0) {
-		bar.resizeBox.hovers = force;
 	}
 };
 
@@ -204,13 +209,13 @@ this.loadAutoHideTwin = function(window) {
 };
 
 this.toggleAutoHide = function(e) {
-	if(prefAid.undockMode == 'autohide') {
+	if(prefAid.autoHide) {
 		overlayAid.overlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide', null, loadAutoHideMain, loadAutoHideMain);
 	} else {
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide');
 	}
 	
-	if(prefAid.undockModeTwin == 'autohide') {
+	if(prefAid.autoHideTwin) {
 		overlayAid.overlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin', null, loadAutoHideTwin, loadAutoHideTwin);
 	} else {
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin');
@@ -220,8 +225,8 @@ this.toggleAutoHide = function(e) {
 moduleAid.LOADMODULE = function() {
 	styleAid.load('autohideSheet', 'autohide');
 	
-	prefAid.listen('undockMode', toggleAutoHide);
-	prefAid.listen('undockModeTwin', toggleAutoHide);
+	prefAid.listen('autoHide', toggleAutoHide);
+	prefAid.listen('autoHideTwin', toggleAutoHide);
 	prefAid.listen('fx', toggleFX);
 	
 	toggleAutoHide();
@@ -254,8 +259,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setAutoHideWidth);
 	
-	prefAid.unlisten('undockMode', toggleAutoHide);
-	prefAid.unlisten('undockModeTwin', toggleAutoHide);
+	prefAid.unlisten('autoHide', toggleAutoHide);
+	prefAid.unlisten('autoHideTwin', toggleAutoHide);
 	prefAid.unlisten('fx', toggleFX);
 	
 	if(UNLOADED) {

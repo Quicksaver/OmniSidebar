@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.2.0';
 
 // stops closing the sidebar when quickly toggling between sidebars in auto-close mode
 this.autoCloseBeginToggleSidebar = function(e) {
@@ -48,7 +48,7 @@ this.autoClose = function(e) {
 			if(!isAncestor(focusedNode, mainSidebar.box)
 			&& dispatch(mainSidebar.sidebar, { type: 'willCloseSidebar', detail: { bar: mainSidebar, focusedNode: focusedNode } })) {
 				listenerAid.add(mainSidebar.sidebar, 'closedSidebar', function(e) { e.preventDefault(); }, true, true); // keep current focus
-				toggleSidebar();
+				closeHide(mainSidebar);
 			}
 		}
 		
@@ -56,7 +56,7 @@ this.autoClose = function(e) {
 			if(!isAncestor(focusedNode, twinSidebar.box)
 			&& dispatch(twinSidebar.sidebar, { type: 'willCloseSidebar', detail: { bar: twinSidebar, focusedNode: focusedNode } })) {
 				listenerAid.add(twinSidebar.sidebar, 'closedSidebar', function(e) { e.preventDefault(); }, true, true); // keep current focus
-				toggleSidebar(null, false, true);
+				closeHide(twinSidebar);
 			}
 		}
 	}, 100);
@@ -65,6 +65,15 @@ this.autoClose = function(e) {
 this.cancelAutoClose = function() {
 	timerAid.cancel('autoClose');
 	timerAid.init('cancelAutoClose', function() {}, 2000);
+};
+
+this.closeHide = function(bar) {
+	if(bar.above && bar.autoHide) {
+		setHover(bar, false);
+		bar.box.setAttribute('dontReHover', 'true');
+	} else {
+		toggleSidebar(null, false, bar.twin);
+	}
 };
 
 this.setAutoClose = function(remove) {
@@ -92,8 +101,8 @@ this.dontOpenOnStartup = function() {
 	if(!UNLOADED || UNLOADED == APP_SHUTDOWN) {
 		_sidebarCommand = null;
 		_sidebarCommandTwin = null;
-		if(mainSidebar.box && !mainSidebar.box.hidden && prefAid.autoClose) { toggleSidebar(); }
-		if(twinSidebar.box && !twinSidebar.box.hidden && prefAid.autoCloseTwin) { toggleSidebar(null, false, true); }
+		if(mainSidebar.box && !mainSidebar.box.hidden && prefAid.autoClose) { closeHide(mainSidebar); }
+		if(twinSidebar.box && !twinSidebar.box.hidden && prefAid.autoCloseTwin) { closeHide(twinSidebar); }
 	}
 };
 

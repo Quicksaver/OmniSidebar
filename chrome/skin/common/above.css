@@ -46,7 +46,7 @@
 		z-index: 5;
 	}
 	
-	.sidebar-box[renderabove]:not([renderabove="autohide"]) .omnisidebar_resize_box,
+	.sidebar-box[renderabove]:not([autohide]) .omnisidebar_resize_box,
 	.sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
 		opacity: 1;
 	}
