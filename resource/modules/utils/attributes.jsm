@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.0';
+moduleAid.VERSION = '2.0.1';
 moduleAid.LAZY = true;
 
 // setAttribute(obj, attr, val) - helper me that saves me the trouble of checking if the obj exists first everywhere in my scripts; yes I'm that lazy
@@ -6,14 +6,14 @@ moduleAid.LAZY = true;
 //	attr - (str) attribute to set
 //	val - (str) value to set for attr
 this.setAttribute = function(obj, attr, val) {
-	if(!obj) { return; }
+	if(!obj || !obj.setAttribute) { return; }
 	obj.setAttribute(attr, val);
 };
 
 // removeAttribute(obj, attr) - helper me that saves me the trouble of checking if the obj exists first everywhere in my scripts; yes I'm that lazy
 //	see setAttribute()
 this.removeAttribute = function(obj, attr) {
-	if(!obj) { return; }
+	if(!obj || !obj.removeAttribute) { return; }
 	obj.removeAttribute(attr);
 };
 
@@ -23,7 +23,7 @@ this.removeAttribute = function(obj, attr) {
 //	(optional) trueval - (str) value to set attr to if condition is true, defaults to (str) true
 //	(optional) falseval - (str) value to set attr to if condition is false, if not set the attr is removed
 this.toggleAttribute = function(obj, attr, condition, trueval, falseval) {
-	if(!obj) { return; }
+	if(!obj || !obj.setAttribute || !obj.removeAttribute) { return; }
 		
 	if(condition) {
 		if(!trueval) { trueval = 'true'; }
