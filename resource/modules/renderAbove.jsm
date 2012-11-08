@@ -1,6 +1,6 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
-this.browser = $('browser');
+this.__defineGetter__('browser', function() { return $('browser'); });
 
 this.dragalt = null;
 this.dragorix = null;
@@ -98,23 +98,6 @@ this.drag = function(e) {
 			dragNotTarget.target.box.style.width = dragOtherW +'px';
 		}
 	}
-};
-
-this.browserResized = function(e) {
-	browserMinWidth(); // this needs to be immediate, so the browser width never goes below these values
-	
-	// The listeners to this event aren't very heavy (so far at least), it doesn't slow down the resizing of the windows when I set the delay to 0.
-	timerAid.init('browserResized', function() {
-		dispatch(browser, { type: 'browserResized', cancelable: false });
-	}, 0);
-};
-
-// this simulates the default browser behavior when the sidebars are docked
-this.browserMinWidth = function() {
-	var minWidth = prefAid.minSpaceBetweenSidebars;
-	if(mainSidebar.width) { minWidth += mainSidebar.width; }
-	if(twinSidebar.width) { minWidth += twinSidebar.width; }
-	browser.style.minWidth = minWidth+'px';
 };
 
 this.setHeight = function() {
@@ -251,16 +234,11 @@ moduleAid.LOADMODULE = function() {
 	hideMainHeader.__defineGetter__('docker', function() { return prefAid.hideheaderdock; });
 	hideTwinHeader.__defineGetter__('docker', function() { return prefAid.hideheaderdockTwin; });
 	
-	// can't let the browser be resized below the dimensions of the sidebars
-	browserMinWidth();
-	listenerAid.add(browser, 'resize', browserResized);
 	listenerAid.add(browser, 'browserResized', setHeight);
 };
 
 moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(browser, 'resize', browserResized);
 	listenerAid.remove(browser, 'browserResized', setHeight);
-	browser.style.minWidth = '';
 	
 	delete hideMainHeader.docker;
 	delete hideTwinHeader.docker;

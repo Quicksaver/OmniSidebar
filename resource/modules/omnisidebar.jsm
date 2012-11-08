@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.customizing = false;
 
@@ -84,6 +84,7 @@ this.__defineGetter__('fireSidebarFocusedEvent', function() { return window.fire
 this.__defineSetter__('fireSidebarFocusedEvent', function(v) { return window.fireSidebarFocusedEvent = v; });
 this.__defineGetter__('sidebarOnLoad', function() { return window.sidebarOnLoad; });
 this.__defineSetter__('sidebarOnLoad', function(v) { return window.sidebarOnLoad = v; });
+this.__defineGetter__('browser', function() { return $('browser'); });
 
 // Dummy methods that will be properly replaced by the corresponding modules when they are loaded
 this.buttonLabels = function(btn, onLoad) {
@@ -253,6 +254,27 @@ this.widthChanged = function(main, twin) {
 	timerAid.init('boxResize_'+box.id, function() {
 		dispatch(box, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: (twin) ? twinSidebar : mainSidebar } });
 	}, 500);
+};
+
+this.browserResized = function(e) {
+	browserMinWidth(e); // this needs to be immediate, so the browser width never goes below these values
+	
+	// The listeners to this event aren't very heavy (so far at least), it doesn't slow down the resizing of the windows when I set the delay to 0.
+	timerAid.init('browserResized', function() {
+		dispatch(browser, { type: 'browserResized', cancelable: false });
+	}, 0);
+};
+
+// this simulates the default browser behavior when the sidebars are docked
+this.browserMinWidth = function(e) {
+	var minWidth = prefAid.minSpaceBetweenSidebars;
+	if(mainSidebar.width && !mainSidebar.box.hidden) { minWidth += mainSidebar.width; }
+	if(twinSidebar.width && !twinSidebar.box.hidden) { minWidth += twinSidebar.width; }
+	browser.style.minWidth = minWidth+'px';
+	
+	if(e && e.type && e.type == 'endToggleSidebar' && window.innerWidth < minWidth) {
+		window.resizeBy(0, 0); // The values don't matter as minWidth takes precedence
+	}
 };
 
 // object of broadcaster id's that shouldn't be saved between sessions
@@ -489,6 +511,11 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'beforecustomization', customize, false);
 	listenerAid.add(window, 'aftercustomization', customize, false);
 	
+	// can't let the browser be resized below the dimensions of the sidebars
+	browserMinWidth();
+	listenerAid.add(browser, 'resize', browserResized);
+	listenerAid.add(window, 'endToggleSidebar', browserResized);
+	
 	if(!mainSidebar.close._tooltiptext) {
 		mainSidebar.close._tooltiptext = mainSidebar.close.getAttribute('tooltiptext');
 		mainSidebar.close.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonCloseTooltip'));
@@ -508,6 +535,10 @@ moduleAid.UNLOADMODULE = function() {
 		mainSidebar.close.setAttribute('tooltiptext', mainSidebar.close._tooltiptext);
 		delete mainSidebar.close._tooltiptext;
 	}
+	
+	listenerAid.remove(browser, 'resize', browserResized);
+	listenerAid.remove(window, 'endToggleSidebar', browserResized);
+	browser.style.minWidth = '';
 	
 	listenerAid.remove(window, 'beforecustomization', customize, false);
 	listenerAid.remove(window, 'aftercustomization', customize, false);
