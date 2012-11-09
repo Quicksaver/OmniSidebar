@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
@@ -18,6 +18,9 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/dmt');
 	moduleAid.load('compatibilityFix/addonMgr');
 	moduleAid.load('compatibilityFix/domi');
+	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0) {
+		moduleAid.load('compatibilityFix/devTools');
+	}
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -30,4 +33,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/dmt');
 	moduleAid.unload('compatibilityFix/addonMgr');
 	moduleAid.unload('compatibilityFix/domi');
+	moduleAid.unload('compatibilityFix/devTools');
 };

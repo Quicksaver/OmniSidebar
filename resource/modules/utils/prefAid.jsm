@@ -1,10 +1,11 @@
-moduleAid.VERSION = '2.0.0';
+moduleAid.VERSION = '2.0.1';
 moduleAid.LAZY = true;
 
 // prefAid - Object to contain and manage all preferences related to the add-on (and others if necessary)
-// setDefaults(prefList, branch) - sets the add-on's preferences default values
-//	prefList - (object) { prefName: defaultValue }
-//	(optional) branch - (string) looks for 'extensions.branch.prefName', defaults to objPathString
+// setDefaults(prefList, branch, trunk) - sets the add-on's preferences default values
+//	prefList - (object) { prefName: defaultValue }, looks for 'trunk.branch.prefName'
+//	(optional) branch - (string) defaults to objPathString
+//	(optional) trunk - (string) defaults to 'extensions'
 // listen(pref, handler) - add handler as a change event listener to pref
 //	pref - (string) name of preference to append handler to
 //	handler - (function) to be fired on change event
@@ -19,14 +20,17 @@ this.prefAid = {
 	_onChange: {},
 	length: 0,
 	
-	setDefaults: function(prefList, branch) {
+	setDefaults: function(prefList, branch, trunk) {
 		if(!branch) {
 			branch = objPathString;
+		}
+		if(!trunk) {
+			trunk = 'extensions';
 		}
 		
 		var readyList = [];
 		
-		var defaultBranch = Services.prefs.getDefaultBranch('extensions.'+branch+'.');
+		var defaultBranch = Services.prefs.getDefaultBranch(trunk+'.'+branch+'.');
 		for(var pref in prefList) {
 			if(typeof(prefList[pref]) == 'string') {
 				defaultBranch.setCharPref(pref, prefList[pref]);
@@ -39,10 +43,10 @@ this.prefAid = {
 			readyList.push(pref);
 		}
 		
-		this.ready(readyList, branch);
+		this.ready(readyList, branch, trunk);
 	},
 	
-	ready: function(prefList, branch) {
+	ready: function(prefList, branch, trunk) {
 		if(!branch) {
 			branch = objPathString;
 		}
@@ -53,13 +57,13 @@ this.prefAid = {
 		
 		for(var i=0; i<prefList.length; i++) {
 			if(!this._prefObjects[prefList[i]]) {
-				this._setPref(prefList[i], branch);
+				this._setPref(prefList[i], branch, trunk);
 			}
 		}
 	},
 	
-	_setPref: function(pref, branch) {
-		this._prefObjects[pref] = Services.fuel.prefs.get('extensions.'+branch+'.'+pref);
+	_setPref: function(pref, branch, trunk) {
+		this._prefObjects[pref] = Services.fuel.prefs.get(trunk+'.'+branch+'.'+pref);
 		this._onChange[pref] = [];
 		this.__defineGetter__(pref, function() { return this._prefObjects[pref].value; });
 		this.__defineSetter__(pref, function(v) { return this._prefObjects[pref].value = v; });

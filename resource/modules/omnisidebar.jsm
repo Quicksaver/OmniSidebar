@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.customizing = false;
 
@@ -77,6 +77,9 @@ this.twinSidebar = {
 	get switcher () { return $('omnisidebar_switch-twin'); },
 	get goURI () { return $('viewURISidebar-twin'); }
 };
+
+this.__defineGetter__('leftSidebar', function() { return !prefAid.moveSidebars ? mainSidebar : twinSidebar; });
+this.__defineGetter__('rightSidebar', function() { return prefAid.moveSidebars ? mainSidebar : twinSidebar; });
 
 this.__defineGetter__('toggleSidebar', function() { return window.toggleSidebar; });
 this.__defineSetter__('toggleSidebar', function(v) { return window.toggleSidebar = v; });

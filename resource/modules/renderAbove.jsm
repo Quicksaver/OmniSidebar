@@ -1,6 +1,23 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
+
+this.__defineGetter__('moveLeft', function() {
+	if(typeof(moveLeftBy) == 'undefined') { return 0; }
+	var ret = 0;
+	for(var x in moveLeftBy) {
+		ret += moveLeftBy[x];
+	}
+	return ret;
+});
+this.__defineGetter__('moveRight', function() {
+	if(typeof(moveRightBy) == 'undefined') { return 0; }
+	var ret = 0;
+	for(var x in moveRightBy) {
+		ret += moveRightBy[x];
+	}
+	return ret;
+});
 
 this.dragalt = null;
 this.dragorix = null;
@@ -114,20 +131,33 @@ this.setAboveWidth = function() {
 	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 	// I'm not supporting other versions of OSX, just this one isn't simple as it is
 	var moveBy = (Services.appinfo.OS != 'WINNT') ? -1 : 0;
+	var leftOffset = moveBy +moveLeft;
+	var rightOffset = moveBy +moveRight;
 	
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	
+	sscode += '	#omnisidebar_switch:not([movetoright]),\n';
+	sscode += '	#omnisidebar_switch-twin[movetoleft] {\n';
+	sscode += '		left: '+leftOffset+'px !important;\n';
+	sscode += '	}\n';
+	
+	sscode += '	#omnisidebar_switch[movetoright],\n';
+	sscode += '	#omnisidebar_switch-twin:not([movetoleft]) {\n';
+	sscode += '		right: '+rightOffset+'px !important;\n';
+	sscode += '	}\n';
+	
 	if(prefAid.renderabove && mainSidebar.width) {
 		sscode += '	#sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box[renderabove]:not([movetoright]) { left: -' + mainSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box[renderabove][movetoright] { right: -' + mainSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box[renderabove]:not([autohide]):not([movetoright]) #omnisidebar_resizebox,\n';
 		sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar_resizebox,\n';
-		sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar_resizebox { left: ' + (mainSidebar.width +leftOffset) + 'px !important; }\n';
 		sscode += '	#sidebar-box[renderabove]:not([autohide])[movetoright] #omnisidebar_resizebox,\n';
 		sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar_resizebox,\n';
-		sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar_resizebox { right: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar_resizebox { right: ' + (mainSidebar.width +rightOffset) + 'px !important; }\n';
 	}
 	
 	if(prefAid.renderaboveTwin && twinSidebar.width) {
@@ -136,10 +166,10 @@ this.setAboveWidth = function() {
 		sscode += '	#sidebar-box-twin[renderabove][movetoleft] { left: -' + twinSidebar.width + 'px; }\n';
 		sscode += '	#sidebar-box-twin[renderabove]:not([autohide]):not([movetoleft]) #omnisidebar_resizebox-twin,\n';
 		sscode += '	#sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar_resizebox-twin,\n';
-		sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar_resizebox-twin { right: ' + (twinSidebar.width +rightOffset) + 'px !important; }\n';
 		sscode += '	#sidebar-box-twin[renderabove]:not([autohide])[movetoleft] #omnisidebar_resizebox-twin,\n';
 		sscode += '	#sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar_resizebox-twin,\n';
-		sscode += '	#sidebar-box-twin[customizing][movetoleft] #omnisidebar_resizebox-twin { left: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box-twin[customizing][movetoleft] #omnisidebar_resizebox-twin { left: ' + (twinSidebar.width +leftOffset) + 'px !important; }\n';
 	}
 	
 	sscode += '}';

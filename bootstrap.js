@@ -128,7 +128,7 @@ function callOnLoad(aSubject, aCallback, arg1) {
 
 function setResourceHandler() {
 	// chrome.manifest files are loaded automatically in Firefox 10+.
-	// I haven't tested this, got it directly from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
+	// Got it from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
 	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0) {
 		Cm.addBootstrappedManifestLocation(addonData.installPath);
 	}
@@ -156,7 +156,7 @@ function removeResourceHandler() {
 	resource.setSubstitution(objPathString, null);
 	
 	// chrome.manifest files are loaded automatically in Firefox 10+.
-	// I haven't tested this, got it directly from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
+	// Got it from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
 	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0) {
 		Cm.removeBootstrappedManifestLocation(addonData.installPath);
 	}

@@ -62,14 +62,6 @@
 		height: 100%;
 		z-index: 3;
 	}
-	#omnisidebar_switch:not([movetoright]),
-	#omnisidebar_switch-twin[movetoleft] {
-		left: 0px;
-	}
-	#omnisidebar_switch[movetoright],
-	#omnisidebar_switch-twin:not([movetoleft]) {
-		right: 0px;
-	}
 	
 	/* Renderabove resizer */
 	.omnisidebar_resizer {

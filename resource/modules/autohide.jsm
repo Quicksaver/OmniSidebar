@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
@@ -95,26 +95,39 @@ this.setAutoHideWidth = function() {
 	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 	// I'm not supporting other versions of OSX, just this one isn't simple as it is
 	var moveBy = (Services.appinfo.OS != 'WINNT') ? -1 : 0;
+	var leftOffset = moveBy +moveLeft;
+	var rightOffset = moveBy +moveRight;
 	
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	
+	sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]) .omnisidebar_resize_box,\n';
+	sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft] .omnisidebar_resize_box {\n';
+	sscode += '		left: '+leftOffset+'px !important;\n';
+	sscode += '	}\n';
+	
+	sscode += '	#sidebar-box[renderabove][autohide][movetoright] .omnisidebar_resize_box,\n';
+	sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]) .omnisidebar_resize_box {\n';
+	sscode += '		right: '+rightOffset+'px !important;\n';
+	sscode += '	}\n';
+	
 	if(prefAid.renderabove && prefAid.autoHide && mainSidebar.width) {
 		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox:hover,\n';
 		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]) #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox[hiding] { left: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox[hiding] { left: ' + (mainSidebar.width +leftOffset) + 'px !important; }\n';
 		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox:hover,\n';
 		sscode += '	#sidebar-box[renderabove][autohide][movetoright] #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox[hiding] { right: ' + (mainSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox[hiding] { right: ' + (mainSidebar.width +rightOffset) + 'px !important; }\n';
 	}
 	
 	if(prefAid.renderaboveTwin && prefAid.autoHideTwin && twinSidebar.width) {
 		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin:hover,\n';
 		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]) #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { right: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { right: ' + (twinSidebar.width +rightOffset) + 'px !important; }\n';
 		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin:hover,\n';
 		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { left: ' + (twinSidebar.width +moveBy) + 'px !important; }\n';
+		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { left: ' + (twinSidebar.width +leftOffset) + 'px !important; }\n';
 	}
 	
 	sscode += '}';
