@@ -1,14 +1,14 @@
-moduleAid.VERSION = '2.1.2';
+moduleAid.VERSION = '2.1.3';
 moduleAid.LAZY = true;
 
 // windowMediator - Aid object to help with window tasks involving window-mediator and window-watcher
 // getEnumerator(aType) - returns an nsISimpleEnumerator object with all windows of aType
 //	(optional) aType - (string) window type to get, defaults to null (all)
-// callOnMostRecent(aCallback, aType) - calls aCallback passing it the most recent window of aType as an argument. If successful it returns the return value of aCallback.
+// callOnMostRecent(aCallback, aType, aURI) - calls aCallback passing it the most recent window of aType as an argument. If successful it returns the return value of aCallback.
 //	aCallback - (function(window)) to be called on window
 //	(optional) aType - type of windows to execute aCallback on, defaults to null (all)
-// callOnAll(aCallback, aType, aURI, beforeComplete) - goes through every opened browser window of aType and executes aCallback on it
 //	(optional) aURI - (string) when defined, checks the documentURI property against the aURI value and only executes aCallback when true, defaults to null
+// callOnAll(aCallback, aType, aURI, beforeComplete) - goes through every opened browser window of aType and executes aCallback on it
 //	(optional) beforeComplete - true calls aCallback immediatelly regardless of readyState, false fires aCallback when window loads if readyState != complete, defaults to false.
 //	see callOnMostRecent()
 // register(aHandler, aTopic, aType, aURI, beforeComplete) - registers aHandler to be notified of every aTopic
@@ -31,8 +31,19 @@ this.windowMediator = {
 		return Services.wm.getEnumerator(type);
 	},
 	
-	callOnMostRecent: function(aCallback, aType) {
+	callOnMostRecent: function(aCallback, aType, aURI) {
 		var type = aType || null;
+		if(aURI) {
+			var browserEnumerator = this.getEnumerator(aType);
+			while(browserEnumerator.hasMoreElements()) {
+				var window = browserEnumerator.getNext();
+				if(window.document.documentURI == aURI && window.document.readyState == 'complete') {
+					return aCallback(window);
+				}
+			}
+			return null;
+		}
+		
 		var window = Services.wm.getMostRecentWindow(aType);
 		if(window) {
 			return aCallback(window);
