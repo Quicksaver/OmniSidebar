@@ -1,15 +1,7 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('mainMenuPopup', function() { return $('mainKeyset-menupopup'); });
 this.__defineGetter__('twinMenuPopup', function() { return $('twinKeyset-menupopup'); });
-
-this.aSyncOnlyNumbers = function(box) {
-	aSync(function () { box.value = onlyNumbers(box.value); });
-};
-
-this.onlyNumbers = function(v) {
-	return Math.max(parseInt(v || 0), 0);
-};
 
 this.isStillAvailable = function(key, list) {
 	if(key.keycode != 'none' && !list[key.keycode]) { return false; }

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://omnisidebar/skin/options.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			id="omnisidebar-options-window"
@@ -341,17 +342,21 @@
 						<caption label="&omnisidebarOptgroupfeatures.label;"/>
 						<hbox>
 							<label value="&omnisidebarOptshowDelay.label;"/>
-							<textbox id="showDelayTextbox" class="textbox" size="3" maxlength="5" style="text-align: center;"
-								preference="pref-showDelay" 
-								onkeydown="objName.aSyncOnlyNumbers(this);"
-								onsynctopreference="return objName.onlyNumbers(this.value);"/>
+							<textbox type="number"
+								size="3"
+								min="0"
+								max="2000"
+								style="text-align: center;"
+								preference="pref-showDelay"/>
 				        </hbox>
 						<hbox>
 							<label value="&omnisidebarOpthideDelay.label;"/>
-							<textbox id="hideDelayTextbox" class="textbox" size="3" maxlength="5" style="text-align: center;"
-								preference="pref-hideDelay" 
-								onkeydown="objName.aSyncOnlyNumbers(this);"
-								onsynctopreference="return objName.onlyNumbers(this.value);"/>
+							<textbox type="number"
+								size="3"
+								min="0"
+								max="2000"
+								style="text-align: center;"
+								preference="pref-hideDelay"/>
 				        </hbox>
 						<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
 					</groupbox>
