@@ -76,7 +76,7 @@
 							<checkbox label="&omnisidebarOptswitchers.label;" preference="pref-useSwitch"/>
 							<groupbox align="start">
 								<caption><checkbox id="aboveCheckbox" 
-									label="&omnisidebarOptrenderabove.label;" 
+									label="&omnisidebarOptundock.label;" 
 									preference="pref-renderabove"/></caption>
 								<checkbox dependson="pref-renderabove" label="&omnisidebarOptundockMode.autohide;" preference="pref-autoHide"/>
 								<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
@@ -206,7 +206,7 @@
 							<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptswitchers.label;" preference="pref-useSwitchTwin"/>
 							<groupbox align="start">
 								<caption><checkbox id="aboveTwinCheckbox"
-									label="&omnisidebarOptrenderabove.label;"
+									label="&omnisidebarOptundock.label;"
 									dependson="pref-twinSidebar"
 									preference="pref-renderaboveTwin"/></caption>
 								<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.autohide;" preference="pref-autoHideTwin"/>

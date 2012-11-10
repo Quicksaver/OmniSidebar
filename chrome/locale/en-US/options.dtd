@@ -23,7 +23,7 @@
 <!ENTITY omnisidebarOptsidebars.rightlabel "Place on the right">
 <!ENTITY omnisidebarOptsidebars.twinlabel "Enable the Twin Sidebar on the opposite side">
 <!ENTITY omnisidebarOptswitchers.label "Click on the browser margin to toggle the sidebar">
-<!ENTITY omnisidebarOptrenderabove.label "Undock from the browser window and">
+<!ENTITY omnisidebarOptundock.label "Undock from the browser window">
 <!ENTITY omnisidebarOptundockMode.autohide "Auto-hide to the side">
 <!ENTITY omnisidebarOptautoClose.label "Close/Hide the sidebar when it loses focus">
 
