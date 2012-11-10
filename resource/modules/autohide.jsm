@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
@@ -8,10 +8,20 @@ this.setAutoHide = function(bar) {
 	if(!bar.autoHide) {
 		removeAttribute(bar.resizeBox, 'hover');
 		delete bar.resizeBox.hovers;
+		
+		listenerAid.remove(bar.switcher, 'mouseover', autoHideSwitchOver);
+		listenerAid.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
+		listenerAid.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
+		listenerAid.remove(bar.switcher, 'dragexit', autoHideSwitchOut);
 	} else {
 		bar.resizeBox.hovers = 0;
 		setHover(bar, true);
 		timerAid.init('autohideSetSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+		
+		listenerAid.add(bar.switcher, 'mouseover', autoHideSwitchOver);
+		listenerAid.add(bar.switcher, 'dragenter', autoHideSwitchOver);
+		listenerAid.add(bar.switcher, 'mouseout', autoHideSwitchOut);
+		listenerAid.add(bar.switcher, 'dragexit', autoHideSwitchOut);
 		toggleSwitcher(bar);
 	}
 	setAutoHideWidth();
@@ -165,7 +175,8 @@ this.hidingSidebar = function(bar) {
 };
 
 // handles mousing over the sidebar switch
-this.switchMouseOver = function(bar) {
+this.autoHideSwitchOver = function(e) {
+	var bar = e.target == twinSidebar.switcher ? twinSidebar : mainSidebar;
 	var hover = bar.above && bar.autoHide;
 	
 	if(hover) {
@@ -175,7 +186,9 @@ this.switchMouseOver = function(bar) {
 	}
 };
 
-this.switchMouseOut = function(bar) {
+this.autoHideSwitchOut = function(e) {
+	var bar = e.target == twinSidebar.switcher ? twinSidebar : mainSidebar;
+	
 	timerAid.cancel('switchMouseOver');
 	setHover(bar, false);
 };

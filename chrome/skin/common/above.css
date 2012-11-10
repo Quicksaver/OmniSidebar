@@ -56,13 +56,6 @@
 		border-top: none;
 	}
 	
-	.omnisidebar_switch {
-		position: fixed;
-		background: none;
-		height: 100%;
-		z-index: 3;
-	}
-	
 	/* Renderabove resizer */
 	.omnisidebar_resizer {
 		height: auto;

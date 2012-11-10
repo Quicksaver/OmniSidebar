@@ -1,23 +1,6 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
-
-this.__defineGetter__('moveLeft', function() {
-	if(typeof(moveLeftBy) == 'undefined') { return 0; }
-	var ret = 0;
-	for(var x in moveLeftBy) {
-		ret += moveLeftBy[x];
-	}
-	return ret;
-});
-this.__defineGetter__('moveRight', function() {
-	if(typeof(moveRightBy) == 'undefined') { return 0; }
-	var ret = 0;
-	for(var x in moveRightBy) {
-		ret += moveRightBy[x];
-	}
-	return ret;
-});
 
 this.dragalt = null;
 this.dragorix = null;

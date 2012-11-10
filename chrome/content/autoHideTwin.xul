@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="autoHideTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
-	<hbox id="browser">
-	
-		<hbox id="omnisidebar_switch-twin"
-			class="omnisidebar_switch"
-			onmouseover="objName.switchMouseOver(objName.twinSidebar);"
-			onmouseout="objName.switchMouseOut(objName.twinSidebar);"
-			ondragenter="objName.switchMouseOver(objName.twinSidebar);"
-			ondragexit="objName.switchMouseOut(objName.twinSidebar);"
-			insertafter="appcontent"/>
-		
-	</hbox>
-	
 	<hbox id="omnisidebar_resizebox-twin" 
 		onmouseout="objName.hidingSidebar(objName.twinSidebar);"
 		ondragenter="objName.onDragEnter(objName.twinSidebar);"

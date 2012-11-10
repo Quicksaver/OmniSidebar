@@ -50,6 +50,8 @@
 		</vbox>
 		
 		<splitter id="sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter" hidden="true" insertafter="appcontent" />
+	
+		<hbox id="omnisidebar_switch-twin" class="omnisidebar_switch" collapsed="true" insertafter="appcontent"/>
 		
 	</hbox>
 	

@@ -33,4 +33,10 @@
 			
 	</broadcasterset>
 	
+	<hbox id="browser">
+	
+		<hbox id="omnisidebar_switch" class="omnisidebar_switch" collapsed="true" insertbefore="appcontent"/>
+		
+	</hbox>
+	
 </overlay>

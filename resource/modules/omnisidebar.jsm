@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.customizing = false;
 
@@ -88,6 +88,23 @@ this.__defineSetter__('fireSidebarFocusedEvent', function(v) { return window.fir
 this.__defineGetter__('sidebarOnLoad', function() { return window.sidebarOnLoad; });
 this.__defineSetter__('sidebarOnLoad', function(v) { return window.sidebarOnLoad = v; });
 this.__defineGetter__('browser', function() { return $('browser'); });
+
+this.__defineGetter__('moveLeft', function() {
+	if(typeof(moveLeftBy) == 'undefined') { return 0; }
+	var ret = 0;
+	for(var x in moveLeftBy) {
+		ret += moveLeftBy[x];
+	}
+	return ret;
+});
+this.__defineGetter__('moveRight', function() {
+	if(typeof(moveRightBy) == 'undefined') { return 0; }
+	var ret = 0;
+	for(var x in moveRightBy) {
+		ret += moveRightBy[x];
+	}
+	return ret;
+});
 
 // Dummy methods that will be properly replaced by the corresponding modules when they are loaded
 this.buttonLabels = function(btn, onLoad) {
@@ -278,6 +295,35 @@ this.browserMinWidth = function(e) {
 	if(e && e.type && e.type == 'endToggleSidebar' && window.innerWidth < minWidth) {
 		window.resizeBy(0, 0); // The values don't matter as minWidth takes precedence
 	}
+};
+
+this.setSwitcherOffset = function() {
+	// Unload current stylesheet if it's been loaded
+	styleAid.unload('switcherOffset');
+	
+	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
+	// I'm not supporting other versions of OSX, just this one isn't simple as it is
+	var moveBy = (Services.appinfo.OS != 'WINNT') ? -1 : 0;
+	var leftOffset = moveBy +moveLeft;
+	var rightOffset = moveBy +moveRight;
+	
+	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
+	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
+	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	
+	sscode += '	#omnisidebar_switch:not([movetoright]),\n';
+	sscode += '	#omnisidebar_switch-twin[movetoleft] {\n';
+	sscode += '		left: '+leftOffset+'px !important;\n';
+	sscode += '	}\n';
+	
+	sscode += '	#omnisidebar_switch[movetoright],\n';
+	sscode += '	#omnisidebar_switch-twin:not([movetoleft]) {\n';
+	sscode += '		right: '+rightOffset+'px !important;\n';
+	sscode += '	}\n';
+	
+	sscode += '}';
+	
+	styleAid.load('switcherOffset', sscode, true);
 };
 
 // object of broadcaster id's that shouldn't be saved between sessions
@@ -500,6 +546,9 @@ moduleAid.LOADMODULE = function() {
 	Globals.mainWidth = mainSidebar.width;
 	objectWatcher.addAttributeWatcher(mainSidebar.box, 'width', watchWidth);
 	
+	listenerAid.add(window, 'sidebarWidthChanged', setSwitcherOffset);
+	setSwitcherOffset();
+	
 	// Toggle modules
 	prefAid.listen('twinSidebar', toggleTwin);
 	
@@ -548,6 +597,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	listenerAid.remove(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
 	
+	listenerAid.remove(window, 'sidebarWidthChanged', setSwitcherOffset);
+	
 	objectWatcher.removeAttributeWatcher(mainSidebar.box, 'width', watchWidth);
 	
 	moduleAid.unload('twin');
@@ -568,4 +619,8 @@ moduleAid.UNLOADMODULE = function() {
 	overlayAid.removeOverlayWindow(window, "mainSidebar");
 	
 	moduleAid.unload('compatibilityFix/windowFixes');
+	
+	if(UNLOADED) {
+		styleAid.unload('switcherOffset');
+	}
 };
