@@ -1,4 +1,28 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.1.0';
+
+this.setTransparency = function() {
+	styleAid.unload('glassStyleTransparency');
+	
+	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
+	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
+	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	
+	var alpha = prefAid.transparency /1000;
+	
+	var m = 128/0.75;
+	var b = 128 -m;
+	var color = Math.max(Math.round((alpha *m) +b), 0);
+	
+	sscode += '	.sidebar-box[renderabove] .omnisidebar_resize_box,\n';
+	sscode += '	.sidebar-box:not([renderabove])[customizing] .sidebar-header,\n';
+	sscode += '	.sidebar-box:not([renderabove]) {\n';
+	sscode += '		background-color: rgba('+color+','+color+','+color+','+alpha+') !important;\n';
+	sscode += '	}\n';
+	
+	sscode += '}';
+	
+	styleAid.load('glassStyleTransparency', sscode, true);
+};
 
 moduleAid.LOADMODULE = function() {
 	styleAid.load('glassStyle', 'glass/glass');
@@ -15,6 +39,9 @@ moduleAid.LOADMODULE = function() {
 	styleAid.load('glassStyleStylish', 'glass/glass-stylish');
 	styleAid.load('glassStyleDOMInspector', 'glass/glass-domi');
 	styleAid.load('glassStylePocket', 'glass/glass-pocket');
+	
+	prefAid.listen('transparency', setTransparency);
+	setTransparency();
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -32,4 +59,7 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('glassStyleStylish');
 	styleAid.unload('glassStyleDOMInspector');
 	styleAid.unload('glassStylePocket');
+	
+	styleAid.unload('glassStyleTransparency');
+	prefAid.unlisten('transparency', setTransparency);
 };

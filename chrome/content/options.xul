@@ -34,6 +34,7 @@
 			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
 			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
 			<preference id="pref-glassStyle" name="extensions.omnisidebar.glassStyle" type="bool"/>
+			<preference id="pref-transparency" name="extensions.omnisidebar.transparency" type="int"/>
 			<preference id="pref-goButton" name="extensions.omnisidebar.goButton" type="bool"/>
 			<preference id="pref-goButtonTwin" name="extensions.omnisidebar.goButtonTwin" type="bool"/>
 			<preference id="pref-alwaysAddons" name="extensions.omnisidebar.alwaysAddons" type="bool"/>
@@ -332,10 +333,21 @@
 				
 				<tabpanel id="miscTab" orient="vertical">
 					<groupbox align="start">
-						<caption label="&omnisidebarOptgroupstyle.label;"/>
-						<checkbox id="glassCheckbox"
-							label="&omnisidebarOptglassStyle.label;" 
-							preference="pref-glassStyle" />
+						<caption>
+							<checkbox id="glassCheckbox"
+								label="&omnisidebarOptglassStyle.label;" 
+								preference="pref-glassStyle" />
+						</caption>
+						<hbox>
+							<label value="&omnisidebarOptglassStyle.transparent;"/>
+							<scale dependson="pref-glassStyle"
+								min="0"
+								max="1000"
+								increment="125"
+								pageincrement="375"
+								preference="pref-transparency"/>
+							<label value="&omnisidebarOptglassStyle.opaque;"/>
+						</hbox>
 					</groupbox>
 					
 					<groupbox align="start">

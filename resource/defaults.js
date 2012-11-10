@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.4';
+var defaultsVersion = '1.0.5';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -38,6 +38,7 @@ var prefList = {
 	goButtonTwin: false,
 	
 	glassStyle: false,
+	transparency: 250,
 	fx: true,
 	forceOpenToolbars: false,
 	forceOpenMenus: false,

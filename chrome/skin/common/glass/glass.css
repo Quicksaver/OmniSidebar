@@ -46,16 +46,12 @@ Other sidebars should also be themed although probably not perfectly! */
 		border: none !important;
 	}
 	
-	.sidebar-box[renderabove]:not([noTransparency]) .omnisidebar_resize_box,
-	.sidebar-box:not([renderabove]):not([noTransparency])[customizing] .sidebar-header,
-	.sidebar-box:not([renderabove]):not([noTransparency]) {
-		background: rgba(0,0,0,0.25) url("chrome://omnisidebar/skin/glass/glass_background.png") scroll no-repeat !important;
-		background-size: cover !important;
-	}
-	.sidebar-box[renderabove][noTransparency] .omnisidebar_resize_box,
-	.sidebar-box:not([renderabove])[noTransparency][customizing] .sidebar-header,
-	.sidebar-box:not([renderabove])[noTransparency] {
-		background: rgba(128,128,128,1) url("chrome://omnisidebar/skin/glass/glass_background.png") scroll no-repeat !important;
+	.sidebar-box[renderabove] .omnisidebar_resize_box,
+	.sidebar-box:not([renderabove])[customizing] .sidebar-header,
+	.sidebar-box:not([renderabove]) {
+		background-image: url("chrome://omnisidebar/skin/glass/glass_background.png") !important;
+		background-attachment: scroll !important;
+		background-repeat: no-repeat !important;
 		background-size: cover !important;
 	}
 	

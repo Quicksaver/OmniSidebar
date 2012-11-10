@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 moduleAid.LAZY = true;
 
 // dependsOn - object that adds a dependson attribute functionality to xul preference elements.
@@ -111,9 +111,24 @@ this.dependsOn = {
 	}
 };
 
+
+// This is so scales are properly initialized if they have a preference attribute, should work in most cases.
+// If you want to bypass this you can set onsyncfrompreference attribute on scale
+this.initScales = function() {
+	var scales = $$('scale');
+	for(var x=0; x<scales.length; x++) {
+		var scale = scales[x];
+		if(!scale.getAttribute('onsyncfrompreference') && scale.getAttribute('preference')) {
+			scale.value = $(scale.getAttribute('preference')).value;
+		}
+	}
+};
+
 moduleAid.LOADMODULE = function() {
 	dependsOn.updateAll();
 	listenerAid.add(window, "change", dependsOn.changed, false);
+	
+	initScales();
 };
 
 moduleAid.UNLOADMODULE = function() {

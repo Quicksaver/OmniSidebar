@@ -14,7 +14,6 @@
 <!ENTITY omnisidebarOptgroupgen.label "Appearance">
 <!ENTITY omnisidebarOptgroupfeatures.label "Features">
 <!ENTITY omnisidebarOptgroupperformance.label "Performance">
-<!ENTITY omnisidebarOptgroupstyle.label "Sidebars style">
 <!ENTITY omnisidebarOptgroupalways.label "Always open in the Sidebar">
 
 <!ENTITY omnisidebarOptGoURI.label "Include 'Go' button">
@@ -28,6 +27,8 @@
 <!ENTITY omnisidebarOptautoClose.label "Close/Hide the sidebar when it loses focus">
 
 <!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
+<!ENTITY omnisidebarOptglassStyle.opaque "Opaque">
+<!ENTITY omnisidebarOptglassStyle.transparent "Fully transparent">
 <!ENTITY omnisidebarOptfx.label "Enable transition effects">
 <!ENTITY omnisidebarOptshowDelay.label "Delay sidebar auto-showing by (msec): ">
 <!ENTITY omnisidebarOpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
