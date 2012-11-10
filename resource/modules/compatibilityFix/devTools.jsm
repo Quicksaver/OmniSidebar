@@ -1,16 +1,14 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('devToolsBox', function() { return $('devtools-sidebar-box'); });
 
-this.devToolsMove = function(obj, prop) {
+this.devToolsMove = function() {
 	if(devToolsBox.getAttribute('hidden') == 'true') {
 		delete moveRightBy.devTools;
 	} else {
-		moveRightBy.devTools = devToolsBox.clientWidth;
+		moveRightBy.__defineGetter__('devTools', function() { return devToolsBox.clientWidth; });
 	}
-	if(!prop || prop == 'hidden') { // width will be taken care of in bar.box width handler
-		dispatch(window, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: rightSidebar } });
-	}
+	dispatch(window, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: rightSidebar } });
 };
 
 this.devToolsHover = function() {
@@ -23,7 +21,6 @@ moduleAid.LOADMODULE = function() {
 	if(typeof(moveRightBy) == 'undefined') { self.moveRightBy = {}; }
 	
 	objectWatcher.addAttributeWatcher(devToolsBox, 'hidden', devToolsMove, false, false);
-	objectWatcher.addAttributeWatcher(devToolsBox, 'width', devToolsMove, false, true);
 	
 	listenerAid.add(devToolsBox, 'mouseover', devToolsHover);
 	
@@ -31,8 +28,9 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
+	delete moveRightBy.devTools;
+	
 	listenerAid.remove(devToolsBox, 'mouseover', devToolsHover);
 	
 	objectWatcher.removeAttributeWatcher(devToolsBox, 'hidden', devToolsMove, false, false);
-	objectWatcher.removeAttributeWatcher(devToolsBox, 'width', devToolsMove, false, true);
 };
