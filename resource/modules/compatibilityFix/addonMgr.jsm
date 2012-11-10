@@ -1,9 +1,9 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.addonMgrBackups = null;
 
-this.toggleAlwaysAddons = function() {
-	if(!UNLOADED && prefAid.alwaysAddons) {
+this.toggleAlwaysAddons = function(unloaded) {
+	if(!UNLOADED && !unloaded && prefAid.alwaysAddons) {
 		if(!addonMgrBackups) {
 			addonMgrBackups = window.BrowserOpenAddonsMgr;
 		}
@@ -57,7 +57,7 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
-	toggleAlwaysAddons();
+	toggleAlwaysAddons(true);
 	
 	prefAid.unlisten('alwaysAddons', toggleAlwaysAddons);
 	

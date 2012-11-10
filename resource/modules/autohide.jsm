@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
@@ -282,6 +282,15 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'endSidebarResize', hideOnResizeEnd);
 	listenerAid.remove(contextMenu, 'popupshown', showOnOpenContextMenu, false);
 	listenerAid.remove(contextMenu, 'popuphiding', hideOnCloseContextMenu, false);
+	
+	listenerAid.remove(mainSidebar.switcher, 'mouseover', autoHideSwitchOver);
+	listenerAid.remove(mainSidebar.switcher, 'dragenter', autoHideSwitchOver);
+	listenerAid.remove(mainSidebar.switcher, 'mouseout', autoHideSwitchOut);
+	listenerAid.remove(mainSidebar.switcher, 'dragexit', autoHideSwitchOut);
+	listenerAid.remove(twinSidebar.switcher, 'mouseover', autoHideSwitchOver);
+	listenerAid.remove(twinSidebar.switcher, 'dragenter', autoHideSwitchOver);
+	listenerAid.remove(twinSidebar.switcher, 'mouseout', autoHideSwitchOut);
+	listenerAid.remove(twinSidebar.switcher, 'dragexit', autoHideSwitchOut);
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setAutoHideWidth);
 	

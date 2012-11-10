@@ -77,6 +77,9 @@ this.listenerAid = {
 		return false;
 	},
 	
+	/* I'm not sure if clean is currently working...
+	OmniSidebar - Started browser and opened new window then closed it, it would not remove the switchers listeners, I don't know in which window,
+	or it would but it would still leave a ZC somehow. Removing them manually in UNLOADMODULE fixed the ZC but they should have been taken care of here */
 	clean: function() {
 		var i = 0;
 		while(i < this.handlers.length) {
