@@ -3,7 +3,7 @@
 	
 	#back-strip {
 		position: relative;
-		z-index: 2000;
+		z-index: 10;
 		opacity: 0.01;
 	}
 	

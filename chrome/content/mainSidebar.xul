@@ -35,7 +35,11 @@
 	
 	<hbox id="browser">
 	
-		<hbox id="omnisidebar_switch" class="omnisidebar_switch" collapsed="true" insertbefore="appcontent"/>
+		<hbox id="omnisidebar_switch"
+			class="omnisidebar_switch"
+			collapsed="true"
+			onclick="objName.clickSwitcher(event, objName.mainSidebar);"
+			insertbefore="appcontent"/>
 		
 	</hbox>
 	

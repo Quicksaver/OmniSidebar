@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
@@ -22,18 +22,14 @@ this.setAutoHide = function(bar) {
 		listenerAid.add(bar.switcher, 'dragenter', autoHideSwitchOver);
 		listenerAid.add(bar.switcher, 'mouseout', autoHideSwitchOut);
 		listenerAid.add(bar.switcher, 'dragexit', autoHideSwitchOut);
-		toggleSwitcher(bar);
+		bar.toggleSwitcher();
 	}
 	setAutoHideWidth();
 	toggleFX();
 };
 
-this.toggleSwitcher = function(bar) {
-	hideIt(bar.switcher, !bar.box.hidden);
-};
-
 this.listenerToggleSwitcher = function(e) {
-	if(e.detail.bar.switcher) { toggleSwitcher(e.detail.bar); }
+	e.detail.bar.toggleSwitcher();
 };
 
 this.showOnFocus = function(e) {

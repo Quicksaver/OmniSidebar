@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 this.customizing = false;
 
@@ -33,10 +33,14 @@ this.mainSidebar = {
 	get lastCommand () { return prefAid.lastcommand; },
 	set lastCommand (v) { return prefAid.lastcommand = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommand'); },
+	get useSwitch () { return prefAid.useSwitch; },
 	get above () { return prefAid.renderabove; },
 	get autoHide () { return prefAid.autoHide; },
 	get autoClose () { return prefAid.autoClose; },
 	get switcher () { return $('omnisidebar_switch'); },
+	toggleSwitcher: function() {
+		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
+	},
 	get goURI () { return $('viewURISidebar'); }
 };
 
@@ -71,10 +75,14 @@ this.twinSidebar = {
 	get lastCommand () { return prefAid.lastcommandTwin; },
 	set lastCommand (v) { return prefAid.lastcommandTwin = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommandTwin'); },
+	get useSwitch () { return prefAid.useSwitchTwin; },
 	get above () { return prefAid.renderaboveTwin; },
 	get autoHide () { return prefAid.autoHideTwin; },
 	get autoClose () { return prefAid.autoCloseTwin; },
 	get switcher () { return $('omnisidebar_switch-twin'); },
+	toggleSwitcher: function() {
+		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
+	},
 	get goURI () { return $('viewURISidebar-twin'); }
 };
 
@@ -297,6 +305,14 @@ this.browserMinWidth = function(e) {
 	}
 };
 
+this.clickSwitcher = function(e, bar) {
+	if(dispatch(bar.switcher, { type: 'clickedSwitcher', detail: { bar: bar, clickEvent: e } })
+	&& bar.switcher.getAttribute('enabled') == 'true'
+	&& e.button == 0) {
+		toggleSidebar(bar.switcher);
+	}
+};
+
 this.setSwitcherOffset = function() {
 	// Unload current stylesheet if it's been loaded
 	styleAid.unload('switcherOffset');
@@ -324,6 +340,23 @@ this.setSwitcherOffset = function() {
 	sscode += '}';
 	
 	styleAid.load('switcherOffset', sscode, true);
+};
+
+this.setSwitcherHeight = function() {
+	var moveBy = $('main-window').getAttribute('sizemode') == 'normal' ? +1 : 0;
+	// I can't set these by css, cpu usage goes through the roof?!
+	if(mainSidebar.switcher) { mainSidebar.switcher.style.height = $('appcontent').clientHeight +moveBy +'px'; }
+	if(twinSidebar.switcher) { twinSidebar.switcher.style.height = $('appcontent').clientHeight +moveBy +'px'; }
+};
+
+this.enableSwitcher = function(bar) {
+	toggleAttribute(bar.switcher, 'enabled', bar.useSwitch);
+	setSwitcherHeight();
+	bar.toggleSwitcher();
+};
+
+this.enableMainSwitcher = function() {
+	enableSwitcher(mainSidebar);
 };
 
 // object of broadcaster id's that shouldn't be saved between sessions
@@ -490,6 +523,7 @@ this.omniSidebarOnLoad = function(e) {
 
 this.loadMainSidebar = function() {
 	mainSidebar.loaded = true;
+	enableMainSwitcher();
 	
 	if(_sidebarCommand) {
 		for(var b in holdBroadcasters) {
@@ -550,6 +584,7 @@ moduleAid.LOADMODULE = function() {
 	setSwitcherOffset();
 	
 	// Toggle modules
+	prefAid.listen('useSwitch', enableMainSwitcher);
 	prefAid.listen('twinSidebar', toggleTwin);
 	
 	moduleAid.load('headers');
@@ -566,6 +601,7 @@ moduleAid.LOADMODULE = function() {
 	// can't let the browser be resized below the dimensions of the sidebars
 	browserMinWidth();
 	listenerAid.add(browser, 'resize', browserResized);
+	listenerAid.add(browser, 'browserResized', setSwitcherHeight);
 	listenerAid.add(window, 'endToggleSidebar', browserResized);
 	
 	if(!mainSidebar.close._tooltiptext) {
@@ -574,6 +610,7 @@ moduleAid.LOADMODULE = function() {
 	}
 	
 	blankTriggers.__defineGetter__('mainCommand', function() { return $('cmd_mainSidebar'); });
+	blankTriggers.__defineGetter__('mainSwitcher', function() { return mainSidebar.switcher; });
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -582,6 +619,7 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	delete blankTriggers.mainCommand;
+	delete blankTriggers.mainSwitcher;
 	
 	if(mainSidebar.close._tooltiptext) {
 		mainSidebar.close.setAttribute('tooltiptext', mainSidebar.close._tooltiptext);
@@ -589,6 +627,7 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	listenerAid.remove(browser, 'resize', browserResized);
+	listenerAid.remove(browser, 'browserResized', setSwitcherHeight);
 	listenerAid.remove(window, 'endToggleSidebar', browserResized);
 	browser.style.minWidth = '';
 	
@@ -607,6 +646,7 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('headers');
 	
 	prefAid.unlisten('twinSidebar', toggleTwin);
+	prefAid.unlisten('useSwitch', enableMainSwitcher);
 	
 	if(this.backups) {
 		toggleSidebar = this.backups.toggleSidebar;

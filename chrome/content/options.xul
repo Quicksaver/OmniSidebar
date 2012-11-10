@@ -9,6 +9,8 @@
 		<preferences>
 			<preference id="pref-moveSidebars" name="extensions.omnisidebar.moveSidebars" type="bool"/>
 			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
+			<preference id="pref-useSwitch" name="extensions.omnisidebar.useSwitch" type="bool"/>
+			<preference id="pref-useSwitchTwin" name="extensions.omnisidebar.useSwitchTwin" type="bool"/>
 			<preference id="pref-renderabove" name="extensions.omnisidebar.renderabove" type="bool"/>
 			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
 			<preference id="pref-autoHide" name="extensions.omnisidebar.autoHide" type="bool"/>
@@ -71,6 +73,7 @@
 									<radio label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
 								</hbox>
 							</radiogroup>
+							<checkbox label="&omnisidebarOptswitchers.label;" preference="pref-useSwitch"/>
 							<groupbox align="start">
 								<caption><checkbox id="aboveCheckbox" 
 									label="&omnisidebarOptrenderabove.label;" 
@@ -200,6 +203,7 @@
 						<caption label="&omnisidebarOptgroupTwin.label;"/>
 						<vbox align="start">
 							<checkbox label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
+							<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptswitchers.label;" preference="pref-useSwitchTwin"/>
 							<groupbox align="start">
 								<caption><checkbox id="aboveTwinCheckbox"
 									label="&omnisidebarOptrenderabove.label;"

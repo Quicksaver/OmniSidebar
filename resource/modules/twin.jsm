@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
@@ -40,8 +40,13 @@ this.fixWidths = function() {
 	if(twinWidth != twinSidebar.width) { twinSidebar.box.setAttribute('width', twinWidth); }
 };
 
+this.enableTwinSwitcher = function() {
+	enableSwitcher(twinSidebar);
+};
+
 this.loadTwinSidebar = function() {
 	twinSidebar.loaded = true;
+	enableTwinSwitcher();
 	
 	if(_sidebarCommandTwin) {
 		for(var b in holdBroadcasters) {
@@ -102,13 +107,21 @@ moduleAid.LOADMODULE = function() {
 		}
 	);
 	
+	prefAid.listen('useSwitchTwin', enableTwinSwitcher);
+	
 	twinTriggers.__defineGetter__('twinCommand', function() { return $('cmd_twinSidebar'); });
+	twinTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
 	blankTriggers.__defineGetter__('twinCommand', function() { return $('cmd_twinSidebar'); });
+	blankTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
 };
 
 moduleAid.UNLOADMODULE = function() {
 	delete twinTriggers.twinCommand;
+	delete twinTriggers.twinSwitcher;
 	delete blankTriggers.twinCommand;
+	delete blankTriggers.twinSwitcher;
+	
+	prefAid.unlisten('useSwitchTwin', enableTwinSwitcher);
 	
 	listenerAid.remove(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);
 	

@@ -17,4 +17,22 @@
 		z-index: 3;
 	}
 	
+	.omnisidebar_switch[enabled] {
+		z-index: 20;
+	}
+	
+	.omnisidebar_switch[enabled]:hover {
+		box-shadow: 0 0 6px rgba(5, 114, 193, 1);
+		background: rgba(40, 143, 252, 0.7);
+		cursor: pointer;
+	}
+	
+	.omnisidebar_switch[enabled]:hover {
+		-moz-transition: background .1s, box-shadow .18s;
+		transition: background .1s, box-shadow .18s; /* Firefox 16 */
+	}
+	.omnisidebar_switch[enabled]:not(:hover) {
+		-moz-transition: background .2s, box-shadow .36s;
+		transition: background .2s, box-shadow .36s; /* Firefox 16 */
+	}
 }
