@@ -1,19 +1,19 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
-		prefAid.hideheadertoolbar = !prefAid.hideheadertoolbar;
+		prefAid.toolbar = !prefAid.toolbar;
 	} else {
-		prefAid.hideheadertoolbarTwin = !prefAid.hideheadertoolbarTwin;
+		prefAid.toolbarTwin = !prefAid.toolbarTwin;
 	}
 };
 
 this.toggleToolbars = function(noHeaders) {
-	hideIt(mainSidebar.toolbar, !prefAid.hideheadertoolbar && toolbarHasButtons(mainSidebar.toolbar));
-	hideIt(twinSidebar.toolbar, !prefAid.hideheadertoolbarTwin && toolbarHasButtons(twinSidebar.toolbar));
+	hideIt(mainSidebar.toolbar, prefAid.toolbar && toolbarHasButtons(mainSidebar.toolbar));
+	hideIt(twinSidebar.toolbar, prefAid.toolbarTwin && toolbarHasButtons(twinSidebar.toolbar));
 	
-	toggleAttribute(mainSidebar.toolbarBroadcaster, 'checked', !prefAid.hideheadertoolbar);
-	toggleAttribute(twinSidebar.toolbarBroadcaster, 'checked', !prefAid.hideheadertoolbarTwin);
+	toggleAttribute(mainSidebar.toolbarBroadcaster, 'checked', prefAid.toolbar);
+	toggleAttribute(twinSidebar.toolbarBroadcaster, 'checked', prefAid.toolbarTwin);
 	
 	if(!noHeaders) {
 		toggleHeaders();
@@ -60,12 +60,12 @@ this.toggleIconsColor = function() {
 };
 
 this.hideMainHeader = {
-	get toolbar () { return prefAid.hideheadertoolbar || !toolbarHasButtons(mainSidebar.toolbar); },
+	get toolbar () { return !prefAid.toolbar || !toolbarHasButtons(mainSidebar.toolbar); },
 	get title () { return prefAid.hideheadertitle; },
 	get close () { return prefAid.hideheaderclose; }
 };
 this.hideTwinHeader = {
-	get toolbar () { return prefAid.hideheadertoolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
+	get toolbar () { return !prefAid.toolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
 	get title () { return prefAid.hideheadertitleTwin; },
 	get close () { return prefAid.hideheadercloseTwin; }
 };
@@ -179,12 +179,12 @@ moduleAid.LOADMODULE = function() {
 	overlayAid.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOverlay);
 	styleAid.load('headers', 'headers');
 	
-	prefAid.listen('hideheadertoolbar', toggleToolbars);
+	prefAid.listen('toolbar', toggleToolbars);
 	prefAid.listen('hideheadertitle', toggleTitles);
 	prefAid.listen('hideheaderclose', toggleCloses);
 	prefAid.listen('alternatebtns', toggleButtonStyle);
 	prefAid.listen('coloricons', toggleIconsColor);
-	prefAid.listen('hideheadertoolbarTwin', toggleToolbars);
+	prefAid.listen('toolbarTwin', toggleToolbars);
 	prefAid.listen('hideheadertitleTwin', toggleTitles);
 	prefAid.listen('hideheadercloseTwin', toggleCloses);
 	prefAid.listen('alternatebtnsTwin', toggleButtonStyle);
@@ -204,12 +204,12 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('menus');
 	delete twinTriggers.twinToolbar;
 	
-	prefAid.unlisten('hideheadertoolbar', toggleToolbars);
+	prefAid.unlisten('toolbar', toggleToolbars);
 	prefAid.unlisten('hideheadertitle', toggleTitles);
 	prefAid.unlisten('hideheaderclose', toggleCloses);
 	prefAid.unlisten('alternatebtns', toggleButtonStyle);
 	prefAid.unlisten('coloricons', toggleIconsColor);
-	prefAid.unlisten('hideheadertoolbarTwin', toggleToolbars);
+	prefAid.unlisten('toolbarTwin', toggleToolbars);
 	prefAid.unlisten('hideheadertitleTwin', toggleTitles);
 	prefAid.unlisten('hideheadercloseTwin', toggleCloses);
 	prefAid.unlisten('alternatebtnsTwin', toggleButtonStyle);

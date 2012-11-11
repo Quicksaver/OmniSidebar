@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.6';
+var defaultsVersion = '1.0.7';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -15,7 +15,7 @@ var prefList = {
 	useSwitch: false,
 	autoClose: false,
 	autoHide: false,
-	hideheadertoolbar: false,
+	toolbar: true,
 	hideheadertitle: false,
 	hideheaderdock: false,
 	hideheaderclose: false,
@@ -28,7 +28,7 @@ var prefList = {
 	useSwitchTwin: false,
 	autoCloseTwin: false,
 	autoHideTwin: false,
-	hideheadertoolbarTwin: false,
+	toolbarTwin: true,
 	hideheadertitleTwin: false,
 	hideheaderdockTwin: false,
 	hideheadercloseTwin: false,

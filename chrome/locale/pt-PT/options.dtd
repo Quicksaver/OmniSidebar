@@ -7,26 +7,17 @@
 <!ENTITY omnisidebarOptMisc.label "Geral">
 <!ENTITY omnisidebarOptgroupMain.label "Painel Lateral Principal">
 <!ENTITY omnisidebarOptgroupTwin.label "Painel Lateral Gémeo">
-<!ENTITY omnisidebarOptgroupicons.label "Tipo de Botões da Barra de Ferramentas do Painel Lateral">
 <!ENTITY omnisidebarOptgroupgen.label "Aparência">
 <!ENTITY omnisidebarOptgroupfeatures.label "Funcionalidades">
 <!ENTITY omnisidebarOptgroupperformance.label "Desempenho">
-<!ENTITY omnisidebarOptgroupstyle.label "Estilo dos Paineis Laterais">
-<!ENTITY omnisidebarOptgroupalways.label "Abrir sempre no Painel Lateral">
 <!ENTITY omnisidebarOptsidebars.leftlabel "Colocar à esquerda">
 <!ENTITY omnisidebarOptsidebars.rightlabel "Colocar à direita">
 <!ENTITY omnisidebarOptsidebars.twinlabel "Ativar Painel Lateral Gémeo no lado oposto">
-<!ENTITY omnisidebarOptrenderabove.label "Desacoplar da janela do navegador e">
-<!ENTITY omnisidebarOptundockMode.autohide "Esconder automaticamente para a margem">
-<!ENTITY omnisidebarOptundockMode.noauto "Só fechar quando comandado">
-<!ENTITY omnisidebarOptundockMode.autoclose "Fechar automaticamente quando perde foco">
 <!ENTITY omnisidebarOptglassStyle.label "Todas os Paineis Laterais com Estilo de Transparência">
 <!ENTITY omnisidebarOptfx.label "Ativar efeitos de transição">
 <!ENTITY omnisidebarOptshowDelay.label "Atrasar o mostrar automático do painel lateral em (msec):">
 <!ENTITY omnisidebarOpthideDelay.label "Atrasar o esconder automático do painel lateral em (msec):">
 <!ENTITY omnisidebarOptkeepPrivate.label "Mnter o estado do painel lateral quando em modo de Navegação Privada">
-<!ENTITY omnisidebarOptalternatebtns.label "Estilo alternativo dos botões da barra de ferramentas do painel lateral">
-<!ENTITY omnisidebarOpthideheadertoolbar.label "Esconder a barra de ferramentas do painel lateral">
 <!ENTITY omnisidebarOpthideheadertitle.label "Esconder o título do Painel Lateral">
 <!ENTITY omnisidebarOpttitleButton.label "Menu de seleção no título do Painel Lateral">
 <!ENTITY omnisidebarOpthideheaderdock.label "Esconder botão de acoplagem">

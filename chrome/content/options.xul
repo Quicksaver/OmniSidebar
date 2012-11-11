@@ -18,12 +18,12 @@
 			<preference id="pref-autoHideTwin" name="extensions.omnisidebar.autoHideTwin" type="bool"/>
 			<preference id="pref-autoClose" name="extensions.omnisidebar.autoClose" type="bool"/>
 			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
-			<preference id="pref-hideheadertoolbar" name="extensions.omnisidebar.hideheadertoolbar" type="bool"/>
+			<preference id="pref-toolbar" name="extensions.omnisidebar.toolbar" type="bool"/>
 			<preference id="pref-hideheadertitle" name="extensions.omnisidebar.hideheadertitle" type="bool"/>
 			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
 			<preference id="pref-hideheaderclose" name="extensions.omnisidebar.hideheaderclose" type="bool"/>
 			<preference id="pref-titleButton" name="extensions.omnisidebar.titleButton" type="bool"/>
-			<preference id="pref-hideheadertoolbarTwin" name="extensions.omnisidebar.hideheadertoolbarTwin" type="bool"/>
+			<preference id="pref-toolbarTwin" name="extensions.omnisidebar.toolbarTwin" type="bool"/>
 			<preference id="pref-hideheadertitleTwin" name="extensions.omnisidebar.hideheadertitleTwin" type="bool"/>
 			<preference id="pref-hideheaderdockTwin" name="extensions.omnisidebar.hideheaderdockTwin" type="bool"/>
 			<preference id="pref-hideheadercloseTwin" name="extensions.omnisidebar.hideheadercloseTwin" type="bool"/>
@@ -56,66 +56,67 @@
 			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
 		</preferences>
 		
-		<tabbox id="omnisidebarTabBox" >
+		<tabbox id="omnisidebarTabBox">
 			<tabs id="tabsElement">
 				<tab id="mainTab" label="&omnisidebarButtonMain.label;"/>
 				<tab id="twinTab" label="&omnisidebarButtonTwin.label;"/>
 				<tab id="miscTab" label="&omnisidebarOptMisc.label;"/>
 			</tabs>
 			
-			<tabpanels id="tabPanels" >
+			<tabpanels id="tabPanels">
 				<tabpanel id="mainTab" orient="vertical">
 					<groupbox align="center">
-						<caption label="&omnisidebarOptgroupMain.label;"/>
+						<radiogroup preference="pref-moveSidebars"
+							onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
+							onsynctopreference="return this.value == 'right';">
+							<hbox>
+								<radio label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
+								<radio label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
+							</hbox>
+						</radiogroup>
 						<vbox align="start">
-							<radiogroup preference="pref-moveSidebars"
-								onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
-								onsynctopreference="return this.value == 'right';">
-								<hbox >
-									<radio label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
-									<radio label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
-								</hbox>
-							</radiogroup>
 							<checkbox label="&omnisidebarOptswitchers.label;" preference="pref-useSwitch"/>
-							<groupbox align="start">
-								<caption><checkbox id="aboveCheckbox" 
-									label="&omnisidebarOptundock.label;" 
-									preference="pref-renderabove"/></caption>
-								<checkbox dependson="pref-renderabove" label="&omnisidebarOptundockMode.autohide;" preference="pref-autoHide"/>
-								<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
-							</groupbox>
+							<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
 						</vbox>
+					</groupbox>
+					
+					<groupbox align="center">
+						<caption><checkbox id="aboveCheckbox" 
+							label="&omnisidebarOptundock.label;" 
+							preference="pref-renderabove"/></caption>
+						<checkbox dependson="pref-renderabove" label="&omnisidebarOptautohide.label;" preference="pref-autoHide"/>
 					</groupbox>
 					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupgen.label;"/>
 						<hbox align="center">
 							<vbox align="start">
-								<checkbox label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
 								<checkbox label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
 								<checkbox dependson="!pref-hideheadertitle" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
 							</vbox>
 							<vbox align="start">
-								<checkbox label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbar"/>
 								<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
 								<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
 							</vbox>
 						</hbox>
 					</groupbox>
 					
-					<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
-						<caption label="&omnisidebarOptgroupicons.label;"/>
-						<radiogroup preference="pref-coloricons">
-							<hbox>
-								<radio label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-								<radio label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
-								<radio label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
-							</hbox>
-						</radiogroup>
-					</groupbox>
-					
 					<groupbox align="center">
-						<checkbox dependson="!pref-hideheadertoolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
+						<caption><checkbox label="&omnisidebarOpttoolbar.label;" preference="pref-toolbar"/></caption>
+						<vbox align="start">
+							<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
+							<checkbox dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
+							<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
+								<caption label="&omnisidebarOptgroupicons.label;"/>
+								<radiogroup preference="pref-coloricons">
+									<hbox align="center">
+										<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
+										<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+										<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
+									</hbox>
+								</radiogroup>
+							</groupbox>
+						</vbox>
 					</groupbox>
 					
 					<groupbox align="center">
@@ -202,51 +203,54 @@
 				</tabpanel>
 				
 				<tabpanel id="twinTab" orient="vertical">
+					<box align="center" style="-moz-binding: url(&quot;chrome://global/content/bindings/groupbox.xml#groupbox&quot;);">
+						<checkbox label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
+					</box>
 					<groupbox align="center">
-						<caption label="&omnisidebarOptgroupTwin.label;"/>
 						<vbox align="start">
-							<checkbox label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
 							<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptswitchers.label;" preference="pref-useSwitchTwin"/>
-							<groupbox align="start">
-								<caption><checkbox id="aboveTwinCheckbox"
-									label="&omnisidebarOptundock.label;"
-									dependson="pref-twinSidebar"
-									preference="pref-renderaboveTwin"/></caption>
-								<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptundockMode.autohide;" preference="pref-autoHideTwin"/>
-								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptautoClose.label;" preference="pref-autoCloseTwin"/>
-							</groupbox>
+							<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptautoClose.label;" preference="pref-autoCloseTwin"/>
 						</vbox>
+					</groupbox>
+					
+					<groupbox align="center">
+						<caption><checkbox id="aboveTwinCheckbox"
+							label="&omnisidebarOptundock.label;"
+							dependson="pref-twinSidebar"
+							preference="pref-renderaboveTwin"/></caption>
+						<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptautohide.label;" preference="pref-autoHideTwin"/>
 					</groupbox>
 					
 					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupgen.label;"/>
 						<hbox align="center">	
 							<vbox align="start">
-								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
 								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
 								<checkbox dependson="pref-twinSidebar,!pref-hideheadertitleTwin" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
 							</vbox>
 							<vbox align="start">
-								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheadertoolbar.label;" preference="pref-hideheadertoolbarTwin"/>
 								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
 								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
 							</vbox>
 						</hbox>
 					</groupbox>
 					
-					<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
-						<caption label="&omnisidebarOptgroupicons.label;"/>
-						<radiogroup preference="pref-coloriconsTwin">
-							<hbox>
-								<radio dependson="pref-twinSidebar" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-								<radio dependson="pref-twinSidebar" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
-								<radio dependson="pref-twinSidebar" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
-							</hbox>
-						</radiogroup>
-					</groupbox>
-					
 					<groupbox align="center">
-						<checkbox dependson="pref-twinSidebar,!pref-hideheadertoolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
+						<caption><checkbox dependson="pref-twinSidebar" label="&omnisidebarOpttoolbar.label;" preference="pref-toolbarTwin"/></caption>
+						<vbox align="start">
+							<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
+							<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
+							<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
+								<caption label="&omnisidebarOptgroupicons.label;"/>
+								<radiogroup preference="pref-coloriconsTwin">
+									<hbox align="center">
+										<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
+										<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+										<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
+									</hbox>
+								</radiogroup>
+							</groupbox>
+						</vbox>
 					</groupbox>
 					
 					<groupbox align="center">
@@ -333,7 +337,7 @@
 				</tabpanel>
 				
 				<tabpanel id="miscTab" orient="vertical">
-					<groupbox align="start">
+					<groupbox align="center">
 						<caption>
 							<checkbox id="glassCheckbox"
 								label="&omnisidebarOptglassStyle.label;" 
@@ -351,33 +355,29 @@
 						</hbox>
 					</groupbox>
 					
-					<groupbox align="start">
+					<groupbox align="center">
 						<caption label="&omnisidebarOptgroupfeatures.label;"/>
-						<hbox>
-							<label value="&omnisidebarOptshowDelay.label;"/>
-							<textbox type="number"
-								size="3"
-								min="0"
-								max="2000"
-								style="text-align: center;"
-								preference="pref-showDelay"/>
-				        </hbox>
-						<hbox>
-							<label value="&omnisidebarOpthideDelay.label;"/>
-							<textbox type="number"
-								size="3"
-								min="0"
-								max="2000"
-								style="text-align: center;"
-								preference="pref-hideDelay"/>
-				        </hbox>
-						<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
-					</groupbox>
-					
-					<groupbox align="start">
-						<caption label="&omnisidebarOptforceOpen.label;"/>
-						<checkbox label="&omnisidebarOptforceOpen.toolbars;" preference="pref-forceOpenToolbars"/>
-						<checkbox label="&omnisidebarOptforceOpen.menus;" preference="pref-forceOpenMenus"/>
+						<vbox align="start">
+							<hbox>
+								<label value="&omnisidebarOptshowDelay.label;"/>
+								<textbox type="number"
+									size="3"
+									min="0"
+									max="2000"
+									style="text-align: center;"
+									preference="pref-showDelay"/>
+					        </hbox>
+							<hbox>
+								<label value="&omnisidebarOpthideDelay.label;"/>
+								<textbox type="number"
+									size="3"
+									min="0"
+									max="2000"
+									style="text-align: center;"
+									preference="pref-hideDelay"/>
+					        </hbox>
+							<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
+						</vbox>
 					</groupbox>
 					
 					<groupbox align="start">
@@ -385,13 +385,20 @@
 						<checkbox label="&omnisidebarOptfx.label;" preference="pref-fx"/>
 					</groupbox>
 					
-					<groupbox align="start">
-						<caption label="&omnisidebarOptgroupalways.label;"/>
-						<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
-						<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
-						<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
-						<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
-					</groupbox>
+					<hbox align="start">
+						<groupbox align="start">
+							<caption label="&omnisidebarOptgroupalways.label;"/>
+							<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
+							<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
+							<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
+							<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
+						</groupbox>
+						<groupbox align="start">
+							<caption label="&omnisidebarOptforceOpen.label;"/>
+							<checkbox label="&omnisidebarOptforceOpen.toolbars;" preference="pref-forceOpenToolbars"/>
+							<checkbox label="&omnisidebarOptforceOpen.menus;" preference="pref-forceOpenMenus"/>
+						</groupbox>
+					</hbox>
 				</tabpanel>
 			</tabpanels>
 		</tabbox>

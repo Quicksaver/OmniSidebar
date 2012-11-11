@@ -11,19 +11,20 @@
 <!ENTITY omnisidebarOptMisc.label "Global">
 <!ENTITY omnisidebarOptgroupMain.label "Main Sidebar">
 <!ENTITY omnisidebarOptgroupTwin.label "Twin Sidebar">
-<!ENTITY omnisidebarOptgroupicons.label "SideToolbar Buttons Iconset">
+<!ENTITY omnisidebarOptgroupicons.label "Buttons Iconset:">
 <!ENTITY omnisidebarOptgroupgen.label "Appearance">
 <!ENTITY omnisidebarOptgroupfeatures.label "Features">
 <!ENTITY omnisidebarOptgroupperformance.label "Performance">
-<!ENTITY omnisidebarOptgroupalways.label "Always open in the Sidebar">
+<!ENTITY omnisidebarOptgroupalways.label "Always open in the sidebar">
 
 <!ENTITY omnisidebarOptGoURI.label "Include 'Go' button">
 
 <!ENTITY omnisidebarOptsidebars.leftlabel "Place on the left">
 <!ENTITY omnisidebarOptsidebars.rightlabel "Place on the right">
 <!ENTITY omnisidebarOptsidebars.twinlabel "Enable the Twin Sidebar on the opposite side">
-<!ENTITY omnisidebarOptswitchers.label "Click on the browser margin to toggle the sidebar">
+<!ENTITY omnisidebarOptswitchers.label "Click on the browser margin to open or close">
 <!ENTITY omnisidebarOptundock.label "Undock from the browser window">
+<!ENTITY omnisidebarOptautohide.label "Automatically hide to the side">
 <!ENTITY omnisidebarOptundockMode.autohide "Auto-hide to the side">
 <!ENTITY omnisidebarOptautoClose.label "Close/Hide the sidebar when it loses focus">
 
@@ -36,11 +37,11 @@
 <!ENTITY omnisidebarOptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">
 
 <!ENTITY omnisidebarOptforceOpen.label "Don't close the sidebar from">
-<!ENTITY omnisidebarOptforceOpen.toolbars "Buttons in the SideToolbar">
+<!ENTITY omnisidebarOptforceOpen.toolbars "Buttons in the sidebar toolbar">
 <!ENTITY omnisidebarOptforceOpen.menus "Drop-down menus">
 
-<!ENTITY omnisidebarOptalternatebtns.label "Alternate SideToolbar button style">
-<!ENTITY omnisidebarOpthideheadertoolbar.label "Hide SideToolbar">
+<!ENTITY omnisidebarOptalternatebtns.label "Alternate button style">
+<!ENTITY omnisidebarOpttoolbar.label "Sidebar Toolbar">
 <!ENTITY omnisidebarOpthideheadertitle.label "Hide sidebar title">
 <!ENTITY omnisidebarOpttitleButton.label "Sidebar menu dropdown in title">
 <!ENTITY omnisidebarOpthideheaderdock.label "Hide docking button">
