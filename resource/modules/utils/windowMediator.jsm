@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.3';
+moduleAid.VERSION = '2.1.4';
 moduleAid.LAZY = true;
 
 // windowMediator - Aid object to help with window tasks involving window-mediator and window-watcher
@@ -34,7 +34,7 @@ this.windowMediator = {
 	callOnMostRecent: function(aCallback, aType, aURI) {
 		var type = aType || null;
 		if(aURI) {
-			var browserEnumerator = this.getEnumerator(aType);
+			var browserEnumerator = this.getEnumerator(type);
 			while(browserEnumerator.hasMoreElements()) {
 				var window = browserEnumerator.getNext();
 				if(window.document.documentURI == aURI && window.document.readyState == 'complete') {
@@ -44,7 +44,7 @@ this.windowMediator = {
 			return null;
 		}
 		
-		var window = Services.wm.getMostRecentWindow(aType);
+		var window = Services.wm.getMostRecentWindow(type);
 		if(window) {
 			return aCallback(window);
 		}
