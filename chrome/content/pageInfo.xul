@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="pageInfo-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<broadcasterset id="mainBroadcasterSet">
+		
+		<broadcaster id="viewPageInfoSidebar"
+			label="&PageInfoSidebar.label;"
+			tooltiptext="&PageInfoSidebar.tooltip;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://browser/content/pageinfo/pageInfo.xul"
+			sidebartitle="&PageInfoSidebar.label;"
+			oncommand="toggleSidebar(this);" />
+		
+	</broadcasterset>
+	
+	<menupopup id="viewSidebarMenu">
+		
+		<menuitem id="menu_pageInfoSidebar"
+			accesskey="I"
+			observes="viewPageInfoSidebar" />
+			
+	</menupopup>
+		
+</overlay>

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 this.customizing = false;
 
@@ -372,15 +372,18 @@ this.twinTriggers = {};
 this.blankTriggers = {};
 // object of elements or parent elements that force the sidebar to open in case the command triggered is already opened on the other sidebar, after closing it
 this.barSwitchTriggers = {};
+// object of elements or parent elements that should reload the sidebar if it's already opened and forceOpen is true
+this.forceReloadTriggers = {};
 
 // toggleSidebar(), fireSidebarFocusedEvent() and sidebarOnLoad() modified for use with two sidebars
-this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceBarSwitch) {
+this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceBarSwitch, forceReload) {
 	if(customizing) { return; }
 	
 	if(!forceOpen) { forceOpen = false; }
 	if(!twin) { twin = false; }
 	if(!forceBlank) { forceBlank = false; }
 	if(!forceBarSwitch) { forceBarSwitch = false; }
+	if(!forceReload) { forceReload = false; }
 	var bar = (twin) ? twinSidebar : mainSidebar;
 	
 	if(!commandID) {
@@ -391,6 +394,15 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 			for(var t in forceOpenTriggers) {
 				if(isAncestor(commandID, forceOpenTriggers[t])) {
 					forceOpen = true;
+					break;
+				}
+			}
+		}
+		
+		if(!forceReload && forceOpen) {
+			for(var t in forceReloadTriggers) {
+				if(isAncestor(commandID, forceReloadTriggers[t])) {
+					forceReload = true;
 					break;
 				}
 			}
@@ -457,23 +469,28 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	}
 	
 	if(sidebarBroadcaster.getAttribute("checked") == "true") {
-		if(!forceOpen) {
+		if(forceReload) {
 			closeSidebar(bar, sidebarBroadcaster);
-			
-			if(dispatch(bar.sidebar, { type: 'closedSidebar', detail: { bar: bar } })) {
-				if(window.content) {
-					try { window.content.focus(); }
-					catch(ex) { window.gBrowser.selectedBrowser.focus(); }
-				} else {
-					window.gBrowser.selectedBrowser.focus();
-				}
-			}
-		} else {
-			fireSidebarFocusedEvent(twin);
 		}
-		
-		dispatch(bar.sidebar, { type: 'endToggleSidebar', cancelable: false, detail: { bar: bar } });
-		return;
+		else {
+			if(!forceOpen) {
+				closeSidebar(bar, sidebarBroadcaster);
+				
+				if(dispatch(bar.sidebar, { type: 'closedSidebar', detail: { bar: bar } })) {
+					if(window.content) {
+						try { window.content.focus(); }
+						catch(ex) { window.gBrowser.selectedBrowser.focus(); }
+					} else {
+						window.gBrowser.selectedBrowser.focus();
+					}
+				}
+			} else {
+				fireSidebarFocusedEvent(twin);
+			}
+			
+			dispatch(bar.sidebar, { type: 'endToggleSidebar', cancelable: false, detail: { bar: bar } });
+			return;
+		}
 	}
 	
 	sidebarBroadcaster.setAttribute("checked", "true");
@@ -512,13 +529,17 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 
 this.fireOmniSidebarFocusedEvent = function(twin) {
 	var bar = (twin) ? twinSidebar : mainSidebar;
-	dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocusedSync', cancelable: false, detail: { bar: bar } });
 	aSync(function() { dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocused', cancelable: false, detail: { bar: bar } }); });
 };
 
 this.omniSidebarOnLoad = function(e) {
 	var target = e.currentTarget;
 	fireSidebarFocusedEvent(twinSidebar.sidebar && target == twinSidebar.sidebar);
+};
+
+this.fireFocusedSyncEvent = function(e) {
+	var bar = e.currentTarget == twinSidebar.sidebar ? twinSidebar : mainSidebar;
+	dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocusedSync', cancelable: false, detail: { bar: bar } });
 };
 
 this.loadMainSidebar = function() {
@@ -594,6 +615,7 @@ moduleAid.LOADMODULE = function() {
 	
 	// Apply initial preferences
 	listenerAid.add(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
+	listenerAid.add(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
 	listenerAid.add(window, 'beforecustomization', customize, false);
 	listenerAid.add(window, 'aftercustomization', customize, false);
@@ -634,6 +656,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'beforecustomization', customize, false);
 	listenerAid.remove(window, 'aftercustomization', customize, false);
 	
+	listenerAid.remove(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	listenerAid.remove(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setSwitcherOffset);

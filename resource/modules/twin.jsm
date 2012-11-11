@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
@@ -76,6 +76,7 @@ this.loadedTwin = function() {
 	// Apply initial preferences
 	setBroadcastersTwin(true);
 	listenerAid.add(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);
+	listenerAid.add(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
 	_sidebarCommandTwin = twinSidebar.box.getAttribute('sidebarcommand');
 	loadTwinSidebar();
@@ -123,6 +124,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	prefAid.unlisten('useSwitchTwin', enableTwinSwitcher);
 	
+	listenerAid.remove(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	listenerAid.remove(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);
 	
 	objectWatcher.removeAttributeWatcher(twinSidebar.box, 'width', watchWidth);

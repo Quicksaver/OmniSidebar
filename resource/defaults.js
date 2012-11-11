@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.5';
+var defaultsVersion = '1.0.6';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -49,6 +49,7 @@ var prefList = {
 	alwaysAddons: false,
 	alwaysConsole: false,
 	alwaysDMT: false,
+	alwaysPageInfo: false,
 	
 	mainKeysetKeycode: 'VK_F8',
 	mainKeysetAccel: false,

@@ -19,7 +19,7 @@
 	<menupopup id="viewSidebarMenu">
 		
 		<menuitem id="menu_domiSidebar"
-			accesskey="I"
+			accesskey="O"
 			observes="viewDOMInspectorSidebar" />
 			
 	</menupopup>

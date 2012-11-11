@@ -40,6 +40,7 @@
 			<preference id="pref-alwaysAddons" name="extensions.omnisidebar.alwaysAddons" type="bool"/>
 			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
 			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
+			<preference id="pref-alwaysPageInfo" name="extensions.omnisidebar.alwaysPageInfo" type="bool"/>
 			<preference id="pref-forceOpenToolbars" name="extensions.omnisidebar.forceOpenToolbars" type="bool"/>
 			<preference id="pref-forceOpenMenus" name="extensions.omnisidebar.forceOpenMenus" type="bool"/>
 			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
@@ -389,6 +390,7 @@
 						<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
 						<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
 						<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
+						<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
 					</groupbox>
 				</tabpanel>
 			</tabpanels>
