@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.9';
+moduleAid.VERSION = '1.0.10';
 
 this.customizing = false;
 
@@ -298,9 +298,9 @@ this.browserMinWidth = function(e) {
 	var minWidth = prefAid.minSpaceBetweenSidebars;
 	if(mainSidebar.width && !mainSidebar.box.hidden) { minWidth += mainSidebar.width; }
 	if(twinSidebar.width && !twinSidebar.box.hidden) { minWidth += twinSidebar.width; }
-	browser.style.minWidth = minWidth+'px';
+	$('main-window').style.minWidth = minWidth+'px';
 	
-	if(e && e.type && e.type == 'endToggleSidebar' && window.innerWidth < minWidth) {
+	if(e && e.type && e.type == 'endToggleSidebar' && $('main-window').clientWidth < minWidth) {
 		window.resizeBy(0, 0); // The values don't matter as minWidth takes precedence
 	}
 };
@@ -651,7 +651,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(browser, 'resize', browserResized);
 	listenerAid.remove(browser, 'browserResized', setSwitcherHeight);
 	listenerAid.remove(window, 'endToggleSidebar', browserResized);
-	browser.style.minWidth = '';
+	$('main-window').style.minWidth = '';
 	
 	listenerAid.remove(window, 'beforecustomization', customize, false);
 	listenerAid.remove(window, 'aftercustomization', customize, false);

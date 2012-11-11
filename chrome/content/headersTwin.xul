@@ -43,4 +43,6 @@
 		<browser id="sidebar-twin" class="sidebar-browser" />
 	</vbox>
 	
+	<splitter id="sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter"/>
+	
 </overlay>
