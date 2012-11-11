@@ -4,6 +4,7 @@
 <!ENTITY omnisidebarPageInfo.label "Page Info">
 
 <!ENTITY omnisidebarOptions.title "OmniSidebar Options">
+<!ENTITY omnisidebarOptabout.label "About">
 
 <!ENTITY omnisidebarButtonMain.label "Main Sidebar">
 <!ENTITY omnisidebarButtonTwin.label "Twin Sidebar">
@@ -67,3 +68,9 @@
 <!ENTITY omnisidebarOptKeyboardShortcut.up "Up">
 <!ENTITY omnisidebarOptKeyboardShortcut.right "Right">
 <!ENTITY omnisidebarOptKeyboardShortcut.down "Down">
+
+<!ENTITY omnisidebarabout.name "OmniSidebar">
+<!ENTITY omnisidebarabout.by "by Quicksaver">
+<!ENTITY omnisidebarabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
+<!ENTITY omnisidebarabout.home "Add-on Homepage">
+<!ENTITY omnisidebarabout.tech "Technical Support">

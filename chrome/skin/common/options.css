@@ -1,3 +1,31 @@
 textbox[type="number"] .numberbox-input {
 	text-align: center;
 }
+
+.box-groupbox {
+	-moz-binding: url("chrome://global/content/bindings/groupbox.xml#groupbox");
+}
+
+#twinTab > .box-groupbox {
+	margin-bottom: 1px;
+}
+
+#logo {
+	list-style-image: url("chrome://omnisidebar/skin/icon.png");
+	max-width: 200px;
+	max-height: 200px;
+	margin: 20px 0;
+}
+
+#aboutTab vbox description,
+#aboutTab vbox label {
+	text-align: right;
+}
+
+#aboutTab vbox description.justify {
+	text-align: justify;
+}
+
+.closer {
+	margin-bottom: 0;
+}
