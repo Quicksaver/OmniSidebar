@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 this.customizing = false;
 
@@ -224,13 +224,13 @@ this.setBroadcasters = function(initialize) {
 		if(initialize) {
 			if(!broadcasters[i]._oncommand) {
 				broadcasters[i]._oncommand = broadcasters[i].getAttribute('oncommand');
-				broadcasters[i].setAttribute('oncommand', 'toggleSidebar(this);');
+				setAttribute(broadcasters[i], 'oncommand', 'toggleSidebar(this);');
 			}
 			objectWatcher.addAttributeWatcher(broadcasters[i], 'disabled', setlast);
 		}
 		else if(!initialize) {
 			if(broadcasters[i]._oncommand) {
-				broadcasters[i].setAttribute('oncommand', broadcasters[i]._oncommand);
+				setAttribute(broadcasters[i], 'oncommand', broadcasters[i]._oncommand);
 				delete broadcasters[i]._oncommand;
 			}
 			objectWatcher.removeAttributeWatcher(broadcasters[i], 'disabled', setlast);
