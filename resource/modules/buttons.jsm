@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -118,7 +118,10 @@ this.updateButtons = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, 'buttons');
+	overlayAid.overlayWindow(window, 'buttons', null, null, function() {
+		removeAttribute(mainSidebar.button, 'loaded');
+		removeAttribute(twinSidebar.button, 'loaded');
+	});
 	
 	prefAid.listen('moveSidebars', updateButtons);
 	

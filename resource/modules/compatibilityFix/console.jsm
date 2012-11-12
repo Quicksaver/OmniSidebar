@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.whichConsole = '1';
 this.consoleBackups = {};
@@ -61,6 +61,8 @@ moduleAid.LOADMODULE = function() {
 	
 	overlayAid.overlayWindow(window, 'consoleButton', null, loadConsoleButton);
 	AddonManager.getAddonByID("{1280606b-2510-4fe0-97ef-9b5a22eafe80}", function(addon) {
+		if(UNLOADED) { return; }
+		
 		if(addon && addon.isActive) {
 			whichConsole = '2';
 			if(_sidebarCommand == 'viewConsole1Sidebar') { _sidebarCommand = 'viewConsole2Sidebar'; }

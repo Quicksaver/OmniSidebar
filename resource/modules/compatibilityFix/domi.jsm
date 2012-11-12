@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.doDOMICommand = function() {
 	delete holdBroadcasters.domi;
@@ -24,6 +24,8 @@ moduleAid.LOADMODULE = function() {
 	holdBroadcasters.domi = 'viewDOMInspectorSidebar';
 	
 	AddonManager.getAddonByID("inspector@mozilla.org", function(addon) {
+		if(UNLOADED) { return; }
+		
 		if(addon && addon.isActive) {
 			overlayAid.overlayWindow(window, 'domi', null, loadDOMI);
 		} else {

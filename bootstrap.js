@@ -24,7 +24,7 @@
 // disable() - disables the add-on
 // Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
 
-let bootstrapVersion = '1.2.3';
+let bootstrapVersion = '1.2.4';
 let UNLOADED = false;
 let STARTED = false;
 let addonData = null;
@@ -105,7 +105,8 @@ function listenOnce(aSubject, type, handler, capture) {
 	if(UNLOADED || !aSubject || !aSubject.addEventListener) { return; }
 	
 	var runOnce = function(event) {
-		aSubject.removeEventListener(type, runOnce, capture);
+		try { aSubject.removeEventListener(type, runOnce, capture); }
+		catch(ex) { Cu.reportError(ex); } // Prevents some can't access dead object errors
 		if(!UNLOADED && event !== undefined) {
 			removeOnceListener(runOnce);
 			try { handler(event, aSubject); }

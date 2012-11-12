@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.9';
+moduleAid.VERSION = '2.1.10';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -456,7 +456,9 @@ this.overlayAid = {
 				}
 			}
 			
-			delete aWindow._OVERLAYS_LOADED;
+			if(aWindow._OVERLAYS_LOADED.length == 0) {
+				delete aWindow._OVERLAYS_LOADED;
+			}
 			delete aWindow._BEING_OVERLAYED;
 			aWindow._RESCHEDULE_OVERLAY = true;
 		}
