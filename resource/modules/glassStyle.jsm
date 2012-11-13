@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.setTransparency = function() {
 	styleAid.unload('glassStyleTransparency');
@@ -42,6 +42,9 @@ moduleAid.LOADMODULE = function() {
 	
 	prefAid.listen('transparency', setTransparency);
 	setTransparency();
+	
+	overlayAid.overlayURI('chrome://omnisidebar/content/mainSidebar.xul', 'glassMain');
+	overlayAid.overlayURI('chrome://omnisidebar/content/twin.xul', 'glassTwin');
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -62,4 +65,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	styleAid.unload('glassStyleTransparency');
 	prefAid.unlisten('transparency', setTransparency);
+	
+	overlayAid.removeOverlayURI('chrome://omnisidebar/content/mainSidebar.xul', 'glassMain');
+	overlayAid.removeOverlayURI('chrome://omnisidebar/content/twin.xul', 'glassTwin');
 };

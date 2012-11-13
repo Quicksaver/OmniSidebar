@@ -2,7 +2,34 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
 	.omnisidebar_switch {
-		width: 5px;
+		width: 8px;
+	}
+	
+	.omnisidebar-docker label {
+		display: none;
+	}
+	
+	#navigator-toolbox :not(#TabsToolbar) .adequate-size .toolbarbutton-icon {
+		height: 18px !important;
+	}
+	#navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon { padding: 0 !important; }
+	
+	.sidebar-title[TitleButton]:hover,
+	.sidebar-title[TitleButton][active] {
+		padding-top: 2px !important;
+		padding-left: 17px !important;
+	}
+	
+	.omnisidebar-toolbar .toolbarbutton-1 > image.toolbarbutton-icon {
+		max-width: none !important;
+		max-height: none !important;
+		margin: 0 !important;
+		height: 20px;
+		width: 20px;
+	}
+	
+	.omnisidebar-toolbar[mode="full"] toolbarbutton {
+		-moz-appearance: none !important;
 	}
 
 }

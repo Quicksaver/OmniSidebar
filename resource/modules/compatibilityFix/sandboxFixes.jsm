@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("treestyletab@piro.sakura.ne.jp", function(addon) {
@@ -13,6 +13,9 @@ moduleAid.LOADMODULE = function() {
 	if(Services.vc.compare(Services.appinfo.platformVersion, "16.0.2") <= 0) {
 		moduleAid.load('compatibilityFix/Ff16sandbox');
 	}
+	if(Services.navigator.oscpu == 'Windows NT 5.1') {
+		moduleAid.load('compatibilityFix/winxp');
+	}
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -20,4 +23,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/mx3');
 	moduleAid.unload('compatibilityFix/Ff13sandbox');
 	moduleAid.unload('compatibilityFix/Ff16sandbox');
+	moduleAid.unload('compatibilityFix/winxp');
 };

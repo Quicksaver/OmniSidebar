@@ -2,10 +2,31 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
 	.omnisidebar_switch {
-		width: 3px;
+		width: 4px;
 	}
-	.sidebar-title {
-		border: 4px solid rgba(0,0,0,0) !important;
+	
+	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:not(:hover) {
+		border: 5px solid rgba(0,0,0,0) !important;
+	}
+	
+	.sidebar-box[glassStyle] .sidebar-title[TitleButton]:not(:hover) {
+		border: 2px solid rgba(0,0,0,0) !important;
+	}
+	
+	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:hover,
+	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton][active] {
+		padding-left: 17px !important;
+	}
+	
+	#navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon { padding: 0 !important; }
+
+	#navigator-toolbox[iconsize=small][mode=full] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon {
+		width: 16px !important;
+		height: 16px !important;
+	}
+	
+	#navigator-toolbox[iconsize=large][mode=full] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon {
+		height: 24px !important;
 	}
 
 }
