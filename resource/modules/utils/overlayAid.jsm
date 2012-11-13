@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.11';
+moduleAid.VERSION = '2.1.10';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -760,22 +760,7 @@ this.overlayAid = {
 	},
 	
 	overlayAll: function(aWindow) {
-		if(aWindow._BEING_OVERLAYED != undefined) {
-			for(var i=0; i<this.overlays.length; i++) {
-				if(this.overlays[i].ready
-				&& (this.overlays[i].uri == aWindow.document.baseURI || this.loadedWindow(aWindow, this.overlays[i].uri) !== false)
-				&& this.loadedWindow(aWindow, this.overlays[i].overlay) === false) {
-				
-				// Ensure the window is rescheduled if needed
-				if(aWindow._BEING_OVERLAYED == undefined) {
-					observerAid.notify('window-overlayed', aWindow);
-				} else {
-					aWindow._RESCHEDULE_OVERLAY = true;
-				}
-				break;
-			}
-			return;
-		}
+		if(aWindow._BEING_OVERLAYED) { return; }
 		aWindow._BEING_OVERLAYED = true;
 		var rescheduleOverlay = false;
 		
@@ -783,7 +768,7 @@ this.overlayAid = {
 			aWindow._OVERLAYS_LOADED = [];
 			delete aWindow._OVERLAYS_TO_UNLOAD;
 		}
-		
+			
 		if(aWindow._OVERLAYS_TO_UNLOAD) {
 			while(aWindow._OVERLAYS_TO_UNLOAD.length > 0) {
 				var toUnload = aWindow._OVERLAYS_TO_UNLOAD.shift();
