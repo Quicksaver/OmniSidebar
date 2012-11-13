@@ -6,6 +6,9 @@
 //	onStartup(aData, aReason) and onShutdown(aData, aReason) - (methods) to be called on startup() and shutdown() to initialize and terminate the add-on respectively
 //	resource folder in installpath, with modules folder containing moduleAid, sandboxUtils and utils modules
 //	chrome.manifest file with content, locale and skin declarations properly set
+// handleDeadObject(ex) - 	expects [nsIScriptError object] ex. Shows dead object notices as warnings only in the console.
+//				If the code can handle them accordingly and firefox does its thing, they shouldn't cause any problems.
+//				Of course this method will only return true in Firefox 15+.
 // prepareObject(window, aName) - initializes a window-dependent add-on object with utils loaded into it, returns the newly created object
 //	window - (xul object) the window object to be initialized
 //	(optional) aName - (string) the object name, defaults to objName
@@ -24,7 +27,7 @@
 // disable() - disables the add-on
 // Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
 
-let bootstrapVersion = '1.2.4';
+let bootstrapVersion = '1.2.5';
 let UNLOADED = false;
 let STARTED = false;
 let addonData = null;
@@ -43,6 +46,18 @@ XPCOMUtils.defineLazyServiceGetter(Services, "fuel", "@mozilla.org/fuel/applicat
 XPCOMUtils.defineLazyServiceGetter(Services, "navigator", "@mozilla.org/network/protocol;1?name=http", "nsIHttpProtocolHandler");
 XPCOMUtils.defineLazyServiceGetter(Services, "privateBrowsing", "@mozilla.org/privatebrowsing;1", "nsIPrivateBrowsingService");
 XPCOMUtils.defineLazyServiceGetter(Services, "stylesheet", "@mozilla.org/content/style-sheet-service;1", "nsIStyleSheetService");
+
+function handleDeadObject(ex) {
+	if(ex.message == "can't access dead object") {
+		var scriptError = Cc["@mozilla.org/scripterror;1"].createInstance(Ci.nsIScriptError);
+		scriptError.init("Can't access dead object. This shouldn't cause any problems.", ex.sourceName || ex.fileName || null, ex.sourceLine || null, ex.lineNumber || null, ex.columnNumber || null, scriptError.warningFlag, 'XPConnect JavaScript');
+		Services.console.logMessage(scriptError);
+		return true;
+	} else {
+		Cu.reportError(ex);
+		return false;
+	}
+}
 
 function prepareObject(window, aName) {
 	// I can override the object name if I want
@@ -106,7 +121,7 @@ function listenOnce(aSubject, type, handler, capture) {
 	
 	var runOnce = function(event) {
 		try { aSubject.removeEventListener(type, runOnce, capture); }
-		catch(ex) { Cu.reportError(ex); } // Prevents some can't access dead object errors
+		catch(ex) { handleDeadObject(ex); } // Prevents some can't access dead object errors
 		if(!UNLOADED && event !== undefined) {
 			removeOnceListener(runOnce);
 			try { handler(event, aSubject); }

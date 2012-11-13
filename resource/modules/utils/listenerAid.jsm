@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.3';
+moduleAid.VERSION = '2.0.4';
 moduleAid.LAZY = true;
 
 // listenerAid - Object to aid in setting and removing all kinds of event listeners to an object;
@@ -56,7 +56,7 @@ this.listenerAid = {
 			if(!obj || !obj.removeEventListener) { return false; }
 		}
 		catch(ex) {
-			Cu.reportError(ex); /* prevents some can't access dead objects */
+			handleDeadObject(ex); /* prevents some can't access dead objects */
 			return false;
 		}
 		
@@ -97,7 +97,7 @@ this.listenerAid = {
 					this.handlers[i].obj.removeEventListener(this.handlers[i].type, this.handlers[i].listener, this.handlers[i].capture);
 				}
 			}
-			catch(ex) { Cu.reportError(ex); /* Prevents can't access dead object sometimes */ }
+			catch(ex) { handleDeadObject(ex); /* Prevents can't access dead object sometimes */ }
 			this.handlers.splice(i, 1);
 		}
 		return true;
