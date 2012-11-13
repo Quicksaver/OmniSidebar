@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.11';
+moduleAid.VERSION = '2.1.12';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -39,8 +39,9 @@ moduleAid.LAZY = true;
 //	see overlayWindow()
 // loadedURI(aURI, aWith) - returns (int) with corresponding overlay index in overlays[] if overlay aWith has been loaded for aURI, returns (bool) false otherwise 
 //	see overlayURI()
-// loadedWindow(aWindow, aWith) -	returns (int) with corresponding overlay index in aWindow._OVERLAYS_LOADED[] if overlay aWith has been loaded for aWindow,
-//					returns (bool) false otherwise 
+// loadedWindow(aWindow, aWith, loaded) -	returns (int) with corresponding overlay index in aWindow._OVERLAYS_LOADED[] if overlay aWith has been loaded for aWindow,
+//						returns (bool) false otherwise 
+//	(optional) loaded - if true it will only return true if the overlay has been actually loaded into the window, rather than just added to the array. Defaults to false.
 //	see overlayWindow()
 this.overlayAid = {
 	overlays: [],
@@ -171,13 +172,13 @@ this.overlayAid = {
 		return false;
 	},
 	
-	loadedWindow: function(aWindow, uri) {
+	loadedWindow: function(aWindow, aWith, loaded) {
 		if(aWindow._OVERLAYS_LOADED == undefined) {
 			return false;
 		}
 		for(var i = 0; i < aWindow._OVERLAYS_LOADED.length; i++) {
-			if(aWindow._OVERLAYS_LOADED[i].uri == uri) {
-				return i;
+			if(aWindow._OVERLAYS_LOADED[i].uri == aWith) {
+				return (!loaded || aWindow._OVERLAYS_LOADED[i].loaded) ? i : false;
 			}
 		}
 		return false;
@@ -763,7 +764,7 @@ this.overlayAid = {
 		if(aWindow._BEING_OVERLAYED != undefined) {
 			for(var i=0; i<this.overlays.length; i++) {
 				if(this.overlays[i].ready
-				&& (this.overlays[i].uri == aWindow.document.baseURI || this.loadedWindow(aWindow, this.overlays[i].uri) !== false)
+				&& (this.overlays[i].uri == aWindow.document.baseURI || this.loadedWindow(aWindow, this.overlays[i].uri, true) !== false)
 				&& this.loadedWindow(aWindow, this.overlays[i].overlay) === false) {
 					// Ensure the window is rescheduled if needed
 					if(aWindow._BEING_OVERLAYED == undefined) {
@@ -819,7 +820,7 @@ this.overlayAid = {
 		
 		for(var i=0; i<this.overlays.length; i++) {
 			if(this.overlays[i].ready
-			&& (this.overlays[i].uri == aWindow.document.baseURI || this.loadedWindow(aWindow, this.overlays[i].uri) !== false)
+			&& (this.overlays[i].uri == aWindow.document.baseURI || this.loadedWindow(aWindow, this.overlays[i].uri, true) !== false)
 			&& this.loadedWindow(aWindow, this.overlays[i].overlay) === false) {
 				aWindow._BEING_OVERLAYED = aWindow._OVERLAYS_LOADED.push({
 					uri: this.overlays[i].overlay,
@@ -959,8 +960,8 @@ this.overlayAid = {
 			}
 			
 			var node = aWindow.document.getElementById(overlayNode.id);
-			// Handle if node with same id was found
 			
+			// Handle if node with same id was found
 			if(node) {
 				// Don't process if id mismatches nodename or if parents mismatch; I should just make sure this doesn't happen in my overlays
 				if(node.nodeName != overlayNode.nodeName) { continue; }
