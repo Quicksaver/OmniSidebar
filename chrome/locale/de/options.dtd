@@ -1,23 +1,39 @@
 <!ENTITY addonsSidebar.label "Add-ons-Manager">
 <!ENTITY omnisidebarConsole.label "Fehlerkonsole">
 <!ENTITY omnisidebarDMT.label "Downloads">
+<!ENTITY omnisidebarPageInfo.label "Seiteninformationen">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
+<!ENTITY omnisidebarOptabout.label "Über">
 <!ENTITY omnisidebarButtonMain.label "Erste Sidebar">
 <!ENTITY omnisidebarButtonTwin.label "Zweite Sidebar">
 <!ENTITY omnisidebarOptMisc.label "Allgemein">
 <!ENTITY omnisidebarOptgroupMain.label "Erste Sidebar">
 <!ENTITY omnisidebarOptgroupTwin.label "Zweite Sidebar">
+<!ENTITY omnisidebarOptgroupicons.label "Schaltflächen-Stil:">
 <!ENTITY omnisidebarOptgroupgen.label "Anzeige">
 <!ENTITY omnisidebarOptgroupfeatures.label "Verhalten">
 <!ENTITY omnisidebarOptgroupperformance.label "Leistung">
+<!ENTITY omnisidebarOptgroupalways.label "Immer in der Sidebar öffnen">
+<!ENTITY omnisidebarOptGoURI.label "'Laden'-Schatlfläche anzeigen">
 <!ENTITY omnisidebarOptsidebars.leftlabel "Auf der linken Seite anzeigen">
 <!ENTITY omnisidebarOptsidebars.rightlabel "Auf der rechten Seite anzeigen">
 <!ENTITY omnisidebarOptsidebars.twinlabel "Zweite Sidebar auf der gegenüberliegenden Seite aktivieren">
+<!ENTITY omnisidebarOptswitchers.label "Zum Öffnen und Schließen auf den Browser-Rand klicken">
+<!ENTITY omnisidebarOptundock.label "Aus Browser-Fenster herauslösen">
+<!ENTITY omnisidebarOptautohide.label "Automatisch zur Seite hin ausblenden">
+<!ENTITY omnisidebarOptautoClose.label "Sidebar schließen/ausblenden, wenn sie den Fokus verliert">
 <!ENTITY omnisidebarOptglassStyle.label "Glass-Stil auf alle Sidebars anwenden">
+<!ENTITY omnisidebarOptglassStyle.opaque "Gefüllt">
+<!ENTITY omnisidebarOptglassStyle.transparent "Vollständig transparent">
 <!ENTITY omnisidebarOptfx.label "Übergangseffekte verwenden">
 <!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms): ">
 <!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms): ">
 <!ENTITY omnisidebarOptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
+<!ENTITY omnisidebarOptforceOpen.label "Sidebar nicht schließen mittels">
+<!ENTITY omnisidebarOptforceOpen.toolbars "Schaltflächen in der Sidebar-Symbolleiste">
+<!ENTITY omnisidebarOptforceOpen.menus "Aufklappmenüs">
+<!ENTITY omnisidebarOptalternatebtns.label "Alternativer Schaltflächen-Stil">
+<!ENTITY omnisidebarOpttoolbar.label "Sidebar-Symbolleiste">
 <!ENTITY omnisidebarOpthideheadertitle.label "Sidebar-Titel ausblenden">
 <!ENTITY omnisidebarOpttitleButton.label "Sidebar-Menü in Titelleiste anzeigen">
 <!ENTITY omnisidebarOpthideheaderdock.label "Schaltfläche zum Herauslösen ausblenden">
@@ -25,3 +41,24 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (keine Veränderung)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Farbenfroh">
+<!ENTITY omnisidebarOptKeyboardShortcut.caption "Tastaturkürzel für Sidebar">
+<!ENTITY omnisidebarOptKeyboardShortcut.control "Strg">
+<!ENTITY omnisidebarOptKeyboardShortcut.shift "Umschalt">
+<!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
+<!ENTITY omnisidebarOptKeyboardShortcut.command "Befehlstaste">
+<!ENTITY omnisidebarOptKeyboardShortcut.option "Wahltaste">
+<!ENTITY omnisidebarOptKeyboardShortcut.none "Kein">
+<!ENTITY omnisidebarOptKeyboardShortcut.spacebar "Leerzeichen">
+<!ENTITY omnisidebarOptKeyboardShortcut.pageup "Bild auf">
+<!ENTITY omnisidebarOptKeyboardShortcut.pagedown "Bild ab">
+<!ENTITY omnisidebarOptKeyboardShortcut.end "Ende">
+<!ENTITY omnisidebarOptKeyboardShortcut.home "Pos1">
+<!ENTITY omnisidebarOptKeyboardShortcut.left "Links">
+<!ENTITY omnisidebarOptKeyboardShortcut.up "Oben">
+<!ENTITY omnisidebarOptKeyboardShortcut.right "Rechts">
+<!ENTITY omnisidebarOptKeyboardShortcut.down "Unten">
+<!ENTITY omnisidebarabout.name "OmniSidebar">
+<!ENTITY omnisidebarabout.by "von Quicksaver">
+<!ENTITY omnisidebarabout.desc "Alle Informationen über das Add-on und seinen Entwickler können auf der Homepage bei Mozilla Add-ons gefunden werden. Falls Ihnen das Add-on gefällt, so ziehen Sie bitte einen netten Kommentar oder kleine Unterstützung in Erwägung, um die Weiterentwicklung zu unterstützen. Fehlerberichte und Vorschläge können über die Seite für technische Unterstützung mitgeteilt werden.">
+<!ENTITY omnisidebarabout.home "Add-on-Homepage">
+<!ENTITY omnisidebarabout.tech "Technische Unterstützung">

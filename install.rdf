@@ -45,8 +45,8 @@
 		<em:localized>
 			<Description>
 				<em:locale>pt-PT</em:locale>
-				<em:name>Barra OmniLateral</em:name>
-				<em:description>Controle a sua Barra Lateral!</em:description>
+				<em:name>Painel OmniLateral</em:name>
+				<em:description>Controle o seu Painel Lateral!</em:description>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
 		</em:localized>

@@ -2,6 +2,8 @@
 <!ENTITY addonsSidebar.tooltip "Add-ons-Manager in der Sidebar öffnen">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "DOM Inspector in der Sidebar öffnen">
+<!ENTITY PageInfoSidebar.label "Seiteninformationen">
+<!ENTITY PageInfoSidebar.tooltip "Informationen über die geöffnete Seite anzeigen">
 <!ENTITY BlankSidebar.label "Leere Seite">
 <!ENTITY BlankSidebar.tooltip "Leere Seite in der Sidebar öffnen">
 <!ENTITY URISidebar.tooltip "Eine zu öffnende Adresse eintippen">

@@ -2,6 +2,8 @@
 <!ENTITY addonsSidebar.tooltip "Öppna tilläggshanteraren i sidopanelen">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Öppna DOM Inspector i sidopanelen">
+<!ENTITY PageInfoSidebar.label "Visa sidinfo">
+<!ENTITY PageInfoSidebar.tooltip "Visa detaljerad information om sidan du besöker">
 <!ENTITY BlankSidebar.label "Tom sida">
 <!ENTITY BlankSidebar.tooltip "Öppna en tom sida i sidopanelen">
 <!ENTITY URISidebar.tooltip "Ange en plats att öppna i sidopanelen">

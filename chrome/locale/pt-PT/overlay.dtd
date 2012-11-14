@@ -2,6 +2,8 @@
 <!ENTITY addonsSidebar.tooltip "Abrir o Gestor de Extras no Painel Lateral">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector no Painel Lateral">
+<!ENTITY PageInfoSidebar.label "Vêr informação da página">
+<!ENTITY PageInfoSidebar.tooltip "Informações detalhadas sobre a página que está a visitar">
 <!ENTITY BlankSidebar.label "Página em Branco">
 <!ENTITY BlankSidebar.tooltip "Abrir uma Página em Branco no Painel Lateral">
 <!ENTITY URISidebar.tooltip "Introduzir uma localização para abrir no painel lateral">

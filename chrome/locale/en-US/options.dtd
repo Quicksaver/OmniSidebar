@@ -26,7 +26,6 @@
 <!ENTITY omnisidebarOptswitchers.label "Click on the browser margin to open or close">
 <!ENTITY omnisidebarOptundock.label "Undock from the browser window">
 <!ENTITY omnisidebarOptautohide.label "Automatically hide to the side">
-<!ENTITY omnisidebarOptundockMode.autohide "Auto-hide to the side">
 <!ENTITY omnisidebarOptautoClose.label "Close/Hide the sidebar when it loses focus">
 
 <!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">

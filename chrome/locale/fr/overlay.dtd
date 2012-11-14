@@ -2,6 +2,8 @@
 <!ENTITY addonsSidebar.tooltip "Ouvrir le gestionnaire de modules dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">
 <!ENTITY DOMInspectorSidebar.tooltip "Ouvrir l'inspecteur DOM dans le panneau latéral">
+<!ENTITY PageInfoSidebar.label "Afficher les infos sur la page">
+<!ENTITY PageInfoSidebar.tooltip "Affiche les informations à propos de la page sur laquelle vous êtes">
 <!ENTITY BlankSidebar.label "Page vierge">
 <!ENTITY BlankSidebar.tooltip "Ouvrir une page vierge dans le panneau latéral">
 <!ENTITY URISidebar.tooltip "Indiquez un emplacement à ouvrir dans le panneau latéral">
