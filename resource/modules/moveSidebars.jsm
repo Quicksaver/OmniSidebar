@@ -1,77 +1,29 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.1.0';
 
 this.notifyMovedSidebars = function(window) {
 	dispatch(window, { type: 'SidebarsMoved', cancelable: false });
 };
 
-this.movedMainWhere = null;
-this.movedTwinWhere = null;
-
-// I could just overlay every URI that changes the UI so the changes in this one supersedes them, but I'd rather have the script figure out which is the best to overlay.
+// I could overlay jsut one URI conditionally with every element in its overlay, but I found this way to be faster loading
 this.moveSidebars = function() {
-	var mainWhereTo = null;
-	var twinWhereTo = null;
-	
-	if(UNLOADED || !prefAid.moveSidebars) {
-		mainWhereTo = null;
-		twinWhereTo = null;
-	} else {
-		if(prefAid.renderabove) {
-			mainWhereTo = prefAid.autoHide ? 'autoHide' : 'renderAbove';
-		} else {
-			mainWhereTo = 'mainSidebar';
-		}
-		
-		if(prefAid.twinSidebar) {
-			if(prefAid.renderaboveTwin) {
-				twinWhereTo = prefAid.autoHideTwin ? 'autoHideTwin' : 'renderAboveTwin';
-			} else {
-				twinWhereTo = 'twin';
-			}
-		} else {
-			twinWhereTo = null;
-		}
+	if(!UNLOADED && prefAid.moveSidebars) {
+		overlayAid.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'moveSidebarMain', null, notifyMovedSidebars);
+		overlayAid.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'moveSidebarTwin', null, notifyMovedSidebars);
+		overlayAid.overlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'moveSidebarMainAbove');
+		overlayAid.overlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'moveSidebarTwinAbove');
 	}
-	
-	if(mainWhereTo != movedMainWhere) {
-		if(movedMainWhere) {
-			overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/'+movedMainWhere+'.xul', 'moveSidebarMain');
-			notifyMovedSidebars();
-		}
-		movedMainWhere = mainWhereTo;
-		if(movedMainWhere) {
-			overlayAid.overlayURI('chrome://'+objPathString+'/content/'+movedMainWhere+'.xul', 'moveSidebarMain', null, notifyMovedSidebars);
-		}
-	}
-	
-	if(twinWhereTo != movedTwinWhere) {
-		if(movedTwinWhere) {
-			overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/'+movedTwinWhere+'.xul', 'moveSidebarTwin');
-			notifyMovedSidebars();
-		}
-		movedTwinWhere = twinWhereTo;
-		if(movedTwinWhere) {
-			overlayAid.overlayURI('chrome://'+objPathString+'/content/'+movedTwinWhere+'.xul', 'moveSidebarTwin', null, notifyMovedSidebars);
-		}
+	else {
+		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'moveSidebarTwinAbove');
+		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'moveSidebarMainAbove');
+		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'moveSidebarTwin');
+		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'moveSidebarMain');
 	}
 };
 
 moduleAid.LOADMODULE = function() {
-	prefAid.listen('twinSidebar', moveSidebars);
-	prefAid.listen('renderabove', moveSidebars);
-	prefAid.listen('autoHide', moveSidebars);
-	prefAid.listen('renderaboveTwin', moveSidebars);
-	prefAid.listen('autoHideTwin', moveSidebars);
-	
 	moveSidebars();
 };
 
 moduleAid.UNLOADMODULE = function() {
-	prefAid.unlisten('twinSidebar', moveSidebars);
-	prefAid.unlisten('renderabove', moveSidebars);
-	prefAid.unlisten('autoHide', moveSidebars);
-	prefAid.unlisten('renderaboveTwin', moveSidebars);
-	prefAid.unlisten('autoHideTwin', moveSidebars);
-	
 	moveSidebars();
 };

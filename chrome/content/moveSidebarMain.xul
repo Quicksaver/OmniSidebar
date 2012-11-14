@@ -4,6 +4,5 @@
 	<vbox id="sidebar-box" movetoright="true" insertafter="appcontent" />
 	<splitter id="sidebar-splitter" movetoright="true" insertafter="appcontent" />
 	<hbox id="omnisidebar_switch" movetoright="true" insertafter="appcontent" />
-	<box id="omnisidebar_resizer" insertbefore="omnisidebar_resizesidebar" />
 	
 </overlay>
