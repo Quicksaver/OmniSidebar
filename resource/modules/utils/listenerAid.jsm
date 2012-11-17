@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.4';
+moduleAid.VERSION = '2.0.5';
 moduleAid.LAZY = true;
 
 // listenerAid - Object to aid in setting and removing all kinds of event listeners to an object;
@@ -120,32 +120,20 @@ this.listenerAid = {
 				{
 					// This still happens sometimes and I can't figure out why, it's mainly when I turn off the add-on, so it should be irrelevant
 					if(this.listenerAid) {
-						var targets = ['target', 'originalTarget', 'currentTarget'];
-						
 						mainRemoveListenerLoop:
-						for(var a = 0; a < targets.length; a++) {
-							for(var i = 0; i < this.listenerAid.handlers.length; i++) {
-								if(this.listenerAid.handlers[i].obj == arguments[0][targets[a]]
-								&& this.listenerAid.handlers[i].type == arguments[0].type
-									&& ((this.listenerAid.handlers[i].capture && arguments[0].eventPhase == arguments[0].CAPTURING_PHASE)
-									|| (!this.listenerAid.handlers[i].capture && arguments[0].eventPhase != arguments[0].CAPTURING_PHASE))
-								&& this.listenerAid.compareListener(this.listenerAid.handlers[i].unboundListener, arguments.callee)) {
-									this.listenerAid.handlers[i].triggerCount++;
-									if(this.listenerAid.handlers[i].triggerCount == this.listenerAid.handlers[i].maxTriggers) {
-										this.listenerAid.remove(arguments[0][targets[a]], this.listenerAid.handlers[i].type, this.listenerAid.handlers[i].unboundListener, this.listenerAid.handlers[i].capture);
-										break mainRemoveListenerLoop;
-									}
+						for(var i = 0; i < this.listenerAid.handlers.length; i++) {
+							if(this.listenerAid.handlers[i].obj == arguments[0].currentTarget
+							&& this.listenerAid.handlers[i].type == arguments[0].type
+							// the handler should only be called in the proper phase, so checks for the eventPhase are unnecessary
+							&& this.listenerAid.compareListener(this.listenerAid.handlers[i].unboundListener, arguments.callee)) {
+								this.listenerAid.handlers[i].triggerCount++;
+								if(this.listenerAid.handlers[i].triggerCount == this.listenerAid.handlers[i].maxTriggers) {
+									this.listenerAid.remove(arguments[0].currentTarget, this.listenerAid.handlers[i].type, this.listenerAid.handlers[i].unboundListener, this.listenerAid.handlers[i].capture);
+									break mainRemoveListenerLoop;
 								}
 							}
 						}
 					}
-				]]>
-				],
-				
-				// This is just so my editor correctly assumes the pairs of {}, it has nothing to do with the add-on itself
-				['}',
-				<![CDATA[
-				}
 				]]>
 				]
 			]);

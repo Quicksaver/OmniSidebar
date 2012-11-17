@@ -24,7 +24,7 @@
 // callOnLoad(aSubject, aCallback) - calls aCallback when load event is fired on that window
 //	aSubject - (xul object) to execute aCallback on
 //	aCallback - (function(aSubject)) to be called on aSubject
-// disable() - disables the add-on
+// disable() - disables the add-on, in general the add-on disabling itself is a bad idea so I shouldn't use it
 // Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
 
 let bootstrapVersion = '1.2.5';
