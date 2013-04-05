@@ -9,12 +9,11 @@ this.toggleAlwaysAddons = function(unloaded) {
 		}
 		window.BrowserOpenAddonsMgr = modifyFunction(window.BrowserOpenAddonsMgr, [
 			['var newLoad = !switchToTabHavingURI("about:addons", true);',
-			<![CDATA[
-				var newLoad = !window.switchToTabHavingURI("about:addons", false);
-				if(newLoad) {
-					toggleSidebar('viewAddonSidebar');
-				}
-			]]>
+			
+			'	var newLoad = !window.switchToTabHavingURI("about:addons", false);'
+			+'	if(newLoad) {'
+			+"		toggleSidebar('viewAddonSidebar');"
+			+'	}'
 			]
 		]);
 	} else {

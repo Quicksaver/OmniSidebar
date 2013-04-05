@@ -27,7 +27,7 @@
 // disable() - disables the add-on, in general the add-on disabling itself is a bad idea so I shouldn't use it
 // Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
 
-let bootstrapVersion = '1.2.5';
+let bootstrapVersion = '1.2.6';
 let UNLOADED = false;
 let STARTED = false;
 let addonData = null;
@@ -41,11 +41,24 @@ const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
 Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/PlacesUIUtils.jsm");
+
+// For some reason, PlacesUIUtils.jsm disappeared in FF21 (maybe before, it was present in FF17, I did not try any version in between yet, I might...)
+// (Maybe it's just a bug in the latest auroras?... Not important)
+// So I'm adding the tools needed in it manually, makes no practical difference as far as I can tell
+XPCOMUtils.defineLazyServiceGetter(Services, "RDF", "@mozilla.org/rdf/rdf-service;1", "nsIRDFService");
+XPCOMUtils.defineLazyGetter(Services, "localStore", function() { return Services.RDF.GetDataSource("rdf:local-store"); });
+
 XPCOMUtils.defineLazyServiceGetter(Services, "fuel", "@mozilla.org/fuel/application;1", "fuelIApplication");
 XPCOMUtils.defineLazyServiceGetter(Services, "navigator", "@mozilla.org/network/protocol;1?name=http", "nsIHttpProtocolHandler");
-XPCOMUtils.defineLazyServiceGetter(Services, "privateBrowsing", "@mozilla.org/privatebrowsing;1", "nsIPrivateBrowsingService");
 XPCOMUtils.defineLazyServiceGetter(Services, "stylesheet", "@mozilla.org/content/style-sheet-service;1", "nsIStyleSheetService");
+
+// Per-window private browsing was implemented as of FF20
+if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
+	// This will only be called in FF19- for compatibility purposes
+	XPCOMUtils.defineLazyServiceGetter(Services, "privateBrowsing", "@mozilla.org/privatebrowsing;1", "nsIPrivateBrowsingService");
+} else {
+	Cu.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
+}
 
 function handleDeadObject(ex) {
 	if(ex.message == "can't access dead object") {

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.7';
+moduleAid.VERSION = '2.0.8';
 moduleAid.LAZY = true;
 
 // window - Similarly to windowMediator.callOnMostRecent, the window property returns the most recent navigator:browser window object
@@ -23,7 +23,10 @@ this.__defineGetter__('browserMediator', function() { windowMediator; delete thi
 this.__defineGetter__('observerAid', function() { delete this.observerAid; moduleAid.load('utils/observerAid'); return observerAid; });
 
 // privateBrowsingAid - Private browsing mode listener
-this.__defineGetter__('privateBrowsingAid', function() { observerAid; delete this.privateBrowsingAid; moduleAid.load('utils/privateBrowsingAid'); return privateBrowsingAid; });
+// Per-window private browsing was implemented as of FF20, this will only be called in FF19- for compatibility purposes
+if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
+	this.__defineGetter__('privateBrowsingAid', function() { observerAid; delete this.privateBrowsingAid; moduleAid.load('utils/privateBrowsingAid'); return privateBrowsingAid; });
+}
 
 // overlayAid - to use overlays in my bootstraped add-ons
 this.__defineGetter__('overlayAid', function() { browserMediator; observerAid; delete this.overlayAid; moduleAid.load('utils/overlayAid'); return overlayAid; });

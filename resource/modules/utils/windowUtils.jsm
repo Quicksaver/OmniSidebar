@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.0.3';
+moduleAid.VERSION = '2.0.4';
 moduleAid.LAZY = true;
 
 // listenerAid - Object to aid in setting and removing all kinds of event listeners to an object;
@@ -6,6 +6,12 @@ this.__defineGetter__('listenerAid', function() { delete this.listenerAid; modul
 
 // timerAid - Object to aid in setting, initializing and cancelling timers
 this.__defineGetter__('timerAid', function() { delete this.timerAid; moduleAid.load('utils/timerAid'); return timerAid; });
+
+// privateBrowsingAid - Private browsing mode aid
+// Per-window private browsing was implemented as of FF20
+if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") >= 0) {
+	this.__defineGetter__('privateBrowsingAid', function() { observerAid; delete this.privateBrowsingAid; moduleAid.load('utils/privateBrowsingWindow'); return privateBrowsingAid; });
+}
 
 // modifyFunction() - allows me to modify a function quickly from within my scripts
 this.modifyFunction = function(aOriginal, aArray) { loadWindowTools(); return modifyFunction(aOriginal, aArray); };
