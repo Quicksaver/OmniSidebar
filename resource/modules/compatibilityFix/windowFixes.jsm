@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
@@ -18,9 +18,12 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/dmt');
 	moduleAid.load('compatibilityFix/addonMgr');
 	moduleAid.load('compatibilityFix/domi');
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0) {
+	
+	// This was implemented and later apparently changed in FF20 to remove its "sidebar"
+	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
 		moduleAid.load('compatibilityFix/devTools');
 	}
+	
 	moduleAid.load('compatibilityFix/pageInfo');
 };
 
