@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.2.2';
+moduleAid.VERSION = '2.2.3';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -383,8 +383,6 @@ this.overlayAid = {
 									continue currentset_loop;
 								}
 							}
-							
-							this.traceBack(aWindow, { action: 'insertToolbar', node: node, palette: palette });
 						}
 					}
 				}
@@ -741,9 +739,10 @@ this.overlayAid = {
 						}
 						break;
 					
-					case 'insertToolbar':
+					case 'addToolbar':
 						closeCustomize();
 						
+						// Move the buttons to the palette first, so they can still be accessed afterwards
 						if(action.node && action.palette) {
 							var button = action.node.firstChild;
 							while(button) {
@@ -758,9 +757,7 @@ this.overlayAid = {
 								button = button.nextSibling;
 							}
 						}
-						break;
-					
-					case 'addToolbar':
+						
 						if(action.node && action.toolboxid) {
 							var toolbox = aWindow.document.getElementById(action.toolboxid);
 							if(toolbox) {
@@ -1101,10 +1098,12 @@ this.overlayAid = {
 						toolbox.externalToolbars.push(node);
 					}
 					
+					var palette = aWindow.document.getElementById(node.getAttribute('toolboxid')).palette;
 					this.traceBack(aWindow, {
 						action: 'addToolbar',
 						node: node,
-						toolboxid: node.getAttribute('toolboxid')
+						toolboxid: node.getAttribute('toolboxid'),
+						palette: palette
 					});
 				}
 			}
