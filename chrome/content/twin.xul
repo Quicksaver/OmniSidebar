@@ -46,7 +46,7 @@
 				<image id="sidebar-throbber-twin" />
 				<toolbarbutton class="tabs-closebutton" tooltiptext="&omnisidebarButtonClose.tooltip;" oncommand="toggleSidebar(null, false, true);" />
 			</sidebarheader>
-			<browser id="sidebar-twin" flex="1" autoscroll="false" disablehistory="true" src="about:blank" />
+			<browser id="sidebar-twin" flex="1" autoscroll="false" disablehistory="true" src="about:blank" type="chrome" />
 		</vbox>
 		
 		<splitter id="sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter" hidden="true" insertafter="appcontent" />
