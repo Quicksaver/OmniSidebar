@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.0';
+moduleAid.VERSION = '2.1.1';
 moduleAid.LAZY = true;
 
 // listenerAid - Object to aid in setting and removing all kinds of event listeners to an object;
@@ -105,16 +105,5 @@ this.listenerAid = {
 			this.handlers.splice(i, 1);
 		}
 		return true;
-	},
-	
-	compareListener: function(a, b) {
-		// I don't remember why I added the toSource()'s here, I know they can be broken due to the recent changes in FF17,
-		// however in my tests 100% of the calls to this method (that are supposed to return true) are passed in the first condition (a == b);
-		// Probably it was an old anonymous function that I eventually removed or changed.
-		// I'm leaving this here just in case I missed the actual reason that they were added, hopefully if that's the case they will still work
-		if(a == b || a.toSource() == b.toSource()) {
-			return true;
-		}
-		return false;
 	}
 };

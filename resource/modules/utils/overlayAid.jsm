@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.2.1';
+moduleAid.VERSION = '2.2.2';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -10,6 +10,7 @@ moduleAid.LAZY = true;
 //	DTD's by the usual method: <!DOCTYPE window [ <!ENTITY % nameDTD SYSTEM "chrome://addon/locale/file.dtd"> %nameDTD; ]>
 //	scripts using the script tag when as a direct child of the overlay element (effects of these won't be undone when unloading the overlay, I have to 
 //		undo it in the onunload function passed to overlayURI() ). Any script that changes the DOM structure might produce unpredictable results!
+//		To avoid using eval unnecessarily, only scripts with src will be imported for now.
 // The overlay element surrounds the overlay content. It uses the same namespace as XUL window files. The id of these items should exist in the window's content.
 // Its content will be added to the window where a similar element exists with the same id value. If such an element does not exist, that part of the overlay is ignored.
 // If there is content inside both the XUL window and in the overlay, the window's content will be used as is and the overlay's content will be appended to the end.
@@ -955,12 +956,13 @@ this.overlayAid = {
 			
 			// Overlaying script elements when direct children of the overlay element
 			// With src attribute we import it as a subscript of aWindow, otherwise we eval the inline content of the script tag
+			// (to avoid using eval unnecessarily, only scripts with src will be imported for now)
 			if(overlayNode.nodeName == 'script' && overlay.nodeName == 'overlay') {
 				if(overlayNode.hasAttribute('src')) {
 					Services.scriptloader.loadSubScript(overlayNode.getAttribute('src'), aWindow);
-				} else {
+				}/* else {
 					aWindow.eval(overlayNode.textContent);
-				}
+				}*/
 				continue;
 			}
 			

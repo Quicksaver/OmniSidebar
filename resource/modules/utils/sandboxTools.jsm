@@ -60,6 +60,10 @@ this.dispatch = function(obj, properties) {
 //	a - (function) to compare
 //	b - (function) to compare
 //	(optional) strict - false compares function source as (string), true does not, defaults to false
+// I don't remember why I added the toSource()'s check here, I know they can be broken due to the recent changes in FF17,
+// however in my tests 100% of the calls to this method (that are supposed to return true) are passed in the first condition (a == b);
+// Probably it was an old anonymous function that I eventually removed or changed.
+// I'm leaving this here just in case I missed the actual reason that they were added, hopefully if that's the case they will still work
 this.compareFunction = function(a, b, strict) {
 	if(a === b || (!strict && a.toSource() == b.toSource())) {
 		return true;
