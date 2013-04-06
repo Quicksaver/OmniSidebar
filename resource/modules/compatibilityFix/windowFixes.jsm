@@ -1,8 +1,9 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
-		moduleAid.loadIf('compatibilityFix/similarWeb', (addon && addon.isActive));
+		// SimilarWeb 2.0 no longer has the sidebar so our fixes are unnecessary. I may completely remove them in the future.
+		moduleAid.loadIf('compatibilityFix/similarWeb', (addon && addon.isActive && Services.vc.compare(addon.version, "2.0") < 0));
 	});
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
 		moduleAid.loadIf('compatibilityFix/milewideback', (addon && addon.isActive));
@@ -20,9 +21,7 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/domi');
 	
 	// This was implemented and later apparently changed in FF20 to remove its "sidebar"
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
-		moduleAid.load('compatibilityFix/devTools');
-	}
+	moduleAid.loadIf('compatibilityFix/devTools', (Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0));
 	
 	moduleAid.load('compatibilityFix/pageInfo');
 };
