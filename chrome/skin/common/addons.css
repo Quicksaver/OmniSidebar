@@ -1,10 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("about:addons") {
 	
-	.inSidebar .text-link {
-		-moz-binding: url("chrome://omnisidebar/content/addons.xbl#text-link") !important;
-	}
-	
 	#addons-page.inSidebar > hbox:not(#header) {
 		-moz-box-orient: vertical !important;
 	}
