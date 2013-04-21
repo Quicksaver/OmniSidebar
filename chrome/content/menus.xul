@@ -11,7 +11,7 @@
 			hidden="true"/>
 		<menuitem id="omnisidebar_contextOptions"
 			label="&omnisidebarOptions.title;"
-			oncommand="objName.openOptions();"
+			oncommand="objName.doOpenOptions();"
 			hidden="true"/>
 			
 	</menupopup>
@@ -23,7 +23,7 @@
 			
 		<menuitem id="omnisidebar_menuoptions_tools"
 			label="&omnisidebarOptions.title;"
-			oncommand="objName.openOptions();"
+			oncommand="objName.doOpenOptions();"
 			insertafter="appmenu_preferences"/>
 			
 	</menupopup>
@@ -41,7 +41,7 @@
 	
 		<menuitem id="omnisidebar_menuoptions_viewmenu"
 			label="&omnisidebarOptions.title;"
-			oncommand="objName.openOptions();"
+			oncommand="objName.doOpenOptions();"
 			insertbefore="prefSep"/>
 			
 	</menupopup>

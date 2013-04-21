@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $('omnisidebar_contextOptions'); });
@@ -16,10 +16,8 @@ this.__defineGetter__('viewToolbarsMenuItemTwin', function() { return $('toggle_
 
 this.__defineGetter__('viewSidebarMenu', function() { return $('viewSidebarMenu'); });
 
-this.openOptions = function() {
-	if(!windowMediator.callOnMostRecent(function(aWindow) { aWindow.focus(); return true; }, null, 'chrome://'+objPathString+'/content/options.xul')) {
-		window.openDialog('chrome://'+objPathString+'/content/options.xul', '', 'chrome,resizable=false');
-	}
+this.doOpenOptions = function() {
+	openOptions();
 };
 
 // Sets toolbar context menu omnisidebar options item according to what called it
