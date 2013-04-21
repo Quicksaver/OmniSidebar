@@ -71,7 +71,7 @@
 	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover {
 		-moz-image-region: rect(48px, 24px, 72px, 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"], {
+	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"] {
 		-moz-image-region: rect(24px, 24px, 48px, 0px) !important;
 	}
 	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:hover,
