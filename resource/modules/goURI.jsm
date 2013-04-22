@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.openURIBar = function(button) {
 	var broadcaster = $(button.getAttribute('broadcaster'));
@@ -89,15 +89,15 @@ this.toggleToolbarsGoURI = function(window) {
 };
 
 this.listenGoCloseSidebar = function(e) {
-	if((e.detail.bar.main && isAncestor(e.detail.focusedNode, $('omnisidebarURIBarMenu')))
-	|| (e.detail.bar.twin && isAncestor(e.detail.focusedNode, $('omnisidebarURIBarMenu-twin')))) {
+	if((e.detail.bar.main && isAncestor(e.detail.focusedNode, $(objName+'-URIBarMenu')))
+	|| (e.detail.bar.twin && isAncestor(e.detail.focusedNode, $(objName+'-URIBarMenu-twin')))) {
 		e.preventDefault();
 	}
 };
 
 moduleAid.LOADMODULE = function() {
-	dontSaveBroadcasters.goURIMain = 'viewURISidebar';
-	dontSaveBroadcasters.goURITwin = 'viewURISidebar-twin';
+	dontSaveBroadcasters.goURIMain = objName+'-viewURISidebar';
+	dontSaveBroadcasters.goURITwin = objName+'-viewURISidebar-twin';
 	styleAid.load('goURI', 'goURI');
 	
 	prefAid.listen('goButton', toggleGoURI);
@@ -107,7 +107,7 @@ moduleAid.LOADMODULE = function() {
 	
 	toggleGoURI();
 	
-	twinTriggers.__defineGetter__('goURITwin', function() { return $('viewURISidebar-twin'); });
+	twinTriggers.__defineGetter__('goURITwin', function() { return $(objName+'-viewURISidebar-twin'); });
 };
 
 moduleAid.UNLOADMODULE = function() {
@@ -120,8 +120,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	if(UNLOADED) {
 		// This is to solve a ZC when the add-on was disabled with a sidebar opened on the goURI broadcasters
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewURISidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewURISidebar-twin') { closeSidebar(twinSidebar); }
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewURISidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewURISidebar-twin') { closeSidebar(twinSidebar); }
 		
 		styleAid.unload('goURI');
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.toggleAlwaysAddons = function(unloaded) {
 	if(!UNLOADED && !unloaded && prefAid.alwaysAddons) {
@@ -7,7 +7,7 @@ this.toggleAlwaysAddons = function(unloaded) {
 			
 			'	var newLoad = !window.switchToTabHavingURI("about:addons", false);'
 			+'	if(newLoad) {'
-			+"		toggleSidebar('viewAddonSidebar');"
+			+"		toggleSidebar('"+objName+"-viewAddonSidebar');"
 			+'	}'
 			]
 		]);
@@ -18,26 +18,26 @@ this.toggleAlwaysAddons = function(unloaded) {
 
 this.doAddonCommand = function() {
 	delete holdBroadcasters.addon;
-	if(mainSidebar.loaded && _sidebarCommand == 'viewAddonSidebar') { loadMainSidebar(); }
-	if(twinSidebar.loaded && _sidebarCommandTwin == 'viewAddonSidebar') { loadTwinSidebar(); }
+	if(mainSidebar.loaded && _sidebarCommand == objName+'-viewAddonSidebar') { loadMainSidebar(); }
+	if(twinSidebar.loaded && _sidebarCommandTwin == objName+'-viewAddonSidebar') { loadTwinSidebar(); }
 };
 
 this.loadAddonMgr = function() {
 	doAddonCommand();
 	
-	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar';
+	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar';
 	var twin = false;
-	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') {
+	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') {
 		checked = true;
 		twin = true;
 	}
-	toggleAttribute($('viewAddonSidebar'), 'checked', checked);
-	toggleAttribute($('viewAddonSidebar'), 'twinSidebar', twin);
-	aSync(function() { setAttribute($('addons_sidebar_button'), 'observes', 'viewAddonSidebar'); });
+	toggleAttribute($(objName+'-viewAddonSidebar'), 'checked', checked);
+	toggleAttribute($(objName+'-viewAddonSidebar'), 'twinSidebar', twin);
+	aSync(function() { setAttribute($(objName+'-addons_sidebar_button'), 'observes', objName+'-viewAddonSidebar'); });
 };
 
 moduleAid.LOADMODULE = function() {
-	holdBroadcasters.addon = 'viewAddonSidebar';
+	holdBroadcasters.addon = objName+'-viewAddonSidebar';
 	
 	styleAid.load('addonMgrSidebar', 'addons');
 	
@@ -59,8 +59,8 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('alwaysAddons', toggleAlwaysAddons);
 	
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewAddonSidebar') { closeSidebar(twinSidebar); }
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(twinSidebar); }
 		styleAid.unload('addonMgrSidebar');
 		styleAid.unload('addonMgrSidebarLinks');
 	}

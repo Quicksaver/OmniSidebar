@@ -2,12 +2,10 @@
 <overlay id="renderAboveDocker-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<sidebarheader id="sidebar-header">
-		
-		<toolbarbutton id="omnisidebar_dock_button"
+		<toolbarbutton id="objName-dock_button"
 			class="omnisidebar-docker"
 			insertafter="sidebar-throbber"
 			oncommand="objName.toggleAbove(false);" />
-			
 	</sidebarheader>
 	
 </overlay>

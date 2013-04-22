@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.titlebarButtonBoxFixer = function(aEnabled) {
 	if(aEnabled) {
@@ -45,10 +45,10 @@ this.customizeLessChrome = function() {
 
 this.cancelLessChrome = function(e) {
 	// Omnisidebar popup menus (and a few from right-clicks)
-	if(isAncestor(e.target, $('openSidebarMenu'))
-	|| isAncestor(e.target, $('openTwinSidebarMenu'))
-	|| isAncestor(e.target, $('omnisidebarURIBarMenu'))
-	|| isAncestor(e.target, $('omnisidebarURIBarMenu-twin'))
+	if(isAncestor(e.target, $(objName+'-openSidebarMenu'))
+	|| isAncestor(e.target, $(objName+'-openTwinSidebarMenu'))
+	|| isAncestor(e.target, $(objName+'-URIBarMenu'))
+	|| isAncestor(e.target, $(objName+'-URIBarMenu-twin'))
 	// Right-clicking the header or elements in the actual sidebars
 	|| isAncestor(e.target.triggerNode, mainSidebar.box)
 	|| isAncestor(e.target.triggerNode, twinSidebar.box)) {

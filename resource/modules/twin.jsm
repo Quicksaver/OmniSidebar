@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
@@ -110,9 +110,9 @@ moduleAid.LOADMODULE = function() {
 	
 	prefAid.listen('useSwitchTwin', enableTwinSwitcher);
 	
-	twinTriggers.__defineGetter__('twinCommand', function() { return $('cmd_twinSidebar'); });
+	twinTriggers.__defineGetter__('twinCommand', function() { return $(objName+'-cmd_twinSidebar'); });
 	twinTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
-	blankTriggers.__defineGetter__('twinCommand', function() { return $('cmd_twinSidebar'); });
+	blankTriggers.__defineGetter__('twinCommand', function() { return $(objName+'-cmd_twinSidebar'); });
 	blankTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
 };
 

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.whichConsole = '1';
 this.consoleBackups = {};
@@ -50,7 +50,7 @@ this.loadConsole = function() {
 };
 
 this.loadConsoleButton = function() {
-	aSync(function() { setAttribute($('console_sidebar_button'), 'observes', 'viewConsole'+whichConsole+'Sidebar'); });
+	aSync(function() { setAttribute($(objName+'-console_sidebar_button'), 'observes', 'viewConsole'+whichConsole+'Sidebar'); });
 };
 
 moduleAid.LOADMODULE = function() {

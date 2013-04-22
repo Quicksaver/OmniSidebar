@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="renderAboveTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
-	<splitter id="sidebar-splitter-twin" collapsed="true" />
+	<splitter id="objName-sidebar-splitter-twin" collapsed="true" />
 	<splitter id="sidebar-splitter" disabled="true" onmousedown="objName.dragStart(event);" />
 	
-	<vbox id="sidebar-box-twin">
-	
-		<hbox id="omnisidebar_resizebox-twin" 
+	<vbox id="objName-sidebar-box-twin">
+		<hbox id="objName-resizebox-twin" 
 			class="omnisidebar_resize_box" 
 			flex="1">
-			<box id="omnisidebar_resizer-twin"
+			<box id="objName-resizer-twin"
 				class="omnisidebar_resizer"
 				onmousedown="objName.dragStart(event);"/>
-			<vbox id="omnisidebar_resizesidebar-twin"
+			<vbox id="objName-resizesidebar-twin"
 				class="omnisidebar_resize_sidebar"
 				flex="1"
-				getchildrenof="sidebar-box-twin" />
+				getchildrenof="objName-sidebar-box-twin" />
 		</hbox>
-		
 	</vbox>
 	
 </overlay>

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 // Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100
 this.TSTzIndex = function() {
@@ -11,15 +11,15 @@ this.TSTzIndex = function() {
 	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
 	
 	if(prefAid.renderabove) {
-		sscode += '	#sidebar-box[renderabove][autohide] #omnisidebar_resizebox:hover,\n';
-		sscode += '	#sidebar-box[renderabove][autohide] #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove]:not([autohide]) #omnisidebar_resizebox { z-index: 200 !important; }\n';
+		sscode += '	#sidebar-box[renderabove][autohide] #omnisidebar-resizebox:hover,\n';
+		sscode += '	#sidebar-box[renderabove][autohide] #omnisidebar-resizebox[hover],\n';
+		sscode += '	#sidebar-box[renderabove]:not([autohide]) #omnisidebar-resizebox { z-index: 200 !important; }\n';
 	}
 	
 	if(prefAid.renderaboveTwin) {
-		sscode += '	#sidebar-box-twin[renderabove][autohide] #omnisidebar_resizebox-twin:hover,\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide] #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove]:not([autohide]) #omnisidebar_resizebox-twin { z-index: 200 !important; }\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide] #omnisidebar-resizebox-twin:hover,\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide] #omnisidebar-resizebox-twin[hover],\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove]:not([autohide]) #omnisidebar-resizebox-twin { z-index: 200 !important; }\n';
 	}
 	
 	sscode += '}';

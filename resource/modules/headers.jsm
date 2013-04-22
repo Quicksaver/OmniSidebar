@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -104,8 +104,8 @@ this.toolbarHasButtons = function(toolbar) {
 };
 
 this.headersCustomize = function(e) {
-	hideIt($('sidebar-customizingLabel'), e.type == 'beforecustomization');
-	hideIt($('sidebar-customizingLabel-twin'), e.type == 'beforecustomization');
+	hideIt($(objName+'-sidebar-customizingLabel'), e.type == 'beforecustomization');
+	hideIt($(objName+'-sidebar-customizingLabel-twin'), e.type == 'beforecustomization');
 	
 	toggleAttribute(mainSidebar.box, 'customizing', e.type == 'beforecustomization');
 	toggleAttribute(mainSidebar.toolbar, 'flex', e.type == 'beforecustomization', '1');
@@ -140,7 +140,7 @@ this.setCustomizeWidth = function() {
 		sscode += '	#sidebar-box[customizing]  { width: ' + mainSidebar.width + 'px; }\n';
 	}
 	if(twinSidebar.width) {
-		sscode += '	#sidebar-box-twin[customizing]  { width: ' + twinSidebar.width + 'px; }\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[customizing]  { width: ' + twinSidebar.width + 'px; }\n';
 	}
 	sscode += '}';
 	

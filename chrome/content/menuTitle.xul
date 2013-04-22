@@ -3,16 +3,14 @@
 	
 	<label id="sidebar-title"
 		TitleButton="true"
-		onclick="objName.openSidebarMenu(event, 'openSidebarMenu');"/>
+		onclick="objName.openSidebarMenu(event, 'objName-openSidebarMenu');"/>
 	
 	<popupset id="mainPopupSet">
-		
-		<menupopup id="openSidebarMenu"
+		<menupopup id="objName-openSidebarMenu"
 			target="sidebar-title"
 			box="sidebar-box"
 			onpopupshowing="objName.populateSidebarMenu(this);"
 			onpopuphiding="objName.closeSidebarMenu(this);"/>
-			
 	</popupset>
 	
 </overlay>

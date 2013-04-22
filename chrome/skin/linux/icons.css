@@ -3,7 +3,7 @@
 	/* Linux Icon Set */
 	
 	/* Set default FF4 icons */
-	#addons_sidebar_button {
+	#omnisidebar-addons_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
@@ -12,11 +12,11 @@
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
 	
-	#console_sidebar_button {
+	#omnisidebar-console_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
-	#dominspector_sidebar_button {
+	#omnisidebar-dominspector_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}

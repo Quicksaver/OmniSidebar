@@ -3,8 +3,7 @@
 <overlay id="pageInfo-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<broadcasterset id="mainBroadcasterSet">
-		
-		<broadcaster id="viewPageInfoSidebar"
+		<broadcaster id="objName-viewPageInfoSidebar"
 			label="&PageInfoSidebar.label;"
 			tooltiptext="&PageInfoSidebar.tooltip;"
 			autoCheck="false"
@@ -13,15 +12,12 @@
 			sidebarurl="chrome://browser/content/pageinfo/pageInfo.xul"
 			sidebartitle="&PageInfoSidebar.label;"
 			oncommand="toggleSidebar(this);" />
-		
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">
-		
-		<menuitem id="menu_pageInfoSidebar"
+		<menuitem id="objName-menu_pageInfoSidebar"
 			accesskey="I"
-			observes="viewPageInfoSidebar" />
-			
+			observes="objName-viewPageInfoSidebar" />
 	</menupopup>
 		
 </overlay>

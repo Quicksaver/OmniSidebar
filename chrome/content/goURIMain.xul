@@ -3,56 +3,50 @@
 <overlay id="goURIMain-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<broadcasterset id="mainBroadcasterSet">
-			
-		<broadcaster id="viewURISidebar"
+		<broadcaster id="objName-viewURISidebar"
 			autoCheck="false"
 			type="checkbox"
-			goButton="omnisidbarURIGo"
-			textbar="omnisidebarURIBar"
+			goButton="objName-URIGo"
+			textbar="objName-URIBar"
 			anchor="sidebar-header"
-			menu="omnisidebarURIBarMenu"
+			menu="objName-URIBarMenu"
 			group="sidebar"
 			sidebarurl="about:blank"
 			sidebartitle="about:blank"
 			oncommand="toggleSidebar(this);" />
-	
 	</broadcasterset>
 
 	<popupset id="mainPopupSet">
-		
-		<menupopup id="omnisidebarURIBarMenu"
+		<menupopup id="objName-URIBarMenu"
 			class="omnisidebarURIBarMenu"
 			ignorekeys="true"
-			broadcaster="viewURISidebar"
+			broadcaster="objName-viewURISidebar"
 			onpopupshown="objName.resetURIBar(this);"
 			onpopuphiding="objName.blurURIBar(this);">
 			<hbox>
-				<textbox id="omnisidebarURIBar"
+				<textbox id="objName-URIBar"
 					type="autocomplete" 
 					flex="1"
-					broadcaster="viewURISidebar"
+					broadcaster="objName-viewURISidebar"
 					onkeydown="return objName.keydownURIBar(event, this);"/>
-				<button id="omnisidbarURIGo" 
+				<button id="objName-URIGo" 
 					class="omnisidebarURIGo"
 					label="&URISidebar.buttonLabel;"
-					broadcaster="viewURISidebar"
+					broadcaster="objName-viewURISidebar"
 					oncommand="objName.loadURIBar(this);"/>
 			</hbox>
 		</menupopup>
-	
 	</popupset>
 	
-	<toolbar id="omnisidebarToolbar">
-		
-		<toolbarbutton id="uri_sidebar_button" 
+	<toolbar id="objName-Toolbar">
+		<toolbarbutton id="objName-uri_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
 			removable="false"
 			position="1"
 			label="&URISidebar.buttonLabel;"
 			tooltiptext="&URISidebar.tooltip;"
-			broadcaster="viewURISidebar"
+			broadcaster="objName-viewURISidebar"
 			oncommand="objName.openURIBar(this);" />
-	
 	</toolbar>
 	
 </overlay>

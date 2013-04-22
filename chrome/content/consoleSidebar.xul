@@ -3,7 +3,6 @@
 <overlay id="consoleSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<broadcasterset id="mainBroadcasterSet">
-	
 		<broadcaster id="viewConsole1Sidebar"
 			label="&consoleSidebar.label;"
 			tooltiptext="&consoleSidebar.tooltip;" 
@@ -13,15 +12,12 @@
 			sidebarurl="chrome://global/content/console.xul"
 			sidebartitle="&consoleSidebar.label;"
 			oncommand="toggleSidebar(this);" />
-			
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">
-		
 		<menuitem id="menu_console1Sidebar"
 			accesskey="E"
 			observes="viewConsole1Sidebar" />
-			
 	</menupopup>
 	
 </overlay>

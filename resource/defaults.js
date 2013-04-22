@@ -1,12 +1,12 @@
-var defaultsVersion = '1.0.7';
+var defaultsVersion = '1.0.8';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
 	minSidebarWidth: 8, // pixels
 	minSpaceBetweenSidebars: 18, // pixels
 	
-	lastcommand: "viewBlankSidebar",
-	lastcommandTwin: "viewBlankSidebar-twin",
+	lastcommand: objName+"-viewBlankSidebar",
+	lastcommandTwin: objName+"-viewBlankSidebar-twin",
 	
 	moveSidebars: false,
 	twinSidebar: false,

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.10';
+moduleAid.VERSION = '1.0.11';
 
 this.customizing = false;
 
@@ -20,14 +20,14 @@ this.mainSidebar = {
 	get splitter () { return $('sidebar-splitter'); },
 	get header () { return $('sidebar-header'); },
 	get box () { return $('sidebar-box'); },
-	get resizeBox () { return $('omnisidebar_resizebox'); },
+	get resizeBox () { return $(objName+'-resizebox'); },
 	get sidebar () { return $('sidebar'); },
 	get title () { return $('sidebar-title'); },
-	get docker () { return $('omnisidebar_dock_button'); },
-	get toolbar () { return $('omnisidebarToolbar'); },
-	get toolbarBroadcaster () { return $('toggleSideToolbar'); },
-	get stack () { return $('stackSidebar'); },
-	get button () { return $('omnisidebar_button'); },
+	get docker () { return $(objName+'-dock_button'); },
+	get toolbar () { return $(objName+'-Toolbar'); },
+	get toolbarBroadcaster () { return $(objName+'-toggleSideToolbar'); },
+	get stack () { return $(objName+'-stackSidebar'); },
+	get button () { return $(objName+'-button'); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
 	get width () { return this.box ? parseInt(this.box.getAttribute('width')) : null; },
 	get lastCommand () { return prefAid.lastcommand; },
@@ -37,11 +37,11 @@ this.mainSidebar = {
 	get above () { return prefAid.renderabove; },
 	get autoHide () { return prefAid.autoHide; },
 	get autoClose () { return prefAid.autoClose; },
-	get switcher () { return $('omnisidebar_switch'); },
+	get switcher () { return $(objName+'-switch'); },
 	toggleSwitcher: function() {
 		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
 	},
-	get goURI () { return $('viewURISidebar'); }
+	get goURI () { return $(objName+'-viewURISidebar'); }
 };
 
 this.twinSidebar = {
@@ -59,17 +59,17 @@ this.twinSidebar = {
 		}
 		return true;
 	},
-	get splitter () { return $('sidebar-splitter-twin'); },
-	get header () { return $('sidebar-header-twin'); },
-	get box () { return $('sidebar-box-twin'); },
-	get resizeBox () { return $('omnisidebar_resizebox-twin'); },
-	get sidebar () { return $('sidebar-twin'); },
-	get title () { return $('sidebar-title-twin'); },
-	get docker () { return $('omnisidebar_dock_button-twin'); },
-	get toolbar () { return $('omnisidebarToolbar-twin'); },
-	get toolbarBroadcaster () { return $('toggleSideToolbar-twin'); },
-	get stack () { return $('stackSidebar-twin'); },
-	get button () { return $('omnisidebar_button-twin'); },
+	get splitter () { return $(objName+'-sidebar-splitter-twin'); },
+	get header () { return $(objName+'-sidebar-header-twin'); },
+	get box () { return $(objName+'-sidebar-box-twin'); },
+	get resizeBox () { return $(objName+'-resizebox-twin'); },
+	get sidebar () { return $(objName+'-sidebar-twin'); },
+	get title () { return $(objName+'-sidebar-title-twin'); },
+	get docker () { return $(objName+'-dock_button-twin'); },
+	get toolbar () { return $(objName+'-Toolbar-twin'); },
+	get toolbarBroadcaster () { return $(objName+'-toggleSideToolbar-twin'); },
+	get stack () { return $(objName+'-stackSidebar-twin'); },
+	get button () { return $(objName+'-button-twin'); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
 	get width () { return this.box ? parseInt(this.box.getAttribute('width')) : null; },
 	get lastCommand () { return prefAid.lastcommandTwin; },
@@ -79,11 +79,11 @@ this.twinSidebar = {
 	get above () { return prefAid.renderaboveTwin; },
 	get autoHide () { return prefAid.autoHideTwin; },
 	get autoClose () { return prefAid.autoCloseTwin; },
-	get switcher () { return $('omnisidebar_switch-twin'); },
+	get switcher () { return $(objName+'-switch-twin'); },
 	toggleSwitcher: function() {
 		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
 	},
-	get goURI () { return $('viewURISidebar-twin'); }
+	get goURI () { return $(objName+'-viewURISidebar-twin'); }
 };
 
 this.__defineGetter__('leftSidebar', function() { return !prefAid.moveSidebars ? mainSidebar : twinSidebar; });
@@ -327,13 +327,13 @@ this.setSwitcherOffset = function() {
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
 	
-	sscode += '	#omnisidebar_switch:not([movetoright]),\n';
-	sscode += '	#omnisidebar_switch-twin[movetoleft] {\n';
+	sscode += '	#'+objName+'-switch:not([movetoright]),\n';
+	sscode += '	#'+objName+'-switch-twin[movetoleft] {\n';
 	sscode += '		left: '+leftOffset+'px !important;\n';
 	sscode += '	}\n';
 	
-	sscode += '	#omnisidebar_switch[movetoright],\n';
-	sscode += '	#omnisidebar_switch-twin:not([movetoleft]) {\n';
+	sscode += '	#'+objName+'-switch[movetoright],\n';
+	sscode += '	#'+objName+'-switch-twin:not([movetoleft]) {\n';
 	sscode += '		right: '+rightOffset+'px !important;\n';
 	sscode += '	}\n';
 	
@@ -631,7 +631,7 @@ moduleAid.LOADMODULE = function() {
 		mainSidebar.close.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonCloseTooltip'));
 	}
 	
-	blankTriggers.__defineGetter__('mainCommand', function() { return $('cmd_mainSidebar'); });
+	blankTriggers.__defineGetter__('mainCommand', function() { return $(objName+'-cmd_mainSidebar'); });
 	blankTriggers.__defineGetter__('mainSwitcher', function() { return mainSidebar.switcher; });
 };
 

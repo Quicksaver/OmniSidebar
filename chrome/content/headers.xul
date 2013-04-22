@@ -3,29 +3,26 @@
 <overlay id="headers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<broadcasterset id="mainBroadcasterSet">
-	
-		<broadcaster id="toggleSideToolbar"
+		<broadcaster id="objName-toggleSideToolbar"
 			label="&omnisidebarToolbar.label;"
 			type="checkbox"
 			oncommand="objName.toggleToolbar(false);" />
-			
 	</broadcasterset>
 	
 	<vbox id="sidebar-box" class="chromeclass-extrachrome sidebar-box">
 		<sidebarheader id="sidebar-header"
 			class="sidebar-header"
 			context="toolbar-context-menu">
-			<label id="sidebar-title"
-				class="sidebar-title" />
-			<stack id="stackSidebar"
+			<label id="sidebar-title" class="sidebar-title" />
+			<stack id="objName-stackSidebar"
 				class="stackSidebar"
 				insertbefore="sidebar-title">
-				<label id="sidebar-customizingLabel"
+				<label id="objName-sidebar-customizingLabel"
 					flex="1"
 					crop="end"
 					value="&omnisidebarButtonMain.label;"
 					collapsed="true" />
-				<toolbar id="omnisidebarToolbar"
+				<toolbar id="objName-Toolbar"
 					class="omnisidebar-toolbar"
 					toolbarname="&omnisidebarToolbar.label;"
 					customizable="true"
@@ -34,7 +31,7 @@
 					toolboxid="navigator-toolbox"
 					coloricons="default" />
 			</stack>
-			<label id="omnisidebar-header-spacer"
+			<label id="objName-header-spacer"
 				class="header-spacer"
 				flex="1"
 				context="toolbar-context-menu"

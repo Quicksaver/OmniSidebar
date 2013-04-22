@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.toggleForceOpenToolbars = function() {
 	if(prefAid.forceOpenToolbars) {
@@ -13,9 +13,9 @@ this.toggleForceOpenToolbars = function() {
 this.toggleForceOpenMenus = function() {
 	if(prefAid.forceOpenMenus) {
 		forceOpenTriggers.__defineGetter__('viewMainSidebarMenu', function() { return $('viewSidebarMenu'); });
-		forceOpenTriggers.__defineGetter__('viewTwinSidebarMenu', function() { return $('viewTwinSidebarMenu'); });
-		forceOpenTriggers.__defineGetter__('openMainSidebarMenu', function() { return $('openSidebarMenu'); });
-		forceOpenTriggers.__defineGetter__('openTwinSidebarMenu', function() { return $('openTwinSidebarMenu'); });
+		forceOpenTriggers.__defineGetter__('viewTwinSidebarMenu', function() { return $(objName+'-viewTwinSidebarMenu'); });
+		forceOpenTriggers.__defineGetter__('openMainSidebarMenu', function() { return $(objName+'-openSidebarMenu'); });
+		forceOpenTriggers.__defineGetter__('openTwinSidebarMenu', function() { return $(objName+'-openTwinSidebarMenu'); });
 	} else {
 		delete forceOpenTriggers.viewMainSidebarMenu;
 		delete forceOpenTriggers.viewTwinSidebarMenu;

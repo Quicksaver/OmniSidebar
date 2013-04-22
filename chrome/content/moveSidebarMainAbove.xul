@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="moveSidebarMainAbove-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
-	<box id="omnisidebar_resizer" insertbefore="omnisidebar_resizesidebar" />
+	<box id="objName-resizer" insertbefore="objName-resizesidebar" />
 	
 </overlay>

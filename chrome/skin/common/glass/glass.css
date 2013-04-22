@@ -32,12 +32,12 @@ Other sidebars should also be themed although probably not perfectly! */
 	}
 	
 	#sidebar-box:not([movetoright]) .omnisidebar_resize_box,
-	#sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
+	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
 		border-left: 0 !important;
 		border-radius: 0 5px 5px 0 !important;
 	}
 	#sidebar-box[movetoright] .omnisidebar_resize_box,
-	#sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
+	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
 		border-right: 0 !important;
 		border-radius: 5px 0 0 5px !important;
 	}

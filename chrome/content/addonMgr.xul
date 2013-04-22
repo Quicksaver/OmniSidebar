@@ -3,8 +3,7 @@
 <overlay id="addonMgr-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<broadcasterset id="mainBroadcasterSet">
-		
-		<broadcaster id="viewAddonSidebar"
+		<broadcaster id="objName-viewAddonSidebar"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
 			autoCheck="false"
@@ -13,25 +12,20 @@
 			sidebarurl="about:addons"
 			sidebartitle="&addonsSidebar.label;"
 			oncommand="toggleSidebar(this);" />
-		
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">
-		
-		<menuitem id="menu_addonsSidebar"
+		<menuitem id="objName-menu_addonsSidebar"
 			accesskey="A"
-			observes="viewAddonSidebar" />
-			
+			observes="objName-viewAddonSidebar" />
 	</menupopup>
 	
 	<toolbarpalette id="BrowserToolbarPalette">
-		
-		<toolbarbutton id="addons_sidebar_button" 
+		<toolbarbutton id="objName-addons_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
-			observes="viewAddonSidebar" />
-		
+			observes="objName-viewAddonSidebar" />
 	</toolbarpalette>
 	
 </overlay>

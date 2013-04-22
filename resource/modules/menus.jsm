@@ -1,18 +1,18 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
-this.__defineGetter__('contextOptions', function() { return $('omnisidebar_contextOptions'); });
-this.__defineGetter__('contextSeparator', function() { return $('omnisidebar_contextSeparator'); });
-this.__defineGetter__('contextItem', function() { return $('toggle_sidebartoolbar_context'); });
-this.__defineGetter__('contextItemTwin', function() { return $('toggle_sidebartoolbar_context-twin'); });
+this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
+this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
+this.__defineGetter__('contextItem', function() { return $(objName+'-toggle_sidebartoolbar_context'); });
+this.__defineGetter__('contextItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_context-twin'); });
 
 this.__defineGetter__('appMenu', function() { return $('appmenu_customizeMenu'); });
-this.__defineGetter__('appMenuItem', function() { return $('toggle_sidebartoolbar_appmenu'); });
-this.__defineGetter__('appMenuItemTwin', function() { return $('toggle_sidebartoolbar_appmenu-twin'); });
+this.__defineGetter__('appMenuItem', function() { return $(objName+'-toggle_sidebartoolbar_appmenu'); });
+this.__defineGetter__('appMenuItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_appmenu-twin'); });
 
 this.__defineGetter__('viewToolbarsMenu', function() { return $('viewToolbarsMenu').firstChild; }); // View - Toolbars submenu
-this.__defineGetter__('viewToolbarsMenuItem', function() { return $('toggle_sidebartoolbar_viewtoolbars'); });
-this.__defineGetter__('viewToolbarsMenuItemTwin', function() { return $('toggle_sidebartoolbar_viewtoolbars-twin'); });
+this.__defineGetter__('viewToolbarsMenuItem', function() { return $(objName+'-toggle_sidebartoolbar_viewtoolbars'); });
+this.__defineGetter__('viewToolbarsMenuItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_viewtoolbars-twin'); });
 
 this.__defineGetter__('viewSidebarMenu', function() { return $('viewSidebarMenu'); });
 
@@ -111,7 +111,7 @@ this.toggleMenuButton = function() {
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/menus.xul', 'menuTitle');
 	} else {
 		overlayAid.overlayURI('chrome://'+objPathString+'/content/menus.xul', 'menuTitle');
-		barSwitchTriggers.__defineGetter__('menuTitle', function() { return $('openSidebarMenu'); });
+		barSwitchTriggers.__defineGetter__('menuTitle', function() { return $(objName+'-openSidebarMenu'); });
 	}
 };
 
@@ -122,8 +122,8 @@ this.toggleMenuButtonTwin = function() {
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/menusTwin.xul', 'menuTitleTwin');
 	} else {
 		overlayAid.overlayURI('chrome://'+objPathString+'/content/menusTwin.xul', 'menuTitleTwin');
-		barSwitchTriggers.__defineGetter__('menuTitleTwin', function() { return $('openTwinSidebarMenu'); });
-		twinTriggers.__defineGetter__('menuTitleTwin', function() { return $('openTwinSidebarMenu'); });
+		barSwitchTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
+		twinTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
 	}
 };
 	
@@ -136,9 +136,9 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
 	listenerAid.add(viewToolbarsMenu, 'popupshown', setViewToolbarsMenu, false);
 	
-	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $('viewTwinSidebarMenuMenu'); });
+	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	barSwitchTriggers.__defineGetter__('viewSidebarMenuMenu', function() { return $('viewSidebarMenuMenu'); });
-	barSwitchTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $('viewTwinSidebarMenuMenu'); });
+	barSwitchTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	
 	prefAid.listen('titleButton', toggleMenuButton);
 	prefAid.listen('titleButtonTwin', toggleMenuButtonTwin);

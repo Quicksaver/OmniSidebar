@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.pageInfoBackup = null;
 
@@ -15,7 +15,7 @@ this.toggleAlwaysPageInfo = function(unloaded) {
 		if(!pageInfoBackup) {
 			pageInfoBackup = window.BrowserPageInfo;
 		}
-		window.BrowserPageInfo = function() { toggleSidebar($('viewPageInfoSidebar')); };
+		window.BrowserPageInfo = function() { toggleSidebar($(objName+'-viewPageInfoSidebar')); };
 	} else if(pageInfoBackup) {
 		window.BrowserPageInfo = pageInfoBackup;
 		pageInfoBackup = null;
@@ -25,9 +25,9 @@ this.toggleAlwaysPageInfo = function(unloaded) {
 moduleAid.LOADMODULE = function() {
 	overlayAid.overlayWindow(window, 'pageInfo');
 	
-	forceOpenTriggers.__defineGetter__('viewPageInfoSidebar', function() { return $('viewPageInfoSidebar'); });
-	forceReloadTriggers.__defineGetter__('viewPageInfoSidebar', function() { return $('viewPageInfoSidebar'); });
-	dontSaveBroadcasters.pageInfo = 'viewPageInfoSidebar';
+	forceOpenTriggers.__defineGetter__('viewPageInfoSidebar', function() { return $(objName+'-viewPageInfoSidebar'); });
+	forceReloadTriggers.__defineGetter__('viewPageInfoSidebar', function() { return $(objName+'-viewPageInfoSidebar'); });
+	dontSaveBroadcasters.pageInfo = objName+'-viewPageInfoSidebar';
 	
 	prefAid.listen('alwaysPageInfo', toggleAlwaysPageInfo);
 	toggleAlwaysPageInfo();
@@ -37,8 +37,8 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewPageInfoSidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewPageInfoSidebar') { closeSidebar(twinSidebar); }
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewPageInfoSidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewPageInfoSidebar') { closeSidebar(twinSidebar); }
 	}
 	
 	listenerAid.remove(window, 'SidebarFocusedSync', loadPageInfoFix);

@@ -3,56 +3,50 @@
 <overlay id="goURIMainTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<broadcasterset id="mainBroadcasterSet">
-			
-		<broadcaster id="viewURISidebar-twin"
+		<broadcaster id="objName-viewURISidebar-twin"
 			autoCheck="false"
 			type="checkbox"
-			goButton="omnisidbarURIGo-twin"
-			textbar="omnisidebarURIBar-twin"
-			anchor="sidebar-header-twin"
-			menu="omnisidebarURIBarMenu-twin"
+			goButton="objName-URIGo-twin"
+			textbar="objName-URIBar-twin"
+			anchor="objName-sidebar-header-twin"
+			menu="objName-URIBarMenu-twin"
 			group="sidebar"
 			sidebarurl="about:blank"
 			sidebartitle="about:blank"
 			oncommand="toggleSidebar(this);" />
-	
 	</broadcasterset>
 
 	<popupset id="mainPopupSet">
-		
-		<menupopup id="omnisidebarURIBarMenu-twin"
+		<menupopup id="objName-URIBarMenu-twin"
 			class="omnisidebarURIBarMenu"
 			ignorekeys="true"
-			broadcaster="viewURISidebar-twin"
+			broadcaster="objName-viewURISidebar-twin"
 			onpopupshown="objName.resetURIBar(this);"
 			onpopuphiding="objName.blurURIBar(this);">
 			<hbox>
-				<textbox id="omnisidebarURIBar-twin"
+				<textbox id="objName-URIBar-twin"
 					type="autocomplete" 
 					flex="1"
-					broadcaster="viewURISidebar-twin"
+					broadcaster="objName-viewURISidebar-twin"
 					onkeydown="return objName.keydownURIBar(event, this);"/>
-				<button id="omnisidbarURIGo-twin" 
+				<button id="objName-URIGo-twin" 
 					class="omnisidebarURIGo"
 					label="&URISidebar.buttonLabel;"
-					broadcaster="viewURISidebar-twin"
+					broadcaster="objName-viewURISidebar-twin"
 					oncommand="objName.loadURIBar(this);"/>
 			</hbox>
 		</menupopup>
-	
 	</popupset>
 	
-	<toolbar id="omnisidebarToolbar-twin">
-		
-		<toolbarbutton id="uri_sidebar_button-twin" 
+	<toolbar id="objName-Toolbar-twin">
+		<toolbarbutton id="objName-uri_sidebar_button-twin" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
 			removable="false"
 			position="1"
 			label="&URISidebar.buttonLabel;"
 			tooltiptext="&URISidebar.tooltip;"
-			broadcaster="viewURISidebar-twin"
+			broadcaster="objName-viewURISidebar-twin"
 			oncommand="objName.openURIBar(this);" />
-	
 	</toolbar>
 	
 </overlay>

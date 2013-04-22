@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -85,7 +85,7 @@ this.buttonLabels = function(btn, onLoad) {
 		toggleAttribute(btn, 'checked', !check);
 		toggleAttribute(btn, 'movetoright', prefAid.moveSidebars);
 		
-		setAttribute($('wrapper-omnisidebar_button'), 'title', btn.getAttribute('label'));
+		setAttribute($('wrapper-'+objName+'-button'), 'title', btn.getAttribute('label'));
 		
 		return;
 	}
@@ -108,7 +108,7 @@ this.buttonLabels = function(btn, onLoad) {
 		toggleAttribute(btn, 'checked', !check);
 		toggleAttribute(btn, 'movetoleft', prefAid.moveSidebars);
 		
-		setAttribute($('wrapper-omnisidebar_button-twin'), 'title', btn.getAttribute('label'));
+		setAttribute($('wrapper-'+objName+'-button-twin'), 'title', btn.getAttribute('label'));
 	}
 };
 

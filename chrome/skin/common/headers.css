@@ -48,19 +48,19 @@
 	}
 	
 	#sidebar-splitter.sidebar-splitter:not([movetoright]),
-	#sidebar-splitter-twin.sidebar-splitter[movetoleft] {
+	#omnisidebar-sidebar-splitter-twin.sidebar-splitter[movetoleft] {
 		border-left: none;
 		border-right: 1px solid rgb(169, 183, 201);
 	}
 	#sidebar-splitter.sidebar-splitter[movetoright],
-	#sidebar-splitter-twin.sidebar-splitter:not([movetoleft]) {
+	#omnisidebar-sidebar-splitter-twin.sidebar-splitter:not([movetoleft]) {
 		border-left: 1px solid rgb(169, 183, 201);
 		border-right: none;
 	}
 	
 	/* Hide a bunch of stuff */
 	#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
-	#sidebar-throbber-twin,
+	#omnisidebar-sidebar-throbber-twin,
 	.sidebar-box[notitle] .sidebar-title,
 	.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton,
 	.sidebar-box[customizing] .sidebar-title,
@@ -82,8 +82,8 @@
 		margin: 1px 3px !important;
 	}
 	
-	#sidebar-customizingLabel,
-	#sidebar-customizingLabel-twin {
+	#omnisidebar-sidebar-customizingLabel,
+	#omnisidebar-sidebar-customizingLabel-twin {
 		text-align: right;
 		margin: 5px 5px 0 5px !important;
 	}
@@ -110,11 +110,11 @@
 		display: -moz-box;
 	}
 	#sidebar-box[customizing]:not([renderabove]):not([movetoright]),
-	#sidebar-box-twin[customizing]:not([renderabove])[movetoleft] {
+	#omnisidebar-sidebar-box-twin[customizing]:not([renderabove])[movetoleft] {
 		left: 0px;
 	}
 	#sidebar-box[customizing]:not([renderabove])[movetoright],
-	#sidebar-box-twin[customizing]:not([renderabove]):not([movetoleft]) {
+	#omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):not([movetoleft]) {
 		right: 0px;
 	}
 	

@@ -4,7 +4,7 @@
 	/* Windows Icon Set */
 	
 	/* Set default FF4 icons */
-	#addons_sidebar_button {
+	#omnisidebar-addons_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(24px 96px 48px 72px) !important; /* default is color */
 	}
@@ -13,12 +13,12 @@
 		-moz-image-region: rect(0px 120px 24px 96px) !important;
 	}
 	
-	#console_sidebar_button {
+	#omnisidebar-console_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(24px 24px 48px 0px) !important; /* default is color */
 	}
 	
-	#dominspector_sidebar_button {
+	#omnisidebar-dominspector_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(24px 48px 48px 24px) !important; /* default is color */
 	}
@@ -37,13 +37,13 @@
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(0px 168px 24px 144px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #addons_sidebar_button {
+	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-addons_sidebar_button {
 		-moz-image-region: rect(0px 96px 24px 72px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #console_sidebar_button {
+	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-console_sidebar_button {
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #dominspector_sidebar_button {
+	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-dominspector_sidebar_button {
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
 	

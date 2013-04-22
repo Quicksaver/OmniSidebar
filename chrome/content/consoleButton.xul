@@ -3,13 +3,11 @@
 <overlay id="consoleButton-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<toolbarpalette id="BrowserToolbarPalette">
-	
-		<toolbarbutton id="console_sidebar_button" 
+		<toolbarbutton id="objName-console_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&consoleSidebar.label;"
 			tooltiptext="&consoleSidebar.tooltip;" 
 			observes="viewConsole2Sidebar" />
-			
 	</toolbarpalette>
 	
 </overlay>

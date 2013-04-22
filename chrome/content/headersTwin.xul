@@ -3,29 +3,26 @@
 <overlay id="headersTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<broadcasterset id="mainBroadcasterSet">
-	
-		<broadcaster id="toggleSideToolbar-twin"
+		<broadcaster id="objName-toggleSideToolbar-twin"
 			label="&omnisidebarToolbarTwin.label;"
 			type="checkbox"
 			oncommand="objName.toggleToolbar(true);" />
-			
 	</broadcasterset>
 	
-	<vbox id="sidebar-box-twin" class="chromeclass-extrachrome sidebar-box">
-		<sidebarheader id="sidebar-header-twin"
+	<vbox id="objName-sidebar-box-twin" class="chromeclass-extrachrome sidebar-box">
+		<sidebarheader id="objName-sidebar-header-twin"
 			class="sidebar-header"
 			context="toolbar-context-menu">
-			<label id="sidebar-title-twin"
-				class="sidebar-title" />
-			<stack id="stackSidebar-twin"
+			<label id="objName-sidebar-title-twin" class="sidebar-title" />
+			<stack id="objName-stackSidebar-twin"
 				class="stackSidebar"
-				insertbefore="sidebar-title-twin">
-				<label id="sidebar-customizingLabel-twin"
+				insertbefore="objName-sidebar-title-twin">
+				<label id="objName-sidebar-customizingLabel-twin"
 					flex="1"
 					crop="end"
 					value="&omnisidebarButtonTwin.label;"
 					collapsed="true" />
-				<toolbar id="omnisidebarToolbar-twin"
+				<toolbar id="objName-Toolbar-twin"
 					class="omnisidebar-toolbar"
 					toolbarname="&omnisidebarToolbarTwin.label;"
 					customizable="true"
@@ -34,15 +31,15 @@
 					toolboxid="navigator-toolbox"
 					coloricons="default" />
 			</stack>
-			<label id="omnisidebar-header-spacer-twin"
+			<label id="objName-header-spacer-twin"
 				class="header-spacer"
 				flex="1"
 				context="toolbar-context-menu"
-				insertbefore="sidebar-title-twin"/>
+				insertbefore="objName-sidebar-title-twin"/>
 		</sidebarheader>
-		<browser id="sidebar-twin" class="sidebar-browser" />
+		<browser id="objName-sidebar-twin" class="sidebar-browser" />
 	</vbox>
 	
-	<splitter id="sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter"/>
+	<splitter id="objName-sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter"/>
 	
 </overlay>

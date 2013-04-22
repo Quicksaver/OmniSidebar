@@ -1,13 +1,13 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.inCustomize = true;
 
 this.mainSidebar = {
-	get button () { return $('omnisidebar_button'); }
+	get button () { return $(objName+'-button'); }
 };
 
 this.twinSidebar = {
-	get button () { return $('omnisidebar_button-twin'); }
+	get button () { return $(objName+'-button-twin'); }
 };
 
 this.buttonLabels = function(btn, onLoad) {

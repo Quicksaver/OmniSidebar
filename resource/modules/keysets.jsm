@@ -1,8 +1,8 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.mainKey = {
 	id: 'key_mainSidebar',
-	command: 'cmd_mainSidebar',
+	command: objName+'-cmd_mainSidebar',
 	get keycode () { return prefAid.mainKeysetKeycode; },
 	get accel () { return prefAid.mainKeysetAccel; },
 	get shift () { return prefAid.mainKeysetShift; },
@@ -11,7 +11,7 @@ this.mainKey = {
 
 this.twinKey = {
 	id: 'key_twinSidebar',
-	command: 'cmd_twinSidebar',
+	command: objName+'-cmd_twinSidebar',
 	get keycode () { return prefAid.twinKeysetKeycode; },
 	get accel () { return prefAid.twinKeysetAccel; },
 	get shift () { return prefAid.twinKeysetShift; },

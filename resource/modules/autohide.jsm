@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
@@ -109,31 +109,31 @@ this.setAutoHideWidth = function() {
 	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
 	
 	sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]) .omnisidebar_resize_box,\n';
-	sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft] .omnisidebar_resize_box {\n';
+	sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide][movetoleft] .omnisidebar_resize_box {\n';
 	sscode += '		left: '+leftOffset+'px !important;\n';
 	sscode += '	}\n';
 	
 	sscode += '	#sidebar-box[renderabove][autohide][movetoright] .omnisidebar_resize_box,\n';
-	sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]) .omnisidebar_resize_box {\n';
+	sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide]:not([movetoleft]) .omnisidebar_resize_box {\n';
 	sscode += '		right: '+rightOffset+'px !important;\n';
 	sscode += '	}\n';
 	
 	if(prefAid.renderabove && prefAid.autoHide && mainSidebar.width) {
-		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox:hover,\n';
-		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]) #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar_resizebox[hiding] { left: ' + (mainSidebar.width +leftOffset) + 'px !important; }\n';
-		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox:hover,\n';
-		sscode += '	#sidebar-box[renderabove][autohide][movetoright] #omnisidebar_resizebox[hover],\n';
-		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar_resizebox[hiding] { right: ' + (mainSidebar.width +rightOffset) + 'px !important; }\n';
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar-resizebox:hover,\n';
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]) #omnisidebar-resizebox[hover],\n';
+		sscode += '	#sidebar-box[renderabove][autohide]:not([movetoright]):not([dontReHover]) #omnisidebar-resizebox[hiding] { left: ' + (mainSidebar.width +leftOffset) + 'px !important; }\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar-resizebox:hover,\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright] #omnisidebar-resizebox[hover],\n';
+		sscode += '	#sidebar-box[renderabove][autohide][movetoright]:not([dontReHover]) #omnisidebar-resizebox[hiding] { right: ' + (mainSidebar.width +rightOffset) + 'px !important; }\n';
 	}
 	
 	if(prefAid.renderaboveTwin && prefAid.autoHideTwin && twinSidebar.width) {
-		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin:hover,\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]) #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { right: ' + (twinSidebar.width +rightOffset) + 'px !important; }\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin:hover,\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft] #omnisidebar_resizebox-twin[hover],\n';
-		sscode += '	#sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar_resizebox-twin[hiding] { left: ' + (twinSidebar.width +leftOffset) + 'px !important; }\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide]:not([movetoleft]) #omnisidebar-resizebox-twin[hover],\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin[hiding] { right: ' + (twinSidebar.width +rightOffset) + 'px !important; }\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide][movetoleft] #omnisidebar-resizebox-twin[hover],\n';
+		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][autohide][movetoleft]:not([dontReHover]) #omnisidebar-resizebox-twin[hiding] { left: ' + (twinSidebar.width +leftOffset) + 'px !important; }\n';
 	}
 	
 	sscode += '}';

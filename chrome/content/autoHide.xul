@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="autoHide-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
-	<hbox id="omnisidebar_resizebox" 
+	<hbox id="objName-resizebox" 
 		onmouseout="objName.hidingSidebar(objName.mainSidebar);"
 		ondragenter="objName.onDragEnter(objName.mainSidebar);"
 		ondragexit="objName.onDragExit(objName.mainSidebar);" />
