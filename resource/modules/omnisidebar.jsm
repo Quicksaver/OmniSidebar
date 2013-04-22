@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.11';
+moduleAid.VERSION = '1.0.12';
 
 this.customizing = false;
 
@@ -29,7 +29,13 @@ this.mainSidebar = {
 	get stack () { return $(objName+'-stackSidebar'); },
 	get button () { return $(objName+'-button'); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
-	get width () { return this.box ? parseInt(this.box.getAttribute('width')) : null; },
+	get width () {
+		if(this.box) {
+			if(!this.box.getAttribute('width') || this.box.getAttribute('width') == 'NaN') { this.box.setAttribute('width', '300'); }
+			return parseInt(this.box.getAttribute('width'));
+		}
+		return null;
+	},
 	get lastCommand () { return prefAid.lastcommand; },
 	set lastCommand (v) { return prefAid.lastcommand = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommand'); },
@@ -71,7 +77,13 @@ this.twinSidebar = {
 	get stack () { return $(objName+'-stackSidebar-twin'); },
 	get button () { return $(objName+'-button-twin'); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
-	get width () { return this.box ? parseInt(this.box.getAttribute('width')) : null; },
+	get width () {
+		if(this.box) {
+			if(!this.box.getAttribute('width') || this.box.getAttribute('width') == 'NaN') { this.box.setAttribute('width', '300'); }
+			return parseInt(this.box.getAttribute('width'));
+		}
+		return null;
+	},
 	get lastCommand () { return prefAid.lastcommandTwin; },
 	set lastCommand (v) { return prefAid.lastcommandTwin = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommandTwin'); },
