@@ -10,6 +10,12 @@
 		height: 0px !important;
 	}
 	
+	/* On custom themes without a default icon to load for every toolbar button, the button would never be actually loaded, thus not triggering its onload attribute */
+	#omnisidebar-button:not([loaded]),
+	#omnisidebar-button-twin:not([loaded]) {
+		list-style-image: url("chrome://omnisidebar/skin/osb-button.png");
+	}
+	
 	.omnisidebar_switch {
 		position: fixed;
 		background: none;

@@ -2,9 +2,9 @@
 @-moz-document url("chrome://browser/content/browser.xul"), url("chrome://global/content/customizeToolbar.xul") {
 
 	/* Buttons */
-	#omnisidebar-button,
-	#omnisidebar-button-twin {
-		list-style-image: url("chrome://omnisidebar/skin/osb-button.png") !important;
+	#omnisidebar-button.toolbarbutton-1,
+	#omnisidebar-button-twin.toolbarbutton-1 {
+		list-style-image: url("chrome://omnisidebar/skin/osb-button.png");
 	}
 	
 	:not(#TabsToolbar) #omnisidebar-button:not([movetoright]):not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
