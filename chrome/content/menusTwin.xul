@@ -17,12 +17,7 @@
 	</menupopup>
 	
 	<menu id="viewToolbarsMenu">
-		
-		<menupopup id="omnisidebar_viewToolbarsMenuPopup-twin" hidden="true">
-			<menuitem id="toggle_sidebartoolbar_viewtoolbars-twin"
-				observes="toggleSideToolbar-twin"/>
-		</menupopup>
-			
+		<menuitem id="toggle_sidebartoolbar_viewtoolbars-twin" hidden="true" observes="toggleSideToolbar-twin"/>
 	</menu>
 	
 	<menupopup id="menu_viewPopup">

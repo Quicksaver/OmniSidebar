@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $('omnisidebar_contextOptions'); });
@@ -56,9 +56,11 @@ this.setAppMenu = function() {
 this.setViewToolbarsMenu = function() {
 	if(viewToolbarsMenuItem) {
 		viewToolbarsMenu.insertBefore(viewToolbarsMenuItem, viewToolbarsMenu.querySelector('#toggle_addon-bar'));
+		viewToolbarsMenuItem.hidden = false;
 	}
 	if(viewToolbarsMenuItemTwin) {
 		viewToolbarsMenu.insertBefore(viewToolbarsMenuItemTwin, viewToolbarsMenu.querySelector('#toggle_addon-bar'));
+		viewToolbarsMenuItemTwin.hidden = false;
 	}
 };
 

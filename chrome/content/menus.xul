@@ -29,12 +29,7 @@
 	</menupopup>
 	
 	<menu id="viewToolbarsMenu">
-		
-		<menupopup id="omnisidebar_viewToolbarsMenuPopup" hidden="true">
-			<menuitem id="toggle_sidebartoolbar_viewtoolbars"
-				observes="toggleSideToolbar"/>
-		</menupopup>
-			
+		<menuitem id="toggle_sidebartoolbar_viewtoolbars" hidden="true" observes="toggleSideToolbar"/>
 	</menu>
 	
 	<menupopup id="menu_ToolsPopup">
