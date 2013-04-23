@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.12';
+moduleAid.VERSION = '1.0.13';
 
 this.customizing = false;
 
@@ -570,6 +570,14 @@ this.loadMainSidebar = function() {
 		toggleSidebar(_sidebarCommand);
 	}
 	_sidebarCommand = null;
+	
+	// The first time we install the add-on lets open the sidebar so the user knows something's changed
+	if(prefAid.firstEnabled) {
+		prefAid.firstEnabled = false;
+		if(!mainSidebar.isOpen && mainSidebar.box.hidden) {
+			toggleSidebar();
+		}
+	}
 };
 
 this.unloadMainSidebar = function() {

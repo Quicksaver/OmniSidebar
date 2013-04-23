@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.8';
+var defaultsVersion = '1.0.9';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -58,7 +58,9 @@ var prefList = {
 	twinKeysetKeycode: 'VK_F8',
 	twinKeysetAccel: false,
 	twinKeysetShift: true,
-	twinKeysetAlt: false
+	twinKeysetAlt: false,
+	
+	firstEnabled: true
 };
 
 function startAddon(window) {
