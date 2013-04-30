@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.9';
+var defaultsVersion = '1.0.10';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -90,10 +90,6 @@ function startPreferences(window) {
 	window[objName].moduleAid.load('options');
 }
 
-function closePreferences() {
-	windowMediator.callOnAll(function(aWindow) { try { aWindow.close(); } catch(ex) {} }, null, "chrome://"+objPathString+"/content/options.xul");
-};
-
 function startConditions(aReason) {
 	return true;
 }
@@ -139,7 +135,6 @@ function onStartup(aReason) {
 function onShutdown(aReason) {
 	// Placing these here prevents an error which I couldn't figure out why the closeCustomize() in overlayAid weren't already preventing.
 	closeCustomize();
-	closePreferences();
 	
 	// remove the add-on from all windows
 	windowMediator.callOnAll(stopAddon, null, null, true);
