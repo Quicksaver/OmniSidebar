@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -131,20 +131,20 @@ this.headersCustomize = function(e) {
 
 this.setCustomizeWidth = function() {
 	// Unload current stylesheet if it's been loaded
-	styleAid.unload('customizeWidthURI');
+	styleAid.unload('customizeWidthURI_'+_UUID);
 	
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	if(mainSidebar.width) {
-		sscode += '	#sidebar-box[customizing]  { width: ' + mainSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]  { width: ' + mainSidebar.width + 'px; }\n';
 	}
 	if(twinSidebar.width) {
-		sscode += '	#'+objName+'-sidebar-box-twin[customizing]  { width: ' + twinSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]  { width: ' + twinSidebar.width + 'px; }\n';
 	}
 	sscode += '}';
 	
-	styleAid.load('customizeWidthURI', sscode, true);
+	styleAid.load('customizeWidthURI_'+_UUID, sscode, true);
 };
 
 this.toggleHeadersOnLoad = function() {
@@ -229,10 +229,11 @@ moduleAid.UNLOADMODULE = function() {
 	removeAttribute(mainSidebar.header, 'hidden');
 	removeAttribute(twinSidebar.header, 'hidden'); 
 	
+	styleAid.unload('customizeWidthURI_'+_UUID);
+	
 	if(UNLOADED) {
 		styleAid.unload('headers');
 		styleAid.unload('alternatebtns');
-		styleAid.unload('customizeWidthURI');
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers');
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin');
 	}

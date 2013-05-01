@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.13';
+moduleAid.VERSION = '1.0.14';
 
 this.customizing = false;
 
@@ -31,8 +31,12 @@ this.mainSidebar = {
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
 	get width () {
 		if(this.box) {
-			if(!this.box.getAttribute('width') || this.box.getAttribute('width') == 'NaN') { this.box.setAttribute('width', '300'); }
-			return parseInt(this.box.getAttribute('width'));
+			var width = this.box.getAttribute('width');
+			if(!width || width == '0' || width == 'NaN') {
+				this.box.setAttribute('width', '300');
+				width = 300;
+			}
+			return parseInt(width);
 		}
 		return null;
 	},
@@ -79,8 +83,12 @@ this.twinSidebar = {
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
 	get width () {
 		if(this.box) {
-			if(!this.box.getAttribute('width') || this.box.getAttribute('width') == 'NaN') { this.box.setAttribute('width', '300'); }
-			return parseInt(this.box.getAttribute('width'));
+			var width = this.box.getAttribute('width');
+			if(!width || width == '0' || width == 'NaN') {
+				this.box.setAttribute('width', '300');
+				width = 300;
+			}
+			return parseInt(width);
 		}
 		return null;
 	},
@@ -274,23 +282,20 @@ this.customize = function(e) {
 
 this.watchWidth = function(box) {
 	var width = box.getAttribute('width');
-	if(!width || width == '0') { 
+	if(!width || width == '0' || width == 'NaN') { 
 		width = box.clientWidth || box == mainSidebar.box ? Globals.mainWidth : box == twinSidebar.box ? Globals.twinWidth : false || 300;
 		box.setAttribute('width', width);
 	}
 	if(box == mainSidebar.box) { Globals.mainWidth = parseInt(width); }
 	else if(box == twinSidebar.box) { Globals.twinWidth = parseInt(width); }
 	
-	windowMediator.callOnAll(function(aWindow) {
-		aWindow[objName].widthChanged(box == mainSidebar.box, box == twinSidebar.box);
-	}, 'navigator:browser');
+	widthChanged(box == mainSidebar.box, box == twinSidebar.box);
 };
 
 this.widthChanged = function(main, twin) {
 	var box = main ? mainSidebar.box : twin ? twinSidebar.box : null;
 	if(!box) { return; }
 	
-	box.setAttribute('width', main ? Globals.mainWidth : twin ? Globals.twinWidth : null);
 	timerAid.init('boxResize_'+box.id, function() {
 		dispatch(box, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: (twin) ? twinSidebar : mainSidebar } });
 	}, 500);
@@ -327,7 +332,7 @@ this.clickSwitcher = function(e, bar) {
 
 this.setSwitcherOffset = function() {
 	// Unload current stylesheet if it's been loaded
-	styleAid.unload('switcherOffset');
+	styleAid.unload('switcherOffset_'+_UUID);
 	
 	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 	// I'm not supporting other versions of OSX, just this one isn't simple as it is
@@ -337,21 +342,21 @@ this.setSwitcherOffset = function() {
 	
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	
-	sscode += '	#'+objName+'-switch:not([movetoright]),\n';
-	sscode += '	#'+objName+'-switch-twin[movetoleft] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:not([movetoright]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin[movetoleft] {\n';
 	sscode += '		left: '+leftOffset+'px !important;\n';
 	sscode += '	}\n';
 	
-	sscode += '	#'+objName+'-switch[movetoright],\n';
-	sscode += '	#'+objName+'-switch-twin:not([movetoleft]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch[movetoright],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:not([movetoleft]) {\n';
 	sscode += '		right: '+rightOffset+'px !important;\n';
 	sscode += '	}\n';
 	
 	sscode += '}';
 	
-	styleAid.load('switcherOffset', sscode, true);
+	styleAid.load('switcherOffset_'+_UUID, sscode, true);
 };
 
 this.setSwitcherHeight = function() {
@@ -691,6 +696,8 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('twinSidebar', toggleTwin);
 	prefAid.unlisten('useSwitch', enableMainSwitcher);
 	
+	styleAid.unload('switcherOffset_'+_UUID);
+	
 	if(this.backups) {
 		toggleSidebar = this.backups.toggleSidebar;
 		fireSidebarFocusedEvent = this.backups.fireSidebarFocusedEvent;
@@ -702,8 +709,4 @@ moduleAid.UNLOADMODULE = function() {
 	overlayAid.removeOverlayWindow(window, "mainSidebar");
 	
 	moduleAid.unload('compatibilityFix/windowFixes');
-	
-	if(UNLOADED) {
-		styleAid.unload('switcherOffset');
-	}
 };

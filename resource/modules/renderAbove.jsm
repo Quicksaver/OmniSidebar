@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
 
@@ -109,7 +109,7 @@ this.setHeight = function() {
 
 this.setAboveWidth = function() {
 	// Unload current stylesheet if it's been loaded
-	styleAid.unload('aboveWidthURI');
+	styleAid.unload('aboveWidthURI_'+_UUID);
 	
 	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 	// I'm not supporting other versions of OSX, just this one isn't simple as it is
@@ -119,45 +119,45 @@ this.setAboveWidth = function() {
 	
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
+	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	
-	sscode += '	#'+objName+'-switch:not([movetoright]),\n';
-	sscode += '	#'+objName+'-switch-twin[movetoleft] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:not([movetoright]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin[movetoleft] {\n';
 	sscode += '		left: '+leftOffset+'px !important;\n';
 	sscode += '	}\n';
 	
-	sscode += '	#'+objName+'-switch[movetoright],\n';
-	sscode += '	#'+objName+'-switch-twin:not([movetoleft]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch[movetoright],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:not([movetoleft]) {\n';
 	sscode += '		right: '+rightOffset+'px !important;\n';
 	sscode += '	}\n';
 	
 	if(prefAid.renderabove && mainSidebar.width) {
-		sscode += '	#sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
-		sscode += '	#sidebar-box[renderabove]:not([movetoright]) { left: -' + mainSidebar.width + 'px; }\n';
-		sscode += '	#sidebar-box[renderabove][movetoright] { right: -' + mainSidebar.width + 'px; }\n';
-		sscode += '	#sidebar-box[renderabove]:not([autohide]):not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	#sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	#sidebar-box[customizing]:not([movetoright]) #omnisidebar-resizebox { left: ' + (mainSidebar.width +leftOffset) + 'px !important; }\n';
-		sscode += '	#sidebar-box[renderabove]:not([autohide])[movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	#sidebar-box[renderabove][customizing][movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	#sidebar-box[customizing][movetoright] #omnisidebar-resizebox { right: ' + (mainSidebar.width +rightOffset) + 'px !important; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([movetoright]) { left: -' + mainSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][movetoright] { right: -' + mainSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):not([movetoright]) #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][customizing]:not([movetoright]) #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]:not([movetoright]) #omnisidebar-resizebox { left: ' + (mainSidebar.width +leftOffset) + 'px !important; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide])[movetoright] #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][customizing][movetoright] #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing][movetoright] #omnisidebar-resizebox { right: ' + (mainSidebar.width +rightOffset) + 'px !important; }\n';
 	}
 	
 	if(prefAid.renderaboveTwin && twinSidebar.width) {
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove] { width: ' + twinSidebar.width + 'px; }\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove]:not([movetoleft]) { right: -' + twinSidebar.width + 'px; }\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][movetoleft] { left: -' + twinSidebar.width + 'px; }\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar-resizebox-twin { right: ' + (twinSidebar.width +rightOffset) + 'px !important; }\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove]:not([autohide])[movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	#'+objName+'-sidebar-box-twin[customizing][movetoleft] #omnisidebar-resizebox-twin { left: ' + (twinSidebar.width +leftOffset) + 'px !important; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove] { width: ' + twinSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([movetoleft]) { right: -' + twinSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][movetoleft] { left: -' + twinSidebar.width + 'px; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][customizing]:not([movetoleft]) #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]:not([movetoleft]) #omnisidebar-resizebox-twin { right: ' + (twinSidebar.width +rightOffset) + 'px !important; }\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide])[movetoleft] #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][customizing][movetoleft] #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing][movetoleft] #omnisidebar-resizebox-twin { left: ' + (twinSidebar.width +leftOffset) + 'px !important; }\n';
 	}
 	
 	sscode += '}';
 	
-	styleAid.load('aboveWidthURI', sscode, true);
+	styleAid.load('aboveWidthURI_'+_UUID, sscode, true);
 };
 
 this.toggleAbove = function(twin) {
@@ -267,9 +267,10 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('renderaboveTwin', toggleRenderAbove);
 	
 	moduleAid.unload('autohide');
+	styleAid.unload('aboveWidthURI_'+_UUID);
+	
 	if(UNLOADED) {
 		styleAid.unload('aboveSheet');
-		styleAid.unload('aboveWidthURI');
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'renderAbove');
 		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'renderAboveTwin');
 		overlayAid.removeOverlayURI("chrome://"+objPathString+"/content/headers.xul", 'renderAboveDocker');
