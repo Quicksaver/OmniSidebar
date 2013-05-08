@@ -125,7 +125,7 @@ function onStartup(aReason) {
 	browserMediator.callOnAll(startCustomize, "chrome://global/content/customizeToolbar.xul");
 	browserMediator.register(startCustomize, 'pageshow', "chrome://global/content/customizeToolbar.xul");
 	
-	// Apply the add-on to every customize window opened and to be opened
+	// Apply the add-on to every preferences window opened and to be opened
 	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
 	windowMediator.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
 	browserMediator.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
