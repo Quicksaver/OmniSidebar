@@ -13,39 +13,6 @@ Other sidebars should also be themed although probably not perfectly! */
 	}*/
 	
 	/* Main window style and animation */
-	#main-window[sizemode='maximized'] .sidebar-box[renderabove] .omnisidebar_resize_box {
-		top: 1% !important;
-		height: 98% !important;
-	}
-	#main-window[sizemode='normal'] .sidebar-box[renderabove] .omnisidebar_resize_box {
-		top: 2% !important;
-		height: 96% !important;
-	}
-	#main-window[sizemode='fullscreen'] .sidebar-box[renderabove] .omnisidebar_resize_box {
-		top: 5% !important;
-		height: 90% !important;
-	} 
-	
-	.sidebar-box[renderabove] .omnisidebar_resize_box {
-		box-shadow: 1px 0px 2px rgba(0,0,0,.4), 1px 0px 3px rgba(0,0,0,.4) inset, 1px 1px 6px rgba(0,0,0,.4) !important;
-		border: 1px solid rgba(0,0,0,.4) !important;
-	}
-	
-	#sidebar-box:not([movetoright]) .omnisidebar_resize_box,
-	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
-		border-left: 0 !important;
-		border-radius: 0 5px 5px 0 !important;
-	}
-	#sidebar-box[movetoright] .omnisidebar_resize_box,
-	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
-		border-right: 0 !important;
-		border-radius: 5px 0 0 5px !important;
-	}
-	
-	.omnisidebar_resizer {
-		border: none !important;
-	}
-	
 	.sidebar-box[renderabove] .omnisidebar_resize_box,
 	.sidebar-box:not([renderabove])[customizing] .sidebar-header,
 	.sidebar-box:not([renderabove]) {
