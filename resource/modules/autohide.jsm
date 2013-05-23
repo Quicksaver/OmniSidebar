@@ -1,5 +1,7 @@
-moduleAid.VERSION = '1.1.6';
+moduleAid.VERSION = '1.1.7';
 
+this.mainAutoHideInit = false;
+this.twinAutoHideInit = false;
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
 this.setAutoHide = function(bar) {
@@ -13,16 +15,26 @@ this.setAutoHide = function(bar) {
 		listenerAid.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
 		listenerAid.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
 		listenerAid.remove(bar.switcher, 'dragexit', autoHideSwitchOut);
+		
+		if(bar == mainSidebar) { mainAutoHideInit = false; }
+		else if(bar == twinSidebar) { twinAutoHideInit = false; }
 	} else {
 		bar.resizeBox.hovers = 0;
-		setHover(bar, true);
-		timerAid.init('autohideSetSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+		if(!prefAid.noInitialShow) {
+			setHover(bar, true);
+			timerAid.init('autohideSetSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+		}
 		
 		listenerAid.add(bar.switcher, 'mouseover', autoHideSwitchOver);
 		listenerAid.add(bar.switcher, 'dragenter', autoHideSwitchOver);
 		listenerAid.add(bar.switcher, 'mouseout', autoHideSwitchOut);
 		listenerAid.add(bar.switcher, 'dragexit', autoHideSwitchOut);
 		bar.toggleSwitcher();
+		
+		aSync(function() {
+			if(bar == mainSidebar) { mainAutoHideInit = true; }
+			else if(bar == twinSidebar) { twinAutoHideInit = true; }
+		}, 2000);
 	}
 	setAutoHideWidth();
 	toggleFX();
@@ -36,7 +48,7 @@ this.showOnFocus = function(e) {
 	var bar = e.detail.bar;
 	
 	// hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
-	if(bar.above && bar.autoHide) {
+	if(bar.above && bar.autoHide && (!prefAid.noInitialShow || (bar == mainSidebar && mainAutoHideInit) || (bar == twinSidebar && twinAutoHideInit))) {
 		setHover(bar, true, 1);
 		timerAid.init('autohideSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
 	}
