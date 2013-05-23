@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
 
@@ -160,6 +160,11 @@ this.setAboveWidth = function() {
 	styleAid.load('aboveWidthURI_'+_UUID, sscode, true);
 };
 
+this.toggleSquared = function() {
+	toggleAttribute(mainSidebar.box, 'squareLook', prefAid.aboveSquared);
+	toggleAttribute(twinSidebar.box, 'squareLook', prefAid.aboveSquared);
+};
+
 this.toggleAbove = function(twin) {
 	if(customizing) { return; }
 	
@@ -208,6 +213,7 @@ this.loadRenderAboveTwin = function(window) {
 
 this.setAbove = function(bar) {
 	toggleAttribute(bar.box, 'renderabove', bar.above);
+	toggleAttribute(bar.box, 'squareLook', prefAid.aboveSquared);
 	
 	toggleDockerStatus(bar);
 	
@@ -240,6 +246,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('hideheaderdockTwin', toggleDockers);
 	prefAid.listen('renderabove', toggleRenderAbove);
 	prefAid.listen('renderaboveTwin', toggleRenderAbove);
+	prefAid.listen('aboveSquared', toggleSquared);
 	
 	toggleDockers(true);
 	toggleRenderAbove();
@@ -258,6 +265,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	removeAttribute(mainSidebar.box, 'renderabove');
 	removeAttribute(twinSidebar.box, 'renderabove');
+	removeAttribute(mainSidebar.box, 'squareLook');
+	removeAttribute(twinSidebar.box, 'squareLook');
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setAboveWidth);
 	
@@ -265,6 +274,7 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('hideheaderdockTwin', toggleDockers);
 	prefAid.unlisten('renderabove', toggleRenderAbove);
 	prefAid.unlisten('renderaboveTwin', toggleRenderAbove);
+	prefAid.unlisten('aboveSquared', toggleSquared);
 	
 	moduleAid.unload('autohide');
 	styleAid.unload('aboveWidthURI_'+_UUID);

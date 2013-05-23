@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.11';
+var defaultsVersion = '1.0.12';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -61,6 +61,7 @@ var prefList = {
 	twinKeysetAlt: false,
 	
 	noInitialShow: false,
+	aboveSquared: false,
 	firstEnabled: true
 };
 
