@@ -1,10 +1,6 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 moduleAid.LOADMODULE = function() {
-	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
-		// SimilarWeb 2.0 no longer has the sidebar so our fixes are unnecessary. I may completely remove them in the future.
-		moduleAid.loadIf('compatibilityFix/similarWeb', (addon && addon.isActive && Services.vc.compare(addon.version, "2.0") < 0));
-	});
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
 		moduleAid.loadIf('compatibilityFix/milewideback', (addon && addon.isActive));
 	});
@@ -19,15 +15,10 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/dmt');
 	moduleAid.load('compatibilityFix/addonMgr');
 	moduleAid.load('compatibilityFix/domi');
-	
-	// This was implemented and later apparently changed in FF20 to remove its "sidebar"
-	moduleAid.loadIf('compatibilityFix/devTools', (Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0));
-	
 	moduleAid.load('compatibilityFix/pageInfo');
 };
 
 moduleAid.UNLOADMODULE = function() {
-	moduleAid.unload('compatibilityFix/similarWeb');
 	moduleAid.unload('compatibilityFix/milewideback');
 	moduleAid.unload('compatibilityFix/delicious');
 	moduleAid.unload('compatibilityFix/totalToolbar');
@@ -36,6 +27,5 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/dmt');
 	moduleAid.unload('compatibilityFix/addonMgr');
 	moduleAid.unload('compatibilityFix/domi');
-	moduleAid.unload('compatibilityFix/devTools');
 	moduleAid.unload('compatibilityFix/pageInfo');
 };

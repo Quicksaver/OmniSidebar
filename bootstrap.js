@@ -9,7 +9,6 @@
 //	chrome.manifest file with content, locale and skin declarations properly set
 // handleDeadObject(ex) - 	expects [nsIScriptError object] ex. Shows dead object notices as warnings only in the console.
 //				If the code can handle them accordingly and firefox does its thing, they shouldn't cause any problems.
-//				Of course this method will only return true in Firefox 15+.
 // prepareObject(window, aName) - initializes a window-dependent add-on object with utils loaded into it, returns the newly created object
 //	window - (xul object) the window object to be initialized
 //	(optional) aName - (string) the object name, defaults to objName
@@ -26,9 +25,8 @@
 //	aSubject - (xul object) to execute aCallback on
 //	aCallback - (function(aSubject)) to be called on aSubject
 // disable() - disables the add-on, in general the add-on disabling itself is a bad idea so I shouldn't use it
-// Note: Firefox 8 is the minimum version supported as the bootstrap requires the chrome.manifest file to be loaded, which was implemented in Firefox 8.
 
-let bootstrapVersion = '1.2.9';
+let bootstrapVersion = '1.3.0';
 let UNLOADED = false;
 let STARTED = false;
 let Addon = {};
@@ -43,6 +41,8 @@ const {classes: Cc, interfaces: Ci, utils: Cu, manager: Cm} = Components;
 Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+Cu.import("resource://gre/modules/PlacesUtils.jsm");
+Cu.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
 
 // For some reason, PlacesUIUtils.jsm disappeared in FF21 (probably has to do with the whole PB restructuring that is going on)
 // So I'm adding the tools needed in it manually, makes no practical difference as far as I can tell
@@ -54,14 +54,6 @@ XPCOMUtils.defineLazyGetter(PlacesUIUtils, "localStore", function() { return Pla
 XPCOMUtils.defineLazyServiceGetter(Services, "fuel", "@mozilla.org/fuel/application;1", "fuelIApplication");
 XPCOMUtils.defineLazyServiceGetter(Services, "navigator", "@mozilla.org/network/protocol;1?name=http", "nsIHttpProtocolHandler");
 XPCOMUtils.defineLazyServiceGetter(Services, "stylesheet", "@mozilla.org/content/style-sheet-service;1", "nsIStyleSheetService");
-
-// Per-window private browsing was implemented as of FF20
-if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
-	// This will only be called in FF19- for compatibility purposes
-	XPCOMUtils.defineLazyServiceGetter(Services, "privateBrowsing", "@mozilla.org/privatebrowsing;1", "nsIPrivateBrowsingService");
-} else {
-	Cu.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
-}
 
 function handleDeadObject(ex) {
 	if(ex.message == "can't access dead object") {
@@ -163,12 +155,6 @@ function callOnLoad(aSubject, aCallback, arg1) {
 }
 
 function setResourceHandler() {
-	// chrome.manifest files are loaded automatically in Firefox 10+.
-	// Got it from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0) {
-		Cm.addBootstrappedManifestLocation(AddonData.installPath);
-	}
-	
 	let alias = Services.io.newFileURI(AddonData.installPath);
 	let resourceURI = (AddonData.installPath.isDirectory()) ? alias.spec : 'jar:' + alias.spec + '!/';
 	resourceURI += 'resource/';
@@ -190,12 +176,6 @@ function removeResourceHandler() {
 	
 	let resource = Services.io.getProtocolHandler("resource").QueryInterface(Ci.nsIResProtocolHandler);
 	resource.setSubstitution(objPathString, null);
-	
-	// chrome.manifest files are loaded automatically in Firefox 10+.
-	// Got it from https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIComponentManager#addBootstrappedManifestLocation()
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0) {
-		Cm.removeBootstrappedManifestLocation(AddonData.installPath);
-	}
 }
 
 function disable() {
@@ -206,10 +186,6 @@ function disable() {
 
 function continueStartup(aReason) {
 	STARTED = aReason;
-	
-	// set add-on preferences defaults
-	prefAid.setDefaults(prefList);
-	
 	onStartup(aReason);
 }
 
@@ -225,6 +201,10 @@ function startup(aData, aReason) {
 	
 	// add resource:// protocol handler so I can access my modules
 	setResourceHandler();
+	
+	// set add-on preferences defaults
+	// This should come before startConditions() so we can use it in there
+	prefAid.setDefaults(prefList);
 	
 	// In the case of OmnibarPlus, I need the Omnibar add-on enabled for everything to work
 	if(startConditions(aReason)) {

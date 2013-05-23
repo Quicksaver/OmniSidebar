@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.toggleAlwaysAddons = function(unloaded) {
 	if(!UNLOADED && !unloaded && prefAid.alwaysAddons) {
@@ -41,11 +41,6 @@ moduleAid.LOADMODULE = function() {
 	
 	styleAid.load('addonMgrSidebar', 'addons');
 	
-	// The binding was changed in FF20, clicking links works properly from within the sidebar so there's no need to replace the binding any more
-	if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
-		styleAid.load('addonMgrSidebarLinks', 'addonsLinks');
-	}
-	
 	overlayAid.overlayWindow(window, 'addonMgr', null, loadAddonMgr);
 	
 	prefAid.listen('alwaysAddons', toggleAlwaysAddons);
@@ -62,7 +57,6 @@ moduleAid.UNLOADMODULE = function() {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(twinSidebar); }
 		styleAid.unload('addonMgrSidebar');
-		styleAid.unload('addonMgrSidebarLinks');
 	}
 	
 	overlayAid.removeOverlayWindow(window, 'addonMgr');

@@ -15,13 +15,11 @@
 	
 	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box {
-		-moz-transition: left .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
-		transition: left .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s; /* Firefox 16+ */
+		transition: left .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
 	}
 	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box {
-		-moz-transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
-		transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s; /* Firefox 16+ */
+		transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
 	}
 	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box:hover,
 	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box[hover],
@@ -29,8 +27,7 @@
 	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box:hover,
 	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box[hover],
 	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box[hiding]  {
-		-moz-transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
-		transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s; /* Firefox 16+ */
+		transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
 	}
 	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box:hover,
 	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box[hover],
@@ -38,8 +35,7 @@
 	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box:hover,
 	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box[hover],
 	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box[hiding]   {
-		-moz-transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
-		transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s; /* Firefox 16+ */
+		transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
 	}
 
 }

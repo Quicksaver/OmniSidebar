@@ -86,8 +86,7 @@
 	-moz-appearance: none !important;
 	border: 1px solid rgb(174, 183, 196) !important;
 	border-radius: 5px !important;
-	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
-	background: rgba(255, 255, 255, 0.35) linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important; /* Firefox 16+ */
+	background: rgba(255, 255, 255, 0.35) linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
 }
 
 

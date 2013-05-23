@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.2.7';
+moduleAid.VERSION = '2.2.9';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -20,6 +20,8 @@ moduleAid.LAZY = true;
 //	If the overlay's element contains an position attribute, the element is added at the one-based index specified in this attribute.
 //	Otherwise, the element is added as the last child.
 // If you would like to remove an element that is already in the XUL file, create elements with removeelement attribute.
+// To move an already existant node to another place, add a newparent attribute with the id of the new parent element. If it exists, it will be moved there. This can be used
+//	together with insertafter, insertbefore and position attributes, which will be relative to the new parent and consequently new siblings.
 // For overlaying preferences dialogs, you can add new preferences in an unnamed <preferences> element. They will be added to an already existing <preferences> element if present,
 // or the whole element will be overlayed if not.
 // Elements with a getchildrenof attribute will inherit all the children from the elements specified by the comma-separated list of element ids.
@@ -990,7 +992,7 @@ this.overlayAid = {
 				for(var a=0; a<toolbox.length; a++) {
 					if(toolbox[a].palette && toolbox[a].palette.id == overlayNode.id) {
 						buttons_loop: for(var e=0; e<overlayNode.childNodes.length; e++) {
-							var button = aWindow.document.importNode(overlayNode.childNodes[e], true); // Firefox 9- deep argument is mandatory
+							var button = aWindow.document.importNode(overlayNode.childNodes[e]);
 							if(button.id) {
 								// change or remove the button on the toolbar if it is found in the document
 								var existButton = aWindow.document.getElementById(button.id);
@@ -1072,7 +1074,7 @@ this.overlayAid = {
 				this.loadInto(aWindow, overlay.childNodes[i]);
 			}
 			else if(overlayNode.parentNode.nodeName != 'overlay') {
-				var node = aWindow.document.importNode(overlayNode, true); // Firefox 9- deep argument is mandatory
+				var node = aWindow.document.importNode(overlayNode);
 				
 				// Add the node to the correct place
 				node = this.moveAround(aWindow, node, overlayNode, aWindow.document.getElementById(overlayNode.parentNode.id));
@@ -1200,6 +1202,12 @@ this.overlayAid = {
 			}
 		}
 		
+		var newParent = null;
+		if(overlayNode.getAttribute('newparent')) {
+			newParent = aWindow.document.getElementById(overlayNode.getAttribute('newparent'));
+			if(newParent) { parent = newParent; }
+		}
+		
 		if(overlayNode.getAttribute('insertafter')) {
 			var idList = overlayNode.getAttribute('insertafter').split(',');
 			for(var i = 0; i < idList.length; i++) {
@@ -1236,7 +1244,7 @@ this.overlayAid = {
 			return this.insertBefore(aWindow, node, parent, sibling);
 		}
 		
-		if(!node.parentNode) {
+		if(!node.parentNode || newParent) {
 			return this.appendChild(aWindow, node, parent);
 		}
 		return node;
@@ -1357,7 +1365,7 @@ this.overlayAid = {
 	
 	appendXMLSS: function(aWindow, node) {
 		try {
-			node = aWindow.document.importNode(node, true); // Firefox 9- deep argument is mandatory
+			node = aWindow.document.importNode(node);
 			// these have to come before the actual window element
 			node = aWindow.document.insertBefore(node, aWindow.document.documentElement);
 		} catch(ex) { node = null; }
@@ -1375,7 +1383,7 @@ this.overlayAid = {
 		var prefElements = prefPane.getElementsByTagName('preferences');
 		if(prefElements.length == 0) {
 			try {
-				var prefs = aWindow.document.importNode(node, true); // Firefox 9- deep argument is mandatory
+				var prefs = aWindow.document.importNode(node);
 				prefs = prefPane.appendChild(prefs);
 			} catch(ex) { prefs = null; }
 			this.traceBack(aWindow, {
@@ -1390,7 +1398,7 @@ this.overlayAid = {
 			if(!node.childNodes[p].id) { continue; }
 			
 			try {
-				var pref = aWindow.document.importNode(node.childNodes[p], true); // Firefox 9- deep argument is mandatory
+				var pref = aWindow.document.importNode(node.childNodes[p]);
 				pref = prefs.appendChild(pref);
 			} catch(ex) { pref = null; }
 			this.traceBack(aWindow, {

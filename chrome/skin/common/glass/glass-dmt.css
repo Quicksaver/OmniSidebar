@@ -8,8 +8,7 @@
 	
 	.inSidebar #dmtTopToolBox {
 		border-top: none !important;
-		background: -moz-linear-gradient(90deg, rgba(100,100,100,.1), transparent) !important;
-		background: linear-gradient(180deg, rgba(100,100,100,.1), transparent) !important; /* Firefox 16+ */
+		background: linear-gradient(180deg, rgba(100,100,100,.1), transparent) !important;
 	}
 	
 	.inSidebar #dmtTopToolBar,

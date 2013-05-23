@@ -34,11 +34,9 @@
 	}
 	
 	.omnisidebar_switch[enabled]:hover {
-		-moz-transition: background .1s, box-shadow .18s;
-		transition: background .1s, box-shadow .18s; /* Firefox 16 */
+		transition: background .1s, box-shadow .18s;
 	}
 	.omnisidebar_switch[enabled]:not(:hover) {
-		-moz-transition: background .2s, box-shadow .36s;
-		transition: background .2s, box-shadow .36s; /* Firefox 16 */
+		transition: background .2s, box-shadow .36s;
 	}
 }
