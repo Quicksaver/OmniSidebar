@@ -58,8 +58,10 @@
 	
 	/* Renderabove resizer */
 	.omnisidebar_resizer {
+		-moz-appearance: none !important;
+		background: none !important;
 		height: auto;
-		width: 3px;
+		width: 4px !important;
 	}
 	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resizer {
@@ -138,18 +140,17 @@
 	
 	.omnisidebar_resizer {
 		border: none !important;
-		position: absolute;
 		height: 100%;
 	}
 	
 	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resizer {
-		right: 0px !important;
+		margin-left: -4px !important;
 	}
 	
 	#sidebar-box[movetoright] .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
-		left: 0px !important;
+		margin-right: -4px !important;
 	}
 
 }

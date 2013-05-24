@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
 
@@ -16,36 +16,25 @@ this.dragStart = function(e) {
 	listenerAid.add(window, "mousemove", drag, false);
 	listenerAid.add(window, "mouseup", dragEnd, false);
 	
-	dragalt = true;
-	dragorix = e.screenX;
 	if(e.target.id == objName+'-resizer' || e.target.id == 'sidebar-splitter') {
 		dragTarget = {
 			target: mainSidebar,
-			dragoriw: mainSidebar.width
+			oriW: mainSidebar.width
 		};
 		dragNotTarget = {
 			target: twinSidebar,
-			dragoriw: twinSidebar.width
+			oriW: twinSidebar.width
 		};
-		if(!prefAid.moveSidebars) {
-			dragalt = false;
-		}
 	} else {
 		dragTarget = {
 			target: twinSidebar,
-			dragoriw: twinSidebar.width
+			oriW: twinSidebar.width
 		};
 		dragNotTarget = {
 			target: mainSidebar,
-			dragoriw: mainSidebar.width
+			oriW: mainSidebar.width
 		};
-		if(prefAid.moveSidebars) {
-			dragalt = false;
-		}
 	}
-	
-	dragNewW = dragTarget.dragoriw;
-	dragOtherW = dragNotTarget.dragoriw;
 	
 	dispatch(dragTarget.target.box, { type: 'startSidebarResize', cancelable: false, detail: { bar: dragTarget.target } });
 };
@@ -54,11 +43,14 @@ this.dragEnd = function(e) {
 	listenerAid.remove(window, "mousemove", drag, false);
 	listenerAid.remove(window, "mouseup", dragEnd, false);
 	
-	dragTarget.target.box.setAttribute('width', dragNewW);
 	dragTarget.target.box.style.width = '';
-	if(dragOtherW) {
-		dragNotTarget.target.box.setAttribute('width', dragOtherW);
+	if(dragNotTarget.target.box) {
 		dragNotTarget.target.box.style.width = '';
+		if(dragTarget.target.width > browser.clientWidth -dragNotTarget.oriW -prefAid.minSpaceBetweenSidebars) {
+			dragNotTarget.target.box.setAttribute('width', browser.clientWidth -prefAid.minSpaceBetweenSidebars -dragTarget.target.width);
+		} else {
+			dragNotTarget.target.box.setAttribute('width', dragNotTarget.oriW);
+		}
 	}
 	
 	// Don't need to wait for the timers to fire themselves, since we've finished resizing at this point
@@ -69,34 +61,25 @@ this.dragEnd = function(e) {
 };
 
 this.drag = function(e) {
-	// Are we dragging from the right or the left
-	if(dragalt) {
-		dragNewW = dragTarget.dragoriw + (dragorix - e.screenX);
-	} else {
-		dragNewW = dragTarget.dragoriw + (e.screenX - dragorix);
-	}
-	if(dragNewW < prefAid.minSidebarWidth) { dragNewW = prefAid.minSidebarWidth; } // we so don't want this...
-	else if(dragNewW > browser.clientWidth -prefAid.minSidebarWidth -prefAid.minSpaceBetweenSidebars) { dragNewW = browser.clientWidth -prefAid.minSidebarWidth -prefAid.minSpaceBetweenSidebars; } // or this
+	var maxWidth = browser.clientWidth -prefAid.minSidebarWidth -prefAid.minSpaceBetweenSidebars;
+	if(dragTarget.target.width < prefAid.minSidebarWidth) { dragTarget.target.box.setAttribute('width', prefAid.minSidebarWidth); } // we so don't want this...
+	else if(dragTarget.target.width > maxWidth) { dragTarget.target.box.setAttribute('width', maxWidth); } // or this
 	
 	// If new width makes it overlap the other sidebar...
-	if(dragOtherW) {
-		if(dragNewW > browser.clientWidth -dragNotTarget.dragoriw -prefAid.minSpaceBetweenSidebars) {
-			dragOtherW = browser.clientWidth -prefAid.minSpaceBetweenSidebars -dragNewW;
+	if(dragNotTarget.target.box) {
+		if(dragTarget.target.width > browser.clientWidth -dragNotTarget.oriW -prefAid.minSpaceBetweenSidebars) {
+			dragNotTarget.target.box.setAttribute('width', browser.clientWidth -prefAid.minSpaceBetweenSidebars -dragTarget.target.width);
 		} else {
-			dragOtherW = dragNotTarget.dragoriw;
+			dragNotTarget.target.box.setAttribute('width', dragNotTarget.oriW);
 		}
 	}
 	
-	// Temporarily apply new widths
-	dragTarget.target.box.setAttribute('width', dragNewW);
+	// Temporarily apply new widths in renderabove
 	if(dragTarget.target.above) {
-		dragTarget.target.box.style.width = dragNewW +'px';
+		dragTarget.target.box.style.width = dragTarget.target.width +'px';
 	}
-	if(dragOtherW) {
-		dragNotTarget.target.box.setAttribute('width', dragOtherW);
-		if(dragNotTarget.target.above) {
-			dragNotTarget.target.box.style.width = dragOtherW +'px';
-		}
+	if(dragNotTarget.target.box && dragNotTarget.target.above) {
+		dragNotTarget.target.box.style.width = dragNotTarget.target.width +'px';
 	}
 };
 

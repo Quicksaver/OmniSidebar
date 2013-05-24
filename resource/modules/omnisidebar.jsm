@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.14';
+moduleAid.VERSION = '1.0.15';
 
 this.customizing = false;
 
@@ -33,8 +33,8 @@ this.mainSidebar = {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				this.box.setAttribute('width', '300');
-				width = 300;
+				width = Math.max(this.box.clientWidth, prefAid.minSidebarWidth) || 300;
+				this.box.setAttribute('width', width);
 			}
 			return parseInt(width);
 		}
@@ -85,8 +85,8 @@ this.twinSidebar = {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				this.box.setAttribute('width', '300');
-				width = 300;
+				width = Math.max(this.box.clientWidth, prefAid.minSidebarWidth) || 300;
+				this.box.setAttribute('width', width);
 			}
 			return parseInt(width);
 		}
@@ -280,16 +280,18 @@ this.customize = function(e) {
 	}
 };
 
-this.watchWidth = function(box) {
+this.watchWidth = function(box, attr, oldW, newW) {
+	// Reject the change if it's invalid
+	if(!newW || newW == '0' || newW == 'NaN') { return false; }
+	
 	var width = box.getAttribute('width');
-	if(!width || width == '0' || width == 'NaN') { 
-		width = box.clientWidth || box == mainSidebar.box ? Globals.mainWidth : box == twinSidebar.box ? Globals.twinWidth : false || 300;
+	if(!width || width == '0' || width == 'NaN') {
+		width = Math.max(box.clientWidth, prefAid.minSidebarWidth) || 300;
 		box.setAttribute('width', width);
 	}
-	if(box == mainSidebar.box) { Globals.mainWidth = parseInt(width); }
-	else if(box == twinSidebar.box) { Globals.twinWidth = parseInt(width); }
 	
 	widthChanged(box == mainSidebar.box, box == twinSidebar.box);
+	return true;
 };
 
 this.widthChanged = function(main, twin) {
@@ -623,8 +625,7 @@ moduleAid.LOADMODULE = function() {
 	mainSidebar.sidebar.style.minWidth = prefAid.minSidebarWidth+'px';
 	mainSidebar.sidebar.style.width = '';
 	
-	Globals.mainWidth = mainSidebar.width;
-	objectWatcher.addAttributeWatcher(mainSidebar.box, 'width', watchWidth);
+	objectWatcher.addAttributeWatcher(mainSidebar.box, 'width', watchWidth, true);
 	
 	listenerAid.add(window, 'sidebarWidthChanged', setSwitcherOffset);
 	setSwitcherOffset();
@@ -686,7 +687,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setSwitcherOffset);
 	
-	objectWatcher.removeAttributeWatcher(mainSidebar.box, 'width', watchWidth);
+	objectWatcher.removeAttributeWatcher(mainSidebar.box, 'width', watchWidth, true);
 	
 	moduleAid.unload('twin');
 	moduleAid.unload('forceOpen');

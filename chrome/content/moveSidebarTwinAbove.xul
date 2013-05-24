@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="moveSidebarTwinAbove-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
-	<box id="objName-resizer-twin" insertafter="objName-resizesidebar-twin" />
+	<resizer id="objName-resizer-twin" insertafter="objName-resizesidebar-twin" dir="right" />
 	
 </overlay>
