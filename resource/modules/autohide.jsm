@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.7';
+moduleAid.VERSION = '1.1.8';
 
 this.mainAutoHideInit = false;
 this.twinAutoHideInit = false;
@@ -14,7 +14,6 @@ this.setAutoHide = function(bar) {
 		listenerAid.remove(bar.switcher, 'mouseover', autoHideSwitchOver);
 		listenerAid.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
 		listenerAid.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
-		listenerAid.remove(bar.switcher, 'dragexit', autoHideSwitchOut);
 		
 		if(bar == mainSidebar) { mainAutoHideInit = false; }
 		else if(bar == twinSidebar) { twinAutoHideInit = false; }
@@ -28,7 +27,6 @@ this.setAutoHide = function(bar) {
 		listenerAid.add(bar.switcher, 'mouseover', autoHideSwitchOver);
 		listenerAid.add(bar.switcher, 'dragenter', autoHideSwitchOver);
 		listenerAid.add(bar.switcher, 'mouseout', autoHideSwitchOut);
-		listenerAid.add(bar.switcher, 'dragexit', autoHideSwitchOut);
 		bar.toggleSwitcher();
 		
 		aSync(function() {
@@ -156,18 +154,20 @@ this.setAutoHideWidth = function() {
 this.onDragEnter = function(bar) {
 	setHover(bar, true, 1);
 	listenerAid.add(window.gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.add(window, "dragdrop", onDragExitAll, false);
+	listenerAid.add(window, "drop", onDragExitAll, false);
 	listenerAid.add(window, "dragend", onDragExitAll, false);
 };
 
 this.onDragExit = function(bar) {
 	setHover(bar, false);
-	hidingSidebar(bar);
+	if(!bar.resizeBox.hovers) {
+		hidingSidebar(bar);
+	}
 };
 
 this.onDragExitAll = function() {
 	listenerAid.remove(window.gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.remove(window, "dragdrop", onDragExitAll, false);
+	listenerAid.remove(window, "drop", onDragExitAll, false);
 	listenerAid.remove(window, "dragend", onDragExitAll, false);
 	setBothHovers(false);
 	if(mainSidebar.resizeBox) { hidingSidebar(mainSidebar); }
@@ -294,11 +294,9 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(mainSidebar.switcher, 'mouseover', autoHideSwitchOver);
 	listenerAid.remove(mainSidebar.switcher, 'dragenter', autoHideSwitchOver);
 	listenerAid.remove(mainSidebar.switcher, 'mouseout', autoHideSwitchOut);
-	listenerAid.remove(mainSidebar.switcher, 'dragexit', autoHideSwitchOut);
 	listenerAid.remove(twinSidebar.switcher, 'mouseover', autoHideSwitchOver);
 	listenerAid.remove(twinSidebar.switcher, 'dragenter', autoHideSwitchOver);
 	listenerAid.remove(twinSidebar.switcher, 'mouseout', autoHideSwitchOut);
-	listenerAid.remove(twinSidebar.switcher, 'dragexit', autoHideSwitchOut);
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setAutoHideWidth);
 	

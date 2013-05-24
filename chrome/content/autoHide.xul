@@ -3,7 +3,6 @@
 	
 	<hbox id="objName-resizebox" 
 		onmouseout="objName.hidingSidebar(objName.mainSidebar);"
-		ondragenter="objName.onDragEnter(objName.mainSidebar);"
-		ondragexit="objName.onDragExit(objName.mainSidebar);" />
+		ondragenter="objName.onDragEnter(objName.mainSidebar);" />
 	
 </overlay>
