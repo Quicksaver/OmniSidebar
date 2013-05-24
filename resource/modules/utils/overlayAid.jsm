@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.2.7';
+moduleAid.VERSION = '2.2.8';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -20,6 +20,8 @@ moduleAid.LAZY = true;
 //	If the overlay's element contains an position attribute, the element is added at the one-based index specified in this attribute.
 //	Otherwise, the element is added as the last child.
 // If you would like to remove an element that is already in the XUL file, create elements with removeelement attribute.
+// To move an already existant node to another place, add a newparent attribute with the id of the new parent element. If it exists, it will be moved there. This can be used
+//	together with insertafter, insertbefore and position attributes, which will be relative to the new parent and consequently new siblings.
 // For overlaying preferences dialogs, you can add new preferences in an unnamed <preferences> element. They will be added to an already existing <preferences> element if present,
 // or the whole element will be overlayed if not.
 // Elements with a getchildrenof attribute will inherit all the children from the elements specified by the comma-separated list of element ids.
@@ -1200,6 +1202,12 @@ this.overlayAid = {
 			}
 		}
 		
+		var newParent = null;
+		if(overlayNode.getAttribute('newparent')) {
+			newParent = aWindow.document.getElementById(overlayNode.getAttribute('newparent'));
+			if(newParent) { parent = newParent; }
+		}
+		
 		if(overlayNode.getAttribute('insertafter')) {
 			var idList = overlayNode.getAttribute('insertafter').split(',');
 			for(var i = 0; i < idList.length; i++) {
@@ -1236,7 +1244,7 @@ this.overlayAid = {
 			return this.insertBefore(aWindow, node, parent, sibling);
 		}
 		
-		if(!node.parentNode) {
+		if(!node.parentNode || newParent) {
 			return this.appendChild(aWindow, node, parent);
 		}
 		return node;
