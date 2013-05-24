@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.5';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
@@ -70,7 +70,8 @@ this.populateSidebarMenu = function(menu) {
 	}
 	
 	for(var i=0; i<viewSidebarMenu.childNodes.length; i++) {
-		var newItem = viewSidebarMenu.childNodes[i].cloneNode();
+		// cloneNode(deep) deep argument is optional and defaults to true in Firefox 13+. For compatibility with Firefox 12-, deep must always be provided.
+		var newItem = viewSidebarMenu.childNodes[i].cloneNode(true);
 		if(menu.id) {
 			newItem.id = newItem.id+'_'+menu.id;
 		}

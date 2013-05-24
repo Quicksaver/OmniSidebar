@@ -1,0 +1,11 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	#navigator-toolbox:not([mode="full"])[iconsize="large"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon { height: 18px !important; }
+	
+	#navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon {
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	
+}

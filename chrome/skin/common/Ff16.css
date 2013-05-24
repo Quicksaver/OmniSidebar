@@ -1,0 +1,11 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	.sidebar-splitter {
+		border: none !important;
+		-moz-margin-start: -3px !important;
+		border-left: none !important;
+		border-right: 1px solid rgb(169, 183, 201) !important;
+	}
+	
+}
