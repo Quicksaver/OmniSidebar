@@ -152,5 +152,10 @@
 	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
 		margin-right: -4px !important;
 	}
+	
+	/* For the status bar link display */
+	#appcontent > #statusbar-display {
+		z-index: 300;
+	}
 
 }
