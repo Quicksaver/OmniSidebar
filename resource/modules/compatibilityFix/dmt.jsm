@@ -1,6 +1,56 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
+
+this.__defineGetter__('DMPanelLink', function() { return $('downloadsHistory'); });
 
 this.DMTbackups = {};
+
+this.setDMButton = function(unset) {
+	var dmButton = $('downloads-button');
+	if(!dmButton) { return; }
+		
+	if(!unset) {
+		if(!DMTbackups.button) {
+			DMTbackups.button = {
+				command: dmButton.getAttribute('oncommand'),
+				label: dmButton.getAttribute('label'),
+				tooltip: dmButton.getAttribute('tooltip')
+			};
+		}
+		setAttribute(dmButton, 'observes', 'viewDmSidebar');
+	}
+	else {
+		removeAttribute(dmButton, 'observes');
+		removeAttribute(dmButton, 'checked');
+		removeAttribute(dmButton, 'twinSidebar');
+		removeAttribute(dmButton, 'autoCheck');
+		removeAttribute(dmButton, 'type');
+		removeAttribute(dmButton, 'group');
+		removeAttribute(dmButton, 'sidebartitle');
+		removeAttribute(dmButton, 'sidebarurl');
+		if(DMTbackups.button) {
+			setAttribute(dmButton, 'oncommand', DMTbackups.button.command);
+			setAttribute(dmButton, 'label', DMTbackups.button.label);
+			setAttribute(dmButton, 'tooltip', DMTbackups.button.tooltip);
+			delete DMTbackups.button;
+		}
+	}
+};
+
+this.customizeDMButton = function(e) {
+	setDMButton(e.type == 'beforecustomization');
+};
+
+this.setDMPanel = function(e) {
+	if((!e && !DMPanelLink) || e.target.id != 'downloadsPanel') { return; }
+	
+	// No need to keep listening to this
+	listenerAid.remove(window, 'popupshown', setDMPanel);
+	
+	if(!DMTbackups.panelCommand) {
+		DMTbackups.panelCommand = DMPanelLink.getAttribute('oncommand');
+	}
+	setAttribute(DMPanelLink, 'oncommand', 'toggleSidebar("viewDmSidebar");');
+};
 
 this.toggleAlwaysDMT = function(unloaded) {
 	if(!UNLOADED && !unloaded && prefAid.alwaysDMT) {
@@ -9,29 +59,29 @@ this.toggleAlwaysDMT = function(unloaded) {
 		}
 		setAttribute($('Tools:Downloads'), 'oncommand', 'toggleSidebar("viewDmSidebar");');
 		
-		if(!DMTbackups.button) {
-			DMTbackups.button = {
-				command: $('downloads-button').getAttribute('oncommand'),
-				label: $('downloads-button').getAttribute('label'),
-				tooltip: $('downloads-button').getAttribute('tooltip')
-			};
+		// "Show all downloads" link in the new download panel
+		if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") >= 0) {
+			// The panel doesn't exist until it is actually called, so we have to wait for that
+			listenerAid.add(window, 'popupshown', setDMPanel);
+			setDMPanel();
 		}
-		setAttribute($('downloads-button'), 'observes', 'viewDmSidebar');
+		
+		listenerAid.add(window, 'beforecustomization', customizeDMButton, false);
+		listenerAid.add(window, 'aftercustomization', customizeDMButton, false);
+		setDMButton();
 	} else {
-		removeAttribute($('downloads-button'), 'observes');
-		removeAttribute($('downloads-button'), 'checked');
-		removeAttribute($('downloads-button'), 'twinSidebar');
-		removeAttribute($('downloads-button'), 'autoCheck');
-		removeAttribute($('downloads-button'), 'type');
-		removeAttribute($('downloads-button'), 'group');
-		removeAttribute($('downloads-button'), 'sidebartitle');
-		removeAttribute($('downloads-button'), 'sidebarurl');
-		if(DMTbackups.button) {
-			setAttribute($('downloads-button'), 'oncommand', DMTbackups.button.command);
-			setAttribute($('downloads-button'), 'label', DMTbackups.button.label);
-			setAttribute($('downloads-button'), 'tooltip', DMTbackups.button.tooltip);
-			delete DMTbackups.button;
+		listenerAid.remove(window, 'beforecustomization', customizeDMButton, false);
+		listenerAid.remove(window, 'aftercustomization', customizeDMButton, false);
+		setDMButton(true);
+		
+		if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") >= 0) {
+			listenerAid.remove(window, 'popupshown', setDMPanel);
+			if(DMPanelLink && DMTbackups.panelCommand) {
+				setAttribute(DMPanelLink, 'oncommand', DMTbackups.panelCommand);
+				delete DMTbackups.panelCommand;
+			}
 		}
+		
 		if(DMTbackups.command) {
 			setAttribute($('Tools:Downloads'), 'oncommand', DMTbackups.command);
 			delete DMTbackups.command;
@@ -56,9 +106,8 @@ this.loadDMT = function() {
 };
 
 this.unloadDMT = function() {
-	toggleAlwaysDMT(true);
-	
 	prefAid.unlisten('alwaysDMT', toggleAlwaysDMT);
+	toggleAlwaysDMT(true);
 };
 
 this.doDMTCommand = function() {
