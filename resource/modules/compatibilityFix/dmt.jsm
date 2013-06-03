@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.DMTbackups = {};
 
@@ -77,13 +77,8 @@ this.loadDmgrFix = function(e) {
 		e.target.arguments.push(Ci.nsIDownloadManagerUI.REASON_USER_INTERACTED);
 		
 		// for example when using Ctrl+J to toggle the downloads sidebar, we wouldn't be able to close it the same way without clicking the actual browser window.
-		if(prefAid.alwaysDMT) {
-			if(window.content) {
-				window.content.focus();
-			} else {
-				window.gBrowser.selectedBrowser.focus();
-			}
-		}
+		var jKey = e.target.document.getElementById('key_close2');
+		setAttribute(jKey, 'disabled', 'true');
 	}
 };
 
@@ -110,8 +105,28 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrFix);
 	
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') { closeSidebar(twinSidebar); }
+		if(mainSidebar.box) {
+			if(mainSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') {
+				closeSidebar(mainSidebar);
+			}
+			else if(mainSidebar.sidebar
+			&& mainSidebar.sidebar.contentDocument
+			&& mainSidebar.sidebar.contentDocument.baseURI == 'chrome://mozapps/content/downloads/downloads.xul') {
+				var jKey = mainSidebar.sidebar.contentDocument.getElementById('key_close2');
+				removeAttribute(jKey, 'disabled');
+			}
+		}
+		if(twinSidebar.box) {
+			if(twinSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') {
+				closeSidebar(twinSidebar);
+			}
+			else if(twinSidebar.sidebar
+			&& twinSidebar.sidebar.contentDocument
+			&& twinSidebar.sidebar.contentDocument.baseURI == 'chrome://mozapps/content/downloads/downloads.xul') {
+				var jKey = twinSidebar.sidebar.contentDocument.getElementById('key_close2');
+				removeAttribute(jKey, 'disabled');
+			}
+		}
 	}
 	
 	overlayAid.removeOverlayWindow(window, 'dmtSidebar');
