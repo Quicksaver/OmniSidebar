@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.16';
+moduleAid.VERSION = '1.0.17';
 
 this.customizing = false;
 
@@ -334,6 +334,19 @@ this.clickSwitcher = function(e, bar) {
 	}
 };
 
+// This makes it so we can scroll the webpage and the sidebar while the mouse is over the switch, while still able to click on it
+this.scrollSwitcher = function(e) {
+	if(!e.target.classList.contains('omnisidebar_switch') || e.defaultPrevented) { return; }
+	
+	setAttribute(e.target, 'scrolling', 'true');
+	timerAid.init('scrollSwitcher', restoreSwitcherMouseEvents, 150);
+};
+
+this.restoreSwitcherMouseEvents = function() {
+	removeAttribute(mainSidebar.switcher, 'scrolling');
+	removeAttribute(twinSidebar.switcher, 'scrolling');
+};
+
 this.setSwitcherOffset = function() {
 	// Unload current stylesheet if it's been loaded
 	styleAid.unload('switcherOffset_'+_UUID);
@@ -378,6 +391,8 @@ this.enableSwitcher = function(bar) {
 	toggleAttribute(bar.switcher, 'enabled', bar.useSwitch);
 	setSwitcherHeight();
 	bar.toggleSwitcher();
+	
+	listenerAid.add(bar.switcher, 'wheel', scrollSwitcher, true);
 };
 
 this.enableMainSwitcher = function() {
@@ -595,6 +610,8 @@ this.loadMainSidebar = function() {
 
 this.unloadMainSidebar = function() {
 	mainSidebar.loaded = false;
+	
+	listenerAid.remove(bar.switcher, 'wheel', scrollSwitcher, true);
 	
 	for(var x in dontSaveBroadcasters) {
 		if(mainSidebar.box.getAttribute('sidebarcommand') == dontSaveBroadcasters[x]) {

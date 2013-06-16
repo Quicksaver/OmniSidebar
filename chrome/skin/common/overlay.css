@@ -27,7 +27,12 @@
 		z-index: 20;
 	}
 	
-	.omnisidebar_switch[enabled]:hover {
+	.omnisidebar_switch[enabled][scrolling] {
+		pointer-events: none;
+	}
+	
+	.omnisidebar_switch[enabled]:hover,
+	.omnisidebar_switch[enabled][scrolling] {
 		box-shadow: 0 0 6px rgba(5, 114, 193, 1);
 		background: rgba(40, 143, 252, 0.7);
 		cursor: pointer;
