@@ -15,7 +15,7 @@
 	
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:hover,
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton][active] {
-		padding-left: 17px !important;
+		-moz-padding-start: 17px !important;
 	}
 	
 	#navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon { padding: 0 !important; }

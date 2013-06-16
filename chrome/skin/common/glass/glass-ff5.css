@@ -47,8 +47,8 @@
 }
 
 .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-	padding-left: 3px !important;
-	padding-right: 3px !important;
+	-moz-padding-start: 3px !important;
+	-moz-padding-end: 3px !important;
 	-moz-border-start-style: none !important;
 }
 
@@ -486,11 +486,17 @@
 	background: none !important;
 	box-shadow: none !important;
 }
-.inSidebar .toolbox-top #nav-bar > toolbarbutton#reload-button toolbarbutton {
+.inSidebar .toolbox-top #nav-bar:-moz-locale-dir(ltr) > toolbarbutton#reload-button toolbarbutton,
+.inSidebar .toolbox-top #nav-bar:-moz-locale-dir(rtl) > toolbarbutton#reload-button dropmarker {
 	border-radius: 3.5px 0 0 3.5px !important;
-	margin-right: 0 !important;
+}
+.inSidebar .toolbox-top #nav-bar:-moz-locale-dir(rtl) > toolbarbutton#reload-button toolbarbutton,
+.inSidebar .toolbox-top #nav-bar:-moz-locale-dir(ltr) > toolbarbutton#reload-button dropmarker {
+	border-radius: 0 3.5px 3.5px 0 !important;
+}
+.inSidebar .toolbox-top #nav-bar > toolbarbutton#reload-button toolbarbutton {
+	-moz-margin-end: 0 !important;
 }
 .inSidebar .toolbox-top #nav-bar > toolbarbutton#reload-button dropmarker {
-	border-radius: 0 3.5px 3.5px 0 !important;
-	margin-left: -1px !important;
+	-moz-margin-start: -1px !important;
 }

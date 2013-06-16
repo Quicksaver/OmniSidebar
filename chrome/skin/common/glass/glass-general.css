@@ -282,8 +282,8 @@
 
 .inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"],
 .inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] {
-	margin-left: 0px !important;
-	margin-right: 1px !important; 
+	-moz-margin-start: 0px !important;
+	-moz-margin-end: 1px !important; 
 }
 
 .inSidebar scrollbarbutton,

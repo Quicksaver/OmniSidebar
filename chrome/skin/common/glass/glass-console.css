@@ -23,7 +23,10 @@
 	
 	#JSConsoleWindow.inSidebar #console-toolbox toolbarbutton {
 		margin: 1px !important;
-		padding: 1px 0px 1px 4px !important;
+		padding-top: 1px !important;
+		padding-bottom: 1px !important;
+		-moz-padding-start: 4px !important;
+		-moz-padding-end: 0 !important;
 	}
 
 }

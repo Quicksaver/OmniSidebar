@@ -21,8 +21,8 @@
 	}
 	
 	.omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		padding-left: 3px !important;
-		padding-right: 3px !important;
+		-moz-padding-start: 3px !important;
+		-moz-padding-end: 3px !important;
 		-moz-border-start-style: none !important;
 	}
 	

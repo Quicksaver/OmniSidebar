@@ -43,8 +43,8 @@
 	.inSidebar #newReview .addReviewLink:hover,
 	.inSidebar #boxRealResults .facebookSingleResult:hover {
 		background: rgba(255,255,255,.3) !important;
-		border-left: none !important;
-		border-right: none !important;
+		-moz-border-start: none !important;
+		-moz-border-end: none !important;
 	}
 	
 	.inSidebar #boxSiteHistory .siteHistorySingleSite,
@@ -84,7 +84,7 @@
 	}
 	
 	#sbSimilarWebSidebar.inSidebar #boxTabsTitle {
-		margin-left: 7px !important;
+		-moz-margin-start: 7px !important;
 	}
 	
 	#sbSimilarWebSidebar.inSidebar #boxTabsTitle * {
@@ -188,10 +188,17 @@
 	.inSidebar #btnAddSite:after {
 		content: url("chrome://similarweb/skin/add_site.png") " Add Similar Site" !important;
 		padding-top: 5px !important;
-		left: 25px !important;
 		position: relative !important;
 		background: rgba(151, 152, 153, 0.05) -moz-linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
 		background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important; /* Firefox 16+ */
+	}
+	
+	.inSidebar #btnAddSite:-moz-locale-dir(ltr):after {
+		left: 25px !important;
+	}
+	
+	.inSidebar #btnAddSite:-moz-locale-dir(rtl):after {
+		right: 25px !important;
 	}
 	
 	#sbSimilarWebSidebar.inSidebar #btnAddSite:after {
@@ -226,7 +233,7 @@
 		width: auto !important;
 		min-width: 7px !important;
 		max-width: none !important;
-		margin-right: 4px !important;
+		-moz-margin-end: 4px !important;
 	}
 
 }

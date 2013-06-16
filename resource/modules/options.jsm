@@ -1,7 +1,9 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.__defineGetter__('mainMenuPopup', function() { return $('mainKeyset-menupopup'); });
 this.__defineGetter__('twinMenuPopup', function() { return $('twinKeyset-menupopup'); });
+
+this.optionsRTL = false;
 
 this.isStillAvailable = function(key, list) {
 	if(key.keycode != 'none' && !list[key.keycode]) { return false; }
@@ -103,6 +105,11 @@ this.fillKeycodes = function(whichTrigger) {
 };
 
 moduleAid.LOADMODULE = function() {
+	optionsRTL = (window.getComputedStyle($('omnisidebar-options-window')).getPropertyValue('direction') == 'rtl');
+	if(optionsRTL) {
+		overlayAid.overlayWindow(window, 'optionsRTL');
+	}
+	
 	if(Services.appinfo.OS == 'WINNT' || Services.appinfo.OS == 'Darwin') {
 		$('omnisidebar_coloroption').removeAttribute('hidden');
 		$('omnisidebar_coloroptionTwin').removeAttribute('hidden');

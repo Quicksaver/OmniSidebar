@@ -14,7 +14,7 @@
 		display: none !important;
 	}
 	#Console2Window.inSidebar #ToolbarMode toolbarbutton image {
-		margin-right: 3px !important;
+		-moz-margin-end: 3px !important;
 	}
 	
 	#ConsoleBox.inSidebar { 

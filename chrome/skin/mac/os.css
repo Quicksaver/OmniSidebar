@@ -17,7 +17,7 @@
 	.sidebar-title[TitleButton]:hover,
 	.sidebar-title[TitleButton][active] {
 		padding-top: 2px !important;
-		padding-left: 17px !important;
+		-moz-padding-start: 17px !important;
 	}
 	
 	.omnisidebar-toolbar .toolbarbutton-1 > image.toolbarbutton-icon {

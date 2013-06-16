@@ -71,8 +71,8 @@
 							onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
 							onsynctopreference="return this.value == 'right';">
 							<hbox>
-								<radio label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
-								<radio label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
+								<radio id="radio_movetoleft" label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
+								<radio id="radio_movetoright" label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
 							</hbox>
 						</radiogroup>
 						<vbox align="start">

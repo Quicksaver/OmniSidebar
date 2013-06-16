@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
+<overlay id="optionsRTL-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<radio id="radio_movetoleft" label="&omnisidebarOptsidebars.rightlabel;"/>
+	<radio id="radio_movetoright" label="&omnisidebarOptsidebars.leftlabel;"/>
+	
+</overlay>

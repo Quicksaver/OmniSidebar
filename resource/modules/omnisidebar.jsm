@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.15';
+moduleAid.VERSION = '1.0.16';
 
 this.customizing = false;
 
@@ -21,6 +21,7 @@ this.mainSidebar = {
 	get header () { return $('sidebar-header'); },
 	get box () { return $('sidebar-box'); },
 	get resizeBox () { return $(objName+'-resizebox'); },
+	get resizer () { return $(objName+'-resizer'); },
 	get sidebar () { return $('sidebar'); },
 	get title () { return $('sidebar-title'); },
 	get docker () { return $(objName+'-dock_button'); },
@@ -73,6 +74,7 @@ this.twinSidebar = {
 	get header () { return $(objName+'-sidebar-header-twin'); },
 	get box () { return $(objName+'-sidebar-box-twin'); },
 	get resizeBox () { return $(objName+'-resizebox-twin'); },
+	get resizer () { return $(objName+'-resizer-twin'); },
 	get sidebar () { return $(objName+'-sidebar-twin'); },
 	get title () { return $(objName+'-sidebar-title-twin'); },
 	get docker () { return $(objName+'-dock_button-twin'); },
@@ -346,13 +348,17 @@ this.setSwitcherOffset = function() {
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
 	
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:not([movetoright]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin[movetoleft] {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(ltr):not([movetoright]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(ltr)[movetoleft],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(rtl)[movetoright],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(rtl):not([movetoleft]) {\n';
 	sscode += '		left: '+leftOffset+'px !important;\n';
 	sscode += '	}\n';
 	
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch[movetoright],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:not([movetoleft]) {\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(ltr)[movetoright],\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(ltr):not([movetoleft]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(rtl):not([movetoright]),\n';
+	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(rtl)[movetoleft] {\n';
 	sscode += '		right: '+rightOffset+'px !important;\n';
 	sscode += '	}\n';
 	
