@@ -1,0 +1,26 @@
+<!ENTITY addonsSidebar.label "Dodatki">
+<!ENTITY addonsSidebar.tooltip "Otwórz menedżer dodatków w panelu bocznym">
+<!ENTITY DOMInspectorSidebar.label "DOM Inspector">
+<!ENTITY DOMInspectorSidebar.tooltip "Otwórz DOM Inspector w panelu bocznym">
+<!ENTITY PageInfoSidebar.label "Informacje o stronie">
+<!ENTITY PageInfoSidebar.tooltip "Wyświetl szczegóły o stronie, na której się znajdujesz">
+<!ENTITY BlankSidebar.label "Pusta strona">
+<!ENTITY BlankSidebar.tooltip "Otwórz pustą stronę w panelu bocznym">
+<!ENTITY URISidebar.tooltip "Wpisz lokalizację, aby otworzyć ją w panelu bocznym">
+<!ENTITY URISidebar.buttonLabel "Przejdź">
+<!ENTITY consoleSidebar.label "Konsola błędów">
+<!ENTITY consoleSidebar.tooltip "Otwórz konsolę błędów w panelu bocznym">
+<!ENTITY dmtSidebar.label "Pobierania">
+<!ENTITY dmtSidebar.tooltip "Wyświetl ostatnio pobierane pliki">
+<!ENTITY omnisidebarToolbar.label "Pasek narzędzi na panelu bocznym">
+<!ENTITY omnisidebarToolbarTwin.label "Twin Sidebar Toolbar">
+<!ENTITY omnisidebarOptions.title "OmniSidebar - Opcje">
+<!ENTITY omnisidebarButton.label "Panel boczny">
+<!ENTITY omnisidebarButtonMain.label "Główny panel boczny">
+<!ENTITY omnisidebarButtonTwin.label "Drugi panel boczny">
+<!ENTITY omnisidebarButton.tooltip "Otwórz panel boczny">
+<!ENTITY omnisidebarButtonMain.tooltip "Otwórz główny panel boczny">
+<!ENTITY omnisidebarButtonTwin.tooltip "Otwórz drugi panel boczny">
+<!ENTITY omnisidebarButtonClose.tooltip "Zamknij panel boczny">
+<!ENTITY omnisidebarButtonMainClose.tooltip "Zamknij główny panel boczny">
+<!ENTITY omnisidebarButtonTwinClose.tooltip "Zamknij drugi panel boczny">

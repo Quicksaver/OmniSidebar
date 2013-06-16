@@ -44,6 +44,14 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>pl</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Przejmij kontrolę nad swoim panelem bocznym!</em:description>
+				<em:translator>http://github.com/piotrex</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>pt-PT</em:locale>
 				<em:name>Painel OmniLateral</em:name>
 				<em:description>Controle o seu Painel Lateral!</em:description>
