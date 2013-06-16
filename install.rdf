@@ -7,7 +7,6 @@
 		<em:creator>Quicksaver</em:creator>
 		<em:optionsURL>chrome://omnisidebar/content/options.xul</em:optionsURL> 
 		<em:iconURL>chrome://omnisidebar/skin/icon.png</em:iconURL>
-		<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
 		<em:name>OmniSidebar</em:name>
 		<em:bootstrap>true</em:bootstrap>
 		
@@ -24,6 +23,7 @@
 				<em:locale>de</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Übernehmen Sie die Kontrolle über Ihre Sidebar!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/de/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Archaeopteryx - BabelZilla</em:translator>
 			</Description>
 		</em:localized>
@@ -32,6 +32,7 @@
 				<em:locale>en-US</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Gain control over your sidebar!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
 			</Description>
 		</em:localized>
 		<em:localized>
@@ -39,6 +40,7 @@
 				<em:locale>fr</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Prenez le contrôle de votre panneau latéral!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/fr/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Jojaba - BabelZilla</em:translator>
 			</Description>
 		</em:localized>
@@ -47,6 +49,7 @@
 				<em:locale>pl</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Przejmij kontrolę nad swoim panelem bocznym!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/pl/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>http://github.com/piotrex</em:translator>
 			</Description>
 		</em:localized>
@@ -55,6 +58,7 @@
 				<em:locale>pt-PT</em:locale>
 				<em:name>Painel OmniLateral</em:name>
 				<em:description>Controle o seu Painel Lateral!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/pt-PT/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
 		</em:localized>
@@ -63,6 +67,7 @@
 				<em:locale>sv-SE</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Ta kontroll över din sidopanel!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/sv-SE/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
 			</Description>
 		</em:localized>
@@ -71,6 +76,7 @@
 				<em:locale>zh-CN</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>获得对侧栏的更高控制!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/zh-CN/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>http://t.qq.com/HeartBlade</em:translator>
 			</Description>
 		</em:localized>
