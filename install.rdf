@@ -31,7 +31,7 @@
 			<Description>
 				<em:locale>en-US</em:locale>
 				<em:name>OmniSidebar</em:name>
-				<em:description>Gain control over your sidebar!</em:description>
+				<em:description>Bring your bookmarks into view with just a gesture. Move the sidebar across the screen. Open a different sidebar by just clicking its title. And more! Keeps your sidebar simple and quick to access!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
 			</Description>
 		</em:localized>
@@ -39,7 +39,7 @@
 			<Description>
 				<em:locale>fr</em:locale>
 				<em:name>OmniSidebar</em:name>
-				<em:description>Prenez le contrôle de votre panneau latéral!</em:description>
+				<em:description>Faire apparaître vos marque-pages en un seul geste. Déplacer le panneau latéral sur tout l'écran. Ouvrir un nouveau panneau latéral juste en cliquant sur son intitulé. Et bien plus ! Rends votre panneau latéral accessible simplement et rapidement !</em:description>
 				<em:homepageURL>https://addons.mozilla.org/fr/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Jojaba - BabelZilla</em:translator>
 			</Description>
@@ -57,7 +57,7 @@
 			<Description>
 				<em:locale>pt-PT</em:locale>
 				<em:name>Painel OmniLateral</em:name>
-				<em:description>Controle o seu Painel Lateral!</em:description>
+				<em:description>Mostre os favoritos apenas com um gesto. Mova o painel lateral para o lado oposto do ecrã. Abra um painel lateral diferente apenas com um clique no seu título. E mais! Mantém o seu painel lateral simples e de rápido acesso!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/pt-PT/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
@@ -66,7 +66,7 @@
 			<Description>
 				<em:locale>sv-SE</em:locale>
 				<em:name>OmniSidebar</em:name>
-				<em:description>Ta kontroll över din sidopanel!</em:description>
+				<em:description>Öppna din bokmärkeslista med en enkel gest. Flytta sidopanelen till andra sidan skärmen. Öppna en annan sidopanel genom att klicka på dess rubrik. Allt detta och mer! Håller din sidopanel enkel och snabbåtkomlig!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/sv-SE/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Mikael Hiort af Ornäs</em:translator>
 			</Description>
@@ -75,7 +75,7 @@
 			<Description>
 				<em:locale>zh-CN</em:locale>
 				<em:name>OmniSidebar</em:name>
-				<em:description>获得对侧栏的更高控制!</em:description>
+				<em:description>一个手势就能查看你的书签。跨越屏幕移动侧边栏。单击标题栏即可打开其它侧边栏。不仅如此，更让你的侧边栏简单易用！</em:description>
 				<em:homepageURL>https://addons.mozilla.org/zh-CN/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>http://t.qq.com/HeartBlade</em:translator>
 			</Description>
