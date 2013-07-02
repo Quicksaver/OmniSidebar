@@ -1,3 +1,4 @@
+<!ENTITY Optwindow.style "width: 32em;">
 <!ENTITY addonsSidebar.label "Add-ons Manager">
 <!ENTITY omnisidebarConsole.label "Error Console">
 <!ENTITY omnisidebarDMT.label "Downloads">

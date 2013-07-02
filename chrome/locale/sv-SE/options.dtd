@@ -1,3 +1,4 @@
+<!ENTITY Optwindow.style "width: 35.5em;">
 <!ENTITY addonsSidebar.label "Tilläggshanteraren">
 <!ENTITY omnisidebarConsole.label "Felkonsol">
 <!ENTITY omnisidebarDMT.label "Filhämtningar">

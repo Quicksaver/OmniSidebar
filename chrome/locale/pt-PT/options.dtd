@@ -1,3 +1,4 @@
+<!ENTITY Optwindow.style "width: 38.167em;">
 <!ENTITY addonsSidebar.label "Gestor de Extras">
 <!ENTITY omnisidebarConsole.label "Consola de Erros">
 <!ENTITY omnisidebarDMT.label "Transferências">
@@ -22,20 +23,20 @@
 <!ENTITY omnisidebarOptundock.label "Desacoplar da janela do navegador">
 <!ENTITY omnisidebarOptautohide.label "Esconder automaticamente para a margem">
 <!ENTITY omnisidebarOptautoClose.label "Fechar/Esconder o painel lateral ao realizar outra ação">
-<!ENTITY omnisidebarOptglassStyle.label "Todas os paineis laterais com estilo de transparência">
+<!ENTITY omnisidebarOptglassStyle.label "Aplicar o estilo de transparência a todos os paineis laterais">
 <!ENTITY omnisidebarOptglassStyle.opaque "Opaco">
 <!ENTITY omnisidebarOptglassStyle.transparent "Transparente">
 <!ENTITY omnisidebarOptfx.label "Ativar efeitos de transição">
 <!ENTITY omnisidebarOptshowDelay.label "Atrasar o mostrar automático do painel lateral em (msec):">
 <!ENTITY omnisidebarOpthideDelay.label "Atrasar o esconder automático do painel lateral em (msec):">
-<!ENTITY omnisidebarOptkeepPrivate.label "Mnter o estado do painel lateral quando em modo de Navegação Privada">
-<!ENTITY omnisidebarOptforceOpen.label "Não fechar a barra lateral a partir de">
-<!ENTITY omnisidebarOptforceOpen.toolbars "Botões na barra de ferramentas do painel lateral">
+<!ENTITY omnisidebarOptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
+<!ENTITY omnisidebarOptforceOpen.label "Não fechar o painel lateral a partir de">
+<!ENTITY omnisidebarOptforceOpen.toolbars "Botões na barra de ferramentas do painel">
 <!ENTITY omnisidebarOptforceOpen.menus "Itens de menu">
 <!ENTITY omnisidebarOptalternatebtns.label "Estilo alternativo de botões">
 <!ENTITY omnisidebarOpttoolbar.label "Barra de ferramentas do painel lateral">
-<!ENTITY omnisidebarOpthideheadertitle.label "Esconder o título do Painel Lateral">
-<!ENTITY omnisidebarOpttitleButton.label "Menu de seleção no título do Painel Lateral">
+<!ENTITY omnisidebarOpthideheadertitle.label "Esconder o título do painel">
+<!ENTITY omnisidebarOpttitleButton.label "Menu de seleção no título do painel">
 <!ENTITY omnisidebarOpthideheaderdock.label "Esconder botão de acoplagem">
 <!ENTITY omnisidebarOpthideheaderclose.label "Esconder botão de fecho">
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Sem Mudança">

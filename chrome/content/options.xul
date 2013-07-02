@@ -6,37 +6,324 @@
 			id="omnisidebar-options-window"
 			title="&omnisidebarOptions.title;">
 	
-	<prefpane>
+	<prefpane id="mainPane" label="&omnisidebarButtonMain.label;" style="&Optwindow.style;">
 		<preferences>
 			<preference id="pref-moveSidebars" name="extensions.omnisidebar.moveSidebars" type="bool"/>
-			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
 			<preference id="pref-useSwitch" name="extensions.omnisidebar.useSwitch" type="bool"/>
-			<preference id="pref-useSwitchTwin" name="extensions.omnisidebar.useSwitchTwin" type="bool"/>
 			<preference id="pref-renderabove" name="extensions.omnisidebar.renderabove" type="bool"/>
-			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
 			<preference id="pref-autoHide" name="extensions.omnisidebar.autoHide" type="bool"/>
-			<preference id="pref-autoHideTwin" name="extensions.omnisidebar.autoHideTwin" type="bool"/>
 			<preference id="pref-autoClose" name="extensions.omnisidebar.autoClose" type="bool"/>
-			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
 			<preference id="pref-toolbar" name="extensions.omnisidebar.toolbar" type="bool"/>
 			<preference id="pref-hideheadertitle" name="extensions.omnisidebar.hideheadertitle" type="bool"/>
 			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
 			<preference id="pref-hideheaderclose" name="extensions.omnisidebar.hideheaderclose" type="bool"/>
 			<preference id="pref-titleButton" name="extensions.omnisidebar.titleButton" type="bool"/>
+			<preference id="pref-alternatebtns" name="extensions.omnisidebar.alternatebtns" type="bool"/>
+			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
+			<preference id="pref-goButton" name="extensions.omnisidebar.goButton" type="bool"/>
+			<preference id="pref-mainKeysetKeycode" name="extensions.omnisidebar.mainKeysetKeycode" type="string"/>
+			<preference id="pref-mainKeysetAccel" name="extensions.omnisidebar.mainKeysetAccel" type="bool"/>
+			<preference id="pref-mainKeysetShift" name="extensions.omnisidebar.mainKeysetShift" type="bool"/>
+			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
+		</preferences>
+		
+		<groupbox align="center">
+			<radiogroup preference="pref-moveSidebars"
+				onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
+				onsynctopreference="return this.value == 'right';">
+				<hbox>
+					<radio id="radio_movetoleft" label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
+					<radio id="radio_movetoright" label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
+				</hbox>
+			</radiogroup>
+			<vbox align="start">
+				<checkbox label="&omnisidebarOptswitchers.label;" preference="pref-useSwitch"/>
+				<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
+			</vbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption><checkbox id="aboveCheckbox" 
+				label="&omnisidebarOptundock.label;" 
+				preference="pref-renderabove"/></caption>
+			<checkbox dependson="pref-renderabove" label="&omnisidebarOptautohide.label;" preference="pref-autoHide"/>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&omnisidebarOptgroupgen.label;"/>
+			<hbox align="center">
+				<vbox align="start">
+					<checkbox label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
+					<checkbox dependson="!pref-hideheadertitle" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
+				</vbox>
+				<vbox align="start">
+					<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
+					<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
+				</vbox>
+			</hbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption><checkbox label="&omnisidebarOpttoolbar.label;" preference="pref-toolbar"/></caption>
+			<vbox align="start">
+				<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
+				<checkbox dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
+				<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
+					<caption label="&omnisidebarOptgroupicons.label;"/>
+					<radiogroup preference="pref-coloricons">
+						<hbox align="center">
+							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
+							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
+						</hbox>
+					</radiogroup>
+				</groupbox>
+			</vbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
+			<hbox>
+				<checkbox id="accelCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-mainKeysetAccel"/>
+				<checkbox id="altCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-mainKeysetAlt"/>
+				<checkbox id="shiftCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-mainKeysetShift"/>
+				<menulist id="mainKeyset-menu" oncommand="objName.fillKeycodes('main');" preference="pref-mainKeysetKeycode">
+					<menupopup id="mainKeyset-menupopup">
+						<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
+						<menuitem value="A" label="A"/>
+						<menuitem value="B" label="B"/>
+						<menuitem value="C" label="C"/>
+						<menuitem value="D" label="D"/>
+						<menuitem value="E" label="E"/>
+						<menuitem value="F" label="F"/>
+						<menuitem value="G" label="G"/>
+						<menuitem value="H" label="H"/>
+						<menuitem value="I" label="I"/>
+						<menuitem value="J" label="J"/>
+						<menuitem value="K" label="K"/>
+						<menuitem value="L" label="L"/>
+						<menuitem value="M" label="M"/>
+						<menuitem value="N" label="N"/>
+						<menuitem value="O" label="O"/>
+						<menuitem value="P" label="P"/>
+						<menuitem value="Q" label="Q"/>
+						<menuitem value="R" label="R"/>
+						<menuitem value="S" label="S"/>
+						<menuitem value="T" label="T"/>
+						<menuitem value="U" label="U"/>
+						<menuitem value="V" label="V"/>
+						<menuitem value="W" label="W"/>
+						<menuitem value="X" label="X"/>
+						<menuitem value="Y" label="Y"/>
+						<menuitem value="Z" label="Z"/>
+						<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
+						<menuitem value="." label="."/>
+						<menuitem value="," label=","/>
+						<menuitem value=";" label=";"/>
+						<menuitem value="/" label="/"/>
+						<menuitem value="\" label="\"/>
+						<menuitem value="=" label="="/>
+						<menuitem value="+" label="+"/>
+						<menuitem value="-" label="-"/>
+						<menuitem value="*" label="*"/>
+						<menuitem value="VK_F1" label="F1"/>
+						<menuitem value="VK_F2" label="F2"/>
+						<menuitem value="VK_F3" label="F3"/>
+						<menuitem value="VK_F4" label="F4"/>
+						<menuitem value="VK_F5" label="F5"/>
+						<menuitem value="VK_F6" label="F6"/>
+						<menuitem value="VK_F7" label="F7"/>
+						<menuitem value="VK_F8" label="F8"/>
+						<menuitem value="VK_F9" label="F9"/>
+						<menuitem value="VK_F10" label="F10"/>
+						<menuitem value="VK_F11" label="F11"/>
+						<menuitem value="VK_F12" label="F12"/>
+						<menuitem value="VK_F13" label="F13"/>
+						<menuitem value="VK_F14" label="F14"/>
+						<menuitem value="VK_F15" label="F15"/>
+						<menuitem value="VK_F16" label="F16"/>
+						<menuitem value="VK_F17" label="F17"/>
+						<menuitem value="VK_F18" label="F18"/>
+						<menuitem value="VK_F19" label="F19"/>
+						<menuitem value="VK_F20" label="F20"/>
+						<menuitem value="VK_F21" label="F21"/>
+						<menuitem value="VK_F22" label="F22"/>
+						<menuitem value="VK_F23" label="F23"/>
+						<menuitem value="VK_F24" label="F24"/>
+					</menupopup>
+				</menulist>
+			</hbox>
+		</groupbox>
+		
+	</prefpane>
+	
+	<prefpane id="twinPane" label="&omnisidebarButtonTwin.label;" style="&Optwindow.style;">
+		<preferences>
+			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
+			<preference id="pref-useSwitchTwin" name="extensions.omnisidebar.useSwitchTwin" type="bool"/>
+			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
+			<preference id="pref-autoHideTwin" name="extensions.omnisidebar.autoHideTwin" type="bool"/>
+			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
 			<preference id="pref-toolbarTwin" name="extensions.omnisidebar.toolbarTwin" type="bool"/>
 			<preference id="pref-hideheadertitleTwin" name="extensions.omnisidebar.hideheadertitleTwin" type="bool"/>
 			<preference id="pref-hideheaderdockTwin" name="extensions.omnisidebar.hideheaderdockTwin" type="bool"/>
 			<preference id="pref-hideheadercloseTwin" name="extensions.omnisidebar.hideheadercloseTwin" type="bool"/>
 			<preference id="pref-titleButtonTwin" name="extensions.omnisidebar.titleButtonTwin" type="bool"/>
-			<preference id="pref-alternatebtns" name="extensions.omnisidebar.alternatebtns" type="bool"/>
 			<preference id="pref-alternatebtnsTwin" name="extensions.omnisidebar.alternatebtnsTwin" type="bool"/>
-			<preference id="pref-fx" name="extensions.omnisidebar.fx" type="bool"/>
-			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
 			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
+			<preference id="pref-goButtonTwin" name="extensions.omnisidebar.goButtonTwin" type="bool"/>
+			<preference id="pref-twinKeysetKeycode" name="extensions.omnisidebar.twinKeysetKeycode" type="string"/>
+			<preference id="pref-twinKeysetAccel" name="extensions.omnisidebar.twinKeysetAccel" type="bool"/>
+			<preference id="pref-twinKeysetShift" name="extensions.omnisidebar.twinKeysetShift" type="bool"/>
+			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
+		</preferences>
+		
+		<box class="box-groupbox" align="center">
+			<checkbox label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
+		</box>
+		<groupbox align="center">
+			<vbox align="start">
+				<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptswitchers.label;" preference="pref-useSwitchTwin"/>
+				<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptautoClose.label;" preference="pref-autoCloseTwin"/>
+			</vbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption><checkbox id="aboveTwinCheckbox"
+				label="&omnisidebarOptundock.label;"
+				dependson="pref-twinSidebar"
+				preference="pref-renderaboveTwin"/></caption>
+			<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptautohide.label;" preference="pref-autoHideTwin"/>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&omnisidebarOptgroupgen.label;"/>
+			<hbox align="center">	
+				<vbox align="start">
+					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
+					<checkbox dependson="pref-twinSidebar,!pref-hideheadertitleTwin" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
+				</vbox>
+				<vbox align="start">
+					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
+					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
+				</vbox>
+			</hbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption><checkbox dependson="pref-twinSidebar" label="&omnisidebarOpttoolbar.label;" preference="pref-toolbarTwin"/></caption>
+			<vbox align="start">
+				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
+				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
+				<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
+					<caption label="&omnisidebarOptgroupicons.label;"/>
+					<radiogroup preference="pref-coloriconsTwin">
+						<hbox align="center">
+							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
+							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
+						</hbox>
+					</radiogroup>
+				</groupbox>
+			</vbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
+			<hbox>
+				<checkbox id="accelCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-twinKeysetAccel"/>
+				<checkbox id="altCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-twinKeysetAlt"/>
+				<checkbox id="shiftCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-twinKeysetShift"/>
+				<menulist id="twinKeyset-menu" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" preference="pref-twinKeysetKeycode">
+					<menupopup id="twinKeyset-menupopup">
+						<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
+						<menuitem value="A" label="A"/>
+						<menuitem value="B" label="B"/>
+						<menuitem value="C" label="C"/>
+						<menuitem value="D" label="D"/>
+						<menuitem value="E" label="E"/>
+						<menuitem value="F" label="F"/>
+						<menuitem value="G" label="G"/>
+						<menuitem value="H" label="H"/>
+						<menuitem value="I" label="I"/>
+						<menuitem value="J" label="J"/>
+						<menuitem value="K" label="K"/>
+						<menuitem value="L" label="L"/>
+						<menuitem value="M" label="M"/>
+						<menuitem value="N" label="N"/>
+						<menuitem value="O" label="O"/>
+						<menuitem value="P" label="P"/>
+						<menuitem value="Q" label="Q"/>
+						<menuitem value="R" label="R"/>
+						<menuitem value="S" label="S"/>
+						<menuitem value="T" label="T"/>
+						<menuitem value="U" label="U"/>
+						<menuitem value="V" label="V"/>
+						<menuitem value="W" label="W"/>
+						<menuitem value="X" label="X"/>
+						<menuitem value="Y" label="Y"/>
+						<menuitem value="Z" label="Z"/>
+						<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
+						<menuitem value="." label="."/>
+						<menuitem value="," label=","/>
+						<menuitem value=";" label=";"/>
+						<menuitem value="/" label="/"/>
+						<menuitem value="\" label="\"/>
+						<menuitem value="=" label="="/>
+						<menuitem value="+" label="+"/>
+						<menuitem value="-" label="-"/>
+						<menuitem value="*" label="*"/>
+						<menuitem value="VK_F1" label="F1"/>
+						<menuitem value="VK_F2" label="F2"/>
+						<menuitem value="VK_F3" label="F3"/>
+						<menuitem value="VK_F4" label="F4"/>
+						<menuitem value="VK_F5" label="F5"/>
+						<menuitem value="VK_F6" label="F6"/>
+						<menuitem value="VK_F7" label="F7"/>
+						<menuitem value="VK_F8" label="F8"/>
+						<menuitem value="VK_F9" label="F9"/>
+						<menuitem value="VK_F10" label="F10"/>
+						<menuitem value="VK_F11" label="F11"/>
+						<menuitem value="VK_F12" label="F12"/>
+						<menuitem value="VK_F13" label="F13"/>
+						<menuitem value="VK_F14" label="F14"/>
+						<menuitem value="VK_F15" label="F15"/>
+						<menuitem value="VK_F16" label="F16"/>
+						<menuitem value="VK_F17" label="F17"/>
+						<menuitem value="VK_F18" label="F18"/>
+						<menuitem value="VK_F19" label="F19"/>
+						<menuitem value="VK_F20" label="F20"/>
+						<menuitem value="VK_F21" label="F21"/>
+						<menuitem value="VK_F22" label="F22"/>
+						<menuitem value="VK_F23" label="F23"/>
+						<menuitem value="VK_F24" label="F24"/>
+					</menupopup>
+				</menulist>
+			</hbox>
+		</groupbox>
+	</prefpane>
+	
+	<prefpane id="miscPane" label="&omnisidebarOptMisc.label;" style="&Optwindow.style;">
+		<preferences>
+			<preference id="pref-fx" name="extensions.omnisidebar.fx" type="bool"/>
 			<preference id="pref-glassStyle" name="extensions.omnisidebar.glassStyle" type="bool"/>
 			<preference id="pref-transparency" name="extensions.omnisidebar.transparency" type="int"/>
-			<preference id="pref-goButton" name="extensions.omnisidebar.goButton" type="bool"/>
-			<preference id="pref-goButtonTwin" name="extensions.omnisidebar.goButtonTwin" type="bool"/>
 			<preference id="pref-alwaysAddons" name="extensions.omnisidebar.alwaysAddons" type="bool"/>
 			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
 			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
@@ -46,371 +333,83 @@
 			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
 			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
 			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
-			<preference id="pref-mainKeysetKeycode" name="extensions.omnisidebar.mainKeysetKeycode" type="string"/>
-			<preference id="pref-mainKeysetAccel" name="extensions.omnisidebar.mainKeysetAccel" type="bool"/>
-			<preference id="pref-mainKeysetShift" name="extensions.omnisidebar.mainKeysetShift" type="bool"/>
-			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
-			<preference id="pref-twinKeysetKeycode" name="extensions.omnisidebar.twinKeysetKeycode" type="string"/>
-			<preference id="pref-twinKeysetAccel" name="extensions.omnisidebar.twinKeysetAccel" type="bool"/>
-			<preference id="pref-twinKeysetShift" name="extensions.omnisidebar.twinKeysetShift" type="bool"/>
-			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
 		</preferences>
 		
-		<tabbox id="omnisidebarTabBox">
-			<tabs id="tabsElement">
-				<tab id="mainTab" label="&omnisidebarButtonMain.label;"/>
-				<tab id="twinTab" label="&omnisidebarButtonTwin.label;"/>
-				<tab id="miscTab" label="&omnisidebarOptMisc.label;"/>
-				<tab id="aboutTab" label="&omnisidebarOptabout.label;"/>
-			</tabs>
-			
-			<tabpanels id="tabPanels">
-				<tabpanel id="mainTab" orient="vertical">
-					<groupbox align="center">
-						<radiogroup preference="pref-moveSidebars"
-							onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
-							onsynctopreference="return this.value == 'right';">
-							<hbox>
-								<radio id="radio_movetoleft" label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
-								<radio id="radio_movetoright" label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
-							</hbox>
-						</radiogroup>
-						<vbox align="start">
-							<checkbox label="&omnisidebarOptswitchers.label;" preference="pref-useSwitch"/>
-							<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
-						</vbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption><checkbox id="aboveCheckbox" 
-							label="&omnisidebarOptundock.label;" 
-							preference="pref-renderabove"/></caption>
-						<checkbox dependson="pref-renderabove" label="&omnisidebarOptautohide.label;" preference="pref-autoHide"/>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption label="&omnisidebarOptgroupgen.label;"/>
-						<hbox align="center">
-							<vbox align="start">
-								<checkbox label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
-								<checkbox dependson="!pref-hideheadertitle" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
-							</vbox>
-							<vbox align="start">
-								<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
-								<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
-							</vbox>
-						</hbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption><checkbox label="&omnisidebarOpttoolbar.label;" preference="pref-toolbar"/></caption>
-						<vbox align="start">
-							<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
-							<checkbox dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
-							<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
-								<caption label="&omnisidebarOptgroupicons.label;"/>
-								<radiogroup preference="pref-coloricons">
-									<hbox align="center">
-										<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-										<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
-										<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
-									</hbox>
-								</radiogroup>
-							</groupbox>
-						</vbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
-						<hbox>
-							<checkbox id="accelCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-mainKeysetAccel"/>
-							<checkbox id="altCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-mainKeysetAlt"/>
-							<checkbox id="shiftCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-mainKeysetShift"/>
-							<menulist id="mainKeyset-menu" oncommand="objName.fillKeycodes('main');" preference="pref-mainKeysetKeycode">
-								<menupopup id="mainKeyset-menupopup">
-									<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
-									<menuitem value="A" label="A"/>
-									<menuitem value="B" label="B"/>
-									<menuitem value="C" label="C"/>
-									<menuitem value="D" label="D"/>
-									<menuitem value="E" label="E"/>
-									<menuitem value="F" label="F"/>
-									<menuitem value="G" label="G"/>
-									<menuitem value="H" label="H"/>
-									<menuitem value="I" label="I"/>
-									<menuitem value="J" label="J"/>
-									<menuitem value="K" label="K"/>
-									<menuitem value="L" label="L"/>
-									<menuitem value="M" label="M"/>
-									<menuitem value="N" label="N"/>
-									<menuitem value="O" label="O"/>
-									<menuitem value="P" label="P"/>
-									<menuitem value="Q" label="Q"/>
-									<menuitem value="R" label="R"/>
-									<menuitem value="S" label="S"/>
-									<menuitem value="T" label="T"/>
-									<menuitem value="U" label="U"/>
-									<menuitem value="V" label="V"/>
-									<menuitem value="W" label="W"/>
-									<menuitem value="X" label="X"/>
-									<menuitem value="Y" label="Y"/>
-									<menuitem value="Z" label="Z"/>
-									<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
-									<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
-									<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
-									<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
-									<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
-									<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
-									<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
-									<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
-									<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
-									<menuitem value="." label="."/>
-									<menuitem value="," label=","/>
-									<menuitem value=";" label=";"/>
-									<menuitem value="/" label="/"/>
-									<menuitem value="\" label="\"/>
-									<menuitem value="=" label="="/>
-									<menuitem value="+" label="+"/>
-									<menuitem value="-" label="-"/>
-									<menuitem value="*" label="*"/>
-									<menuitem value="VK_F1" label="F1"/>
-									<menuitem value="VK_F2" label="F2"/>
-									<menuitem value="VK_F3" label="F3"/>
-									<menuitem value="VK_F4" label="F4"/>
-									<menuitem value="VK_F5" label="F5"/>
-									<menuitem value="VK_F6" label="F6"/>
-									<menuitem value="VK_F7" label="F7"/>
-									<menuitem value="VK_F8" label="F8"/>
-									<menuitem value="VK_F9" label="F9"/>
-									<menuitem value="VK_F10" label="F10"/>
-									<menuitem value="VK_F11" label="F11"/>
-									<menuitem value="VK_F12" label="F12"/>
-									<menuitem value="VK_F13" label="F13"/>
-									<menuitem value="VK_F14" label="F14"/>
-									<menuitem value="VK_F15" label="F15"/>
-									<menuitem value="VK_F16" label="F16"/>
-									<menuitem value="VK_F17" label="F17"/>
-									<menuitem value="VK_F18" label="F18"/>
-									<menuitem value="VK_F19" label="F19"/>
-									<menuitem value="VK_F20" label="F20"/>
-									<menuitem value="VK_F21" label="F21"/>
-									<menuitem value="VK_F22" label="F22"/>
-									<menuitem value="VK_F23" label="F23"/>
-									<menuitem value="VK_F24" label="F24"/>
-								</menupopup>
-							</menulist>
-						</hbox>
-					</groupbox>
-				</tabpanel>
-				
-				<tabpanel id="twinTab" orient="vertical">
-					<box class="box-groupbox" align="center">
-						<checkbox label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
-					</box>
-					<groupbox align="center">
-						<vbox align="start">
-							<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptswitchers.label;" preference="pref-useSwitchTwin"/>
-							<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptautoClose.label;" preference="pref-autoCloseTwin"/>
-						</vbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption><checkbox id="aboveTwinCheckbox"
-							label="&omnisidebarOptundock.label;"
-							dependson="pref-twinSidebar"
-							preference="pref-renderaboveTwin"/></caption>
-						<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptautohide.label;" preference="pref-autoHideTwin"/>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption label="&omnisidebarOptgroupgen.label;"/>
-						<hbox align="center">	
-							<vbox align="start">
-								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
-								<checkbox dependson="pref-twinSidebar,!pref-hideheadertitleTwin" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
-							</vbox>
-							<vbox align="start">
-								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
-								<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
-							</vbox>
-						</hbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption><checkbox dependson="pref-twinSidebar" label="&omnisidebarOpttoolbar.label;" preference="pref-toolbarTwin"/></caption>
-						<vbox align="start">
-							<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
-							<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
-							<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
-								<caption label="&omnisidebarOptgroupicons.label;"/>
-								<radiogroup preference="pref-coloriconsTwin">
-									<hbox align="center">
-										<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-										<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
-										<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
-									</hbox>
-								</radiogroup>
-							</groupbox>
-						</vbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
-						<hbox>
-							<checkbox id="accelCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-twinKeysetAccel"/>
-							<checkbox id="altCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-twinKeysetAlt"/>
-							<checkbox id="shiftCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-twinKeysetShift"/>
-							<menulist id="twinKeyset-menu" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" preference="pref-twinKeysetKeycode">
-								<menupopup id="twinKeyset-menupopup">
-									<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
-									<menuitem value="A" label="A"/>
-									<menuitem value="B" label="B"/>
-									<menuitem value="C" label="C"/>
-									<menuitem value="D" label="D"/>
-									<menuitem value="E" label="E"/>
-									<menuitem value="F" label="F"/>
-									<menuitem value="G" label="G"/>
-									<menuitem value="H" label="H"/>
-									<menuitem value="I" label="I"/>
-									<menuitem value="J" label="J"/>
-									<menuitem value="K" label="K"/>
-									<menuitem value="L" label="L"/>
-									<menuitem value="M" label="M"/>
-									<menuitem value="N" label="N"/>
-									<menuitem value="O" label="O"/>
-									<menuitem value="P" label="P"/>
-									<menuitem value="Q" label="Q"/>
-									<menuitem value="R" label="R"/>
-									<menuitem value="S" label="S"/>
-									<menuitem value="T" label="T"/>
-									<menuitem value="U" label="U"/>
-									<menuitem value="V" label="V"/>
-									<menuitem value="W" label="W"/>
-									<menuitem value="X" label="X"/>
-									<menuitem value="Y" label="Y"/>
-									<menuitem value="Z" label="Z"/>
-									<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
-									<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
-									<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
-									<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
-									<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
-									<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
-									<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
-									<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
-									<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
-									<menuitem value="." label="."/>
-									<menuitem value="," label=","/>
-									<menuitem value=";" label=";"/>
-									<menuitem value="/" label="/"/>
-									<menuitem value="\" label="\"/>
-									<menuitem value="=" label="="/>
-									<menuitem value="+" label="+"/>
-									<menuitem value="-" label="-"/>
-									<menuitem value="*" label="*"/>
-									<menuitem value="VK_F1" label="F1"/>
-									<menuitem value="VK_F2" label="F2"/>
-									<menuitem value="VK_F3" label="F3"/>
-									<menuitem value="VK_F4" label="F4"/>
-									<menuitem value="VK_F5" label="F5"/>
-									<menuitem value="VK_F6" label="F6"/>
-									<menuitem value="VK_F7" label="F7"/>
-									<menuitem value="VK_F8" label="F8"/>
-									<menuitem value="VK_F9" label="F9"/>
-									<menuitem value="VK_F10" label="F10"/>
-									<menuitem value="VK_F11" label="F11"/>
-									<menuitem value="VK_F12" label="F12"/>
-									<menuitem value="VK_F13" label="F13"/>
-									<menuitem value="VK_F14" label="F14"/>
-									<menuitem value="VK_F15" label="F15"/>
-									<menuitem value="VK_F16" label="F16"/>
-									<menuitem value="VK_F17" label="F17"/>
-									<menuitem value="VK_F18" label="F18"/>
-									<menuitem value="VK_F19" label="F19"/>
-									<menuitem value="VK_F20" label="F20"/>
-									<menuitem value="VK_F21" label="F21"/>
-									<menuitem value="VK_F22" label="F22"/>
-									<menuitem value="VK_F23" label="F23"/>
-									<menuitem value="VK_F24" label="F24"/>
-								</menupopup>
-							</menulist>
-						</hbox>
-					</groupbox>
-				</tabpanel>
-				
-				<tabpanel id="miscTab" orient="vertical">
-					<groupbox align="center">
-						<caption>
-							<checkbox id="glassCheckbox"
-								label="&omnisidebarOptglassStyle.label;" 
-								preference="pref-glassStyle" />
-						</caption>
-						<hbox>
-							<label value="&omnisidebarOptglassStyle.transparent;"/>
-							<scale dependson="pref-glassStyle"
-								min="0"
-								max="1000"
-								increment="125"
-								pageincrement="375"
-								preference="pref-transparency"/>
-							<label value="&omnisidebarOptglassStyle.opaque;"/>
-						</hbox>
-					</groupbox>
-					
-					<groupbox align="center">
-						<caption label="&omnisidebarOptgroupfeatures.label;"/>
-						<vbox align="start">
-							<hbox>
-								<label value="&omnisidebarOptshowDelay.label;"/>
-								<textbox type="number"
-									size="3"
-									min="0"
-									max="2000"
-									preference="pref-showDelay"/>
-					        </hbox>
-							<hbox>
-								<label value="&omnisidebarOpthideDelay.label;"/>
-								<textbox type="number"
-									size="3"
-									min="0"
-									max="2000"
-									preference="pref-hideDelay"/>
-					        </hbox>
-							<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
-						</vbox>
-					</groupbox>
-					
-					<groupbox align="start">
-						<caption label="&omnisidebarOptgroupperformance.label;"/>
-						<checkbox label="&omnisidebarOptfx.label;" preference="pref-fx"/>
-					</groupbox>
-					
-					<hbox align="start">
-						<groupbox align="start">
-							<caption label="&omnisidebarOptgroupalways.label;"/>
-							<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
-							<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
-							<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
-							<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
-						</groupbox>
-						<groupbox align="start">
-							<caption label="&omnisidebarOptforceOpen.label;"/>
-							<checkbox label="&omnisidebarOptforceOpen.toolbars;" preference="pref-forceOpenToolbars"/>
-							<checkbox label="&omnisidebarOptforceOpen.menus;" preference="pref-forceOpenMenus"/>
-						</groupbox>
-					</hbox>
-				</tabpanel>
-				
-				<tabpanel id="aboutTab" orient="vertical" align="center">
-					<image id="logo"/>
-					<vbox align="end">
-						<description class="closer">&omnisidebarabout.name;</description>
-						<description>&omnisidebarabout.by;</description>
-						<description class="justify">&omnisidebarabout.desc;</description>
-						<label class="text-link closer" href="https://addons.mozilla.org/UserAgentLocale/firefox/addon/omnisidebar/" value="&omnisidebarabout.home;"/>
-						<label class="text-link closer" href="https://github.com/Quicksaver/OmniSidebar/issues" value="&omnisidebarabout.tech;"/>
-					</vbox>
-				</tabpanel>
-			</tabpanels>
-		</tabbox>
+		<groupbox align="center">
+			<caption>
+				<checkbox id="glassCheckbox"
+					label="&omnisidebarOptglassStyle.label;" 
+					preference="pref-glassStyle" />
+			</caption>
+			<hbox>
+				<label value="&omnisidebarOptglassStyle.transparent;"/>
+				<scale dependson="pref-glassStyle"
+					min="0"
+					max="1000"
+					increment="125"
+					pageincrement="375"
+					preference="pref-transparency"/>
+				<label value="&omnisidebarOptglassStyle.opaque;"/>
+			</hbox>
+		</groupbox>
+		
+		<groupbox align="center">
+			<caption label="&omnisidebarOptgroupfeatures.label;"/>
+			<vbox align="start">
+				<hbox>
+					<label value="&omnisidebarOptshowDelay.label;"/>
+					<textbox type="number"
+						size="3"
+						min="0"
+						max="2000"
+						preference="pref-showDelay"/>
+		        </hbox>
+				<hbox>
+					<label value="&omnisidebarOpthideDelay.label;"/>
+					<textbox type="number"
+						size="3"
+						min="0"
+						max="2000"
+						preference="pref-hideDelay"/>
+		        </hbox>
+				<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
+			</vbox>
+		</groupbox>
+		
+		<groupbox align="start">
+			<caption label="&omnisidebarOptgroupperformance.label;"/>
+			<checkbox label="&omnisidebarOptfx.label;" preference="pref-fx"/>
+		</groupbox>
+		
+		<hbox align="start">
+			<groupbox align="start">
+				<caption label="&omnisidebarOptgroupalways.label;"/>
+				<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
+				<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
+				<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
+				<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
+			</groupbox>
+			<groupbox align="start">
+				<caption label="&omnisidebarOptforceOpen.label;"/>
+				<checkbox label="&omnisidebarOptforceOpen.toolbars;" preference="pref-forceOpenToolbars"/>
+				<checkbox label="&omnisidebarOptforceOpen.menus;" preference="pref-forceOpenMenus"/>
+			</groupbox>
+		</hbox>
+	</prefpane>
+	
+	<prefpane id="aboutPane" label="&omnisidebarOptabout.label;" align="center" style="&Optwindow.style;">
+		<hbox align="center">
+			<label flex="1" value=" "/>
+			<image id="logo"/>
+			<label flex="1" value=" "/>
+		</hbox>
+		
+		<vbox align="end">
+			<description class="closer">&omnisidebarabout.name;</description>
+			<description>&omnisidebarabout.by;</description>
+			<description class="justify">&omnisidebarabout.desc;</description>
+			<label class="text-link closer" href="https://addons.mozilla.org/UserAgentLocale/firefox/addon/omnisidebar/" value="&omnisidebarabout.home;"/>
+			<label class="text-link closer" href="https://github.com/Quicksaver/OmniSidebar/issues" value="&omnisidebarabout.tech;"/>
+		</vbox>
 	</prefpane>
 </prefwindow>

@@ -1,3 +1,4 @@
+<!ENTITY Optwindow.style "width: 26.25em;">
 <!ENTITY addonsSidebar.label "附加组件管理器">
 <!ENTITY omnisidebarConsole.label "错误控制台">
 <!ENTITY omnisidebarDMT.label "下载">
