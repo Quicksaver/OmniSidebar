@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.17';
+moduleAid.VERSION = '1.0.18';
 
 this.customizing = false;
 
@@ -611,7 +611,7 @@ this.loadMainSidebar = function() {
 this.unloadMainSidebar = function() {
 	mainSidebar.loaded = false;
 	
-	listenerAid.remove(bar.switcher, 'wheel', scrollSwitcher, true);
+	listenerAid.remove(mainSidebar.switcher, 'wheel', scrollSwitcher, true);
 	
 	for(var x in dontSaveBroadcasters) {
 		if(mainSidebar.box.getAttribute('sidebarcommand') == dontSaveBroadcasters[x]) {
