@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.18';
+moduleAid.VERSION = '1.0.19';
 
 this.customizing = false;
 
@@ -188,7 +188,7 @@ this.openLast = function(bar) {
 	if(bar.box.getAttribute('sidebarcommand')) {
 		if($(bar.box.getAttribute('sidebarcommand'))
 		&& $(bar.box.getAttribute('sidebarcommand')).localName == 'broadcaster'
-		&& $(bar.box.getAttribute('sidebarcommand')).getAttribute('disabled') != 'true') {
+		&& !trueAttribute($(bar.box.getAttribute('sidebarcommand')), 'disabled')) {
 			if(dispatch(bar.box, { type: 'willOpenLast', detail: { bar: bar } })) {
 				toggleSidebar($(bar.box.getAttribute('sidebarcommand')), true, bar.twin);
 				return true;
@@ -209,7 +209,7 @@ this.setLastCommand = function(bar) {
 	if(bar.box.getAttribute('sidebarcommand') 
 	&& $(bar.box.getAttribute('sidebarcommand'))
 	&& $(bar.box.getAttribute('sidebarcommand')).localName == 'broadcaster'
-	&& $(bar.box.getAttribute('sidebarcommand')).getAttribute('disabled') != 'true') {
+	&& !trueAttribute($(bar.box.getAttribute('sidebarcommand')), 'disabled')) {
 		var saveCommand = true;
 		for(var x in dontSaveBroadcasters) {
 			if(dontSaveBroadcasters[x] == bar.box.getAttribute('sidebarcommand')) {
@@ -228,7 +228,7 @@ this.setLastCommand = function(bar) {
 	}
 	else if(!$(bar.lastCommand)
 	|| $(bar.lastCommand).localName != 'broadcaster'
-	|| $(bar.lastCommand).getAttribute('disabled') == 'true') {
+	|| trueAttribute($(bar.lastCommand), 'disabled')) {
 		bar.lastCommandReset();
 		closeSidebar(bar);
 		
@@ -328,7 +328,7 @@ this.browserMinWidth = function(e) {
 
 this.clickSwitcher = function(e, bar) {
 	if(dispatch(bar.switcher, { type: 'clickedSwitcher', detail: { bar: bar, clickEvent: e } })
-	&& bar.switcher.getAttribute('enabled') == 'true'
+	&& trueAttribute(bar.switcher, 'enabled')
 	&& e.button == 0) {
 		toggleSidebar(bar.switcher);
 	}
@@ -491,10 +491,10 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: { bar: bar } })) { return; }
 	
 	// Can't let both sidebars display the same page, it becomes unstable
-	if(sidebarBroadcaster.getAttribute("checked") == "true"
+	if(trueAttribute(sidebarBroadcaster, "checked")
 	&& prefAid.twinSidebar
-	&& (	(!twin && sidebarBroadcaster.getAttribute('twinSidebar') == 'true')
-		|| (twin && sidebarBroadcaster.getAttribute('twinSidebar') != 'true'))) {
+	&& (	(!twin && trueAttribute(sidebarBroadcaster, 'twinSidebar'))
+		|| (twin && !trueAttribute(sidebarBroadcaster, 'twinSidebar')))) {
 			if(forceBlank) {
 				bar.lastCommandReset();
 				commandID = bar.lastCommand;
@@ -508,7 +508,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 			}
 	}
 	
-	if(sidebarBroadcaster.getAttribute("checked") == "true") {
+	if(trueAttribute(sidebarBroadcaster, "checked")) {
 		if(forceReload) {
 			closeSidebar(bar, sidebarBroadcaster);
 		}
@@ -539,7 +539,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	var broadcasters = $$("broadcaster[group='sidebar']");
 	for(var i=0; i<broadcasters.length; i++) {
 		if(broadcasters[i] != sidebarBroadcaster
-		&& ((!twin && broadcasters[i].getAttribute('twinSidebar') != 'true') || (twin && broadcasters[i].getAttribute('twinSidebar') == 'true'))) {
+		&& ((!twin && !trueAttribute(broadcasters[i], 'twinSidebar')) || (twin && trueAttribute(broadcasters[i], 'twinSidebar')))) {
 			broadcasters[i].removeAttribute("checked");
 			broadcasters[i].removeAttribute('twinSidebar');
 		}

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -95,7 +95,7 @@ this.toggleHeaders = function() {
 this.toolbarHasButtons = function(toolbar) {
 	if(toolbar) {
 		for(var i=0; i<toolbar.childNodes.length; i++) {
-			if(!toolbar.childNodes[i].hasAttribute('collapsed') && !toolbar.childNodes[i].hasAttribute('hidden')) {
+			if(!trueAttribute(toolbar.childNodes[i], 'collapsed') && !trueAttribute(toolbar.childNodes[i], 'hidden')) {
 				return true;
 			}
 		}

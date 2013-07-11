@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
@@ -85,7 +85,7 @@ this.menuItemsCheck = function(menu) {
 	for(var m=0; m<menu.childNodes.length; m++) {
 		if(!$(menu.childNodes[m].getAttribute('observes'))) { continue; }
 		
-		toggleAttribute(menu.childNodes[m], 'checked', $(menu.childNodes[m].getAttribute('observes')).getAttribute('checked') == 'true' && menu.getAttribute('twinSidebar') == $(menu.childNodes[m].getAttribute('observes')).getAttribute('twinSidebar'));
+		toggleAttribute(menu.childNodes[m], 'checked', trueAttribute($(menu.childNodes[m].getAttribute('observes')), 'checked') && menu.getAttribute('twinSidebar') == $(menu.childNodes[m].getAttribute('observes')).getAttribute('twinSidebar'));
 	}
 };
 

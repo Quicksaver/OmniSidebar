@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
@@ -13,7 +13,7 @@ this.setBroadcastersTwin = function(initialize) {
 		}
 		else if(!initialize) {
 			objectWatcher.removeAttributeWatcher(broadcasters[i], 'disabled', setlastTwin);
-			if(broadcasters[i].getAttribute('twinSidebar') == 'true') {
+			if(trueAttribute(broadcasters[i], 'twinSidebar')) {
 				broadcasters[i].removeAttribute('checked');
 				broadcasters[i].removeAttribute('twinSidebar');
 			}

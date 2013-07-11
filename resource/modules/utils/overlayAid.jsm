@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.2.9';
+moduleAid.VERSION = '2.2.10';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -318,7 +318,7 @@ this.overlayAid = {
 						&& allRes[uri][id][attr]
 						&& allRes[uri][id][attr] != '__empty'
 						&& node.nodeName == 'toolbar'
-						&& node.getAttribute('customizable') == 'true'
+						&& trueAttribute(node, 'customizable')
 						&& node.getAttribute('toolboxid')
 						&& aWindow.document.getElementById(node.getAttribute('toolboxid'))
 						&& (this.tracedAction(aWindow, 'appendChild', node) || this.tracedAction(aWindow, 'insertBefore', node))) {
@@ -982,7 +982,7 @@ this.overlayAid = {
 								// change or remove the button on the toolbar if it is found in the document
 								var existButton = aWindow.document.getElementById(button.id);
 								if(existButton) {
-									if(button.getAttribute('removeelement') == 'true') {
+									if(trueAttribute(button, 'removeelement')) {
 										this.removeButton(aWindow, toolbox[a].palette, existButton);
 										continue buttons_loop;
 									}
@@ -999,7 +999,7 @@ this.overlayAid = {
 								// change or remove in the palette if it exists there
 								for(var b=0; b<toolbox[a].palette.childNodes.length; b++) {
 									if(toolbox[a].palette.childNodes[b].id == button.id) {
-										if(button.getAttribute('removeelement') == 'true') {
+										if(trueAttribute(button, 'removeelement')) {
 											this.removeButton(aWindow, toolbox[a].palette, toolbox[a].palette.childNodes[b]);
 											continue buttons_loop;
 										}
@@ -1033,7 +1033,7 @@ this.overlayAid = {
 				if(overlayNode.parentNode.nodeName != 'overlay' && node.parentNode.id != overlayNode.parentNode.id) { continue; }
 				
 				// If removeelement attribute is true, remove the element and do nothing else
-				if(overlayNode.getAttribute('removeelement') == 'true') {
+				if(trueAttribute(overlayNode, 'removeelement')) {
 					// Check if we are removing any sidebars so we also remove it from the toolbox
 					this.removeToolbars(aWindow, node);
 					
