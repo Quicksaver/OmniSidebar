@@ -5,6 +5,12 @@
 		width: 4px;
 	}
 	
+	/* Bugfix: transparent header when undocked using personas,
+	I can't override these without the !important tags */
+	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
+		background-color: -moz-Dialog !important;
+	}
+	
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:not(:hover) {
 		border: 5px solid rgba(0,0,0,0) !important;
 	}

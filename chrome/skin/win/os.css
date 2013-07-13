@@ -4,5 +4,14 @@
 	.omnisidebar_switch {
 		width: 3px;
 	}
+	
+	/* Bugfix: transparent header when undocked using personas,
+	I can't override these without the !important tags */
+	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
+		-moz-appearance: toolbox !important;
+		background-color: -moz-Dialog !important;
+		border-bottom: 1px solid ThreeDShadow !important;
+		border-top: 1px solid ThreeDHighlight !important;
+	}
 
 }
