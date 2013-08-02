@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.19';
+moduleAid.VERSION = '1.0.20';
 
 this.customizing = false;
 
@@ -34,7 +34,7 @@ this.mainSidebar = {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				width = Math.max(this.box.clientWidth, prefAid.minSidebarWidth) || 300;
+				width = (!width) ? 300 : Math.max(this.box.clientWidth, prefAid.minSidebarWidth) || 300;
 				this.box.setAttribute('width', width);
 			}
 			return parseInt(width);
@@ -87,7 +87,7 @@ this.twinSidebar = {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				width = Math.max(this.box.clientWidth, prefAid.minSidebarWidth) || 300;
+				width = (!width) ? 300 : Math.max(this.box.clientWidth, prefAid.minSidebarWidth) || 300;
 				this.box.setAttribute('width', width);
 			}
 			return parseInt(width);
@@ -288,7 +288,7 @@ this.watchWidth = function(box, attr, oldW, newW) {
 	
 	var width = box.getAttribute('width');
 	if(!width || width == '0' || width == 'NaN') {
-		width = Math.max(box.clientWidth, prefAid.minSidebarWidth) || 300;
+		width = (!width) ? 300 : Math.max(box.clientWidth, prefAid.minSidebarWidth) || 300;
 		box.setAttribute('width', width);
 	}
 	
@@ -603,7 +603,7 @@ this.loadMainSidebar = function() {
 	if(prefAid.firstEnabled) {
 		prefAid.firstEnabled = false;
 		if(!mainSidebar.isOpen && mainSidebar.box.hidden) {
-			toggleSidebar();
+			toggleSidebar('viewBookmarksSidebar');
 		}
 	}
 };
