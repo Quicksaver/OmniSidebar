@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.9';
+moduleAid.VERSION = '1.1.10';
 
 this.mainAutoHideInit = false;
 this.twinAutoHideInit = false;
@@ -30,6 +30,7 @@ this.setAutoHide = function(bar) {
 		bar.toggleSwitcher();
 		
 		aSync(function() {
+			if(typeof(mainSidebar) == 'undefined') { return; }
 			if(bar == mainSidebar) { mainAutoHideInit = true; }
 			else if(bar == twinSidebar) { twinAutoHideInit = true; }
 		}, 2000);
