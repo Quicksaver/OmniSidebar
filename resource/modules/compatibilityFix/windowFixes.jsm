@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
@@ -13,6 +13,9 @@ moduleAid.LOADMODULE = function() {
 	});
 	AddonManager.getAddonByID("totaltoolbar@mozdev.org", function(addon) {
 		moduleAid.loadIf('compatibilityFix/totalToolbar', (addon && addon.isActive));
+	});
+	AddonManager.getAddonByID("isreaditlater@ideashower.com", function(addon) {
+		moduleAid.loadIf('compatibilityFix/pocket', (addon && addon.isActive));
 	});
 	moduleAid.load('compatibilityFix/lessChrome');
 	moduleAid.load('compatibilityFix/console');
@@ -31,6 +34,7 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/milewideback');
 	moduleAid.unload('compatibilityFix/delicious');
 	moduleAid.unload('compatibilityFix/totalToolbar');
+	moduleAid.unload('compatibilityFix/pocket');
 	moduleAid.unload('compatibilityFix/lessChrome');
 	moduleAid.unload('compatibilityFix/console');
 	moduleAid.unload('compatibilityFix/dmt');
