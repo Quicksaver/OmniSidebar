@@ -6,6 +6,7 @@
 		<broadcaster id="viewConsole1Sidebar"
 			label="&consoleSidebar.label;"
 			tooltiptext="&consoleSidebar.tooltip;" 
+			accesskey="&consoleSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
@@ -16,7 +17,6 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="menu_console1Sidebar"
-			accesskey="E"
 			observes="viewConsole1Sidebar" />
 	</menupopup>
 	

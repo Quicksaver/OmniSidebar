@@ -1,23 +1,29 @@
 <!ENTITY addonsSidebar.label "Gestionnaire de modules">
 <!ENTITY addonsSidebar.tooltip "Ouvrir le gestionnaire de modules dans le panneau latéral">
+<!ENTITY addonsSidebar.accesskey "G">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">
 <!ENTITY DOMInspectorSidebar.tooltip "Ouvrir l'inspecteur DOM dans le panneau latéral">
+<!ENTITY DOMInspectorSidebar.accesskey "O">
 <!ENTITY PageInfoSidebar.label "Afficher les infos sur la page">
 <!ENTITY PageInfoSidebar.tooltip "Affiche les informations à propos de la page sur laquelle vous êtes">
+<!ENTITY PageInfoSidebar.accesskey "i">
 <!ENTITY BlankSidebar.label "Page vierge">
 <!ENTITY BlankSidebar.tooltip "Ouvrir une page vierge dans le panneau latéral">
 <!ENTITY URISidebar.tooltip "Indiquez un emplacement à ouvrir dans le panneau latéral">
 <!ENTITY URISidebar.buttonLabel "Go">
 <!ENTITY consoleSidebar.label "Console d'erreurs">
 <!ENTITY consoleSidebar.tooltip "Ouvrir la console d'erreurs dans le panneau latéral">
+<!ENTITY consoleSidebar.accesskey "C">
 <!ENTITY dmtSidebar.label "Téléchargements">
 <!ENTITY dmtSidebar.tooltip "Afficher la progression des téléchargements en cours">
+<!ENTITY dmtSidebar.accesskey "h">
 <!ENTITY omnisidebarToolbar.label "Barre d'outils du panneau latéral">
 <!ENTITY omnisidebarToolbarTwin.label "Barre d'outils du panneau latéral secondaire">
 <!ENTITY omnisidebarOptions.title "Options d'OmniSidebar">
 <!ENTITY omnisidebarButton.label "Panneau latéral">
 <!ENTITY omnisidebarButtonMain.label "Panneau latéral principal">
 <!ENTITY omnisidebarButtonTwin.label "Panneau latéral secondaire">
+<!ENTITY omnisidebarButtonTwin.accesskey "s">
 <!ENTITY omnisidebarButton.tooltip "Ouvrir le panneau latéral">
 <!ENTITY omnisidebarButtonMain.tooltip "Ouvrir le panneau latéral principal">
 <!ENTITY omnisidebarButtonTwin.tooltip "Ouvrir le panneau latéral secondaire">

@@ -6,6 +6,7 @@
 		<broadcaster id="objName-viewAddonSidebar"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
+			accesskey="&addonsSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
@@ -16,7 +17,6 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_addonsSidebar"
-			accesskey="A"
 			observes="objName-viewAddonSidebar" />
 	</menupopup>
 	

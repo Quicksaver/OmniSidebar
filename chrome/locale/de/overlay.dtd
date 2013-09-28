@@ -1,23 +1,29 @@
 <!ENTITY addonsSidebar.label "Add-ons-Manager">
 <!ENTITY addonsSidebar.tooltip "Add-ons-Manager in der Sidebar öffnen">
+<!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "DOM Inspector in der Sidebar öffnen">
+<!ENTITY DOMInspectorSidebar.accesskey "O">
 <!ENTITY PageInfoSidebar.label "Seiteninformationen">
 <!ENTITY PageInfoSidebar.tooltip "Informationen über die geöffnete Seite anzeigen">
+<!ENTITY PageInfoSidebar.accesskey "i">
 <!ENTITY BlankSidebar.label "Leere Seite">
 <!ENTITY BlankSidebar.tooltip "Leere Seite in der Sidebar öffnen">
 <!ENTITY URISidebar.tooltip "Eine zu öffnende Adresse eintippen">
 <!ENTITY URISidebar.buttonLabel "Öffnen">
 <!ENTITY consoleSidebar.label "Fehlerkonsole">
 <!ENTITY consoleSidebar.tooltip "Fehlerkonsole in der Sidebar öffnen">
+<!ENTITY consoleSidebar.accesskey "F">
 <!ENTITY dmtSidebar.label "Downloads">
 <!ENTITY dmtSidebar.tooltip "Download-Fortschritt anzeigen">
+<!ENTITY dmtSidebar.accesskey "D">
 <!ENTITY omnisidebarToolbar.label "Sidebar-Symbolleiste">
 <!ENTITY omnisidebarToolbarTwin.label "Symbolleiste für zweite Sidebar">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
 <!ENTITY omnisidebarButton.label "Sidebar">
 <!ENTITY omnisidebarButtonMain.label "Erste Sidebar">
 <!ENTITY omnisidebarButtonTwin.label "Zweite Sidebar">
+<!ENTITY omnisidebarButtonTwin.accesskey "e">
 <!ENTITY omnisidebarButton.tooltip "Sidebar öffnen">
 <!ENTITY omnisidebarButtonMain.tooltip "Erste Sidebar öffnen">
 <!ENTITY omnisidebarButtonTwin.tooltip "Zweite Sidebar öffnen">

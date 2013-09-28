@@ -20,7 +20,7 @@
 		
 		<menu id="objName-viewTwinSidebarMenuMenu"
 			label="&omnisidebarButtonTwin.label;"
-			accesskey="w"
+			accesskey="&omnisidebarButtonTwin.accesskey;"
 			insertafter="viewSidebarMenuMenu">
 			<menupopup id="objName-viewTwinSidebarMenu"
 				twinSidebar="true"

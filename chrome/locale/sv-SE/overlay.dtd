@@ -1,23 +1,29 @@
 <!ENTITY addonsSidebar.label "Tilläggshanteraren">
 <!ENTITY addonsSidebar.tooltip "Öppna tilläggshanteraren i sidopanelen">
+<!ENTITY addonsSidebar.accesskey "T">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Öppna DOM Inspector i sidopanelen">
+<!ENTITY DOMInspectorSidebar.accesskey "O">
 <!ENTITY PageInfoSidebar.label "Visa sidinfo">
 <!ENTITY PageInfoSidebar.tooltip "Visa detaljerad information om sidan du besöker">
+<!ENTITY PageInfoSidebar.accesskey "V">
 <!ENTITY BlankSidebar.label "Tom sida">
 <!ENTITY BlankSidebar.tooltip "Öppna en tom sida i sidopanelen">
 <!ENTITY URISidebar.tooltip "Ange en plats att öppna i sidopanelen">
 <!ENTITY URISidebar.buttonLabel "Gå">
 <!ENTITY consoleSidebar.label "Felkonsolen">
 <!ENTITY consoleSidebar.tooltip "Öppna felkonsolen i sidopanelen">
+<!ENTITY consoleSidebar.accesskey "F">
 <!ENTITY dmtSidebar.label "Filhämtningar">
 <!ENTITY dmtSidebar.tooltip "Visa förloppet för pågående filhämtningar">
+<!ENTITY dmtSidebar.accesskey "h">
 <!ENTITY omnisidebarToolbar.label "Sidopanelsfältet">
 <!ENTITY omnisidebarToolbarTwin.label "Tvillingsidopanelsfältet">
 <!ENTITY omnisidebarOptions.title "OmniSidebar: Inställningar">
 <!ENTITY omnisidebarButton.label "Sidopanelen">
 <!ENTITY omnisidebarButtonMain.label "Huvudsidopanelen">
 <!ENTITY omnisidebarButtonTwin.label "Tvillingsidopanelen">
+<!ENTITY omnisidebarButtonTwin.accesskey "T">
 <!ENTITY omnisidebarButton.tooltip "Öppna sidopanelen">
 <!ENTITY omnisidebarButtonMain.tooltip "Öppna huvudsidopanelen">
 <!ENTITY omnisidebarButtonTwin.tooltip "Öppna tvillingsidopanelen">

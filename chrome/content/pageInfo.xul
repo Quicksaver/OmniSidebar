@@ -6,6 +6,7 @@
 		<broadcaster id="objName-viewPageInfoSidebar"
 			label="&PageInfoSidebar.label;"
 			tooltiptext="&PageInfoSidebar.tooltip;"
+			accesskey="&PageInfoSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
@@ -16,7 +17,6 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_pageInfoSidebar"
-			accesskey="I"
 			observes="objName-viewPageInfoSidebar" />
 	</menupopup>
 		

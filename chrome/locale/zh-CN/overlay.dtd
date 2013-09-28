@@ -1,23 +1,29 @@
 <!ENTITY addonsSidebar.label "附加组件管理器">
 <!ENTITY addonsSidebar.tooltip "在侧栏中打开附加组件管理器">
+<!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "在侧栏中打开DOM Inspector">
+<!ENTITY DOMInspectorSidebar.accesskey "O">
 <!ENTITY PageInfoSidebar.label "查看页面信息">
 <!ENTITY PageInfoSidebar.tooltip "查看当前页面的细节信息">
+<!ENTITY PageInfoSidebar.accesskey "I">
 <!ENTITY BlankSidebar.label "空白页">
 <!ENTITY BlankSidebar.tooltip "在侧栏中打开空白页">
 <!ENTITY URISidebar.tooltip "输入要在侧栏中载入的地址">
 <!ENTITY URISidebar.buttonLabel "转到">
 <!ENTITY consoleSidebar.label "错误控制台">
 <!ENTITY consoleSidebar.tooltip "在侧栏打开错误控制台">
+<!ENTITY consoleSidebar.accesskey "E">
 <!ENTITY dmtSidebar.label "下载">
 <!ENTITY dmtSidebar.tooltip "显示正在进行的下载进度">
+<!ENTITY dmtSidebar.accesskey "D">
 <!ENTITY omnisidebarToolbar.label "侧栏工具栏">
 <!ENTITY omnisidebarToolbarTwin.label "副侧栏工具栏">
 <!ENTITY omnisidebarOptions.title "OmniSidebar 选项">
 <!ENTITY omnisidebarButton.label "侧栏">
 <!ENTITY omnisidebarButtonMain.label "主侧栏">
 <!ENTITY omnisidebarButtonTwin.label "副侧栏">
+<!ENTITY omnisidebarButtonTwin.accesskey "w">
 <!ENTITY omnisidebarButton.tooltip "打开侧栏">
 <!ENTITY omnisidebarButtonMain.tooltip "打开主侧栏">
 <!ENTITY omnisidebarButtonTwin.tooltip "打开副侧栏">

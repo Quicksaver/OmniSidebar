@@ -1,23 +1,29 @@
 <!ENTITY addonsSidebar.label "Gestor de Extras">
 <!ENTITY addonsSidebar.tooltip "Abrir o Gestor de Extras no Painel Lateral">
+<!ENTITY addonsSidebar.accesskey "G">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector no Painel Lateral">
+<!ENTITY DOMInspectorSidebar.accesskey "O">
 <!ENTITY PageInfoSidebar.label "Vêr informação da página">
 <!ENTITY PageInfoSidebar.tooltip "Informações detalhadas sobre a página que está a visitar">
+<!ENTITY PageInfoSidebar.accesskey "i">
 <!ENTITY BlankSidebar.label "Página em Branco">
 <!ENTITY BlankSidebar.tooltip "Abrir uma Página em Branco no Painel Lateral">
 <!ENTITY URISidebar.tooltip "Introduzir uma localização para abrir no painel lateral">
 <!ENTITY URISidebar.buttonLabel "Abrir">
 <!ENTITY consoleSidebar.label "Consola de Erros">
 <!ENTITY consoleSidebar.tooltip "Abrir a Consola de Erros no Painel Lateral">
-<!ENTITY dmtSidebar.label "Transfêrencias">
+<!ENTITY consoleSidebar.accesskey "E">
+<!ENTITY dmtSidebar.label "Transferências">
 <!ENTITY dmtSidebar.tooltip "Mostrar o Progresso Atual das Transferências">
+<!ENTITY dmtSidebar.accesskey "a">
 <!ENTITY omnisidebarToolbar.label "Barra de Ferramentas do Painel Lateral">
 <!ENTITY omnisidebarToolbarTwin.label "Barra de Ferramentas do Painel Lateral Gémeo">
 <!ENTITY omnisidebarOptions.title "Opções do Painel OmniLateral">
 <!ENTITY omnisidebarButton.label "Painel Lateral">
 <!ENTITY omnisidebarButtonMain.label "Painel Lateral Principal">
 <!ENTITY omnisidebarButtonTwin.label "Painel Lateral Gémeo">
+<!ENTITY omnisidebarButtonTwin.accesskey "G">
 <!ENTITY omnisidebarButton.tooltip "Abrir o Painel Lateral">
 <!ENTITY omnisidebarButtonMain.tooltip "Abrir o Painel Lateral Principal">
 <!ENTITY omnisidebarButtonTwin.tooltip "Abrir o Painel Lateral Gémeo">

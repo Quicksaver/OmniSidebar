@@ -6,6 +6,7 @@
 		<broadcaster id="viewDmSidebar"
 			label="&dmtSidebar.label;"
 			tooltiptext="&dmtSidebar.tooltip;" 
+			accesskey="&dmtSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
@@ -16,7 +17,6 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="menu_dmSidebar"
-			accesskey="D"
 			observes="viewDmSidebar" />
 	</menupopup>
 	
