@@ -1,10 +1,16 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.openURIBar = function(button) {
 	var broadcaster = $(button.getAttribute('broadcaster'));
 	
-	$(broadcaster.getAttribute('menu')).style.width = $(broadcaster.getAttribute('anchor')).clientWidth -2 +'px';
-	$(broadcaster.getAttribute('menu')).openPopup($(broadcaster.getAttribute('anchor')), 'after_start');
+	var anchor = $(broadcaster.getAttribute('anchor'));
+	// If the button is opened in the panel, we need to change the anchor to the actual toolbar
+	if(isAncestor(button, panel)) {
+		anchor = button.parentNode;
+	}
+	
+	$(broadcaster.getAttribute('menu')).style.width = anchor.clientWidth -2 +'px';
+	$(broadcaster.getAttribute('menu')).openPopup(anchor, 'after_start');
 };
 
 // Set the value of the developers tools URI bar to the value in the broadcaster

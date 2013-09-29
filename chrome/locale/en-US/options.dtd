@@ -1,4 +1,4 @@
-<!ENTITY Optwindow.style "width: 32em;">
+<!ENTITY Optwindow.style "width: 33em;">
 <!ENTITY addonsSidebar.label "Add-ons Manager">
 <!ENTITY omnisidebarConsole.label "Error Console">
 <!ENTITY omnisidebarDMT.label "Downloads">
@@ -53,6 +53,7 @@
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">
 
+<!ENTITY omnisidebarOptKeysetPanel.label "If the sidebar is closed, the shortcut opens the mini panel">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Sidebar Keyboard Shortcut">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">

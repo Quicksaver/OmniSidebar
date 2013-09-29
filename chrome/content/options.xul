@@ -25,6 +25,7 @@
 			<preference id="pref-mainKeysetAccel" name="extensions.omnisidebar.mainKeysetAccel" type="bool"/>
 			<preference id="pref-mainKeysetShift" name="extensions.omnisidebar.mainKeysetShift" type="bool"/>
 			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
+			<preference id="pref-mainKeysetPanel" name="extensions.omnisidebar.mainKeysetPanel" type="bool"/>
 		</preferences>
 		
 		<groupbox align="center">
@@ -161,6 +162,7 @@
 					</menupopup>
 				</menulist>
 			</hbox>
+			<checkbox dependson="!pref-mainKeysetKeycode:none" label="&omnisidebarOptKeysetPanel.label;" preference="pref-mainKeysetPanel"/>
 		</groupbox>
 		
 	</prefpane>
@@ -184,6 +186,7 @@
 			<preference id="pref-twinKeysetAccel" name="extensions.omnisidebar.twinKeysetAccel" type="bool"/>
 			<preference id="pref-twinKeysetShift" name="extensions.omnisidebar.twinKeysetShift" type="bool"/>
 			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
+			<preference id="pref-twinKeysetPanel" name="extensions.omnisidebar.twinKeysetPanel" type="bool"/>
 		</preferences>
 		
 		<box class="box-groupbox" align="center">
@@ -316,6 +319,7 @@
 					</menupopup>
 				</menulist>
 			</hbox>
+			<checkbox dependson="pref-twinSidebar,!pref-twinKeysetKeycode:none" label="&omnisidebarOptKeysetPanel.label;" preference="pref-twinKeysetPanel"/>
 		</groupbox>
 	</prefpane>
 	

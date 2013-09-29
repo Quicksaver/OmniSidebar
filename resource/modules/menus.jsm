@@ -1,6 +1,5 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
-this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
 this.__defineGetter__('contextItem', function() { return $(objName+'-toggle_sidebartoolbar_context'); });
@@ -83,7 +82,12 @@ this.populateSidebarMenu = function(menu) {
 
 this.menuItemsCheck = function(menu) {
 	for(var m=0; m<menu.childNodes.length; m++) {
-		if(!$(menu.childNodes[m].getAttribute('observes'))) { continue; }
+		if(!menu.childNodes[m].getAttribute('observes')) {
+			// Social sidebar menu entry sometimes appears when it shouldn't
+			menu.childNodes[m].hidden = true;
+			
+			continue;
+		}
 		
 		toggleAttribute(menu.childNodes[m], 'checked', trueAttribute($(menu.childNodes[m].getAttribute('observes')), 'checked') && menu.getAttribute('twinSidebar') == $(menu.childNodes[m].getAttribute('observes')).getAttribute('twinSidebar'));
 	}

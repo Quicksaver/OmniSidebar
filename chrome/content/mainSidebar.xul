@@ -4,6 +4,7 @@
 	
 	<commandset id="mainCommandSet">
 		<command id="objName-cmd_mainSidebar" oncommand="toggleSidebar(this);"/>
+		<command id="objName-cmd_keyset_mainSidebar" oncommand="objName.keysetCommand(false, 'cmd_mainSidebar');"/>
 	</commandset>
 	
 	<toolbarpalette id="BrowserToolbarPalette">
@@ -12,6 +13,7 @@
 			label="&omnisidebarButton.label;"
 			tooltiptext="&omnisidebarButton.tooltip;" 
 			onload="objName.buttonLabels(this, true);"
+			onclick="return objName.shouldFollowCommand(this, false, event);"
 			command="objName-cmd_mainSidebar" />
 	</toolbarpalette>
 	
@@ -26,6 +28,23 @@
 			sidebartitle="&BlankSidebar.label;"
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
+	
+	<popupset id="mainPopupSet">
+		<menupopup id="objName-panel"
+			onpopupshowing="objName.populatePanel();"
+			onpopuphiding="objName.emptyPanel();">
+			<vbox>
+				<box id="objName-panel-toolbarContainer"/>
+				<menuseparator id="objName-panel-toolbarSeparator"/>
+				<vbox id="objName-panel-menuContainer"/>
+				<menuseparator id="objName-panel-menuSeparator"/>
+				<menuitem id="objName-panelOptions"
+					label="&omnisidebarOptions.title;"
+					autoCheck="false"
+					oncommand="objName.doOpenOptions();"/>
+			</vbox>
+		</menupopup>
+	</popupset>
 	
 	<hbox id="browser">
 		<hbox id="objName-switch"

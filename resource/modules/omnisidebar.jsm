@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.21';
+moduleAid.VERSION = '1.1.0';
 
 this.customizing = false;
 
@@ -24,6 +24,7 @@ this.mainSidebar = {
 	get resizer () { return $(objName+'-resizer'); },
 	get sidebar () { return $('sidebar'); },
 	get title () { return $('sidebar-title'); },
+	get titleButton () { return !prefAid.hideheadertitle && prefAid.titleButton; },
 	get docker () { return $(objName+'-dock_button'); },
 	get toolbar () { return $(objName+'-Toolbar'); },
 	get toolbarBroadcaster () { return $(objName+'-toggleSideToolbar'); },
@@ -45,6 +46,7 @@ this.mainSidebar = {
 	set lastCommand (v) { return prefAid.lastcommand = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommand'); },
 	get useSwitch () { return prefAid.useSwitch; },
+	get keysetPanel () { return prefAid.mainKeysetPanel; },
 	get above () { return prefAid.renderabove; },
 	get autoHide () { return prefAid.autoHide; },
 	get autoClose () { return prefAid.autoClose; },
@@ -77,6 +79,7 @@ this.twinSidebar = {
 	get resizer () { return $(objName+'-resizer-twin'); },
 	get sidebar () { return $(objName+'-sidebar-twin'); },
 	get title () { return $(objName+'-sidebar-title-twin'); },
+	get titleButton () { return !prefAid.hideheadertitleTwin && prefAid.titleButtonTwin; },
 	get docker () { return $(objName+'-dock_button-twin'); },
 	get toolbar () { return $(objName+'-Toolbar-twin'); },
 	get toolbarBroadcaster () { return $(objName+'-toggleSideToolbar-twin'); },
@@ -98,6 +101,7 @@ this.twinSidebar = {
 	set lastCommand (v) { return prefAid.lastcommandTwin = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommandTwin'); },
 	get useSwitch () { return prefAid.useSwitchTwin; },
+	get keysetPanel () { return prefAid.twinKeysetPanel; },
 	get above () { return prefAid.renderaboveTwin; },
 	get autoHide () { return prefAid.autoHideTwin; },
 	get autoClose () { return prefAid.autoCloseTwin; },
@@ -110,7 +114,13 @@ this.twinSidebar = {
 
 this.__defineGetter__('leftSidebar', function() { return !prefAid.moveSidebars ? mainSidebar : twinSidebar; });
 this.__defineGetter__('rightSidebar', function() { return prefAid.moveSidebars ? mainSidebar : twinSidebar; });
+this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
+this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
+this.__defineGetter__('panelMenu', function() { return $(objName+'-panel-menuContainer'); });
+this.__defineGetter__('panelToolbarSeparator', function() { return $(objName+'-panel-toolbarSeparator'); });
+this.__defineGetter__('panelMenuSeparator', function() { return $(objName+'-panel-menuSeparator'); });
 
+this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('toggleSidebar', function() { return window.toggleSidebar; });
 this.__defineSetter__('toggleSidebar', function(v) { return window.toggleSidebar = v; });
 this.__defineGetter__('fireSidebarFocusedEvent', function() { return window.fireSidebarFocusedEvent; });
@@ -329,6 +339,7 @@ this.browserMinWidth = function(e) {
 this.clickSwitcher = function(e, bar) {
 	if(dispatch(bar.switcher, { type: 'clickedSwitcher', detail: { bar: bar, clickEvent: e } })
 	&& trueAttribute(bar.switcher, 'enabled')
+	&& shouldFollowCommand(bar.switcher, bar.twin, e)
 	&& e.button == 0) {
 		toggleSidebar(bar.switcher);
 	}
@@ -399,6 +410,125 @@ this.enableMainSwitcher = function() {
 	enableSwitcher(mainSidebar);
 };
 
+// Only open the panel if we're doing a right-click or a ctrl+click
+this.shouldFollowCommand = function(trigger, twin, e) {
+	var metaKey = e && (e.ctrlKey || e.metaKey);
+	if(!e || e.button == 2 || (e.button == 0 && metaKey)) {
+		var bar = (twin) ? twinSidebar : mainSidebar;
+		if(!bar.isOpen) {
+			if(e) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+			
+			var position = 'after_end';
+			if(!e) {
+				trigger = bar.button || $('navigator-toolbox');
+			} else if(trigger == bar.button) {
+				position = 'after_pointer';
+			}
+			openPanel(trigger, bar, e, position);
+			return false;
+		}
+	}
+	return true;
+};
+
+this.openPanel = function(trigger, bar, e, position) {
+	panel._bar = bar;
+	
+	var x = 0;
+	var y = 0;
+	if(position == 'after_pointer') {
+		x = e.clientX +1;
+		y = e.clientY +1;
+	}
+	
+	panel.openPopup((position != 'after_pointer') ? trigger : null, position, x, y, false, false, e);
+};
+
+this.hidePanel = function() {
+	if(panel && panel.state == 'open') { panel.hidePopup(); }
+};
+
+this.populatePanel = function() {
+	var bar = panel._bar;
+	if(bar.twin) {
+		twinTriggers.panel = panel;
+	}
+	
+	if(!bar.toolbar.collapsed) {
+		if(Services.appinfo.OS == 'WINNT' && Services.navigator.oscpu.indexOf('6.') > -1) {
+			var color = window.getComputedStyle(panel).getPropertyValue('background-color');
+			var padding = (Services.navigator.oscpu.indexOf('6.2') > -1) ? 3 : 5;
+			bar.toolbar.style.backgroundColor = color;
+			bar.toolbar.style.paddingBottom = padding+'px';
+			panelToolbarSeparator.style.marginTop = '-'+(padding -1)+'px';
+		}
+		else if(Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin') {
+			var padding = 3;
+			panelToolbarSeparator.style.marginTop = '-'+(padding)+'px';
+		}
+		panelToolbar._originalParent = bar.toolbar.parentNode;
+		panelToolbar.appendChild(bar.toolbar);
+		panelToolbarSeparator.hidden = false;
+	} else {
+		panelToolbarSeparator.hidden = true;
+	}
+	
+	if(bar.titleButton) {
+		populateSidebarMenu(panelMenu);
+		panelMenuSeparator.hidden = false;
+	} else {
+		panelMenuSeparator.hidden = true;
+	}
+};
+
+this.emptyPanel = function() {
+	var bar = panel._bar;
+	delete twinTriggers.panel;
+	
+	if(!bar.toolbar.collapsed && panelToolbar._originalParent) {
+		if(Services.appinfo.OS == 'WINNT' && Services.navigator.oscpu.indexOf('6.') > -1) {
+			bar.toolbar.style.backgroundColor = '';
+			bar.toolbar.style.paddingBottom = '';
+			panelToolbarSeparator.style.marginTop = '';
+		}
+		else if(Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin') {
+			panelToolbarSeparator.style.marginTop = '';
+		}
+		panelToolbar._originalParent.appendChild(bar.toolbar);
+		panelToolbar._originalParent = null;
+	}
+	
+	while(panelMenu.firstChild) {
+		panelMenu.removeChild(panelMenu.firstChild);
+	}
+	
+	panelMenuSeparator.hidden = true;
+	panelToolbarSeparator.hidden = true;
+};
+
+// Linux still opens the context menu when it should open only our panel
+this.panelDontOpenContext = function(e) {
+	if(e.explicitOriginalTarget
+	&& (e.explicitOriginalTarget == mainSidebar.button || e.explicitOriginalTarget == twinSidebar.button)) {
+		var bar = (e.explicitOriginalTarget == mainSidebar.button) ? mainSidebar : twinSidebar;
+		if(!bar.isOpen) {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	}
+};
+
+// Our command method for the keyboard shortcuts
+this.keysetCommand = function(twin, cmd) {
+	var bar = (twin) ? twinSidebar : mainSidebar;
+	if(!bar.keysetPanel || shouldFollowCommand(null, twin)) {
+		$(objName+'-'+cmd).doCommand();
+	}
+};
+
 // object of broadcaster id's that shouldn't be saved between sessions
 this.dontSaveBroadcasters = {};
 // object of broadcaster id's that may be added after the sidebars are loaded
@@ -417,6 +547,9 @@ this.forceReloadTriggers = {};
 
 // toggleSidebar(), fireSidebarFocusedEvent() and sidebarOnLoad() modified for use with two sidebars
 this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceBarSwitch, forceReload) {
+	// Always make sure we hide our popup
+	hidePanel();
+	
 	if(customizing) { return false; }
 	
 	if(!forceOpen) { forceOpen = false; }
@@ -676,6 +809,7 @@ moduleAid.LOADMODULE = function() {
 	
 	listenerAid.add(window, 'beforecustomization', customize, false);
 	listenerAid.add(window, 'aftercustomization', customize, false);
+	listenerAid.add(contextMenu, 'popupshowing', panelDontOpenContext, true);
 	
 	// can't let the browser be resized below the dimensions of the sidebars
 	browserMinWidth();
@@ -712,6 +846,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	listenerAid.remove(window, 'beforecustomization', customize, false);
 	listenerAid.remove(window, 'aftercustomization', customize, false);
+	listenerAid.remove(contextMenu, 'popupshowing', panelDontOpenContext, true);
 	
 	listenerAid.remove(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	listenerAid.remove(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);

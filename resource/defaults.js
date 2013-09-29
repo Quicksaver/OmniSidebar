@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.13';
+var defaultsVersion = '1.0.14';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -56,10 +56,12 @@ var prefList = {
 	mainKeysetAccel: false,
 	mainKeysetShift: false,
 	mainKeysetAlt: false,
+	mainKeysetPanel: false,
 	twinKeysetKeycode: 'VK_F8',
 	twinKeysetAccel: false,
 	twinKeysetShift: true,
 	twinKeysetAlt: false,
+	twinKeysetPanel: false,
 	
 	noInitialShow: false,
 	aboveSquared: false,

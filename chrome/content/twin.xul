@@ -4,6 +4,7 @@
 	
 	<commandset id="mainCommandSet">
 		<command id="objName-cmd_twinSidebar" oncommand="toggleSidebar(this);"/>
+		<command id="objName-cmd_keyset_twinSidebar" oncommand="objName.keysetCommand(true, 'cmd_twinSidebar');"/>
 	</commandset>
 	
 	<toolbarpalette id="BrowserToolbarPalette">
@@ -12,6 +13,7 @@
 			label="&omnisidebarButtonTwin.label;"
 			tooltiptext="&omnisidebarButtonTwin.tooltip;" 
 			onload="objName.buttonLabels(this, true);"
+			onclick="return objName.shouldFollowCommand(this, true, event);"
 			command="objName-cmd_twinSidebar" />
 	</toolbarpalette>
 	
