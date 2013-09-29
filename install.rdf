@@ -14,10 +14,18 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
 				<em:minVersion>8.0</em:minVersion>
-				<em:maxVersion>25.0a1</em:maxVersion>
+				<em:maxVersion>27.0a1</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 		
+		<em:localized>
+			<Description>
+				<em:locale>en-US</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Bring your bookmarks into view with just a gesture. Move the sidebar across the screen. Open a different sidebar by just clicking its title. And more! Keeps your sidebar simple and quick to access!</em:description>
+				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
+			</Description>
+		</em:localized>
 		<em:localized>
 			<Description>
 				<em:locale>de</em:locale>
@@ -25,14 +33,6 @@
 				<em:description>Lassen Sie sich Ihre Lesezeichen mit nur eine Geste anzeigen. Verschieben Sie die Sidebar auf dem Bildschirm. Öffnen Sie eine andere Sidebar, indem Sie einfach auf den Sidebar-Titel klicken. Und mehr! Hält Ihre Sidebar einfach und für schnellen Zugriff bereit!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/de/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>Archaeopteryx - BabelZilla</em:translator>
-			</Description>
-		</em:localized>
-		<em:localized>
-			<Description>
-				<em:locale>en-US</em:locale>
-				<em:name>OmniSidebar</em:name>
-				<em:description>Bring your bookmarks into view with just a gesture. Move the sidebar across the screen. Open a different sidebar by just clicking its title. And more! Keeps your sidebar simple and quick to access!</em:description>
-				<em:homepageURL>https://addons.mozilla.org/en-US/firefox/addon/omnisidebar/</em:homepageURL>
 			</Description>
 		</em:localized>
 		<em:localized>
