@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
@@ -22,6 +22,7 @@ moduleAid.LOADMODULE = function() {
 	moduleAid.load('compatibilityFix/dmt');
 	moduleAid.load('compatibilityFix/addonMgr');
 	moduleAid.load('compatibilityFix/domi');
+	moduleAid.load('compatibilityFix/scratchpad');
 	
 	// This was implemented and later apparently changed in FF20 to remove its "sidebar"
 	moduleAid.loadIf('compatibilityFix/devTools', (Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0));
@@ -40,6 +41,7 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/dmt');
 	moduleAid.unload('compatibilityFix/addonMgr');
 	moduleAid.unload('compatibilityFix/domi');
+	moduleAid.unload('compatibilityFix/scratchpad');
 	moduleAid.unload('compatibilityFix/devTools');
 	moduleAid.unload('compatibilityFix/pageInfo');
 };

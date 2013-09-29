@@ -3,6 +3,7 @@
 <!ENTITY omnisidebarConsole.label "Error Console">
 <!ENTITY omnisidebarDMT.label "Downloads">
 <!ENTITY omnisidebarPageInfo.label "Page Info">
+<!ENTITY omnisidebarScratchpad.label "Scratchpad">
 
 <!ENTITY omnisidebarOptions.title "OmniSidebar Options">
 <!ENTITY omnisidebarOptabout.label "About">

@@ -328,6 +328,7 @@
 			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
 			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
 			<preference id="pref-alwaysPageInfo" name="extensions.omnisidebar.alwaysPageInfo" type="bool"/>
+			<preference id="pref-alwaysScratchpad" name="extensions.omnisidebar.alwaysScratchpad" type="bool"/>
 			<preference id="pref-forceOpenToolbars" name="extensions.omnisidebar.forceOpenToolbars" type="bool"/>
 			<preference id="pref-forceOpenMenus" name="extensions.omnisidebar.forceOpenMenus" type="bool"/>
 			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
@@ -388,6 +389,7 @@
 				<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
 				<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
 				<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
+				<checkbox label="&omnisidebarScratchpad.label;" preference="pref-alwaysScratchpad"/>
 			</groupbox>
 			<groupbox align="start">
 				<caption label="&omnisidebarOptforceOpen.label;"/>

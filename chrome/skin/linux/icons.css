@@ -20,6 +20,10 @@
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
+	#omnisidebar-scratchpad_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(0px 96px 24px 72px) !important;
+	}
 	.uri-sidebar-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 72px 24px 48px) !important;

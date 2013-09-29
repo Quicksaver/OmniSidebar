@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="scratchpad-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="objName-viewScratchpadSidebar"
+			label="&scratchpadSidebar.label;"
+			tooltiptext="&scratchpadSidebar.tooltip;"
+			accesskey="&scratchpadSidebar.accesskey;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://browser/content/devtools/scratchpad.xul"
+			sidebartitle="&scratchpadSidebar.label;"
+			oncommand="toggleSidebar(this);" />
+	</broadcasterset>
+	
+	<menupopup id="viewSidebarMenu">
+		<menuitem id="objName-menu_scratchpadSidebar"
+			observes="objName-viewScratchpadSidebar" />
+	</menupopup>
+	
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="objName-scratchpad_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
+			label="&scratchpadSidebar.label;"
+			tooltiptext="&scratchpadSidebar.tooltip;"
+			observes="objName-viewScratchpadSidebar" />
+	</toolbarpalette>
+	
+</overlay>

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.setTransparency = function() {
 	styleAid.unload('glassStyleTransparency');
@@ -39,6 +39,7 @@ moduleAid.LOADMODULE = function() {
 	styleAid.load('glassStyleStylish', 'glass/glass-stylish');
 	styleAid.load('glassStyleDOMInspector', 'glass/glass-domi');
 	styleAid.load('glassStylePocket', 'glass/glass-pocket');
+	styleAid.load('glassStyleScratchpad', 'glass/glass-scratchpad');
 	
 	prefAid.listen('transparency', setTransparency);
 	setTransparency();
@@ -62,6 +63,7 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('glassStyleStylish');
 	styleAid.unload('glassStyleDOMInspector');
 	styleAid.unload('glassStylePocket');
+	styleAid.unload('glassStyleScratchpad');
 	
 	styleAid.unload('glassStyleTransparency');
 	prefAid.unlisten('transparency', setTransparency);

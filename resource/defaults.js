@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.12';
+var defaultsVersion = '1.0.13';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -50,6 +50,7 @@ var prefList = {
 	alwaysConsole: false,
 	alwaysDMT: false,
 	alwaysPageInfo: false,
+	alwaysScratchpad: false,
 	
 	mainKeysetKeycode: 'VK_F8',
 	mainKeysetAccel: false,
@@ -78,6 +79,9 @@ function startAddon(window) {
 }
 
 function stopAddon(window) {
+	// Make sure we are ready to disable the add-on
+	dispatch(window, { type: objName+'-disabled', cancelable: false });
+	
 	removeObject(window);
 }
 

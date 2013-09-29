@@ -7,6 +7,9 @@
 <!ENTITY PageInfoSidebar.label "View Page Info">
 <!ENTITY PageInfoSidebar.tooltip "View details about the page you're on">
 <!ENTITY PageInfoSidebar.accesskey "I">
+<!ENTITY scratchpadSidebar.label "Scratchpad">
+<!ENTITY scratchpadSidebar.tooltip "Open the Scratchpad in the Sidebar">
+<!ENTITY scratchpadSidebar.accesskey "p">
 <!ENTITY BlankSidebar.label "Blank Page">
 <!ENTITY BlankSidebar.tooltip "Open a blank page in the Sidebar">
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">

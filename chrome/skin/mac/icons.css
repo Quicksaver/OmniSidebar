@@ -20,6 +20,10 @@
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(24px 48px 48px 24px) !important; /* default is color */
 	}
+	#omnisidebar-scratchpad_sidebar_button {
+		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
+		-moz-image-region: rect(24px 96px 48px 72px) !important; /* default is color */
+	}
 	.uri-sidebar-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 72px 24px 48px) !important;
@@ -38,6 +42,9 @@
 	}
 	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-dominspector_sidebar_button {
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
+	}
+	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-scratchpad_sidebar_button {
+		-moz-image-region: rect(0px 96px 24px 72px) !important;
 	}
 	
 	/* Color icons */

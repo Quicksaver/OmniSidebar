@@ -296,7 +296,7 @@
 /* Other stuff */
 
 .inSidebar toolbox,
-.inSidebar toolbar {
+.inSidebar toolbar:not(#sp-toolbar) {
 	-moz-appearance: none !important;
 	background: rgba(0, 0, 0, 0) !important;
 	margin: 0 !important;

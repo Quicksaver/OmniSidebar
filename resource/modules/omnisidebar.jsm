@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.20';
+moduleAid.VERSION = '1.0.21';
 
 this.customizing = false;
 
@@ -417,7 +417,7 @@ this.forceReloadTriggers = {};
 
 // toggleSidebar(), fireSidebarFocusedEvent() and sidebarOnLoad() modified for use with two sidebars
 this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceBarSwitch, forceReload) {
-	if(customizing) { return; }
+	if(customizing) { return false; }
 	
 	if(!forceOpen) { forceOpen = false; }
 	if(!twin) { twin = false; }
@@ -486,9 +486,18 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	}
 	
 	var sidebarBroadcaster = $(commandID);
-	if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
+	if(!sidebarBroadcaster) { return false; } // Prevent some unforseen error here
 	
-	if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: { bar: bar } })) { return; }
+	if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: {
+		bar: bar,
+		commandID: commandID,
+		forceOpen: forceOpen,
+		forceBlank: forceBlank,
+		forceBarSwitch: forceBarSwitch,
+		forceReload: forceReload
+	} })) {
+		return false;
+	}
 	
 	// Can't let both sidebars display the same page, it becomes unstable
 	if(trueAttribute(sidebarBroadcaster, "checked")
@@ -499,12 +508,10 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 				bar.lastCommandReset();
 				commandID = bar.lastCommand;
 				sidebarBroadcaster = $(commandID);
-				if(!sidebarBroadcaster) { return; } // Prevent some unforseen error here
+				if(!sidebarBroadcaster) { return false; } // Prevent some unforseen error here
 			} else {
-				toggleSidebar(commandID, false, !twin);
-				if(!forceBarSwitch) {
-					return;
-				}
+				if(!toggleSidebar(commandID, false, !twin)) { return false; }
+				if(!forceBarSwitch) { return true; }
 			}
 	}
 	
@@ -529,7 +536,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 			}
 			
 			dispatch(bar.sidebar, { type: 'endToggleSidebar', cancelable: false, detail: { bar: bar } });
-			return;
+			return true;
 		}
 	}
 	
@@ -565,6 +572,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	}
 	
 	dispatch(bar.sidebar, { type: 'endToggleSidebar', cancelable: false, detail: { bar: bar } });
+	return true;
 };
 
 this.fireOmniSidebarFocusedEvent = function(twin) {
