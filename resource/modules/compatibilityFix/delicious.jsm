@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 // I was overriding the delicious keyset before (ctrl+shift+S) I don't know why. Maybe so it wouldn't conflict with my own keyset at the time?
 // I'm not doing that anymore.
@@ -24,6 +24,15 @@ this.watchHiddenBox = function(e) {
 	}
 };
 
+// Delicious also likes to hide my sidebar header...
+this.deliciousHeaderHideFix = function(e) {
+	if(e.target && e.target.document && e.target.document.baseURI == 'chrome://ybookmarks/content/ybsidebar.xul') {
+		// Don't bother undoing this, when the sidebar is closed this is lost, plus we close the delicious sidebar when we unload (easier this way), so no issues here.
+		var ybPanel = e.target.document.getElementById('ybSidebarPanel');
+		ybPanel.setSearchBoxFocus = function() { this._searchBox.focus(); };
+	}
+};
+
 moduleAid.LOADMODULE = function() {
 	styleAid.load('deliciousFix', 'delicious');
 	
@@ -38,6 +47,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('sidebar.pinned', keepDeliciousPinned);
 	keepDeliciousPinned();
 	
+	listenerAid.add(window, 'SidebarFocusedSync', deliciousHeaderHideFix);
 	listenerAid.add(window, 'sidebarAbove', watchHiddenBox);
 	watchHiddenBox(mainSidebar);
 	watchHiddenBox(twinSidebar);
@@ -47,6 +57,7 @@ moduleAid.UNLOADMODULE = function() {
 	watchHiddenBox(mainSidebar);
 	watchHiddenBox(twinSidebar);
 	listenerAid.remove(window, 'sidebarAbove', watchHiddenBox);
+	listenerAid.remove(window, 'SidebarFocusedSync', deliciousHeaderHideFix);
 	
 	prefAid.unlisten('sidebar.pinned', keepDeliciousPinned);
 	
@@ -56,6 +67,8 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	if(UNLOADED) {
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewYBookmarksSidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewYBookmarksSidebar') { closeSidebar(twinSidebar); }
 		styleAid.unload('deliciousFix', 'delicious');
 	}
 };
