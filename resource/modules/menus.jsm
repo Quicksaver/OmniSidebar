@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -85,7 +85,12 @@ this.menuItemsCheck = function(menu) {
 		if(!menu.childNodes[m].getAttribute('observes')) {
 			// Social sidebar menu entry sometimes appears when it shouldn't
 			menu.childNodes[m].hidden = true;
-			
+		}
+		
+		// No point in having this menu entry in our lists if it isn't going to be visible
+		if(menu.childNodes[m].hidden) {
+			menu.removeChild(menu.childNodes[m]);
+			m--;
 			continue;
 		}
 		
