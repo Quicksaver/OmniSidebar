@@ -18,6 +18,9 @@
 	</toolbarpalette>
 	
 	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="viewBookmarksSidebar" accesskey="&bookmarksSidebar.accesskey;"/>
+		<broadcaster id="viewHistorySidebar" accesskey="&historySidebar.accesskey;"/>
+		
 		<broadcaster id="objName-viewBlankSidebar"
 			label="&BlankSidebar.label;"
 			tooltiptext="&BlankSidebar.tooltip;"

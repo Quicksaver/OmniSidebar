@@ -5,6 +5,7 @@
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-toggleSideToolbar-twin"
 			label="&omnisidebarToolbarTwin.label;"
+			accesskey="&omnisidebarToolbarTwin.accesskey;"
 			type="checkbox"
 			oncommand="objName.toggleToolbar(true);" />
 	</broadcasterset>

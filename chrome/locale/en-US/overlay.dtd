@@ -15,6 +15,9 @@
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
 
+<!ENTITY bookmarksSidebar.accesskey "B">
+<!ENTITY historySidebar.accesskey "H">
+
 <!ENTITY consoleSidebar.label "Error Console">
 <!ENTITY consoleSidebar.tooltip "Open the Error Console in the Sidebar">
 <!ENTITY consoleSidebar.accesskey "E">
@@ -23,8 +26,11 @@
 <!ENTITY dmtSidebar.accesskey "D">
 
 <!ENTITY omnisidebarToolbar.label "Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.accesskey "w">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Options">
+<!ENTITY omnisidebarOptions.accesskey "r">
 
 <!ENTITY omnisidebarButton.label "Sidebar">
 <!ENTITY omnisidebarButtonMain.label "Main Sidebar">

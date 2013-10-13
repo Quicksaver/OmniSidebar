@@ -13,6 +13,7 @@
 				<menuseparator id="objName-panel-menuSeparator"/>
 				<menuitem id="objName-panelOptions"
 					label="&omnisidebarOptions.title;"
+					accesskey="&omnisidebarOptions.accesskey;"
 					autoCheck="false"
 					oncommand="objName.doOpenOptions();"/>
 			</vbox>

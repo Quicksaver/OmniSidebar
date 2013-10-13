@@ -9,6 +9,7 @@
 			
 		<menuitem id="objName-contextOptions"
 			label="&omnisidebarOptions.title;"
+			accesskey="&omnisidebarOptions.accesskey;"
 			oncommand="objName.doOpenOptions();"
 			hidden="true"/>
 	</menupopup>
@@ -18,6 +19,7 @@
 			
 		<menuitem id="objName-menuoptions_tools"
 			label="&omnisidebarOptions.title;"
+			accesskey="&omnisidebarOptions.accesskey;"
 			oncommand="objName.doOpenOptions();"
 			insertafter="appmenu_preferences"/>
 	</menupopup>
@@ -29,6 +31,7 @@
 	<menupopup id="menu_ToolsPopup">
 		<menuitem id="objName-menuoptions_viewmenu"
 			label="&omnisidebarOptions.title;"
+			accesskey="&omnisidebarOptions.accesskey;"
 			oncommand="objName.doOpenOptions();"
 			insertbefore="prefSep"/>
 	</menupopup>
