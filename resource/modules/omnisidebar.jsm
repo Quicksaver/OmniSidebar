@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.customizing = false;
 
@@ -114,12 +114,8 @@ this.twinSidebar = {
 
 this.__defineGetter__('leftSidebar', function() { return !prefAid.moveSidebars ? mainSidebar : twinSidebar; });
 this.__defineGetter__('rightSidebar', function() { return prefAid.moveSidebars ? mainSidebar : twinSidebar; });
-this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
-this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
-this.__defineGetter__('panelMenu', function() { return $(objName+'-panel-menuContainer'); });
-this.__defineGetter__('panelToolbarSeparator', function() { return $(objName+'-panel-toolbarSeparator'); });
-this.__defineGetter__('panelMenuSeparator', function() { return $(objName+'-panel-menuSeparator'); });
 
+this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('toggleSidebar', function() { return window.toggleSidebar; });
 this.__defineSetter__('toggleSidebar', function(v) { return window.toggleSidebar = v; });
 this.__defineGetter__('fireSidebarFocusedEvent', function() { return window.fireSidebarFocusedEvent; });

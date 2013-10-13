@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="miniPanel-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<popupset id="mainPopupSet">
+		<menupopup id="objName-panel"
+			onpopupshowing="objName.populatePanel();"
+			onpopuphiding="objName.emptyPanel();">
+			<vbox>
+				<box id="objName-panel-toolbarContainer"/>
+				<menuseparator id="objName-panel-toolbarSeparator"/>
+				<vbox id="objName-panel-menuContainer"/>
+				<menuseparator id="objName-panel-menuSeparator"/>
+				<menuitem id="objName-panelOptions"
+					label="&omnisidebarOptions.title;"
+					autoCheck="false"
+					oncommand="objName.doOpenOptions();"/>
+			</vbox>
+		</menupopup>
+	</popupset>
+	
+</overlay>

@@ -29,23 +29,6 @@
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
 	
-	<popupset id="mainPopupSet">
-		<menupopup id="objName-panel"
-			onpopupshowing="objName.populatePanel();"
-			onpopuphiding="objName.emptyPanel();">
-			<vbox>
-				<box id="objName-panel-toolbarContainer"/>
-				<menuseparator id="objName-panel-toolbarSeparator"/>
-				<vbox id="objName-panel-menuContainer"/>
-				<menuseparator id="objName-panel-menuSeparator"/>
-				<menuitem id="objName-panelOptions"
-					label="&omnisidebarOptions.title;"
-					autoCheck="false"
-					oncommand="objName.doOpenOptions();"/>
-			</vbox>
-		</menupopup>
-	</popupset>
-	
 	<hbox id="browser">
 		<hbox id="objName-switch"
 			class="omnisidebar_switch"
