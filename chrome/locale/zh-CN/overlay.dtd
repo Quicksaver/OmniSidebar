@@ -7,10 +7,15 @@
 <!ENTITY PageInfoSidebar.label "查看页面信息">
 <!ENTITY PageInfoSidebar.tooltip "查看当前页面的细节信息">
 <!ENTITY PageInfoSidebar.accesskey "I">
+<!ENTITY scratchpadSidebar.label "代码片段速记器">
+<!ENTITY scratchpadSidebar.tooltip "在侧栏打开代码片段速记器">
+<!ENTITY scratchpadSidebar.accesskey "p">
 <!ENTITY BlankSidebar.label "空白页">
 <!ENTITY BlankSidebar.tooltip "在侧栏中打开空白页">
 <!ENTITY URISidebar.tooltip "输入要在侧栏中载入的地址">
 <!ENTITY URISidebar.buttonLabel "转到">
+<!ENTITY bookmarksSidebar.accesskey "B">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "错误控制台">
 <!ENTITY consoleSidebar.tooltip "在侧栏打开错误控制台">
 <!ENTITY consoleSidebar.accesskey "E">
@@ -18,8 +23,11 @@
 <!ENTITY dmtSidebar.tooltip "显示正在进行的下载进度">
 <!ENTITY dmtSidebar.accesskey "D">
 <!ENTITY omnisidebarToolbar.label "侧栏工具栏">
+<!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "副侧栏工具栏">
+<!ENTITY omnisidebarToolbarTwin.accesskey "w">
 <!ENTITY omnisidebarOptions.title "OmniSidebar 选项">
+<!ENTITY omnisidebarOptions.accesskey "r">
 <!ENTITY omnisidebarButton.label "侧栏">
 <!ENTITY omnisidebarButtonMain.label "主侧栏">
 <!ENTITY omnisidebarButtonTwin.label "副侧栏">

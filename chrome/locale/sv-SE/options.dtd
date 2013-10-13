@@ -3,7 +3,8 @@
 <!ENTITY omnisidebarConsole.label "Felkonsol">
 <!ENTITY omnisidebarDMT.label "Filhämtningar">
 <!ENTITY omnisidebarPageInfo.label "Sidinfo">
-<!ENTITY omnisidebarOptions.title "OmniSidebar: Inställningar">
+<!ENTITY omnisidebarScratchpad.label "Anteckningsblock">
+<!ENTITY omnisidebarOptions.title "Inställningar för OmniSidebar">
 <!ENTITY omnisidebarOptabout.label "Om">
 <!ENTITY omnisidebarButtonMain.label "Huvudsidopanelen">
 <!ENTITY omnisidebarButtonTwin.label "Tvillingsidopanelen">
@@ -42,6 +43,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (ingen ändring)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Färgglad">
+<!ENTITY omnisidebarOptKeysetPanel.label "Om sidopanelen är stängd öppnar kortkommandot minipanelen">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Kortkommando för sidopanelen">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Skift">

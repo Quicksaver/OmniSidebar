@@ -3,6 +3,7 @@
 <!ENTITY omnisidebarConsole.label "Console d'erreurs">
 <!ENTITY omnisidebarDMT.label "Téléchargements">
 <!ENTITY omnisidebarPageInfo.label "Infos sur la page">
+<!ENTITY omnisidebarScratchpad.label "Ardoise JavaScript">
 <!ENTITY omnisidebarOptions.title "Options d'OmniSidebar">
 <!ENTITY omnisidebarOptabout.label "À propos">
 <!ENTITY omnisidebarButtonMain.label "Panneau latéral principal">
@@ -42,6 +43,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Défaut (pas de modification)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Multicolore">
+<!ENTITY omnisidebarOptKeysetPanel.label "Si le panneau latéral est fermé, le raccourci ouvre le mini-panneau">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Raccourcis clavier du panneau latéral">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Maj">

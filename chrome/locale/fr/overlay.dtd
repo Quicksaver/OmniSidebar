@@ -7,10 +7,15 @@
 <!ENTITY PageInfoSidebar.label "Afficher les infos sur la page">
 <!ENTITY PageInfoSidebar.tooltip "Affiche les informations à propos de la page sur laquelle vous êtes">
 <!ENTITY PageInfoSidebar.accesskey "i">
+<!ENTITY scratchpadSidebar.label "Ardoise JavaScript">
+<!ENTITY scratchpadSidebar.tooltip "Ouvre l'ardoise JavaScript dans le panneau latéral">
+<!ENTITY scratchpadSidebar.accesskey "d">
 <!ENTITY BlankSidebar.label "Page vierge">
 <!ENTITY BlankSidebar.tooltip "Ouvrir une page vierge dans le panneau latéral">
 <!ENTITY URISidebar.tooltip "Indiquez un emplacement à ouvrir dans le panneau latéral">
 <!ENTITY URISidebar.buttonLabel "Go">
+<!ENTITY bookmarksSidebar.accesskey "M">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "Console d'erreurs">
 <!ENTITY consoleSidebar.tooltip "Ouvrir la console d'erreurs dans le panneau latéral">
 <!ENTITY consoleSidebar.accesskey "C">
@@ -18,8 +23,11 @@
 <!ENTITY dmtSidebar.tooltip "Afficher la progression des téléchargements en cours">
 <!ENTITY dmtSidebar.accesskey "h">
 <!ENTITY omnisidebarToolbar.label "Barre d'outils du panneau latéral">
+<!ENTITY omnisidebarToolbar.accesskey "l">
 <!ENTITY omnisidebarToolbarTwin.label "Barre d'outils du panneau latéral secondaire">
+<!ENTITY omnisidebarToolbarTwin.accesskey "s">
 <!ENTITY omnisidebarOptions.title "Options d'OmniSidebar">
+<!ENTITY omnisidebarOptions.accesskey "r">
 <!ENTITY omnisidebarButton.label "Panneau latéral">
 <!ENTITY omnisidebarButtonMain.label "Panneau latéral principal">
 <!ENTITY omnisidebarButtonTwin.label "Panneau latéral secondaire">

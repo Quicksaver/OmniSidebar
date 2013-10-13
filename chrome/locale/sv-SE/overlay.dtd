@@ -7,10 +7,15 @@
 <!ENTITY PageInfoSidebar.label "Visa sidinfo">
 <!ENTITY PageInfoSidebar.tooltip "Visa detaljerad information om sidan du besöker">
 <!ENTITY PageInfoSidebar.accesskey "V">
+<!ENTITY scratchpadSidebar.label "Anteckningsblock">
+<!ENTITY scratchpadSidebar.tooltip "Öppna anteckningsblocket i sidopanelen">
+<!ENTITY scratchpadSidebar.accesskey "A">
 <!ENTITY BlankSidebar.label "Tom sida">
 <!ENTITY BlankSidebar.tooltip "Öppna en tom sida i sidopanelen">
 <!ENTITY URISidebar.tooltip "Ange en plats att öppna i sidopanelen">
 <!ENTITY URISidebar.buttonLabel "Gå">
+<!ENTITY bookmarksSidebar.accesskey "B">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "Felkonsolen">
 <!ENTITY consoleSidebar.tooltip "Öppna felkonsolen i sidopanelen">
 <!ENTITY consoleSidebar.accesskey "F">
@@ -18,8 +23,11 @@
 <!ENTITY dmtSidebar.tooltip "Visa förloppet för pågående filhämtningar">
 <!ENTITY dmtSidebar.accesskey "h">
 <!ENTITY omnisidebarToolbar.label "Sidopanelsfältet">
+<!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "Tvillingsidopanelsfältet">
+<!ENTITY omnisidebarToolbarTwin.accesskey "v">
 <!ENTITY omnisidebarOptions.title "OmniSidebar: Inställningar">
+<!ENTITY omnisidebarOptions.accesskey "r">
 <!ENTITY omnisidebarButton.label "Sidopanelen">
 <!ENTITY omnisidebarButtonMain.label "Huvudsidopanelen">
 <!ENTITY omnisidebarButtonTwin.label "Tvillingsidopanelen">

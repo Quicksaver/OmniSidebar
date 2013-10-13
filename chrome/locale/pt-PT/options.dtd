@@ -3,6 +3,7 @@
 <!ENTITY omnisidebarConsole.label "Consola de Erros">
 <!ENTITY omnisidebarDMT.label "Transferências">
 <!ENTITY omnisidebarPageInfo.label "Informação da página">
+<!ENTITY omnisidebarScratchpad.label "Scratchpad">
 <!ENTITY omnisidebarOptions.title "Opções do Painel OmniLateral">
 <!ENTITY omnisidebarOptabout.label "Sobre">
 <!ENTITY omnisidebarButtonMain.label "Painel Lateral Principal">
@@ -42,6 +43,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Sem Mudança">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Coloridos">
+<!ENTITY omnisidebarOptKeysetPanel.label "Se o painel lateral estiver fechado, o atalho abre o mini painel">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Atalho de teclado para o painel lateral">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
