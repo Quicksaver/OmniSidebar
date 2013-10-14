@@ -6,11 +6,16 @@
 <!ENTITY DOMInspectorSidebar.accesskey "O">
 <!ENTITY PageInfoSidebar.label "Seiteninformationen">
 <!ENTITY PageInfoSidebar.tooltip "Informationen über die geöffnete Seite anzeigen">
-<!ENTITY PageInfoSidebar.accesskey "i">
+<!ENTITY PageInfoSidebar.accesskey "m">
+<!ENTITY scratchpadSidebar.label "JavaScript-Umgebung">
+<!ENTITY scratchpadSidebar.tooltip "JavaScript-Umgebung in der Sidebar öffnen">
+<!ENTITY scratchpadSidebar.accesskey "J">
 <!ENTITY BlankSidebar.label "Leere Seite">
 <!ENTITY BlankSidebar.tooltip "Leere Seite in der Sidebar öffnen">
 <!ENTITY URISidebar.tooltip "Eine zu öffnende Adresse eintippen">
 <!ENTITY URISidebar.buttonLabel "Öffnen">
+<!ENTITY bookmarksSidebar.accesskey "L">
+<!ENTITY historySidebar.accesskey "C">
 <!ENTITY consoleSidebar.label "Fehlerkonsole">
 <!ENTITY consoleSidebar.tooltip "Fehlerkonsole in der Sidebar öffnen">
 <!ENTITY consoleSidebar.accesskey "F">
@@ -18,8 +23,11 @@
 <!ENTITY dmtSidebar.tooltip "Download-Fortschritt anzeigen">
 <!ENTITY dmtSidebar.accesskey "D">
 <!ENTITY omnisidebarToolbar.label "Sidebar-Symbolleiste">
+<!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "Symbolleiste für zweite Sidebar">
+<!ENTITY omnisidebarToolbarTwin.accesskey "z">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
+<!ENTITY omnisidebarOptions.accesskey "r">
 <!ENTITY omnisidebarButton.label "Sidebar">
 <!ENTITY omnisidebarButtonMain.label "Erste Sidebar">
 <!ENTITY omnisidebarButtonTwin.label "Zweite Sidebar">

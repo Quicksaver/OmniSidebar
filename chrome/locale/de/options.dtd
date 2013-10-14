@@ -3,6 +3,7 @@
 <!ENTITY omnisidebarConsole.label "Fehlerkonsole">
 <!ENTITY omnisidebarDMT.label "Downloads">
 <!ENTITY omnisidebarPageInfo.label "Seiteninformationen">
+<!ENTITY omnisidebarScratchpad.label "JavaScript-Umgebung">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
 <!ENTITY omnisidebarOptabout.label "Über">
 <!ENTITY omnisidebarButtonMain.label "Erste Sidebar">
@@ -42,6 +43,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (keine Veränderung)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Farbenfroh">
+<!ENTITY omnisidebarOptKeysetPanel.label "Bei geschlossener Sidebar mit Tastaturkürzel das Menü öffnen">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Tastaturkürzel für Sidebar">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Strg">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Umschalt">
