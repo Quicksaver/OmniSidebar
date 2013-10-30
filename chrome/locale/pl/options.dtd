@@ -3,6 +3,7 @@
 <!ENTITY omnisidebarConsole.label "Konsola błędów">
 <!ENTITY omnisidebarDMT.label "Pobrania">
 <!ENTITY omnisidebarPageInfo.label "Informacje o stronie">
+<!ENTITY omnisidebarScratchpad.label "Brudnopis">
 <!ENTITY omnisidebarOptions.title "OmniSidebar - Opcje">
 <!ENTITY omnisidebarOptabout.label "Informacja">
 <!ENTITY omnisidebarButtonMain.label "Główny panel boczny">
@@ -27,8 +28,8 @@
 <!ENTITY omnisidebarOptglassStyle.opaque "Brak przezroczystości">
 <!ENTITY omnisidebarOptglassStyle.transparent "Całkowicie przeźroczyste">
 <!ENTITY omnisidebarOptfx.label "Włącz efekty przejścia">
-<!ENTITY omnisidebarOptshowDelay.label "Opóźnienie automatycznego pokazywania o (ms): ">
-<!ENTITY omnisidebarOpthideDelay.label "Opóźnienie automatycznego chowania o (ms): ">
+<!ENTITY omnisidebarOptshowDelay.label "Opóźnienie automatycznego pokazywania o (ms):">
+<!ENTITY omnisidebarOpthideDelay.label "Opóźnienie automatycznego chowania o (ms):">
 <!ENTITY omnisidebarOptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
 <!ENTITY omnisidebarOptforceOpen.label "Zapobiegaj zamykaniu panelu z">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Przycisków na pasku narzędzi panelu">
@@ -42,6 +43,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Domyślny (bez zmian)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefoksa">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Kolorowy">
+<!ENTITY omnisidebarOptKeysetPanel.label "Jeśli panel boczny jest zamknięty, skrót otwiera mini panel">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Skrót klawiszowy panelu bocznego">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
