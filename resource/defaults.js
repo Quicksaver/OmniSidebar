@@ -1,7 +1,11 @@
-var defaultsVersion = '1.0.14';
+var defaultsVersion = '1.0.15';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
+	NoSync_firstEnabled: true,
+	NoSync_lastcommand: true,
+	NoSync_lastcommandTwin: true,
+	
 	minSidebarWidth: 8, // pixels
 	minSpaceBetweenSidebars: 18, // pixels
 	
