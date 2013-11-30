@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -125,7 +125,7 @@ moduleAid.LOADMODULE = function() {
 	
 	prefAid.listen('moveSidebars', updateButtons);
 	
-	if(window.document.baseURI == 'chrome://browser/content/browser.xul') {
+	if(Australis || window.document.baseURI == 'chrome://browser/content/browser.xul') {
 		listenerAid.add(window, 'beforecustomization', customizeButtonModifiers, false);
 		listenerAid.add(window, 'aftercustomization', customizeButtonModifiers, false);
 		listenerAid.add(window, 'loadedSidebarHeader', customizeButtonModifiers, false);
@@ -135,7 +135,7 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
-	if(window.document.baseURI == 'chrome://browser/content/browser.xul') {
+	if(Australis || window.document.baseURI == 'chrome://browser/content/browser.xul') {
 		for(var i=0; i<buttonsToWatch.length; i++) {
 			objectWatcher.removeAttributeWatcher($(buttonsToWatch[i].id), buttonsToWatch[i].watchAttr, updateButtonModifier);
 		}

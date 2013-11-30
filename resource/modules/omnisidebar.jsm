@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.2.2';
 
 this.customizing = false;
 
@@ -54,7 +54,8 @@ this.mainSidebar = {
 	toggleSwitcher: function() {
 		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
 	},
-	get goURI () { return $(objName+'-viewURISidebar'); }
+	get goURI () { return $(objName+'-viewURISidebar'); },
+	get goURIButton () { return $(objName+'-uri_sidebar_button'); }
 };
 
 this.twinSidebar = {
@@ -109,7 +110,8 @@ this.twinSidebar = {
 	toggleSwitcher: function() {
 		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
 	},
-	get goURI () { return $(objName+'-viewURISidebar-twin'); }
+	get goURI () { return $(objName+'-viewURISidebar-twin'); },
+	get goURIButton () { return $(objName+'-uri_sidebar_button-twin'); }
 };
 
 this.__defineGetter__('leftSidebar', function() { return !prefAid.moveSidebars ? mainSidebar : twinSidebar; });
@@ -149,7 +151,7 @@ this.buttonLabels = function(btn, onLoad) {
 
 // Toggle modules
 this.toggleButtons = function() {
-	return moduleAid.loadIf('buttons', mainSidebar.button || twinSidebar.button);
+	return moduleAid.loadIf('buttons', mainSidebar.button || twinSidebar.button || Australis && customizing);
 };
 
 this.toggleTwin = function() {
@@ -651,6 +653,11 @@ this.unloadMainSidebar = function() {
 };
 
 moduleAid.LOADMODULE = function() {
+	// This will be removed in the future, when Australis hits release
+	if(Australis) {
+		setAttribute(document.documentElement, objName+'_Australis', 'true');
+	}
+	
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
 	moduleAid.load('miniPanel');
 	
@@ -762,4 +769,8 @@ moduleAid.UNLOADMODULE = function() {
 	
 	moduleAid.unload('compatibilityFix/windowFixes');
 	moduleAid.unload('miniPanel');
+	
+	if(Australis) {
+		removeAttribute(document.documentElement, objName+'_Australis');
+	}
 };

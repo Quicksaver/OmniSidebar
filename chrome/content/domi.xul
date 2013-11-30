@@ -25,6 +25,7 @@
 			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&DOMInspectorSidebar.label;"
 			tooltiptext="&DOMInspectorSidebar.tooltip;"
+			type="custom"
 			observes="objName-viewDOMInspectorSidebar" />
 	</toolbarpalette>
 		

@@ -6,7 +6,8 @@
 		<toolbarbutton id="objName-console_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&consoleSidebar.label;"
-			tooltiptext="&consoleSidebar.tooltip;" 
+			tooltiptext="&consoleSidebar.tooltip;"
+			type="custom"
 			observes="viewConsole2Sidebar" />
 	</toolbarpalette>
 	

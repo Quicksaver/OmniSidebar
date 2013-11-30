@@ -25,6 +25,7 @@
 			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
+			type="custom"
 			observes="objName-viewAddonSidebar" />
 	</toolbarpalette>
 	

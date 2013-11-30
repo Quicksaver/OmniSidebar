@@ -43,6 +43,7 @@
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
 			removable="false"
 			position="1"
+			type="custom"
 			label="&URISidebar.buttonLabel;"
 			tooltiptext="&URISidebar.tooltip;"
 			broadcaster="objName-viewURISidebar"

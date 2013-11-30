@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -35,11 +35,12 @@ this.setContextMenu = function(e) {
 		&& !isAncestor(trigger, twinSidebar.button)
 		&& !isAncestor(trigger, twinSidebar.header));
 	
+	var before = (Australis) ? contextMenu.querySelector('#toggle_PersonalToolbar').nextSibling : contextMenu.querySelector('#toggle_addon-bar');
 	if(contextItem) {
-		contextMenu.insertBefore(contextItem, contextMenu.querySelector('#toggle_addon-bar'));
+		contextMenu.insertBefore(contextItem, before);
 	}
 	if(contextItemTwin) {
-		contextMenu.insertBefore(contextItemTwin, contextMenu.querySelector('#toggle_addon-bar'));
+		contextMenu.insertBefore(contextItemTwin, before);
 	}
 },
 
@@ -53,12 +54,13 @@ this.setAppMenu = function() {
 };
 
 this.setViewToolbarsMenu = function() {
+	var before = (Australis) ? viewToolbarsMenu.querySelector('#toggle_PersonalToolbar').nextSibling : viewToolbarsMenu.querySelector('#toggle_addon-bar');
 	if(viewToolbarsMenuItem) {
-		viewToolbarsMenu.insertBefore(viewToolbarsMenuItem, viewToolbarsMenu.querySelector('#toggle_addon-bar'));
+		viewToolbarsMenu.insertBefore(viewToolbarsMenuItem, before);
 		viewToolbarsMenuItem.hidden = false;
 	}
 	if(viewToolbarsMenuItemTwin) {
-		viewToolbarsMenu.insertBefore(viewToolbarsMenuItemTwin, viewToolbarsMenu.querySelector('#toggle_addon-bar'));
+		viewToolbarsMenu.insertBefore(viewToolbarsMenuItemTwin, before);
 		viewToolbarsMenuItemTwin.hidden = false;
 	}
 };
@@ -142,7 +144,9 @@ moduleAid.LOADMODULE = function() {
 	styleAid.load('menus', 'menus');
 	
 	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
-	listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
+	if(!Australis) {
+		listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
+	}
 	listenerAid.add(viewToolbarsMenu, 'popupshown', setViewToolbarsMenu, false);
 	
 	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
@@ -165,7 +169,9 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('titleButtonTwin', toggleMenuButtonTwin);
 	
 	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
-	listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
+	if(!Australis) {
+		listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
+	}
 	listenerAid.remove(viewToolbarsMenu, 'popupshown', setViewToolbarsMenu, false);
 	
 	// ensure the menu is properly reset when unloading

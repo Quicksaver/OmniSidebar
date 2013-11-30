@@ -11,7 +11,8 @@
 		<toolbarbutton id="objName-button-twin" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController adequate-size"
 			label="&omnisidebarButtonTwin.label;"
-			tooltiptext="&omnisidebarButtonTwin.tooltip;" 
+			tooltiptext="&omnisidebarButtonTwin.tooltip;"
+			type="custom"
 			onload="objName.buttonLabels(this, true);"
 			onclick="return objName.shouldFollowCommand(this, true, event);"
 			command="objName-cmd_twinSidebar" />

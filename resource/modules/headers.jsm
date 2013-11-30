@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -104,28 +104,48 @@ this.toolbarHasButtons = function(toolbar) {
 };
 
 this.headersCustomize = function(e) {
-	hideIt($(objName+'-sidebar-customizingLabel'), e.type == 'beforecustomization');
-	hideIt($(objName+'-sidebar-customizingLabel-twin'), e.type == 'beforecustomization');
+	customizing = e.type == 'beforecustomization';
 	
-	toggleAttribute(mainSidebar.box, 'customizing', e.type == 'beforecustomization');
-	toggleAttribute(mainSidebar.toolbar, 'flex', e.type == 'beforecustomization', '1');
-	toggleAttribute(mainSidebar.stack, 'flex', e.type == 'beforecustomization', '1');
+	hideIt($(objName+'-sidebar-customizingLabel'), customizing);
+	hideIt($(objName+'-sidebar-customizingLabel-twin'), customizing);
 	
-	toggleAttribute(twinSidebar.box, 'customizing', e.type == 'beforecustomization');
-	toggleAttribute(twinSidebar.toolbar, 'flex', e.type == 'beforecustomization', '1');
-	toggleAttribute(twinSidebar.stack, 'flex', e.type == 'beforecustomization', '1');
+	toggleAttribute(mainSidebar.toolbar, 'flex', customizing, '1');
+	toggleAttribute(mainSidebar.stack, 'flex', customizing, '2');
 	
-	toggleToolbars();
+	toggleAttribute(twinSidebar.toolbar, 'flex', customizing, '1');
+	toggleAttribute(twinSidebar.stack, 'flex', customizing, '2');
 	
-	if(e.type == 'aftercustomization') {
-		if(mainSidebar.toolbar) {
-			mainSidebar.toolbar.setAttribute('currentset', mainSidebar.toolbar.currentSet);
-			document.persist(mainSidebar.toolbar.id, 'currentset');
+	if(!Australis) {
+		// These are no longer needed with Australis
+		toggleAttribute(mainSidebar.box, 'customizing', customizing);
+		toggleAttribute(twinSidebar.box, 'customizing', customizing);
+		
+		toggleToolbars();
+		
+		if(!customizing) {
+			if(mainSidebar.toolbar) {
+				mainSidebar.toolbar.setAttribute('currentset', mainSidebar.toolbar.currentSet);
+				document.persist(mainSidebar.toolbar.id, 'currentset');
+			}
+			if(twinSidebar.toolbar) {
+				twinSidebar.toolbar.setAttribute('currentset', twinSidebar.toolbar.currentSet);
+				document.persist(twinSidebar.toolbar.id, 'currentset');
+			}
 		}
-		if(twinSidebar.toolbar) {
-			twinSidebar.toolbar.setAttribute('currentset', twinSidebar.toolbar.currentSet);
-			document.persist(twinSidebar.toolbar.id, 'currentset');
-		}
+		
+		return;
+	}
+	
+	if(customizing) {
+		overlayAid.overlayWindow(window, 'customize');
+		
+		hideIt(mainSidebar.toolbar, true);
+		hideIt(twinSidebar.toolbar, true);
+	}
+	else {
+		overlayAid.removeOverlayWindow(window, 'customize');
+		
+		toggleToolbars();
 	}
 };
 

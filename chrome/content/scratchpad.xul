@@ -25,6 +25,7 @@
 			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
 			label="&scratchpadSidebar.label;"
 			tooltiptext="&scratchpadSidebar.tooltip;"
+			type="custom"
 			observes="objName-viewScratchpadSidebar" />
 	</toolbarpalette>
 	
