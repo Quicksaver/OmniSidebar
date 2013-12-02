@@ -4,7 +4,7 @@
 
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-console_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size osb-custom-button"
 			label="&consoleSidebar.label;"
 			tooltiptext="&consoleSidebar.tooltip;"
 			type="custom"

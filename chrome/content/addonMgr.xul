@@ -22,7 +22,7 @@
 	
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-addons_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size"
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size osb-replace-button"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
 			type="custom"

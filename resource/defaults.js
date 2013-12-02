@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.15';
+var defaultsVersion = '1.0.16';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -131,11 +131,13 @@ function onStartup(aReason) {
 	windowMediator.callOnAll(startAddon, 'navigator:browser');
 	windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
 	
-	// Apply the add-on to every customize window opened and to be opened
-	windowMediator.callOnAll(startCustomize, null, "chrome://global/content/customizeToolbar.xul");
-	windowMediator.register(startCustomize, 'domwindowopened', null, "chrome://global/content/customizeToolbar.xul");
-	browserMediator.callOnAll(startCustomize, "chrome://global/content/customizeToolbar.xul");
-	browserMediator.register(startCustomize, 'pageshow', "chrome://global/content/customizeToolbar.xul");
+	if(!Australis) {
+		// Apply the add-on to every customize window opened and to be opened
+		windowMediator.callOnAll(startCustomize, null, "chrome://global/content/customizeToolbar.xul");
+		windowMediator.register(startCustomize, 'domwindowopened', null, "chrome://global/content/customizeToolbar.xul");
+		browserMediator.callOnAll(startCustomize, "chrome://global/content/customizeToolbar.xul");
+		browserMediator.register(startCustomize, 'pageshow', "chrome://global/content/customizeToolbar.xul");
+	}
 	
 	// Apply the add-on to every preferences window opened and to be opened
 	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");

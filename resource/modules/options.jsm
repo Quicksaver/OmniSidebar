@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.__defineGetter__('mainMenuPopup', function() { return $('mainKeyset-menupopup'); });
 this.__defineGetter__('twinMenuPopup', function() { return $('twinKeyset-menupopup'); });
@@ -110,7 +110,7 @@ moduleAid.LOADMODULE = function() {
 		overlayAid.overlayWindow(window, 'optionsRTL');
 	}
 	
-	if(Services.appinfo.OS == 'WINNT' || Services.appinfo.OS == 'Darwin') {
+	if(Australis || Services.appinfo.OS == 'WINNT' || Services.appinfo.OS == 'Darwin') {
 		$('omnisidebar_coloroption').removeAttribute('hidden');
 		$('omnisidebar_coloroptionTwin').removeAttribute('hidden');
 		sizeProperly();

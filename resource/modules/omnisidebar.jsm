@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.2';
+moduleAid.VERSION = '1.2.3';
 
 this.customizing = false;
 
@@ -656,6 +656,11 @@ moduleAid.LOADMODULE = function() {
 	// This will be removed in the future, when Australis hits release
 	if(Australis) {
 		setAttribute(document.documentElement, objName+'_Australis', 'true');
+		overlayAid.overlayWindow(window, 'buttons', null, null, function() {
+			removeAttribute(mainSidebar.button, 'loaded');
+			removeAttribute(twinSidebar.button, 'loaded');
+		});
+		overlayAid.overlayWindow(window, 'australis');
 	}
 	
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
@@ -772,5 +777,7 @@ moduleAid.UNLOADMODULE = function() {
 	
 	if(Australis) {
 		removeAttribute(document.documentElement, objName+'_Australis');
+		overlayAid.removeOverlayWindow(window, 'australis');
+		overlayAid.removeOverlayWindow(window, 'buttons');
 	}
 };

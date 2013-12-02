@@ -1,6 +1,11 @@
-<!ENTITY addonsSidebar.label "Add-ons Manager">
-<!ENTITY addonsSidebar.tooltip "Open the Add-ons Manager in the Sidebar">
+<!ENTITY addonsSidebar.label "Add-ons Sidebar">
+<!ENTITY addonsSidebar.tooltip "Open the add-ons manager in the sidebar">
 <!ENTITY addonsSidebar.accesskey "A">
+<!ENTITY bookmarksSidebar.label "Bookmarks Sidebar">
+<!ENTITY bookmarksSidebar.tooltip "Display your bookmarks in the sidebar">
+<!ENTITY historySidebar.label "History Sidebar">
+<!ENTITY historySidebar.tooltip "Display in the sidebar pages you've viewed recently">
+
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Open the DOM Inspector in the Sidebar">
 <!ENTITY DOMInspectorSidebar.accesskey "O">

@@ -1,4 +1,3 @@
-<!ENTITY addonsSidebar.label "Dodatki">
 <!ENTITY addonsSidebar.tooltip "Otwórz menedżer dodatków w panelu bocznym">
 <!ENTITY addonsSidebar.accesskey "D">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">

@@ -5,17 +5,17 @@
 
 	/* Headers */
 	/* Everything related to toolbarbuttons takes an !important tag */
-	.omnisidebar-toolbar .toolbarbutton-1 {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1 {
 		-moz-appearance: toolbarbutton !important;
 		margin: 0 2px 0 2px !important;
 		padding: 1px 5px 1px 5px !important;
 	}
-	.omnisidebar-toolbar .toolbarbutton-1[checked="true"],
-	.omnisidebar-toolbar .toolbarbutton-1:active {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1[checked="true"],
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1:active {
 		margin: 0 2px 0 2px !important;
 		padding: 1px 5px 1px 5px !important; /* This !important is for some themes to dimension the button correctly */
 	}
-	.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
 		max-width: 17px !important;
 		max-height: 17px !important;
 	}

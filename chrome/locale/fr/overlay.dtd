@@ -1,4 +1,3 @@
-<!ENTITY addonsSidebar.label "Gestionnaire de modules">
 <!ENTITY addonsSidebar.tooltip "Ouvrir le gestionnaire de modules dans le panneau latéral">
 <!ENTITY addonsSidebar.accesskey "G">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">

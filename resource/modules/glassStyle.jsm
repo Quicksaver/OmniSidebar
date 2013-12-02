@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.setTransparency = function() {
 	styleAid.unload('glassStyleTransparency');
@@ -26,6 +26,9 @@ this.setTransparency = function() {
 
 moduleAid.LOADMODULE = function() {
 	styleAid.load('glassStyle', 'glass/glass');
+	if(Australis) {
+		styleAid.load('glassStyleOldButtons', 'Ff5');
+	}
 	styleAid.load('glassStyleFF', 'glass/glass-ff5');
 	styleAid.load('glassStyleGeneral', 'glass/glass-general');
 	styleAid.load('glassStyleNative', 'glass/glass-nativeSidebars');
@@ -50,6 +53,9 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('glassStyle');
+	if(Australis) {
+		styleAid.unload('glassStyleOldButtons');
+	}
 	styleAid.unload('glassStyleFF');
 	styleAid.unload('glassStyleGeneral');
 	styleAid.unload('glassStyleNative');

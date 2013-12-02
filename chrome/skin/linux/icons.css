@@ -3,28 +3,28 @@
 	/* Linux Icon Set */
 	
 	/* Set default FF4 icons */
-	#omnisidebar-addons_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-addons_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
-	#stylish_sidebar_button {
+	window:not([omnisidebar_Australis]) #stylish_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
 	
-	#omnisidebar-console_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-console_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
-	#omnisidebar-dominspector_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-dominspector_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
-	#omnisidebar-scratchpad_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-scratchpad_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 96px 24px 72px) !important;
 	}
-	.uri-sidebar-button {
+	window:not([omnisidebar_Australis]) .uri-sidebar-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 72px 24px 48px) !important;
 	}

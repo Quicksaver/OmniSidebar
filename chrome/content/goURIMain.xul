@@ -40,7 +40,7 @@
 	
 	<toolbar id="objName-Toolbar">
 		<toolbarbutton id="objName-uri_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button"
+			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button adequate-size osb-custom-button"
 			removable="false"
 			position="1"
 			type="custom"

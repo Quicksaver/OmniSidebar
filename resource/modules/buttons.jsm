@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -118,10 +118,12 @@ this.updateButtons = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, 'buttons', null, null, function() {
-		removeAttribute(mainSidebar.button, 'loaded');
-		removeAttribute(twinSidebar.button, 'loaded');
-	});
+	if(!Australis) {
+		overlayAid.overlayWindow(window, 'buttons', null, null, function() {
+			removeAttribute(mainSidebar.button, 'loaded');
+			removeAttribute(twinSidebar.button, 'loaded');
+		});
+	}
 	
 	prefAid.listen('moveSidebars', updateButtons);
 	
@@ -152,5 +154,7 @@ moduleAid.UNLOADMODULE = function() {
 		if(toggleButtons()) { buttonLabels(btn, onLoad); }
 	};
 	
-	overlayAid.removeOverlayWindow(window, 'buttons');
+	if(!Australis) {
+		overlayAid.removeOverlayWindow(window, 'buttons');
+	}
 };

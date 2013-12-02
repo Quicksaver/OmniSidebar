@@ -74,7 +74,7 @@
 					<radiogroup preference="pref-coloricons">
 						<hbox align="center">
 							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.ff4label;" value="ff"/>
 							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
 						</hbox>
 					</radiogroup>
@@ -231,7 +231,7 @@
 					<radiogroup preference="pref-coloriconsTwin">
 						<hbox align="center">
 							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff4"/>
+							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff"/>
 							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
 						</hbox>
 					</radiogroup>

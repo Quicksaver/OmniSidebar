@@ -3,90 +3,90 @@
 	/* Mac Icon Set */
 	
 	/* Set default FF4 icons */
-	#omnisidebar-addons_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-addons_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(24px 96px 48px 72px) !important; /* default is color */
 	}
-	#stylish_sidebar_button {
+	window:not([omnisidebar_Australis]) #stylish_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(0px 120px 24px 96px) !important;
 	}
 	
-	#omnisidebar-console_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-console_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(24px 24px 48px 0px) !important; /* default is color */
 	}
-	#omnisidebar-dominspector_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-dominspector_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(24px 48px 48px 24px) !important; /* default is color */
 	}
-	#omnisidebar-scratchpad_sidebar_button {
+	window:not([omnisidebar_Australis]) #omnisidebar-scratchpad_sidebar_button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(24px 96px 48px 72px) !important; /* default is color */
 	}
-	.uri-sidebar-button {
+	window:not([omnisidebar_Australis]) .uri-sidebar-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/devButtons.png") !important;
 		-moz-image-region: rect(0px 72px 24px 48px) !important;
 	}
 	
 	/* FF4 icons */
-	.omnisidebar-toolbar[coloricons="ff4"] #tools-updatescan-button:not([status="CHANGE"]):not([status="CHANGE_DISABLED"]):not([status="NO_CHANGE_DISABLED"]) {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button:not([status="CHANGE"]):not([status="CHANGE_DISABLED"]):not([status="NO_CHANGE_DISABLED"]) {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(0px 144px 24px 120px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-addons_sidebar_button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="ff"] #omnisidebar-addons_sidebar_button {
 		-moz-image-region: rect(0px 96px 24px 72px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-console_sidebar_button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="ff"] #omnisidebar-console_sidebar_button {
 		-moz-image-region: rect(0px 24px 24px 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-dominspector_sidebar_button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="ff"] #omnisidebar-dominspector_sidebar_button {
 		-moz-image-region: rect(0px 48px 24px 24px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="ff4"] #omnisidebar-scratchpad_sidebar_button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="ff"] #omnisidebar-scratchpad_sidebar_button {
 		-moz-image-region: rect(0px 96px 24px 72px) !important;
 	}
 	
 	/* Color icons */
-	.omnisidebar-toolbar[coloricons="color"] #bookmarks-button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #bookmarks-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(24px 24px 48px 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #history-button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #history-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(24px 48px 48px 24px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #downloads-button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #downloads-button {
 		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png") !important;
 		-moz-image-region: rect(24px 72px 48px 48px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #stylish_sidebar_button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #stylish_sidebar_button {
 		-moz-image-region: rect(24px 120px 48px 96px) !important;
 	}
 	
-	.omnisidebar-toolbar[coloricons="color"] .uri-sidebar-button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] .uri-sidebar-button {
 		-moz-image-region: rect(24px 72px 48px 48px) !important;
 	}
 	
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button {
 		list-style-image: url(chrome://omnisidebar-os/skin/feed.png) !important;
 		-moz-image-region: rect(0px, 24px, 24px, 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover:active, 
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover,
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover:active, 
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover:active, 
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover,
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover:active, 
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover {
 		-moz-image-region: rect(48px, 24px, 72px, 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"] {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"] {
 		-moz-image-region: rect(24px, 24px, 48px, 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:hover,
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:active,
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"][checked="true"] {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:hover,
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"]:active,
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[new="true"][checked="true"] {
 		-moz-image-region: rect(72px, 24px, 96px, 0px) !important;
 	}
-	.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"] {
+	window:not([omnisidebar_Australis]) .omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"] {
 		-moz-image-region: rect(0px, 24px, 24px, 0px) !important;
 	}
 
