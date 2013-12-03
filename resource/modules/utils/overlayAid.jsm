@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.4.0';
+moduleAid.VERSION = '2.4.1';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1464,7 +1464,7 @@ this.overlayAid = {
 	},
 	
 	moveAround: function(aWindow, node, overlayNode, parent) {
-		if(parent.nodeName == 'toolbar' && parent.getAttribute('currentset')) {
+		if(!Australis && parent.nodeName == 'toolbar' && parent.getAttribute('currentset')) {
 			var ret = null;
 			var originalParent = node.parentNode;
 			var currentset = parent.getAttribute('currentset').split(',');
@@ -1499,16 +1499,16 @@ this.overlayAid = {
 					}
 					
 					ret = this.insertBefore(aWindow, node, parent, beforeEl);
-					if(!Australis && ret && originalParent && originalParent.id && originalParent.nodeName == 'toolbar') {
+					if(ret && originalParent && originalParent.id && originalParent.nodeName == 'toolbar') {
 						setAttribute(originalParent, 'currentset', originalParent.currentSet);
 						aWindow.document.persist(originalParent.id, 'currentset');
-					}
-					else if(Australis) {
-						aWindow.CustomizableUI.createWidget(this.getWidgetData(ret));
 					}
 					return ret;
 				}
 			}
+		}
+		else if(Australis && parent.nodeName == 'toolbar' && parent != node.parentNode) {
+			return this.appendButton(aWindow, parent, node);
 		}
 		
 		var newParent = null;
