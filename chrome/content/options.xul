@@ -411,7 +411,10 @@
 		</hbox>
 		
 		<vbox align="end">
-			<description class="closer">&omnisidebarabout.name;</description>
+			<hbox>
+				<description class="closer">&omnisidebarabout.name;</description>
+				<description id="addonVersion" hidden="true" class="closer"></description>
+			</hbox>
 			<description>&omnisidebarabout.by;</description>
 			<description class="justify">&omnisidebarabout.desc;</description>
 			<label class="text-link closer" href="https://addons.mozilla.org/UserAgentLocale/firefox/addon/omnisidebar/" value="&omnisidebarabout.home;"/>

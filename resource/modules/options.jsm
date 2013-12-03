@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.__defineGetter__('mainMenuPopup', function() { return $('mainKeyset-menupopup'); });
 this.__defineGetter__('twinMenuPopup', function() { return $('twinKeyset-menupopup'); });
@@ -121,4 +121,5 @@ moduleAid.LOADMODULE = function() {
 	}
 	
 	fillKeycodes();
+	fillVersion($('addonVersion'));
 };
