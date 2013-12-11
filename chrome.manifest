@@ -13,3 +13,9 @@ skin      omnisidebar      classic/1.0   chrome/skin/common/
 skin      omnisidebar-os   classic/1.0   chrome/skin/linux/
 skin      omnisidebar-os   classic/1.0   chrome/skin/win/     os=WINNT
 skin      omnisidebar-os   classic/1.0   chrome/skin/mac/     os=Darwin
+
+override  chrome://omnisidebar-os/skin/osb-button-toolbar-left.png  chrome://omnisidebar-os/skin/osb-button-toolbar-left-aero.png  os=WINNT osversion>=6
+override  chrome://omnisidebar-os/skin/osb-button-toolbar-right.png  chrome://omnisidebar-os/skin/osb-button-toolbar-right-aero.png  os=WINNT osversion>=6
+override  chrome://omnisidebar-os/skin/osb-button-panel-left.png  chrome://omnisidebar-os/skin/osb-button-panel-left-aero.png  os=WINNT osversion>=6
+override  chrome://omnisidebar-os/skin/osb-button-panel-right.png  chrome://omnisidebar-os/skin/osb-button-panel-right-aero.png  os=WINNT osversion>=6
+override  chrome://omnisidebar-os/skin/custom-buttons-toolbar.png  chrome://omnisidebar-os/skin/custom-buttons-toolbar-aero.png  os=WINNT osversion>=6
