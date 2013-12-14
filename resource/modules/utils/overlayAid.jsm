@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.4.2';
+moduleAid.VERSION = '2.4.3';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1907,10 +1907,13 @@ this.overlayAid = {
 			}
 			
 			var created = false;
-			if(!aWindow.CustomizableUI.getWidget(id)) {
+			var widget = aWindow.CustomizableUI.getWidget(id);
+			if(!widget || widget.provider != aWindow.CustomizableUI.PROVIDER_API) {
 				aWindow.CustomizableUI.createWidget(this.getWidgetData(aWindow, node, palette));
 				created = true;
 			}
+			
+			aWindow.CustomizableUI.ensureWidgetPlacedInWindow(id, aWindow);
 			
 			// CUI always gets the widget from the Globals.widgets object in this case
 			if(palette.nodeName == 'toolbar') {
@@ -1918,8 +1921,6 @@ this.overlayAid = {
 				removeAttribute(node, 'CUI_placeholder');
 				hideIt(node, true);
 			}
-			
-			aWindow.CustomizableUI.ensureWidgetPlacedInWindow(id, aWindow);
 			
 			if(this.tempAppend) {
 				this.tempRestoreToolbar();
