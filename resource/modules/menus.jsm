@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.10';
+moduleAid.VERSION = '1.0.11';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -28,10 +28,12 @@ this.cleanMenuToolbars = function(menu) {
 	if(twinSidebar.toolbar) { toCheck.push(twinSidebar.toolbar.id); }
 	if(!toCheck.length) { return; }
 	
-	for(var c=0; c<menu.childNodes.length; c++) {
+	var items = menu.querySelectorAll('menuitem');
+	
+	for(var i=0; i<items.length; i++) {
 		for(var t=0; t<toCheck.length; t++) {
-			if(menu.childNodes[c].id == 'toggle_'+toCheck[t]) {
-				menu.removeChild(menu.childNodes[c]);
+			if(items[i].id == 'toggle_'+toCheck[t]) {
+				items[i].parentNode.removeChild(items[i]);
 				c--;
 			}
 		}
