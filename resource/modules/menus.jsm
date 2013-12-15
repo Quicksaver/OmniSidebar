@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.9';
+moduleAid.VERSION = '1.0.10';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -17,6 +17,25 @@ this.__defineGetter__('viewSidebarMenu', function() { return $('viewSidebarMenu'
 
 this.doOpenOptions = function() {
 	openOptions();
+};
+
+// Australis adds its own menuitems for custom toolbars now, we don't want them as we use custom methods of our own
+this.cleanMenuToolbars = function(menu) {
+	if(!Australis) { return; }
+	
+	var toCheck = [];
+	if(mainSidebar.toolbar) { toCheck.push(mainSidebar.toolbar.id); }
+	if(twinSidebar.toolbar) { toCheck.push(twinSidebar.toolbar.id); }
+	if(!toCheck.length) { return; }
+	
+	for(var c=0; c<menu.childNodes.length; c++) {
+		for(var t=0; t<toCheck.length; t++) {
+			if(menu.childNodes[c].id == 'toggle_'+toCheck[t]) {
+				menu.removeChild(menu.childNodes[c]);
+				c--;
+			}
+		}
+	}
 };
 
 // Sets toolbar context menu omnisidebar options item according to what called it
@@ -42,6 +61,8 @@ this.setContextMenu = function(e) {
 	if(contextItemTwin) {
 		contextMenu.insertBefore(contextItemTwin, before);
 	}
+	
+	cleanMenuToolbars(contextMenu);
 },
 
 this.setAppMenu = function() {
@@ -63,6 +84,8 @@ this.setViewToolbarsMenu = function() {
 		viewToolbarsMenu.insertBefore(viewToolbarsMenuItemTwin, before);
 		viewToolbarsMenuItemTwin.hidden = false;
 	}
+	
+	cleanMenuToolbars(viewToolbarsMenu);
 };
 
 this.populateSidebarMenu = function(menu) {
