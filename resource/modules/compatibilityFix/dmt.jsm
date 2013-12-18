@@ -1,6 +1,8 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.1.0';
 
 this.__defineGetter__('DMPanelLink', function() { return $('downloadsHistory'); });
+this.__defineGetter__('BrowserDownloadsUI', function() { return window.BrowserDownloadsUI; });
+this.__defineSetter__('BrowserDownloadsUI', function(v) { return window.BrowserDownloadsUI = v; });
 
 this.DMTbackups = {};
 
@@ -53,6 +55,22 @@ this.setDMPanel = function(e) {
 };
 
 this.toggleAlwaysDMT = function(unloaded) {
+	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
+		if(!UNLOADED && !unloaded && prefAid.alwaysDMT) {
+			if(!DMTbackups.BrowserDownloadsUI) {
+				DMTbackups.BrowserDownloadsUI = BrowserDownloadsUI;
+			}
+			BrowserDownloadsUI = function() { toggleSidebar($('viewDmgrPlacesSidebar')); };
+		} else {
+			if(DMTbackups.BrowserDownloadsUI) {
+				BrowserDownloadsUI = DMTbackups.BrowserDownloadsUI;
+				delete DMTbackups.BrowserDownloadsUI;
+			}
+		}
+		
+		return;
+	}
+	
 	if(!UNLOADED && !unloaded && prefAid.alwaysDMT) {
 		if(!DMTbackups.command) {
 			DMTbackups.command = $('Tools:Downloads').getAttribute('oncommand');
@@ -95,14 +113,15 @@ this.loadDMT = function() {
 	prefAid.listen('alwaysDMT', toggleAlwaysDMT);
 	toggleAlwaysDMT();
 	
-	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar';
+	var broadcaster = (Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) ? 'viewDmgrPlacesSidebar' : 'viewDmSidebar';
+	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == broadcaster;
 	var twin = false;
-	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') {
+	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == broadcaster) {
 		checked = true;
 		twin = true;
 	}
-	toggleAttribute($('viewDmSidebar'), 'checked', checked);
-	toggleAttribute($('viewDmSidebar'), 'twinSidebar', twin);
+	toggleAttribute($(broadcaster), 'checked', checked);
+	toggleAttribute($(broadcaster), 'twinSidebar', twin);
 };
 
 this.unloadDMT = function() {
@@ -111,6 +130,13 @@ this.unloadDMT = function() {
 };
 
 this.doDMTCommand = function() {
+	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
+		delete holdBroadcasters.dm;
+		if(mainSidebar.loaded && _sidebarCommand == 'viewDmgrPlacesSidebar') { loadMainSidebar(); }
+		if(twinSidebar.loaded && _sidebarCommandTwin == 'viewDmgrPlacesSidebar') { loadTwinSidebar(); }
+		return;
+	}
+	
 	delete holdBroadcasters.dm;
 	delete holdBroadcasters.dmt;
 	if(mainSidebar.loaded && (_sidebarCommand == 'viewDmSidebar' || _sidebarCommand == 'viewDmtSidebar')) { loadMainSidebar(); }
@@ -131,7 +157,34 @@ this.loadDmgrFix = function(e) {
 	}
 };
 
+this.isDmgrPlacesSidebar = function(bar) {
+	return (bar && bar.box && bar.box.getAttribute('sidebarcommand') == 'viewDmgrPlacesSidebar');
+};
+
+this.loadDmgrPlacesFix = function(e) {
+	if(e.target
+	&& e.target.document
+	&& e.target.document.baseURI == 'chrome://browser/content/places/places.xul'
+	&& e.detail
+	&& isDmgrPlacesSidebar(e.detail.bar)) {
+		if(!e.target.arguments) {
+			e.target.arguments = new e.target.Array(); // Doing it this way to prevent a ZC.
+		}
+		e.target.arguments.push("Downloads");
+	}
+};
+
 moduleAid.LOADMODULE = function() {
+	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
+		holdBroadcasters.dm = 'viewDmgrPlacesSidebar';
+		
+		styleAid.load('dmgrPlaces', 'dmgrPlaces');
+		overlayAid.overlayWindow(window, 'dmgrPlacesSidebar', null, loadDMT, unloadDMT);
+		
+		listenerAid.add(window, 'SidebarFocusedSync', loadDmgrPlacesFix);
+		return;
+	}
+	
 	holdBroadcasters.dm = 'viewDmSidebar';
 	holdBroadcasters.dmt = 'viewDmtSidebar';
 	
@@ -151,6 +204,25 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
+	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
+		listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrPlacesFix);
+		
+		if(UNLOADED) {
+			if(isDmgrPlacesSidebar(mainSidebar)) {
+				closeSidebar(mainSidebar);
+			}
+			if(isDmgrPlacesSidebar(twinSidebar)) {
+				closeSidebar(twinSidebar);
+			}
+			
+			styleAid.unload('dmgrPlaces');
+		}
+		
+		overlayAid.removeOverlayWindow(window, 'dmgrPlacesSidebar');
+		
+		return;
+	}
+	
 	listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrFix);
 	
 	if(UNLOADED) {
