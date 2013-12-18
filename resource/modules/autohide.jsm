@@ -1,8 +1,7 @@
-moduleAid.VERSION = '1.1.10';
+moduleAid.VERSION = '1.1.11';
 
 this.mainAutoHideInit = false;
 this.twinAutoHideInit = false;
-this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 
 this.setAutoHide = function(bar) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide);
@@ -90,18 +89,18 @@ this.hideOnResizeEnd = function(e) {
 	}, 100);
 };
 
-this.showOnOpenContextMenu = function(e) {
-	var trigger = e.originalTarget.triggerNode;
+this.showOnMenuShown = function(e) {
+	var trigger = e.originalTarget.triggerNode || e.originalTarget;
 	
-	if(isAncestor(trigger, mainSidebar.header)) {
+	if(isAncestor(trigger, mainSidebar.box)) {
 		setHover(mainSidebar, true);
 	}
-	else if(isAncestor(trigger, twinSidebar.header)) {
+	else if(isAncestor(trigger, twinSidebar.box)) {
 		setHover(twinSidebar, true);
 	}
 };
 
-this.hideOnCloseContextMenu = function() {
+this.hideOnMenuHidden = function() {
 	setBothHovers(false);
 };
 
@@ -298,8 +297,8 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'closeGoURIBar', hideOnCloseGOMenu);
 	listenerAid.add(window, 'startSidebarResize', showOnResizeStart);
 	listenerAid.add(window, 'endSidebarResize', hideOnResizeEnd);
-	listenerAid.add(contextMenu, 'popupshown', showOnOpenContextMenu, false);
-	listenerAid.add(contextMenu, 'popuphiding', hideOnCloseContextMenu, false);
+	listenerAid.add(window, 'popupshown', showOnMenuShown);
+	listenerAid.add(window, 'popuphidden', hideOnMenuHidden);
 	
 	listenerAid.add(window, 'sidebarWidthChanged', setAutoHideWidth);
 };
@@ -313,8 +312,8 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'closeGoURIBar', hideOnCloseGOMenu);
 	listenerAid.remove(window, 'startSidebarResize', showOnResizeStart);
 	listenerAid.remove(window, 'endSidebarResize', hideOnResizeEnd);
-	listenerAid.remove(contextMenu, 'popupshown', showOnOpenContextMenu, false);
-	listenerAid.remove(contextMenu, 'popuphiding', hideOnCloseContextMenu, false);
+	listenerAid.remove(window, 'popupshown', showOnMenuShown);
+	listenerAid.remove(window, 'popuphidden', hideOnMenuHidden);
 	
 	listenerAid.remove(mainSidebar.switcher, 'mouseover', autoHideSwitchOver);
 	listenerAid.remove(mainSidebar.switcher, 'dragenter', autoHideSwitchOver);
