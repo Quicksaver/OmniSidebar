@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.11';
+moduleAid.VERSION = '1.0.12';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -34,7 +34,7 @@ this.cleanMenuToolbars = function(menu) {
 		for(var t=0; t<toCheck.length; t++) {
 			if(items[i].id == 'toggle_'+toCheck[t]) {
 				items[i].parentNode.removeChild(items[i]);
-				c--;
+				i--;
 			}
 		}
 	}
