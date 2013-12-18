@@ -130,7 +130,7 @@
 	  	color: black !important;
 	 	text-shadow: 0 0 2px white !important;
 	}
-	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] > .toolbarbutton-1 {
+	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 {
 		margin: 1px 3px !important;
 	}
 
@@ -147,13 +147,15 @@
 		border-radius: 3.5px !important;
 	}
 	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-button {
-		border-right: none !important;
+		-moz-border-end: none !important;
 		border-radius: 3.5px 0 0 3.5px !important;
 	}
+	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menu-dropmarker,
 	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		border-left: none !important;
+		-moz-border-start: none !important;
 		border-radius: 0 3.5px 3.5px 0 !important;
 		background-position: 10px !important;
+		-moz-padding-start: 3px !important;
 	}
 	
 	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1[disabled="true"] {
