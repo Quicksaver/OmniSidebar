@@ -7,5 +7,9 @@
 	.inSidebar #placesMenu {
 		display: none;
 	}
+	
+	.inSidebar #searchFilter {
+		width: 13em !important;
+	}
 
 }
