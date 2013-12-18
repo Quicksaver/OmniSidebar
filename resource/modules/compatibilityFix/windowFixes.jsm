@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.6';
 
 moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("FirefoxAddon@similarWeb.com", function(addon) {
@@ -16,9 +16,6 @@ moduleAid.LOADMODULE = function() {
 	});
 	AddonManager.getAddonByID("isreaditlater@ideashower.com", function(addon) {
 		moduleAid.loadIf('compatibilityFix/pocket', (addon && addon.isActive));
-	});
-	AddonManager.getAddonByID("support@lastpass.com", function(addon) {
-		moduleAid.loadIf('compatibilityFix/lastPass', (addon && addon.isActive));
 	});
 	moduleAid.load('compatibilityFix/lessChrome');
 	moduleAid.load('compatibilityFix/console');
@@ -39,7 +36,6 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('compatibilityFix/delicious');
 	moduleAid.unload('compatibilityFix/totalToolbar');
 	moduleAid.unload('compatibilityFix/pocket');
-	moduleAid.unload('compatibilityFix/lastPass');
 	moduleAid.unload('compatibilityFix/lessChrome');
 	moduleAid.unload('compatibilityFix/console');
 	moduleAid.unload('compatibilityFix/dmt');
