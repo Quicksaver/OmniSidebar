@@ -93,7 +93,7 @@ function prepareObject(window, aName) {
 		objName: objectName,
 		objPathString: objPathString,
 		_UUID: new Date().getTime(),
-		_sandbox: this,
+		
 		// every supposedly global variable is inaccessible because bootstraped means sandboxed, so I have to reference all these;
 		// it's easier to reference more specific objects from within the modules for better control, only setting these two here because they're more generalized
 		window: window,
@@ -270,96 +270,3 @@ function shutdown(aData, aReason) {
 
 function install() {}
 function uninstall() {}
-function printO(obj, maxDepth, searchFor, prefix, prevObjs){
-	var resultObj = {};
-	if(maxDepth === undefined) maxDepth = 0;
-	if(!searchFor) searchFor = null;
-	if(!prefix) prefix = '';
-	if(typeof(obj) == 'object' && obj !== null) {
-		//obj = XPCNativeWrapper.unwrap(obj);
-		mainLoop: for(var key in obj) {
-			try {
-				if(typeof obj[key] == 'object' && obj[key] !== null) {
-					if(prevObjs) {
-						for(var p=0; p<prevObjs.length; p++) {
-							if(prevObjs[p].obj == obj[key]) {
-								if(!searchFor) { resultObj[prefix + key] = prevObjs[p].entry; }
-								continue mainLoop;
-							}
-						}
-					}
-					
-					if(maxDepth < 1) {
-						if(!searchFor) { resultObj[prefix + key] = obj[key] + ' [max depth reached]'; }
-					} else {
-						try { 
-							var newPrevObjs = [];
-							if(prevObjs) {
-								var newPrevObjs = prevObjs;
-							}
-							var newEntry = prefix ? prefix.substr(0, prefix.length-1) : 'printO(first object)';
-							newPrevObjs.push({ entry: newEntry, obj: obj });
-							var subResultObj = printO(obj[key], maxDepth -1, searchFor, prefix + key + '.', newPrevObjs);
-							for(var s in subResultObj) {
-								resultObj[s] = subResultObj[s];
-							}
-						}
-						catch(ex) { resultObj[prefix + key] = ' !ERROR PRINTING! ' + ex; }
-					}
-					
-				} else if(typeof obj[key] == 'string' && (!searchFor || obj[key].indexOf(searchFor) > -1)) {
-					resultObj[prefix + key] = '\'' + obj[key] + '\'';
-					
-				} else if(!searchFor || obj[key].toString().indexOf(searchFor) > -1) {
-					resultObj[prefix + key] = obj[key];
-				}
-			}
-			catch(ex) { 
-				if(!searchFor) { resultObj[prefix + key] = ' !ERROR PRINTING! ' + ex; } 
-			}
-		}
-	
-	} else if(typeof(obj) == 'string') {
-		resultObj[''] = '\'' + obj + '\'';
-	
-	} else {
-		resultObj[''] = obj;
-	}
-	
-	if(!prevObjs) {
-		var tempArr = [];
-		for(var r in resultObj) {
-			tempArr.push(r);
-		}
-		
-		if(tempArr.length == 0) { var result = (!searchFor) ? 'object is empty' : 'search string not found in object at maxDepth ' + maxDepth; }
-		else {
-			if(Array.isArray(obj)) {
-				tempArr.sort(function(a,b) { return a-b; });
-			} else {
-				tempArr.sort();
-			}
-			
-			var newResultObj = {};
-			for(var r=0; r<tempArr.length; r++) {
-				newResultObj[tempArr[r]] = resultObj[tempArr[r]];
-			}
-			
-			var result = '';
-			for(var r in newResultObj) {
-				result += r + '=' + newResultObj[r] + '\n';
-			}
-		}
-		
-		var gClipboardHelper = Cc["@mozilla.org/widget/clipboardhelper;1"].getService(Ci.nsIClipboardHelper);
-		gClipboardHelper.copyString(result);
-		
-		Services.console.logStringMessage("Object data copied to clipboard.");
-	}
-	else { return resultObj; }
-}
-
-function doLog(str) {
-	if(!str) { str = typeof(str)+': '+str; }
-	Services.console.logStringMessage(str);
-}
