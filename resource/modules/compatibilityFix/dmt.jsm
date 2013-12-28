@@ -1,10 +1,11 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('DMPanelLink', function() { return $('downloadsHistory'); });
 this.__defineGetter__('BrowserDownloadsUI', function() { return window.BrowserDownloadsUI; });
 this.__defineSetter__('BrowserDownloadsUI', function(v) { return window.BrowserDownloadsUI = v; });
 
 this.DMTbackups = {};
+this.dmtLoaded = false;
 
 this.setDMButton = function(unset) {
 	var dmButton = $('downloads-button');
@@ -130,17 +131,11 @@ this.unloadDMT = function() {
 };
 
 this.doDMTCommand = function() {
-	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
-		delete holdBroadcasters.dm;
-		if(mainSidebar.loaded && _sidebarCommand == 'viewDmgrPlacesSidebar') { loadMainSidebar(); }
-		if(twinSidebar.loaded && _sidebarCommandTwin == 'viewDmgrPlacesSidebar') { loadTwinSidebar(); }
-		return;
-	}
-	
 	delete holdBroadcasters.dm;
 	delete holdBroadcasters.dmt;
-	if(mainSidebar.loaded && (_sidebarCommand == 'viewDmSidebar' || _sidebarCommand == 'viewDmtSidebar')) { loadMainSidebar(); }
-	if(twinSidebar.loaded && (_sidebarCommandTwin == 'viewDmSidebar' || _sidebarCommandTwin == 'viewDmtSidebar')) { loadTwinSidebar(); }
+	delete holdBroadcasters.dmp;
+	if(mainSidebar.loaded && (_sidebarCommand == 'viewDmSidebar' || _sidebarCommand == 'viewDmtSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar')) { loadMainSidebar(); }
+	if(twinSidebar.loaded && (_sidebarCommandTwin == 'viewDmSidebar' || _sidebarCommandTwin == 'viewDmtSidebar' || _sidebarCommandTwin == 'viewDmgrPlacesSidebar')) { loadTwinSidebar(); }
 };
 
 this.loadDmgrFix = function(e) {
@@ -175,59 +170,42 @@ this.loadDmgrPlacesFix = function(e) {
 };
 
 moduleAid.LOADMODULE = function() {
-	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
-		holdBroadcasters.dm = 'viewDmgrPlacesSidebar';
-		
-		styleAid.load('dmgrPlaces', 'dmgrPlaces');
-		overlayAid.overlayWindow(window, 'dmgrPlacesSidebar', null, loadDMT, unloadDMT);
-		
-		listenerAid.add(window, 'SidebarFocusedSync', loadDmgrPlacesFix);
-		return;
-	}
-	
 	holdBroadcasters.dm = 'viewDmSidebar';
 	holdBroadcasters.dmt = 'viewDmtSidebar';
-	
-	listenerAid.add(window, 'SidebarFocusedSync', loadDmgrFix);
+	holdBroadcasters.dmp = 'viewDmgrPlacesSidebar';
 	
 	AddonManager.getAddonByID("{F8A55C97-3DB6-4961-A81D-0DE0080E53CB}", function(addon) {
 		if(!addon || !addon.isActive) {
+			if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
+				if(_sidebarCommand == 'viewDmtSidebar' || _sidebarCommand == 'viewDmSidebar') { _sidebarCommand = 'viewDmgrPlacesSidebar'; }
+				if(_sidebarCommandTwin == 'viewDmtSidebar' || _sidebarCommandTwin == 'viewDmSidebar') { _sidebarCommandTwin = 'viewDmgrPlacesSidebar'; }
+				
+				styleAid.load('dmgrPlaces', 'dmgrPlaces');
+				overlayAid.overlayWindow(window, 'dmgrPlacesSidebar', null, loadDMT, unloadDMT);
+				
+				listenerAid.add(window, 'SidebarFocusedSync', loadDmgrPlacesFix);
+				return;
+			}
+			
+			listenerAid.add(window, 'SidebarFocusedSync', loadDmgrFix);
+			
+			if(_sidebarCommand == 'viewDmtSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommand = 'viewDmSidebar'; }
+			if(_sidebarCommandTwin == 'viewDmtSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommandTwin = 'viewDmSidebar'; }
+			
 			overlayAid.overlayWindow(window, 'dmtSidebar', null, loadDMT, unloadDMT);
-			if(_sidebarCommand == 'viewDmtSidebar') { _sidebarCommand = 'viewDmSidebar'; }
-			if(_sidebarCommandTwin == 'viewDmtSidebar') { _sidebarCommandTwin = 'viewDmSidebar'; }
 		} else {
-			if(_sidebarCommand == 'viewDmSidebar') { _sidebarCommand = 'viewDmtSidebar'; }
-			if(_sidebarCommandTwin == 'viewDmSidebar') { _sidebarCommandTwin = 'viewDmtSidebar'; }
+			dmtLoaded = true;
+			if(_sidebarCommand == 'viewDmSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommand = 'viewDmtSidebar'; }
+			if(_sidebarCommandTwin == 'viewDmSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommandTwin = 'viewDmtSidebar'; }
 			doDMTCommand();
 		}
 	});
 };
 
 moduleAid.UNLOADMODULE = function() {
-	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
-		listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrPlacesFix);
-		
-		if(UNLOADED) {
-			if(isDmgrPlacesSidebar(mainSidebar)) {
-				closeSidebar(mainSidebar);
-			}
-			if(isDmgrPlacesSidebar(twinSidebar)) {
-				closeSidebar(twinSidebar);
-			}
-			
-			styleAid.unload('dmgrPlaces');
-		}
-		
-		overlayAid.removeOverlayWindow(window, 'dmgrPlacesSidebar');
-		
-		return;
-	}
-	
-	listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrFix);
-	
 	if(UNLOADED) {
 		if(mainSidebar.box) {
-			if(mainSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') {
+			if(mainSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar' || isDmgrPlacesSidebar(mainSidebar)) {
 				closeSidebar(mainSidebar);
 			}
 			else if(mainSidebar.sidebar
@@ -238,7 +216,7 @@ moduleAid.UNLOADMODULE = function() {
 			}
 		}
 		if(twinSidebar.box) {
-			if(twinSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar') {
+			if(twinSidebar.box.getAttribute('sidebarcommand') == 'viewDmSidebar' || isDmgrPlacesSidebar(twinSidebar)) {
 				closeSidebar(twinSidebar);
 			}
 			else if(twinSidebar.sidebar
@@ -250,5 +228,19 @@ moduleAid.UNLOADMODULE = function() {
 		}
 	}
 	
-	overlayAid.removeOverlayWindow(window, 'dmtSidebar');
+	if(dmtLoaded) { return; }
+	
+	if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
+		listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrPlacesFix);
+		
+		if(UNLOADED) {
+			styleAid.unload('dmgrPlaces');
+		}
+		
+		overlayAid.removeOverlayWindow(window, 'dmgrPlacesSidebar');
+	}
+	else {
+		listenerAid.remove(window, 'SidebarFocusedSync', loadDmgrFix);
+		overlayAid.removeOverlayWindow(window, 'dmtSidebar');
+	}
 };
