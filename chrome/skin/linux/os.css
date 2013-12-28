@@ -1,10 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
-	/* Bugfix: transparent header when undocked using personas,
-	I can't override these without the !important tags */
+	/* Bugfix: transparent header when undocked using personas */
 	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
 		background-color: -moz-Dialog !important;
+		color: -moz-dialogtext;
+		text-shadow: none;
 	}
 	
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:not(:hover) {

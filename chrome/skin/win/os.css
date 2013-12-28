@@ -1,13 +1,23 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
-	/* Bugfix: transparent header when undocked using personas,
-	I can't override these without the !important tags */
+	/* Bugfix: classic windows theme replaces sidebar header look when using lwthemes */
 	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
-		-moz-appearance: toolbox !important;
 		background-color: -moz-Dialog !important;
-		border-bottom: 1px solid ThreeDShadow !important;
-		border-top: 1px solid ThreeDHighlight !important;
+		-moz-appearance: toolbox !important;
+		border-top-style: solid !important;
+		border-bottom-style: solid !important;
+		color: -moz-dialogtext;
+		text-shadow: none;
+	}
+	@media not all and (-moz-windows-classic) {
+		@media (-moz-windows-default-theme) {
+			.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
+				-moz-appearance: none !important;
+				background-color: #EEF3FA !important;
+				border-bottom: none !important;
+			}
+		}
 	}
 	
 	/* Australis */
