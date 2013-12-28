@@ -19,24 +19,11 @@
 	border-radius: 5px !important;
 	height: 20px !important;
 	color: black !important;
-	text-shadow: white 0 0 3px, white 0 0 3px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
 	outline-width: 0 !important;
 }
 
-.inSidebar #sidebar-search-label {
-	color: black !important;
-	text-shadow: white 0 0 3px, white 0 0 3px, rgba(255, 255, 255, .3) 0 1px 0 !important;
-}
-
-
-/* Backgrounds and dimensions */
-
-.inSidebar {
-	-moz-appearance: none !important;
-	background: rgba(0, 0, 0, 0) !important;
-	padding: 8px !important;
-}
-
+.inSidebar #sidebar-search-label,
 .inSidebar #dmtTopToolBox,
 .inSidebar #dmtDownloadFrom,
 .inSidebar #dmtDownloadTo,
@@ -52,6 +39,15 @@
 .inSidebar #bookmarks-content-label {
 	color: black !important;
 	text-shadow: white 0 0 6px, white 0 0 6px, rgba(255, 255, 255, .3) 0 1px 0 !important;
+}
+
+
+/* Backgrounds and dimensions */
+
+.inSidebar {
+	-moz-appearance: none !important;
+	background: rgba(0, 0, 0, 0) !important;
+	padding: 8px !important;
 }
 
 .inSidebar #bookmarks-view,
@@ -86,8 +82,8 @@
 	-moz-appearance: none !important;
 	border: 1px solid rgb(174, 183, 196) !important;
 	border-radius: 5px !important;
-	background: rgba(255, 255, 255, 0.35) -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important;
-	background: rgba(255, 255, 255, 0.35) linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.75)) repeat scroll 0% 0% !important; /* Firefox 16+ */
+	background: rgba(255, 255, 255, 0.65) -moz-linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.5)) repeat scroll 0% 0% !important;
+	background: rgba(255, 255, 255, 0.65) linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.5)) repeat scroll 0% 0% !important; /* Firefox 16+ */
 }
 
 
@@ -139,7 +135,8 @@
 
 .inSidebar .RIL_row:hover {
 	color: black !important;
-	background: rgba(255,255,255,.3) !important;
+	background: rgba(255,255,255,.5) !important;
+	outline: none !important;
 }
 
 .inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
