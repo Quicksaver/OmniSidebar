@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.16';
+var defaultsVersion = '1.0.17';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -48,6 +48,7 @@ var prefList = {
 	forceOpenMenus: false,
 	showDelay: 250,
 	hideDelay: 250,
+	switcherAdjust: 0,
 	keepPrivate: false,
 	
 	alwaysAddons: false,

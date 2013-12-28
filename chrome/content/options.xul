@@ -337,6 +337,7 @@
 			<preference id="pref-forceOpenMenus" name="extensions.omnisidebar.forceOpenMenus" type="bool"/>
 			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
 			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
+			<preference id="pref-switcherAdjust" name="extensions.omnisidebar.switcherAdjust" type="int"/>
 			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
 		</preferences>
 		
@@ -376,6 +377,14 @@
 						min="0"
 						max="2000"
 						preference="pref-hideDelay"/>
+		        </hbox>
+				<hbox>
+					<label value="&omnisidebarOptswitcherAdjust.label;"/>
+					<textbox type="number"
+						size="2"
+						min="-2"
+						max="25"
+						preference="pref-switcherAdjust"/>
 		        </hbox>
 				<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
 			</vbox>

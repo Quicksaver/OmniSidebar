@@ -1,10 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
-	.omnisidebar_switch {
-		width: 4px;
-	}
-	
 	/* Bugfix: transparent header when undocked using personas,
 	I can't override these without the !important tags */
 	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
