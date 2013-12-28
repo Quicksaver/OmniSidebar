@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -11,21 +11,19 @@ this.shouldFollowCommand = function(trigger, twin, e) {
 	var metaKey = e && (e.ctrlKey || e.metaKey);
 	if(!e || e.button == 2 || (e.button == 0 && metaKey)) {
 		var bar = (twin) ? twinSidebar : mainSidebar;
-		if(!bar.isOpen) {
-			if(e) {
-				e.preventDefault();
-				e.stopPropagation();
-			}
-			
-			var position = 'after_end';
-			if(!e) {
-				trigger = bar.button || $('navigator-toolbox');
-			} else if(trigger == bar.switcher) {
-				position = 'after_pointer';
-			}
-			openPanel(trigger, bar, e, position);
-			return false;
+		if(e) {
+			e.preventDefault();
+			e.stopPropagation();
 		}
+		
+		var position = 'after_end';
+		if(!e) {
+			trigger = bar.button || $('navigator-toolbox');
+		} else if(trigger == bar.switcher) {
+			position = 'after_pointer';
+		}
+		openPanel(trigger, bar, e, position);
+		return false;
 	}
 	return true;
 };
@@ -54,6 +52,10 @@ this.populatePanel = function() {
 	}
 	
 	if(!bar.toolbar.collapsed) {
+		// Don't let the sidebar header jump around with this change
+		bar.stack.style.height = bar.stack.clientHeight+'px';
+		bar.stack.style.width = bar.stack.clientWidth+'px';
+		
 		if(Services.appinfo.OS == 'WINNT' && Services.navigator.oscpu.indexOf('6.') > -1) {
 			var color = window.getComputedStyle(panel).getPropertyValue('background-color');
 			var padding = (Services.navigator.oscpu.indexOf('6.2') > -1) ? 3 : 5;
@@ -85,6 +87,9 @@ this.emptyPanel = function() {
 	delete twinTriggers.panel;
 	
 	if(!bar.toolbar.collapsed && panelToolbar._originalParent) {
+		bar.stack.style.height = '';
+		bar.stack.style.width = '';
+		
 		if(Services.appinfo.OS == 'WINNT' && Services.navigator.oscpu.indexOf('6.') > -1) {
 			bar.toolbar.style.backgroundColor = '';
 			bar.toolbar.style.paddingBottom = '';
@@ -110,10 +115,8 @@ this.panelDontOpenContext = function(e) {
 	if(e.explicitOriginalTarget
 	&& (e.explicitOriginalTarget == mainSidebar.button || e.explicitOriginalTarget == twinSidebar.button)) {
 		var bar = (e.explicitOriginalTarget == mainSidebar.button) ? mainSidebar : twinSidebar;
-		if(!bar.isOpen) {
-			e.preventDefault();
-			e.stopPropagation();
-		}
+		e.preventDefault();
+		e.stopPropagation();
 	}
 };
 
