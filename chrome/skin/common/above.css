@@ -62,6 +62,7 @@
 		background: none !important;
 		height: auto;
 		width: 4px !important;
+		min-width: 4px !important;
 	}
 	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resizer {
