@@ -2,8 +2,8 @@
 @-moz-document url("chrome://browser/content/places/places.xul") {
 	
 	.inSidebar #placesView > *:not(#contentView),
-	.inSidebar #back-button,
-	.inSidebar #forward-button,
+	.inSidebar #placesToolbar > toolbarbutton:not(#clearDownloadsButton),
+	.inSidebar #main-menubar,
 	.inSidebar #placesMenu {
 		display: none;
 	}
@@ -11,5 +11,24 @@
 	.inSidebar #searchFilter {
 		width: 13em !important;
 	}
+	
+	.inSidebar #downloadsRichListBox,
+	.inSidebar #placesToolbar {
+		background: none !important;
+		border: none !important;
+	}
+	
+	.inSidebar.glassStyle richlistitem.download[selected] > .downloadButton.downloadCancel { -moz-image-region: rect(0px, 16px, 16px, 0px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadCancel { -moz-image-region: rect(0px, 32px, 16px, 16px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadCancel:hover { -moz-image-region: rect(0px, 48px, 16px, 32px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadCancel:active { -moz-image-region: rect(0px, 64px, 16px, 48px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected] > .downloadButton.downloadShow { -moz-image-region: rect(16px, 16px, 32px, 0px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadShow { -moz-image-region: rect(16px, 32px, 32px, 16px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadShow:hover { -moz-image-region: rect(16px, 48px, 32px, 32px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadShow:active { -moz-image-region: rect(16px, 64px, 32px, 48px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected] > .downloadButton.downloadRetry { -moz-image-region: rect(32px, 16px, 48px, 0px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadRetry { -moz-image-region: rect(32px, 32px, 48px, 16px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadRetry:hover { -moz-image-region: rect(32px, 48px, 48px, 32px) !important; }
+	.inSidebar.glassStyle richlistitem.download[selected]:hover > .downloadButton.downloadRetry:active { -moz-image-region: rect(32px, 64px, 48px, 48px) !important; }
 
 }

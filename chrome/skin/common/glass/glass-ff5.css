@@ -29,6 +29,7 @@
 .inSidebar #ybsidebar-tags-sort-menu,
 .inSidebar #ybsidebar-bookmarks-sort-menu,
 .inSidebar #bookmarks-dustbox,
+.inSidebar #placesToolbar > toolbarbutton,
 .inSidebar #RIL_sort,
 .inSidebar #RIL_listPage {
 	-moz-appearance: none !important;
@@ -80,6 +81,7 @@
 .inSidebar #ybsidebar-tags-sort-menu[disabled="true"],
 .inSidebar #ybsidebar-bookmarks-sort-menu[disabled="true"],
 .inSidebar #bookmarks-dustbox[disabled="true"],
+.inSidebar #placesToolbar > toolbarbutton[disabled="true"],
 .inSidebar #RIL_sort[disabled="true"],
 .inSidebar #RIL_listPage[disabled="true"] {
 	opacity: .8;
@@ -112,6 +114,7 @@
 .inSidebar #ybsidebar-tags-sort-menu[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .inSidebar #ybsidebar-bookmarks-sort-menu[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .inSidebar #bookmarks-dustbox[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.inSidebar #placesToolbar > toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .inSidebar #RIL_sort[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .inSidebar #RIL_listPage[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 
@@ -142,6 +145,7 @@
 .inSidebar #ybsidebar-tags-sort-menu[disabled="true"] > .toolbarbutton-icon,
 .inSidebar #ybsidebar-bookmarks-sort-menu[disabled="true"] > .toolbarbutton-icon,
 .inSidebar #bookmarks-dustbox[disabled="true"] > .toolbarbutton-icon,
+.inSidebar #placesToolbar > toolbarbutton[disabled="true"] > .toolbarbutton-icon,
 .inSidebar #RIL_sort[disabled="true"] > .toolbarbutton-icon,
 .inSidebar #RIL_listPage[disabled="true"] > .toolbarbutton-icon {
 	opacity: .5;
@@ -176,6 +180,7 @@
 .inSidebar #ybsidebar-tags-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .inSidebar #ybsidebar-bookmarks-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .inSidebar #bookmarks-dustbox > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.inSidebar #placesToolbar > toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .inSidebar #RIL_sort > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .inSidebar #RIL_listPage > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 
@@ -204,6 +209,7 @@
 .inSidebar #ybsidebar-tags-sort-menu:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #ybsidebar-bookmarks-sort-menu:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #bookmarks-dustbox:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.inSidebar #placesToolbar > toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_sort:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_listPage:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
@@ -233,6 +239,7 @@
 .inSidebar #ybsidebar-tags-sort-menu:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .inSidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .inSidebar #bookmarks-dustbox:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.inSidebar #placesToolbar > toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .inSidebar #RIL_sort:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .inSidebar #RIL_listPage:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
 	background-color: hsla(190,60%,70%,.5) !important;
@@ -279,6 +286,7 @@
 .inSidebar #ybsidebar-tags-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .inSidebar #ybsidebar-bookmarks-sort-menu > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .inSidebar #bookmarks-dustbox > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.inSidebar #placesToolbar > toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .inSidebar #RIL_sort > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .inSidebar #RIL_listPage > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 
@@ -309,6 +317,7 @@
 .inSidebar #ybsidebar-tags-sort-menu:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #ybsidebar-bookmarks-sort-menu:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #bookmarks-dustbox:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.inSidebar #placesToolbar > toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_sort:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_listPage:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
@@ -339,6 +348,7 @@
 .inSidebar #ybsidebar-tags-sort-menu[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .inSidebar #ybsidebar-bookmarks-sort-menu[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .inSidebar #bookmarks-dustbox[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.inSidebar #placesToolbar > toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .inSidebar #RIL_sort[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .inSidebar #RIL_listPage[open="true"] > .toolbarbutton-menubutton-dropmarker,
 
@@ -370,6 +380,7 @@
 .inSidebar #ybsidebar-tags-sort-menu:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .inSidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .inSidebar #bookmarks-dustbox:not([type="menu-button"]):not([disabled="true"]):hover:active,
+.inSidebar #placesToolbar > toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .inSidebar #RIL_sort:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .inSidebar #RIL_listPage:not([type="menu-button"]):not([disabled="true"]):hover:active,
 
@@ -401,6 +412,7 @@
 .inSidebar #ybsidebar-tags-sort-menu:not([type="menu-button"])[checked="true"],
 .inSidebar #ybsidebar-bookmarks-sort-menu:not([type="menu-button"])[checked="true"],
 .inSidebar #bookmarks-dustbox:not([type="menu-button"])[checked="true"],
+.inSidebar #placesToolbar > toolbarbutton:not([type="menu-button"])[checked="true"],
 .inSidebar #RIL_sort:not([type="menu-button"])[checked="true"],
 .inSidebar #RIL_listPage:not([type="menu-button"])[checked="true"],
 
@@ -432,6 +444,7 @@
 .inSidebar #ybsidebar-tags-sort-menu[open="true"],
 .inSidebar #ybsidebar-bookmarks-sort-menu[open="true"],
 .inSidebar #bookmarks-dustbox[open="true"],
+.inSidebar #placesToolbar > toolbarbutton[open="true"],
 .inSidebar #RIL_sort[open="true"],
 .inSidebar #RIL_listPage[open="true"] {
 	background-color: transparent !important;
@@ -468,6 +481,7 @@
 .inSidebar #ybsidebar-tags-sort-menu[checked="true"]:not(:active):hover,
 .inSidebar #ybsidebar-bookmarks-sort-menu[checked="true"]:not(:active):hover,
 .inSidebar #bookmarks-dustbox[checked="true"]:not(:active):hover,
+.inSidebar #placesToolbar > toolbarbutton[checked="true"]:not(:active):hover,
 .inSidebar #RIL_sort[checked="true"]:not(:active):hover,
 .inSidebar #RIL_listPage[checked="true"]:not(:active):hover {
 	background-color: rgba(90%,90%,90%,.4) !important;

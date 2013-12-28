@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.4';
+moduleAid.VERSION = '1.2.5';
 
 this.customizing = false;
 
@@ -158,15 +158,28 @@ this.toggleTwin = function() {
 	moduleAid.loadIf('twin', prefAid.twinSidebar);
 };
 
-// Adds an 'insidebar' class tag to the opened page for easier costumization
+// Adds 'inSidebar' and "glassStyle" class tags to the opened page for easier costumization
 this.setclass = function(bar) {
 	if(typeof(bar.contentDocument) != 'undefined') { // Fix for newly created profiles (unloaded sidebars)
-		if(!UNLOADED && !bar.contentDocument.documentElement.classList.contains('inSidebar')) {
-			bar.contentDocument.documentElement.classList.add('inSidebar');
-		} else if(UNLOADED) {
+		if(!UNLOADED) {
+			if(!bar.contentDocument.documentElement.classList.contains('inSidebar')) {
+				bar.contentDocument.documentElement.classList.add('inSidebar');
+			}
+			if(prefAid.glassStyle && !bar.contentDocument.documentElement.classList.contains('glassStyle')) {
+				bar.contentDocument.documentElement.classList.add('glassStyle');
+			} else if(!prefAid.glassStyle && bar.contentDocument.documentElement.classList.contains('glassStyle')) {
+				bar.contentDocument.documentElement.classList.remove('glassStyle');
+			}
+		} else {
 			bar.contentDocument.documentElement.classList.remove('inSidebar');
+			bar.contentDocument.documentElement.classList.remove('glassStyle');
 		}
 	}
+};
+
+this.setClasses = function() {
+	setclass(mainSidebar.sidebar);
+	setclass(twinSidebar.sidebar);
 };
 
 this.closeSidebar = function(bar, broadcaster) {
@@ -719,6 +732,7 @@ moduleAid.LOADMODULE = function() {
 	
 	// Apply initial preferences
 	prefAid.listen('switcherAdjust', setSwitcherWidth);
+	prefAid.listen('glassStyle', setClasses);
 	
 	setSwitcherWidth();
 	
@@ -768,6 +782,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
 	
 	prefAid.unlisten('switcherAdjust', setSwitcherWidth);
+	prefAid.unlisten('glassStyle', setClasses);
 	
 	styleAid.unload('switcherWidth_'+_UUID);
 	

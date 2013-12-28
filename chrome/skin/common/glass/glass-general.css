@@ -12,6 +12,7 @@
 .inSidebar #styles-filter,
 .inSidebar #tfURLBar,
 .inSidebar #panoSearchBox,
+.inSidebar #searchFilter,
 .inSidebar .ybsidebar-search2 {
 	-moz-appearance: none !important;
 	background: rgba(135,135,135,.5) !important;
@@ -46,7 +47,7 @@
 
 .inSidebar {
 	-moz-appearance: none !important;
-	background: rgba(0, 0, 0, 0) !important;
+	background: none !important;
 	padding: 8px !important;
 }
 
@@ -78,6 +79,7 @@
 .inSidebar #ybbookmarks-tree-tags,
 .inSidebar #ybbookmarks-tree-bookmarks,
 .inSidebar #bookmarks-content-box,
+.inSidebar #placesView,
 .inSidebar #RIL_sidebar {
 	-moz-appearance: none !important;
 	border: 1px solid rgb(174, 183, 196) !important;
@@ -132,6 +134,8 @@
 .inSidebar #ybbookmarks-tree-bookmarks treechildren::-moz-tree-row(hover),
 .inSidebar #places-content-view treechildren::-moz-tree-row(selected),
 .inSidebar #places-content-view treechildren::-moz-tree-row(hover),
+.inSidebar #downloadsRichListBox richlistitem:hover,
+.inSidebar #downloadsRichListBox richlistitem[selected="true"],
 
 .inSidebar .RIL_row:hover {
 	color: black !important;
@@ -186,8 +190,10 @@
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf, hover),
 
+.inSidebar #downloadsRichListBox richlistitem,
 .inSidebar #downloadView > richlistitem {
 	color: black !important;
+	border-radius: 0 !important;
 }
 
 .inSidebar #bookmarks-view-children::-moz-tree-separator,
@@ -205,6 +211,7 @@
 .inSidebar .view-pane richlistitem:not(:first-child),
 .inSidebar #ConsoleBox richlistitem:not(:first-child),
 .inSidebar #styles richlistitem:not(:first-child),
+.inSidebar #downloadsRichListBox richlistitem:not(:first-child),
 .inSidebar #boxRelatedSites .siteDiv:not(:first-child),
 .inSidebar #boxTopSites .topSitesResultBox:not(:first-child),
 .inSidebar #boxSiteInfo .newsResultBox:not(:first-child),
@@ -223,6 +230,7 @@
 .inSidebar .view-pane richlistitem:first-child,
 .inSidebar #ConsoleBox richlistitem:first-child,
 .inSidebar #styles richlistitem:first-child,
+.inSidebar #downloadsRichListBox richlistitem:first-child,
 .inSidebar #boxRelatedSites .siteDiv:first-child,
 .inSidebar #boxTopSites .topSitesResultBox:first-child,
 .inSidebar #boxSiteInfo .newsResultBox:first-child,

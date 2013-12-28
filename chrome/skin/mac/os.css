@@ -95,3 +95,13 @@
 	}
 
 }
+
+@-moz-document url("chrome://browser/content/places/places.xul") {
+	
+	#places.inSidebar,
+	.inSidebar #placesToolbar {
+		-moz-appearance: none !important;
+		background: none !important;
+	}
+
+}
