@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.17';
+var defaultsVersion = '1.0.18';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -50,6 +50,7 @@ var prefList = {
 	hideDelay: 250,
 	switcherAdjust: 0,
 	keepPrivate: false,
+	keepLoaded: false,
 	
 	alwaysAddons: false,
 	alwaysConsole: false,
@@ -81,7 +82,10 @@ function startAddon(window) {
 	
 	// Hide the sidebar until the add-on is initialized
 	if(STARTED == APP_STARTUP) {
-		hideIt(window.document.getElementById('sidebar-box'));
+		var box = window.document.getElementById('sidebar-box');
+		if(box) {
+			box.style.visibility = 'collapse';
+		}
 	}
 }
 

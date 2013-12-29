@@ -1,8 +1,14 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
 	setLastCommand(twinSidebar);
+};
+
+this.reUnloadTwin = function() {
+	if(twinSidebar.box.collapsed) {
+		closeSidebar(twinSidebar);
+	}
 };
 
 this.setBroadcastersTwin = function(initialize) {
@@ -110,6 +116,7 @@ moduleAid.LOADMODULE = function() {
 	);
 	
 	prefAid.listen('useSwitchTwin', enableTwinSwitcher);
+	prefAid.listen('keepLoaded', reUnloadTwin);
 	
 	twinTriggers.__defineGetter__('twinCommand', function() { return $(objName+'-cmd_twinSidebar'); });
 	twinTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
@@ -124,6 +131,9 @@ moduleAid.UNLOADMODULE = function() {
 	delete blankTriggers.twinSwitcher;
 	
 	prefAid.unlisten('useSwitchTwin', enableTwinSwitcher);
+	prefAid.unlisten('keepLoaded', reUnloadTwin);
+	
+	reUnloadTwin();
 	
 	listenerAid.remove(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	listenerAid.remove(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);

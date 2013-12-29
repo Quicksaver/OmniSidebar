@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.0.7';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -60,7 +60,7 @@ this.buttonLabels = function(btn, onLoad) {
 	aSync(function() { btn.setAttribute('loaded', 'true'); });
 	if(btn == mainSidebar.button) {
 		var box = mainSidebar.box;
-		var check = !box || box.hidden || customizing;
+		var check = !box || mainSidebar.closed || customizing;
 		
 		if(onLoad && window.document.baseURI == 'chrome://browser/content/browser.xul') {
 			setButtonModifiers(mainSidebar);
@@ -92,7 +92,7 @@ this.buttonLabels = function(btn, onLoad) {
 	
 	if(btn == twinSidebar.button) {
 		var box = twinSidebar.box;
-		var check = !box || box.hidden || customizing;
+		var check = !box || twinSidebar.closed || customizing;
 		
 		if(onLoad && window.document.baseURI == 'chrome://browser/content/browser.xul') {
 			setButtonModifiers(twinSidebar);

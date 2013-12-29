@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.10';
+moduleAid.VERSION = '1.0.11';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
 
@@ -252,7 +252,7 @@ this.setAbove = function(bar) {
 	
 	if(bar.above) {
 		dispatch(bar.resizeBox, { type: 'sidebarAbove', cancelable: false });
-		if(!UNLOADED && !bar.box.hidden) {
+		if(!UNLOADED && !bar.closed) {
 			fireSidebarFocusedEvent(bar.twin);
 		}
 	} else {

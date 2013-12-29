@@ -339,6 +339,7 @@
 			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
 			<preference id="pref-switcherAdjust" name="extensions.omnisidebar.switcherAdjust" type="int"/>
 			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
+			<preference id="pref-keepLoaded" name="extensions.omnisidebar.keepLoaded" type="bool"/>
 		</preferences>
 		
 		<groupbox align="center">
@@ -387,6 +388,7 @@
 						preference="pref-switcherAdjust"/>
 		        </hbox>
 				<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
+				<checkbox label="&omnisidebarOptkeepLoaded.label;" preference="pref-keepLoaded"/>
 			</vbox>
 		</groupbox>
 		

@@ -38,6 +38,7 @@
 <!ENTITY omnisidebarOpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
 <!ENTITY omnisidebarOptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">
 <!ENTITY omnisidebarOptswitcherAdjust.label "Adjust width of the active margin area (pixels): ">
+<!ENTITY omnisidebarOptkeepLoaded.label "Keep the panel loaded when the sidebar closes">
 
 <!ENTITY omnisidebarOptforceOpen.label "Don't close the sidebar from">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Buttons in the sidebar toolbar">

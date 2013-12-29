@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.5';
+moduleAid.VERSION = '1.3.0';
 
 this.customizing = false;
 
@@ -17,6 +17,7 @@ this.mainSidebar = {
 		}
 		return true;
 	},
+	get closed () { return this.box.hidden || this.box.collapsed; },
 	get splitter () { return $('sidebar-splitter'); },
 	get header () { return $('sidebar-header'); },
 	get box () { return $('sidebar-box'); },
@@ -52,7 +53,7 @@ this.mainSidebar = {
 	get autoClose () { return prefAid.autoClose; },
 	get switcher () { return $(objName+'-switch'); },
 	toggleSwitcher: function() {
-		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
+		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed));
 	},
 	get goURI () { return $(objName+'-viewURISidebar'); },
 	get goURIButton () { return $(objName+'-uri_sidebar_button'); }
@@ -73,6 +74,7 @@ this.twinSidebar = {
 		}
 		return true;
 	},
+	get closed () { return this.box.hidden || this.box.collapsed; },
 	get splitter () { return $(objName+'-sidebar-splitter-twin'); },
 	get header () { return $(objName+'-sidebar-header-twin'); },
 	get box () { return $(objName+'-sidebar-box-twin'); },
@@ -108,7 +110,7 @@ this.twinSidebar = {
 	get autoClose () { return prefAid.autoCloseTwin; },
 	get switcher () { return $(objName+'-switch-twin'); },
 	toggleSwitcher: function() {
-		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.box.hidden));
+		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed));
 	},
 	get goURI () { return $(objName+'-viewURISidebar-twin'); },
 	get goURIButton () { return $(objName+'-uri_sidebar_button-twin'); }
@@ -182,7 +184,9 @@ this.setClasses = function() {
 	setclass(twinSidebar.sidebar);
 };
 
-this.closeSidebar = function(bar, broadcaster) {
+this.closeSidebar = function(bar, forceUnload, broadcaster) {
+	if(forceUnload === undefined) { forceUnload = true; }
+	
 	dispatch(bar.sidebar.contentWindow, { type: 'SidebarClosed', cancelable: false });
 	
 	if(!broadcaster && bar.box.getAttribute('sidebarcommand')) {
@@ -193,14 +197,26 @@ this.closeSidebar = function(bar, broadcaster) {
 		broadcaster.removeAttribute('twinSidebar');
 	}
 	
-	bar.sidebar.setAttribute("src", "about:blank");
-	if(bar.sidebar.docShell) { bar.sidebar.docShell.createAboutBlankContentViewer(null); }
-	bar.title.value = "";
-	bar.box.setAttribute("sidebarcommand", "");
-	bar.box.hidden = true;
-	bar.splitter.hidden = true;
+	if(!prefAid.keepLoaded || forceUnload || UNLOADED || !dispatch(bar, { type: 'ShouldCollapseSidebar' })) {
+		bar.sidebar.setAttribute("src", "about:blank");
+		if(bar.sidebar.docShell) { bar.sidebar.docShell.createAboutBlankContentViewer(null); }
+		bar.title.value = "";
+		bar.box.setAttribute("sidebarcommand", "");
+		bar.box.hidden = true;
+		hideIt(bar.box, true);
+	}
+	else {
+		hideIt(bar.box);
+	}
 	
+	bar.splitter.hidden = true;
 	buttonLabels(bar.button);
+};
+
+this.reUnloadMain = function() {
+	if(mainSidebar.box.collapsed) {
+		closeSidebar(mainSidebar);
+	}
 };
 
 // Opens the sidebars last opened page if its closed and should be open, to be called on startup
@@ -337,8 +353,8 @@ this.browserResized = function(e) {
 // this simulates the default browser behavior when the sidebars are docked
 this.browserMinWidth = function(e) {
 	var minWidth = prefAid.minSpaceBetweenSidebars;
-	if(mainSidebar.width && !mainSidebar.box.hidden) { minWidth += mainSidebar.width; }
-	if(twinSidebar.width && !twinSidebar.box.hidden) { minWidth += twinSidebar.width; }
+	if(mainSidebar.width && !mainSidebar.closed) { minWidth += mainSidebar.width; }
+	if(twinSidebar.width && !twinSidebar.closed) { minWidth += twinSidebar.width; }
 	$('main-window').style.minWidth = minWidth+'px';
 	
 	if(e && e.type && e.type == 'endToggleSidebar' && $('main-window').clientWidth < minWidth) {
@@ -460,7 +476,7 @@ this.barSwitchTriggers = {};
 this.forceReloadTriggers = {};
 
 // toggleSidebar(), fireSidebarFocusedEvent() and sidebarOnLoad() modified for use with two sidebars
-this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceBarSwitch, forceReload) {
+this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, forceBlank, forceBarSwitch, forceReload) {
 	// Always make sure we hide our popup
 	hidePanel();
 	
@@ -468,6 +484,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	
 	if(!forceOpen) { forceOpen = false; }
 	if(!twin) { twin = false; }
+	if(!forceUnload) { forceUnload = false; }
 	if(!forceBlank) { forceBlank = false; }
 	if(!forceBarSwitch) { forceBarSwitch = false; }
 	if(!forceReload) { forceReload = false; }
@@ -538,6 +555,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: {
 		bar: bar,
 		commandID: commandID,
+		forceUnload: forceUnload,
 		forceOpen: forceOpen,
 		forceBlank: forceBlank,
 		forceBarSwitch: forceBarSwitch,
@@ -557,18 +575,18 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 				sidebarBroadcaster = $(commandID);
 				if(!sidebarBroadcaster) { return false; } // Prevent some unforseen error here
 			} else {
-				if(!toggleSidebar(commandID, false, !twin)) { return false; }
+				if(!toggleSidebar(commandID, false, !twin, true)) { return false; }
 				if(!forceBarSwitch) { return true; }
 			}
 	}
 	
 	if(trueAttribute(sidebarBroadcaster, "checked")) {
 		if(forceReload) {
-			closeSidebar(bar, sidebarBroadcaster);
+			closeSidebar(bar, true, sidebarBroadcaster);
 		}
 		else {
 			if(!forceOpen) {
-				closeSidebar(bar, sidebarBroadcaster);
+				closeSidebar(bar, forceUnload, sidebarBroadcaster);
 				
 				if(dispatch(bar.sidebar, { type: 'closedSidebar', detail: { bar: bar } })) {
 					if(window.content) {
@@ -599,6 +617,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 		}
 	}
 	bar.box.hidden = false;
+	hideIt(bar.box, true);
 	bar.splitter.hidden = false;
 	
 	buttonLabels(bar.button);
@@ -606,11 +625,13 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceBlank, forceB
 	var newTitle = sidebarBroadcaster.getAttribute("sidebartitle") || sidebarBroadcaster.getAttribute("label");
 	var url = sidebarBroadcaster.getAttribute("sidebarurl");
 	
-	bar.sidebar.setAttribute("src", url);
-	bar.box.setAttribute("sidebarcommand", sidebarBroadcaster.id);
-	bar.box.setAttribute("src", url);
-	bar.title.value = newTitle;
-	bar.title.setAttribute('value', newTitle); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
+	if(!prefAid.keepLoaded || forceUnload || bar.sidebar.getAttribute('src') != url) {
+		bar.sidebar.setAttribute("src", url);
+		bar.box.setAttribute("sidebarcommand", sidebarBroadcaster.id);
+		bar.box.setAttribute("src", url);
+		bar.title.value = newTitle;
+		bar.title.setAttribute('value', newTitle); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
+	}
 	
 	if(!bar.sidebar.contentDocument || bar.sidebar.contentDocument.readyState != 'complete' || bar.sidebar.contentDocument.location.href != url) {
 		listenerAid.add(bar.sidebar, "load", sidebarOnLoad, true, true);
@@ -657,7 +678,7 @@ this.loadMainSidebar = function() {
 	// The first time we install the add-on lets open the sidebar so the user knows something's changed
 	if(prefAid.firstEnabled) {
 		prefAid.firstEnabled = false;
-		if(!mainSidebar.isOpen && mainSidebar.box.hidden) {
+		if(!mainSidebar.isOpen && mainSidebar.closed) {
 			toggleSidebar('viewBookmarksSidebar');
 		}
 	}
@@ -698,7 +719,9 @@ moduleAid.LOADMODULE = function() {
 	
 	overlayAid.overlayWindow(window, "mainSidebar", null, loadMainSidebar, unloadMainSidebar);
 	setBroadcasters(true);
-	hideIt(mainSidebar.box, true);
+	if(mainSidebar.box) {
+		mainSidebar.box.style.visibility = '';
+	}
 	
 	if(!this.backups) {
 		this.backups = {
@@ -733,6 +756,7 @@ moduleAid.LOADMODULE = function() {
 	// Apply initial preferences
 	prefAid.listen('switcherAdjust', setSwitcherWidth);
 	prefAid.listen('glassStyle', setClasses);
+	prefAid.listen('keepLoaded', reUnloadMain);
 	
 	setSwitcherWidth();
 	
@@ -783,6 +807,9 @@ moduleAid.UNLOADMODULE = function() {
 	
 	prefAid.unlisten('switcherAdjust', setSwitcherWidth);
 	prefAid.unlisten('glassStyle', setClasses);
+	prefAid.unlisten('keepLoaded', reUnloadMain);
+	
+	reUnloadMain();
 	
 	styleAid.unload('switcherWidth_'+_UUID);
 	

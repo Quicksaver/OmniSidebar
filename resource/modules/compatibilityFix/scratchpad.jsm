@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -52,7 +52,15 @@ this.confirmCloseScratchpad = function(e) {
 			
 			inScratchpad.promptSave(function(toClose) {
 				if(toClose) {
-					toggleSidebar(e.detail.commandID, e.detail.forceOpen, e.detail.bar.twin, e.detail.forceBlank, e.detail.forceBarSwitch, e.detail.forceReload);
+					toggleSidebar(
+						e.detail.commandID,
+						e.detail.forceOpen,
+						e.detail.bar.twin,
+						e.detail.forceUnload,
+						e.detail.forceBlank,
+						e.detail.forceBarSwitch,
+						e.detail.CUI_placeholder
+					);
 				}
 			});
 		}

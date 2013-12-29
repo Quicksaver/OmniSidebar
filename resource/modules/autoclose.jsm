@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.2.2';
 
 // stops closing the sidebar when quickly toggling between sidebars in auto-close mode
 this.autoCloseBeginToggleSidebar = function(e) {
@@ -44,7 +44,7 @@ this.autoClose = function(e) {
 		
 		var focusedNode = document.commandDispatcher.focusedElement || e.target;
 		
-		if(mainSidebar.box && !mainSidebar.box.hidden && prefAid.autoClose) {
+		if(mainSidebar.box && !mainSidebar.closed && prefAid.autoClose) {
 			if(!isAncestor(focusedNode, mainSidebar.box)
 			&& dispatch(mainSidebar.sidebar, { type: 'willCloseSidebar', detail: { bar: mainSidebar, focusedNode: focusedNode } })) {
 				listenerAid.add(mainSidebar.sidebar, 'closedSidebar', function(e) { e.preventDefault(); }, true, true); // keep current focus
@@ -52,7 +52,7 @@ this.autoClose = function(e) {
 			}
 		}
 		
-		if(twinSidebar.box && !twinSidebar.box.hidden && prefAid.autoCloseTwin) {
+		if(twinSidebar.box && !twinSidebar.closed && prefAid.autoCloseTwin) {
 			if(!isAncestor(focusedNode, twinSidebar.box)
 			&& dispatch(twinSidebar.sidebar, { type: 'willCloseSidebar', detail: { bar: twinSidebar, focusedNode: focusedNode } })) {
 				listenerAid.add(twinSidebar.sidebar, 'closedSidebar', function(e) { e.preventDefault(); }, true, true); // keep current focus
@@ -101,11 +101,11 @@ this.dontOpenOnStartup = function() {
 	if(!UNLOADED || UNLOADED == APP_SHUTDOWN) {
 		if(prefAid.autoClose) {
 			_sidebarCommand = null;
-			if(mainSidebar.box && !mainSidebar.box.hidden) { closeHide(mainSidebar); }
+			if(mainSidebar.box && !mainSidebar.closed) { closeHide(mainSidebar); }
 		}
 		if(prefAid.autoCloseTwin) {
 			_sidebarCommandTwin = null;
-			if(twinSidebar.box && !twinSidebar.box.hidden) { closeHide(twinSidebar); }
+			if(twinSidebar.box && !twinSidebar.closed) { closeHide(twinSidebar); }
 		}
 	}
 };
