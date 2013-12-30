@@ -13,6 +13,7 @@
 			label="&omnisidebarButtonTwin.label;"
 			tooltiptext="&omnisidebarButtonTwin.tooltip;"
 			type="custom"
+			defaultArea="nav-bar"
 			onload="objName.buttonLabels(this, true);"
 			onclick="return objName.shouldFollowCommand(this, true, event);"
 			command="objName-cmd_twinSidebar" />
