@@ -45,11 +45,12 @@
 
 }
 
-@-moz-document url("chrome://browser/content/places/places.xul") {
+@-moz-document url("chrome://browser/content/places/places.xul"), url("about:addons") {
 	
 	@media (-moz-windows-default-theme) {
+		#addons-page.inSidebar:not(.glassStyle),
 		#places.inSidebar:not(.glassStyle) {
-			background-color: #EEF3FA !important;
+			background: #EEF3FA !important;
 		}
 	}
 

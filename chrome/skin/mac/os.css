@@ -105,3 +105,11 @@
 	}
 
 }
+
+@-moz-document url("about:addons") {
+	
+	#addons-page.inSidebar:not(.glassStyle) {
+		background: none !important;
+	}
+
+}
