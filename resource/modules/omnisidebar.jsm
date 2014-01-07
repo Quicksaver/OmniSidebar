@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.0';
+moduleAid.VERSION = '1.3.1';
 
 this.customizing = false;
 
@@ -702,15 +702,8 @@ this.unloadMainSidebar = function() {
 };
 
 moduleAid.LOADMODULE = function() {
-	// This will be removed in the future, when Australis hits release
-	if(Australis) {
-		setAttribute(document.documentElement, objName+'_Australis', 'true');
-		overlayAid.overlayWindow(window, 'buttons', null, null, function() {
-			removeAttribute(mainSidebar.button, 'loaded');
-			removeAttribute(twinSidebar.button, 'loaded');
-		});
-		overlayAid.overlayWindow(window, 'australis');
-	}
+	// This will be moved here in the future, when Australis hits release
+	moduleAid.loadIf('australis', Australis);
 	
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
 	moduleAid.load('miniPanel');
@@ -839,10 +832,5 @@ moduleAid.UNLOADMODULE = function() {
 	
 	moduleAid.unload('compatibilityFix/windowFixes');
 	moduleAid.unload('miniPanel');
-	
-	if(Australis) {
-		removeAttribute(document.documentElement, objName+'_Australis');
-		overlayAid.removeOverlayWindow(window, 'australis');
-		overlayAid.removeOverlayWindow(window, 'buttons');
-	}
+	moduleAid.unload('australis');
 };
