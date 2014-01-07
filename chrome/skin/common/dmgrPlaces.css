@@ -1,11 +1,16 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/places/places.xul") {
 	
-	.inSidebar #placesView > *:not(#contentView),
+	.inSidebar #placesView > *:not(#contentView):not(#placesList),
 	.inSidebar #placesToolbar > toolbarbutton:not(#clearDownloadsButton),
 	.inSidebar #main-menubar,
 	.inSidebar #placesMenu {
 		display: none;
+	}
+	
+	/* can't use display:none in this one because its treeBoxObject.view object wouldn't be populated (at least in linux, but safe-guarding for the other OS's) */
+	.inSidebar #placesList {
+		visibility: collapse;
 	}
 	
 	.inSidebar #searchFilter {
