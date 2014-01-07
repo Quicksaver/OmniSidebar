@@ -1148,7 +1148,10 @@ this.overlayAid = {
 			
 			// unregisterArea()'ing the toolbar can nuke the nodes, we need to make sure ours are moved to the palette
 			data.onWidgetAfterDOMChange = function(aNode) {
-				if(aNode.id == this.id && !aNode.parentNode && !trueAttribute(aNode.ownerDocument.documentElement, 'customizing') && this.palette) {
+				if(aNode.id == this.id
+				&& !aNode.parentNode
+				&& !trueAttribute(aNode.ownerDocument.documentElement, 'customizing') // here's to hoping we never unregister a toolbar while in customziation mode
+				&& this.palette) {
 					this.palette.appendChild(aNode);
 				}
 			};
