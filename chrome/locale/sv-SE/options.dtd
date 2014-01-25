@@ -31,6 +31,8 @@
 <!ENTITY omnisidebarOptshowDelay.label "Fördröj automatisk visning av sidopanelen med (ms):">
 <!ENTITY omnisidebarOpthideDelay.label "Fördröj automatisk döljning av sidopanelen med (ms):">
 <!ENTITY omnisidebarOptkeepPrivate.label "Behåll sidopanelens tillstånd i Privat surfning-läget">
+<!ENTITY omnisidebarOptswitcherAdjust.label "Justera bredden på det aktiva marginalområdet (px):">
+<!ENTITY omnisidebarOptkeepLoaded.label "Behåll panelen inläst när sidopanelen stängs">
 <!ENTITY omnisidebarOptforceOpen.label "Stäng inte sidopanelen från">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Knappar i sidopanelens verktygsfält">
 <!ENTITY omnisidebarOptforceOpen.menus "Rullgardinsmenyer">

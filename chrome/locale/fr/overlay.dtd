@@ -1,5 +1,10 @@
+<!ENTITY addonsSidebar.label "Gestionnaire de modules">
 <!ENTITY addonsSidebar.tooltip "Ouvrir le gestionnaire de modules dans le panneau latéral">
 <!ENTITY addonsSidebar.accesskey "G">
+<!ENTITY bookmarksSidebar.label "Panneau latéral des marque-pages">
+<!ENTITY bookmarksSidebar.tooltip "Afficher vos marque-pages dans le panneau latéral">
+<!ENTITY historySidebar.label "Panneau latéral de l'historique">
+<!ENTITY historySidebar.tooltip "Affiche les pages vues récemment dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">
 <!ENTITY DOMInspectorSidebar.tooltip "Ouvrir l'inspecteur DOM dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -18,6 +23,9 @@
 <!ENTITY consoleSidebar.label "Console d'erreurs">
 <!ENTITY consoleSidebar.tooltip "Ouvrir la console d'erreurs dans le panneau latéral">
 <!ENTITY consoleSidebar.accesskey "C">
+<!ENTITY browserConsole.label "Console du navigateur">
+<!ENTITY browserConsole.tooltip "Ouvre la console dans le panneau latéral">
+<!ENTITY browserConsole.accesskey "C">
 <!ENTITY dmtSidebar.label "Téléchargements">
 <!ENTITY dmtSidebar.tooltip "Afficher la progression des téléchargements en cours">
 <!ENTITY dmtSidebar.accesskey "h">

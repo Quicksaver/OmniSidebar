@@ -31,6 +31,8 @@
 <!ENTITY omnisidebarOptshowDelay.label "Délai d'affichage automatique du panneau latéral (en msec) :">
 <!ENTITY omnisidebarOpthideDelay.label "Délai de masquage automatique du panneau latéral (en msec) :">
 <!ENTITY omnisidebarOptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
+<!ENTITY omnisidebarOptswitcherAdjust.label "Ajuster la largeur de la marge de la zone active (pixels) :">
+<!ENTITY omnisidebarOptkeepLoaded.label "Conserver le panneau lors de la fermeture du panneau latéral">
 <!ENTITY omnisidebarOptforceOpen.label "Ne pas fermer le panneau latéral de">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Boutons dans la barre d'outils du panneau latéral">
 <!ENTITY omnisidebarOptforceOpen.menus "Menus déroulants">

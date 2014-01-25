@@ -1,5 +1,10 @@
+<!ENTITY addonsSidebar.label "Gestor de Extras">
 <!ENTITY addonsSidebar.tooltip "Abrir o Gestor de Extras no Painel Lateral">
 <!ENTITY addonsSidebar.accesskey "G">
+<!ENTITY bookmarksSidebar.label "Painel Lateral dos Favoritos">
+<!ENTITY bookmarksSidebar.tooltip "Mostrar os seus favoritos no painel lateral">
+<!ENTITY historySidebar.label "Painel Lateral do Histórico">
+<!ENTITY historySidebar.tooltip "Mostrar no painel lateral as páginas que visualizou recentemente">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector no Painel Lateral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -18,6 +23,9 @@
 <!ENTITY consoleSidebar.label "Consola de Erros">
 <!ENTITY consoleSidebar.tooltip "Abrir a Consola de Erros no Painel Lateral">
 <!ENTITY consoleSidebar.accesskey "E">
+<!ENTITY browserConsole.label "Consola do Navegador">
+<!ENTITY browserConsole.tooltip "Abrir a consola do navegador no painel lateral">
+<!ENTITY browserConsole.accesskey "C">
 <!ENTITY dmtSidebar.label "Transferências">
 <!ENTITY dmtSidebar.tooltip "Mostrar o Progresso Atual das Transferências">
 <!ENTITY dmtSidebar.accesskey "r">

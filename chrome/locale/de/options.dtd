@@ -31,6 +31,8 @@
 <!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms): ">
 <!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms): ">
 <!ENTITY omnisidebarOptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
+<!ENTITY omnisidebarOptswitcherAdjust.label "Randbreite, welche bei Mauskontakt die Sidebar aktiviert (Pixel): ">
+<!ENTITY omnisidebarOptkeepLoaded.label "Inhalt der Sidebar auch nach deren Schließen im Speicher behalten">
 <!ENTITY omnisidebarOptforceOpen.label "Sidebar nicht schließen mittels">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Schaltflächen in der Sidebar-Symbolleiste">
 <!ENTITY omnisidebarOptforceOpen.menus "Aufklappmenüs">

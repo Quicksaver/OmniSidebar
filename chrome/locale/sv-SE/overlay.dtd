@@ -1,5 +1,10 @@
+<!ENTITY addonsSidebar.label "Tilläggshanteraren">
 <!ENTITY addonsSidebar.tooltip "Öppna tilläggshanteraren i sidopanelen">
 <!ENTITY addonsSidebar.accesskey "T">
+<!ENTITY bookmarksSidebar.label "Bokmärkespanelen">
+<!ENTITY bookmarksSidebar.tooltip "Visa dina bokmärken i sidopanelen">
+<!ENTITY historySidebar.label "Historikpanelen">
+<!ENTITY historySidebar.tooltip "Visa en lista över nyligen besökta webbsidor i sidopanelen">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Öppna DOM Inspector i sidopanelen">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -18,6 +23,9 @@
 <!ENTITY consoleSidebar.label "Felkonsolen">
 <!ENTITY consoleSidebar.tooltip "Öppna felkonsolen i sidopanelen">
 <!ENTITY consoleSidebar.accesskey "F">
+<!ENTITY browserConsole.label "Webbläsarkonsolen">
+<!ENTITY browserConsole.tooltip "Öppna webbläsarkonsolen i sidopanelen">
+<!ENTITY browserConsole.accesskey "W">
 <!ENTITY dmtSidebar.label "Filhämtningar">
 <!ENTITY dmtSidebar.tooltip "Visa förloppet för pågående filhämtningar">
 <!ENTITY dmtSidebar.accesskey "h">

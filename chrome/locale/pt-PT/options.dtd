@@ -31,6 +31,8 @@
 <!ENTITY omnisidebarOptshowDelay.label "Atrasar o mostrar automático do painel lateral em (msec):">
 <!ENTITY omnisidebarOpthideDelay.label "Atrasar o esconder automático do painel lateral em (msec):">
 <!ENTITY omnisidebarOptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
+<!ENTITY omnisidebarOptswitcherAdjust.label "Ajustar a largura da margem activa (pixels)">
+<!ENTITY omnisidebarOptkeepLoaded.label "Manter o painel na memória ao fechar">
 <!ENTITY omnisidebarOptforceOpen.label "Não fechar o painel lateral a partir de">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Botões na barra de ferramentas do painel">
 <!ENTITY omnisidebarOptforceOpen.menus "Itens de menu">
