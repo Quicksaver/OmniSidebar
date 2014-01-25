@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<overlay id="browserConsole-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="viewConsoleSidebar"
+			label="&browserConsole.label;"
+			tooltiptext="&browserConsole.tooltip;" 
+			accesskey="&browserConsole.accesskey;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://browser/content/devtools/webconsole.xul"
+			sidebartitle="&browserConsole.label;"
+			oncommand="toggleSidebar(this);" />
+	</broadcasterset>
+
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="objName-console_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size osb-custom-button"
+			label="&browserConsole.label;"
+			tooltiptext="&browserConsole.tooltip;"
+			type="custom"
+			observes="viewConsoleSidebar" />
+	</toolbarpalette>
+	
+	<menupopup id="viewSidebarMenu">
+		<menuitem id="menu_consoleSidebar"
+			observes="viewConsoleSidebar" />
+	</menupopup>
+	
+</overlay>
