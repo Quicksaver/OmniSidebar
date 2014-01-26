@@ -113,3 +113,15 @@
 	}
 
 }
+
+@-moz-document url("chrome://browser/content/devtools/webconsole.xul") {
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
+		background: #e2e7ed !important;
+	}
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar:-moz-window-inactive {
+		background: #e8e8e8 !important;
+	}
+
+}

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.1';
+moduleAid.VERSION = '1.3.2';
 
 this.customizing = false;
 
@@ -162,6 +162,8 @@ this.toggleTwin = function() {
 
 // Adds 'inSidebar' and "glassStyle" class tags to the opened page for easier costumization
 this.setclass = function(bar) {
+	if(!bar) { return; } // failsafe, could happen if a sidebar is closing when this is triggered
+	
 	if(typeof(bar.contentDocument) != 'undefined') { // Fix for newly created profiles (unloaded sidebars)
 		if(!UNLOADED) {
 			if(!bar.contentDocument.documentElement.classList.contains('inSidebar')) {

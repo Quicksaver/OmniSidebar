@@ -45,11 +45,19 @@
 
 }
 
-@-moz-document url("chrome://browser/content/places/places.xul"), url("about:addons") {
+@-moz-document
+	url("chrome://browser/content/places/places.xul"),
+	url("about:addons"),
+	url("chrome://browser/content/devtools/webconsole.xul") {
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
+		background: -moz-dialog !important;
+	}
 	
 	@media (-moz-windows-default-theme) {
 		#addons-page.inSidebar:not(.glassStyle),
-		#places.inSidebar:not(.glassStyle) {
+		#places.inSidebar:not(.glassStyle),
+		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
 			background: #EEF3FA !important;
 		}
 	}

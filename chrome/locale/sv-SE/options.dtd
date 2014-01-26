@@ -1,6 +1,7 @@
 <!ENTITY Optwindow.style "width: 35.5em;">
 <!ENTITY addonsSidebar.label "Tilläggshanteraren">
 <!ENTITY omnisidebarConsole.label "Felkonsol">
+<!ENTITY omnisidebarBrowserConsole.label "Webbläsarkonsolen">
 <!ENTITY omnisidebarDMT.label "Filhämtningar">
 <!ENTITY omnisidebarPageInfo.label "Sidinfo">
 <!ENTITY omnisidebarScratchpad.label "Anteckningsblock">

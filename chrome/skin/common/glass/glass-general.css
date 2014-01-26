@@ -301,7 +301,7 @@
 /* Other stuff */
 
 .inSidebar toolbox,
-.inSidebar toolbar:not(#sp-toolbar) {
+.inSidebar toolbar:not(#sp-toolbar):not(.devtools-toolbar) {
 	-moz-appearance: none !important;
 	background: rgba(0, 0, 0, 0) !important;
 	margin: 0 !important;

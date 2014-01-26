@@ -1,6 +1,7 @@
 <!ENTITY Optwindow.style "width: 42.75em;">
 <!ENTITY addonsSidebar.label "Add-ons-Manager">
 <!ENTITY omnisidebarConsole.label "Fehlerkonsole">
+<!ENTITY omnisidebarBrowserConsole.label "Browser-Konsole">
 <!ENTITY omnisidebarDMT.label "Downloads">
 <!ENTITY omnisidebarPageInfo.label "Seiteninformationen">
 <!ENTITY omnisidebarScratchpad.label "JavaScript-Umgebung">

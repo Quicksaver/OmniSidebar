@@ -402,7 +402,7 @@
 				<caption label="&omnisidebarOptgroupalways.label;"/>
 				<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
 				<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
-				<checkbox label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
+				<checkbox id="consoleCheckbox" label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
 				<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
 				<checkbox label="&omnisidebarScratchpad.label;" preference="pref-alwaysScratchpad"/>
 			</groupbox>

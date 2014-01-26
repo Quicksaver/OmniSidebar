@@ -1,0 +1,56 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("chrome://browser/content/devtools/webconsole.xul") {
+	
+	/* toolbars and buttons */
+	
+	@media (min-width: 300px) {
+		#devtools-webconsole.inSidebar toolbarbutton[type="menu-button"] toolbarbutton label,
+		#devtools-webconsole.inSidebar toolbarbutton.webconsole-clear-console-button image {
+			display: none !important;
+		}
+	}
+	
+	#devtools-webconsole.inSidebar toolbarbutton[type="menu-button"],
+	#devtools-webconsole.inSidebar toolbarbutton.webconsole-clear-console-button {
+		min-width: 40px !important;
+	}
+	
+	#devtools-webconsole.inSidebar .webconsole-filter-button > .toolbarbutton-menubutton-button:before {
+		width: 16px !important;
+		height: 16px !important;
+		margin-left: 1px !important;
+	}
+	
+	#devtools-webconsole.inSidebar toolbarbutton.webconsole-clear-console-button .toolbarbutton-text {
+		display: -moz-box !important;
+	}
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
+		color: black !important;
+	}
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbarbutton {
+		color: black !important;
+		text-shadow: none !important;
+	}
+	
+	/* filter boxes */
+	
+	#devtools-webconsole.inSidebar .hud-filter-box {
+		width: 150px !important;
+	}
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-searchinput {
+		-moz-appearance: textfield !important;
+		background: none !important;
+		-moz-padding-start: 6px !important;
+		-moz-padding-end: 6px !important;
+		color: rgba(0, 0, 0, 1) !important;
+	}
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-searchinput > .textbox-input-box > .textbox-search-icons {
+		display: -moz-deck !important;
+	}
+
+
+}

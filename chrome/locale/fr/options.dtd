@@ -1,6 +1,7 @@
 <!ENTITY Optwindow.style "width: 45.75em;">
 <!ENTITY addonsSidebar.label "Gestionnaire de modules">
 <!ENTITY omnisidebarConsole.label "Console d'erreurs">
+<!ENTITY omnisidebarBrowserConsole.label "Console du navigateur">
 <!ENTITY omnisidebarDMT.label "Téléchargements">
 <!ENTITY omnisidebarPageInfo.label "Infos sur la page">
 <!ENTITY omnisidebarScratchpad.label "Ardoise JavaScript">

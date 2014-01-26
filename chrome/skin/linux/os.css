@@ -41,3 +41,11 @@
 	}
 
 }
+
+@-moz-document url("chrome://browser/content/devtools/webconsole.xul") {
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
+		background: -moz-dialog !important;
+	}
+
+}
