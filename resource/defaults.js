@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.19';
+var defaultsVersion = '1.0.20';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -75,6 +75,10 @@ var prefList = {
 };
 
 function startAddon(window) {
+	// don't load in popup windows set to hide extra chrome
+	var chromeHidden = window.document.documentElement.getAttribute('chromehidden');
+	if(chromeHidden && chromeHidden.indexOf('extrachrome') > -1) { return; }
+	
 	prepareObject(window);
 	window[objName]._sidebarCommand = window.document.getElementById('sidebar-box').getAttribute('sidebarcommand');
 	window[objName]._sidebarCommandTwin = null;

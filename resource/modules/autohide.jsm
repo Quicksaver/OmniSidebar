@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.12';
+moduleAid.VERSION = '1.1.13';
 
 this.mainAutoHideInit = false;
 this.twinAutoHideInit = false;
@@ -259,11 +259,11 @@ this.toggleFX = function() {
 };
 
 this.loadAutoHideMain = function(window) {
-	window[objName].setAutoHide(window[objName].mainSidebar);
+	if(window[objName] && window[objName].setAutoHide) { window[objName].setAutoHide(window[objName].mainSidebar); }
 };
 
 this.loadAutoHideTwin = function(window) {
-	window[objName].setAutoHide(window[objName].twinSidebar);
+	if(window[objName] && window[objName].setAutoHide) { window[objName].setAutoHide(window[objName].twinSidebar); }
 };
 
 this.toggleAutoHide = function(e) {
