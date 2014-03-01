@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.3';
+moduleAid.VERSION = '1.3.4';
 
 this.customizing = false;
 
@@ -426,21 +426,6 @@ this.setSwitcherHeight = function() {
 	if(twinSidebar.switcher) { twinSidebar.switcher.style.height = $('appcontent').clientHeight +moveBy +'px'; }
 };
 
-this.setSwitcherWidth = function() {
-	var width = (Services.appinfo.OS == 'WINNT') ? 3 : (Services.appinfo.OS == 'Darwin') ? 8 : 4;
-	width += prefAid.switcherAdjust;
-	
-	styleAid.unload('switcherWidth_'+_UUID);
-	
-	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
-	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	sscode += '	.omnisidebar_switch { width: '+width+'px; }\n';
-	sscode += '}';
-	
-	styleAid.load('switcherWidth_'+_UUID, sscode, true);
-};
-
 this.enableSwitcher = function(bar) {
 	toggleAttribute(bar.switcher, 'enabled', bar.useSwitch);
 	setSwitcherHeight();
@@ -746,11 +731,8 @@ moduleAid.LOADMODULE = function() {
 	toggleTwin();
 	
 	// Apply initial preferences
-	prefAid.listen('switcherAdjust', setSwitcherWidth);
 	prefAid.listen('glassStyle', setClasses);
 	prefAid.listen('keepLoaded', reUnloadMain);
-	
-	setSwitcherWidth();
 	
 	listenerAid.add(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
 	listenerAid.add(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
@@ -797,13 +779,10 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	listenerAid.remove(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
 	
-	prefAid.unlisten('switcherAdjust', setSwitcherWidth);
 	prefAid.unlisten('glassStyle', setClasses);
 	prefAid.unlisten('keepLoaded', reUnloadMain);
 	
 	reUnloadMain();
-	
-	styleAid.unload('switcherWidth_'+_UUID);
 	
 	listenerAid.remove(window, 'sidebarWidthChanged', setSwitcherOffset);
 	

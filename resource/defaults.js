@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.20';
+var defaultsVersion = '1.0.21';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -123,6 +123,7 @@ function onStartup(aReason) {
 	
 	moduleAid.load('compatibilityFix/sandboxFixes');
 	moduleAid.load('keysets');
+	moduleAid.load('sandbox');
 	
 	prefAid.listen('moveSidebars', toggleMoveSidebars);
 	prefAid.listen('glassStyle', toggleGlass);
@@ -169,6 +170,7 @@ function onShutdown(aReason) {
 	prefAid.unlisten('moveSidebars', toggleMoveSidebars);
 	prefAid.unlisten('glassStyle', toggleGlass);
 	
+	moduleAid.unload('sandbox');
 	moduleAid.unload('keysets');
 	moduleAid.unload('compatibilityFix/sandboxFixes');
 	
