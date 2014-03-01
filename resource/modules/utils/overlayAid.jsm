@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.4.6';
+moduleAid.VERSION = '2.4.7';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1111,7 +1111,7 @@ this.overlayAid = {
 		// createWidget() defaults the removable state to true as of bug 947987
 		if(!data.removable && !data.defaultArea) {
 			data.defaultArea = (node.parentNode) ? node.parentNode.id : palette.id;
-		}		
+		}
 		
 		if(data.type == 'custom') {
 			data.palette = palette;
@@ -1462,7 +1462,7 @@ this.overlayAid = {
 	},
 	
 	registerAreas: function(aWindow, node) {
-		if(node.nodeName == 'toolbar' && node.id) {
+		if(node.nodeName == 'toolbar' && node.id && !aWindow.CustomizableUI.getAreaType(node.id)) {
 			aWindow.CustomizableUI.registerArea(node.id, {
 				type: CustomizableUI.TYPE_TOOLBAR,
 				legacy: true
