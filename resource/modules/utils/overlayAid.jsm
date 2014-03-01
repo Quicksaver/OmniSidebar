@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.4.5';
+moduleAid.VERSION = '2.4.6';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1114,10 +1114,9 @@ this.overlayAid = {
 		}		
 		
 		if(data.type == 'custom') {
-			data.self = data;
 			data.palette = palette;
 			
-			data.onBuild = function(aDocument) {
+			data.onBuild = function(aDocument, aDestroy) {
 				// Find the node in the DOM tree
 				var node = aDocument.getElementById(this.id);
 				
@@ -1137,7 +1136,7 @@ this.overlayAid = {
 				
 				// If it doesn't exist there either, CustomizableUI is using the widget information before it has been overlayed (i.e. opening a new window).
 				// We get a placeholder for it, then we'll replace it later when the window overlays.
-				if(!node) {
+				if(!node && !aDestroy) {
 					var node = aDocument.importNode(Globals.widgets[this.id], true);
 					setAttribute(node, 'CUI_placeholder', 'true');
 					hideIt(node);
@@ -1158,6 +1157,10 @@ this.overlayAid = {
 			
 			data.onWidgetDestroyed = function(aId) {
 				if(aId == this.id) {
+					windowMediator.callOnAll(function(aWindow) {
+						var node = data.onBuild(aWindow.document, true);
+						if(node) { node.remove(); }
+					}, 'navigator:browser');
 					aWindow.CustomizableUI.removeListener(this);
 				}
 			};
