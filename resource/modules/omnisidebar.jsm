@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.5';
+moduleAid.VERSION = '1.3.6';
 
 this.customizing = false;
 
@@ -127,6 +127,7 @@ this.__defineSetter__('fireSidebarFocusedEvent', function(v) { return window.fir
 this.__defineGetter__('sidebarOnLoad', function() { return window.sidebarOnLoad; });
 this.__defineSetter__('sidebarOnLoad', function(v) { return window.sidebarOnLoad = v; });
 this.__defineGetter__('browser', function() { return $('browser'); });
+this.__defineGetter__('FullScreen', function() { return window.FullScreen; });
 
 this.__defineGetter__('moveLeft', function() {
 	if(typeof(moveLeftBy) == 'undefined') { return 0; }
@@ -467,6 +468,9 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	// Always make sure we hide our popup
 	hidePanel();
 	
+	// don't do command if it comes from the fullScreen handler, let ours do the work
+	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && arguments.callee.caller == FullScreen.enterDomFullscreen) { return; }
+	
 	if(customizing) { return false; }
 	
 	if(!forceOpen) { forceOpen = false; }
@@ -645,6 +649,10 @@ this.fireFocusedSyncEvent = function(e) {
 	dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocusedSync', cancelable: false, detail: { bar: bar } });
 };
 
+this.onMozEnteredFullScreen = function() {
+	toggleAttribute(document.documentElement, objName+'-mozFullScreen', document.mozFullScreen);
+};
+
 this.loadMainSidebar = function() {
 	mainSidebar.loaded = true;
 	enableMainSwitcher();
@@ -746,6 +754,11 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(browser, 'browserResized', setSwitcherHeight);
 	listenerAid.add(window, 'endToggleSidebar', browserResized);
 	
+	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0) {
+		listenerAid.add(window, 'fullscreen', onMozEnteredFullScreen);
+		listenerAid.add(window, 'MozEnteredDomFullscreen', onMozEnteredFullScreen);
+	}
+	
 	if(!mainSidebar.close._tooltiptext) {
 		mainSidebar.close._tooltiptext = mainSidebar.close.getAttribute('tooltiptext');
 		mainSidebar.close.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonCloseTooltip'));
@@ -768,10 +781,17 @@ moduleAid.UNLOADMODULE = function() {
 		delete mainSidebar.close._tooltiptext;
 	}
 	
+	removeAttribute(document.documentElement, objName+'-mozFullScreen');
+	
 	listenerAid.remove(browser, 'resize', browserResized);
 	listenerAid.remove(browser, 'browserResized', setSwitcherHeight);
 	listenerAid.remove(window, 'endToggleSidebar', browserResized);
 	$('main-window').style.minWidth = '';
+	
+	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0) {
+		listenerAid.remove(window, 'fullscreen', onMozEnteredFullScreen);
+		listenerAid.remove(window, 'MozEnteredDomFullscreen', onMozEnteredFullScreen);
+	}
 	
 	listenerAid.remove(window, 'beforecustomization', customize, false);
 	listenerAid.remove(window, 'aftercustomization', customize, false);
