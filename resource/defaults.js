@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.18';
+var defaultsVersion = '1.0.19';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -79,14 +79,6 @@ function startAddon(window) {
 	window[objName]._sidebarCommand = window.document.getElementById('sidebar-box').getAttribute('sidebarcommand');
 	window[objName]._sidebarCommandTwin = null;
 	window[objName].moduleAid.load(objName, true);
-	
-	// Hide the sidebar until the add-on is initialized
-	if(STARTED == APP_STARTUP) {
-		var box = window.document.getElementById('sidebar-box');
-		if(box) {
-			box.style.visibility = 'collapse';
-		}
-	}
 }
 
 function stopAddon(window) {
@@ -120,6 +112,11 @@ function toggleGlass() {
 }
 
 function onStartup(aReason) {
+	// try not to show the sidebar when starting up, so the browser doesn't jump around
+	if(STARTED == APP_STARTUP) {
+		styleAid.load('startupFix', 'startupFix');
+	}
+	
 	moduleAid.load('compatibilityFix/sandboxFixes');
 	moduleAid.load('keysets');
 	
@@ -170,4 +167,6 @@ function onShutdown(aReason) {
 	
 	moduleAid.unload('keysets');
 	moduleAid.unload('compatibilityFix/sandboxFixes');
+	
+	styleAid.unload('startupFix');
 }

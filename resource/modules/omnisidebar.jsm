@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.2';
+moduleAid.VERSION = '1.3.3';
 
 this.customizing = false;
 
@@ -714,9 +714,6 @@ moduleAid.LOADMODULE = function() {
 	
 	overlayAid.overlayWindow(window, "mainSidebar", null, loadMainSidebar, unloadMainSidebar);
 	setBroadcasters(true);
-	if(mainSidebar.box) {
-		mainSidebar.box.style.visibility = '';
-	}
 	
 	if(!this.backups) {
 		this.backups = {

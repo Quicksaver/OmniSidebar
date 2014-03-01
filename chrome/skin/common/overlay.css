@@ -4,6 +4,7 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
 	/* Tricks needed */
+	
 	/* prevent showing the full firefox iconset on the buttons before the stylsheet with their actual images loads */
 	#omnisidebar-button:not([loaded]) .toolbarbutton-icon,
 	#omnisidebar-button-twin:not([loaded]) .toolbarbutton-icon {
