@@ -37,7 +37,7 @@ this.aSync = function(aFunc, aDelay) {
 	return newTimer;
 };
 
-// dispatch(obj, properties) - creates and dispatches an event and returns (bool) whether preventDefault was called on it
+// dispatch(obj, properties) - creates and dispatches an event and returns (bool) whether preventDefault was not called on it
 //	obj - (xul element) object to dispatch the event from, it will be e.target
 //	properties - (obj) expecting the following sub properties defining the following event characteristics:
 //		type - (str) the event type

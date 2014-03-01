@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.4';
+moduleAid.VERSION = '1.3.5';
 
 this.customizing = false;
 
@@ -199,7 +199,7 @@ this.closeSidebar = function(bar, forceUnload, broadcaster) {
 		broadcaster.removeAttribute('twinSidebar');
 	}
 	
-	if(!prefAid.keepLoaded || forceUnload || UNLOADED || !dispatch(bar, { type: 'ShouldCollapseSidebar' })) {
+	if(!prefAid.keepLoaded || forceUnload || UNLOADED || !dispatch(bar.box, { type: 'ShouldCollapseSidebar' })) {
 		bar.sidebar.setAttribute("src", "about:blank");
 		if(bar.sidebar.docShell) { bar.sidebar.docShell.createAboutBlankContentViewer(null); }
 		bar.title.value = "";

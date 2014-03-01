@@ -1,8 +1,8 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.unloadAutoPager = function(e) {
-	var bar = e.target;
-	if(bar.box.getAttribute('sidebarcommand') == 'autopagerSiteWizardSidebar') {
+	var box = e.target;
+	if(box.getAttribute('sidebarcommand') == 'autopagerSiteWizardSidebar') {
 		e.preventDefault();
 		e.stopPropagation();
 	}
