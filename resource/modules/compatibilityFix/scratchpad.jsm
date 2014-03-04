@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+moduleAid.VERSION = '1.0.2';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -59,7 +59,7 @@ this.confirmCloseScratchpad = function(e) {
 						e.detail.forceUnload,
 						e.detail.forceBlank,
 						e.detail.forceBarSwitch,
-						e.detail.CUI_placeholder
+						e.detail.forceReload
 					);
 				}
 			});
