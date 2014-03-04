@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -52,6 +52,7 @@ this.confirmCloseScratchpad = function(e) {
 			
 			inScratchpad.promptSave(function(toClose) {
 				if(toClose) {
+					inScratchpad.dirty = false;
 					toggleSidebar(
 						e.detail.commandID,
 						e.detail.forceOpen,
