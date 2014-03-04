@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.6';
+moduleAid.VERSION = '1.3.7';
 
 this.customizing = false;
 
@@ -541,7 +541,13 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	}
 	
 	var sidebarBroadcaster = $(commandID);
-	if(!sidebarBroadcaster) { return false; } // Prevent some unforseen error here
+	
+	// if the last command was an add-on's sidebar, and it's been disabled/removed
+	if(!sidebarBroadcaster) {
+		commandID = objName+'-viewBlankSidebar';
+		if(twin) { commandID += '-twin'; }
+		sidebarBroadcaster = $(commandID);
+	}
 	
 	if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: {
 		bar: bar,
