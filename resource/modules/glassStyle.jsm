@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.setTransparency = function() {
 	styleAid.unload('glassStyleTransparency');
@@ -37,6 +37,7 @@ moduleAid.LOADMODULE = function() {
 	styleAid.load('glassStyleSimilarWeb', 'glass/glass-similarweb');
 	styleAid.load('glassStyleDelicious', 'glass/glass-delicious');
 	styleAid.load('glassStyleConsole', 'glass/glass-console');
+	styleAid.load('glassStyleBrowserConsole', 'glass/glass-browserConsole');
 	styleAid.load('glassStyleDMT', 'glass/glass-dmt');
 	styleAid.load('glassStyleAddons', 'glass/glass-addons');
 	styleAid.load('glassStyleStylish', 'glass/glass-stylish');
@@ -64,6 +65,7 @@ moduleAid.UNLOADMODULE = function() {
 	styleAid.unload('glassStyleSimilarWeb');
 	styleAid.unload('glassStyleDelicious');
 	styleAid.unload('glassStyleConsole');
+	styleAid.unload('glassStyleBrowserConsole');
 	styleAid.unload('glassStyleDMT');
 	styleAid.unload('glassStyleAddons');
 	styleAid.unload('glassStyleStylish');

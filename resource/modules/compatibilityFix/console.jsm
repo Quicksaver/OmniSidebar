@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
@@ -128,6 +128,9 @@ moduleAid.LOADMODULE = function() {
 	
 	toggleAlwaysConsole();
 	
+	// Users can still open the console in the sidebar if they have Console2 installed
+	styleAid.load('consoleFix', 'console');
+	
 	// The browser console was introduced way before Australis, but I don't feel like figuring out exactly on which version it was implemented
 	if(Australis) {
 		holdBroadcasters.console = 'viewConsoleSidebar';
@@ -138,14 +141,11 @@ moduleAid.LOADMODULE = function() {
 		observerAid.add(closeConsoleSidebarOnDestroy, 'web-console-destroyed');
 		
 		listenerAid.add(window, 'SidebarFocused', registerSidebarConsole);
-		
 		return;
 	}
 	
 	holdBroadcasters.console1 = 'viewConsole1Sidebar';
 	holdBroadcasters.console2 = 'viewConsole2Sidebar';
-	
-	styleAid.load('consoleFix', 'console');
 	
 	overlayAid.overlayWindow(window, 'consoleButton', null, loadConsoleButton);
 	AddonManager.getAddonByID("{1280606b-2510-4fe0-97ef-9b5a22eafe80}", function(addon) {
@@ -184,5 +184,6 @@ moduleAid.UNLOADMODULE = function() {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? 'viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? 'viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(twinSidebar); }
 		styleAid.unload('browserConsole');
+		styleAid.unload('consoleFix');
 	}
 };

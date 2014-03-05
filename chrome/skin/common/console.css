@@ -21,6 +21,19 @@
 		margin: 0 !important; 
 	}
 	
+	#Console2Window.inSidebar #ConsoleToolbox,
+	#Console2Window.inSidebar #ConsoleToolbox toolbar {
+		-moz-appearance: none !important;
+		background: none !important;
+		border: none !important;
+	}
+	#Console2Window.inSidebar #ConsoleBox {
+		-moz-appearance: none !important;
+		margin: 0 !important;
+		border: none;
+		border-top: 1px solid #888;
+	}
+	
 	/* These are so message rows don't get a ridiculous width, the first are just for the dots (supposedly) pointing to the part of the code that's errored */
 	#JSConsoleWindow.inSidebar .console-row-code > box,
 	#JSConsoleWindow.inSidebar .console-row spacer { 
