@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.7';
+moduleAid.VERSION = '1.3.8';
 
 this.customizing = false;
 
@@ -375,16 +375,25 @@ this.clickSwitcher = function(e, bar) {
 };
 
 // This makes it so we can scroll the webpage and the sidebar while the mouse is over the switch, while still able to click on it
+this.scrollNodes = {};
 this.scrollSwitcher = function(e) {
-	if(!e.target.classList.contains('omnisidebar_switch') || e.defaultPrevented) { return; }
+	if(e.defaultPrevented) { return; }
 	
-	setAttribute(e.target, 'scrolling', 'true');
-	timerAid.init('scrollSwitcher', restoreSwitcherMouseEvents, 150);
+	var active = false;
+	for(var n in scrollNodes) {
+		setAttribute(scrollNodes[n], 'scrolling', 'true');
+		active = true;
+	}
+	
+	if(active) {
+		timerAid.init('scrollSwitcher', restoreSwitcherMouseEvents, 200);
+	}
 };
 
 this.restoreSwitcherMouseEvents = function() {
-	removeAttribute(mainSidebar.switcher, 'scrolling');
-	removeAttribute(twinSidebar.switcher, 'scrolling');
+	for(var n in scrollNodes) {
+		removeAttribute(scrollNodes[n], 'scrolling');
+	}
 };
 
 this.setSwitcherOffset = function() {
@@ -431,12 +440,11 @@ this.enableSwitcher = function(bar) {
 	toggleAttribute(bar.switcher, 'enabled', bar.useSwitch);
 	setSwitcherHeight();
 	bar.toggleSwitcher();
-	
-	listenerAid.add(bar.switcher, 'wheel', scrollSwitcher, true);
 };
 
 this.enableMainSwitcher = function() {
 	enableSwitcher(mainSidebar);
+	scrollNodes.mainSwitcher = mainSidebar.switcher;
 };
 
 // Our command method for the keyboard shortcuts
@@ -688,7 +696,7 @@ this.loadMainSidebar = function() {
 this.unloadMainSidebar = function() {
 	mainSidebar.loaded = false;
 	
-	listenerAid.remove(mainSidebar.switcher, 'wheel', scrollSwitcher, true);
+	delete scrollNodes.mainSwitcher;
 	
 	for(var x in dontSaveBroadcasters) {
 		if(mainSidebar.box.getAttribute('sidebarcommand') == dontSaveBroadcasters[x]) {
@@ -760,6 +768,9 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(browser, 'browserResized', setSwitcherHeight);
 	listenerAid.add(window, 'endToggleSidebar', browserResized);
 	
+	// make sure our margin triggers don't interfere with webpage scrolling
+	listenerAid.add(window, 'wheel', scrollSwitcher, true);
+	
 	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0) {
 		listenerAid.add(window, 'fullscreen', onMozEnteredFullScreen);
 		listenerAid.add(window, 'MozEnteredDomFullscreen', onMozEnteredFullScreen);
@@ -788,6 +799,8 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	
 	removeAttribute(document.documentElement, objName+'-mozFullScreen');
+	
+	listenerAid.remove(window, 'wheel', scrollSwitcher, true);
 	
 	listenerAid.remove(browser, 'resize', browserResized);
 	listenerAid.remove(browser, 'browserResized', setSwitcherHeight);

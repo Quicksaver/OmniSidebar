@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 // omnisidebar button opens the last sidebar opened
 this.setlastTwin = function() {
@@ -48,6 +48,7 @@ this.fixWidths = function() {
 
 this.enableTwinSwitcher = function() {
 	enableSwitcher(twinSidebar);
+	scrollNodes.twinSwitcher = twinSidebar.switcher;
 };
 
 this.loadTwinSidebar = function() {
@@ -90,7 +91,7 @@ this.loadedTwin = function() {
 this.unloadedTwin = function() {
 	twinSidebar.loaded = false;
 	
-	listenerAid.remove(twinSidebar.switcher, 'wheel', scrollSwitcher, true);
+	delete scrollNodes.twinSwitcher;
 	
 	for(var x in dontSaveBroadcasters) {
 		if(twinSidebar.box.getAttribute('sidebarcommand') == dontSaveBroadcasters[x]) {
