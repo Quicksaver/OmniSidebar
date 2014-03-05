@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.1.4';
+moduleAid.VERSION = '2.1.5';
 moduleAid.LAZY = true;
 
 // xmlHttpRequest(url, callback, method, async) - aid for quickly using the nsIXMLHttpRequest interface
@@ -80,7 +80,7 @@ this.isAncestor = function(aNode, aParent, aWindow) {
 	if(ownDocument && ownDocument == aParent) { return true; }
 	if(aNode.compareDocumentPosition && (aNode.compareDocumentPosition(aParent) & aNode.DOCUMENT_POSITION_CONTAINS)) { return true; }
 	
-	var browsers = aParent.getElementsByTagName('browser');
+	var browsers = (aParent.tagName == 'browser') ? [aParent] : aParent.getElementsByTagName('browser');
 	for(var i=0; i<browsers.length; i++) {
 		if(isAncestor(aNode, browsers[i].contentDocument, browsers[i].contentWindow)) { return true; }
 	}

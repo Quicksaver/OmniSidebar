@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.4.7';
+moduleAid.VERSION = '2.5.0';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -821,13 +821,15 @@ this.overlayAid = {
 					case 'appendChild':
 						if(action.node) {
 							if(action.originalParent) {
-								if(action.originalParent.firstChild.nodeName == 'preferences') {
-									var sibling = action.originalParent.firstChild.nextSibling;
-								} else {
-									var sibling = action.originalParent.firstChild;
+								var sibling = action.originalParent.firstChild
+								if(sibling.nodeName == 'preferences') {
+									sibling = sibling.nextSibling;
 								}
+								var browserList = this.swapBrowsers(aWindow, action.node);
+								
 								action.node = action.originalParent.insertBefore(action.node, sibling);
 								
+								this.swapBrowsers(aWindow, action.node, browserList);
 								if(!Australis) {
 									if(action.originalParent.nodeName == 'toolbar') {
 										setAttribute(action.originalParent, 'currentset', action.originalParent.currentSet);
@@ -853,12 +855,15 @@ this.overlayAid = {
 									}
 								}
 							}
+							var browserList = this.swapBrowsers(aWindow, action.node);
+							
 							if(action.originalPos < action.node.parentNode.childNodes.length) {
 								action.node = action.originalParent.insertBefore(action.node, action.originalParent.childNodes[action.originalPos]);
 							} else {
 								action.node = action.originalParent.appendChild(action.node);
 							}
 							
+							this.swapBrowsers(aWindow, action.node, browserList);
 							if(!Australis) {
 								if(action.originalParent.nodeName == 'toolbar') {
 									setAttribute(action.originalParent, 'currentset', action.originalParent.currentSet);
@@ -1709,9 +1714,11 @@ this.overlayAid = {
 	appendChild: function(aWindow, node, parent) {
 		var originalParent = node.parentNode;
 		var updateList = this.updateOverlayedNodes(aWindow, node);
+		var browserList = this.swapBrowsers(aWindow, node);
 		
 		try { node = parent.appendChild(node); } catch(ex) { Cu.reportError(ex); node = null; }
 		
+		this.swapBrowsers(aWindow, node, browserList);
 		this.updateOverlayedNodes(aWindow, node, updateList);
 		this.traceBack(aWindow, {
 			action: 'appendChild',
@@ -1732,9 +1739,11 @@ this.overlayAid = {
 			}
 		}
 		var updateList = this.updateOverlayedNodes(aWindow, node);
+		var browserList = this.swapBrowsers(aWindow, node);
 		
 		try { node = parent.insertBefore(node, sibling); } catch(ex) { Cu.reportError(ex); return null; }
 		
+		this.swapBrowsers(aWindow, node, browserList);
 		this.updateOverlayedNodes(aWindow, node, updateList);
 		if(!originalParent) {
 			this.traceBack(aWindow, {
@@ -1752,6 +1761,201 @@ this.overlayAid = {
 		}
 		
 		return node;
+	},
+	
+	// this ensures we don't need to reload any browser elements when they are moved within the DOM;
+	// all the temporary browser elements are promptly removed once they're not needed.
+	// so far, this is only used for OmniSidebar, so I can move the browser#sidebar element at will through the dom without it reloading every time
+	swapBrowsers: function(aWindow, node, temps) {
+		if(temps !== undefined) {
+			this.cleanTempBrowsers(temps);
+			return;
+		}
+		
+		// none of this is needed if the node doesn't exist yet in the DOM
+		if(!node.parentNode) { return null; }
+		
+		// find all browser child nodes of node if it isn't a browser itself
+		var browsers = [];
+		if(node.tagName == 'browser') { browsers.push(node); }
+		else {
+			var els = node.getElementsByTagName('browser');
+			for(var ee=0; ee<els.length; ee++) {
+				browsers.push(els[ee]);
+			}
+		}
+		
+		if(browsers.length > 0) {
+			var temps = [];
+			tempBrowsersLoop: for(var b=0; b<browsers.length; b++) {
+				if(!browsers[b].swapDocShells) { continue; } // happens when it isn't loaded yet, so it's unnecessary
+				var browserType = browsers[b].getAttribute('type') || 'chrome';
+				
+				// we also need to blur() and then focus() the focusedElement if it belongs in this browser element,
+				// otherwise we can't type in it if it's an input box and we swap its docShell;
+				// note that just blur()'ing the focusedElement doesn't actually work, we have to shift the focus between browser elements for this to work
+				if(aWindow.document.commandDispatcher.focusedElement && isAncestor(aWindow.document.commandDispatcher.focusedElement, browsers[b])) {
+					temps.unshift({ // unshift instead of push so we undo in the reverse order
+						focusedElement: aWindow.document.commandDispatcher.focusedElement
+					});
+					aWindow.document.documentElement.focus();
+				}
+				
+				// We need to move content inner-browsers first, otherwise it will throw an NS_ERROR_NOT_IMPLEMENTED
+				var innerDone = [];
+				var inners = [];
+				
+				if(browsers[b].contentDocument) {
+					var els = browsers[b].contentDocument.getElementsByTagName('browser');
+					for(var ee=0; ee<els.length; ee++) {
+						inners.push(els[ee]);
+					}
+				}
+				
+				if(inners.length > 0) {
+					for(var i=0; i<inners.length; i++) {
+						if(!inners[i].swapDocShells) { continue; } // happens when it isn't loaded yet, so it's unnecessary
+						
+						// if the browsers are of the same time, the swap can proceed as normal
+						var innerType = inners[i].getAttribute('type');
+						if(!innerType || innerType == browserType) { continue; }
+						
+						var newTemp = this.createBlankTempBrowser(aWindow, innerType);
+						this.setTempBrowsersListeners(inners[i], newTemp);
+						
+						try { inners[i].swapDocShells(newTemp); }
+						catch(ex) { // undo everything and just let the browser element reload
+							this.cleanTempBrowsers(innerDone);
+							this.unsetTempBrowsersListeners(inners[i], newTemp);
+							newTemp.parentNode.removeChild(newTemp);
+							continue tempBrowsersLoop;
+						}
+						
+						innerDone.unshift({ // unshift instead of push so we undo in the reverse order
+							sibling: inners[i].nextSibling,
+							parent: inners[i].parentNode,
+							browser: inners[i].parentNode.removeChild(inners[i]),
+							temp: newTemp
+						});
+					}
+				}
+				
+				// iframes don't have swapDocShells(), but they will throw an error if not ripped off too
+				var iframesDone = [];
+				var iframes = [];
+				
+				if(browsers[b].contentDocument) {
+					var els = browsers[b].contentDocument.getElementsByTagName('iframe');
+					for(var ee=0; ee<els.length; ee++) {
+						iframes.push(els[ee]);
+					}
+				}
+				
+				if(iframes.length > 0) {
+					for(var i=0; i<iframes.length; i++) {
+						var frameType = iframes[i].getAttribute('type');
+						if(!frameType || frameType == browserType) { continue; }
+						
+						var newTemp = this.createBlankTempBrowser(aWindow, frameType, 'iframe');
+						
+						try { iframes[i].QueryInterface(Ci.nsIFrameLoaderOwner).swapFrameLoaders(newTemp); }
+						catch(ex) { // undo everything and just let the browser element reload
+							this.cleanTempBrowsers(iframesDone);
+							newTemp.parentNode.removeChild(newTemp);
+							continue tempBrowsersLoop;
+						}
+						
+						iframesDone.unshift({ // unshift instead of push so we undo in the reverse order
+							sibling: iframes[i].nextSibling,
+							parent: iframes[i].parentNode,
+							browser: iframes[i].parentNode.removeChild(iframes[i]),
+							iframe: true,
+							temp: newTemp
+						});
+					}
+				}
+				
+				var newTemp = this.createBlankTempBrowser(aWindow);
+				this.setTempBrowsersListeners(browsers[b], newTemp);
+				
+				try { browsers[b].swapDocShells(newTemp); }
+				catch(ex) { // undo everything and just let the browser element reload
+					this.cleanTempBrowsers(innerDone);
+					this.unsetTempBrowsersListeners(browsers[b], newTemp);
+					newTemp.parentNode.removeChild(newTemp);
+					continue;
+				}
+					
+				temps = iframesDone.concat(innerDone).concat(temps);
+				temps.unshift({ // unshift instead of push so we undo in the reverse order
+					browser: browsers[b],
+					temp: newTemp
+				});
+			}
+			
+			return (temps.length > 0) ? temps : null;
+		}
+		
+		return null;
+	},
+	
+	// this creates a temporary browser element in the main window; element defaults to 'browser' and type to 'chrome'
+	createBlankTempBrowser: function(aWindow, type, element) {
+		var newTemp = aWindow.document.createElement(element || 'browser');
+		newTemp.collapsed = true;
+		setAttribute(newTemp, 'type', type || 'chrome');
+		setAttribute(newTemp, 'src', 'about:blank');
+		newTemp = aWindow.document.documentElement.appendChild(newTemp);
+		newTemp.docShell.createAboutBlankContentViewer(null);
+		return newTemp;
+	},
+	
+	// remove all traces of all of these swaps
+	cleanTempBrowsers: function(list) {
+		if(!list) { return; }
+		for(var l=0; l<list.length; l++) {
+			if(list[l].focusedElement) {
+				list[l].focusedElement.focus();
+				continue;
+			}
+			
+			if(list[l].parent) {
+				list[l].parent.insertBefore(list[l].browser, list[l].sibling);
+			}
+			
+			try {
+				if(!list[l].iframe) { list[l].browser.swapDocShells(list[l].temp); }
+				else { list[l].browser.QueryInterface(Ci.nsIFrameLoaderOwner).swapFrameLoaders(list[l].temp); }
+			}
+			catch(ex) { /* nothing we can do at this point */  }
+			
+			// I can't remove these here, as then some events might slip through after the DOM change (e.g. DOM Inspector),
+			// instead, I "self"-remove them in the listener itself
+			//this.unsetTempBrowsersListeners(list[l].browser, list[l].temp);
+			
+			list[l].temp.parentNode.removeChild(list[l].temp);
+		}
+	},
+	
+	// some sidebars (i.e. DOM Inspector) have listeners for their browser elements, we need to make sure (as best as we can) that they're not triggered when swapping
+	cancelTempBrowserEvents: function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		if(typeof(overlayAid) != 'undefined') {
+			e.target.removeEventListener(e.type, overlayAid.cancelTempBrowserEvents, true);
+		}
+	},
+	
+	tempBrowserListenEvents: ['pageshow'],
+	setTempBrowsersListeners: function(browser, temp) {
+		for(var e=0; e<this.tempBrowserListenEvents.length; e++) {
+			browser.addEventListener(this.tempBrowserListenEvents[e], this.cancelTempBrowserEvents, true);
+		}
+	},
+	unsetTempBrowsersListeners: function(browser, temp) {
+		for(var e=0; e<this.tempBrowserListenEvents.length; e++) {
+			browser.removeEventListener(this.tempBrowserListenEvents[e], this.cancelTempBrowserEvents, true);
+		}
 	},
 	
 	removeChild: function(aWindow, node) {
