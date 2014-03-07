@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.13';
+moduleAid.VERSION = '1.0.14';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -167,11 +167,11 @@ moduleAid.LOADMODULE = function() {
 	overlayAid.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
 	styleAid.load('menus', 'menus');
 	
-	listenerAid.add(contextMenu, 'popupshown', setContextMenu, false);
+	listenerAid.add(contextMenu, 'popupshowing', setContextMenu);
 	if(!Australis) {
-		listenerAid.add(appMenu, 'popupshown', setAppMenu, false);
+		listenerAid.add(appMenu, 'popupshowing', setAppMenu);
 	}
-	listenerAid.add(viewToolbarsMenu, 'popupshown', setViewToolbarsMenu, false);
+	listenerAid.add(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
 	
 	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	barSwitchTriggers.__defineGetter__('viewSidebarMenuMenu', function() { return $('viewSidebarMenuMenu'); });
@@ -192,11 +192,11 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('titleButton', toggleMenuButton);
 	prefAid.unlisten('titleButtonTwin', toggleMenuButtonTwin);
 	
-	listenerAid.remove(contextMenu, 'popupshown', setContextMenu, false);
+	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
 	if(!Australis) {
-		listenerAid.remove(appMenu, 'popupshown', setAppMenu, false);
+		listenerAid.remove(appMenu, 'popupshowing', setAppMenu);
 	}
-	listenerAid.remove(viewToolbarsMenu, 'popupshown', setViewToolbarsMenu, false);
+	listenerAid.remove(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
 	
 	// ensure the menu is properly reset when unloading
 	menuItemsCheck($('viewSidebarMenu'));
