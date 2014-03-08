@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.5.0';
+moduleAid.VERSION = '2.5.1';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1769,7 +1769,7 @@ this.overlayAid = {
 	swapBrowsers: function(aWindow, node, temps) {
 		if(temps !== undefined) {
 			this.cleanTempBrowsers(temps);
-			return;
+			return null;
 		}
 		
 		// none of this is needed if the node doesn't exist yet in the DOM
@@ -1786,7 +1786,7 @@ this.overlayAid = {
 		}
 		
 		if(browsers.length > 0) {
-			var temps = [];
+			temps = [];
 			tempBrowsersLoop: for(var b=0; b<browsers.length; b++) {
 				if(!browsers[b].swapDocShells) { continue; } // happens when it isn't loaded yet, so it's unnecessary
 				var browserType = browsers[b].getAttribute('type') || 'chrome';
