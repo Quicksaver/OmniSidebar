@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.8';
+moduleAid.VERSION = '1.3.9';
 
 this.customizing = false;
 
@@ -630,7 +630,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	var newTitle = sidebarBroadcaster.getAttribute("sidebartitle") || sidebarBroadcaster.getAttribute("label");
 	var url = sidebarBroadcaster.getAttribute("sidebarurl");
 	
-	if(!prefAid.keepLoaded || forceUnload || bar.sidebar.getAttribute('src') != url) {
+	if(!prefAid.keepLoaded || forceUnload || bar.sidebar.getAttribute('src') != url || url == 'about:blank') {
 		bar.sidebar.setAttribute("src", url);
 		bar.box.setAttribute("sidebarcommand", sidebarBroadcaster.id);
 		bar.box.setAttribute("src", url);
