@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -122,9 +122,11 @@ this.panelDontOpenContext = function(e) {
 
 this.loadMiniPanel = function() {
 	keydownPanel.setupPanel(panel);
+	barSwitchTriggers.__defineGetter__('miniPanel', function() { return panel; });
 };
 
 this.unloadMiniPanel = function() {
+	delete barSwitchTriggers.miniPanel;
 	keydownPanel.unsetPanel(panel);
 };
 
