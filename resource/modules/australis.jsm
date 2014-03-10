@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
 
 this.__defineGetter__('bookmarksBroadcaster', function() { return $('viewBookmarksSidebar'); });
 
@@ -24,7 +24,7 @@ moduleAid.LOADMODULE = function() {
 		},
 		null,
 		function() {
-			setAttribute(bookmarksBroadcaster, bookmarksLabel);
+			setAttribute(bookmarksBroadcaster, 'label', bookmarksLabel);
 			removeAttribute(bookmarksBroadcaster, 'sidebartitle');
 		}
 	);
