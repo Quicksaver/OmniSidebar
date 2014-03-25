@@ -1,9 +1,4 @@
-moduleAid.VERSION = '1.0.9';
-
-// omnisidebar button opens the last sidebar opened
-this.setlastTwin = function() {
-	setLastCommand(twinSidebar);
-};
+moduleAid.VERSION = '1.1.0';
 
 this.reUnloadTwin = function() {
 	if(twinSidebar.box.collapsed) {
@@ -11,18 +6,12 @@ this.reUnloadTwin = function() {
 	}
 };
 
-this.setBroadcastersTwin = function(initialize) {
+this.unsetBroadcastersTwin = function() {
 	var broadcasters = $$("broadcaster[group='sidebar']");
 	for(var i = 0; i < broadcasters.length; ++i) {
-		if(initialize) {
-			objectWatcher.addAttributeWatcher(broadcasters[i], 'disabled', setlastTwin);
-		}
-		else if(!initialize) {
-			objectWatcher.removeAttributeWatcher(broadcasters[i], 'disabled', setlastTwin);
-			if(trueAttribute(broadcasters[i], 'twinSidebar')) {
-				broadcasters[i].removeAttribute('checked');
-				broadcasters[i].removeAttribute('twinSidebar');
-			}
+		if(trueAttribute(broadcasters[i], 'twinSidebar')) {
+			broadcasters[i].removeAttribute('checked');
+			broadcasters[i].removeAttribute('twinSidebar');
 		}
 	}
 };
@@ -80,8 +69,6 @@ this.loadedTwin = function() {
 	objectWatcher.addAttributeWatcher(twinSidebar.box, 'width', watchWidth, true);
 	
 	// Apply initial preferences
-	setBroadcastersTwin(true);
-	listenerAid.add(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);
 	listenerAid.add(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
 	_sidebarCommandTwin = twinSidebar.box.getAttribute('sidebarcommand');
@@ -99,7 +86,7 @@ this.unloadedTwin = function() {
 		}
 	}
 	
-	setBroadcastersTwin(false);
+	unsetBroadcastersTwin();
 	
 	if(!UNLOADED && twinSidebar.isOpen) {
 		_sidebarCommandTwin = twinSidebar.box.getAttribute('sidebarcommand');
@@ -137,9 +124,12 @@ moduleAid.UNLOADMODULE = function() {
 	reUnloadTwin();
 	
 	listenerAid.remove(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
-	listenerAid.remove(twinSidebar.sidebar, 'DOMContentLoaded', setlastTwin, true);
 	
 	objectWatcher.removeAttributeWatcher(twinSidebar.box, 'width', watchWidth, true);
+	
+	if(SocialSidebar && isAncestor(SocialBrowser, twinSidebar.box)) {
+		restoreSocialSidebar();
+	}
 	
 	overlayAid.removeOverlayWindow(window, "twin");
 };

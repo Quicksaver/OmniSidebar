@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.14';
+moduleAid.VERSION = '1.1.0';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -94,6 +94,9 @@ this.populateSidebarMenu = function(menu) {
 		menu.removeChild(menu.firstChild);
 	}
 	
+	// Populate with Social API entries
+	if(SocialSidebar) { SocialSidebar.populateSidebarMenu({ target: viewSidebarMenu }); }
+	
 	for(var i=0; i<viewSidebarMenu.childNodes.length; i++) {
 		// cloneNode(deep) deep argument is optional and defaults to true in Firefox 13+. For compatibility with Firefox 12-, deep must always be provided.
 		var newItem = viewSidebarMenu.childNodes[i].cloneNode(true);
@@ -107,20 +110,34 @@ this.populateSidebarMenu = function(menu) {
 };
 
 this.menuItemsCheck = function(menu) {
+	menu = (menu.target) ? menu.target : menu;
+	var mainMenu = (menu == viewSidebarMenu);
+	
 	for(var m=0; m<menu.childNodes.length; m++) {
 		if(!menu.childNodes[m].getAttribute('observes')) {
-			// Social sidebar menu entry sometimes appears when it shouldn't
-			menu.childNodes[m].hidden = true;
+			if(!UNLOADED && !SocialSidebar) {
+				// Social sidebar menu entry sometimes appears when it shouldn't
+				menu.childNodes[m].hidden = !mainMenu;
+			} else {
+				menu.childNodes[m].hidden = false;
+				if(menu.childNodes[m].getAttribute('oncommand').indexOf('show') > -1) {
+					var command = ((!UNLOADED) ? objName+'.placeSocialSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
+					setAttribute(menu.childNodes[m], 'oncommand', command);
+				} else {
+					var command = (!UNLOADED) ? objName+'.ensureSocialSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
+					setAttribute(menu.childNodes[m], 'oncommand', command);
+				}
+			}
 		}
 		
+		if(mainMenu) { continue; }
+		
 		// No point in having this menu entry in our lists if it isn't going to be visible
-		if(menu.childNodes[m].hidden) {
+		if(menu.childNodes[m].hidden || menu.childNodes[m].collapsed) {
 			menu.removeChild(menu.childNodes[m]);
 			m--;
 			continue;
 		}
-		
-		toggleAttribute(menu.childNodes[m], 'checked', trueAttribute($(menu.childNodes[m].getAttribute('observes')), 'checked') && menu.getAttribute('twinSidebar') == $(menu.childNodes[m].getAttribute('observes')).getAttribute('twinSidebar'));
 	}
 };
 
@@ -172,6 +189,7 @@ moduleAid.LOADMODULE = function() {
 		listenerAid.add(appMenu, 'popupshowing', setAppMenu);
 	}
 	listenerAid.add(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
+	listenerAid.add($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
 	
 	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	barSwitchTriggers.__defineGetter__('viewSidebarMenuMenu', function() { return $('viewSidebarMenuMenu'); });
@@ -197,9 +215,11 @@ moduleAid.UNLOADMODULE = function() {
 		listenerAid.remove(appMenu, 'popupshowing', setAppMenu);
 	}
 	listenerAid.remove(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
+	listenerAid.remove($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
 	
 	// ensure the menu is properly reset when unloading
 	menuItemsCheck($('viewSidebarMenu'));
+	if($('social-statusarea-popup')) { menuItemsCheck($('social-statusarea-popup')); }
 	
 	toggleMenuButton();
 	toggleMenuButtonTwin();

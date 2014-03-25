@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.5.1';
+moduleAid.VERSION = '2.5.2';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1825,6 +1825,8 @@ this.overlayAid = {
 						
 						try { inners[i].swapDocShells(newTemp); }
 						catch(ex) { // undo everything and just let the browser element reload
+							Cu.reportError('Failed to swap inner browser in '+browsers[b].tagName+' '+browsers[b].id);
+							Cu.reportError(ex);
 							this.cleanTempBrowsers(innerDone);
 							this.unsetTempBrowsersListeners(inners[i], newTemp);
 							newTemp.parentNode.removeChild(newTemp);
@@ -1860,6 +1862,8 @@ this.overlayAid = {
 						
 						try { iframes[i].QueryInterface(Ci.nsIFrameLoaderOwner).swapFrameLoaders(newTemp); }
 						catch(ex) { // undo everything and just let the browser element reload
+							Cu.reportError('Failed to swap iframe in '+browsers[b].tagName+' '+browsers[b].id);
+							Cu.reportError(ex);
 							this.cleanTempBrowsers(iframesDone);
 							newTemp.parentNode.removeChild(newTemp);
 							continue tempBrowsersLoop;
@@ -1875,11 +1879,13 @@ this.overlayAid = {
 					}
 				}
 				
-				var newTemp = this.createBlankTempBrowser(aWindow);
+				var newTemp = this.createBlankTempBrowser(aWindow, browserType);
 				this.setTempBrowsersListeners(browsers[b], newTemp);
 				
 				try { browsers[b].swapDocShells(newTemp); }
 				catch(ex) { // undo everything and just let the browser element reload
+					Cu.reportError('Failed to swap '+browsers[b].tagName+' '+browsers[b].id);
+					Cu.reportError(ex);
 					this.cleanTempBrowsers(innerDone);
 					this.unsetTempBrowsersListeners(browsers[b], newTemp);
 					newTemp.parentNode.removeChild(newTemp);

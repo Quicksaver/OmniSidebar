@@ -1,4 +1,4 @@
-var defaultsVersion = '1.0.21';
+var defaultsVersion = '1.0.22';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -11,6 +11,7 @@ var prefList = {
 	
 	lastcommand: objName+"-viewBlankSidebar",
 	lastcommandTwin: objName+"-viewBlankSidebar-twin",
+	lastcommandSocial: '',
 	
 	moveSidebars: false,
 	twinSidebar: false,

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.9';
+moduleAid.VERSION = '1.4.0';
 
 this.customizing = false;
 
@@ -129,6 +129,22 @@ this.__defineSetter__('sidebarOnLoad', function(v) { return window.sidebarOnLoad
 this.__defineGetter__('browser', function() { return $('browser'); });
 this.__defineGetter__('FullScreen', function() { return window.FullScreen; });
 
+this.__defineGetter__('SocialSidebar', function() { return (Services.vc.compare(Services.appinfo.platformVersion, "27.0") >= 0) ? window.SocialSidebar : null; });
+this.__defineGetter__('SocialBroadcaster', function() { return $(objName+'-viewSocialSidebar'); });
+this.__defineGetter__('SocialBox', function() { return $('social-sidebar-box'); });
+this.__defineGetter__('SocialHeader', function() { return $('social-sidebar-header'); });
+
+this._SocialButton = null;
+this._SocialBrowser = null;
+this.__defineGetter__('SocialButton', function() {
+	if(!_SocialButton) { _SocialButton = $('social-sidebar-button'); }
+	return _SocialButton;
+});
+this.__defineGetter__('SocialBrowser', function() {
+	if(!_SocialBrowser) { _SocialBrowser = $('social-sidebar-browser'); }
+	return _SocialBrowser;
+});
+
 this.__defineGetter__('moveLeft', function() {
 	if(typeof(moveLeftBy) == 'undefined') { return 0; }
 	var ret = 0;
@@ -195,16 +211,21 @@ this.closeSidebar = function(bar, forceUnload, broadcaster) {
 	if(!broadcaster && bar.box.getAttribute('sidebarcommand')) {
 		broadcaster = $(bar.box.getAttribute('sidebarcommand'));
 	}
-	if(broadcaster && broadcaster.localName == 'broadcaster') {
+	if(trueAttribute(broadcaster, 'checked') && broadcaster.localName == 'broadcaster') {
 		broadcaster.removeAttribute('checked');
 		broadcaster.removeAttribute('twinSidebar');
+		
+		if(SocialSidebar && broadcaster == SocialBroadcaster) {
+			setSocialOpenListener(false);
+			SocialSidebar.hide();
+			setSocialOpenListener(true);
+		}
 	}
 	
 	if(!prefAid.keepLoaded || forceUnload || UNLOADED || !dispatch(bar.box, { type: 'ShouldCollapseSidebar' })) {
-		bar.sidebar.setAttribute("src", "about:blank");
-		if(bar.sidebar.docShell) { bar.sidebar.docShell.createAboutBlankContentViewer(null); }
+		unloadSidebarBrowser(bar.sidebar);
 		bar.title.value = "";
-		bar.box.setAttribute("sidebarcommand", "");
+		setAttribute(bar.box, "sidebarcommand", "");
 		bar.box.hidden = true;
 		hideIt(bar.box, true);
 	}
@@ -212,8 +233,14 @@ this.closeSidebar = function(bar, forceUnload, broadcaster) {
 		hideIt(bar.box);
 	}
 	
+	removeAttribute(bar.box, 'origin');
 	bar.splitter.hidden = true;
 	buttonLabels(bar.button);
+};
+
+this.unloadSidebarBrowser = function(browser) {
+	setAttribute(browser, "src", "about:blank");
+	if(browser.docShell) { browser.docShell.createAboutBlankContentViewer(null); }
 };
 
 this.reUnloadMain = function() {
@@ -225,11 +252,10 @@ this.reUnloadMain = function() {
 // Opens the sidebars last opened page if its closed and should be open, to be called on startup
 this.openLast = function(bar) {
 	if(bar.box.getAttribute('sidebarcommand')) {
-		if($(bar.box.getAttribute('sidebarcommand'))
-		&& $(bar.box.getAttribute('sidebarcommand')).localName == 'broadcaster'
-		&& !trueAttribute($(bar.box.getAttribute('sidebarcommand')), 'disabled')) {
+		var lastBroadcaster = $(bar.box.getAttribute('sidebarcommand'));
+		if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster' && !trueAttribute(lastBroadcaster, 'disabled')) {
 			if(dispatch(bar.box, { type: 'willOpenLast', detail: { bar: bar } })) {
-				toggleSidebar($(bar.box.getAttribute('sidebarcommand')), true, bar.twin);
+				toggleSidebar(lastBroadcaster, true, bar.twin);
 				return true;
 			}
 			return false;
@@ -240,8 +266,13 @@ this.openLast = function(bar) {
 };
 
 // omnisidebar button opens the last sidebar opened
-this.setlast = function() {
-	setLastCommand(mainSidebar);
+this.setlast = function(e) {
+	if(e && e.detail && e.detail.bar) {
+		setLastCommand(e.detail.bar);
+	} else {
+		setLastCommand(mainSidebar);
+		setLastCommand(twinSidebar);
+	}
 };
 
 this.setLastCommand = function(bar) {
@@ -477,7 +508,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	hidePanel();
 	
 	// don't do command if it comes from the fullScreen handler, let ours do the work
-	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && arguments.callee.caller == FullScreen.enterDomFullscreen) { return; }
+	if(Services.vc.compare(Services.appinfo.platformVersion, "10.0") >= 0 && arguments.callee.caller == FullScreen.enterDomFullscreen) { return false; }
 	
 	if(customizing) { return false; }
 	
@@ -509,6 +540,11 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 					break;
 				}
 			}
+		}
+		
+		if(!twin && SocialSidebar && commandID == SocialBroadcaster && trueAttribute(SocialBroadcaster, 'twinSidebar')) {
+			twin = true;
+			bar = twinSidebar;
 		}
 		
 		if(!twin) {
@@ -585,7 +621,8 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 			}
 	}
 	
-	if(trueAttribute(sidebarBroadcaster, "checked")) {
+	if(trueAttribute(sidebarBroadcaster, "checked")
+	&& (!SocialSidebar || sidebarBroadcaster != SocialBroadcaster || SocialBroadcaster.getAttribute('origin') == bar.box.getAttribute('origin'))) {
 		if(forceReload) {
 			closeSidebar(bar, true, sidebarBroadcaster);
 		}
@@ -610,7 +647,55 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		}
 	}
 	
-	sidebarBroadcaster.setAttribute("checked", "true");
+	// make sure we actually can show the social sidebar
+	if(SocialSidebar && sidebarBroadcaster == SocialBroadcaster) {
+		var canSocial = true;
+		if((Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && !prefAid['enabled']) || !SocialSidebar.canShow) {
+			canSocial = false;
+		}
+		
+		var origin = SocialBroadcaster.getAttribute('origin');
+		if(canSocial && !origin) {
+			origin = prefAid.lastcommandSocial;
+			if(SocialSidebar.provider) {
+				origin = SocialSidebar.provider.origin;
+				setAttribute(SocialBroadcaster, 'sidebartitle', SocialSidebar.provider.name);
+			}
+			setAttribute(SocialBroadcaster, 'origin', origin);
+		}
+		
+		if(canSocial
+		&& (	(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && !prefAid['sidebar.open'])
+			|| !SocialSidebar.opened || !SocialSidebar.provider || SocialSidebar.provider.origin != origin)) {
+				setSocialOpenListener(false);
+				SocialSidebar.show(origin);
+				setSocialOpenListener(true);
+		}
+		
+		if(canSocial && !SocialSidebar.provider) {
+			// we may have an invalid last social command, so let's reset it
+			if(origin == prefAid.lastcommandSocial) {
+				prefAid.reset('lastcommandSocial');
+			}
+			canSocial = false;
+		}
+		
+		// in case we can't, let's reset the command so we don't (or shouldn't) trigger this again
+		if(!canSocial) {
+			if(bar.lastCommand == SocialBroadcaster.id) {
+				bar.lastCommandReset();
+			}
+			return false;
+		}
+		
+		// this doesn't happen above if we're switching sidebars, because placeSocialSidebar() overrides the twinSidebar attr
+		var otherBar = (twin) ? mainSidebar : twinSidebar;
+		if(otherBar.box && otherBar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id) {
+			closeSidebar(otherBar);
+		}
+	}
+	
+	setAttribute(sidebarBroadcaster, "checked", "true");
 	toggleAttribute(sidebarBroadcaster, 'twinSidebar', twin);
 	
 	var broadcasters = $$("broadcaster[group='sidebar']");
@@ -627,15 +712,66 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	
 	buttonLabels(bar.button);
 	
+	// if we're toggling a social sidebar
+	if(SocialSidebar && sidebarBroadcaster == SocialBroadcaster) {
+		placeSocialSidebar(null, twin);
+		unloadSidebarBrowser(bar.sidebar);
+		bar.sidebar.hidden = true;
+		SocialBrowser.hidden = false;
+		SocialButton.hidden = false;
+		
+		setAttribute(bar.box, "sidebarcommand", sidebarBroadcaster.id);
+		setAttribute(bar.box, 'origin', sidebarBroadcaster.getAttribute('origin'));
+		
+		var newTitle = sidebarBroadcaster.getAttribute("sidebartitle");
+		bar.title.value = newTitle;
+		setAttribute(bar.title, 'value', newTitle);
+		
+		if(_swapSocialTwinFlag && _swapSocialTwinFlag != 'about:blank') {
+			if(_swapSocialTwinFlag != SocialBrowser.getAttribute('src')) {
+				unloadSidebarBrowser(SocialBrowser);
+			}
+			
+			// when switching between the main and twin sidebar, somehow the social sidebar is closed (for some reason)
+			setSocialOpenListener(false);
+			if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+				prefAid['sidebar.open'] = true; // this implies SocialSidebar.update()
+			} else {
+				$('socialSidebarBroadcaster').hidden = false;
+				SocialSidebar.update();
+			}
+			setSocialOpenListener(true);
+		}
+		_swapSocialTwinFlag = null;
+		
+		dispatch(bar.sidebar, { type: 'endToggleSidebar', cancelable: false, detail: { bar: bar } });
+		return true;
+	}
+	
+	// only other choice is we're toggling a normal sidebar
 	var newTitle = sidebarBroadcaster.getAttribute("sidebartitle") || sidebarBroadcaster.getAttribute("label");
 	var url = sidebarBroadcaster.getAttribute("sidebarurl");
 	
 	if(!prefAid.keepLoaded || forceUnload || bar.sidebar.getAttribute('src') != url || url == 'about:blank') {
-		bar.sidebar.setAttribute("src", url);
-		bar.box.setAttribute("sidebarcommand", sidebarBroadcaster.id);
-		bar.box.setAttribute("src", url);
+		if(bar.box.getAttribute('origin') || isAncestor(SocialBrowser, bar.box)) {
+			removeAttribute(bar.box, 'origin');
+			
+			setSocialOpenListener(false);
+			SocialSidebar.hide();
+			setSocialOpenListener(true);
+			
+			SocialBrowser.hidden = true;
+			SocialButton.hidden = true;
+		}
+		
+		bar.sidebar.hidden = false;
+		
+		setAttribute(bar.sidebar, "src", url);
+		setAttribute(bar.box, "sidebarcommand", sidebarBroadcaster.id);
+		setAttribute(bar.box, "src", url);
+		
 		bar.title.value = newTitle;
-		bar.title.setAttribute('value', newTitle); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
+		setAttribute(bar.title, 'value', newTitle); // Correct a bug where the title wouldn't show sometimes when starting firefox with the sidebar closed
 	}
 	
 	if(!bar.sidebar.contentDocument || bar.sidebar.contentDocument.readyState != 'complete' || bar.sidebar.contentDocument.location.href != url) {
@@ -661,6 +797,136 @@ this.omniSidebarOnLoad = function(e) {
 this.fireFocusedSyncEvent = function(e) {
 	var bar = e.currentTarget == twinSidebar.sidebar ? twinSidebar : mainSidebar;
 	dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocusedSync', cancelable: false, detail: { bar: bar } });
+};
+
+// for compatibility with the Social API sidebars:
+// we move its browser element into our sidebars, then it proceeds from there
+this._swapSocialTwinFlag = null;
+this._backupSocialStyle = null;
+this.placeSocialSidebar = function(el, twin) {
+	var bar = (twin) ? twinSidebar : mainSidebar;
+	if(!twin && prefAid.twinSidebar && el) {
+		for(var t in twinTriggers) {
+			if(isAncestor(el, twinTriggers[t])) {
+				bar = twinSidebar;
+				break;
+			}
+		}
+	}
+	
+	if(!_backupSocialStyle) {
+		_backupSocialStyle = {
+			minWidth: SocialBrowser.style.minWidth,
+			width: SocialBrowser.style.width,
+			maxWidth: SocialBrowser.style.maxWidth
+		};
+		
+		SocialBrowser.style.minWidth = '';
+		SocialBrowser.style.width = '';
+		SocialBrowser.style.maxWidth = '';
+	}
+	
+	if(!isAncestor(SocialBrowser, bar.box)) {
+		_swapSocialTwinFlag = SocialBrowser.getAttribute('src');
+		if(el && SocialBrowser.getAttribute('origin') != el.getAttribute('origin')) {
+			unloadSidebarBrowser(SocialBrowser);
+			SocialBrowser.hidden = true; // prevent showing the last panel when switching sidebars
+		}
+		
+		bar.box.hidden = false;
+		
+		var tempSocial = overlayAid.swapBrowsers(window, SocialBrowser);
+		bar.sidebar.parentNode.appendChild(SocialBrowser);
+		overlayAid.swapBrowsers(window, SocialBrowser, tempSocial);
+		bar.title.parentNode.insertBefore(SocialButton, bar.title.nextSibling);
+		
+		if(bar.twin) {
+			twinTriggers.__defineGetter__('SocialButton', function() { return SocialButton; });
+		} else {
+			delete twinTriggers.SocialButton;
+		}
+	}
+	
+	toggleAttribute(SocialBroadcaster, 'twinSidebar', bar.twin);
+};
+
+this.restoreSocialSidebar = function() {
+	delete twinTriggers.SocialButton;
+	
+	var tempSocial = overlayAid.swapBrowsers(window, SocialBrowser);
+	SocialBox.appendChild(SocialBrowser);
+	overlayAid.swapBrowsers(window, SocialBrowser, tempSocial);
+	
+	SocialHeader.appendChild(SocialButton);
+	
+	SocialBrowser.hidden = false;
+	SocialButton.hidden = false;
+};
+
+this.toggleSocialSidebar = function() {
+	if((Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && (!prefAid['enabled'] || !prefAid['sidebar.open']))
+	|| !SocialSidebar.canShow || !SocialSidebar.opened || !SocialSidebar.provider) {
+		if((mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id)
+		|| (twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id)) {
+			toggleSidebar(SocialBroadcaster);
+		}
+		return;
+	}
+	
+	var bar = (trueAttribute(SocialBroadcaster, 'twinSidebar')) ? twinSidebar : mainSidebar;
+	if(bar.box.getAttribute('origin') == SocialSidebar.provider.origin) { return; }
+	
+	setAttribute(SocialBroadcaster, 'sidebartitle', SocialSidebar.provider.name);
+	setAttribute(SocialBroadcaster, 'origin', SocialSidebar.provider.origin);
+	prefAid.lastcommandSocial = SocialSidebar.provider.origin;
+	
+	toggleSidebar(SocialBroadcaster, false, bar.twin);
+};
+
+this.setSocialOpenListener = function(enable) {
+	if(enable) {
+		if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+			prefAid.listen('sidebar.open', toggleSocialSidebar);
+		} else {
+			if(!SocialSidebar._update) {
+				SocialSidebar._update = SocialSidebar.update;
+				SocialSidebar.update = function() { SocialSidebar._update(); toggleSocialSidebar(); };
+			}
+		}
+	} else {
+		if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+			prefAid.unlisten('sidebar.open', toggleSocialSidebar);
+		} else {
+			if(SocialSidebar._update) {
+				SocialSidebar.update = SocialSidebar._update;
+				delete SocialSidebar._update;
+			}
+		}
+	}
+};
+
+this.ensureSocialSwitchBeforeHide = function(el) {
+	for(var t in barSwitchTriggers) {
+		if(isAncestor(el, barSwitchTriggers[t])) {
+			var twin = false;
+			for(var e in twinTriggers) {
+				if(isAncestor(el, twinTriggers[e])) {
+					twin = true;
+					break;
+				}
+			}
+			
+			if((twin && isAncestor(SocialBrowser, mainSidebar.box)) || (!twin && isAncestor(SocialBrowser, twinSidebar.box))) {
+				placeSocialSidebar(el);
+				SocialSidebar.show(el.getAttribute('origin'));
+				return;
+			}
+			
+			break;
+		}
+	}
+	
+	SocialSidebar.hide();
 };
 
 this.onMozEnteredFullScreen = function() {
@@ -722,16 +988,53 @@ moduleAid.LOADMODULE = function() {
 	overlayAid.overlayWindow(window, "mainSidebar", null, loadMainSidebar, unloadMainSidebar);
 	setBroadcasters(true);
 	
-	if(!this.backups) {
-		this.backups = {
-			toggleSidebar: toggleSidebar,
-			fireSidebarFocusedEvent: fireSidebarFocusedEvent,
-			sidebarOnLoad: sidebarOnLoad
-		};
-	}
+	this.backups = {
+		toggleSidebar: toggleSidebar,
+		fireSidebarFocusedEvent: fireSidebarFocusedEvent,
+		sidebarOnLoad: sidebarOnLoad
+	};
 	toggleSidebar = toggleOmniSidebar;
 	fireSidebarFocusedEvent = fireOmniSidebarFocusedEvent;
 	sidebarOnLoad = omniSidebarOnLoad;
+	
+	// SocialAPI compatibility
+	if(SocialSidebar) {
+		if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+			// the preference listener only triggers when there's a change in the open preference
+			this.backups.show = SocialSidebar.show;
+			SocialSidebar.show = function(origin) {
+				// always show the sidebar, and set the provider
+				this.setProvider(origin);
+				if(!prefAid['sidebar.open']) { prefAid['sidebar.open'] = true; }
+				else { toggleSocialSidebar(); }
+			};
+			
+			var socialDefaults = {};
+			socialDefaults['enabled'] = false;
+			socialDefaults['sidebar.open'] = true;
+			prefAid.setDefaults(socialDefaults, 'social', '');
+		}
+		
+		barSwitchTriggers.__defineGetter__('socialSidebar', function() { return SocialBroadcaster; });
+		
+		// if we start with the social sidebar opened, but neither the main or the twin sidebars had last been opened with it, we close the social sidebar
+		if((Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && prefAid['enabled'] && prefAid['sidebar.open'])
+		|| (Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") >= 0 && SocialSidebar.opened)) {
+			if((prefAid.lastcommand != objName+'-viewSocialSidebar' || (mainSidebar.box && !mainSidebar.closed && mainSidebar.box.getAttribute('sidebarcommand')))
+			&& (!prefAid.twinSidebar || prefAid.lastcommandTwin != objName+'-viewSocialSidebar')) {
+				SocialSidebar.hide();
+			}
+			else if(mainSidebar.box && mainSidebar.closed && (!prefAid.twinSidebar || prefAid.lastcommandTwin != objName+'-viewSocialSidebar')) {
+				setAttribute(mainSidebar.box, 'sidebarcommand', objName+'-viewSocialSidebar');
+				_sidebarCommand = objName+'-viewSocialSidebar';
+			}
+		}
+		
+		setSocialOpenListener(true);
+		if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+			prefAid.listen('enabled', toggleSocialSidebar);
+		}
+	}
 	
 	// I guess some add-ons can set these, they override the css set ones so we have to erase them
 	mainSidebar.sidebar.style.maxWidth = '';
@@ -756,7 +1059,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('glassStyle', setClasses);
 	prefAid.listen('keepLoaded', reUnloadMain);
 	
-	listenerAid.add(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
+	listenerAid.add(window, 'endToggleSidebar', setlast);
 	listenerAid.add(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
 	listenerAid.add(window, 'beforecustomization', customize, false);
@@ -816,7 +1119,7 @@ moduleAid.UNLOADMODULE = function() {
 	listenerAid.remove(window, 'aftercustomization', customize, false);
 	
 	listenerAid.remove(mainSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
-	listenerAid.remove(mainSidebar.sidebar, 'DOMContentLoaded', setlast, true);
+	listenerAid.remove(window, 'endToggleSidebar', setlast);
 	
 	prefAid.unlisten('glassStyle', setClasses);
 	prefAid.unlisten('keepLoaded', reUnloadMain);
@@ -837,12 +1140,40 @@ moduleAid.UNLOADMODULE = function() {
 	
 	styleAid.unload('switcherOffset_'+_UUID);
 	
-	if(this.backups) {
-		toggleSidebar = this.backups.toggleSidebar;
-		fireSidebarFocusedEvent = this.backups.fireSidebarFocusedEvent;
-		sidebarOnLoad = this.backups.sidebarOnLoad;
-		delete this.backups;
+	if(SocialSidebar) {
+		setSocialOpenListener(false);
+		if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+			prefAid.unlisten('enabled', toggleSocialSidebar);
+		}
+		
+		delete barSwitchTriggers.socialSidebar;
+		
+		if(_backupSocialStyle) {
+			SocialBrowser.style.minWidth = _backupSocialStyle.minWidth;
+			SocialBrowser.style.width = _backupSocialStyle.width;
+			SocialBrowser.style.maxWidth = _backupSocialStyle.maxWidth;
+			
+			_backupSocialStyle = null;
+		}
+		
+		if(!isAncestor(SocialBrowser, SocialBox)) {
+			restoreSocialSidebar();
+			
+			// Let's make sure this is visible...
+			mainSidebar.sidebar.hidden = false;
+		}
+		
+		if(Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0) {
+			SocialSidebar.show = this.backups.show;
+		}
+		
+		if(mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewSocialSidebar') { closeSidebar(mainSidebar); }
 	}
+	
+	toggleSidebar = this.backups.toggleSidebar;
+	fireSidebarFocusedEvent = this.backups.fireSidebarFocusedEvent;
+	sidebarOnLoad = this.backups.sidebarOnLoad;
+	delete this.backups;
 	
 	setBroadcasters(false);
 	overlayAid.removeOverlayWindow(window, "mainSidebar");

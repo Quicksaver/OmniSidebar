@@ -53,4 +53,16 @@
 	window[omnisidebar-mozFullScreen="true"] .omnisidebar_switch {
 		visibility: collapse !important;
 	}
+	
+	/* hide the social sidebar, since we use our own for it */
+	#social-sidebar-box,
+	#social-sidebar-splitter,
+	.social-toggle-sidebar-menuitem {
+		visibility: collapse !important;
+	}
+	
+	.sidebar-header #social-sidebar-button {
+		-moz-margin-end: 4px !important;
+	}
+	
 }

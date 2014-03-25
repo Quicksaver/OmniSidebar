@@ -32,6 +32,13 @@
 			sidebarurl="about:blank"
 			sidebartitle="&BlankSidebar.label;"
 			oncommand="toggleSidebar(this);" />
+		
+		<broadcaster id="objName-viewSocialSidebar"
+			label=""
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebartitle="" />
 	</broadcasterset>
 	
 	<hbox id="browser">
