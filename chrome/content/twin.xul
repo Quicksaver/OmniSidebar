@@ -40,7 +40,7 @@
 					crop="end" 
 					control="objName-sidebar-twin"/>
 				<image id="objName-sidebar-throbber-twin" />
-				<toolbarbutton class="tabs-closebutton" tooltiptext="&omnisidebarButtonClose.tooltip;" oncommand="toggleSidebar(null, false, true);" />
+				<toolbarbutton class="tabs-closebutton close-icon" tooltiptext="&omnisidebarButtonClose.tooltip;" oncommand="toggleSidebar(null, false, true);" />
 			</sidebarheader>
 			<browser id="objName-sidebar-twin" flex="1" autoscroll="false" disablehistory="true" src="about:blank" type="chrome" />
 		</vbox>
