@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.4.0';
+moduleAid.VERSION = '1.4.1';
 
 this.customizing = false;
 
@@ -656,11 +656,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		
 		var origin = SocialBroadcaster.getAttribute('origin');
 		if(canSocial && !origin) {
-			origin = prefAid.lastcommandSocial;
-			if(SocialSidebar.provider) {
-				origin = SocialSidebar.provider.origin;
-				setAttribute(SocialBroadcaster, 'sidebartitle', SocialSidebar.provider.name);
-			}
+			origin = (SocialSidebar.provider) ? SocialSidebar.provider.origin : prefAid.lastcommandSocial;
 			setAttribute(SocialBroadcaster, 'origin', origin);
 		}
 		
@@ -723,9 +719,10 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		setAttribute(bar.box, "sidebarcommand", sidebarBroadcaster.id);
 		setAttribute(bar.box, 'origin', sidebarBroadcaster.getAttribute('origin'));
 		
-		var newTitle = sidebarBroadcaster.getAttribute("sidebartitle");
+		var newTitle = SocialSidebar.provider.name;
 		bar.title.value = newTitle;
 		setAttribute(bar.title, 'value', newTitle);
+		setAttribute(sidebarBroadcaster, 'sidebartitle', newTitle);
 		
 		if(_swapSocialTwinFlag && _swapSocialTwinFlag != 'about:blank') {
 			if(_swapSocialTwinFlag != SocialBrowser.getAttribute('src')) {
