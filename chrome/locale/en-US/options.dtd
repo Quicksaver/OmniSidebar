@@ -56,7 +56,7 @@
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">
 
-<!ENTITY omnisidebarOptKeysetPanel.label "If the sidebar is closed, the shortcut opens the mini panel">
+<!ENTITY omnisidebarOptKeysetPanel.label "Open the mini panel instead of the sidebar">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Sidebar Keyboard Shortcut">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">

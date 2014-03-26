@@ -1,10 +1,16 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.1.0';
 moduleAid.LAZY = true;
 
 // keydownPanel - 	Panel elements don't support keyboard navigation by default; this object fixes that.
 // 			This aid does NOT self-clean, so make sure to remove every call and set object on it.
 //			However, the methods are kept in the panel object, and listenerAid self-cleans, so it should be ok though, as long as that doesn't fail and the objects
 //			are fully removed.
+//			To also enable a keyset that toggles (closes) the panel, supply it to the panel object as its ._toggleKeyset property, in the form of:
+//				key - (obj):
+//					keycode - (string) either a key to press (e.g. 'A') or a keycode to watch for (e.g. 'VK_F8')
+//					accel: (bool) true if control key (command key on mac) should be pressed
+//					shift: (bool) true if shift key should be pressed
+//					alt: (bool) true if alt key (option key on mac) should be pressed
 //	setupPanel(panel) - sets up a panel element to be able to use keyboard navigation
 //		panel - (xul element): panel element to be set
 //	unsetPanel(panel) - removes keyboard navigation from a panel
@@ -22,6 +28,21 @@ this.keydownPanel = {
 			if(panel.state != 'open') {
 				listenerAid.remove(window, 'keydown', panel._keydownPanel, true);
 				return;
+			}
+			
+			// if this var exists, it means this keyset should be used to toggle the panel as well
+			if(panel._toggleKeyset) {
+				var keycode = keysetAid.translateToConstantCode(panel._toggleKeyset.keycode);
+				
+				if(e[keycode] && e[keycode] == e.which
+				&& panel._toggleKeyset.shift == e.shiftKey
+				&& panel._toggleKeyset.alt == e.altKey
+				&& panel._toggleKeyset.accel == ((Services.appinfo.OS == 'Darwin') ? e.metaKey : e.ctrlKey)) {
+					e.preventDefault();
+					e.stopPropagation();
+					panel.hidePopup();
+					return;
+				}
 			}
 			
 			switch(e.which) {
@@ -78,7 +99,6 @@ this.keydownPanel = {
 					
 					break;
 				
-				case e.DOM_VK_ENTER:
 				case e.DOM_VK_RETURN:
 					var items = panel.querySelectorAll('menuitem');
 					for(var i=0; i<items.length; i++) {

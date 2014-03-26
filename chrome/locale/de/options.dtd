@@ -46,7 +46,6 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (keine Veränderung)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Farbenfroh">
-<!ENTITY omnisidebarOptKeysetPanel.label "Bei geschlossener Sidebar mit Tastaturkürzel das Menü öffnen">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Tastaturkürzel für Sidebar">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Strg">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Umschalt">

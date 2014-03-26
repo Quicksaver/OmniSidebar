@@ -43,7 +43,6 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "默认（无变动）">
 <!ENTITY omnisidebarOptcoloricons.ff4label "FireFox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "多彩">
-<!ENTITY omnisidebarOptKeysetPanel.label "若侧栏关闭，该快捷键将打开迷你面板">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "侧栏键盘快捷键">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">

@@ -46,7 +46,6 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Sem Mudança">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Coloridos">
-<!ENTITY omnisidebarOptKeysetPanel.label "Se o painel lateral estiver fechado, o atalho abre o mini painel">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Atalho de teclado para o painel lateral">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">

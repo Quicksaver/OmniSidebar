@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+moduleAid.VERSION = '1.1.4';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -16,13 +16,17 @@ this.shouldFollowCommand = function(trigger, twin, e) {
 			e.stopPropagation();
 		}
 		
-		var position = 'after_end';
-		if(!e) {
-			trigger = bar.button || $('navigator-toolbox');
-		} else if(trigger == bar.switcher) {
-			position = 'after_pointer';
+		if(panel.state == 'closed' || panel._bar != bar) {
+			var position = 'after_end';
+			if(!e) {
+				trigger = bar.button || $('navigator-toolbox');
+			} else if(trigger == bar.switcher) {
+				position = 'after_pointer';
+			}
+			openPanel(trigger, bar, e, position);
+		} else {
+			hidePanel();
 		}
-		openPanel(trigger, bar, e, position);
 		return false;
 	}
 	return true;
@@ -121,6 +125,7 @@ this.panelDontOpenContext = function(e) {
 };
 
 this.loadMiniPanel = function() {
+	panel.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
 	keydownPanel.setupPanel(panel);
 	barSwitchTriggers.__defineGetter__('miniPanel', function() { return panel; });
 };
@@ -128,6 +133,7 @@ this.loadMiniPanel = function() {
 this.unloadMiniPanel = function() {
 	delete barSwitchTriggers.miniPanel;
 	keydownPanel.unsetPanel(panel);
+	delete panel._toggleKeyset;
 };
 
 moduleAid.LOADMODULE = function() {

@@ -43,7 +43,6 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Domyślny (bez zmian)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefoksa">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Kolorowy">
-<!ENTITY omnisidebarOptKeysetPanel.label "Jeśli panel boczny jest zamknięty, skrót otwiera mini panel">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Skrót klawiszowy panelu bocznego">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">

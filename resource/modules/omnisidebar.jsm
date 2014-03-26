@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.4.1';
+moduleAid.VERSION = '1.4.2';
 
 this.customizing = false;
 
@@ -47,6 +47,7 @@ this.mainSidebar = {
 	set lastCommand (v) { return prefAid.lastcommand = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommand'); },
 	get useSwitch () { return prefAid.useSwitch; },
+	get keyset () { return mainKey; },
 	get keysetPanel () { return prefAid.mainKeysetPanel; },
 	get above () { return prefAid.renderabove; },
 	get autoHide () { return prefAid.autoHide; },
@@ -104,6 +105,7 @@ this.twinSidebar = {
 	set lastCommand (v) { return prefAid.lastcommandTwin = v; },
 	lastCommandReset: function() { return prefAid.reset('lastcommandTwin'); },
 	get useSwitch () { return prefAid.useSwitchTwin; },
+	get keyset () { return twinKey; },
 	get keysetPanel () { return prefAid.twinKeysetPanel; },
 	get above () { return prefAid.renderaboveTwin; },
 	get autoHide () { return prefAid.autoHideTwin; },
