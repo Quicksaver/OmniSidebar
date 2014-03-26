@@ -1,5 +1,10 @@
+<!ENTITY addonsSidebar.label "Dodatki">
 <!ENTITY addonsSidebar.tooltip "Otwórz menedżer dodatków w panelu bocznym">
 <!ENTITY addonsSidebar.accesskey "D">
+<!ENTITY bookmarksSidebar.label "Zakładki">
+<!ENTITY bookmarksSidebar.tooltip "Wyświetl zakładki w panelu bocznym">
+<!ENTITY historySidebar.label "Historia">
+<!ENTITY historySidebar.tooltip "Wyświetl w panelu bocznym strony, które odwiedziłeś niedawno">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Otwórz DOM Inspector w panelu bocznym">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -18,6 +23,9 @@
 <!ENTITY consoleSidebar.label "Konsola błędów">
 <!ENTITY consoleSidebar.tooltip "Otwórz konsolę błędów w panelu bocznym">
 <!ENTITY consoleSidebar.accesskey "K">
+<!ENTITY browserConsole.label "Konsola przeglądarki">
+<!ENTITY browserConsole.tooltip "Otwórz Konsolę przeglądarki w panelu bocznym">
+<!ENTITY browserConsole.accesskey "C">
 <!ENTITY dmtSidebar.label "Pobierania">
 <!ENTITY dmtSidebar.tooltip "Wyświetl ostatnio pobierane pliki">
 <!ENTITY dmtSidebar.accesskey "P">

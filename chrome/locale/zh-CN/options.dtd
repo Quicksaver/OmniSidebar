@@ -1,6 +1,7 @@
 <!ENTITY Optwindow.style "width: 26.25em;">
 <!ENTITY addonsSidebar.label "附加组件管理器">
 <!ENTITY omnisidebarConsole.label "错误控制台">
+<!ENTITY omnisidebarBrowserConsole.label "浏览器控制台">
 <!ENTITY omnisidebarDMT.label "下载">
 <!ENTITY omnisidebarPageInfo.label "页面信息">
 <!ENTITY omnisidebarScratchpad.label "代码片段速记器">
@@ -31,6 +32,8 @@
 <!ENTITY omnisidebarOptshowDelay.label "侧栏自动显示延时(毫秒):">
 <!ENTITY omnisidebarOpthideDelay.label "侧栏自动隐藏延时(毫秒):">
 <!ENTITY omnisidebarOptkeepPrivate.label "隐私浏览模式沿用侧栏状态">
+<!ENTITY omnisidebarOptswitcherAdjust.label "调整激活区域宽度(像素): ">
+<!ENTITY omnisidebarOptkeepLoaded.label "关闭侧栏后仍保持面板载入状态">
 <!ENTITY omnisidebarOptforceOpen.label "不要关闭侧栏从">
 <!ENTITY omnisidebarOptforceOpen.toolbars "侧栏工具栏中的按钮">
 <!ENTITY omnisidebarOptforceOpen.menus "下拉菜单">

@@ -48,7 +48,7 @@
 			<Description>
 				<em:locale>pl</em:locale>
 				<em:name>OmniSidebar</em:name>
-				<em:description>Przywołuj panel boczny prostym gestem. Przenieś panel w inne miejsce. Otwieraj różne panele po prostu klikając na ich tytuł. I jeszcze więcej! Pozostaw Twój panel boczny prostym i szybko dostępnym!</em:description>
+				<em:description>Przywołuj panel boczny prostym gestem. Umieść panel w innym miejscu. Otwieraj różne zawartości panelu po prostu klikając na ich tytuł. I jeszcze więcej! Pozostaw Twój panel boczny prostym i szybko dostępnym!</em:description>
 				<em:homepageURL>https://addons.mozilla.org/pl/firefox/addon/omnisidebar/</em:homepageURL>
 				<em:translator>http://github.com/piotrex</em:translator>
 			</Description>
