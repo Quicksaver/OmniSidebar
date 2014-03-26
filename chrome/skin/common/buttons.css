@@ -111,12 +111,7 @@
 	
 	/* Australis */
 	
-	/* make sure our buttons text wraps when in the panel */
-	window[omnisidebar_Australis] toolbarbutton.adequate-size[cui-areatype="menu-panel"] {
-		-moz-binding: url("chrome://global/content/bindings/toolbarbutton.xml#toolbarbutton-wrapping-label");
-	}
-	
-	/* Genereal toolbar buttons */
+	/* General toolbar buttons */
 	
 	window[omnisidebar_Australis] .omnisidebar-toolbar .toolbarbutton-1 {
 		margin: 0 2px 0 2px !important;
