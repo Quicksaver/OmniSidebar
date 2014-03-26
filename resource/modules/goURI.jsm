@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.2';
+moduleAid.VERSION = '1.0.3';
 
 this.openURIBar = function(button) {
 	var broadcaster = $(button.getAttribute('broadcaster'));
@@ -66,7 +66,6 @@ this.keydownURIBar = function(e, box) {
 			return false;
 		
 		case e.DOM_VK_RETURN:
-		case e.DOM_VK_ENTER:
 			loadURIBar($(broadcaster.getAttribute('goButton')));
 			return true;
 		
