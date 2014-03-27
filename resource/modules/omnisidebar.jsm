@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.4.2';
+moduleAid.VERSION = '1.4.3';
 
 this.customizing = false;
 
@@ -257,7 +257,17 @@ this.openLast = function(bar) {
 		var lastBroadcaster = $(bar.box.getAttribute('sidebarcommand'));
 		if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster' && !trueAttribute(lastBroadcaster, 'disabled')) {
 			if(dispatch(bar.box, { type: 'willOpenLast', detail: { bar: bar } })) {
-				toggleSidebar(lastBroadcaster, true, bar.twin);
+				// ensure the focus is on content at startup/opening new window
+				var listener = function(e) {
+					ensureContentIsFocused(bar);
+					e.preventDefault();
+					e.stopPropagation();
+				};
+				listenerAid.add(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
+				
+				if(!toggleSidebar(lastBroadcaster, true, bar.twin)) {
+					listenerAid.remove(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
+				}
 				return true;
 			}
 			return false;
@@ -265,6 +275,13 @@ this.openLast = function(bar) {
 		closeSidebar(bar);
 	}
 	return false;
+};
+
+this.ensureContentIsFocused = function(bar) {
+	if(document.commandDispatcher.focusedWindow == bar.sidebar.contentWindow.content
+	|| document.commandDispatcher.focusedWindow == bar.sidebar.contentWindow) {
+		window.content.focus();
+	}
 };
 
 // omnisidebar button opens the last sidebar opened
