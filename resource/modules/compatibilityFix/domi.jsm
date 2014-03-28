@@ -1,9 +1,9 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.doDOMICommand = function() {
 	delete holdBroadcasters.domi;
-	if(mainSidebar.loaded && _sidebarCommand == objName+'-viewDOMInspectorSidebar') { loadMainSidebar(); }
-	if(twinSidebar.loaded && _sidebarCommandTwin == objName+'-viewDOMInspectorSidebar') { loadTwinSidebar(); }
+	if(mainSidebar.loaded && mainSidebar.state.command == objName+'-viewDOMInspectorSidebar') { loadMainSidebar(); }
+	if(twinSidebar.loaded && twinSidebar.state.command == objName+'-viewDOMInspectorSidebar') { loadTwinSidebar(); }
 };
 
 this.isDOMISidebar = function(bar) {

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.__defineGetter__('DMPanelLink', function() { return $('downloadsHistory'); });
 this.__defineGetter__('BrowserDownloadsUI', function() { return window.BrowserDownloadsUI; });
@@ -134,8 +134,16 @@ this.doDMTCommand = function() {
 	delete holdBroadcasters.dm;
 	delete holdBroadcasters.dmt;
 	delete holdBroadcasters.dmp;
-	if(mainSidebar.loaded && (_sidebarCommand == 'viewDmSidebar' || _sidebarCommand == 'viewDmtSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar')) { loadMainSidebar(); }
-	if(twinSidebar.loaded && (_sidebarCommandTwin == 'viewDmSidebar' || _sidebarCommandTwin == 'viewDmtSidebar' || _sidebarCommandTwin == 'viewDmgrPlacesSidebar')) { loadTwinSidebar(); }
+	
+	if(mainSidebar.loaded
+	&& (mainSidebar.state.command == 'viewDmSidebar' || mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmgrPlacesSidebar')) {
+		loadMainSidebar();
+	}
+	
+	if(twinSidebar.loaded
+	&& (twinSidebar.state.command == 'viewDmSidebar' || twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmgrPlacesSidebar')) {
+		loadTwinSidebar();
+	}
 };
 
 this.loadDmgrFix = function(e) {
@@ -177,8 +185,8 @@ moduleAid.LOADMODULE = function() {
 	AddonManager.getAddonByID("{F8A55C97-3DB6-4961-A81D-0DE0080E53CB}", function(addon) {
 		if(!addon || !addon.isActive) {
 			if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
-				if(_sidebarCommand == 'viewDmtSidebar' || _sidebarCommand == 'viewDmSidebar') { _sidebarCommand = 'viewDmgrPlacesSidebar'; }
-				if(_sidebarCommandTwin == 'viewDmtSidebar' || _sidebarCommandTwin == 'viewDmSidebar') { _sidebarCommandTwin = 'viewDmgrPlacesSidebar'; }
+				if(mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmSidebar') { mainSidebar.stateForceCommand('viewDmgrPlacesSidebar'); }
+				if(twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmSidebar') { twinSidebar.stateForceCommand('viewDmgrPlacesSidebar'); }
 				
 				styleAid.load('dmgrPlaces', 'dmgrPlaces');
 				overlayAid.overlayWindow(window, 'dmgrPlacesSidebar', null, loadDMT, unloadDMT);
@@ -189,14 +197,14 @@ moduleAid.LOADMODULE = function() {
 			
 			listenerAid.add(window, 'SidebarFocusedSync', loadDmgrFix);
 			
-			if(_sidebarCommand == 'viewDmtSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommand = 'viewDmSidebar'; }
-			if(_sidebarCommandTwin == 'viewDmtSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommandTwin = 'viewDmSidebar'; }
+			if(mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmgrPlacesSidebar') { mainSidebar.stateForceCommand('viewDmSidebar'); }
+			if(twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmgrPlacesSidebar') { twinSidebar.stateForceCommand('viewDmSidebar'); }
 			
 			overlayAid.overlayWindow(window, 'dmtSidebar', null, loadDMT, unloadDMT);
 		} else {
 			dmtLoaded = true;
-			if(_sidebarCommand == 'viewDmSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommand = 'viewDmtSidebar'; }
-			if(_sidebarCommandTwin == 'viewDmSidebar' || _sidebarCommand == 'viewDmgrPlacesSidebar') { _sidebarCommandTwin = 'viewDmtSidebar'; }
+			if(mainSidebar.state.command == 'viewDmSidebar' || mainSidebar.state.command == 'viewDmgrPlacesSidebar') { mainSidebar.stateForceCommand('viewDmtSidebar'); }
+			if(twinSidebar.state.command == 'viewDmSidebar' || twinSidebar.state.command == 'viewDmgrPlacesSidebar') { twinSidebar.stateForceCommand('viewDmtSidebar'); }
 			doDMTCommand();
 		}
 	});

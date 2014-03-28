@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+moduleAid.VERSION = '1.0.4';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -41,7 +41,7 @@ this.toggleAlwaysScratchpad = function(unloaded) {
 
 this.confirmCloseScratchpad = function(e) {
 	if(e.detail.bar.isOpen
-	&& e.detail.bar.lastCommand == objName+'-viewScratchpadSidebar'
+	&& e.detail.bar.state.command == objName+'-viewScratchpadSidebar'
 	&& (e.detail.commandID != objName+'-viewScratchpadSidebar' || e.detail.forceReload || !e.detail.forceOpen)) {
 		var inScratchpad = e.detail.bar.sidebar.contentWindow.Scratchpad;
 		if(inScratchpad.dirty) {
@@ -72,7 +72,7 @@ this.confirmCloseScratchpad = function(e) {
 this.willCloseScratchpadBar = function(e, bar) {
 	if(e.defaultPrevented) { return; }
 	
-	if(bar && bar.isOpen && bar.lastCommand == objName+'-viewScratchpadSidebar') {
+	if(bar && bar.isOpen && bar.state.command == objName+'-viewScratchpadSidebar') {
 		var inScratchpad = bar.sidebar.contentWindow.Scratchpad;
 		if(inScratchpad.dirty) {
 			// We found a sidebar with Scratchpad open that has been changed.
@@ -104,7 +104,7 @@ this.willCloseScratchpad = function(e) {
 this.willQuitScratchpadBar = function(aSubject, aData, bar) {
 	if(!(aSubject instanceof Ci.nsISupportsPRBool) || aSubject.data) { return; }
 	
-	if(bar && bar.isOpen && bar.lastCommand == objName+'-viewScratchpadSidebar') {
+	if(bar && bar.isOpen && bar.state.command == objName+'-viewScratchpadSidebar') {
 		var inScratchpad = bar.sidebar.contentWindow.Scratchpad;
 		if(inScratchpad.dirty) {
 			var ps = Services.prompt;
@@ -178,7 +178,7 @@ this.willQuitScratchpad = function(aSubject, aTopic, aData) {
 // count on it existing forever). Also, I can't even detect most other times the sidebar is reloaded.
 // For now at least, I'm adding a method that popups up a notification, when there are changes to be saved and it won't use the save file dialog (already previously saved).
 this.willDisableAddonScratchpadBar = function(bar) {
-	if(bar && bar.isOpen && bar.lastCommand == objName+'-viewScratchpadSidebar') {
+	if(bar && bar.isOpen && bar.state.command == objName+'-viewScratchpadSidebar') {
 		var inScratchpad = bar.sidebar.contentWindow.Scratchpad;
 		if(inScratchpad.dirty && inScratchpad.filename) {
 			var ps = Services.prompt;

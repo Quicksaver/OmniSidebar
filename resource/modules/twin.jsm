@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.reUnloadTwin = function() {
 	if(twinSidebar.box.collapsed) {
@@ -43,19 +43,7 @@ this.enableTwinSwitcher = function() {
 this.loadTwinSidebar = function() {
 	twinSidebar.loaded = true;
 	enableTwinSwitcher();
-	
-	if(_sidebarCommandTwin) {
-		for(var b in holdBroadcasters) {
-			if(holdBroadcasters[b] == _sidebarCommandTwin) {
-				return;
-			}
-		}
-	}
-	
-	if(!openLast(twinSidebar) && _sidebarCommandTwin) {
-		toggleSidebar(_sidebarCommandTwin, false, true);
-	}
-	_sidebarCommandTwin = null;
+	openLast(twinSidebar);
 };
 
 this.loadedTwin = function() {
@@ -71,7 +59,6 @@ this.loadedTwin = function() {
 	// Apply initial preferences
 	listenerAid.add(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
-	_sidebarCommandTwin = twinSidebar.box.getAttribute('sidebarcommand');
 	loadTwinSidebar();
 };
 
@@ -87,10 +74,6 @@ this.unloadedTwin = function() {
 	}
 	
 	unsetBroadcastersTwin();
-	
-	if(!UNLOADED && twinSidebar.isOpen) {
-		_sidebarCommandTwin = twinSidebar.box.getAttribute('sidebarcommand');
-	}
 };
 
 moduleAid.LOADMODULE = function() {

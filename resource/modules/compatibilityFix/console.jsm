@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
@@ -87,12 +87,12 @@ this.doConsoleCommand = function() {
 		delete holdBroadcasters.console;
 		
 		// We don't want it to start with the console open
-		if(_sidebarCommand == 'viewConsoleSidebar') {
-			_sidebarCommand = null;
+		if(mainSidebar.state.command == 'viewConsoleSidebar' && !mainSidebar.state.closed) {
+			mainSidebar.stateForceClosed(true);
 			loadMainSidebar();
 		}
-		if(_sidebarCommandTwin == 'viewConsoleSidebar') {
-			_sidebarCommandTwin = null;
+		if(twinSidebar.state.command == 'viewConsoleSidebar' && !twinSidebar.state.closed) {
+			twinSidebar.stateForceClosed(true);
 			loadTwinSidebar();
 		}
 		
@@ -101,8 +101,8 @@ this.doConsoleCommand = function() {
 	
 	delete holdBroadcasters.console1;
 	delete holdBroadcasters.console2;
-	if(mainSidebar.loaded && (_sidebarCommand == 'viewConsole1Sidebar' || _sidebarCommand == 'viewConsole2Sidebar')) { loadMainSidebar(); }
-	if(twinSidebar.loaded && (_sidebarCommandTwin == 'viewConsole1Sidebar' || _sidebarCommandTwin == 'viewConsole2Sidebar')) { loadTwinSidebar(); }
+	if(mainSidebar.loaded && (mainSidebar.state.command == 'viewConsole1Sidebar' || mainSidebar.state.command == 'viewConsole2Sidebar')) { loadMainSidebar(); }
+	if(twinSidebar.loaded && (twinSidebar.state.command == 'viewConsole1Sidebar' || twinSidebar.state.command == 'viewConsole2Sidebar')) { loadTwinSidebar(); }
 };
 
 this.loadConsole = function() {
@@ -153,13 +153,13 @@ moduleAid.LOADMODULE = function() {
 		
 		if(addon && addon.isActive) {
 			whichConsole = '2';
-			if(_sidebarCommand == 'viewConsole1Sidebar') { _sidebarCommand = 'viewConsole2Sidebar'; }
-			if(_sidebarCommandTwin == 'viewConsole1Sidebar') { _sidebarCommandTwin = 'viewConsole2Sidebar'; }
+			if(mainSidebar.state.command == 'viewConsole1Sidebar') { mainSidebar.stateForceCommand('viewConsole2Sidebar'); }
+			if(twinSidebar.state.command == 'viewConsole1Sidebar') { twinSidebar.stateForceCommand('viewConsole2Sidebar'); }
 			doConsoleCommand();
 		} else {
 			overlayAid.overlayWindow(window, 'consoleSidebar', null, loadConsole);
-			if(_sidebarCommand == 'viewConsole2Sidebar') { _sidebarCommand = 'viewConsole1Sidebar'; }
-			if(_sidebarCommandTwin == 'viewConsole2Sidebar') { _sidebarCommandTwin = 'viewConsole1Sidebar'; }
+			if(mainSidebar.state.command == 'viewConsole2Sidebar') { mainSidebar.stateForceCommand('viewConsole1Sidebar'); }
+			if(twinSidebar.state.command == 'viewConsole2Sidebar') { twinSidebar.stateForceCommand('viewConsole1Sidebar'); }
 		}
 	});
 };

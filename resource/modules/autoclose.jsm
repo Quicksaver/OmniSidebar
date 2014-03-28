@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.2';
+moduleAid.VERSION = '1.2.3';
 
 // stops closing the sidebar when quickly toggling between sidebars in auto-close mode
 this.autoCloseBeginToggleSidebar = function(e) {
@@ -100,11 +100,9 @@ this.setAutoClose = function(remove) {
 this.dontOpenOnStartup = function() {
 	if(!UNLOADED || UNLOADED == APP_SHUTDOWN) {
 		if(prefAid.autoClose) {
-			_sidebarCommand = null;
 			if(mainSidebar.box && !mainSidebar.closed) { closeHide(mainSidebar); }
 		}
 		if(prefAid.autoCloseTwin) {
-			_sidebarCommandTwin = null;
 			if(twinSidebar.box && !twinSidebar.closed) { closeHide(twinSidebar); }
 		}
 	}
@@ -124,7 +122,7 @@ moduleAid.LOADMODULE = function() {
 };
 
 moduleAid.UNLOADMODULE = function() {
-	observerAid.remove(dontOpenOnStartup);
+	observerAid.remove(dontOpenOnStartup, 'quit-application');
 	
 	setAutoClose(true);
 	

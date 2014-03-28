@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.0.6';
 
 this.toggleAlwaysAddons = function(unloaded) {
 	if(!UNLOADED && !unloaded && prefAid.alwaysAddons) {
@@ -18,8 +18,8 @@ this.toggleAlwaysAddons = function(unloaded) {
 
 this.doAddonCommand = function() {
 	delete holdBroadcasters.addon;
-	if(mainSidebar.loaded && _sidebarCommand == objName+'-viewAddonSidebar') { loadMainSidebar(); }
-	if(twinSidebar.loaded && _sidebarCommandTwin == objName+'-viewAddonSidebar') { loadTwinSidebar(); }
+	if(mainSidebar.loaded && mainSidebar.state.command == objName+'-viewAddonSidebar') { loadMainSidebar(); }
+	if(twinSidebar.loaded && twinSidebar.state.command == objName+'-viewAddonSidebar') { loadTwinSidebar(); }
 };
 
 this.loadAddonMgr = function() {

@@ -1,17 +1,16 @@
-var defaultsVersion = '1.0.22';
+var defaultsVersion = '1.1.0';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
 	NoSync_firstEnabled: true,
-	NoSync_lastcommand: true,
-	NoSync_lastcommandTwin: true,
+	NoSync_lastStateMain: true,
+	NoSync_lastStateTwin: true,
 	
 	minSidebarWidth: 8, // pixels
 	minSpaceBetweenSidebars: 18, // pixels
 	
-	lastcommand: objName+"-viewBlankSidebar",
-	lastcommandTwin: objName+"-viewBlankSidebar-twin",
-	lastcommandSocial: '',
+	lastStateMain: '',
+	lastStateTwin: '',
 	
 	moveSidebars: false,
 	twinSidebar: false,
@@ -75,15 +74,28 @@ var prefList = {
 	firstEnabled: true
 };
 
+function waitForSessionStore(window, delayed) {
+	if(window.__SSi) {
+		window[objName].moduleAid.load(objName, delayed);
+		return;
+	}
+	
+	// Since promises don't exist yet (at least not in their current form) in earlier versions of firefox,
+	// I'm sticking with aSync checks for now to ensure compatibility, but ideally this should be changed to promises in the future.
+	aSync(function() {
+		waitForSessionStore(window, false);
+	}, 100);
+}
+
 function startAddon(window) {
 	// don't load in popup windows set to hide extra chrome
 	var chromeHidden = window.document.documentElement.getAttribute('chromehidden');
 	if(chromeHidden && chromeHidden.indexOf('extrachrome') > -1) { return; }
 	
 	prepareObject(window);
-	window[objName]._sidebarCommand = window.document.getElementById('sidebar-box').getAttribute('sidebarcommand');
-	window[objName]._sidebarCommandTwin = null;
-	window[objName].moduleAid.load(objName, true);
+	
+	// We use SessionStore pretty much everywhere, which might not be yet initialized in this window.
+	waitForSessionStore(window, true);
 }
 
 function stopAddon(window) {

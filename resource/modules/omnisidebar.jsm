@@ -1,6 +1,9 @@
-moduleAid.VERSION = '1.4.3';
+moduleAid.VERSION = '1.5.0';
 
 this.customizing = false;
+
+this._mainState = null;
+this._twinState = null;
 
 this.mainSidebar = {
 	main: true,
@@ -43,9 +46,69 @@ this.mainSidebar = {
 		}
 		return null;
 	},
-	get lastCommand () { return prefAid.lastcommand; },
-	set lastCommand (v) { return prefAid.lastcommand = v; },
-	lastCommandReset: function() { return prefAid.reset('lastcommand'); },
+	get state () {
+		if(!_mainState) {
+			var data = SessionStore.getWindowValue(window, objName+'.mainSidebar');
+			// if this window doesn't have it's own state, use the state from the opener
+			if(!privateBrowsingAid.inPrivateBrowsing || prefAid.keepPrivate) {
+				if(!data && window.opener && !window.opener.closed) {
+					data = SessionStore.getWindowValue(window.opener, objName+'.mainSidebar');
+				}
+				// fallback to a global pref value so the sidebar is rarely reset when it's not supposed to
+				if(!data) {
+					data = prefAid.lastStateMain;
+				}
+			}
+			
+			if(data) {
+				_mainState = JSON.parse(data);
+			} else {
+				_mainState = {
+					command: objName+"-viewBlankSidebar",
+					closed: true
+				};
+				// I can remove this in later versions of firefox, this is just to port from the previous pref to the new system
+				if(Services.prefs.prefHasUserValue('extensions.'+objPathString+'.lastcommand')) {
+					_mainState.command = Services.prefs.getCharPref('extensions.'+objPathString+'.lastcommand');
+					Services.prefs.clearUserPref('extensions.'+objPathString+'.lastcommand');
+				}
+				this.saveState();
+			}
+		}
+		
+		return _mainState;
+	},
+	set state (v) {
+		_mainState = {
+			command: v,
+			closed: !this.box || this.closed
+		};
+		this.saveState();
+	},
+	stateForceClosed: function(v) {
+		this.state;
+		_mainState.closed = v;
+		this.saveState();
+	},
+	stateForceCommand: function(v) {
+		this.state;
+		_mainState.command = v;
+		this.saveState();
+	},
+	saveState: function() {
+		var stringified = JSON.stringify(_mainState);
+		if(!privateBrowsingAid.inPrivateBrowsing || prefAid.keepPrivate) {
+			prefAid.lastStateMain = stringified;
+		}
+		return SessionStore.setWindowValue(window, objName+'.mainSidebar', stringified);
+	},
+	stateReset: function() {
+		_mainState = null;
+		if(!privateBrowsingAid.inPrivateBrowsing || prefAid.keepPrivate) {
+			prefAid.reset('lastStateMain');
+		}
+		SessionStore.deleteWindowValue(window, objName+'.mainSidebar');
+	},
 	get useSwitch () { return prefAid.useSwitch; },
 	get keyset () { return mainKey; },
 	get keysetPanel () { return prefAid.mainKeysetPanel; },
@@ -101,9 +164,69 @@ this.twinSidebar = {
 		}
 		return null;
 	},
-	get lastCommand () { return prefAid.lastcommandTwin; },
-	set lastCommand (v) { return prefAid.lastcommandTwin = v; },
-	lastCommandReset: function() { return prefAid.reset('lastcommandTwin'); },
+	get state () {
+		if(!_twinState) {
+			var data = SessionStore.getWindowValue(window, objName+'.twinSidebar');
+			// if this window doesn't have it's own state, use the state from the opener
+			if(!privateBrowsingAid.inPrivateBrowsing || prefAid.keepPrivate) {
+				if(!data && window.opener && !window.opener.closed) {
+					data = SessionStore.getWindowValue(window.opener, objName+'.twinSidebar');
+				}
+				// fallback to a global pref value so the sidebar is rarely reset when it's not supposed to
+				if(!data) {
+					data = prefAid.lastStateTwin;
+				}
+			}
+			
+			if(data) {
+				_twinState = JSON.parse(data);
+			} else {
+				_twinState = {
+					command: objName+"-viewBlankSidebar-twin",
+					closed: true
+				};
+				// I can remove this in later versions of firefox, this is just to port from the previous pref to the new system
+				if(Services.prefs.prefHasUserValue('extensions.'+objPathString+'.lastcommandTwin')) {
+					_twinState.command = Services.prefs.getCharPref('extensions.'+objPathString+'.lastcommandTwin');
+					Services.prefs.clearUserPref('extensions.'+objPathString+'.lastcommandTwin');
+				}
+				this.saveState();
+			}
+		}
+		
+		return _twinState;
+	},
+	set state (v) {
+		_twinState = {
+			command: v,
+			closed: !this.box || this.closed
+		};
+		this.saveState();
+	},
+	stateForceClosed: function(v) {
+		this.state;
+		_twinState.closed = v;
+		this.saveState();
+	},
+	stateForceCommand: function(v) {
+		this.state;
+		_twinState.command = v;
+		this.saveState();
+	},
+	saveState: function() {
+		var stringified = JSON.stringify(_twinState);
+		if(!privateBrowsingAid.inPrivateBrowsing || prefAid.keepPrivate) {
+			prefAid.lastStateTwin = stringified;
+		}
+		return SessionStore.setWindowValue(window, objName+'.twinSidebar', stringified);
+	},
+	stateReset: function() {
+		_twinState = null;
+		if(!privateBrowsingAid.inPrivateBrowsing || prefAid.keepPrivate) {
+			prefAid.reset('lastStateTwin');
+		}
+		SessionStore.deleteWindowValue(window, objName+'.twinSidebar');
+	},
 	get useSwitch () { return prefAid.useSwitchTwin; },
 	get keyset () { return twinKey; },
 	get keysetPanel () { return prefAid.twinKeysetPanel; },
@@ -130,6 +253,7 @@ this.__defineGetter__('sidebarOnLoad', function() { return window.sidebarOnLoad;
 this.__defineSetter__('sidebarOnLoad', function(v) { return window.sidebarOnLoad = v; });
 this.__defineGetter__('browser', function() { return $('browser'); });
 this.__defineGetter__('FullScreen', function() { return window.FullScreen; });
+this.__defineGetter__('SessionStore', function() { return window.SessionStore; });
 
 this.__defineGetter__('SocialSidebar', function() { return (Services.vc.compare(Services.appinfo.platformVersion, "27.0") >= 0) ? window.SocialSidebar : null; });
 this.__defineGetter__('SocialBroadcaster', function() { return $(objName+'-viewSocialSidebar'); });
@@ -145,6 +269,22 @@ this.__defineGetter__('SocialButton', function() {
 this.__defineGetter__('SocialBrowser', function() {
 	if(!_SocialBrowser) { _SocialBrowser = $('social-sidebar-browser'); }
 	return _SocialBrowser;
+});
+
+this._lastSocialCommand = null;
+this.__defineGetter__('lastSocialCommand', function() {
+	if(!_lastSocialCommand) {
+		_lastSocialCommand = SessionStore.getWindowValue(window, objName+'.lastSocialCommand');
+		// if this window doesn't have it's own state, use the state from the opener
+		if(!_lastSocialCommand && window.opener && !window.opener.closed) {
+			_lastSocialCommand = SessionStore.getWindowValue(window.opener, objName+'.lastSocialCommand');
+		}
+	}
+	return _lastSocialCommand;
+});
+this.__defineSetter__('lastSocialCommand', function(v) {
+	_lastSocialCommand = v;
+	return SessionStore.setWindowValue(window, objName+'.lastSocialCommand', v);
 });
 
 this.__defineGetter__('moveLeft', function() {
@@ -238,6 +378,8 @@ this.closeSidebar = function(bar, forceUnload, broadcaster) {
 	removeAttribute(bar.box, 'origin');
 	bar.splitter.hidden = true;
 	buttonLabels(bar.button);
+	
+	bar.state = bar.state.command;
 };
 
 this.unloadSidebarBrowser = function(browser) {
@@ -253,28 +395,34 @@ this.reUnloadMain = function() {
 
 // Opens the sidebars last opened page if its closed and should be open, to be called on startup
 this.openLast = function(bar) {
-	if(bar.box.getAttribute('sidebarcommand')) {
-		var lastBroadcaster = $(bar.box.getAttribute('sidebarcommand'));
+	for(var b in holdBroadcasters) {
+		if(holdBroadcasters[b] == bar.state.command) {
+			return;
+		}
+	}
+	
+	if(!bar.state.closed) {
+		var lastBroadcaster = $(bar.state.command);
 		if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster' && !trueAttribute(lastBroadcaster, 'disabled')) {
-			if(dispatch(bar.box, { type: 'willOpenLast', detail: { bar: bar } })) {
-				// ensure the focus is on content at startup/opening new window
-				var listener = function(e) {
-					ensureContentIsFocused(bar);
-					e.preventDefault();
-					e.stopPropagation();
-				};
-				listenerAid.add(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
-				
-				if(!toggleSidebar(lastBroadcaster, true, bar.twin)) {
-					listenerAid.remove(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
-				}
-				return true;
+			// ensure the focus is on content at startup/opening new window
+			var listener = function(e) {
+				ensureContentIsFocused(bar);
+				e.preventDefault();
+				e.stopPropagation();
+			};
+			listenerAid.add(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
+			
+			if(!toggleSidebar(lastBroadcaster, true, bar.twin)) {
+				listenerAid.remove(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
 			}
-			return false;
+			return;
 		}
 		closeSidebar(bar);
 	}
-	return false;
+	else if(bar.isOpen
+	&& (bar.state.command == bar.box.getAttribute('sidebarcommand') || (privateBrowsingAid.inPrivateBrowsing && !prefAid.keepPrivate))) {
+		closeSidebar(bar);
+	}
 };
 
 this.ensureContentIsFocused = function(bar) {
@@ -307,7 +455,7 @@ this.setLastCommand = function(bar) {
 			}
 		}
 		if(saveCommand) {
-			bar.lastCommand = bar.box.getAttribute('sidebarcommand');
+			bar.state = bar.box.getAttribute('sidebarcommand');
 		}
 		
 		if(bar.isOpen) {
@@ -315,15 +463,19 @@ this.setLastCommand = function(bar) {
 		}
 		return;
 	}
-	else if(!$(bar.lastCommand)
-	|| $(bar.lastCommand).localName != 'broadcaster'
-	|| trueAttribute($(bar.lastCommand), 'disabled')) {
-		bar.lastCommandReset();
-		closeSidebar(bar);
-		
-		if($(bar.lastCommand) && $(bar.lastCommand).localName == 'broadcaster') {
-			$(bar.lastCommand).removeAttribute('checked');
-			$(bar.lastCommand).removeAttribute('twinSidebar');
+	else {
+		var lastBroadcaster = $(bar.state.command);
+		if(!lastBroadcaster
+		|| lastBroadcaster.localName != 'broadcaster'
+		|| trueAttribute(lastBroadcaster, 'disabled')) {
+			bar.stateReset();
+			closeSidebar(bar);
+			
+			lastBroadcaster = $(bar.state.command);
+			if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster') {
+				lastBroadcaster.removeAttribute('checked');
+				lastBroadcaster.removeAttribute('twinSidebar');
+			}
 		}
 	}
 };
@@ -540,7 +692,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	var bar = (twin) ? twinSidebar : mainSidebar;
 	
 	if(!commandID) {
-		commandID = bar.box.getAttribute("sidebarcommand") || bar.lastCommand;
+		commandID = bar.box.getAttribute("sidebarcommand") || bar.state.command;
 	}
 	else if(typeof(commandID) != "string") {
 		if(!forceOpen) {
@@ -580,7 +732,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 			for(var t in blankTriggers) {
 				if(isAncestor(commandID, blankTriggers[t])) {
 					forceBlank = true;
-					commandID = bar.box.getAttribute("sidebarcommand") || bar.lastCommand;
+					commandID = bar.box.getAttribute("sidebarcommand") || bar.state.command;
 					break;
 				}
 			}
@@ -610,6 +762,8 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		commandID = objName+'-viewBlankSidebar';
 		if(twin) { commandID += '-twin'; }
 		sidebarBroadcaster = $(commandID);
+		
+		if(!sidebarBroadcaster) { return false; } // we're not ready for this yet
 	}
 	
 	if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: {
@@ -630,8 +784,8 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 	&& (	(!twin && trueAttribute(sidebarBroadcaster, 'twinSidebar'))
 		|| (twin && !trueAttribute(sidebarBroadcaster, 'twinSidebar')))) {
 			if(forceBlank) {
-				bar.lastCommandReset();
-				commandID = bar.lastCommand;
+				bar.stateReset();
+				commandID = bar.state.command;
 				sidebarBroadcaster = $(commandID);
 				if(!sidebarBroadcaster) { return false; } // Prevent some unforseen error here
 			} else {
@@ -675,7 +829,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		
 		var origin = SocialBroadcaster.getAttribute('origin');
 		if(canSocial && !origin) {
-			origin = (SocialSidebar.provider) ? SocialSidebar.provider.origin : prefAid.lastcommandSocial;
+			origin = (SocialSidebar.provider) ? SocialSidebar.provider.origin : lastSocialCommand;
 			setAttribute(SocialBroadcaster, 'origin', origin);
 		}
 		
@@ -689,16 +843,16 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		
 		if(canSocial && !SocialSidebar.provider) {
 			// we may have an invalid last social command, so let's reset it
-			if(origin == prefAid.lastcommandSocial) {
-				prefAid.reset('lastcommandSocial');
+			if(origin == lastSocialCommand) {
+				lastSocialCommand = '';
 			}
 			canSocial = false;
 		}
 		
 		// in case we can't, let's reset the command so we don't (or shouldn't) trigger this again
 		if(!canSocial) {
-			if(bar.lastCommand == SocialBroadcaster.id) {
-				bar.lastCommandReset();
+			if(bar.state.command == SocialBroadcaster.id) {
+				bar.stateReset();
 			}
 			return false;
 		}
@@ -882,8 +1036,10 @@ this.restoreSocialSidebar = function() {
 this.toggleSocialSidebar = function() {
 	if((Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && (!prefAid['enabled'] || !prefAid['sidebar.open']))
 	|| !SocialSidebar.canShow || !SocialSidebar.opened || !SocialSidebar.provider) {
-		if((mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id)
-		|| (twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id)) {
+		if(SocialBroadcaster // the overlay might not have loaded yet?
+		&&	((mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id)
+			|| (twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id))
+		) {
 			toggleSidebar(SocialBroadcaster);
 		}
 		return;
@@ -894,7 +1050,7 @@ this.toggleSocialSidebar = function() {
 	
 	setAttribute(SocialBroadcaster, 'sidebartitle', SocialSidebar.provider.name);
 	setAttribute(SocialBroadcaster, 'origin', SocialSidebar.provider.origin);
-	prefAid.lastcommandSocial = SocialSidebar.provider.origin;
+	lastSocialCommand = SocialSidebar.provider.origin;
 	
 	toggleSidebar(SocialBroadcaster, false, bar.twin);
 };
@@ -952,19 +1108,7 @@ this.onMozEnteredFullScreen = function() {
 this.loadMainSidebar = function() {
 	mainSidebar.loaded = true;
 	enableMainSwitcher();
-	
-	if(_sidebarCommand) {
-		for(var b in holdBroadcasters) {
-			if(holdBroadcasters[b] == _sidebarCommand) {
-				return;
-			}
-		}
-	}
-	
-	if(!openLast(mainSidebar) && _sidebarCommand) {
-		toggleSidebar(_sidebarCommand);
-	}
-	_sidebarCommand = null;
+	openLast(mainSidebar);
 	
 	// The first time we install the add-on lets open the sidebar so the user knows something's changed
 	if(prefAid.firstEnabled) {
@@ -985,10 +1129,6 @@ this.unloadMainSidebar = function() {
 			closeSidebar(mainSidebar);
 			return;
 		}
-	}
-	
-	if(!UNLOADED && mainSidebar.isOpen) {
-		_sidebarCommand = mainSidebar.box.getAttribute('sidebarcommand');
 	}
 };
 
@@ -1033,16 +1173,33 @@ moduleAid.LOADMODULE = function() {
 		
 		barSwitchTriggers.__defineGetter__('socialSidebar', function() { return SocialBroadcaster; });
 		
-		// if we start with the social sidebar opened, but neither the main or the twin sidebars had last been opened with it, we close the social sidebar
-		if((Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && prefAid['enabled'] && prefAid['sidebar.open'])
-		|| (Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") >= 0 && SocialSidebar.opened)) {
-			if((prefAid.lastcommand != objName+'-viewSocialSidebar' || (mainSidebar.box && !mainSidebar.closed && mainSidebar.box.getAttribute('sidebarcommand')))
-			&& (!prefAid.twinSidebar || prefAid.lastcommandTwin != objName+'-viewSocialSidebar')) {
+		// if we start with the social sidebar opened, but neither the main or the twin sidebars had last been opened with it and can't open it now, we close the social sidebar
+		if(!privateBrowsingAid.inPrivateBrowsing
+		&&	((Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") < 0 && prefAid['enabled'] && prefAid['sidebar.open'])
+			|| (Services.vc.compare(Services.appinfo.platformVersion, "30.0a1") >= 0 && SocialSidebar.opened))
+		) {
+			// close the social sidebar when it...
+			if(	
+				// can't go to the mainSidebar when it is already open or when it's supposed to open something else after this
+				((mainSidebar.box && !mainSidebar.closed && mainSidebar.box.getAttribute('sidebarcommand'))
+				|| (mainSidebar.state.command != objName+'-viewSocialSidebar' && !mainSidebar.state.closed))
+			&&
+				// can't go to the twinSidebar when it's supposed to open something else after this
+				(!prefAid.twinSidebar || (twinSidebar.state.command != objName+'-viewSocialSidebar' && !twinSidebar.state.closed))
+			) {
 				SocialSidebar.hide();
 			}
-			else if(mainSidebar.box && mainSidebar.closed && (!prefAid.twinSidebar || prefAid.lastcommandTwin != objName+'-viewSocialSidebar')) {
-				setAttribute(mainSidebar.box, 'sidebarcommand', objName+'-viewSocialSidebar');
-				_sidebarCommand = objName+'-viewSocialSidebar';
+			
+			// open the sidebar in the main sidebar if it's not supposed to open in the twin
+			else if(!prefAid.twinSidebar || (twinSidebar.state.command != objName+'-viewSocialSidebar' && !twinSidebar.state.closed)) {
+				mainSidebar.stateForceCommand(objName+'-viewSocialSidebar');
+				mainSidebar.stateForceClosed(false);
+			}
+			
+			// open in the twin
+			else {
+				twinSidebar.stateForceCommand(objName+'-viewSocialSidebar');
+				twinSidebar.stateForceClosed(false);
 			}
 		}
 		
@@ -1067,7 +1224,6 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('twinSidebar', toggleTwin);
 	
 	moduleAid.load('headers');
-	moduleAid.load('privateBrowsing');
 	moduleAid.load('forceOpen');
 	toggleTwin();
 	
@@ -1148,7 +1304,6 @@ moduleAid.UNLOADMODULE = function() {
 	
 	moduleAid.unload('twin');
 	moduleAid.unload('forceOpen');
-	moduleAid.unload('privateBrowsing');
 	moduleAid.unload('headers');
 	
 	prefAid.unlisten('twinSidebar', toggleTwin);
@@ -1183,6 +1338,7 @@ moduleAid.UNLOADMODULE = function() {
 			SocialSidebar.show = this.backups.show;
 		}
 		
+		// to prevent the sidebar from staying open with an empty panel, since the social browser is moved back to its place
 		if(mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewSocialSidebar') { closeSidebar(mainSidebar); }
 	}
 	
