@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -119,13 +119,15 @@ this.menuItemsCheck = function(menu) {
 				// Social sidebar menu entry sometimes appears when it shouldn't
 				menu.childNodes[m].hidden = !mainMenu;
 			} else {
-				menu.childNodes[m].hidden = false;
-				if(menu.childNodes[m].getAttribute('oncommand').indexOf('show') > -1) {
-					var command = ((!UNLOADED) ? objName+'.placeSocialSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
-					setAttribute(menu.childNodes[m], 'oncommand', command);
-				} else {
-					var command = (!UNLOADED) ? objName+'.ensureSocialSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
-					setAttribute(menu.childNodes[m], 'oncommand', command);
+				menu.childNodes[m].hidden = !SocialSidebar.canShow;
+				if(menu.childNodes[m].getAttribute('origin')) {
+					if(menu.childNodes[m].getAttribute('oncommand').indexOf('show') > -1) {
+						var command = ((!UNLOADED) ? objName+'.placeSocialSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
+						setAttribute(menu.childNodes[m], 'oncommand', command);
+					} else {
+						var command = (!UNLOADED) ? objName+'.ensureSocialSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
+						setAttribute(menu.childNodes[m], 'oncommand', command);
+					}
 				}
 			}
 		}
