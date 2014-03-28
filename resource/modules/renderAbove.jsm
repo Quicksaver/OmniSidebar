@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.11';
+moduleAid.VERSION = '1.0.12';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
 
@@ -265,10 +265,10 @@ moduleAid.LOADMODULE = function() {
 	
 	styleAid.load('aboveSheet', 'above');
 	overlayAid.overlayURI("chrome://"+objPathString+"/content/headers.xul", 'renderAboveDocker', null,
-		function() { window[objName].toggleDockerStatus(window[objName].mainSidebar); }
+		function(aWindow) { aWindow[objName].toggleDockerStatus(aWindow[objName].mainSidebar); }
 	);
 	overlayAid.overlayURI("chrome://"+objPathString+"/content/headersTwin.xul", 'renderAboveDockerTwin', null,
-		function() { window[objName].toggleDockerStatus(window[objName].twinSidebar); }
+		function(aWindow) { aWindow[objName].toggleDockerStatus(aWindow[objName].twinSidebar); }
 	);
 	moduleAid.load('autohide');
 	
