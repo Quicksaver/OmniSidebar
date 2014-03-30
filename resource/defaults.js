@@ -1,4 +1,4 @@
-var defaultsVersion = '1.1.0';
+var defaultsVersion = '1.1.1';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -16,27 +16,27 @@ var prefList = {
 	twinSidebar: false,
 	
 	renderabove: false,
-	useSwitch: false,
+	useSwitch: true,
 	autoClose: false,
-	autoHide: false,
+	autoHide: true,
 	toolbar: true,
 	hideheadertitle: false,
 	hideheaderdock: false,
 	hideheaderclose: false,
-	alternatebtns: false,
+	alternatebtns: true,
 	coloricons: 'default',
 	titleButton: true,
 	goButton: false,
 	
 	renderaboveTwin: false,
-	useSwitchTwin: false,
+	useSwitchTwin: true,
 	autoCloseTwin: false,
-	autoHideTwin: false,
+	autoHideTwin: true,
 	toolbarTwin: true,
 	hideheadertitleTwin: false,
 	hideheaderdockTwin: false,
 	hideheadercloseTwin: false,
-	alternatebtnsTwin: false,
+	alternatebtnsTwin: true,
 	coloriconsTwin: 'default',
 	titleButtonTwin: true,
 	goButtonTwin: false,
@@ -45,14 +45,14 @@ var prefList = {
 	transparency: 250,
 	fx: true,
 	forceOpenToolbars: false,
-	forceOpenMenus: false,
+	forceOpenMenus: true,
 	showDelay: 250,
 	hideDelay: 250,
 	switcherAdjust: 0,
 	keepPrivate: false,
 	keepLoaded: false,
 	
-	alwaysAddons: false,
+	alwaysAddons: true,
 	alwaysConsole: false,
 	alwaysDMT: false,
 	alwaysPageInfo: false,
