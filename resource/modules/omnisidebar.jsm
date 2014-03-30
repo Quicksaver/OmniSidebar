@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.1';
+moduleAid.VERSION = '1.5.2';
 
 this.customizing = false;
 
@@ -754,6 +754,7 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		}
 	}
 	
+	var otherBar = (twin) ? mainSidebar : twinSidebar;
 	var sidebarBroadcaster = $(commandID);
 	
 	// if the last command was an add-on's sidebar, and it's been disabled/removed
@@ -791,6 +792,11 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 				if(!toggleSidebar(commandID, false, !twin, true)) { return false; }
 				if(!forceBarSwitch) { return true; }
 			}
+	}
+	
+	// in case the other sidebar is still loaded with the sidebar we want to open, make sure we unload it
+	if(otherBar.box && otherBar.box.getAttribute('sidebarcommand') == sidebarBroadcaster.id) {
+		closeSidebar(otherBar);
 	}
 	
 	if(trueAttribute(sidebarBroadcaster, "checked")
@@ -857,7 +863,6 @@ this.toggleOmniSidebar = function(commandID, forceOpen, twin, forceUnload, force
 		}
 		
 		// this doesn't happen above if we're switching sidebars, because placeSocialSidebar() overrides the twinSidebar attr
-		var otherBar = (twin) ? mainSidebar : twinSidebar;
 		if(otherBar.box && otherBar.box.getAttribute('sidebarcommand') == SocialBroadcaster.id) {
 			closeSidebar(otherBar);
 		}
