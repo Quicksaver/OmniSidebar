@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.0';
+moduleAid.VERSION = '1.5.1';
 
 this.customizing = false;
 
@@ -319,30 +319,31 @@ this.toggleTwin = function() {
 	moduleAid.loadIf('twin', prefAid.twinSidebar);
 };
 
-// Adds 'inSidebar' and "glassStyle" class tags to the opened page for easier costumization
+// Adds 'inSidebar' and 'glassStyle' class tags to the opened page for easier costumization.
+// I may overcall this function, but sometimes the sidebar wouldn't get these classes, and other times there would be a visible lag when applying the classes,
+// so I'm jsut "always" placing these classes to prevent all of this.
 this.setclass = function(bar) {
 	if(!bar) { return; } // failsafe, could happen if a sidebar is closing when this is triggered
+	if(bar.detail) { bar = bar.detail.bar; }
 	
-	if(typeof(bar.contentDocument) != 'undefined') { // Fix for newly created profiles (unloaded sidebars)
+	if(typeof(bar.sidebar.contentDocument) != 'undefined') { // Fix for newly created profiles (unloaded sidebars)
 		if(!UNLOADED) {
-			if(!bar.contentDocument.documentElement.classList.contains('inSidebar')) {
-				bar.contentDocument.documentElement.classList.add('inSidebar');
-			}
-			if(prefAid.glassStyle && !bar.contentDocument.documentElement.classList.contains('glassStyle')) {
-				bar.contentDocument.documentElement.classList.add('glassStyle');
-			} else if(!prefAid.glassStyle && bar.contentDocument.documentElement.classList.contains('glassStyle')) {
-				bar.contentDocument.documentElement.classList.remove('glassStyle');
+			bar.sidebar.contentDocument.documentElement.classList.add('inSidebar');
+			if(prefAid.glassStyle) {
+				bar.sidebar.contentDocument.documentElement.classList.add('glassStyle');
+			} else {
+				bar.sidebar.contentDocument.documentElement.classList.remove('glassStyle');
 			}
 		} else {
-			bar.contentDocument.documentElement.classList.remove('inSidebar');
-			bar.contentDocument.documentElement.classList.remove('glassStyle');
+			bar.sidebar.contentDocument.documentElement.classList.remove('inSidebar');
+			bar.sidebar.contentDocument.documentElement.classList.remove('glassStyle');
 		}
 	}
 };
 
 this.setClasses = function() {
-	setclass(mainSidebar.sidebar);
-	setclass(twinSidebar.sidebar);
+	setclass(mainSidebar);
+	setclass(twinSidebar);
 };
 
 this.closeSidebar = function(bar, forceUnload, broadcaster) {
@@ -457,10 +458,8 @@ this.setLastCommand = function(bar) {
 		if(saveCommand) {
 			bar.state = bar.box.getAttribute('sidebarcommand');
 		}
-		
-		if(bar.isOpen) {
-			aSync(function() { setclass(bar.sidebar); }); // aSync to see if it resolves a problem of not inserting the class tag sometimes
-		}
+		setclass(bar);
+		aSync(function() { setclass(bar); });
 		return;
 	}
 	else {
@@ -1109,6 +1108,7 @@ this.loadMainSidebar = function() {
 	mainSidebar.loaded = true;
 	enableMainSwitcher();
 	openLast(mainSidebar);
+	setclass(mainSidebar);
 	
 	// The first time we install the add-on lets open the sidebar so the user knows something's changed
 	if(prefAid.firstEnabled) {
@@ -1237,6 +1237,10 @@ moduleAid.LOADMODULE = function() {
 	listenerAid.add(window, 'beforecustomization', customize, false);
 	listenerAid.add(window, 'aftercustomization', customize, false);
 	
+	// set our custom classes so the sidebars can be styled properly
+	listenerAid.add(window, 'SidebarFocusedSync', setclass);
+	listenerAid.add(window, 'SidebarFocused', setclass);
+	
 	// can't let the browser be resized below the dimensions of the sidebars
 	browserMinWidth();
 	listenerAid.add(browser, 'resize', browserResized);
@@ -1262,7 +1266,7 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	if(UNLOADED && mainSidebar.isOpen) {
-		setclass(mainSidebar.sidebar);
+		setclass(mainSidebar);
 	}
 	
 	delete blankTriggers.mainCommand;
@@ -1286,6 +1290,9 @@ moduleAid.UNLOADMODULE = function() {
 		listenerAid.remove(window, 'fullscreen', onMozEnteredFullScreen);
 		listenerAid.remove(window, 'MozEnteredDomFullscreen', onMozEnteredFullScreen);
 	}
+	
+	listenerAid.remove(window, 'SidebarFocusedSync', setclass);
+	listenerAid.remove(window, 'SidebarFocused', setclass);
 	
 	listenerAid.remove(window, 'beforecustomization', customize, false);
 	listenerAid.remove(window, 'aftercustomization', customize, false);

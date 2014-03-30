@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 
 this.reUnloadTwin = function() {
 	if(twinSidebar.box.collapsed) {
@@ -44,6 +44,7 @@ this.loadTwinSidebar = function() {
 	twinSidebar.loaded = true;
 	enableTwinSwitcher();
 	openLast(twinSidebar);
+	setclass(twinSidebar);
 };
 
 this.loadedTwin = function() {
