@@ -11,13 +11,12 @@
 		text-shadow: none;
 	}
 	@media not all and (-moz-windows-classic) {
-		@media	(-moz-windows-default-theme) and (-moz-os-version: windows-vista),
-			(-moz-windows-default-theme) and (-moz-os-version: windows-win7) {
-				.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
-					-moz-appearance: none !important;
-					background-color: #EEF3FA !important;
-					border-bottom: none !important;
-				}
+		@media	(-moz-windows-default-theme)) {
+			.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
+				-moz-appearance: none !important;
+				background-color: #EEF3FA !important;
+				border-bottom: none !important;
+			}
 		}
 	}
 	
@@ -56,14 +55,13 @@
 		background: -moz-dialog !important;
 	}
 	
-	@media	(-moz-windows-default-theme) and (-moz-os-version: windows-vista),
-		(-moz-windows-default-theme) and (-moz-os-version: windows-win7) {
-			#addons-page.inSidebar:not(.glassStyle),
-			#places.inSidebar:not(.glassStyle),
-			#Console2Window.inSidebar:not(.glassStyle),
-			#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
-				background: #EEF3FA !important;
-			}
+	@media	(-moz-windows-default-theme) {
+		#addons-page.inSidebar:not(.glassStyle),
+		#places.inSidebar:not(.glassStyle),
+		#Console2Window.inSidebar:not(.glassStyle),
+		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
+			background: #EEF3FA !important;
+		}
 	}
 
 }
