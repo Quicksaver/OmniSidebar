@@ -30,6 +30,10 @@
 					mode="icons"
 					context="toolbar-context-menu"
 					toolboxid="navigator-toolbox"
+					menuAdd="&omnisidebarToolbar.menuAdd;"
+					menuMove="&omnisidebarToolbar.menuMove;"
+					menuRemove="&omnisidebarToolbar.menuRemove;"
+					menuMain="&omnisidebarToolbar.menuMain;"
 					coloricons="default" />
 			</stack>
 			<label id="objName-header-spacer"

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.5.2';
+moduleAid.VERSION = '2.6.1';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -27,6 +27,12 @@ moduleAid.LAZY = true;
 // Elements with a getchildrenof attribute will inherit all the children from the elements specified by the comma-separated list of element ids.
 // Every occurence of (string) objName and (string) objPathString in every attribute in the overlay will be properly replaced with this object's objName and objPathString.
 // I can also overlay other overlays provided they are loaded through the overlayAid object (either from this add-on or another implementing it).
+// Now in Australis, if the toolbar element in the overlays has the following attributes, the system will add the corresponding customize context menu items:
+//	menuAdd : "Add to X" context menu entries
+//	menuMove : "Move to X" context menu entries
+//	menuRemove : "Remove from X" context menu entries
+//	menuMain : "Move to Toolbar" context menu entries, that will move widgets to the nav-bar
+// All of these attributes above can be complemented with the corresponding menuXXXAccesskey attribute.
 // Attention: avoid using "removeelement" in toolbars and widgets; this probably won't play well with Australis as I haven't tested a lot here.
 // 
 // overlayURI(aURI, aWith, beforeload, onload, onunload) - overlays aWith in all windows with aURI
@@ -994,6 +1000,39 @@ this.overlayAid = {
 							}
 							
 							if(Australis) {
+								// remove the context menu entries associated with this toolbar
+								var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
+								var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
+								var paletteMenu = aWindow.document.getElementById('customizationPaletteItemContextMenu');
+								
+								if(action.node._menuEntries.add.str) {
+									action.node._menuEntries.add.palette.remove();
+								}
+								
+								if(action.node._menuEntries.move.str) {
+									contextMenu.removeEventListener('popupshowing', action.node._menuEntries.move.context._popupShowing);
+									panelMenu.removeEventListener('popupshowing', action.node._menuEntries.move.panel._popupShowing);
+									action.node._menuEntries.move.context.remove();
+									action.node._menuEntries.move.panel.remove();
+								}
+								if(action.node._menuEntries.remove.str) {
+									contextMenu.removeEventListener('popupshowing', action.node._menuEntries.remove.context._popupShowing);
+									if(action.node._menuEntries.remove.context.getAttribute('label') == action.node._menuEntries.remove.str) {
+										setAttribute(action.node._menuEntries.remove.context, 'label',
+											action.node._menuEntries.remove.context.getAttribute('originalLabel'));
+										toggleAttribute(action.node._menuEntries.remove.context, 'accesskey',
+											action.node._menuEntries.remove.context.getAttribute('originalAccesskey'),
+											action.node._menuEntries.remove.context.hasAttribute('originalAccesskey'));
+										removeAttribute(action.node._menuEntries.remove.context, 'originalLabel');
+										removeAttribute(action.node._menuEntries.remove.context, 'originalAccesskey');
+									}
+								}
+								if(action.node._menuEntries.main.str) {
+									action.node._menuEntries.main.context.remove();
+								}
+
+								delete action.node._menuEntries;
+								
 								// see note in runRegisterToolbar()
 								if(!action.node._init) {
 									this.tempAppendToolbar(aWindow, action.node);
@@ -1542,6 +1581,155 @@ this.overlayAid = {
 			// This will just do nothing if it has been run already.
 			if(Australis) {
 				this.runRegisterToolbar(aWindow, node);
+				
+				// CUI doesn't add these entries automatically to the menus, they're a nice addition to the UX
+				node._menuEntries = {
+					toolbarID: node.id,
+					add: { str: node.getAttribute('menuAdd'), key: node.getAttribute('menuAddAccesskey') },
+					move: { str: node.getAttribute('menuMove'), key: node.getAttribute('menuMoveAccesskey') },
+					remove: { str: node.getAttribute('menuRemove'), key: node.getAttribute('menuRemoveAccesskey') },
+					main: { str: node.getAttribute('menuMain'), key: node.getAttribute('menuMainAccesskey') },
+					
+					getNode: function(aNode) {
+						aNode = aWindow.gCustomizeMode._getCustomizableChildForNode(aNode);
+						if(aNode && aNode.localName == "toolbarpaletteitem" && aNode.firstChild) {
+							aNode = aNode.firstChild;
+						}
+						return aNode;
+					},
+					
+					getInToolbar: function(aNode, toolbar) {
+						var walk = aNode;
+						while(walk) {
+							if(walk.tagName == 'toolbar') {
+								return (walk == toolbar);
+							}
+							walk = walk.parentNode;
+						}
+						return false;
+					},
+					
+					disableEntry: function(aNode, entry) {
+						aNode = this.getNode(aNode);
+						entry.disabled = 	!aNode
+									|| (aNode.getAttribute('removable') == 'false')
+									|| (	!trueAttribute(aNode, 'removable')
+										&& !aNode.id.startsWith('social-')
+										&& !aNode.id.startsWith('customizableui-special-'));
+					},
+					
+					hideOnSelf: function(aNode, entry) {
+						aNode = this.getNode(aNode);
+						entry.hidden = !aNode || this.getInToolbar(aNode, node);
+					},
+					
+					// because if there's multiple toolbars added through this time, there will also be multiple of these entries,
+					// we only need to show one of these
+					showOnlyFirstMain: function(menu, aNode) {
+						aNode = this.getNode(aNode);
+						var hide = !aNode || this.getInToolbar(aNode, aWindow.document.getElementById('nav-bar'));
+						
+						var mains = menu.getElementsByClassName('customize-context-moveToToolbar');
+						for(var m=0; m<mains.length; m++) {
+							mains[m].hidden = hide;
+							if(!hide) {
+								this.disableEntry(aNode, mains[m]);
+							}
+							hide = true;
+						}
+					},
+					
+					addCommand: function(aNode) {
+						aNode = this.getNode(aNode);
+						aWindow.CustomizableUI.addWidgetToArea(aNode.id, this.toolbarID);
+						if(!aWindow.gCustomizeMode._customizing) {
+							aWindow.CustomizableUI.dispatchToolboxEvent("customizationchange");
+						}
+					}
+				};
+				
+				var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
+				var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
+				var paletteMenu = aWindow.document.getElementById('customizationPaletteItemContextMenu');
+				
+				if(node._menuEntries.add.str) {
+					node._menuEntries.add.palette = aWindow.document.createElement('menuitem');
+					node._menuEntries.add.palette._toolbar = node;
+					setAttribute(node._menuEntries.add.palette, 'class', 'customize-context-addTo-'+node.id);
+					setAttribute(node._menuEntries.add.palette, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
+					setAttribute(node._menuEntries.add.palette, 'label', node._menuEntries.add.str);
+					toggleAttribute(node._menuEntries.add.palette, 'accesskey', node._menuEntries.add.key, node._menuEntries.add.key);
+					paletteMenu.appendChild(node._menuEntries.add.palette);
+				}
+				
+				if(node._menuEntries.move.str) {
+					node._menuEntries.move.context = aWindow.document.createElement('menuitem');
+					node._menuEntries.move.context._toolbar = node;
+					setAttribute(node._menuEntries.move.context, 'class', 'customize-context-moveTo-'+node.id);
+					setAttribute(node._menuEntries.move.context, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
+					setAttribute(node._menuEntries.move.context, 'label', node._menuEntries.move.str);
+					toggleAttribute(node._menuEntries.move.context, 'accesskey', node._menuEntries.move.key, node._menuEntries.move.key);
+					
+					node._menuEntries.move.context._popupShowing = function(e) {
+						if(e.target.id != 'toolbar-context-menu') { return; }
+						node._menuEntries.hideOnSelf(aWindow.document.popupNode, node._menuEntries.move.context);
+						node._menuEntries.disableEntry(aWindow.document.popupNode, node._menuEntries.move.context);
+						node._menuEntries.showOnlyFirstMain(e.target, aWindow.document.popupNode);
+					};
+					
+					contextMenu.insertBefore(node._menuEntries.move.context, contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0]);
+					contextMenu.addEventListener('popupshowing', node._menuEntries.move.context._popupShowing);
+					
+					node._menuEntries.move.panel = aWindow.document.createElement('menuitem');
+					node._menuEntries.move.panel._toolbar = node;
+					setAttribute(node._menuEntries.move.panel, 'class', 'customize-context-moveTo-'+node.id);
+					setAttribute(node._menuEntries.move.panel, 'oncommand', 'this._toolbar._menuEntries.addCommand(document.popupNode);');
+					setAttribute(node._menuEntries.move.panel, 'label', node._menuEntries.move.str);
+					toggleAttribute(node._menuEntries.move.panel, 'accesskey', node._menuEntries.move.key, node._menuEntries.move.key);
+					
+					node._menuEntries.move.panel._popupShowing = function(e) {
+						if(e.target.id != 'customizationPanelItemContextMenu') { return; }
+						node._menuEntries.disableEntry(aWindow.document.popupNode, node._menuEntries.move.panel);
+					};
+					
+					panelMenu.insertBefore(node._menuEntries.move.panel, panelMenu.getElementsByClassName('customize-context-removeFromPanel')[0]);
+					panelMenu.addEventListener('popupshowing', node._menuEntries.move.panel._popupShowing);
+				}
+				
+				if(node._menuEntries.remove.str) {
+					node._menuEntries.remove.context = contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0];
+					node._menuEntries.remove.context._popupShowing = function(e) {
+						if(e.target.id != 'toolbar-context-menu') { return; }
+						var entry = node._menuEntries.remove.context;
+						var aNode = node._menuEntries.getNode(aWindow.document.popupNode);
+						
+						if(isAncestor(aNode, node)) {
+							if(!entry.getAttribute('originalLabel')) {
+								setAttribute(entry, 'originalLabel', entry.getAttribute('label'));
+								toggleAttribute(entry, 'originalAccesskey', entry.getAttribute('accesskey'), entry.hasAttribute('accesskey'));
+							}
+							setAttribute(entry, 'label', node._menuEntries.remove.str);
+							toggleAttribute(entry, 'accesskey', node._menuEntries.remove.key, node._menuEntries.remove.key);
+						} else if(entry.getAttribute('label') == node._menuEntries.remove.str) {
+							setAttribute(entry, 'label', entry.getAttribute('originalLabel'));
+							toggleAttribute(entry, 'accesskey', entry.getAttribute('originalAccesskey'), entry.hasAttribute('originalAccesskey'));
+							removeAttribute(entry, 'originalLabel');
+							removeAttribute(entry, 'originalAccesskey');
+						}
+					};
+					
+					contextMenu.addEventListener('popupshowing', node._menuEntries.remove.context._popupShowing);
+				}
+				
+				if(node._menuEntries.main.str) {
+					node._menuEntries.main.context = aWindow.document.createElement('menuitem');
+					setAttribute(node._menuEntries.main.context, 'class', 'customize-context-moveToToolbar');
+					setAttribute(node._menuEntries.main.context, 'oncommand', 'gCustomizeMode.addToToolbar(document.popupNode)');
+					setAttribute(node._menuEntries.main.context, 'label', node._menuEntries.main.str);
+					toggleAttribute(node._menuEntries.main.context, 'accesskey', node._menuEntries.main.key, node._menuEntries.main.key);
+					
+					contextMenu.insertBefore(node._menuEntries.main.context, contextMenu.firstChild);
+				}
 			}
 			
 			var palette = toolbox.palette;

@@ -40,6 +40,16 @@
 <!ENTITY omnisidebarOptions.title "OmniSidebar Options">
 <!ENTITY omnisidebarOptions.accesskey "r">
 
+<!ENTITY omnisidebarToolbar.menuAdd "Add to Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.menuMove "Move to Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.menuRemove "Remove from Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.menuMain "Move to Toolbar">
+
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Add to Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Move to Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Remove from Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Move to Toolbar">
+
 <!ENTITY omnisidebarButton.label "Sidebar">
 <!ENTITY omnisidebarButtonMain.label "Main Sidebar">
 <!ENTITY omnisidebarButtonTwin.label "Twin Sidebar">
