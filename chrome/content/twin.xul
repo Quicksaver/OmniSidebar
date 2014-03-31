@@ -22,7 +22,6 @@
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewBlankSidebar-twin"
 			label="&BlankSidebar.label;"
-			tooltiptext="&BlankSidebar.tooltip;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.2.0';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -143,41 +143,78 @@ this.menuItemsCheck = function(menu) {
 	}
 };
 
-this.openSidebarMenu = function(e, menu) {
-	if(e.which != 1) { return; }
+this.openSidebarMenu = function(e) {
+	if(e.target) {
+		if(e.which != 1) { return; }
+		var menu = $(e.target.getAttribute('TitleButton'));
+	} else {
+		var menu = e;
+	}
 	
-	$(menu).style.minWidth = $($(menu).getAttribute('target')).clientWidth +'px';
-	$($(menu).getAttribute('target')).setAttribute('active', 'true');
-	$(menu).openPopup($($(menu).getAttribute('target')), 'after_start');
+	var target = $(menu.getAttribute('target'));
 	
-	dispatch($($(menu).getAttribute('target')), { type: 'openSidebarMenu', cancelable: false });
+	setAttribute(target, 'active', 'true');
+	if(!target.getAttribute('TitleButton')) { setAttribute(target, 'TitleButton', 'true'); }
+	
+	// the title needs to be visible to place the menu correctly
+	toggleTitles();
+	menu.style.minWidth = target.clientWidth +'px';
+	
+	menu.openPopup(target, 'after_start');
+	dispatch(target, { type: 'openSidebarMenu', cancelable: false });
 };
 
 this.closeSidebarMenu = function(menu) {
-	$(menu.getAttribute('target')).removeAttribute('active');
+	var bar = (trueAttribute(menu, 'twinSidebar')) ? twinSidebar : mainSidebar;
 	
-	dispatch($(menu.getAttribute('target')), { type: 'closeSidebarMenu', cancelable: false });
+	if(bar.twin) {
+		toggleMenuButtonTwin();
+	} else {
+		toggleMenuButton();
+	}
+	
+	var target = $(menu.getAttribute('target'));
+	target.removeAttribute('active');
+	
+	toggleTitles();
+	
+	dispatch(target, { type: 'closeSidebarMenu', cancelable: false });
+	
+	// the aSync is probably unnecessary, but I think it'll work better and it'll be smoother
+	aSync(function() {
+		if(!bar.box || bar.closed) { return; }
+		var command = bar.box.getAttribute('sidebarcommand');
+		if(command.indexOf(objName+'-viewBlankSidebar') == 0) {
+			toggleSidebar(command, false, bar.twin);
+		}
+	});
 };
 
 this.toggleMenuButton = function() {
 	if(UNLOADED || !prefAid.titleButton) {
-		delete barSwitchTriggers.menuTitle;
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/menus.xul', 'menuTitle');
+		removeAttribute(mainSidebar.title, 'TitleButton');
+		listenerAid.remove(mainSidebar.title, 'click', openSidebarMenu);
 	} else {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/menus.xul', 'menuTitle');
-		barSwitchTriggers.__defineGetter__('menuTitle', function() { return $(objName+'-openSidebarMenu'); });
+		setAttribute(mainSidebar.title, 'TitleButton', objName+'-openSidebarMenu');
+		listenerAid.add(mainSidebar.title, 'click', openSidebarMenu);
 	}
 };
 
 this.toggleMenuButtonTwin = function() {
-	if(UNLOADED || !prefAid.titleButtonTwin) {
-		delete barSwitchTriggers.menuTitleTwin;
-		delete twinTriggers.menuTitleTwin;
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/menusTwin.xul', 'menuTitleTwin');
+	if(UNLOADED || !prefAid.twinSidebar || !prefAid.titleButtonTwin) {
+		removeAttribute(twinSidebar.title, 'TitleButton');
+		listenerAid.remove(twinSidebar.title, 'click', openSidebarMenu);
 	} else {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/menusTwin.xul', 'menuTitleTwin');
-		barSwitchTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
-		twinTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
+		setAttribute(twinSidebar.title, 'TitleButton', objName+'-openTwinSidebarMenu');
+		listenerAid.add(twinSidebar.title, 'click', openSidebarMenu);
+	}
+};
+
+this.blankSidebarMenu = function(e) {
+	var bar = e.detail.bar;
+	
+	if(!bar.closed && bar.box.getAttribute('sidebarcommand').indexOf(objName+'-viewBlankSidebar') == 0) {
+		openSidebarMenu($((bar.twin) ? objName+'-openTwinSidebarMenu' : objName+'-openSidebarMenu'));
 	}
 };
 	
@@ -192,10 +229,15 @@ moduleAid.LOADMODULE = function() {
 	}
 	listenerAid.add(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
 	listenerAid.add($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
+	listenerAid.add(window, 'endToggleSidebar', blankSidebarMenu);
 	
 	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
+	twinTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
+	
 	barSwitchTriggers.__defineGetter__('viewSidebarMenuMenu', function() { return $('viewSidebarMenuMenu'); });
 	barSwitchTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
+	barSwitchTriggers.__defineGetter__('menuTitle', function() { return $(objName+'-openSidebarMenu'); });
+	barSwitchTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
 	
 	prefAid.listen('titleButton', toggleMenuButton);
 	prefAid.listen('titleButtonTwin', toggleMenuButtonTwin);
@@ -206,8 +248,12 @@ moduleAid.LOADMODULE = function() {
 
 moduleAid.UNLOADMODULE = function() {
 	delete twinTriggers.viewTwinSidebarMenuMenu;
+	delete twinTriggers.menuTitleTwin;
+	
 	delete barSwitchTriggers.viewSidebarMenuMenu;
 	delete barSwitchTriggers.viewTwinSidebarMenuMenu;
+	delete barSwitchTriggers.menuTitle;
+	delete barSwitchTriggers.menuTitleTwin;
 	
 	prefAid.unlisten('titleButton', toggleMenuButton);
 	prefAid.unlisten('titleButtonTwin', toggleMenuButtonTwin);
@@ -218,6 +264,7 @@ moduleAid.UNLOADMODULE = function() {
 	}
 	listenerAid.remove(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
 	listenerAid.remove($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
+	listenerAid.remove(window, 'endToggleSidebar', blankSidebarMenu);
 	
 	// ensure the menu is properly reset when unloading
 	menuItemsCheck($('viewSidebarMenu'));

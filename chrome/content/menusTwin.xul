@@ -28,4 +28,13 @@
 		</menu>
 	</menupopup>
 	
+	<popupset id="mainPopupSet">
+		<menupopup id="objName-openTwinSidebarMenu"
+			target="objName-sidebar-title-twin"
+			box="objName-sidebar-box-twin"
+			twinSidebar="true"
+			onpopupshowing="objName.populateSidebarMenu(this);"
+			onpopuphiding="objName.closeSidebarMenu(this);"/>
+	</popupset>
+	
 </overlay>

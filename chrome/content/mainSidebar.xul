@@ -25,7 +25,6 @@
 		
 		<broadcaster id="objName-viewBlankSidebar"
 			label="&BlankSidebar.label;"
-			tooltiptext="&BlankSidebar.tooltip;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"

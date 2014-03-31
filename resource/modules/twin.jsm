@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 
 this.reUnloadTwin = function() {
 	if(twinSidebar.box.collapsed) {
@@ -59,6 +59,11 @@ this.loadedTwin = function() {
 	
 	// Apply initial preferences
 	listenerAid.add(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
+	
+	// there are no events dispatched when the overlay loads, so I have to do this here
+	if(typeof(toggleMenuButtonTwin) != 'undefined') {
+		toggleMenuButtonTwin();
+	}
 	
 	loadTwinSidebar();
 };

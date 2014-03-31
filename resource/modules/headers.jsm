@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+moduleAid.VERSION = '1.0.9';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -21,8 +21,8 @@ this.toggleToolbars = function(noHeaders) {
 };
 
 this.toggleTitles = function(noHeaders) {
-	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && prefAid.hideheadertitle);
-	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && prefAid.hideheadertitleTwin);
+	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && prefAid.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'));
+	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && prefAid.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'));
 	
 	if(!noHeaders) {
 		toggleHeaders();
@@ -61,17 +61,17 @@ this.toggleIconsColor = function() {
 
 this.hideMainHeader = {
 	get toolbar () { return !prefAid.toolbar || !toolbarHasButtons(mainSidebar.toolbar); },
-	get title () { return prefAid.hideheadertitle; },
+	get title () { return prefAid.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'); },
 	get close () { return prefAid.hideheaderclose; }
 };
 this.hideTwinHeader = {
 	get toolbar () { return !prefAid.toolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
-	get title () { return prefAid.hideheadertitleTwin; },
+	get title () { return prefAid.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'); },
 	get close () { return prefAid.hideheadercloseTwin; }
 };
 
 // Handles the headers visibility
-// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons			
+// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons
 this.toggleHeaders = function() {
 	var mainHeader = true;
 	for(var x in hideMainHeader) {
@@ -95,9 +95,7 @@ this.toggleHeaders = function() {
 this.toolbarHasButtons = function(toolbar) {
 	if(toolbar) {
 		for(var i=0; i<toolbar.childNodes.length; i++) {
-			if(!trueAttribute(toolbar.childNodes[i], 'collapsed') && !trueAttribute(toolbar.childNodes[i], 'hidden')) {
-				return true;
-			}
+			if(!toolbar.childNodes[i].collapsed && !toolbar.childNodes[i].hidden) { return true; }
 		}
 	}
 	return false;

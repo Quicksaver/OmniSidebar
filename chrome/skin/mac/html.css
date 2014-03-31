@@ -1,0 +1,7 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+@-moz-document url("about:blank") {
+	
+	.inSidebar:not(.glassStyle) { background: #e2e7ed; }
+	.inSidebar:not(.glassStyle):-moz-window-inactive { background: #e8e8e8; }
+
+}

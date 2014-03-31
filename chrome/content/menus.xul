@@ -38,4 +38,12 @@
 	
 	<menupopup id="viewSidebarMenu" onpopupshowing="objName.menuItemsCheck(this);" />
 	
+	<popupset id="mainPopupSet">
+		<menupopup id="objName-openSidebarMenu"
+			target="sidebar-title"
+			box="sidebar-box"
+			onpopupshowing="objName.populateSidebarMenu(this);"
+			onpopuphiding="objName.closeSidebarMenu(this);"/>
+	</popupset>
+	
 </overlay>
