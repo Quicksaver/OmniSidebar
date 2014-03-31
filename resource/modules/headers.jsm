@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.9';
+moduleAid.VERSION = '1.0.10';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -165,11 +165,27 @@ this.setCustomizeWidth = function() {
 	styleAid.load('customizeWidthURI_'+_UUID, sscode, true);
 };
 
+this.toolbarsCustomized = {
+	onWidgetAdded: function(aWidget, aArea) { this.listener(aWidget, aArea); },
+	onWidgetRemoved: function(aWidget, aArea) { this.listener(aWidget, aArea); },
+	listener: function(aWidget, aArea) {
+		if(customizing) { return; }
+		
+		if((mainSidebar.toolbar && mainSidebar.toolbar.id == aArea) || (twinSidebar.toolbar && twinSidebar.toolbar.id == aArea)) {
+			toggleToolbars();
+		}
+	}
+};
+
 this.toggleHeadersOnLoad = function() {
 	listenerAid.add(window, 'sidebarWidthChanged', setCustomizeWidth, false);
 	
 	listenerAid.add(window, 'beforecustomization', headersCustomize, false);
 	listenerAid.add(window, 'aftercustomization', headersCustomize, false);
+	
+	if(Australis) {
+		CustomizableUI.addListener(toolbarsCustomized);
+	}
 	
 	toggleToolbars(true);
 	toggleTitles(true);
@@ -209,6 +225,7 @@ moduleAid.LOADMODULE = function() {
 	prefAid.listen('coloriconsTwin', toggleIconsColor);
 	
 	twinTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
+	
 	moduleAid.load('menus');
 	moduleAid.load('renderAbove');
 	moduleAid.load('goURI');
@@ -220,7 +237,12 @@ moduleAid.UNLOADMODULE = function() {
 	moduleAid.unload('goURI');
 	moduleAid.unload('renderAbove');
 	moduleAid.unload('menus');
+	
 	delete twinTriggers.twinToolbar;
+	
+	if(Australis) {
+		CustomizableUI.removeListener(toolbarsCustomized);
+	}
 	
 	prefAid.unlisten('toolbar', toggleToolbars);
 	prefAid.unlisten('hideheadertitle', toggleTitles);

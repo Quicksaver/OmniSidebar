@@ -1,4 +1,6 @@
-moduleAid.VERSION = '1.0.0';
+moduleAid.VERSION = '1.0.1';
+
+this.CustomizableUI = null;
 
 this.setSwitcherWidth = function() {
 	var width = (Services.appinfo.OS == 'WINNT') ? 3 : (Services.appinfo.OS == 'Darwin') ? 8 : 4;
@@ -16,6 +18,12 @@ this.setSwitcherWidth = function() {
 };
 
 moduleAid.LOADMODULE = function() {
+	if(Australis) {
+		var scope = {};
+		Cu.import("resource:///modules/CustomizableUI.jsm", scope);
+		CustomizableUI = scope.CustomizableUI;
+	}
+	
 	prefAid.listen('switcherAdjust', setSwitcherWidth);
 	setSwitcherWidth();
 };
