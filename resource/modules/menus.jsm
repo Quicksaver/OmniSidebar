@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -193,20 +193,20 @@ this.closeSidebarMenu = function(menu) {
 this.toggleMenuButton = function() {
 	if(UNLOADED || !prefAid.titleButton) {
 		removeAttribute(mainSidebar.title, 'TitleButton');
-		listenerAid.remove(mainSidebar.title, 'click', openSidebarMenu);
+		listenerAid.remove(mainSidebar.title, 'mousedown', openSidebarMenu);
 	} else {
 		setAttribute(mainSidebar.title, 'TitleButton', objName+'-openSidebarMenu');
-		listenerAid.add(mainSidebar.title, 'click', openSidebarMenu);
+		listenerAid.add(mainSidebar.title, 'mousedown', openSidebarMenu);
 	}
 };
 
 this.toggleMenuButtonTwin = function() {
 	if(UNLOADED || !prefAid.twinSidebar || !prefAid.titleButtonTwin) {
 		removeAttribute(twinSidebar.title, 'TitleButton');
-		listenerAid.remove(twinSidebar.title, 'click', openSidebarMenu);
+		listenerAid.remove(twinSidebar.title, 'mousedown', openSidebarMenu);
 	} else {
 		setAttribute(twinSidebar.title, 'TitleButton', objName+'-openTwinSidebarMenu');
-		listenerAid.add(twinSidebar.title, 'click', openSidebarMenu);
+		listenerAid.add(twinSidebar.title, 'mousedown', openSidebarMenu);
 	}
 };
 
