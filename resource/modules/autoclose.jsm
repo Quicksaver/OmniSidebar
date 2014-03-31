@@ -1,8 +1,8 @@
-moduleAid.VERSION = '1.2.3';
+moduleAid.VERSION = '1.2.4';
 
 // stops closing the sidebar when quickly toggling between sidebars in auto-close mode
 this.autoCloseBeginToggleSidebar = function(e) {
-	if(timerAid['toggleSidebar'+(e.detail.bar.twin ? 'Twin' : '')]) {
+	if(timerAid['autoCloseSidebarToggled'+(e.detail.bar.twin ? 'Twin' : '')]) {
 		e.preventDefault();
 	}
 };
@@ -11,7 +11,7 @@ this.autoCloseEndToggleSidebar = function(e) {
 	var bar = e.detail.bar;
 	
 	if(bar.autoClose) {
-		timerAid.init('toggleSidebar'+(bar.twin ? 'Twin' : ''), function() {}, 100);
+		timerAid.init('autoCloseSidebarToggled'+(bar.twin ? 'Twin' : ''), function() {}, 100);
 	}
 };
 
@@ -26,6 +26,12 @@ this.focusContent = function(e) {
 			bar.sidebar.focus();
 		}
 	}
+};
+
+this.forceAutoClose = function(e) {
+	timerAid.cancel('stopCancelAutoClose');
+	timerAid.cancel('cancelAutoClose');
+	autoClose(e);
 };
 
 this.autoClose = function(e) {
@@ -77,14 +83,17 @@ this.closeHide = function(bar) {
 };
 
 this.setAutoClose = function(remove) {
-	if(!remove
-	&& (prefAid.autoClose || prefAid.autoCloseTwin)) {
+	if(!remove && (prefAid.autoClose || prefAid.autoCloseTwin)) {
 		listenerAid.add(window, 'beginToggleSidebar', autoCloseBeginToggleSidebar, true);
 		listenerAid.add(window, 'endToggleSidebar', autoCloseEndToggleSidebar);
 		listenerAid.add(window, 'SidebarFocused', focusContent);
 		listenerAid.add(window, 'focus', autoClose, true);
 		listenerAid.add(window, 'sidebarAbove', cancelAutoClose);
 		listenerAid.add(window, 'sidebarDocked', cancelAutoClose);
+		
+		// trick to not autoclose when opening tabs in the background sidebar links
+		listenerAid.add(window, 'TabOpen', cancelAutoClose);
+		listenerAid.add(window, 'TabSelect', forceAutoClose);
 	}
 	else {
 		listenerAid.remove(window, 'beginToggleSidebar', autoCloseBeginToggleSidebar, true);
@@ -93,6 +102,8 @@ this.setAutoClose = function(remove) {
 		listenerAid.remove(window, 'focus', autoClose, true);
 		listenerAid.remove(window, 'sidebarAbove', cancelAutoClose);
 		listenerAid.remove(window, 'sidebarDocked', cancelAutoClose);
+		listenerAid.remove(window, 'TabOpen', cancelAutoClose);
+		listenerAid.remove(window, 'TabSelect', forceAutoClose);
 	}
 };
 
