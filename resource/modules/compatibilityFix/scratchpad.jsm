@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+moduleAid.VERSION = '1.0.5';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -44,7 +44,7 @@ this.confirmCloseScratchpad = function(e) {
 	&& e.detail.bar.state.command == objName+'-viewScratchpadSidebar'
 	&& (e.detail.commandID != objName+'-viewScratchpadSidebar' || e.detail.forceReload || !e.detail.forceOpen)) {
 		var inScratchpad = e.detail.bar.sidebar.contentWindow.Scratchpad;
-		if(inScratchpad.dirty) {
+		if(inScratchpad && inScratchpad.dirty) {
 			// We found a sidebar with Scratchpad open that has been changed.
 			// We stop here, we'll continue after the confirm save dialog has closed.
 			e.preventDefault();
