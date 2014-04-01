@@ -54,6 +54,7 @@
 .inSidebar #bookmarks-view,
 .inSidebar #historyTree,
 .inSidebar #downloadView,
+.inSidebar #placesView,
 .inSidebar #updatescan-bookmarks-view,
 .inSidebar #sidebar-notify #feed_tree,
 .inSidebar #bookmarks-content-box {
@@ -63,6 +64,7 @@
 .inSidebar #bookmarks-view,
 .inSidebar #historyTree,
 .inSidebar #downloadView,
+.inSidebar #placesView,
 .inSidebar #updatescan-bookmarks-view,
 .inSidebar #sidebar-notify #feed_tree,
 .inSidebar #view-port-container,

@@ -137,10 +137,9 @@
 		height: 100% !important;
 	}
 	
-	.sidebar-header { min-height: 29px; } /* trying to keep it from jumping around when customizing the toolbar or toying with the other options */
-	
 	.sidebar-browser { background-color: window; }
 	
+	.sidebar-header { min-height: 29px; } /* trying to keep it from jumping around when customizing the toolbar or toying with the other options */
 	.omnisidebar-toolbar { min-height: 28px !important; } /* this won't stick without the !important tag */
 	
 }

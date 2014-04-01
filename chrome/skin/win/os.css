@@ -20,6 +20,13 @@
 		}
 	}
 	
+	@media	(-moz-os-version: windows-xp) {
+		.sidebar-title[TitleButton]:hover,
+		.sidebar-title[TitleButton][active] {
+			padding-top: 2px !important;
+		}
+	}
+	
 	/* Australis */
 	
 	/* I'm not sure if this one is correct here, I'm just copying from firefox source */
@@ -51,8 +58,9 @@
 	url("chrome://console2/content/console2.xul"),
 	url("chrome://browser/content/devtools/webconsole.xul") {
 	
-	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
-		background: -moz-dialog !important;
+	.inSidebar #placesToolbar {
+		border-top: none !important;
+		border-bottom: 1px solid ThreeDShadow !important;
 	}
 	
 	@media	(-moz-windows-default-theme) {
@@ -61,6 +69,15 @@
 		#Console2Window.inSidebar:not(.glassStyle),
 		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
 			background: #EEF3FA !important;
+		}
+		
+		.inSidebar #placesToolbar {
+			border-bottom: none !important;
+		}
+		
+		.inSidebar #downloadsRichListBox {
+			border: none !important;
+			background: none !important;
 		}
 	}
 

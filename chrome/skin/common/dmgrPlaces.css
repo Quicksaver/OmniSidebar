@@ -17,10 +17,8 @@
 		width: 13em !important;
 	}
 	
-	.inSidebar #downloadsRichListBox,
 	.inSidebar #placesToolbar {
 		background: none !important;
-		border: none !important;
 	}
 	
 	.inSidebar.glassStyle richlistitem.download[selected] > .downloadButton.downloadCancel { -moz-image-region: rect(0px, 16px, 16px, 0px) !important; }

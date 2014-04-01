@@ -49,3 +49,11 @@
 	}
 
 }
+
+@-moz-document url("chrome://browser/content/places/places.xul") {
+	
+	.inSidebar:not(.glassStyle) #downloadsRichListBox {
+		border: 1px solid ThreeDShadow !important;
+	}
+
+}
