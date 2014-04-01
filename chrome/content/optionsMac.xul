@@ -7,4 +7,7 @@
 	<checkbox id="accelCheckboxTwin" label="&omnisidebarOptKeyboardShortcut.command;"/>
 	<checkbox id="altCheckboxTwin" label="&omnisidebarOptKeyboardShortcut.option;"/>
 	
+	<checkbox id="checkbox_alternatebtns" hidden="true"/>
+	<checkbox id="checkbox_alternatebtnsTwin" hidden="true"/>
+	
 </overlay>

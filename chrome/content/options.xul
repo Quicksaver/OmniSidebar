@@ -68,7 +68,7 @@
 			<caption><checkbox label="&omnisidebarOpttoolbar.label;" preference="pref-toolbar"/></caption>
 			<vbox align="start">
 				<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
-				<checkbox dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
+				<checkbox id="checkbox_alternatebtns" dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
 				<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
 					<caption label="&omnisidebarOptgroupicons.label;"/>
 					<radiogroup preference="pref-coloricons">
@@ -225,7 +225,7 @@
 			<caption><checkbox dependson="pref-twinSidebar" label="&omnisidebarOpttoolbar.label;" preference="pref-toolbarTwin"/></caption>
 			<vbox align="start">
 				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
-				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
+				<checkbox id="checkbox_alternatebtnsTwin" dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
 				<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
 					<caption label="&omnisidebarOptgroupicons.label;"/>
 					<radiogroup preference="pref-coloriconsTwin">

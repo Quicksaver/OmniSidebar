@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.10';
+moduleAid.VERSION = '1.0.11';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -39,10 +39,13 @@ this.toggleCloses = function(noHeaders) {
 };
 
 this.toggleButtonStyle = function() {
-	toggleAttribute(mainSidebar.toolbar, 'alternatebtns', !UNLOADED && prefAid.alternatebtns);
-	toggleAttribute(twinSidebar.toolbar, 'alternatebtns', !UNLOADED && prefAid.alternatebtnsTwin);
+	// we always "load" alternate styles in mac, mac doesn't actually have an alternate style, but this is so the glass style also loads there
+	var isMac = Services.appinfo.OS == 'Darwin';
 	
-	styleAid.loadIf('alternatebtns', (Australis) ? 'australisButtons' : 'Ff5', false, prefAid.alternatebtns || (prefAid.twinSidebar && prefAid.alternatebtnsTwin));
+	toggleAttribute(mainSidebar.toolbar, 'alternatebtns', isMac || (!UNLOADED && prefAid.alternatebtns));
+	toggleAttribute(twinSidebar.toolbar, 'alternatebtns', isMac || (!UNLOADED && prefAid.alternatebtnsTwin));
+	
+	styleAid.loadIf('alternatebtns', (Australis) ? 'australisButtons' : 'Ff5', false, isMac || prefAid.alternatebtns || (prefAid.twinSidebar && prefAid.alternatebtnsTwin));
 };
 
 this.toggleIconsColor = function() {
