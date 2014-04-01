@@ -43,26 +43,6 @@
 		-moz-padding-end: 3px;
 	}
 	
-	.sidebar-splitter {
-		border: none;
-		min-width: 0 !important;
-		width: 3px;
-		background-color: transparent !important;
-		-moz-margin-start: -3px;
-		position: relative;
-	}
-	
-	#sidebar-splitter.sidebar-splitter:not([movetoright]),
-	#omnisidebar-sidebar-splitter-twin.sidebar-splitter[movetoleft] {
-		-moz-border-start: none;
-		-moz-border-end: 1px solid rgb(169, 183, 201);
-	}
-	#sidebar-splitter.sidebar-splitter[movetoright],
-	#omnisidebar-sidebar-splitter-twin.sidebar-splitter:not([movetoleft]) {
-		-moz-border-start: 1px solid rgb(169, 183, 201);
-		-moz-border-end: none;
-	}
-	
 	/* Hide a bunch of stuff */
 	#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
 	#omnisidebar-sidebar-throbber-twin,
