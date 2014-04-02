@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.6.1';
+moduleAid.VERSION = '2.6.2';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1610,6 +1610,12 @@ this.overlayAid = {
 					},
 					
 					disableEntry: function(aNode, entry) {
+						// if we're customizing and the node is already wrapped, we can quickly check for the wrapper's removable tag
+						if(aNode.nodeName == 'toolbarpaletteitem' && aNode.id.startsWith('wrapper-')) {
+							entry.disabled = !trueAttribute(aNode, 'removable');
+							return;
+						}
+						
 						aNode = this.getNode(aNode);
 						entry.disabled = 	!aNode
 									|| (aNode.getAttribute('removable') == 'false')
