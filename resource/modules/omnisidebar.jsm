@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.2';
+moduleAid.VERSION = '1.5.3';
 
 this.customizing = false;
 
@@ -21,6 +21,7 @@ this.mainSidebar = {
 		return true;
 	},
 	get closed () { return this.box.hidden || this.box.collapsed; },
+	get label () { return stringsAid.get('buttons', (prefAid.twinSidebar) ? 'buttonMainLabel' : 'buttonLabel'); },
 	get splitter () { return $('sidebar-splitter'); },
 	get header () { return $('sidebar-header'); },
 	get box () { return $('sidebar-box'); },
@@ -33,6 +34,7 @@ this.mainSidebar = {
 	get toolbar () { return $(objName+'-Toolbar'); },
 	get toolbarBroadcaster () { return $(objName+'-toggleSideToolbar'); },
 	get stack () { return $(objName+'-stackSidebar'); },
+	get buttonId () { return objName+'-button'; },
 	get button () { return $(objName+'-button'); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
 	get width () {
@@ -139,6 +141,7 @@ this.twinSidebar = {
 		return true;
 	},
 	get closed () { return this.box.hidden || this.box.collapsed; },
+	get label () { return stringsAid.get('buttons', 'buttonTwinLabel'); },
 	get splitter () { return $(objName+'-sidebar-splitter-twin'); },
 	get header () { return $(objName+'-sidebar-header-twin'); },
 	get box () { return $(objName+'-sidebar-box-twin'); },
@@ -151,6 +154,7 @@ this.twinSidebar = {
 	get toolbar () { return $(objName+'-Toolbar-twin'); },
 	get toolbarBroadcaster () { return $(objName+'-toggleSideToolbar-twin'); },
 	get stack () { return $(objName+'-stackSidebar-twin'); },
+	get buttonId () { return objName+'-button-twin'; },
 	get button () { return $(objName+'-button-twin'); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
 	get width () {

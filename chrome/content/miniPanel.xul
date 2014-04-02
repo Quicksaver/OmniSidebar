@@ -4,8 +4,8 @@
 	
 	<popupset id="mainPopupSet">
 		<menupopup id="objName-panel"
-			onpopupshowing="objName.populatePanel();"
-			onpopuphiding="objName.emptyPanel();">
+			onpopupshowing="objName.populatePanel(this);"
+			onpopuphiding="objName.emptyPanel(this);">
 			<vbox>
 				<box id="objName-panel-toolbarContainer"/>
 				<menuseparator id="objName-panel-toolbarSeparator"/>

@@ -12,4 +12,11 @@
 		border: 3px solid rgba(0,0,0,0) !important;
 	}
 	
+	/* toolbarbuttons in panels only have a :hover state, we need our own state for keyboard navigation,
+	damn thing needs !important tag, couldn't get its specificity... */
+	.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover)[hover] {
+		background-color: hsla(210,4%,10%,.08) !important;
+		border-color: hsla(210,4%,10%,.11) !important;
+	}
+	
 }

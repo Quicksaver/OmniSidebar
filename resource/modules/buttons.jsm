@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.7';
+moduleAid.VERSION = '1.0.8';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -66,15 +66,14 @@ this.buttonLabels = function(btn, onLoad) {
 			setButtonModifiers(mainSidebar);
 		}
 		
+		btn.setAttribute('label', mainSidebar.label);
 		if(prefAid.twinSidebar) {
-			btn.setAttribute('label', stringsAid.get('buttons', 'buttonMainLabel'));
 			if(check) {
 				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonMainTooltip'));
 			} else {
 				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonMainCloseTooltip'));
 			}
 		} else {
-			btn.setAttribute('label', stringsAid.get('buttons', 'buttonlabel'));
 			if(check) {
 				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonTooltip'));
 			} else {
@@ -98,7 +97,7 @@ this.buttonLabels = function(btn, onLoad) {
 			setButtonModifiers(twinSidebar);
 		}
 		
-		btn.setAttribute('label', stringsAid.get('buttons', 'buttonTwinLabel'));
+		btn.setAttribute('label', twinSidebar.label);
 		if(check) {
 			btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonTwinTooltip'));
 		} else {

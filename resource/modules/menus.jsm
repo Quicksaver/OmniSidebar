@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.3.0';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -89,17 +89,26 @@ this.setViewToolbarsMenu = function() {
 	cleanMenuToolbars(viewToolbarsMenu);
 };
 
-this.populateSidebarMenu = function(menu) {
+this.populateSidebarMenu = function(menu, useButton) {
 	while(menu.firstChild) {
 		menu.removeChild(menu.firstChild);
 	}
 	
 	// Populate with Social API entries
-	if(SocialSidebar) { SocialSidebar.populateSidebarMenu({ target: viewSidebarMenu }); }
+	if(SocialSidebar && SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: viewSidebarMenu }); }
 	
 	for(var i=0; i<viewSidebarMenu.childNodes.length; i++) {
-		// cloneNode(deep) deep argument is optional and defaults to true in Firefox 13+. For compatibility with Firefox 12-, deep must always be provided.
-		var newItem = viewSidebarMenu.childNodes[i].cloneNode(true);
+		// PanelUI styling is mostly done with toolbarbutton elements, so if I want to use the native styling, I have to use these nodes as well
+		if(useButton && viewSidebarMenu.childNodes[i].localName != 'menuseparator') {
+			var newItem = document.createElement('toolbarbutton');
+			for(var a=0; a<viewSidebarMenu.childNodes[i].attributes.length; a++) {
+				setAttribute(newItem, viewSidebarMenu.childNodes[i].attributes[a].name, viewSidebarMenu.childNodes[i].attributes[a].value);
+			}
+		} else {
+			// cloneNode(deep) deep argument is optional and defaults to true in Firefox 13+. For compatibility with Firefox 12-, deep must always be provided.
+			var newItem = viewSidebarMenu.childNodes[i].cloneNode(true);
+		}
+		
 		if(menu.id) {
 			newItem.id = newItem.id+'_'+menu.id;
 		}
@@ -139,6 +148,11 @@ this.menuItemsCheck = function(menu) {
 			menu.removeChild(menu.childNodes[m]);
 			m--;
 			continue;
+		}
+		
+		// if we're in the mini panel, let's try to style it like a native PanelUI-subView panel
+		if((menu == panelMenu || menu == panelViewMenu) && menu.childNodes[m].localName != 'menuseparator') {
+			menu.childNodes[m].classList.add('subviewbutton');
 		}
 	}
 };
