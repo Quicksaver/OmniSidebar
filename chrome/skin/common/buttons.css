@@ -127,7 +127,7 @@
 	and it would be better if the buttons themselves were made compatible with the new Australis system. */
 	window[omnisidebar_Australis] .omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-text { display: none !important; }
 	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 .toolbarbutton-icon { max-height: 18px !important; }
-	window[omnisidebar_Australis] .sidebar-box:not([glassStyle]) .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px !important; }
+	window[omnisidebar_Australis] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px !important; }
 	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 17px !important; }
 	
 	/* OSB Button */
@@ -183,7 +183,8 @@
 	window[omnisidebar_Australis] .osb-custom-button { list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar.png"); }
 	window[omnisidebar_Australis] .omnisidebar-toolbar:not([coloricons="ff"]) .osb-custom-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
 	
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"]) .osb-custom-button:-moz-lwtheme-brighttext {
+	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] .osb-custom-button:-moz-lwtheme-brighttext,
+	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox) .osb-custom-button:-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 	}
 	
@@ -216,7 +217,8 @@
 	
 	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="color"] .osb-replace-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
 	
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"])) .osb-replace-button:-moz-lwtheme-brighttext {
+	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"]) .osb-replace-button:-moz-lwtheme-brighttext,
+	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox) .osb-replace-button:-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 	}
 	

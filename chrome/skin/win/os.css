@@ -1,7 +1,7 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 	
-	/* Bugfix: classic windows theme replaces sidebar header look when using lwthemes */
+	/* Bugfix: windows theme replaces sidebar header look when using lwthemes */
 	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
 		background-color: -moz-Dialog !important;
 		-moz-appearance: toolbox !important;
@@ -11,7 +11,7 @@
 		text-shadow: none;
 	}
 	@media not all and (-moz-windows-classic) {
-		@media	(-moz-windows-default-theme)) {
+		@media	(-moz-windows-default-theme) {
 			.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
 				-moz-appearance: none !important;
 				background-color: #EEF3FA !important;
