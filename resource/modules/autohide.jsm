@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.13';
+moduleAid.VERSION = '1.1.14';
 
 this.mainAutoHideInit = false;
 this.twinAutoHideInit = false;
@@ -202,7 +202,7 @@ this.onDragExitAll = function() {
 this.hidingSidebar = function(bar) {
 	bar.resizeBox.setAttribute('hiding', 'true');
 	timerAid.init('hidingSidebar'+(bar.twin ? 'Twin' : ''), function() {
-		bar.resizeBox.removeAttribute('hiding');
+		removeAttribute(bar.resizeBox, 'hiding');
 	}, prefAid.hideDelay);
 };
 
