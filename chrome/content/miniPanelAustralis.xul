@@ -29,7 +29,7 @@
 			class="PanelUI-subView objName-panel">
 				<label id="objName-panelView-header" class="panel-subview-header"/>
 				<vbox class="cui-widget-panelview PanelUI-subView">
-					<box id="objName-panelView-toolbarContainer"/>
+					<arrowscrollbox orient="horizontal" id="objName-panelView-toolbarContainer"/>
 					<menuseparator id="objName-panelView-toolbarSeparator"/>
 					<vbox id="objName-panelView-menuContainer"/>
 					<menuseparator id="objName-panelView-menuSeparator"/>

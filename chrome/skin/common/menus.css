@@ -19,4 +19,11 @@
 		border-color: hsla(210,4%,10%,.11) !important;
 	}
 	
+	/* don't show hover style in the arrow buttons of the panelview */
+	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
+		border: none !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	
 }
