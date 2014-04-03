@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.6.3';
+moduleAid.VERSION = '2.6.5';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -178,6 +178,15 @@ this.overlayAid = {
 		if(i === false) { return; }
 		
 		aWindow['_OVERLAYS_'+objName][i].remove = true;
+		
+		// could have already been unloaded by another add-on's overlay
+		if(!aWindow['_OVERLAYS_'+objName][i].loaded) {
+			aWindow['_OVERLAYS_'+objName].splice(i, 1);
+			if(aWindow['_OVERLAYS_'+objName].length == 0) {
+				delete aWindow['_OVERLAYS_'+objName];
+			}
+			return;
+		}
 		
 		overlayAid.scheduleUnOverlay(aWindow, path);
 	},
@@ -1016,13 +1025,13 @@ this.overlayAid = {
 									action.node._menuEntries.move.panel.remove();
 								}
 								if(action.node._menuEntries.remove.str) {
-									contextMenu.removeEventListener('popupshowing', action.node._menuEntries.remove.context._popupShowing);
+									contextMenu.removeEventListener('popupshowing', action.node._menuEntries.remove._popupShowing);
 									if(action.node._menuEntries.remove.context.getAttribute('label') == action.node._menuEntries.remove.str) {
 										setAttribute(action.node._menuEntries.remove.context, 'label',
 											action.node._menuEntries.remove.context.getAttribute('originalLabel'));
 										toggleAttribute(action.node._menuEntries.remove.context, 'accesskey',
-											action.node._menuEntries.remove.context.getAttribute('originalAccesskey'),
-											action.node._menuEntries.remove.context.hasAttribute('originalAccesskey'));
+											action.node._menuEntries.remove.context.hasAttribute('originalAccesskey'),
+											action.node._menuEntries.remove.context.getAttribute('originalAccesskey'));
 										removeAttribute(action.node._menuEntries.remove.context, 'originalLabel');
 										removeAttribute(action.node._menuEntries.remove.context, 'originalAccesskey');
 									}
@@ -1699,7 +1708,7 @@ this.overlayAid = {
 				
 				if(node._menuEntries.remove.str) {
 					node._menuEntries.remove.context = contextMenu.getElementsByClassName('customize-context-removeFromToolbar')[0];
-					node._menuEntries.remove.context._popupShowing = function(e) {
+					node._menuEntries.remove._popupShowing = function(e) {
 						if(e.target.id != 'toolbar-context-menu') { return; }
 						var entry = node._menuEntries.remove.context;
 						var aNode = node._menuEntries.getNode(aWindow.document.popupNode);
@@ -1707,19 +1716,19 @@ this.overlayAid = {
 						if(isAncestor(aNode, node)) {
 							if(!entry.getAttribute('originalLabel')) {
 								setAttribute(entry, 'originalLabel', entry.getAttribute('label'));
-								toggleAttribute(entry, 'originalAccesskey', entry.getAttribute('accesskey'), entry.hasAttribute('accesskey'));
+								toggleAttribute(entry, 'originalAccesskey', entry.hasAttribute('accesskey'), entry.getAttribute('accesskey'));
 							}
 							setAttribute(entry, 'label', node._menuEntries.remove.str);
 							toggleAttribute(entry, 'accesskey', node._menuEntries.remove.key, node._menuEntries.remove.key);
 						} else if(entry.getAttribute('label') == node._menuEntries.remove.str) {
 							setAttribute(entry, 'label', entry.getAttribute('originalLabel'));
-							toggleAttribute(entry, 'accesskey', entry.getAttribute('originalAccesskey'), entry.hasAttribute('originalAccesskey'));
+							toggleAttribute(entry, 'accesskey', entry.hasAttribute('originalAccesskey'), entry.getAttribute('originalAccesskey'));
 							removeAttribute(entry, 'originalLabel');
 							removeAttribute(entry, 'originalAccesskey');
 						}
 					};
 					
-					contextMenu.addEventListener('popupshowing', node._menuEntries.remove.context._popupShowing);
+					contextMenu.addEventListener('popupshowing', node._menuEntries.remove._popupShowing);
 				}
 				
 				if(node._menuEntries.main.str) {
