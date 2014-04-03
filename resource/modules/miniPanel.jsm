@@ -225,6 +225,15 @@ this.panelViewHiding = function(e) {
 	}
 };
 
+this.panelViewToolbarScrolling = function(e) {
+	// there's a madening bug where, if you scroll while it's still scrolling, the box will just scroll back to the start,
+	// so I'm just preventing all extra scrolling while it's still scrolling
+	if(e.detail > 0 && panelViewToolbar._scrollTarget) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
+};
+
 this.loadMiniPanel = function() {
 	panel.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
 	keydownPanel.setupPanel(panel);
@@ -237,11 +246,13 @@ this.loadMiniPanel = function() {
 		
 		listenerAid.add(panelView, 'ViewShowing', panelViewShowing);
 		listenerAid.add(panelView, 'ViewHiding', panelViewHiding);
+		listenerAid.add(panelViewToolbar, 'DOMMouseScroll', panelViewToolbarScrolling, true);
 	}
 };
 
 this.unloadMiniPanel = function() {
 	if(Australis) {
+		listenerAid.remove(panelViewToolbar, 'DOMMouseScroll', panelViewToolbarScrolling, true);
 		listenerAid.remove(panelView, 'ViewShowing', panelViewShowing);
 		listenerAid.remove(panelView, 'ViewHiding', panelViewHiding);
 		

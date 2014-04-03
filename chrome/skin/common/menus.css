@@ -22,8 +22,14 @@
 	/* don't show hover style in the arrow buttons of the panelview */
 	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
 		border: none !important;
-		margin: 0 !important;
-		padding: 0 !important;
+		background: none !important;
+		box-shadow: none !important;
+		margin: 2px !important;
+		padding: 0 2px 5px 2px !important;
+	}
+	
+	#omnisidebar-panelView-toolbarContainer autorepeatbutton[disabled="true"] {
+		opacity: 0 !important;
 	}
 	
 }
