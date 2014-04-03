@@ -49,6 +49,11 @@
 	}
 	
 	window[omnisidebar_Australis] #nav-bar .adequate-size > .toolbarbutton-icon { padding: 2px 6px !important; }
+	
+	/* fix the look of the arrowscrollbuttons a little */
+	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
+		padding: 0 2px 5px 2px !important;
+	}
 
 }
 

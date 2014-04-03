@@ -8,6 +8,10 @@
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-button,
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 {
 		-moz-appearance: none !important;
+		background: none !important;
+		border: none !important;
+		box-shadow: none !important;
+		padding: 3px !important;
 	}
 	
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1[open="true"],

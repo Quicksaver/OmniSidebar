@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.1';
+moduleAid.VERSION = '1.2.2';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -34,8 +34,8 @@ this.shouldFollowCommand = function(trigger, twin, e) {
 		// if the trigger is our button and it's placed in the PanelUI, open its subview panel instead
 		var placement = Australis && CustomizableUI.getPlacementOfWidget(bar.buttonId);
 		if(placement && placement.area == 'PanelUI-contents' && (!trigger || trigger == bar.button)) {
-			// I can't get to it before it opens, so I have to close it afterwards
-			if(Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin') {
+			// I can't get to it before it opens, so I can only close it afterwards
+			if(Services.appinfo.OS != 'WINNT') {
 				var panelContext = $('customizationPanelItemContextMenu');
 				if(panelContext.state != 'closed') {
 					panelContext.hidePopup();

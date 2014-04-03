@@ -1,1 +1,3 @@
-/* placeholder file, mac doesn't have alternate toolbar button styles */
+.omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-icon {
+	margin: 0 !important;
+}
