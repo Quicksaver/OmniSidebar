@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.0';
+moduleAid.VERSION = '1.3.1';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -14,6 +14,16 @@ this.__defineGetter__('viewToolbarsMenuItem', function() { return $(objName+'-to
 this.__defineGetter__('viewToolbarsMenuItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_viewtoolbars-twin'); });
 
 this.__defineGetter__('viewSidebarMenu', function() { return $('viewSidebarMenu'); });
+
+this._ShortcutUtils = null;
+this.__defineGetter__('ShortcutUtils', function() {
+	if(!_ShortcutUtils) {
+		var temp = {};
+		Cu.import("resource://gre/modules/ShortcutUtils.jsm", temp);
+		_ShortcutUtils = temp.ShortcutUtils;
+	}
+	return _ShortcutUtils;
+});
 
 this.doOpenOptions = function() {
 	openOptions();
@@ -153,6 +163,16 @@ this.menuItemsCheck = function(menu) {
 		// if we're in the mini panel, let's try to style it like a native PanelUI-subView panel
 		if((menu == panelMenu || menu == panelViewMenu) && menu.childNodes[m].localName != 'menuseparator') {
 			menu.childNodes[m].classList.add('subviewbutton');
+			
+			// add keyboard shortcuts, as it doesn't display them automatically in panels
+			if(menu.childNodes[m].getAttribute('acceltext')) {
+				setAttribute(menu.childNodes[m], 'shortcut', menu.childNodes[m].getAttribute('acceltext'));
+			} else if(menu.childNodes[m].getAttribute('key')) {
+				var menuKey = $(menu.childNodes[m].getAttribute('key'));
+				if(menuKey) {
+					setAttribute(menu.childNodes[m], 'shortcut', ShortcutUtils.prettifyShortcut(menuKey));
+				}
+			}
 		}
 	}
 };
