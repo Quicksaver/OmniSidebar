@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.5';
+moduleAid.VERSION = '1.1.0';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -36,6 +36,15 @@ this.toggleAlwaysScratchpad = function(unloaded) {
 			ScratchpadManager.openScratchpad = ScratchpadManager._openScratchpad;
 			delete ScratchpadManager._openScratchpad;
 		}
+	}
+	
+	scratchpadAcceltext();
+};
+
+this.scratchpadAcceltext = function() {
+	if($(objName+'-viewScratchpadSidebar')) {
+		var str = $(objName+'-viewScratchpadSidebar').getAttribute('allAcceltext').replace('VK_', '');
+		toggleAttribute($(objName+'-viewScratchpadSidebar'), 'acceltext', prefAid.alwaysScratchpad, str);
 	}
 };
 
@@ -207,7 +216,7 @@ this.willDisableAddonScratchpad = function() {
 moduleAid.LOADMODULE = function() {
 	prefAid.setDefaults({ disable_fastload: false }, 'restartless-restart');
 	
-	overlayAid.overlayWindow(window, 'scratchpad');
+	overlayAid.overlayWindow(window, 'scratchpad', null, scratchpadAcceltext);
 	styleAid.load('scratchpadSidebar', 'scratchpad');
 	
 	prefAid.listen('alwaysScratchpad', toggleAlwaysScratchpad);

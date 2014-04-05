@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<!DOCTYPE window [
+  <!ENTITY % overlayDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+  %overlayDTD;
+  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
+  %browserDTD;
+]>
 <overlay id="scratchpad-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<broadcasterset id="mainBroadcasterSet">
@@ -12,6 +17,7 @@
 			group="sidebar"
 			sidebarurl="chrome://browser/content/devtools/scratchpad.xul"
 			sidebartitle="&scratchpadSidebar.label;"
+			allAcceltext="&acceltext.shift;+&scratchpad.keycode;"
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
 	

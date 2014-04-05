@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<!DOCTYPE window [
+  <!ENTITY % overlayDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+  %overlayDTD;
+  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
+  %browserDTD;
+]>
 <overlay id="addonMgr-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<broadcasterset id="mainBroadcasterSet">
@@ -12,6 +17,8 @@
 			group="sidebar"
 			sidebarurl="about:addons"
 			sidebartitle="&addonsSidebar.label;"
+			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&addons.commandkey;"
+			MacAcceltext="&acceltext.cmd;+&acceltext.shift;+&addons.commandkey;"
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
 	

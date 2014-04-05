@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.6';
+moduleAid.VERSION = '1.1.0';
 
 this.toggleAlwaysAddons = function(unloaded) {
 	if(!UNLOADED && !unloaded && prefAid.alwaysAddons) {
@@ -13,6 +13,15 @@ this.toggleAlwaysAddons = function(unloaded) {
 		]);
 	} else {
 		toCode.revert(window, 'window.BrowserOpenAddonsMgr');
+	}
+	
+	addonMgrAcceltext();
+};
+
+this.addonMgrAcceltext = function() {
+	if($(objName+'-viewAddonSidebar')) {
+		toggleAttribute($(objName+'-viewAddonSidebar'), 'acceltext', prefAid.alwaysAddons,
+			$(objName+'-viewAddonSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext'));
 	}
 };
 
@@ -33,6 +42,7 @@ this.loadAddonMgr = function() {
 	}
 	toggleAttribute($(objName+'-viewAddonSidebar'), 'checked', checked);
 	toggleAttribute($(objName+'-viewAddonSidebar'), 'twinSidebar', twin);
+	addonMgrAcceltext();
 	aSync(function() { setAttribute($(objName+'-addons_sidebar_button'), 'observes', objName+'-viewAddonSidebar'); });
 };
 

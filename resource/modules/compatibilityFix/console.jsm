@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.2.0';
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
@@ -11,7 +11,7 @@ this.consoleBackups = {};
 
 // A lot of this comes from HUDService.toggleBrowserConsole()
 this.registerSidebarConsole = function(e) {
-	if(e.detail.bar.box.getAttribute('sidebarcommand') != 'viewConsoleSidebar') { return; }
+	if(e.detail.bar.box.getAttribute('sidebarcommand') != objName+'-viewConsoleSidebar') { return; }
 	
 	if(!DebuggerServer.initialized) {
 		DebuggerServer.init();
@@ -36,8 +36,8 @@ this.registerSidebarConsole = function(e) {
 };
 
 this.closeConsoleSidebarOnDestroy = function() {
-	if(trueAttribute($('viewConsoleSidebar'), 'checked')) {
-		toggleSidebar('viewConsoleSidebar');
+	if(trueAttribute($(objName+'-viewConsoleSidebar'), 'checked')) {
+		toggleSidebar(objName+'-viewConsoleSidebar');
 	}
 };
 
@@ -47,13 +47,15 @@ this.toggleAlwaysConsole = function(unloaded) {
 			if(!consoleBackups.browserConsole) {
 				consoleBackups.browserConsole = $("Tools:BrowserConsole").getAttribute('oncommand');
 			}
-			setAttribute($("Tools:BrowserConsole"), 'oncommand', 'toggleSidebar("viewConsoleSidebar");');
+			setAttribute($("Tools:BrowserConsole"), 'oncommand', 'toggleSidebar("'+objName+'-viewConsoleSidebar");');
 		} else {
 			if(consoleBackups.browserConsole) {
 				setAttribute($("Tools:BrowserConsole"), 'oncommand', consoleBackups.browserConsole);
 				delete consoleBackups.browserConsole;
 			}
 		}
+		
+		browserConsoleAcceltext();
 		
 		return;
 	}
@@ -82,19 +84,31 @@ this.toggleAlwaysConsole = function(unloaded) {
 	}
 };
 
+this.browserConsoleAcceltext = function() {
+	if($(objName+'-viewConsoleSidebar')) {
+		var str = $(objName+'-viewConsoleSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext');
+		var parts = str.split('+');
+		parts[parts.length-1] = parts[parts.length-1].toUpperCase();
+		str = parts.join('+');
+		toggleAttribute($(objName+'-viewConsoleSidebar'), 'acceltext', prefAid.alwaysConsole, str);
+	}
+};
+
 this.doConsoleCommand = function() {
 	if(Australis) {
 		delete holdBroadcasters.console;
 		
 		// We don't want it to start with the console open
-		if(mainSidebar.state.command == 'viewConsoleSidebar' && !mainSidebar.state.closed) {
+		if(mainSidebar.state.command == objName+'-viewConsoleSidebar' && !mainSidebar.state.closed) {
 			mainSidebar.stateForceClosed(true);
 			loadMainSidebar();
 		}
-		if(twinSidebar.state.command == 'viewConsoleSidebar' && !twinSidebar.state.closed) {
+		if(twinSidebar.state.command == objName+'-viewConsoleSidebar' && !twinSidebar.state.closed) {
 			twinSidebar.stateForceClosed(true);
 			loadTwinSidebar();
 		}
+		
+		browserConsoleAcceltext();
 		
 		return;
 	}
@@ -133,7 +147,7 @@ moduleAid.LOADMODULE = function() {
 	
 	// The browser console was introduced way before Australis, but I don't feel like figuring out exactly on which version it was implemented
 	if(Australis) {
-		holdBroadcasters.console = 'viewConsoleSidebar';
+		holdBroadcasters.console = objName+'-viewConsoleSidebar';
 		
 		styleAid.load('browserConsole', 'browserConsole');
 		overlayAid.overlayWindow(window, 'browserConsole', null, doConsoleCommand);
@@ -181,8 +195,8 @@ moduleAid.UNLOADMODULE = function() {
 	prefAid.unlisten('alwaysConsole', toggleAlwaysConsole);
 	
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? 'viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? 'viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(twinSidebar); }
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? objName+'-viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? objName+'-viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(twinSidebar); }
 		styleAid.unload('browserConsole');
 		styleAid.unload('consoleFix');
 	}

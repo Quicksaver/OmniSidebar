@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+<!DOCTYPE window [
+  <!ENTITY % overlayDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
+  %overlayDTD;
+  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
+  %browserDTD;
+]>
 <overlay id="browserConsole-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<broadcasterset id="mainBroadcasterSet">
-		<broadcaster id="viewConsoleSidebar"
+		<broadcaster id="objName-viewConsoleSidebar"
 			label="&browserConsole.label;"
 			tooltiptext="&browserConsole.tooltip;" 
 			accesskey="&browserConsole.accesskey;"
@@ -12,6 +17,8 @@
 			group="sidebar"
 			sidebarurl="chrome://browser/content/devtools/webconsole.xul"
 			sidebartitle="&browserConsole.label;"
+			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&browserConsoleCmd.commandkey;"
+			MacAcceltext="&acceltext.cmd;+&acceltext.shift;+&browserConsoleCmd.commandkey;"
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
 
@@ -21,12 +28,12 @@
 			label="&browserConsole.label;"
 			tooltiptext="&browserConsole.tooltip;"
 			type="custom"
-			observes="viewConsoleSidebar" />
+			observes="objName-viewConsoleSidebar" />
 	</toolbarpalette>
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="menu_consoleSidebar"
-			observes="viewConsoleSidebar" />
+			observes="objName-viewConsoleSidebar" />
 	</menupopup>
 	
 </overlay>

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.2.0';
 
 this.__defineGetter__('DMPanelLink', function() { return $('downloadsHistory'); });
 this.__defineGetter__('BrowserDownloadsUI', function() { return window.BrowserDownloadsUI; });
@@ -61,13 +61,15 @@ this.toggleAlwaysDMT = function(unloaded) {
 			if(!DMTbackups.BrowserDownloadsUI) {
 				DMTbackups.BrowserDownloadsUI = BrowserDownloadsUI;
 			}
-			BrowserDownloadsUI = function() { toggleSidebar($('viewDmgrPlacesSidebar')); };
+			BrowserDownloadsUI = function() { toggleSidebar($(objName+'-viewDmgrPlacesSidebar')); };
 		} else {
 			if(DMTbackups.BrowserDownloadsUI) {
 				BrowserDownloadsUI = DMTbackups.BrowserDownloadsUI;
 				delete DMTbackups.BrowserDownloadsUI;
 			}
 		}
+		
+		dmgrPlacesAcceltext();
 		
 		return;
 	}
@@ -108,13 +110,23 @@ this.toggleAlwaysDMT = function(unloaded) {
 	}
 };
 
+this.dmgrPlacesAcceltext = function() {
+	if($(objName+'-viewDmgrPlacesSidebar')) {
+		var str = $(objName+'-viewDmgrPlacesSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext');
+		var parts = str.split('+');
+		parts[parts.length-1] = parts[parts.length-1].toUpperCase();
+		str = parts.join('+');
+		toggleAttribute($(objName+'-viewDmgrPlacesSidebar'), 'acceltext', prefAid.alwaysDMT, str);
+	}
+};
+
 this.loadDMT = function() {
 	doDMTCommand();
 	
 	prefAid.listen('alwaysDMT', toggleAlwaysDMT);
 	toggleAlwaysDMT();
 	
-	var broadcaster = (Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) ? 'viewDmgrPlacesSidebar' : 'viewDmSidebar';
+	var broadcaster = (Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) ? objName+'-viewDmgrPlacesSidebar' : 'viewDmSidebar';
 	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == broadcaster;
 	var twin = false;
 	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == broadcaster) {
@@ -122,7 +134,8 @@ this.loadDMT = function() {
 		twin = true;
 	}
 	toggleAttribute($(broadcaster), 'checked', checked);
-	toggleAttribute($(broadcaster), 'twinSidebar', twin);
+	toggleAttribute($(broadcaster), 'twinSidebar', twin);	
+	dmgrPlacesAcceltext();
 };
 
 this.unloadDMT = function() {
@@ -136,12 +149,12 @@ this.doDMTCommand = function() {
 	delete holdBroadcasters.dmp;
 	
 	if(mainSidebar.loaded
-	&& (mainSidebar.state.command == 'viewDmSidebar' || mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmgrPlacesSidebar')) {
+	&& (mainSidebar.state.command == 'viewDmSidebar' || mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == objName+'-viewDmgrPlacesSidebar')) {
 		loadMainSidebar();
 	}
 	
 	if(twinSidebar.loaded
-	&& (twinSidebar.state.command == 'viewDmSidebar' || twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmgrPlacesSidebar')) {
+	&& (twinSidebar.state.command == 'viewDmSidebar' || twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == objName+'-viewDmgrPlacesSidebar')) {
 		loadTwinSidebar();
 	}
 };
@@ -161,7 +174,7 @@ this.loadDmgrFix = function(e) {
 };
 
 this.isDmgrPlacesSidebar = function(bar) {
-	return (bar && bar.box && bar.box.getAttribute('sidebarcommand') == 'viewDmgrPlacesSidebar');
+	return (bar && bar.box && bar.box.getAttribute('sidebarcommand') == objName+'-viewDmgrPlacesSidebar');
 };
 
 this.loadDmgrPlacesFix = function(e) {
@@ -180,13 +193,17 @@ this.loadDmgrPlacesFix = function(e) {
 moduleAid.LOADMODULE = function() {
 	holdBroadcasters.dm = 'viewDmSidebar';
 	holdBroadcasters.dmt = 'viewDmtSidebar';
-	holdBroadcasters.dmp = 'viewDmgrPlacesSidebar';
+	holdBroadcasters.dmp = objName+'-viewDmgrPlacesSidebar';
 	
 	AddonManager.getAddonByID("{F8A55C97-3DB6-4961-A81D-0DE0080E53CB}", function(addon) {
 		if(!addon || !addon.isActive) {
 			if(Services.vc.compare(Services.appinfo.platformVersion, "26.0a1") >= 0) {
-				if(mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmSidebar') { mainSidebar.stateForceCommand('viewDmgrPlacesSidebar'); }
-				if(twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmSidebar') { twinSidebar.stateForceCommand('viewDmgrPlacesSidebar'); }
+				if(mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmSidebar') {
+					mainSidebar.stateForceCommand(objName+'-viewDmgrPlacesSidebar');
+				}
+				if(twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmSidebar') {
+					twinSidebar.stateForceCommand(objName+'-viewDmgrPlacesSidebar');
+				}
 				
 				styleAid.load('dmgrPlaces', 'dmgrPlaces');
 				overlayAid.overlayWindow(window, 'dmgrPlacesSidebar', null, loadDMT, unloadDMT);
@@ -197,14 +214,22 @@ moduleAid.LOADMODULE = function() {
 			
 			listenerAid.add(window, 'SidebarFocusedSync', loadDmgrFix);
 			
-			if(mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == 'viewDmgrPlacesSidebar') { mainSidebar.stateForceCommand('viewDmSidebar'); }
-			if(twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == 'viewDmgrPlacesSidebar') { twinSidebar.stateForceCommand('viewDmSidebar'); }
+			if(mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == objName+'-viewDmgrPlacesSidebar') {
+				mainSidebar.stateForceCommand('viewDmSidebar');
+			}
+			if(twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == objName+'-viewDmgrPlacesSidebar') {
+				twinSidebar.stateForceCommand('viewDmSidebar');
+			}
 			
 			overlayAid.overlayWindow(window, 'dmtSidebar', null, loadDMT, unloadDMT);
 		} else {
 			dmtLoaded = true;
-			if(mainSidebar.state.command == 'viewDmSidebar' || mainSidebar.state.command == 'viewDmgrPlacesSidebar') { mainSidebar.stateForceCommand('viewDmtSidebar'); }
-			if(twinSidebar.state.command == 'viewDmSidebar' || twinSidebar.state.command == 'viewDmgrPlacesSidebar') { twinSidebar.stateForceCommand('viewDmtSidebar'); }
+			if(mainSidebar.state.command == 'viewDmSidebar' || mainSidebar.state.command == objName+'-viewDmgrPlacesSidebar') {
+				mainSidebar.stateForceCommand('viewDmtSidebar');
+			}
+			if(twinSidebar.state.command == 'viewDmSidebar' || twinSidebar.state.command == objName+'-viewDmgrPlacesSidebar') {
+				twinSidebar.stateForceCommand('viewDmtSidebar');
+			}
 			doDMTCommand();
 		}
 	});

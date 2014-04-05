@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "Bookmarks Sidebar">
 <!ENTITY bookmarksSidebar.tooltip "Display your bookmarks in the sidebar">
+<!ENTITY bookmarksSidebar.accesskey "B">
 <!ENTITY historySidebar.label "History Sidebar">
 <!ENTITY historySidebar.tooltip "Display in the sidebar pages you've viewed recently">
+<!ENTITY historySidebar.accesskey "H">
 
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Open the DOM Inspector in the Sidebar">
@@ -19,9 +21,6 @@
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
 
-<!ENTITY bookmarksSidebar.accesskey "B">
-<!ENTITY historySidebar.accesskey "H">
-
 <!ENTITY consoleSidebar.label "Error Console">
 <!ENTITY consoleSidebar.tooltip "Open the Error Console in the Sidebar">
 <!ENTITY consoleSidebar.accesskey "E">
@@ -31,6 +30,12 @@
 <!ENTITY dmtSidebar.label "Downloads">
 <!ENTITY dmtSidebar.tooltip "Display the Progress of Ongoing Downloads">
 <!ENTITY dmtSidebar.accesskey "D">
+
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Shift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "Option">
+<!ENTITY acceltext.cmd "Cmd">
 
 <!ENTITY omnisidebarToolbar.label "Sidebar Toolbar">
 <!ENTITY omnisidebarToolbar.accesskey "S">
