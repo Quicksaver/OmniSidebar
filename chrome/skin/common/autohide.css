@@ -1,14 +1,14 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	.sidebar-box[renderabove][autohide]:not([customizing]) .omnisidebar_resize_box {
+	.sidebar-box[renderabove][autohide]:not([collapsed]):not([customizing]) .omnisidebar_resize_box {
 		opacity: 0;
 		visibility: hidden;
 	}
 	
-	.sidebar-box[renderabove][autohide]:not([dontReHover]) .omnisidebar_resize_box:hover,
-	.sidebar-box[renderabove][autohide] .omnisidebar_resize_box[hover],
-	.sidebar-box[renderabove][autohide]:not([dontReHover]) .omnisidebar_resize_box[hiding] {
+	.sidebar-box[renderabove][autohide]:not([collapsed]):not([dontReHover]) .omnisidebar_resize_box:hover,
+	.sidebar-box[renderabove][autohide]:not([collapsed]) .omnisidebar_resize_box[hover],
+	.sidebar-box[renderabove][autohide]:not([collapsed]):not([dontReHover]) .omnisidebar_resize_box[hiding] {
 		opacity: 1;
 		visibility: visible;
 	}
