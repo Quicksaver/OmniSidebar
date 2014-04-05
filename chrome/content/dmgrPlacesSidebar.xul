@@ -18,7 +18,7 @@
 			sidebarurl="chrome://browser/content/places/places.xul"
 			sidebartitle="&dmtSidebar.label;"
 			WinLinAcceltext="&acceltext.ctrl;+&downloads.commandkey;"
-			MacAcceltext="&acceltext.cmd;+&downloads.commandkey;"
+			MacAcceltext="&acceltext.cmd;&downloads.commandkey;"
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
 	

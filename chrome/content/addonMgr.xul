@@ -18,7 +18,7 @@
 			sidebarurl="about:addons"
 			sidebartitle="&addonsSidebar.label;"
 			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&addons.commandkey;"
-			MacAcceltext="&acceltext.cmd;+&acceltext.shift;+&addons.commandkey;"
+			MacAcceltext="&acceltext.upArrow;&acceltext.cmd;&addons.commandkey;"
 			oncommand="toggleSidebar(this);" />
 	</broadcasterset>
 	

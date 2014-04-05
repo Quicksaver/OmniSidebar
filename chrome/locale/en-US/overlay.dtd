@@ -34,8 +34,9 @@
 <!ENTITY acceltext.ctrl "Ctrl">
 <!ENTITY acceltext.shift "Shift">
 <!ENTITY acceltext.alt "Alt">
-<!ENTITY acceltext.option "Option">
-<!ENTITY acceltext.cmd "Cmd">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 
 <!ENTITY omnisidebarToolbar.label "Sidebar Toolbar">
 <!ENTITY omnisidebarToolbar.accesskey "S">

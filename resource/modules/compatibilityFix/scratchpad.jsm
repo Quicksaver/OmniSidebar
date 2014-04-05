@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.0';
+moduleAid.VERSION = '1.1.1';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -43,7 +43,7 @@ this.toggleAlwaysScratchpad = function(unloaded) {
 
 this.scratchpadAcceltext = function() {
 	if($(objName+'-viewScratchpadSidebar')) {
-		var str = $(objName+'-viewScratchpadSidebar').getAttribute('allAcceltext').replace('VK_', '');
+		var str = $(objName+'-viewScratchpadSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext').replace('VK_', '');
 		toggleAttribute($(objName+'-viewScratchpadSidebar'), 'acceltext', prefAid.alwaysScratchpad, str);
 	}
 };
