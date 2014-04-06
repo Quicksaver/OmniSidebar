@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.3';
+moduleAid.VERSION = '1.5.4';
 
 this.customizing = false;
 
@@ -21,7 +21,7 @@ this.mainSidebar = {
 		return true;
 	},
 	get closed () { return this.box.hidden || this.box.collapsed; },
-	get label () { return stringsAid.get('buttons', (prefAid.twinSidebar) ? 'buttonMainLabel' : 'buttonLabel'); },
+	get label () { return stringsAid.get('buttons', (prefAid.twinSidebar) ? 'buttonMainLabel' : 'buttonlabel'); },
 	get splitter () { return $('sidebar-splitter'); },
 	get header () { return $('sidebar-header'); },
 	get box () { return $('sidebar-box'); },
