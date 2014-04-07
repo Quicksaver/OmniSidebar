@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.2';
+moduleAid.VERSION = '1.1.3';
 moduleAid.LAZY = true;
 
 // keydownPanel - 	Panel elements don't support keyboard navigation by default; this object fixes that.
@@ -87,6 +87,7 @@ this.keydownPanel = {
 						var attr = (items[active].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
 						if(attr == 'focused') {
 							items[active].blur();
+							items[active].style.MozUserFocus = '';
 						}
 						removeAttribute(items[active], attr);
 					}
@@ -111,6 +112,7 @@ this.keydownPanel = {
 					var attr = (items[active].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
 					setAttribute(items[active], attr, 'true');
 					if(attr == 'focused') {
+						items[active].style.MozUserFocus = 'normal';
 						items[active].focus();
 					}
 					
@@ -123,6 +125,11 @@ this.keydownPanel = {
 						if(trueAttribute(items[i], attr)) {
 							e.preventDefault();
 							e.stopPropagation();
+							if(attr == 'focused') {
+								items[i].blur();
+								items[i].style.MozUserFocus = '';
+							}
+							
 							items[i].doCommand();
 							keydownPanel.closeSubView();
 							break;
@@ -142,6 +149,7 @@ this.keydownPanel = {
 				var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
 				if(attr == 'focused') {
 					items[i].blur();
+					items[i].style.MozUserFocus = '';
 				}
 				removeAttribute(items[i], attr);
 			}
