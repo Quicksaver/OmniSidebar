@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+moduleAid.VERSION = '1.1.2';
 moduleAid.LAZY = true;
 
 // keydownPanel - 	Panel elements don't support keyboard navigation by default; this object fixes that.
@@ -76,7 +76,7 @@ this.keydownPanel = {
 					var items = panel.querySelectorAll('menuitem,toolbarbutton.subviewbutton');
 					var active = -1;
 					for(var i=0; i<items.length; i++) {
-						var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'hover';
+						var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
 						if(trueAttribute(items[i], attr)) {
 							active = i;
 							break;
@@ -84,7 +84,10 @@ this.keydownPanel = {
 					}
 					
 					if(items[active]) {
-						var attr = (items[active].localName == 'menuitem') ? '_moz-menuactive' : 'hover';
+						var attr = (items[active].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
+						if(attr == 'focused') {
+							items[active].blur();
+						}
 						removeAttribute(items[active], attr);
 					}
 					
@@ -105,15 +108,18 @@ this.keydownPanel = {
 							break;
 					}
 					
-					var attr = (items[active].localName == 'menuitem') ? '_moz-menuactive' : 'hover';
+					var attr = (items[active].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
 					setAttribute(items[active], attr, 'true');
+					if(attr == 'focused') {
+						items[active].focus();
+					}
 					
 					break;
 				
 				case e.DOM_VK_RETURN:
 					var items = panel.querySelectorAll('menuitem,toolbarbutton.subviewbutton');
 					for(var i=0; i<items.length; i++) {
-						var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'hover';
+						var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
 						if(trueAttribute(items[i], attr)) {
 							e.preventDefault();
 							e.stopPropagation();
@@ -133,7 +139,10 @@ this.keydownPanel = {
 			listenerAid.remove(panel, 'mousemove', panel._mouseOverPanel);
 			var items = panel.querySelectorAll('menuitem,toolbarbutton.subviewbutton');
 			for(var i=0; i<items.length; i++) {
-				var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'hover';
+				var attr = (items[i].localName == 'menuitem') ? '_moz-menuactive' : 'focused';
+				if(attr == 'focused') {
+					items[i].blur();
+				}
 				removeAttribute(items[i], attr);
 			}
 		};

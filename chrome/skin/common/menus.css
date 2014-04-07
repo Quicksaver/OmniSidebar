@@ -14,7 +14,10 @@
 	
 	/* toolbarbuttons in panels only have a :hover state, we need our own state for keyboard navigation,
 	damn thing needs !important tag, couldn't get its specificity... */
-	.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover)[hover] {
+	.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover)[focused] {
+		-moz-user-focus: normal !important;
+	}
+	.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover):focus {
 		background-color: hsla(210,4%,10%,.08) !important;
 		border-color: hsla(210,4%,10%,.11) !important;
 	}
