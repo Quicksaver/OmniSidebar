@@ -115,11 +115,11 @@
 	
 	/* General toolbar buttons */
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar .toolbarbutton-1 {
+	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 {
 		margin: 0 2px 0 2px !important;
 	}
-	window[omnisidebar_Australis] .omnisidebar-toolbar .toolbarbutton-1[checked="true"],
-	window[omnisidebar_Australis] .omnisidebar-toolbar .toolbarbutton-1:active {
+	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1[checked="true"],
+	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1:active {
 		margin: 0 2px 0 2px !important;
 	}
 	
