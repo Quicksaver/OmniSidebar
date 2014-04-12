@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.4';
+moduleAid.VERSION = '1.5.5';
 
 this.customizing = false;
 
@@ -1022,6 +1022,41 @@ this.placeSocialSidebar = function(el, twin) {
 			twinTriggers.__defineGetter__('SocialButton', function() { return SocialButton; });
 		} else {
 			delete twinTriggers.SocialButton;
+		}
+		
+		// we need to make sure that un/docking the sidebar won't leave the SocialBrowser in limbo
+		var aboveURI = (bar.twin) ? 'renderAboveTwin' : 'renderAbove';
+		var otherURI = (bar.twin) ? 'renderAbove' : 'renderAboveTwin';
+		for(var o=0; o<window['_OVERLAYS_'+objName].length; o++) {
+			var overlay = window['_OVERLAYS_'+objName][o];
+			if(!overlay.loaded) { continue; }
+			
+			// if this is the sheet of this sidebar, make sure it has the social sidebar traceback
+			if(overlay.uri == 'chrome://'+objPathString+'/content/'+aboveURI+'.xul') {
+				for(var t=0; t<overlay.traceBack.length; t++) {
+					if(overlay.traceBack[t].action == 'appendChild' && overlay.traceBack[t].node == bar.sidebar) {
+						if(!overlay.traceBack[t+1] || overlay.traceBack[t+1].action != 'appendChild' || overlay.traceBack[t+1].node == SocialBrowser) {
+							overlay.traceBack.splice(t+1, 0, {
+								action: 'appendChild',
+								node: SocialBrowser,
+								nodeID: SocialBrowser.id,
+								originalParent: bar.box,
+								originalParentID: bar.box.id
+							});
+						}
+						break;
+					}
+				}
+			}
+			
+			// if this is the sheet of the other sidebar, make sure the traceback doesn't have the social sidebar
+			else if(overlay.uri == 'chrome://'+objPathString+'/content/'+otherURI+'.xul') {
+				for(var t=0; t<overlay.traceBack.length; t++) {
+					if(overlay.traceBack[t].action == 'appendChild' && overlay.traceBack[t].node == SocialBrowser) {
+						overlay.traceBack.splice(t, 1);
+					}
+				}
+			}
 		}
 	}
 	
