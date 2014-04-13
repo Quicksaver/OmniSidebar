@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.6';
+moduleAid.VERSION = '1.5.7';
 
 this.customizing = false;
 
@@ -1178,7 +1178,11 @@ this.unloadMainSidebar = function() {
 
 moduleAid.LOADMODULE = function() {
 	if(Australis) {
-		customizing = trueAttribute(document.documentElement, 'customizing');
+		customizing =	trueAttribute(document.documentElement, 'customizing')
+				// this means that the window is still opening and the first tab will open customize mode
+				|| (	window.gBrowser.mCurrentBrowser
+					&& window.gBrowser.mCurrentBrowser.__SS_restore_data
+					&& window.gBrowser.mCurrentBrowser.__SS_restore_data.url == 'about:customizing');
 	}
 	
 	// This will be moved here in the future, when Australis hits release
