@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.3.1';
+moduleAid.VERSION = '1.3.2';
 
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
@@ -225,7 +225,7 @@ this.closeSidebarMenu = function(menu) {
 };
 
 this.toggleMenuButton = function() {
-	if(UNLOADED || !prefAid.titleButton) {
+	if(UNLOADED || window.closed || window.willClose || !prefAid.titleButton) {
 		removeAttribute(mainSidebar.title, 'TitleButton');
 		listenerAid.remove(mainSidebar.title, 'mousedown', openSidebarMenu);
 	} else {
@@ -235,7 +235,7 @@ this.toggleMenuButton = function() {
 };
 
 this.toggleMenuButtonTwin = function() {
-	if(UNLOADED || !prefAid.twinSidebar || !prefAid.titleButtonTwin) {
+	if(UNLOADED || window.closed || window.willClose || !prefAid.twinSidebar || !prefAid.titleButtonTwin) {
 		removeAttribute(twinSidebar.title, 'TitleButton');
 		listenerAid.remove(twinSidebar.title, 'mousedown', openSidebarMenu);
 	} else {
