@@ -1,4 +1,4 @@
-var defaultsVersion = '1.1.1';
+var defaultsVersion = '1.1.2';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -168,7 +168,9 @@ function onStartup(aReason) {
 
 function onShutdown(aReason) {
 	// Placing these here prevents an error which I couldn't figure out why the closeCustomize() in overlayAid weren't already preventing.
-	closeCustomize();
+	if(!Australis) {
+		closeCustomize();
+	}
 	
 	// remove the add-on from all windows
 	windowMediator.callOnAll(stopAddon, null, null, true);

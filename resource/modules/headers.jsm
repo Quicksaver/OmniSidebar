@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.11';
+moduleAid.VERSION = '1.0.12';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -105,7 +105,7 @@ this.toolbarHasButtons = function(toolbar) {
 };
 
 this.headersCustomize = function(e) {
-	customizing = e.type == 'beforecustomization';
+	customizing = (e && e.type == 'beforecustomization') || (!e && customizing);
 	
 	hideIt($(objName+'-sidebar-customizingLabel'), customizing);
 	hideIt($(objName+'-sidebar-customizingLabel-twin'), customizing);
@@ -185,6 +185,7 @@ this.toggleHeadersOnLoad = function() {
 	
 	listenerAid.add(window, 'beforecustomization', headersCustomize, false);
 	listenerAid.add(window, 'aftercustomization', headersCustomize, false);
+	headersCustomize();
 	
 	if(Australis) {
 		CustomizableUI.addListener(toolbarsCustomized);
@@ -244,6 +245,7 @@ moduleAid.UNLOADMODULE = function() {
 	delete twinTriggers.twinToolbar;
 	
 	if(Australis) {
+		overlayAid.removeOverlayWindow(window, 'customize');
 		CustomizableUI.removeListener(toolbarsCustomized);
 	}
 	

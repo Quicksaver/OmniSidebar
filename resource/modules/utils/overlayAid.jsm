@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.6.5';
+moduleAid.VERSION = '2.7.0';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -398,7 +398,7 @@ this.overlayAid = {
 							
 							var palette = aWindow.document.getElementById(node.getAttribute('toolboxid')).palette;
 							if(!palette) { continue; }
-							closeCustomize();
+							if(!Australis) { closeCustomize(); }
 							
 							var currentset = node.getAttribute('currentset').split(',');
 							currentset_loop: for(var c=0; c<currentset.length; c++) {
@@ -810,8 +810,14 @@ this.overlayAid = {
 			if(action.paletteID && !action.palette) {
 				var toolbox = aWindow.document.querySelectorAll('toolbox');
 				for(var a=0; a<toolbox.length; a++) {
-					if(toolbox[a].palette && toolbox[a].palette.id == action.paletteID) {
-						action.palette = toolbox[a].palette;
+					if(toolbox[a].palette) {
+						if(toolbox[a].palette.id == action.paletteID) {
+							action.palette = toolbox[a].palette;
+						} else if(Australis
+						&& toolbox[a].palette == aWindow.gCustomizeMode.visiblePalette
+						&& aWindow.gCustomizeMode._stowedPalette.id == action.paletteID) {
+							action.palette = aWindow.gCustomizeMode._stowedPalette;
+						}
 						
 						if(!action.node && action.nodeID) {
 							for(var c=0; c<action.palette.childNodes.length; c++) {
@@ -837,7 +843,7 @@ this.overlayAid = {
 						if(action.node) {
 							if(action.originalParent) {
 								var sibling = action.originalParent.firstChild
-								if(sibling.nodeName == 'preferences') {
+								if(sibling && sibling.nodeName == 'preferences') {
 									sibling = sibling.nextSibling;
 								}
 								var browserList = this.swapBrowsers(aWindow, action.node);
@@ -937,7 +943,7 @@ this.overlayAid = {
 						break;
 					
 					case 'appendButton':
-						closeCustomize();
+						if(!Australis) { closeCustomize(); }
 						
 						if(action.node) {
 							if(!Australis || (action.node.parentNode && action.node.parentNode.nodeName == 'toolbarpalette')) {
@@ -952,7 +958,7 @@ this.overlayAid = {
 						break;
 					
 					case 'removeButton':
-						closeCustomize();
+						if(!Australis) { closeCustomize(); }
 						
 						if(action.node && action.palette) {
 							action.node = action.palette.appendChild(action.node);
@@ -993,7 +999,7 @@ this.overlayAid = {
 						break;
 					
 					case 'addToolbar':
-						closeCustomize();
+						if(!Australis) { closeCustomize(); }
 						
 						if(action.node) {
 							if(action.toolboxid) {
@@ -1009,6 +1015,8 @@ this.overlayAid = {
 							}
 							
 							if(Australis) {
+								aWindow.removeEventListener('unload', action.node._menuEntries.onClose);
+								
 								// remove the context menu entries associated with this toolbar
 								var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
 								var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
@@ -1042,15 +1050,23 @@ this.overlayAid = {
 
 								delete action.node._menuEntries;
 								
-								// see note in runRegisterToolbar()
-								if(!action.node._init) {
-									this.tempAppendToolbar(aWindow, action.node);
-								}
-								
-								aWindow.CustomizableUI.unregisterArea(action.node.id);
-								
-								if(this.tempAppend) {
-									this.tempRestoreToolbar();
+								if(aWindow.CustomizableUI.getAreaType(action.node.id)) {
+									// see note in runRegisterToolbar(), we need this in all toolbars as well
+									windowMediator.callOnAll(function(bWindow) {
+										var wToolbar = bWindow.document.getElementById(action.node.id);
+										if(wToolbar && !wToolbar._init) {
+											overlayAid.tempAppendToolbar(bWindow, wToolbar);
+										}
+									}, aWindow.document.documentElement.getAttribute('windowtype'));
+									
+									aWindow.CustomizableUI.unregisterArea(action.node.id);
+									
+									windowMediator.callOnAll(function(bWindow) {
+										var wToolbar = bWindow.document.getElementById(action.node.id);
+										if(wToolbar) {
+											overlayAid.tempRestoreToolbar(wToolbar);
+										}
+									}, aWindow.document.documentElement.getAttribute('windowtype'));
 								}
 								break;
 							}
@@ -1178,9 +1194,13 @@ this.overlayAid = {
 				if(!node) {
 					var toolbox = aDocument.querySelectorAll('toolbox');
 					toolbox_loop: for(var a=0; a<toolbox.length; a++) {
-						for(var b=0; b<toolbox[a].palette.childNodes.length; b++) {
-							if(toolbox[a].palette.childNodes[b].id == this.id) {
-								node = toolbox[a].palette.childNodes[b];
+						var palette = toolbox[a].palette;
+						if(toolbox[a].palette && toolbox[a].palette == aDocument.defaultView.gCustomizeMode.visiblePalette) {
+							palette = aDocument.defaultView.gCustomizeMode._stowedPalette;
+						}
+						for(var b=0; b<palette.childNodes.length; b++) {
+							if(palette.childNodes[b].id == this.id) {
+								node = palette.childNodes[b];
 								break toolbox_loop;
 							}
 						}
@@ -1202,7 +1222,7 @@ this.overlayAid = {
 			data.onWidgetAfterDOMChange = function(aNode) {
 				if(aNode.id == this.id
 				&& !aNode.parentNode
-				&& !trueAttribute(aNode.ownerDocument.documentElement, 'customizing') // here's to hoping we never unregister a toolbar while in customziation mode
+				&& !trueAttribute(aNode.ownerDocument.documentElement, 'customizing') // it always ends up in the palette in this case
 				&& this.palette) {
 					this.palette.appendChild(aNode);
 				}
@@ -1384,22 +1404,30 @@ this.overlayAid = {
 			if(overlayNode.nodeName == 'toolbarpalette') {
 				var toolbox = aWindow.document.querySelectorAll('toolbox');
 				for(var a=0; a<toolbox.length; a++) {
-					if(toolbox[a].palette && toolbox[a].palette.id == overlayNode.id) {
+					var palette = toolbox[a].palette;
+					if(Australis && palette
+					&& aWindow.gCustomizeMode._stowedPalette
+					&& aWindow.gCustomizeMode._stowedPalette.id == overlayNode.id
+					&& palette == aWindow.gCustomizeMode.visiblePalette) {
+						palette = aWindow.gCustomizeMode._stowedPalette;
+					}
+					
+					if(palette && palette.id == overlayNode.id) {
 						buttons_loop: for(var e=0; e<overlayNode.childNodes.length; e++) {
 							var button = overlayNode.childNodes[e];
 							if(button.id) {
 								var existButton = aWindow.document.getElementById(button.id);
 								
 								// If it's a placeholder created by us to deal with CustomizableUI, just use it.
-								if(existButton && trueAttribute(existButton, 'CUI_placeholder')) {
-									this.reAppendPlaceholder(aWindow, existButton, toolbox[a].palette);
+								if(trueAttribute(existButton, 'CUI_placeholder')) {
+									this.reAppendPlaceholder(aWindow, existButton, palette);
 									continue buttons_loop;
 								}
 								
 								// change or remove the button on the toolbar if it is found in the document
 								if(existButton) {
 									if(trueAttribute(button, 'removeelement')) {
-										this.removeButton(aWindow, toolbox[a].palette, existButton);
+										this.removeButton(aWindow, palette, existButton);
 										continue buttons_loop;
 									}
 									
@@ -1413,10 +1441,10 @@ this.overlayAid = {
 								}
 								
 								// change or remove in the palette if it exists there
-								for(var b=0; b<toolbox[a].palette.childNodes.length; b++) {
-									if(toolbox[a].palette.childNodes[b].id == button.id) {
+								for(var b=0; b<palette.childNodes.length; b++) {
+									if(palette.childNodes[b].id == button.id) {
 										if(trueAttribute(button, 'removeelement')) {
-											this.removeButton(aWindow, toolbox[a].palette, toolbox[a].palette.childNodes[b]);
+											this.removeButton(aWindow, palette, palette.childNodes[b]);
 											continue buttons_loop;
 										}
 										
@@ -1424,7 +1452,7 @@ this.overlayAid = {
 											// Why bother, id is the same already
 											if(button.attributes[c].name == 'id') { continue; }
 											
-											this.setAttribute(aWindow, toolbox[a].palette.childNodes[b], button.attributes[c]);
+											this.setAttribute(aWindow, palette.childNodes[b], button.attributes[c]);
 										}
 										continue buttons_loop;
 									}
@@ -1438,7 +1466,7 @@ this.overlayAid = {
 								
 								// add the button if not found either in a toolbar or the palette
 								button = aWindow.document.importNode(button, true); // Firefox 9- deep argument is mandatory
-								this.appendButton(aWindow, toolbox[a].palette, button);
+								this.appendButton(aWindow, palette, button);
 							}
 						}
 						break;
@@ -1532,32 +1560,33 @@ this.overlayAid = {
 	runRegisterToolbar: function(aWindow, node) {
 		if(!node._init) {
 			this.tempAppendToolbar(aWindow, node);
-			this.tempRestoreToolbar();
+			this.tempRestoreToolbar(node);
 		}
 	},
 	
-	tempAppend: null,
 	tempAppendToolbar: function(aWindow, node) {
-		if(this.tempAppend) {
+		if(node.tempAppend) {
 			Cu.reportError('tempAppend already exists!');
 			return;
 		}
 		
-		this.tempAppend = {
+		node.tempAppend = {
 			parent: node.parentNode,
 			sibling: node.nextSibling,
 			container: aWindow.document.createElement('box')
 		};
 		
-		setAttribute(this.tempAppend.container, 'style', 'position: fixed; top: 4000px; left: 4000px; opacity: 0.001;');
-		this.tempAppend.container = aWindow.document.documentElement.appendChild(this.tempAppend.container);
+		setAttribute(node.tempAppend.container, 'style', 'position: fixed; top: 4000px; left: 4000px; opacity: 0.001;');
+		node.tempAppend.container = aWindow.document.documentElement.appendChild(node.tempAppend.container);
 		
-		node = this.tempAppend.container.appendChild(node);
+		node = node.tempAppend.container.appendChild(node);
 	},
-	tempRestoreToolbar: function() {
-		this.tempAppend.parent.insertBefore(this.tempAppend.container.firstChild, this.tempAppend.sibling);
-		this.tempAppend.container.parentNode.removeChild(this.tempAppend.container);
-		this.tempAppend = null;
+	tempRestoreToolbar: function(node) {
+		if(node.tempAppend) {
+			node.tempAppend.parent.insertBefore(node.tempAppend.container.firstChild, node.tempAppend.sibling);
+			node.tempAppend.container.parentNode.removeChild(node.tempAppend.container);
+			delete node.tempAppend;
+		}
 	},
 	
 	addToolbars: function(aWindow, node) {
@@ -1655,8 +1684,27 @@ this.overlayAid = {
 						if(!aWindow.gCustomizeMode._customizing) {
 							aWindow.CustomizableUI.dispatchToolboxEvent("customizationchange");
 						}
+					},
+					
+					onClose: function() {
+						aWindow.removeEventListener('unload', node._menuEntries.onClose);
+						
+						var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
+						var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
+						
+						if(node._menuEntries.move.str) {
+							contextMenu.removeEventListener('popupshowing', node._menuEntries.move.context._popupShowing);
+							panelMenu.removeEventListener('popupshowing', node._menuEntries.move.panel._popupShowing);
+						}
+						
+						if(node._menuEntries.remove.str) {
+							contextMenu.removeEventListener('popupshowing', node._menuEntries.remove._popupShowing);
+						}
 					}
 				};
+				
+				// all of these menu entries listeners would cause a ZC if we closed a window without removing them
+				aWindow.addEventListener('unload', node._menuEntries.onClose);
 				
 				var contextMenu = aWindow.document.getElementById('toolbar-context-menu');
 				var panelMenu = aWindow.document.getElementById('customizationPanelItemContextMenu');
@@ -2019,14 +2067,15 @@ this.overlayAid = {
 						if(!innerType || innerType == browserType) { continue; }
 						
 						var newTemp = this.createBlankTempBrowser(aWindow, innerType);
-						this.setTempBrowsersListeners(inners[i], newTemp);
 						
-						try { inners[i].swapDocShells(newTemp); }
+						try {
+							this.setTempBrowsersListeners(inners[i]);
+							inners[i].swapDocShells(newTemp);
+						}
 						catch(ex) { // undo everything and just let the browser element reload
-							Cu.reportError('Failed to swap inner browser in '+browsers[b].tagName+' '+browsers[b].id);
-							Cu.reportError(ex);
+							//Cu.reportError('Failed to swap inner browser in '+browsers[b].tagName+' '+browsers[b].id);
+							//Cu.reportError(ex);
 							this.cleanTempBrowsers(innerDone);
-							this.unsetTempBrowsersListeners(inners[i], newTemp);
 							newTemp.parentNode.removeChild(newTemp);
 							continue tempBrowsersLoop;
 						}
@@ -2060,8 +2109,8 @@ this.overlayAid = {
 						
 						try { iframes[i].QueryInterface(Ci.nsIFrameLoaderOwner).swapFrameLoaders(newTemp); }
 						catch(ex) { // undo everything and just let the browser element reload
-							Cu.reportError('Failed to swap iframe in '+browsers[b].tagName+' '+browsers[b].id);
-							Cu.reportError(ex);
+							//Cu.reportError('Failed to swap iframe in '+browsers[b].tagName+' '+browsers[b].id);
+							//Cu.reportError(ex);
 							this.cleanTempBrowsers(iframesDone);
 							newTemp.parentNode.removeChild(newTemp);
 							continue tempBrowsersLoop;
@@ -2078,14 +2127,15 @@ this.overlayAid = {
 				}
 				
 				var newTemp = this.createBlankTempBrowser(aWindow, browserType);
-				this.setTempBrowsersListeners(browsers[b], newTemp);
 				
-				try { browsers[b].swapDocShells(newTemp); }
+				try {
+					this.setTempBrowsersListeners(browsers[b]);
+					browsers[b].swapDocShells(newTemp);
+				}
 				catch(ex) { // undo everything and just let the browser element reload
-					Cu.reportError('Failed to swap '+browsers[b].tagName+' '+browsers[b].id);
-					Cu.reportError(ex);
+					//Cu.reportError('Failed to swap '+browsers[b].tagName+' '+browsers[b].id);
+					//Cu.reportError(ex);
 					this.cleanTempBrowsers(innerDone);
-					this.unsetTempBrowsersListeners(browsers[b], newTemp);
 					newTemp.parentNode.removeChild(newTemp);
 					continue;
 				}
@@ -2128,38 +2178,35 @@ this.overlayAid = {
 			}
 			
 			try {
-				if(!list[l].iframe) { list[l].browser.swapDocShells(list[l].temp); }
+				if(!list[l].iframe) {
+					this.setTempBrowsersListeners(list[l].temp);
+					list[l].browser.swapDocShells(list[l].temp);
+				}
 				else { list[l].browser.QueryInterface(Ci.nsIFrameLoaderOwner).swapFrameLoaders(list[l].temp); }
 			}
 			catch(ex) { /* nothing we can do at this point */  }
-			
-			// I can't remove these here, as then some events might slip through after the DOM change (e.g. DOM Inspector),
-			// instead, I "self"-remove them in the listener itself
-			//this.unsetTempBrowsersListeners(list[l].browser, list[l].temp);
 			
 			list[l].temp.parentNode.removeChild(list[l].temp);
 		}
 	},
 	
 	// some sidebars (i.e. DOM Inspector) have listeners for their browser elements, we need to make sure (as best as we can) that they're not triggered when swapping
-	cancelTempBrowserEvents: function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		if(typeof(overlayAid) != 'undefined') {
-			e.target.removeEventListener(e.type, overlayAid.cancelTempBrowserEvents, true);
-		}
-	},
-	
 	tempBrowserListenEvents: ['pageshow'],
-	setTempBrowsersListeners: function(browser, temp) {
+	setTempBrowsersListeners: function(browser) {
 		for(var e=0; e<this.tempBrowserListenEvents.length; e++) {
-			browser.addEventListener(this.tempBrowserListenEvents[e], this.cancelTempBrowserEvents, true);
+			this.createTempBrowserListener(browser, this.tempBrowserListenEvents[e]);
 		}
 	},
-	unsetTempBrowsersListeners: function(browser, temp) {
-		for(var e=0; e<this.tempBrowserListenEvents.length; e++) {
-			browser.removeEventListener(this.tempBrowserListenEvents[e], this.cancelTempBrowserEvents, true);
-		}
+	createTempBrowserListener: function(browser, type) {
+		// we wrap all this in its own object, so it can still remove itself even after disabling the add-on
+		var listener = function(e) {
+			if(e.target == browser.contentDocument) {
+				e.preventDefault();
+				e.stopPropagation();
+				browser.ownerDocument.defaultView.removeEventListener(type, listener, true);
+			}
+		};
+		browser.ownerDocument.defaultView.addEventListener(type, listener, true);
 	},
 	
 	removeChild: function(aWindow, node) {
@@ -2277,10 +2324,11 @@ this.overlayAid = {
 	},
 	
 	appendButton: function(aWindow, palette, node) {
-		closeCustomize();
+		if(!Australis) { closeCustomize(); }
 		var updateList = this.updateOverlayedNodes(aWindow, node);
 		
-		if(!Australis || (node.parentNode != palette && palette.nodeName == 'toolbarpalette')) {
+		if(!Australis || !node.parentNode
+		|| (node.parentNode != palette && node.parentNode.id != 'wrapper-'+node.id && palette.nodeName == 'toolbarpalette')) {
 			node = palette.appendChild(node);
 		}
 		var id = node.id;
@@ -2347,9 +2395,7 @@ this.overlayAid = {
 				hideIt(node, true);
 			}
 			
-			if(this.tempAppend) {
-				this.tempRestoreToolbar();
-			}
+			this.tempRestoreToolbar(palette);
 			
 			if(!node) { node = aWindow.document.getElementById(id); }
 		}
@@ -2363,7 +2409,7 @@ this.overlayAid = {
 	},
 	
 	removeButton: function(aWindow, palette, node) {
-		closeCustomize();
+		if(!Australis) { closeCustomize(); }
 		var updateList = this.updateOverlayedNodes(aWindow, node);
 		
 		node = node.parentNode.removeChild(node);

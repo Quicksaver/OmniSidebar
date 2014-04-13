@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.5';
+moduleAid.VERSION = '1.5.6';
 
 this.customizing = false;
 
@@ -506,7 +506,7 @@ this.setBroadcasters = function(initialize) {
 
 // handler for entering and leaving the toolbar customize window
 this.customize = function(e) {
-	customizing = e.type == 'beforecustomization';
+	customizing = (e && e.type == 'beforecustomization') || (!e && customizing);
 	if(customizing || toggleButtons()) {
 		buttonLabels(mainSidebar.button);
 		buttonLabels(twinSidebar.button);
@@ -1177,6 +1177,10 @@ this.unloadMainSidebar = function() {
 };
 
 moduleAid.LOADMODULE = function() {
+	if(Australis) {
+		customizing = trueAttribute(document.documentElement, 'customizing');
+	}
+	
 	// This will be moved here in the future, when Australis hits release
 	moduleAid.loadIf('australis', Australis);
 	
@@ -1280,6 +1284,7 @@ moduleAid.LOADMODULE = function() {
 	
 	listenerAid.add(window, 'beforecustomization', customize, false);
 	listenerAid.add(window, 'aftercustomization', customize, false);
+	customize();
 	
 	// set our custom classes so the sidebars can be styled properly
 	listenerAid.add(window, 'SidebarFocusedSync', setclass);

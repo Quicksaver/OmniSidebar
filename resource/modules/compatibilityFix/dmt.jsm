@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.0';
+moduleAid.VERSION = '1.2.1';
 
 this.__defineGetter__('DMPanelLink', function() { return $('downloadsHistory'); });
 this.__defineGetter__('BrowserDownloadsUI', function() { return window.BrowserDownloadsUI; });
@@ -89,7 +89,7 @@ this.toggleAlwaysDMT = function(unloaded) {
 		
 		listenerAid.add(window, 'beforecustomization', customizeDMButton, false);
 		listenerAid.add(window, 'aftercustomization', customizeDMButton, false);
-		setDMButton();
+		setDMButton(customizing);
 	} else {
 		listenerAid.remove(window, 'beforecustomization', customizeDMButton, false);
 		listenerAid.remove(window, 'aftercustomization', customizeDMButton, false);
