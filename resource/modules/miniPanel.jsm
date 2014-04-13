@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.2';
+moduleAid.VERSION = '1.2.3';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -234,10 +234,18 @@ this.panelViewToolbarScrolling = function(e) {
 	}
 };
 
+this.panelOwner = function(e) {
+	e.detail = panel._bar.buttonId;
+	e.stopPropagation();
+};
+
 this.loadMiniPanel = function() {
 	panel.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
 	keydownPanel.setupPanel(panel);
 	barSwitchTriggers.__defineGetter__('miniPanel', function() { return panel; });
+	
+	// for compatibility with all the add-ons that use my backbone
+	listenerAid.add(panel, 'AskingForNodeOwner', panelOwner);
 	
 	if(Australis) {
 		keydownPanel.setupPanel(panelView);
@@ -260,6 +268,8 @@ this.unloadMiniPanel = function() {
 		delete barSwitchTriggers.miniPanelView;
 		delete panelView._toggleKeyset;
 	}
+	
+	listenerAid.remove(panel, 'AskingForNodeOwner', panelOwner);
 	
 	delete barSwitchTriggers.miniPanel;
 	keydownPanel.unsetPanel(panel);
