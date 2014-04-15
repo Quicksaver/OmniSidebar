@@ -136,11 +136,11 @@
 	
 	#sidebar-box:not([movetoright])[squareLook] .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin[movetoleft][squareLook] .omnisidebar_resize_box {
-		-moz-border-end: 1px solid rgba(0,0,0,.4) !important;
+		-moz-border-end: 1px solid #A9B7C9 !important;
 	}
 	#sidebar-box[movetoright][squareLook] .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:not([movetoleft])[squareLook] .omnisidebar_resize_box {
-		-moz-border-start: 1px solid rgba(0,0,0,.4) !important;
+		-moz-border-start: 1px solid #A9B7C9 !important;
 	}
 	
 	.omnisidebar_resizer {
