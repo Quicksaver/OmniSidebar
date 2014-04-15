@@ -49,9 +49,12 @@
 	
 	.inSidebar .category[selected="true"] {
 		border-bottom: none !important;
-		border-right: 1px solid rgb(195,206,223) !important;
-		border-top: 1px solid rgb(195,206,223) !important;
-		border-left: 1px solid rgb(195,206,223) !important;
+		border-right: 1px solid;
+		border-top: 1px solid;
+		border-left: 1px solid;
+		-moz-border-top-colors: rgb(195,206,223);
+		-moz-border-left-colors: rgb(195,206,223);
+		-moz-border-right-colors: rgb(195,206,223);
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 		border-bottom-left-radius: 0 !important;
