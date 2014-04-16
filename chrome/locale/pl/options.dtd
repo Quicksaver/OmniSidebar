@@ -32,7 +32,7 @@
 <!ENTITY omnisidebarOptshowDelay.label "Opóźnienie automatycznego pokazywania o (ms):">
 <!ENTITY omnisidebarOpthideDelay.label "Opóźnienie automatycznego chowania o (ms):">
 <!ENTITY omnisidebarOptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
-<!ENTITY omnisidebarOptswitcherAdjust.label "Dostosuj szerokość obszaru aktywnego marginesu (w pikselach): ">
+<!ENTITY omnisidebarOptswitcherAdjust.label "Dostosuj szerokość obszaru aktywnego marginesu (w pikselach):">
 <!ENTITY omnisidebarOptkeepLoaded.label "Zachowuj wczytaną zawartość panelu bocznego podczas jego zamykania">
 <!ENTITY omnisidebarOptforceOpen.label "Zapobiegaj zamykaniu panelu z">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Przycisków na pasku narzędzi panelu">

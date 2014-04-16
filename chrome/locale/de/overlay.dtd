@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "Lesezeichen-Sidebar">
 <!ENTITY bookmarksSidebar.tooltip "Die Lesezeichen in der Sidebar anzeigen">
+<!ENTITY bookmarksSidebar.accesskey "L">
 <!ENTITY historySidebar.label "Chronik-Sidebar">
 <!ENTITY historySidebar.tooltip "Die kürzlich besuchten Seiten in der Sidebar anzeigen">
+<!ENTITY historySidebar.accesskey "C">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "DOM Inspector in der Sidebar öffnen">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -14,12 +16,9 @@
 <!ENTITY scratchpadSidebar.label "JavaScript-Umgebung">
 <!ENTITY scratchpadSidebar.tooltip "JavaScript-Umgebung in der Sidebar öffnen">
 <!ENTITY scratchpadSidebar.accesskey "J">
-<!ENTITY BlankSidebar.label "Leere Seite">
-<!ENTITY BlankSidebar.tooltip "Leere Seite in der Sidebar öffnen">
+<!ENTITY BlankSidebar.label "Eine Sidebar öffnen">
 <!ENTITY URISidebar.tooltip "Eine zu öffnende Adresse eintippen">
 <!ENTITY URISidebar.buttonLabel "Öffnen">
-<!ENTITY bookmarksSidebar.accesskey "L">
-<!ENTITY historySidebar.accesskey "C">
 <!ENTITY consoleSidebar.label "Fehlerkonsole">
 <!ENTITY consoleSidebar.tooltip "Fehlerkonsole in der Sidebar öffnen">
 <!ENTITY consoleSidebar.accesskey "F">
@@ -29,12 +28,26 @@
 <!ENTITY dmtSidebar.label "Downloads">
 <!ENTITY dmtSidebar.tooltip "Download-Fortschritt anzeigen">
 <!ENTITY dmtSidebar.accesskey "D">
+<!ENTITY acceltext.ctrl "Strg">
+<!ENTITY acceltext.shift "Umschalt">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 <!ENTITY omnisidebarToolbar.label "Sidebar-Symbolleiste">
 <!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "Symbolleiste für zweite Sidebar">
 <!ENTITY omnisidebarToolbarTwin.accesskey "z">
 <!ENTITY omnisidebarOptions.title "OmniSidebar Einstellungen">
 <!ENTITY omnisidebarOptions.accesskey "r">
+<!ENTITY omnisidebarToolbar.menuAdd "Zu Sidebar-Symbolleiste hinzufügen">
+<!ENTITY omnisidebarToolbar.menuMove "In Sidebar-Symbolleiste verschieben">
+<!ENTITY omnisidebarToolbar.menuRemove "Aus Sidebar-Symbolleiste entfernen">
+<!ENTITY omnisidebarToolbar.menuMain "In Symbolleiste verschieben">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Zu Symbolleiste für zweite Sidebar hinzufügen">
+<!ENTITY omnisidebarToolbarTwin.menuMove "In Symbolleiste für zweite Sidebar verschieben">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Aus Symbolleiste für zweite Sidebar verschieben">
+<!ENTITY omnisidebarToolbarTwin.menuMain "In Symbolleiste verschieben">
 <!ENTITY omnisidebarButton.label "Sidebar">
 <!ENTITY omnisidebarButtonMain.label "Erste Sidebar">
 <!ENTITY omnisidebarButtonTwin.label "Zweite Sidebar">

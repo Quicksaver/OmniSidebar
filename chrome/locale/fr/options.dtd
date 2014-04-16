@@ -46,6 +46,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Défaut (pas de modification)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Multicolore">
+<!ENTITY omnisidebarOptKeysetPanel.label "Ouvrir le mini-panneau au lieu du panneau latéral">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Raccourcis clavier du panneau latéral">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Maj">

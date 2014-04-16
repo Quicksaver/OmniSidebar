@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "G">
 <!ENTITY bookmarksSidebar.label "Painel Lateral dos Favoritos">
 <!ENTITY bookmarksSidebar.tooltip "Mostrar os seus favoritos no painel lateral">
+<!ENTITY bookmarksSidebar.accesskey "M">
 <!ENTITY historySidebar.label "Painel Lateral do Histórico">
 <!ENTITY historySidebar.tooltip "Mostrar no painel lateral as páginas que visualizou recentemente">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector no Painel Lateral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -14,12 +16,9 @@
 <!ENTITY scratchpadSidebar.label "Scratchpad">
 <!ENTITY scratchpadSidebar.tooltip "Abrir o Scratchpad no painel lateral">
 <!ENTITY scratchpadSidebar.accesskey "p">
-<!ENTITY BlankSidebar.label "Página em Branco">
-<!ENTITY BlankSidebar.tooltip "Abrir uma Página em Branco no Painel Lateral">
+<!ENTITY BlankSidebar.label "Abrir um painel lateral">
 <!ENTITY URISidebar.tooltip "Introduzir uma localização para abrir no painel lateral">
 <!ENTITY URISidebar.buttonLabel "Abrir">
-<!ENTITY bookmarksSidebar.accesskey "M">
-<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "Consola de Erros">
 <!ENTITY consoleSidebar.tooltip "Abrir a Consola de Erros no Painel Lateral">
 <!ENTITY consoleSidebar.accesskey "E">
@@ -29,12 +28,26 @@
 <!ENTITY dmtSidebar.label "Transferências">
 <!ENTITY dmtSidebar.tooltip "Mostrar o Progresso Atual das Transferências">
 <!ENTITY dmtSidebar.accesskey "r">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Shift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 <!ENTITY omnisidebarToolbar.label "Barra de Ferramentas do Painel Lateral">
 <!ENTITY omnisidebarToolbar.accesskey "L">
 <!ENTITY omnisidebarToolbarTwin.label "Barra de Ferramentas do Painel Lateral Gémeo">
 <!ENTITY omnisidebarToolbarTwin.accesskey "G">
 <!ENTITY omnisidebarOptions.title "Opções do Painel OmniLateral">
 <!ENTITY omnisidebarOptions.accesskey "a">
+<!ENTITY omnisidebarToolbar.menuAdd "Adicionar à Barra de Ferramentas do Painel Lateral">
+<!ENTITY omnisidebarToolbar.menuMove "Mover para a Barra de Ferramentas do Painel Lateral">
+<!ENTITY omnisidebarToolbar.menuRemove "Remover da Barra de Ferramentas do Painel Lateral">
+<!ENTITY omnisidebarToolbar.menuMain "Mover para a Barra de Ferramentas">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Adicionar à Barra de Ferramentas do Painel Lateral Gémeo">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Mover para a Barra de Ferramentas do Painel Lateral Gémeo">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Remover da Barra de Ferramentas do Painel Lateral Gémeo">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Mover para a Barra de Ferramentas">
 <!ENTITY omnisidebarButton.label "Painel Lateral">
 <!ENTITY omnisidebarButtonMain.label "Painel Lateral Principal">
 <!ENTITY omnisidebarButtonTwin.label "Painel Lateral Gémeo">

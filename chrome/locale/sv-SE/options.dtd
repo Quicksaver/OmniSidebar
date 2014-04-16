@@ -46,6 +46,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (ingen ändring)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Färgglad">
+<!ENTITY omnisidebarOptKeysetPanel.label "Öppna minipanelen istället för sidopanelen">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Kortkommando för sidopanelen">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Skift">

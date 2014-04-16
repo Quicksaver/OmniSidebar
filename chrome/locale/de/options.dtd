@@ -29,10 +29,10 @@
 <!ENTITY omnisidebarOptglassStyle.opaque "Gefüllt">
 <!ENTITY omnisidebarOptglassStyle.transparent "Vollständig transparent">
 <!ENTITY omnisidebarOptfx.label "Übergangseffekte verwenden">
-<!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms): ">
-<!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms): ">
+<!ENTITY omnisidebarOptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms):">
+<!ENTITY omnisidebarOpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms):">
 <!ENTITY omnisidebarOptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
-<!ENTITY omnisidebarOptswitcherAdjust.label "Randbreite, welche bei Mauskontakt die Sidebar aktiviert (Pixel): ">
+<!ENTITY omnisidebarOptswitcherAdjust.label "Randbreite, welche bei Mauskontakt die Sidebar aktiviert (Pixel):">
 <!ENTITY omnisidebarOptkeepLoaded.label "Inhalt der Sidebar auch nach deren Schließen im Speicher behalten">
 <!ENTITY omnisidebarOptforceOpen.label "Sidebar nicht schließen mittels">
 <!ENTITY omnisidebarOptforceOpen.toolbars "Schaltflächen in der Sidebar-Symbolleiste">
@@ -46,6 +46,7 @@
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (keine Veränderung)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
 <!ENTITY omnisidebarOptcoloricons.colorlabel "Farbenfroh">
+<!ENTITY omnisidebarOptKeysetPanel.label "Sidebar-Menü anstatt der Sidebar öffnen">
 <!ENTITY omnisidebarOptKeyboardShortcut.caption "Tastaturkürzel für Sidebar">
 <!ENTITY omnisidebarOptKeyboardShortcut.control "Strg">
 <!ENTITY omnisidebarOptKeyboardShortcut.shift "Umschalt">

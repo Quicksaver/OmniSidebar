@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "T">
 <!ENTITY bookmarksSidebar.label "Bokmärkespanelen">
 <!ENTITY bookmarksSidebar.tooltip "Visa dina bokmärken i sidopanelen">
+<!ENTITY bookmarksSidebar.accesskey "B">
 <!ENTITY historySidebar.label "Historikpanelen">
 <!ENTITY historySidebar.tooltip "Visa en lista över nyligen besökta webbsidor i sidopanelen">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Öppna DOM Inspector i sidopanelen">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -14,12 +16,9 @@
 <!ENTITY scratchpadSidebar.label "Anteckningsblock">
 <!ENTITY scratchpadSidebar.tooltip "Öppna anteckningsblocket i sidopanelen">
 <!ENTITY scratchpadSidebar.accesskey "A">
-<!ENTITY BlankSidebar.label "Tom sida">
-<!ENTITY BlankSidebar.tooltip "Öppna en tom sida i sidopanelen">
+<!ENTITY BlankSidebar.label "Öppna en sidopanel">
 <!ENTITY URISidebar.tooltip "Ange en plats att öppna i sidopanelen">
 <!ENTITY URISidebar.buttonLabel "Gå">
-<!ENTITY bookmarksSidebar.accesskey "B">
-<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "Felkonsolen">
 <!ENTITY consoleSidebar.tooltip "Öppna felkonsolen i sidopanelen">
 <!ENTITY consoleSidebar.accesskey "F">
@@ -29,12 +28,26 @@
 <!ENTITY dmtSidebar.label "Filhämtningar">
 <!ENTITY dmtSidebar.tooltip "Visa förloppet för pågående filhämtningar">
 <!ENTITY dmtSidebar.accesskey "h">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Skift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 <!ENTITY omnisidebarToolbar.label "Sidopanelsfältet">
 <!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "Tvillingsidopanelsfältet">
 <!ENTITY omnisidebarToolbarTwin.accesskey "v">
 <!ENTITY omnisidebarOptions.title "OmniSidebar: Inställningar">
 <!ENTITY omnisidebarOptions.accesskey "r">
+<!ENTITY omnisidebarToolbar.menuAdd "Lägg till i sidopanelens verktygsfält">
+<!ENTITY omnisidebarToolbar.menuMove "Flyta till sidopanelens verktygsfält">
+<!ENTITY omnisidebarToolbar.menuRemove "Ta bort från sidopanelens verktygsfält">
+<!ENTITY omnisidebarToolbar.menuMain "Flytta till huvudverktygsfältet">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Lägg till i tvillingsidopanelens verktygsfält">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Flytta till tvillingsidopanelens verktygsfält">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Ta bort från tvillingsidopanelens verktygsfält">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Flytta till huvudverktygsfältet">
 <!ENTITY omnisidebarButton.label "Sidopanelen">
 <!ENTITY omnisidebarButtonMain.label "Huvudsidopanelen">
 <!ENTITY omnisidebarButtonTwin.label "Tvillingsidopanelen">

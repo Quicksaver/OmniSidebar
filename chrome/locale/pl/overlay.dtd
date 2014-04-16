@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "D">
 <!ENTITY bookmarksSidebar.label "Zakładki">
 <!ENTITY bookmarksSidebar.tooltip "Wyświetl zakładki w panelu bocznym">
+<!ENTITY bookmarksSidebar.accesskey "Z">
 <!ENTITY historySidebar.label "Historia">
 <!ENTITY historySidebar.tooltip "Wyświetl w panelu bocznym strony, które odwiedziłeś niedawno">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Otwórz DOM Inspector w panelu bocznym">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -14,12 +16,8 @@
 <!ENTITY scratchpadSidebar.label "Brudnopis">
 <!ENTITY scratchpadSidebar.tooltip "Otwórz Brudnopis w panelu bocznym">
 <!ENTITY scratchpadSidebar.accesskey "b">
-<!ENTITY BlankSidebar.label "Pusta strona">
-<!ENTITY BlankSidebar.tooltip "Otwórz pustą stronę w panelu bocznym">
 <!ENTITY URISidebar.tooltip "Wpisz lokalizację, aby otworzyć ją w panelu bocznym">
 <!ENTITY URISidebar.buttonLabel "Przejdź">
-<!ENTITY bookmarksSidebar.accesskey "Z">
-<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "Konsola błędów">
 <!ENTITY consoleSidebar.tooltip "Otwórz konsolę błędów w panelu bocznym">
 <!ENTITY consoleSidebar.accesskey "K">
@@ -29,6 +27,12 @@
 <!ENTITY dmtSidebar.label "Pobierania">
 <!ENTITY dmtSidebar.tooltip "Wyświetl ostatnio pobierane pliki">
 <!ENTITY dmtSidebar.accesskey "P">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Shift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 <!ENTITY omnisidebarToolbar.label "Pasek narzędzi na panelu bocznym">
 <!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "Pasek narz. drugiego panelu">

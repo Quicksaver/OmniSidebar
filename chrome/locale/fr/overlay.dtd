@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "G">
 <!ENTITY bookmarksSidebar.label "Panneau latéral des marque-pages">
 <!ENTITY bookmarksSidebar.tooltip "Afficher vos marque-pages dans le panneau latéral">
+<!ENTITY bookmarksSidebar.accesskey "M">
 <!ENTITY historySidebar.label "Panneau latéral de l'historique">
 <!ENTITY historySidebar.tooltip "Affiche les pages vues récemment dans le panneau latéral">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">
 <!ENTITY DOMInspectorSidebar.tooltip "Ouvrir l'inspecteur DOM dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -14,12 +16,9 @@
 <!ENTITY scratchpadSidebar.label "Ardoise JavaScript">
 <!ENTITY scratchpadSidebar.tooltip "Ouvre l'ardoise JavaScript dans le panneau latéral">
 <!ENTITY scratchpadSidebar.accesskey "d">
-<!ENTITY BlankSidebar.label "Page vierge">
-<!ENTITY BlankSidebar.tooltip "Ouvrir une page vierge dans le panneau latéral">
+<!ENTITY BlankSidebar.label "Ouvrir un panneau latéral">
 <!ENTITY URISidebar.tooltip "Indiquez un emplacement à ouvrir dans le panneau latéral">
 <!ENTITY URISidebar.buttonLabel "Go">
-<!ENTITY bookmarksSidebar.accesskey "M">
-<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "Console d'erreurs">
 <!ENTITY consoleSidebar.tooltip "Ouvrir la console d'erreurs dans le panneau latéral">
 <!ENTITY consoleSidebar.accesskey "C">
@@ -29,12 +28,26 @@
 <!ENTITY dmtSidebar.label "Téléchargements">
 <!ENTITY dmtSidebar.tooltip "Afficher la progression des téléchargements en cours">
 <!ENTITY dmtSidebar.accesskey "h">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Maj">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 <!ENTITY omnisidebarToolbar.label "Barre d'outils du panneau latéral">
 <!ENTITY omnisidebarToolbar.accesskey "l">
 <!ENTITY omnisidebarToolbarTwin.label "Barre d'outils du panneau latéral secondaire">
 <!ENTITY omnisidebarToolbarTwin.accesskey "s">
 <!ENTITY omnisidebarOptions.title "Options d'OmniSidebar">
 <!ENTITY omnisidebarOptions.accesskey "r">
+<!ENTITY omnisidebarToolbar.menuAdd "Ajouter à la barre d'outils du panneau latéral">
+<!ENTITY omnisidebarToolbar.menuMove "Déplacer vers la barre d'outils du panneau latéral">
+<!ENTITY omnisidebarToolbar.menuRemove "Retirer de la barre d'outils du panneau latéral">
+<!ENTITY omnisidebarToolbar.menuMain "Déplacer vers la barre d'outils">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Ajouter à la barre d'outils des panneaux jumeaux">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Déplacer vers la barre d'outils des panneaux jumeaux">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Retirer de la barre d'outils des panneaux jumeaux">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Déplacer vers la barre d'outils">
 <!ENTITY omnisidebarButton.label "Panneau latéral">
 <!ENTITY omnisidebarButtonMain.label "Panneau latéral principal">
 <!ENTITY omnisidebarButtonTwin.label "Panneau latéral secondaire">

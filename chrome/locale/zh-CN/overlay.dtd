@@ -3,8 +3,10 @@
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "书签侧栏">
 <!ENTITY bookmarksSidebar.tooltip "在侧栏中显示您的书签">
+<!ENTITY bookmarksSidebar.accesskey "B">
 <!ENTITY historySidebar.label "历史侧栏">
 <!ENTITY historySidebar.tooltip "在侧栏显示您最近浏览的页面">
+<!ENTITY historySidebar.accesskey "H">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "在侧栏中打开DOM Inspector">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
@@ -14,12 +16,9 @@
 <!ENTITY scratchpadSidebar.label "代码片段速记器">
 <!ENTITY scratchpadSidebar.tooltip "在侧栏打开代码片段速记器">
 <!ENTITY scratchpadSidebar.accesskey "p">
-<!ENTITY BlankSidebar.label "空白页">
-<!ENTITY BlankSidebar.tooltip "在侧栏中打开空白页">
+<!ENTITY BlankSidebar.label "打开一个侧栏">
 <!ENTITY URISidebar.tooltip "输入要在侧栏中载入的地址">
 <!ENTITY URISidebar.buttonLabel "转到">
-<!ENTITY bookmarksSidebar.accesskey "B">
-<!ENTITY historySidebar.accesskey "H">
 <!ENTITY consoleSidebar.label "错误控制台">
 <!ENTITY consoleSidebar.tooltip "在侧栏打开错误控制台">
 <!ENTITY consoleSidebar.accesskey "E">
@@ -29,12 +28,26 @@
 <!ENTITY dmtSidebar.label "下载">
 <!ENTITY dmtSidebar.tooltip "显示正在进行的下载进度">
 <!ENTITY dmtSidebar.accesskey "D">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Shift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
 <!ENTITY omnisidebarToolbar.label "侧栏工具栏">
 <!ENTITY omnisidebarToolbar.accesskey "S">
 <!ENTITY omnisidebarToolbarTwin.label "副侧栏工具栏">
 <!ENTITY omnisidebarToolbarTwin.accesskey "w">
 <!ENTITY omnisidebarOptions.title "OmniSidebar 选项">
 <!ENTITY omnisidebarOptions.accesskey "r">
+<!ENTITY omnisidebarToolbar.menuAdd "添加到侧栏工具栏">
+<!ENTITY omnisidebarToolbar.menuMove "移动到侧栏工具栏">
+<!ENTITY omnisidebarToolbar.menuRemove "从侧栏工具栏移除">
+<!ENTITY omnisidebarToolbar.menuMain "移动到工具栏">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "添加到副侧栏工具栏">
+<!ENTITY omnisidebarToolbarTwin.menuMove "移动到副侧栏工具栏">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "从副侧栏工具栏移除">
+<!ENTITY omnisidebarToolbarTwin.menuMain "移动到工具栏">
 <!ENTITY omnisidebarButton.label "侧栏">
 <!ENTITY omnisidebarButtonMain.label "主侧栏">
 <!ENTITY omnisidebarButtonTwin.label "副侧栏">
