@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.3';
+moduleAid.VERSION = '1.2.4';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -96,7 +96,6 @@ this.openPanel = function(trigger, bar, e, position) {
 	if(position == 'after_pointer') {
 		x = e.clientX +1;
 		y = e.clientY +1;
-		anchor = null;
 	} else if(trigger) {
 		anchor = document.getAnonymousElementByAttribute(trigger, "class", "toolbarbutton-icon") || trigger;
 	}
@@ -235,8 +234,10 @@ this.panelViewToolbarScrolling = function(e) {
 };
 
 this.panelOwner = function(e) {
-	e.detail = panel._bar.buttonId;
-	e.stopPropagation();
+	if(isAncestor(panel.anchorNode, panel._bar.button)) {
+		e.detail = panel._bar.buttonId;
+		e.stopPropagation();
+	}
 };
 
 this.loadMiniPanel = function() {
