@@ -10,6 +10,8 @@
 	}
 	window:not([omnisidebar_Australis]) #navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon { padding: 0 !important; }
 	
+	window[omnisidebar_Australis] #nav-bar-customization-target > .adequate-size > .toolbarbutton-icon { margin: 0 !important; }
+	
 	.sidebar-title[TitleButton]:hover,
 	.sidebar-title[TitleButton][active] {
 		padding-top: 2px !important;

@@ -31,6 +31,8 @@
 	window:not([omnisidebar_Australis]) #navigator-toolbox[iconsize=large][mode=full] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon {
 		height: 24px !important;
 	}
+	
+	window[omnisidebar_Australis] #nav-bar-customization-target > .adequate-size > .toolbarbutton-icon { padding: 2px 6px !important; }
 
 }
 
