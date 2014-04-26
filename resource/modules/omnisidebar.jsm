@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.5.7';
+moduleAid.VERSION = '1.5.8';
 
 this.customizing = false;
 
@@ -36,7 +36,10 @@ this.mainSidebar = {
 	get stack () { return $(objName+'-stackSidebar'); },
 	get buttonId () { return objName+'-button'; },
 	get button () { return $(objName+'-button'); },
-	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
+	get close () { return this.header
+		? this.header.querySelectorAll('toolbarbutton.'+(Services.vc.compare(Services.appinfo.platformVersion, "31.0a1") >= 0 ? 'close-icon' : 'tabs-closebutton'))[0]
+		: null;
+	},
 	get width () {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
@@ -156,7 +159,10 @@ this.twinSidebar = {
 	get stack () { return $(objName+'-stackSidebar-twin'); },
 	get buttonId () { return objName+'-button-twin'; },
 	get button () { return $(objName+'-button-twin'); },
-	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.tabs-closebutton')[0] : null; },
+	get close () { return this.header
+		? this.header.querySelectorAll('toolbarbutton.'+(Services.vc.compare(Services.appinfo.platformVersion, "31.0a1") >= 0 ? 'close-icon' : 'tabs-closebutton'))[0]
+		: null;
+	},
 	get width () {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
