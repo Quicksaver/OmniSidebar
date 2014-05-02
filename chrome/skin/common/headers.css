@@ -47,9 +47,10 @@
 	#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
 	#omnisidebar-sidebar-throbber-twin,
 	.sidebar-box[notitle] .sidebar-title,
-	.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton,
-	.sidebar-box[customizing] .sidebar-title,
-	.sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton,
+	.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
+	.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon, /* FF31+, confirm later to be sure */
+	.sidebar-box[customizing] .sidebar-title, /* FF30- */
+	.sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
 	.omnisidebar-toolbar toolbarbutton[disabled] {
 		display: none !important;
 	}
