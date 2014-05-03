@@ -1,4 +1,4 @@
-moduleAid.VERSION = '2.7.3';
+moduleAid.VERSION = '2.7.4';
 moduleAid.LAZY = true;
 
 // overlayAid - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1225,7 +1225,9 @@ this.overlayAid = {
 					var toolbox = aDocument.querySelectorAll('toolbox');
 					toolbox_loop: for(var a=0; a<toolbox.length; a++) {
 						var palette = toolbox[a].palette;
-						if(toolbox[a].palette && toolbox[a].palette == aDocument.defaultView.gCustomizeMode.visiblePalette) {
+						if(!palette) { continue; }
+						
+						if(toolbox[a].palette == aDocument.defaultView.gCustomizeMode.visiblePalette) {
 							palette = aDocument.defaultView.gCustomizeMode._stowedPalette;
 						}
 						for(var b=0; b<palette.childNodes.length; b++) {
