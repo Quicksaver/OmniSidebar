@@ -159,6 +159,8 @@
 	}
 	
 	/* For the status bar link display */
+	notificationbox statuspanel,
+	/* I have no idea what this is, maybe it was removed in some FF version? */
 	#appcontent > #statusbar-display {
 		z-index: 300;
 	}
