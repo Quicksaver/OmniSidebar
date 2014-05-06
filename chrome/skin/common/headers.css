@@ -55,13 +55,13 @@
 		display: none !important;
 	}
 	
-	window[omnisidebar_Australis] .sidebar-box:not([notitle]) .header-spacer,
-	window:not([omnisidebar_Australis]) .sidebar-box:not([notitle]):not([customizing]) .header-spacer,
+	/* remove :not([customizing]) for Australis */
+	.sidebar-box:not([notitle]):not([customizing]) .header-spacer,
 	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .header-spacer {
 		display: none;
 	}
-	window[omnisidebar_Australis] .sidebar-box[notitle] .header-spacer,
-	window:not([omnisidebar_Australis]) .sidebar-box[notitle]:not([customizing]) .header-spacer {
+	/* remove :not([customizing]) for Australis */
+	.sidebar-box[notitle]:not([customizing]) .header-spacer {
 		display: -moz-box;
 	}
 	.sidebar-box .sidebar-title {
@@ -75,9 +75,8 @@
 		text-align: right;
 		margin: 5px 5px 0 5px !important;
 	}
-	
-	window[omnisidebar_Australis] .sidebar-box .stackSidebar,
-	window:not([omnisidebar_Australis]) .sidebar-box:not([customizing]) .stackSidebar {
+	/* remove :not([customizing]) for Australis */
+	.sidebar-box:not([customizing]) .stackSidebar {
 		display: -moz-box;
 	}
 	

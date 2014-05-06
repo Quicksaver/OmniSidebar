@@ -74,8 +74,8 @@
 		-moz-border-start: none;
 		-moz-border-end: 1px solid rgb(169, 183, 201);
 	}
-	window[omnisidebar_Australis] .sidebar-box .omnisidebar_resizer:hover,
-	window:not([omnisidebar_Australis]) .sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
+	/* remove :not([customizing]) for Australis */
+	.sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
 	.sidebar-splitter[disabled]:hover {
 		cursor: ew-resize !important;
 	}
