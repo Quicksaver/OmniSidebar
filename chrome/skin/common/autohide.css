@@ -1,7 +1,8 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	.sidebar-box[renderabove][autohide]:not([collapsed]):not([customizing]) .omnisidebar_resize_box {
+	window[omnisidebar_Australis] .sidebar-box[renderabove][autohide]:not([collapsed]) .omnisidebar_resize_box,
+	window:not([omnisidebar_Australis]) .sidebar-box[renderabove][autohide]:not([collapsed]):not([customizing]) .omnisidebar_resize_box {
 		opacity: 0;
 		visibility: hidden;
 	}

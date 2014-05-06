@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.12';
+moduleAid.VERSION = '1.0.13';
 
 this.__defineGetter__('browser', function() { return $('browser'); });
 
@@ -88,8 +88,8 @@ this.drag = function(e) {
 this.setHeight = function() {
 	var moveBy = $('main-window').getAttribute('sizemode') == 'normal' ? +1 : 0;
 	// I can't set these by css, cpu usage goes through the roof?!
-	if(mainSidebar.box) { mainSidebar.box.style.height = (prefAid.renderabove && !customizing) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
-	if(twinSidebar.box) { twinSidebar.box.style.height = (prefAid.renderaboveTwin && !customizing) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
+	if(mainSidebar.box) { mainSidebar.box.style.height = (prefAid.renderabove && (Australis || !customizing)) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
+	if(twinSidebar.box) { twinSidebar.box.style.height = (prefAid.renderaboveTwin && (Australis || !customizing)) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
 };
 
 this.setAboveWidth = function() {
@@ -131,19 +131,19 @@ this.setAboveWidth = function() {
 		sscode += '		right: -' + mainSidebar.width + 'px;\n';
 		sscode += '	}\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][customizing]:-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]:-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[renderabove][customizing]:-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[customizing]:-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][customizing]:-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]:-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[renderabove][customizing]:-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[customizing]:-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox {\n';
 		sscode += '		left: ' + (mainSidebar.width +leftOffset) + 'px !important;\n';
 		sscode += '	}\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][customizing]:-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]:-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[renderabove][customizing]:-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[customizing]:-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][customizing]:-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]:-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[renderabove][customizing]:-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #sidebar-box[customizing]:-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox {\n';
 		sscode += '		right: ' + (mainSidebar.width +rightOffset) + 'px !important;\n';
 		sscode += '	}\n';
 	}
@@ -159,19 +159,19 @@ this.setAboveWidth = function() {
 		sscode += '		left: -' + twinSidebar.width + 'px;\n';
 		sscode += '	}\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin {\n';
 		sscode += '		right: ' + (twinSidebar.width +rightOffset) + 'px !important;\n';
 		sscode += '	}\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin {\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[renderabove][customizing]:-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
+		sscode += '	window['+objName+'_UUID="'+_UUID+'"]:not(['+objName+'_Australis]) #'+objName+'-sidebar-box-twin[customizing]:-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin {\n';
 		sscode += '		left: ' + (twinSidebar.width +leftOffset) + 'px !important;\n';
 		sscode += '	}\n';
 	}

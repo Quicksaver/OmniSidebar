@@ -49,17 +49,19 @@
 	.sidebar-box[notitle] .sidebar-title,
 	.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
 	.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon, /* FF31+, confirm later to be sure */
-	.sidebar-box[customizing] .sidebar-title, /* FF30- */
-	.sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-title, /* FF30- */
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
 	.omnisidebar-toolbar toolbarbutton[disabled] {
 		display: none !important;
 	}
 	
-	.sidebar-box:not([notitle]):not([customizing]) .header-spacer,
-	.sidebar-box[customizing] .header-spacer {
+	window[omnisidebar_Australis] .sidebar-box:not([notitle]) .header-spacer,
+	window:not([omnisidebar_Australis]) .sidebar-box:not([notitle]):not([customizing]) .header-spacer,
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .header-spacer {
 		display: none;
 	}
-	.sidebar-box[notitle]:not([customizing]) .header-spacer {
+	window[omnisidebar_Australis] .sidebar-box[notitle] .header-spacer,
+	window:not([omnisidebar_Australis]) .sidebar-box[notitle]:not([customizing]) .header-spacer {
 		display: -moz-box;
 	}
 	.sidebar-box .sidebar-title {
@@ -74,13 +76,14 @@
 		margin: 5px 5px 0 5px !important;
 	}
 	
-	.sidebar-box:not([customizing]) .stackSidebar {
+	window[omnisidebar_Australis] .sidebar-box .stackSidebar,
+	window:not([omnisidebar_Australis]) .sidebar-box:not([customizing]) .stackSidebar {
 		display: -moz-box;
 	}
 	
 	/* Sidebar size, position and animation */
-	.sidebar-box[customizing],
-	.sidebar-box[customizing][hidden="true"] {
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing],
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing][hidden="true"] {
 		-moz-appearance: none;
 		position: fixed;
 		overflow: visible !important;
@@ -91,29 +94,29 @@
 		background: none;
 	}
 	
-	.sidebar-box[customizing],
-	.sidebar-box[customizing][hidden="true"] {
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing],
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing][hidden="true"] {
 		display: -moz-box;
 	}
-	#sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(ltr):not([movetoright]),
-	#omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(ltr)[movetoleft],
-	#sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(rtl)[movetoright],
-	#omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(rtl):not([movetoleft]) {
+	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(ltr):not([movetoright]),
+	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(ltr)[movetoleft],
+	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(rtl)[movetoright],
+	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(rtl):not([movetoleft]) {
 		left: 0px;
 	}
-	#sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(ltr)[movetoright],
-	#omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(ltr):not([movetoleft]),
-	#sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(rtl):not([movetoright]),
-	#omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(rtl)[movetoleft] {
+	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(ltr)[movetoright],
+	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(ltr):not([movetoleft]),
+	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(rtl):not([movetoright]),
+	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(rtl)[movetoleft] {
 		right: 0px;
 	}
 	
-	.sidebar-box[customizing] .sidebar-header,
-	.sidebar-box[customizing] .omnisidebar-toolbar {
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-header,
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .omnisidebar-toolbar {
 		display: -moz-box;
 		visibility: visible;
 	}
-	.sidebar-box[customizing] .sidebar-browser {
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-browser {
 		display: none;
 	}
 	

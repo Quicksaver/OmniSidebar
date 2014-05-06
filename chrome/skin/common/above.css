@@ -24,7 +24,7 @@
 	
 	/* Hide a bunch of stuff */
 	.sidebar-box[nodock] .omnisidebar-docker,
-	.sidebar-box[customizing] .omnisidebar-docker {
+	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .omnisidebar-docker {
 		display: none;
 	}
 	
@@ -47,7 +47,7 @@
 	}
 	
 	.sidebar-box[renderabove]:not([autohide]) .omnisidebar_resize_box,
-	.sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
+	window:not([omnisidebar_Australis]) .sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
 		opacity: 1;
 	}
 	
@@ -74,7 +74,8 @@
 		-moz-border-start: none;
 		-moz-border-end: 1px solid rgb(169, 183, 201);
 	}
-	.sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
+	window[omnisidebar_Australis] .sidebar-box .omnisidebar_resizer:hover,
+	window:not([omnisidebar_Australis]) .sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
 	.sidebar-splitter[disabled]:hover {
 		cursor: ew-resize !important;
 	}

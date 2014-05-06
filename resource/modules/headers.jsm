@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.12';
+moduleAid.VERSION = '1.0.13';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -151,6 +151,8 @@ this.headersCustomize = function(e) {
 };
 
 this.setCustomizeWidth = function() {
+	if(Australis) { return; }
+	
 	// Unload current stylesheet if it's been loaded
 	styleAid.unload('customizeWidthURI_'+_UUID);
 	

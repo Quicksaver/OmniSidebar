@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.4';
+moduleAid.VERSION = '1.1.5';
 
 this.setTransparency = function() {
 	styleAid.unload('glassStyleTransparency');
@@ -14,7 +14,9 @@ this.setTransparency = function() {
 	var color = Math.max(Math.round((alpha *m) +b), 0);
 	
 	sscode += '	.sidebar-box[renderabove] .omnisidebar_resize_box,\n';
-	sscode += '	.sidebar-box:not([renderabove])[customizing] .sidebar-header,\n';
+	if(!Australis) {
+		sscode += '	.sidebar-box:not([renderabove])[customizing] .sidebar-header,\n';
+	}
 	sscode += '	.sidebar-box:not([renderabove]) {\n';
 	sscode += '		background-color: rgba('+color+','+color+','+color+','+alpha+') !important;\n';
 	sscode += '	}\n';
