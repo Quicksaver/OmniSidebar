@@ -107,6 +107,14 @@
 		top: 5% !important;
 		height: 90% !important;
 	}
+	/* Tile Tabs changes the tabpanels element to display:-moz-stack, which renders any z-index inside it useless,
+	because of this, the status display will be shown behind the sidebar, so I have no choice but to raise it in this case */
+	#main-window[sizemode='maximized'][tiletabs-ffversion] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
+		height: 95.5% !important;
+	}
+	#main-window[sizemode='normal'][tiletabs-ffversion] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
+		height: 93.5% !important;
+	}
 	
 	.sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
 		box-shadow: 1px 1px 2px rgba(0,0,0,.4), 1px 0px 3px rgba(0,0,0,.4) inset, 1px 1px 6px rgba(0,0,0,.4) !important;
