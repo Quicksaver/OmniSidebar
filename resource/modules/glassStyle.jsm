@@ -1,83 +1,69 @@
-moduleAid.VERSION = '1.1.5';
+Modules.VERSION = '1.2.0';
 
 this.setTransparency = function() {
-	styleAid.unload('glassStyleTransparency');
-	
-	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
-	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
-	
-	var alpha = prefAid.transparency /1000;
-	
+	var alpha = Prefs.transparency /1000;
 	var m = 128/0.75;
 	var b = 128 -m;
 	var color = Math.max(Math.round((alpha *m) +b), 0);
 	
+	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
+	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
+	sscode += '@-moz-document url("chrome://browser/content/browser.xul") {\n';
 	sscode += '	.sidebar-box[renderabove] .omnisidebar_resize_box,\n';
-	if(!Australis) {
-		sscode += '	.sidebar-box:not([renderabove])[customizing] .sidebar-header,\n';
-	}
 	sscode += '	.sidebar-box:not([renderabove]) {\n';
 	sscode += '		background-color: rgba('+color+','+color+','+color+','+alpha+') !important;\n';
 	sscode += '	}\n';
-	
 	sscode += '}';
 	
-	styleAid.load('glassStyleTransparency', sscode, true);
+	Styles.load('glassStyleTransparency', sscode, true);
 };
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('glassStyle', 'glass/glass');
-	if(Australis) {
-		styleAid.load('glassStyleOldButtons', 'Ff5');
-	}
-	styleAid.load('glassStyleFF', 'glass/glass-ff5');
-	styleAid.load('glassStyleGeneral', 'glass/glass-general');
-	styleAid.load('glassStyleNative', 'glass/glass-nativeSidebars');
-	styleAid.load('glassStyleFeed', 'glass/glass-feedbar');
-	styleAid.load('glassStyleUpdScanner', 'glass/glass-updscanner');
-	styleAid.load('glassStyleSimilarWeb', 'glass/glass-similarweb');
-	styleAid.load('glassStyleDelicious', 'glass/glass-delicious');
-	styleAid.load('glassStyleConsole', 'glass/glass-console');
-	styleAid.load('glassStyleBrowserConsole', 'glass/glass-browserConsole');
-	styleAid.load('glassStyleDMT', 'glass/glass-dmt');
-	styleAid.load('glassStyleAddons', 'glass/glass-addons');
-	styleAid.load('glassStyleStylish', 'glass/glass-stylish');
-	styleAid.load('glassStyleDOMInspector', 'glass/glass-domi');
-	styleAid.load('glassStylePocket', 'glass/glass-pocket');
-	styleAid.load('glassStyleScratchpad', 'glass/glass-scratchpad');
+Modules.LOADMODULE = function() {
+	Styles.load('glassStyle', 'glass/glass');
+	Styles.load('glassStyleFF', 'glass/glass-ff5');
+	Styles.load('glassStyleGeneral', 'glass/glass-general');
+	Styles.load('glassStyleNative', 'glass/glass-nativeSidebars');
+	Styles.load('glassStyleFeed', 'glass/glass-feedbar');
+	Styles.load('glassStyleUpdScanner', 'glass/glass-updscanner');
+	Styles.load('glassStyleSimilarWeb', 'glass/glass-similarweb');
+	Styles.load('glassStyleDelicious', 'glass/glass-delicious');
+	Styles.load('glassStyleConsole', 'glass/glass-console');
+	Styles.load('glassStyleBrowserConsole', 'glass/glass-browserConsole');
+	Styles.load('glassStyleDMT', 'glass/glass-dmt');
+	Styles.load('glassStyleAddons', 'glass/glass-addons');
+	Styles.load('glassStyleStylish', 'glass/glass-stylish');
+	Styles.load('glassStyleDOMInspector', 'glass/glass-domi');
+	Styles.load('glassStylePocket', 'glass/glass-pocket');
+	Styles.load('glassStyleScratchpad', 'glass/glass-scratchpad');
 	
-	prefAid.listen('transparency', setTransparency);
+	Prefs.listen('transparency', setTransparency);
 	setTransparency();
 	
-	overlayAid.overlayURI('chrome://omnisidebar/content/mainSidebar.xul', 'glassMain');
-	overlayAid.overlayURI('chrome://omnisidebar/content/twin.xul', 'glassTwin');
+	Overlays.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'glassMain');
+	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'glassTwin');
 };
 
-moduleAid.UNLOADMODULE = function() {
-	styleAid.unload('glassStyle');
-	if(Australis) {
-		styleAid.unload('glassStyleOldButtons');
-	}
-	styleAid.unload('glassStyleFF');
-	styleAid.unload('glassStyleGeneral');
-	styleAid.unload('glassStyleNative');
-	styleAid.unload('glassStyleFeed');
-	styleAid.unload('glassStyleUpdScanner');
-	styleAid.unload('glassStyleSimilarWeb');
-	styleAid.unload('glassStyleDelicious');
-	styleAid.unload('glassStyleConsole');
-	styleAid.unload('glassStyleBrowserConsole');
-	styleAid.unload('glassStyleDMT');
-	styleAid.unload('glassStyleAddons');
-	styleAid.unload('glassStyleStylish');
-	styleAid.unload('glassStyleDOMInspector');
-	styleAid.unload('glassStylePocket');
-	styleAid.unload('glassStyleScratchpad');
+Modules.UNLOADMODULE = function() {
+	Styles.unload('glassStyle');
+	Styles.unload('glassStyleFF');
+	Styles.unload('glassStyleGeneral');
+	Styles.unload('glassStyleNative');
+	Styles.unload('glassStyleFeed');
+	Styles.unload('glassStyleUpdScanner');
+	Styles.unload('glassStyleSimilarWeb');
+	Styles.unload('glassStyleDelicious');
+	Styles.unload('glassStyleConsole');
+	Styles.unload('glassStyleBrowserConsole');
+	Styles.unload('glassStyleDMT');
+	Styles.unload('glassStyleAddons');
+	Styles.unload('glassStyleStylish');
+	Styles.unload('glassStyleDOMInspector');
+	Styles.unload('glassStylePocket');
+	Styles.unload('glassStyleScratchpad');
 	
-	styleAid.unload('glassStyleTransparency');
-	prefAid.unlisten('transparency', setTransparency);
+	Styles.unload('glassStyleTransparency');
+	Prefs.unlisten('transparency', setTransparency);
 	
-	overlayAid.removeOverlayURI('chrome://omnisidebar/content/mainSidebar.xul', 'glassMain');
-	overlayAid.removeOverlayURI('chrome://omnisidebar/content/twin.xul', 'glassTwin');
+	Overlays.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'glassMain');
+	Overlays.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'glassTwin');
 };

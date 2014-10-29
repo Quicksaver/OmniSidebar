@@ -1,31 +1,16 @@
-@import url("chrome://omnisidebar-os/skin/icons.css"); /* Buttons */
-
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 	/* Headers */
 	/* Everything related to toolbarbuttons takes an !important tag */
-	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1 {
-		-moz-appearance: toolbarbutton !important;
-		margin: 0 2px 0 2px !important;
-		padding: 1px 5px 1px 5px !important;
-	}
-	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1[checked="true"],
-	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1:active {
-		margin: 0 2px 0 2px !important;
-		padding: 1px 5px 1px 5px !important; /* This !important is for some themes to dimension the button correctly */
-	}
-	window:not([omnisidebar_Australis]) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
-		max-width: 17px !important;
-		max-height: 17px !important;
-	}
 	
 	.omnisidebar-toolbar { 
 		-moz-appearance: none !important; /* without !important the changes won't take effect */
 		border: none !important;
 		padding: 1px 3px;
 	}
-	#main-window[sizemode="fullscreen"] .omnisidebar-toolbar { 
+	
+	window[sizemode="fullscreen"] .omnisidebar-toolbar[moz-collapsed="true"]:not([collapsed="true"]) { 
 		visibility: visible; 
 	}
 	
@@ -39,6 +24,7 @@
 		padding: 0;
 		overflow: hidden;
 	}
+	
 	.sidebar-box[noclose] .sidebar-header {
 		-moz-padding-end: 3px;
 	}
@@ -47,87 +33,62 @@
 	#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
 	#omnisidebar-sidebar-throbber-twin,
 	.sidebar-box[notitle] .sidebar-title,
-	.sidebar-box[noclose] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
-	.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon, /* FF31+, confirm later to be sure */
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-title, /* FF30- */
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-header > toolbarbutton.tabs-closebutton, /* FF30- */
+	.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon,
 	.omnisidebar-toolbar toolbarbutton[disabled] {
 		display: none !important;
 	}
 	
-	/* remove :not([customizing]) for Australis */
-	.sidebar-box:not([notitle]):not([customizing]) .header-spacer,
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .header-spacer {
+	.sidebar-box:not([notitle]) .header-spacer {
 		display: none;
 	}
-	/* remove :not([customizing]) for Australis */
-	.sidebar-box[notitle]:not([customizing]) .header-spacer {
+	
+	.sidebar-box[notitle] .header-spacer {
 		display: -moz-box;
 	}
+	
 	.sidebar-box .sidebar-title {
 		text-align: center;
 		padding: 0 !important;
 		margin: 1px 3px !important;
 	}
 	
-	#omnisidebar-sidebar-customizingLabel,
-	#omnisidebar-sidebar-customizingLabel-twin {
-		text-align: right;
-		margin: 5px 5px 0 5px !important;
-	}
-	/* remove :not([customizing]) for Australis */
-	.sidebar-box:not([customizing]) .stackSidebar {
+	.sidebar-box .stackSidebar {
 		display: -moz-box;
 	}
 	
-	/* Sidebar size, position and animation */
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing],
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing][hidden="true"] {
-		-moz-appearance: none;
-		position: fixed;
-		overflow: visible !important;
-		/* Compatibility with Memory Fox: !important tag in the overflow property, already talked to the developer and he will fix it in his extension himself in future versions
-		so this is just for compatibility with past versions, maybe I will remove it in the future since those versions don't even seem to be available anyway
-		for now I'll leave it because the latest version still has the issue;
-		tried to conditionally set it via javascript but I couldn't get it to detect memory fox and still apply the change */
-		background: none;
-	}
+	/* customize dialog */
 	
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing],
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing][hidden="true"] {
-		display: -moz-box;
-	}
-	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(ltr):not([movetoright]),
-	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(ltr)[movetoleft],
-	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(rtl)[movetoright],
-	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(rtl):not([movetoleft]) {
-		left: 0px;
-	}
-	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(ltr)[movetoright],
-	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(ltr):not([movetoleft]),
-	window:not([omnisidebar_Australis]) #sidebar-box[customizing]:not([renderabove]):-moz-locale-dir(rtl):not([movetoright]),
-	window:not([omnisidebar_Australis]) #omnisidebar-sidebar-box-twin[customizing]:not([renderabove]):-moz-locale-dir(rtl)[movetoleft] {
-		right: 0px;
-	}
-	
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-header,
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .omnisidebar-toolbar {
-		display: -moz-box;
-		visibility: visible;
-	}
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .sidebar-browser {
-		display: none;
-	}
-	
-	/* Australis customize dialog */
 	#omnisidebar-toolbarCustomizeWrapper {
 		margin: 15px;
+		display: flex;
 	}
 	
-	#omnisidebar-toolbarCustomizeWrapper stack {
+	#omnisidebar-toolbarCustomizeWrapper > :not(label) { flex: 3 3 auto; }
+	#omnisidebar-toolbarCustomizeWrapper > label { flex: 1 1 auto; }
+	
+	#omnisidebar-toolbarCustomizeWrapper .stackSidebar {
 		border: 1px solid rgba(0,0,0,.3);
 		box-shadow: 0 0 4px rgba(0,0,0,.3);
 		background: rgba(250, 250, 250, 0.8);
+		width: 100%;
+	}
+	
+  	#omnisidebar-toolbarCustomizeWrapper .stackSidebar > label {
+		margin: 5px 15px;
+		color: #777;
+	}
+	#omnisidebar-toolbarCustomizeWrapper .stackSidebar:-moz-locale-dir(ltr) > label { text-align: right; }
+	#omnisidebar-toolbarCustomizeWrapper .stackSidebar:-moz-locale-dir(rtl) > label { text-align: left; }
+	
+	window:not([customizing="true"]) .stackSidebar > label {
+		visibility: collapse;
+	}
+	
+	/* sometimes the buttons would still be visible, and the toolbar would still have a small dropable area,
+	this is probably because of a freak combination of display:flex and visibility:collapse */
+	#omnisidebar-toolbarCustomizeWrapper[collapsed="true"] {
+		opacity: 0;
+		pointer-events: none;
 	}
 	
 	/* Tricks needed */

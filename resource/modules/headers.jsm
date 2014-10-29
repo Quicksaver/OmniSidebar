@@ -1,287 +1,205 @@
-moduleAid.VERSION = '1.0.13';
+Modules.VERSION = '1.1.0';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
-		prefAid.toolbar = !prefAid.toolbar;
+		Prefs.toolbar = mainSidebar.toolbar.collapsed;
 	} else {
-		prefAid.toolbarTwin = !prefAid.toolbarTwin;
+		Prefs.toolbarTwin = twinSidebar.toolbar.collapsed;
 	}
 };
 
-this.toggleToolbars = function(noHeaders) {
-	hideIt(mainSidebar.toolbar, prefAid.toolbar && toolbarHasButtons(mainSidebar.toolbar));
-	hideIt(twinSidebar.toolbar, prefAid.toolbarTwin && toolbarHasButtons(twinSidebar.toolbar));
+this.toggleTitles = function(headers) {
+	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && Prefs.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'));
+	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && Prefs.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'));
 	
-	toggleAttribute(mainSidebar.toolbarBroadcaster, 'checked', prefAid.toolbar);
-	toggleAttribute(twinSidebar.toolbarBroadcaster, 'checked', prefAid.toolbarTwin);
-	
-	if(!noHeaders) {
+	if(headers) {
 		toggleHeaders();
 	}
 };
 
-this.toggleTitles = function(noHeaders) {
-	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && prefAid.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'));
-	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && prefAid.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'));
+this.toggleCloses = function(headers) {
+	toggleAttribute(mainSidebar.box, 'noclose', !UNLOADED && Prefs.hideheaderclose);
+	toggleAttribute(twinSidebar.box, 'noclose', !UNLOADED && Prefs.hideheadercloseTwin);
 	
-	if(!noHeaders) {
-		toggleHeaders();
-	}
-};
-
-this.toggleCloses = function(noHeaders) {
-	toggleAttribute(mainSidebar.box, 'noclose', !UNLOADED && prefAid.hideheaderclose);
-	toggleAttribute(twinSidebar.box, 'noclose', !UNLOADED && prefAid.hideheadercloseTwin);
-	
-	if(!noHeaders) {
+	if(headers) {
 		toggleHeaders();
 	}
 };
 
 this.toggleButtonStyle = function() {
 	// we always "load" alternate styles in mac, mac doesn't actually have an alternate style, but this is so the glass style also loads there
-	var isMac = Services.appinfo.OS == 'Darwin';
 	
-	toggleAttribute(mainSidebar.toolbar, 'alternatebtns', isMac || (!UNLOADED && prefAid.alternatebtns));
-	toggleAttribute(twinSidebar.toolbar, 'alternatebtns', isMac || (!UNLOADED && prefAid.alternatebtnsTwin));
+	toggleAttribute(mainSidebar.toolbar, 'alternatebtns', DARWIN || (!UNLOADED && Prefs.alternatebtns));
+	toggleAttribute(twinSidebar.toolbar, 'alternatebtns', DARWIN || (!UNLOADED && Prefs.alternatebtnsTwin));
 	
-	styleAid.loadIf('alternatebtns', (Australis) ? 'australisButtons' : 'Ff5', false, isMac || prefAid.alternatebtns || (prefAid.twinSidebar && prefAid.alternatebtnsTwin));
+	Styles.loadIf('alternatebtns', 'buttonsStyle', false, DARWIN || Prefs.alternatebtns || (Prefs.twinSidebar && Prefs.alternatebtnsTwin));
 };
 
 this.toggleIconsColor = function() {
-	if(!Australis && Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin') {
-		if(prefAid.coloricons != 'default') {
-			prefAid.coloricons = 'default';
-		}
-		if(prefAid.coloriconsTwin != 'default') {
-			prefAid.coloriconsTwin = 'default';
-		}
-	}
-	
-	setAttribute(mainSidebar.toolbar, 'coloricons', prefAid.coloricons);
-	setAttribute(twinSidebar.toolbar, 'coloricons', prefAid.coloriconsTwin);
+	setAttribute(mainSidebar.toolbar, 'coloricons', Prefs.coloricons);
+	setAttribute(twinSidebar.toolbar, 'coloricons', Prefs.coloriconsTwin);
 };
 
 this.hideMainHeader = {
-	get toolbar () { return !prefAid.toolbar || !toolbarHasButtons(mainSidebar.toolbar); },
-	get title () { return prefAid.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'); },
-	get close () { return prefAid.hideheaderclose; }
+	get toolbar () { return !Prefs.toolbar || !toolbarHasButtons(mainSidebar.toolbar); },
+	get title () { return Prefs.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'); },
+	get close () { return Prefs.hideheaderclose; }
 };
 this.hideTwinHeader = {
-	get toolbar () { return !prefAid.toolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
-	get title () { return prefAid.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'); },
-	get close () { return prefAid.hideheadercloseTwin; }
+	get toolbar () { return !Prefs.toolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
+	get title () { return Prefs.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'); },
+	get close () { return Prefs.hideheadercloseTwin; }
 };
 
 // Handles the headers visibility
 // Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons
 this.toggleHeaders = function() {
-	var mainHeader = true;
+	// first we make sure the pref value reflects the toolbar state
+	if(mainSidebar.toolbar && Prefs.toolbar == mainSidebar.toolbar.collapsed) {
+		CustomizableUI.setToolbarVisibility(mainSidebar.toolbar.id, Prefs.toolbar);
+	}
+	if(twinSidebar.toolbar && Prefs.toolbarTwin == twinSidebar.toolbar.collapsed) {
+		CustomizableUI.setToolbarVisibility(twinSidebar.toolbar.id, Prefs.toolbarTwin);
+	}
+	
+	var mainHeader = false;
 	for(var x in hideMainHeader) {
 		if(!hideMainHeader[x]) {
-			mainHeader = false;
+			mainHeader = true;
 			break;
 		}
 	}
-	var twinHeader = true;
+	var twinHeader = false;
 	for(var x in hideTwinHeader) {
 		if(!hideTwinHeader[x]) {
-			twinHeader = false;
+			twinHeader = true;
 			break;
 		}
 	}
 	
-	toggleAttribute(mainSidebar.header, 'hidden', mainHeader);
-	toggleAttribute(twinSidebar.header, 'hidden', twinHeader);
+	hideIt(mainSidebar.header, mainHeader);
+	hideIt(twinSidebar.header, twinHeader);
+	
+	hideIt($(objName+'-toolbarCustomizeWrapper'), Prefs.toolbar || (Prefs.twinSidebar && Prefs.toolbarTwin));
 };
 
 this.toolbarHasButtons = function(toolbar) {
 	if(toolbar) {
-		for(var i=0; i<toolbar.childNodes.length; i++) {
-			if(!toolbar.childNodes[i].collapsed && !toolbar.childNodes[i].hidden) { return true; }
+		for(var child of toolbar.childNodes) {
+			if(!child.collapsed && !child.hidden) { return true; }
 		}
 	}
 	return false;
 };
 
 this.headersCustomize = function(e) {
-	customizing = (e && e.type == 'beforecustomization') || (!e && customizing);
-	
-	hideIt($(objName+'-sidebar-customizingLabel'), customizing);
-	hideIt($(objName+'-sidebar-customizingLabel-twin'), customizing);
-	
-	toggleAttribute(mainSidebar.toolbar, 'flex', customizing, '1');
-	toggleAttribute(mainSidebar.stack, 'flex', customizing, '2');
-	
-	toggleAttribute(twinSidebar.toolbar, 'flex', customizing, '1');
-	toggleAttribute(twinSidebar.stack, 'flex', customizing, '2');
-	
-	if(!Australis) {
-		// These are no longer needed with Australis
-		toggleAttribute(mainSidebar.box, 'customizing', customizing);
-		toggleAttribute(twinSidebar.box, 'customizing', customizing);
-		
-		toggleToolbars();
-		
-		if(!customizing) {
-			if(mainSidebar.toolbar) {
-				mainSidebar.toolbar.setAttribute('currentset', mainSidebar.toolbar.currentSet);
-				document.persist(mainSidebar.toolbar.id, 'currentset');
-			}
-			if(twinSidebar.toolbar) {
-				twinSidebar.toolbar.setAttribute('currentset', twinSidebar.toolbar.currentSet);
-				document.persist(twinSidebar.toolbar.id, 'currentset');
-			}
-		}
-		
-		return;
-	}
-	
-	if(customizing) {
-		overlayAid.overlayWindow(window, 'customize');
-		
-		hideIt(mainSidebar.toolbar, true);
-		hideIt(twinSidebar.toolbar, true);
+	if((e && e.type == 'beforecustomization') || (!e && customizing)) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
+		Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
 	}
 	else {
-		overlayAid.removeOverlayWindow(window, 'customize');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
 		
-		toggleToolbars();
+		// our CUI listener doesn't run while in customize mode, we only need to do this after exiting anyway
+		toggleHeaders();
 	}
-};
-
-this.setCustomizeWidth = function() {
-	if(Australis) { return; }
-	
-	// Unload current stylesheet if it's been loaded
-	styleAid.unload('customizeWidthURI_'+_UUID);
-	
-	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
-	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	if(mainSidebar.width) {
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[customizing]  { width: ' + mainSidebar.width + 'px; }\n';
-	}
-	if(twinSidebar.width) {
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[customizing]  { width: ' + twinSidebar.width + 'px; }\n';
-	}
-	sscode += '}';
-	
-	styleAid.load('customizeWidthURI_'+_UUID, sscode, true);
 };
 
 this.toolbarsCustomized = {
-	onWidgetAdded: function(aWidget, aArea) { this.listener(aWidget, aArea); },
-	onWidgetRemoved: function(aWidget, aArea) { this.listener(aWidget, aArea); },
-	listener: function(aWidget, aArea) {
+	onWidgetAdded: function(aWidget, aArea) { this.listener(aArea); },
+	onWidgetRemoved: function(aWidget, aArea) { this.listener(aArea); },
+	onAreaNodeRegistered: function(aArea) { this.listener(aArea); },
+	onAreaNodeUnregistered: function(aArea) { this.listener(aArea); },
+	
+	listener: function(aArea) {
 		if(customizing) { return; }
 		
 		if((mainSidebar.toolbar && mainSidebar.toolbar.id == aArea) || (twinSidebar.toolbar && twinSidebar.toolbar.id == aArea)) {
-			toggleToolbars();
+			toggleHeaders();
 		}
 	}
 };
 
 this.toggleHeadersOnLoad = function() {
-	listenerAid.add(window, 'sidebarWidthChanged', setCustomizeWidth, false);
-	
-	listenerAid.add(window, 'beforecustomization', headersCustomize, false);
-	listenerAid.add(window, 'aftercustomization', headersCustomize, false);
+	Listeners.add(window, 'beforecustomization', headersCustomize);
+	Listeners.add(window, 'aftercustomization', headersCustomize);
 	headersCustomize();
 	
-	if(Australis) {
-		CustomizableUI.addListener(toolbarsCustomized);
-	}
+	CustomizableUI.addListener(toolbarsCustomized);
 	
-	toggleToolbars(true);
-	toggleTitles(true);
-	toggleCloses(true);
+	toggleTitles();
+	toggleCloses();
 	toggleButtonStyle();
 	toggleIconsColor();
 	toggleHeaders();
 	
-	setCustomizeWidth();
-	
 	dispatch(window, { type: 'loadedSidebarHeader', cancelable: false });
 };
 
-this.toggleHeadersOverlay = function(window) {
-	// I actually don't remember why I did this aSync... but I'm leaving it
-	if(!window[objName].toggleHeadersOnLoad) {
-		aSync(function() { window[objName].toggleHeadersOnLoad(); }, 100);
-		return;
-	}
-	window[objName].toggleHeadersOnLoad();
-};
-
-moduleAid.LOADMODULE = function() {
-	overlayAid.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers', null, toggleHeadersOverlay);
-	overlayAid.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOverlay);
-	styleAid.load('headers', 'headers');
+Modules.LOADMODULE = function() {
+	Overlays.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers', null, toggleHeadersOnLoad);
+	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOnLoad);
 	
-	prefAid.listen('toolbar', toggleToolbars);
-	prefAid.listen('hideheadertitle', toggleTitles);
-	prefAid.listen('hideheaderclose', toggleCloses);
-	prefAid.listen('alternatebtns', toggleButtonStyle);
-	prefAid.listen('coloricons', toggleIconsColor);
-	prefAid.listen('toolbarTwin', toggleToolbars);
-	prefAid.listen('hideheadertitleTwin', toggleTitles);
-	prefAid.listen('hideheadercloseTwin', toggleCloses);
-	prefAid.listen('alternatebtnsTwin', toggleButtonStyle);
-	prefAid.listen('coloriconsTwin', toggleIconsColor);
+	Prefs.listen('toolbar', toggleHeaders);
+	Prefs.listen('hideheadertitle', toggleTitles);
+	Prefs.listen('hideheaderclose', toggleCloses);
+	Prefs.listen('alternatebtns', toggleButtonStyle);
+	Prefs.listen('coloricons', toggleIconsColor);
+	Prefs.listen('toolbarTwin', toggleHeaders);
+	Prefs.listen('hideheadertitleTwin', toggleTitles);
+	Prefs.listen('hideheadercloseTwin', toggleCloses);
+	Prefs.listen('alternatebtnsTwin', toggleButtonStyle);
+	Prefs.listen('coloriconsTwin', toggleIconsColor);
 	
 	twinTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
 	
-	moduleAid.load('menus');
-	moduleAid.load('renderAbove');
-	moduleAid.load('goURI');
-	moduleAid.load('autoclose');
+	Modules.load('menus');
+	Modules.load('renderAbove');
+	Modules.load('goURI');
+	Modules.load('autoclose');
 };
 
-moduleAid.UNLOADMODULE = function() {
-	moduleAid.unload('autoclose');
-	moduleAid.unload('goURI');
-	moduleAid.unload('renderAbove');
-	moduleAid.unload('menus');
+Modules.UNLOADMODULE = function() {
+	Modules.unload('autoclose');
+	Modules.unload('goURI');
+	Modules.unload('renderAbove');
+	Modules.unload('menus');
 	
 	delete twinTriggers.twinToolbar;
 	
-	if(Australis) {
-		overlayAid.removeOverlayWindow(window, 'customize');
-		CustomizableUI.removeListener(toolbarsCustomized);
+	if(customizing) {
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
 	}
+	CustomizableUI.removeListener(toolbarsCustomized);
 	
-	prefAid.unlisten('toolbar', toggleToolbars);
-	prefAid.unlisten('hideheadertitle', toggleTitles);
-	prefAid.unlisten('hideheaderclose', toggleCloses);
-	prefAid.unlisten('alternatebtns', toggleButtonStyle);
-	prefAid.unlisten('coloricons', toggleIconsColor);
-	prefAid.unlisten('toolbarTwin', toggleToolbars);
-	prefAid.unlisten('hideheadertitleTwin', toggleTitles);
-	prefAid.unlisten('hideheadercloseTwin', toggleCloses);
-	prefAid.unlisten('alternatebtnsTwin', toggleButtonStyle);
-	prefAid.unlisten('coloriconsTwin', toggleIconsColor);
+	Prefs.unlisten('toolbar', toggleHeaders);
+	Prefs.unlisten('hideheadertitle', toggleTitles);
+	Prefs.unlisten('hideheaderclose', toggleCloses);
+	Prefs.unlisten('alternatebtns', toggleButtonStyle);
+	Prefs.unlisten('coloricons', toggleIconsColor);
+	Prefs.unlisten('toolbarTwin', toggleHeaders);
+	Prefs.unlisten('hideheadertitleTwin', toggleTitles);
+	Prefs.unlisten('hideheadercloseTwin', toggleCloses);
+	Prefs.unlisten('alternatebtnsTwin', toggleButtonStyle);
+	Prefs.unlisten('coloriconsTwin', toggleIconsColor);
 	
-	listenerAid.remove(window, 'beforecustomization', headersCustomize, false);
-	listenerAid.remove(window, 'aftercustomization', headersCustomize, false);
-	
-	listenerAid.remove(window, 'sidebarWidthChanged', setCustomizeWidth, false);
+	Listeners.remove(window, 'beforecustomization', headersCustomize);
+	Listeners.remove(window, 'aftercustomization', headersCustomize);
 	
 	removeAttribute(mainSidebar.toolbar, 'coloricons');
 	removeAttribute(twinSidebar.toolbar, 'coloricons');
 	
-	toggleTitles(true);
-	toggleCloses(true);
+	toggleTitles();
+	toggleCloses();
 	toggleButtonStyle();
 	removeAttribute(mainSidebar.header, 'hidden');
-	removeAttribute(twinSidebar.header, 'hidden'); 
-	
-	styleAid.unload('customizeWidthURI_'+_UUID);
+	removeAttribute(twinSidebar.header, 'hidden');
 	
 	if(UNLOADED) {
-		styleAid.unload('headers');
-		styleAid.unload('alternatebtns');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin');
+		Styles.unload('alternatebtns');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin');
 	}
 };

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.8';
+Modules.VERSION = '1.1.0';
 
 this.buttonsToWatch = [
 	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
@@ -10,10 +10,10 @@ this.setButtonModifiers = function(bar) {
 	if(!bar.button) { return; }
 	
 	var modifiers = {};
-	for(var i=0; i<buttonsToWatch.length; i++) {
-		if(modifiers[buttonsToWatch[i].modifierAttr]) { continue; }
+	for(var watch of buttonsToWatch) {
+		if(modifiers[watch.modifierAttr]) { continue; }
 		
-		modifiers[buttonsToWatch[i].modifierAttr] = !customizing && isAncestor($(buttonsToWatch[i].id), bar.toolbar) && $(buttonsToWatch[i].id).getAttribute(buttonsToWatch[i].watchAttr) == buttonsToWatch[i].trueVal;
+		modifiers[watch.modifierAttr] = !customizing && isAncestor($(watch.id), bar.toolbar) && $(watch.id).getAttribute(watch.watchAttr) == watch.trueVal;
 	}
 	
 	for(var a in modifiers) {
@@ -26,11 +26,11 @@ this.updateButtonModifier = function(obj, attr, oldValue, newValue) {
 	
 	if(bar && bar.button) {
 		var modifiers = {};
-		for(var i=0; i<buttonsToWatch.length; i++) {
-			if(buttonsToWatch[i].id == obj.id && buttonsToWatch[i].watchAttr == attr) {
-				if(modifiers[buttonsToWatch[i].modifierAttr]) { continue; }
+		for(var watch of buttonsToWatch) {
+			if(watch.id == obj.id && watch.watchAttr == attr) {
+				if(modifiers[watch.modifierAttr]) { continue; }
 				
-				modifiers[buttonsToWatch[i].modifierAttr] = newValue == buttonsToWatch[i].trueVal;
+				modifiers[watch.modifierAttr] = newValue == watch.trueVal;
 			}
 		}
 		
@@ -41,11 +41,11 @@ this.updateButtonModifier = function(obj, attr, oldValue, newValue) {
 };
 
 this.customizeButtonModifiers = function() {
-	for(var i=0; i<buttonsToWatch.length; i++) {
-		if(customizing || (!isAncestor($(buttonsToWatch[i].id), mainSidebar.toolbar) && !isAncestor($(buttonsToWatch[i].id), twinSidebar.toolbar))) {
-			objectWatcher.removeAttributeWatcher($(buttonsToWatch[i].id), buttonsToWatch[i].watchAttr, updateButtonModifier);
+	for(var watch of buttonsToWatch) {
+		if(customizing || (!isAncestor($(watch.id), mainSidebar.toolbar) && !isAncestor($(watch.id), twinSidebar.toolbar))) {
+			Watchers.removeAttributeWatcher($(watch.id), watch.watchAttr, updateButtonModifier);
 		} else {
-			objectWatcher.addAttributeWatcher($(buttonsToWatch[i].id), buttonsToWatch[i].watchAttr, updateButtonModifier);
+			Watchers.addAttributeWatcher($(watch.id), watch.watchAttr, updateButtonModifier);
 		}
 	}
 		
@@ -57,7 +57,7 @@ this.customizeButtonModifiers = function() {
 this.buttonLabels = function(btn, onLoad) {
 	if(!btn) { return; }
 	
-	aSync(function() { btn.setAttribute('loaded', 'true'); });
+	aSync(function() { setAttribute(btn, 'loaded', 'true'); });
 	if(btn == mainSidebar.button) {
 		var box = mainSidebar.box;
 		var check = !box || mainSidebar.closed || customizing;
@@ -66,23 +66,23 @@ this.buttonLabels = function(btn, onLoad) {
 			setButtonModifiers(mainSidebar);
 		}
 		
-		btn.setAttribute('label', mainSidebar.label);
-		if(prefAid.twinSidebar) {
+		setAttribute(btn, 'label', mainSidebar.label);
+		if(Prefs.twinSidebar) {
 			if(check) {
-				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonMainTooltip'));
+				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonMainTooltip'));
 			} else {
-				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonMainCloseTooltip'));
+				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonMainCloseTooltip'));
 			}
 		} else {
 			if(check) {
-				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonTooltip'));
+				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTooltip'));
 			} else {
-				btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonCloseTooltip'));
+				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonCloseTooltip'));
 			}
 		}
 		
 		toggleAttribute(btn, 'checked', !check);
-		toggleAttribute(btn, 'movetoright', prefAid.moveSidebars);
+		toggleAttribute(btn, 'movetoright', Prefs.moveSidebars);
 		
 		setAttribute($('wrapper-'+objName+'-button'), 'title', btn.getAttribute('label'));
 		
@@ -97,15 +97,15 @@ this.buttonLabels = function(btn, onLoad) {
 			setButtonModifiers(twinSidebar);
 		}
 		
-		btn.setAttribute('label', twinSidebar.label);
+		setAttribute(btn, 'label', twinSidebar.label);
 		if(check) {
-			btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonTwinTooltip'));
+			setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTwinTooltip'));
 		} else {
-			btn.setAttribute('tooltiptext', stringsAid.get('buttons', 'buttonTwinCloseTooltip'));
+			setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTwinCloseTooltip'));
 		}
 		
 		toggleAttribute(btn, 'checked', !check);
-		toggleAttribute(btn, 'movetoleft', prefAid.moveSidebars);
+		toggleAttribute(btn, 'movetoleft', Prefs.moveSidebars);
 		
 		setAttribute($('wrapper-'+objName+'-button-twin'), 'title', btn.getAttribute('label'));
 	}
@@ -116,44 +116,29 @@ this.updateButtons = function() {
 	if(twinSidebar.button) { buttonLabels(twinSidebar.button); }
 };
 
-moduleAid.LOADMODULE = function() {
-	if(!Australis) {
-		overlayAid.overlayWindow(window, 'buttons', null, null, function() {
-			removeAttribute(mainSidebar.button, 'loaded');
-			removeAttribute(twinSidebar.button, 'loaded');
-		});
-	}
+Modules.LOADMODULE = function() {
+	Prefs.listen('moveSidebars', updateButtons);
 	
-	prefAid.listen('moveSidebars', updateButtons);
-	
-	if(Australis || window.document.baseURI == 'chrome://browser/content/browser.xul') {
-		listenerAid.add(window, 'beforecustomization', customizeButtonModifiers, false);
-		listenerAid.add(window, 'aftercustomization', customizeButtonModifiers, false);
-		listenerAid.add(window, 'loadedSidebarHeader', customizeButtonModifiers, false);
-	
-		customizeButtonModifiers();
-	}
+	Listeners.add(window, 'beforecustomization', customizeButtonModifiers);
+	Listeners.add(window, 'aftercustomization', customizeButtonModifiers);
+	Listeners.add(window, 'loadedSidebarHeader', customizeButtonModifiers);
+
+	customizeButtonModifiers();
 };
 
-moduleAid.UNLOADMODULE = function() {
-	if(Australis || window.document.baseURI == 'chrome://browser/content/browser.xul') {
-		for(var i=0; i<buttonsToWatch.length; i++) {
-			objectWatcher.removeAttributeWatcher($(buttonsToWatch[i].id), buttonsToWatch[i].watchAttr, updateButtonModifier);
-		}
-		
-		listenerAid.remove(window, 'beforecustomization', customizeButtonModifiers, false);
-		listenerAid.remove(window, 'aftercustomization', customizeButtonModifiers, false);
-		listenerAid.remove(window, 'loadedSidebarHeader', customizeButtonModifiers, false);
+Modules.UNLOADMODULE = function() {
+	for(var watch of buttonsToWatch) {
+		Watchers.removeAttributeWatcher($(watch.id), watch.watchAttr, updateButtonModifier);
 	}
+	
+	Listeners.remove(window, 'beforecustomization', customizeButtonModifiers);
+	Listeners.remove(window, 'aftercustomization', customizeButtonModifiers);
+	Listeners.remove(window, 'loadedSidebarHeader', customizeButtonModifiers);
 		
-	prefAid.unlisten('moveSidebars', updateButtons);
+	Prefs.unlisten('moveSidebars', updateButtons);
 	
 	self.buttonLabels = function(btn, onLoad) {
 		if(UNLOADED) { return; }
 		if(toggleButtons()) { buttonLabels(btn, onLoad); }
 	};
-	
-	if(!Australis) {
-		overlayAid.removeOverlayWindow(window, 'buttons');
-	}
 };

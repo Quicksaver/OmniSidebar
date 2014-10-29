@@ -3,276 +3,166 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul"), url("chrome://global/content/customizeToolbar.xul") {
 
-	/* Buttons */
-	
-	window:not([omnisidebar_Australis]) #omnisidebar-button.toolbarbutton-1,
-	window:not([omnisidebar_Australis]) #omnisidebar-button-twin.toolbarbutton-1 {
-		list-style-image: url("chrome://omnisidebar/skin/osb-button.png");
-	}
-	
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button:not([movetoright]):not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button:not([movetoright])[updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button:not([movetoright]):not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button:not([movetoright])[updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
-	
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin:not([movetoleft]):not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin:not([movetoleft])[updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin:not([movetoleft]):not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin:not([movetoleft])[updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
-	
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button[movetoright]:not([updscannew]):not([feednew]) { -moz-image-region: rect(24px 24px 48px 0px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button[movetoright][updscannew]:not([feednew]) { -moz-image-region: rect(24px 48px 48px 24px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button[movetoright]:not([updscannew])[feednew] { -moz-image-region: rect(24px 72px 48px 48px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button[movetoright][updscannew][feednew] { -moz-image-region: rect(24px 96px 48px 72px); }
-	
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin[movetoleft]:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 24px 24px 0px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin[movetoleft][updscannew]:not([feednew]) { -moz-image-region: rect(0px 48px 24px 24px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin[movetoleft]:not([updscannew])[feednew] { -moz-image-region: rect(0px 72px 24px 48px); }
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar) #omnisidebar-button-twin[movetoleft][updscannew][feednew] { -moz-image-region: rect(0px 96px 24px 72px); }
-	
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button:not([movetoright]):not([updscannew]):not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button:not([movetoright]):not([updscannew]):not([feednew]) {
-		-moz-image-region: rect(48px 24px 72px 0px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button:not([movetoright])[updscannew]:not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button:not([movetoright])[updscannew]:not([feednew]) {
-		-moz-image-region: rect(48px 48px 72px 24px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button:not([movetoright]):not([updscannew])[feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button:not([movetoright]):not([updscannew])[feednew] {
-		-moz-image-region: rect(48px 72px 72px 48px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button:not([movetoright])[updscannew][feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button:not([movetoright])[updscannew][feednew] {
-		-moz-image-region: rect(48px 96px 72px 72px);
-	}
-	
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin:not([movetoleft]):not([updscannew]):not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin:not([movetoleft]):not([updscannew]):not([feednew]) {
-		-moz-image-region: rect(72px 24px 96px 0px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin:not([movetoleft])[updscannew]:not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin:not([movetoleft])[updscannew]:not([feednew]) {
-		-moz-image-region: rect(72px 48px 96px 24px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin:not([movetoleft]):not([updscannew])[feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin:not([movetoleft]):not([updscannew])[feednew] {
-		-moz-image-region: rect(72px 72px 96px 48px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin:not([movetoleft])[updscannew][feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin:not([movetoleft])[updscannew][feednew] {
-		-moz-image-region: rect(72px 96px 96px 72px);
-	}
-	
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button[movetoright]:not([updscannew]):not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button[movetoright]:not([updscannew]):not([feednew]) {
-		-moz-image-region: rect(72px 24px 96px 0px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button[movetoright][updscannew]:not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button[movetoright][updscannew]:not([feednew]) {
-		-moz-image-region: rect(72px 48px 96px 24px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button[movetoright]:not([updscannew])[feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button[movetoright]:not([updscannew])[feednew] {
-		-moz-image-region: rect(72px 72px 96px 48px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button[movetoright][updscannew][feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button[movetoright][updscannew][feednew] {
-		-moz-image-region: rect(72px 96px 96px 72px);
-	}
-	
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin[movetoleft]:not([updscannew]):not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin[movetoleft]:not([updscannew]):not([feednew]) {
-		-moz-image-region: rect(48px 24px 72px 0px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin[movetoleft][updscannew]:not([feednew]),
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin[movetoleft][updscannew]:not([feednew]) {
-		-moz-image-region: rect(48px 48px 72px 24px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin[movetoleft]:not([updscannew])[feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin[movetoleft]:not([updscannew])[feednew] {
-		-moz-image-region: rect(48px 72px 72px 48px);
-	}
-	window:not([omnisidebar_Australis]) #TabsToolbar #omnisidebar-button-twin[movetoleft][updscannew][feednew],
-	window:not([omnisidebar_Australis]) :not(#TabsToolbar)[tabsontop="false"] #omnisidebar-button-twin[movetoleft][updscannew][feednew] {
-		-moz-image-region: rect(48px 96px 72px 72px);
-	}
-	
-	
-	window:not([omnisidebar_Australis]) #navigator-toolbox[iconsize="small"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon,
-	window:not([omnisidebar_Australis]) #navigator-toolbox[mode="full"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon {
-		height: 18px;
-	}
-	window:not([omnisidebar_Australis]) #navigator-toolbox:not([mode="full"])[iconsize="large"] :not(#TabsToolbar) .adequate-size .toolbarbutton-icon { height: 24px; }
-	
-	window:not([omnisidebar_Australis]) #TabsToolbar .sidebarController.adequate-size .toolbarbutton-icon { height: 16px; }
-	window:not([omnisidebar_Australis]) #TabsToolbar :not(.sidebarController).adequate-size .toolbarbutton-icon { height: 20px; }
-	
-	window:not([omnisidebar_Australis]) #navigator-toolbox[iconsize=large][mode=icons] > :not(#TabsToolbar):not(.omnisidebar-toolbar) > .adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
-	
-	
-	/* Australis */
-	
 	/* General toolbar buttons */
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 {
+	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 {
 		margin: 0 2px 0 2px !important;
 	}
-	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1[checked="true"],
-	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1:active {
+	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1[checked="true"],
+	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1:active {
 		margin: 0 2px 0 2px !important;
 	}
 	
 	/* I might have to review these in the future; they may not be 100% compatible with every toolbar button out there,
 	and it would be better if the buttons themselves were made compatible with the new Australis system. */
-	window[omnisidebar_Australis] .omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-text { display: none !important; }
-	window[omnisidebar_Australis] .omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 .toolbarbutton-icon { max-height: 18px !important; }
-	window[omnisidebar_Australis] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px !important; }
-	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 17px !important; }
+	.omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-text { display: none !important; }
+	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 .toolbarbutton-icon { max-height: 18px !important; }
+	.omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px !important; }
+	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 17px !important; }
 	
 	/* OSB Button */
 	
-	window[omnisidebar_Australis] #omnisidebar-button:not([movetoright]),
-	window[omnisidebar_Australis] #omnisidebar-button-twin[movetoleft] {
+	#omnisidebar-button:not([movetoright]),
+	#omnisidebar-button-twin[movetoleft] {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left.png");
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-button[movetoright],
-	window[omnisidebar_Australis] #omnisidebar-button-twin:not([movetoleft]) {
+	#omnisidebar-button[movetoright],
+	#omnisidebar-button-twin:not([movetoleft]) {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right.png");
 	}
 	
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button:not([movetoright]):-moz-lwtheme-brighttext,
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin[movetoleft]:-moz-lwtheme-brighttext {
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button:not([movetoright]):-moz-lwtheme-brighttext,
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin[movetoleft]:-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
 	}
 	
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button[movetoright]:-moz-lwtheme-brighttext,
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin:not([movetoleft]):-moz-lwtheme-brighttext {
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button[movetoright]:-moz-lwtheme-brighttext,
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin:not([movetoleft]):-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-button[cui-areatype="menu-panel"]:not([movetoright]),
-	window[omnisidebar_Australis] #omnisidebar-button-twin[cui-areatype="menu-panel"][movetoleft],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-button:not([movetoright]),
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-button-twin[movetoleft] {
+	#omnisidebar-button[cui-areatype="menu-panel"]:not([movetoright]),
+	#omnisidebar-button-twin[cui-areatype="menu-panel"][movetoleft],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-button:not([movetoright]),
+	toolbarpaletteitem[place="palette"] > #omnisidebar-button-twin[movetoleft] {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-panel-left.png");
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-button[cui-areatype="menu-panel"][movetoright],
-	window[omnisidebar_Australis] #omnisidebar-button-twin[cui-areatype="menu-panel"]:not([movetoleft]),
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-button[movetoright],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-button-twin:not([movetoleft]) {
+	#omnisidebar-button[cui-areatype="menu-panel"][movetoright],
+	#omnisidebar-button-twin[cui-areatype="menu-panel"]:not([movetoleft]),
+	toolbarpaletteitem[place="palette"] > #omnisidebar-button[movetoright],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-button-twin:not([movetoleft]) {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-panel-right.png");
 	}
 	
-	window[omnisidebar_Australis] .sidebarController:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 18px 18px 0px); }
-	window[omnisidebar_Australis] .sidebarController[updscannew]:not([feednew]) { -moz-image-region: rect(0px 36px 18px 18px); }
-	window[omnisidebar_Australis] .sidebarController:not([updscannew])[feednew] { -moz-image-region: rect(0px 54px 18px 36px); }
-	window[omnisidebar_Australis] .sidebarController[updscannew][feednew] { -moz-image-region: rect(0px 72px 18px 54px); }
+	.sidebarController:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 18px 18px 0px); }
+	.sidebarController[updscannew]:not([feednew]) { -moz-image-region: rect(0px 36px 18px 18px); }
+	.sidebarController:not([updscannew])[feednew] { -moz-image-region: rect(0px 54px 18px 36px); }
+	.sidebarController[updscannew][feednew] { -moz-image-region: rect(0px 72px 18px 54px); }
 	
-	window[omnisidebar_Australis] .sidebarController[cui-areatype="menu-panel"]:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 32px 32px 0px); }
-	window[omnisidebar_Australis] .sidebarController[cui-areatype="menu-panel"][updscannew]:not([feednew]) { -moz-image-region: rect(0px 64px 32px 32px); }
-	window[omnisidebar_Australis] .sidebarController[cui-areatype="menu-panel"]:not([updscannew])[feednew] { -moz-image-region: rect(0px 96px 32px 64px); }
-	window[omnisidebar_Australis] .sidebarController[cui-areatype="menu-panel"][updscannew][feednew] { -moz-image-region: rect(0px 128px 32px 96px); }
+	.sidebarController[cui-areatype="menu-panel"]:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 32px 32px 0px); }
+	.sidebarController[cui-areatype="menu-panel"][updscannew]:not([feednew]) { -moz-image-region: rect(0px 64px 32px 32px); }
+	.sidebarController[cui-areatype="menu-panel"]:not([updscannew])[feednew] { -moz-image-region: rect(0px 96px 32px 64px); }
+	.sidebarController[cui-areatype="menu-panel"][updscannew][feednew] { -moz-image-region: rect(0px 128px 32px 96px); }
 	
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] .sidebarController:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 32px 32px 0px); }
+	toolbarpaletteitem[place="palette"] .sidebarController:not([updscannew]):not([feednew]) { -moz-image-region: rect(0px 32px 32px 0px); }
 	
 	/* Custom Buttons */
 	
-	window[omnisidebar_Australis] .osb-custom-button { list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar.png"); }
-	window[omnisidebar_Australis] .omnisidebar-toolbar:not([coloricons="ff"]) .osb-custom-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
+	.osb-custom-button { list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar.png"); }
+	.omnisidebar-toolbar:not([coloricons="ff"]) .osb-custom-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
 	
-	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] .osb-custom-button:-moz-lwtheme-brighttext,
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox) .osb-custom-button:-moz-lwtheme-brighttext {
+	.sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] .osb-custom-button:-moz-lwtheme-brighttext,
+	:-moz-any(#navigator-toolbox, #browser-bottombox) .osb-custom-button:-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 	}
 	
-	window[omnisidebar_Australis] .osb-custom-button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > .osb-custom-button {
+	.osb-custom-button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > .osb-custom-button {
 		list-style-image: url("chrome://omnisidebar/skin/custom-buttons-panel.png");
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-console_sidebar_button { -moz-image-region: rect(0px 126px 18px 108px); }
-	window[omnisidebar_Australis] #omnisidebar-dominspector_sidebar_button { -moz-image-region: rect(0px 144px 18px 126px); }
-	window[omnisidebar_Australis] .uri-sidebar-button { -moz-image-region: rect(0px 162px 18px 144px); }
-	window[omnisidebar_Australis] #omnisidebar-scratchpad_sidebar_button { -moz-image-region: rect(0px 180px 18px 162px); }
+	#omnisidebar-console_sidebar_button { -moz-image-region: rect(0px 126px 18px 108px); }
+	#omnisidebar-dominspector_sidebar_button { -moz-image-region: rect(0px 144px 18px 126px); }
+	.uri-sidebar-button { -moz-image-region: rect(0px 162px 18px 144px); }
+	#omnisidebar-scratchpad_sidebar_button { -moz-image-region: rect(0px 180px 18px 162px); }
 	
-	window[omnisidebar_Australis] #omnisidebar-console_sidebar_button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-console_sidebar_button {
+	#omnisidebar-console_sidebar_button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-console_sidebar_button {
 		-moz-image-region: rect(0px 32px 32px 0px);
 	}
-	window[omnisidebar_Australis] #omnisidebar-dominspector_sidebar_button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-dominspector_sidebar_button {
+	#omnisidebar-dominspector_sidebar_button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-dominspector_sidebar_button {
 		-moz-image-region: rect(0px 64px 32px 32px);
 	}
-	window[omnisidebar_Australis] #omnisidebar-scratchpad_sidebar_button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-scratchpad_sidebar_button {
+	#omnisidebar-scratchpad_sidebar_button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-scratchpad_sidebar_button {
 		-moz-image-region: rect(0px 96px 32px 64px);
 	}
 	
 	/* Replace Buttons */
 	
-	window[omnisidebar_Australis] .osb-replace-button { list-style-image: url("chrome://browser/skin/Toolbar.png"); }
+	.osb-replace-button { list-style-image: url("chrome://browser/skin/Toolbar.png"); }
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="color"] .osb-replace-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
+	.omnisidebar-toolbar[coloricons="color"] .osb-replace-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
 	
-	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"]) .osb-replace-button:-moz-lwtheme-brighttext,
-	window[omnisidebar_Australis] :-moz-any(#navigator-toolbox, #browser-bottombox) .osb-replace-button:-moz-lwtheme-brighttext {
+	.sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"]) .osb-replace-button:-moz-lwtheme-brighttext,
+	:-moz-any(#navigator-toolbox, #browser-bottombox) .osb-replace-button:-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 	}
 	
-	window[omnisidebar_Australis] .osb-replace-button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > .osb-replace-button {
+	.osb-replace-button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > .osb-replace-button {
 		list-style-image: url("chrome://browser/skin/menuPanel.png");
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 216px 18px 198px); }
+	#omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 216px 18px 198px); }
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="color"] #omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 72px 18px 54px); }
+	.omnisidebar-toolbar[coloricons="color"] #omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 72px 18px 54px); }
 	
-	window[omnisidebar_Australis] #omnisidebar-addons_sidebar_button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-addons_sidebar_button {
+	#omnisidebar-addons_sidebar_button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-addons_sidebar_button {
 		-moz-image-region: rect(0px 288px 32px 256px);
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 144px 18px 126px); }
+	#omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 144px 18px 126px); }
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="color"] #omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 18px 18px 0px); }
+	.omnisidebar-toolbar[coloricons="color"] #omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 18px 18px 0px); }
 	
-	window[omnisidebar_Australis] #omnisidebar-bookmarks_sidebar_button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-bookmarks_sidebar_button {
+	#omnisidebar-bookmarks_sidebar_button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-bookmarks_sidebar_button {
 		-moz-image-region: rect(0px 160px 32px 128px);
 	}
 	
-	window[omnisidebar_Australis] #omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 180px 18px 162px); }
+	#omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 180px 18px 162px); }
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="color"] #omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 36px 18px 18px); }
+	.omnisidebar-toolbar[coloricons="color"] #omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 36px 18px 18px); }
 	
-	window[omnisidebar_Australis] #omnisidebar-history_sidebar_button[cui-areatype="menu-panel"],
-	window[omnisidebar_Australis] toolbarpaletteitem[place="palette"] > #omnisidebar-history_sidebar_button {
+	#omnisidebar-history_sidebar_button[cui-areatype="menu-panel"],
+	toolbarpaletteitem[place="palette"] > #omnisidebar-history_sidebar_button {
 		-moz-image-region: rect(0px 224px 32px 192px);
 	}
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="color"] #downloads-button {
-		list-style-image: url("chrome://omnisidebar-os/skin/buttons.png");
+	.omnisidebar-toolbar[coloricons="color"] #downloads-button {
+		list-style-image: list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png");
 		-moz-image-region: rect(0px 54px 18px 36px);
 	}
 	
 	/* Buttons from other add-ons */
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"] {
+	.omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"] {
 		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar.png");
 		-moz-image-region: rect(0px 90px 18px 72px);
 	}
 	
-	window[omnisidebar_Australis] .omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]) {
+	.omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]) {
 		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar.png");
 		-moz-image-region: rect(0px 108px 18px 90px);
 	}
 	
-	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"]:-moz-lwtheme-brighttext,
-	window[omnisidebar_Australis] .sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]):-moz-lwtheme-brighttext {
+	.sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"]:-moz-lwtheme-brighttext,
+	.sidebar-box[glassStyle] .omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]):-moz-lwtheme-brighttext {
 		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 	}
 

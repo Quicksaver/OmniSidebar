@@ -1,14 +1,13 @@
-moduleAid.VERSION = '1.1.0';
+Modules.VERSION = '1.2.0';
 
-this.toggleAlwaysAddons = function(unloaded) {
-	if(!UNLOADED && !unloaded && prefAid.alwaysAddons) {
+this.toggleAlwaysAddons = function(loaded) {
+	if(loaded && Prefs.alwaysAddons) {
 		toCode.modify(window, 'window.BrowserOpenAddonsMgr', [
 			['var newLoad = !switchToTabHavingURI("about:addons", true);',
-			
-			'	var newLoad = !window.switchToTabHavingURI("about:addons", false);'
-			+'	if(newLoad) {'
-			+"		toggleSidebar('"+objName+"-viewAddonSidebar');"
-			+'	}'
+				 'var newLoad = !window.switchToTabHavingURI("about:addons", false);'
+				+'if(newLoad) {'
+				+"	toggleSidebar('omnisidebar-viewAddonSidebar');"
+				+'}'
 			]
 		]);
 	} else {
@@ -20,8 +19,8 @@ this.toggleAlwaysAddons = function(unloaded) {
 
 this.addonMgrAcceltext = function() {
 	if($(objName+'-viewAddonSidebar')) {
-		toggleAttribute($(objName+'-viewAddonSidebar'), 'acceltext', prefAid.alwaysAddons,
-			$(objName+'-viewAddonSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext'));
+		toggleAttribute($(objName+'-viewAddonSidebar'), 'acceltext', Prefs.alwaysAddons,
+			$(objName+'-viewAddonSidebar').getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext'));
 	}
 };
 
@@ -46,34 +45,26 @@ this.loadAddonMgr = function() {
 	aSync(function() { setAttribute($(objName+'-addons_sidebar_button'), 'observes', objName+'-viewAddonSidebar'); });
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	holdBroadcasters.addon = objName+'-viewAddonSidebar';
 	
-	styleAid.load('addonMgrSidebar', 'addons');
+	Styles.load('addonMgrSidebar', 'addons');
 	
-	// The binding was changed in FF20, clicking links works properly from within the sidebar so there's no need to replace the binding any more
-	if(Services.vc.compare(Services.appinfo.platformVersion, "20.0") < 0) {
-		styleAid.load('addonMgrSidebarLinks', 'addonsLinks');
-	}
+	Overlays.overlayWindow(window, 'addonMgr', null, loadAddonMgr);
 	
-	overlayAid.overlayWindow(window, 'addonMgr', null, loadAddonMgr);
-	
-	prefAid.listen('alwaysAddons', toggleAlwaysAddons);
-	
-	toggleAlwaysAddons();
+	Prefs.listen('alwaysAddons', toggleAlwaysAddons);
+	toggleAlwaysAddons(true);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	toggleAlwaysAddons(true);
-	
-	prefAid.unlisten('alwaysAddons', toggleAlwaysAddons);
+Modules.UNLOADMODULE = function() {
+	Prefs.unlisten('alwaysAddons', toggleAlwaysAddons);
+	toggleAlwaysAddons();
 	
 	if(UNLOADED) {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(twinSidebar); }
-		styleAid.unload('addonMgrSidebar');
-		styleAid.unload('addonMgrSidebarLinks');
+		Styles.unload('addonMgrSidebar');
 	}
 	
-	overlayAid.removeOverlayWindow(window, 'addonMgr');
+	Overlays.removeOverlayWindow(window, 'addonMgr');
 };

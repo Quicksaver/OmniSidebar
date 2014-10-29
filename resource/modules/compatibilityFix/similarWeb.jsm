@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.1.0';
 
 // SimilarWeb is the most aweful add-on I've seen in terms of controlling the sidebar and imposing itself on the browser layout... it's just aweful.
 // Why it even resizes the sidebar on startup is beyond comprehension!
@@ -6,7 +6,7 @@ moduleAid.VERSION = '1.0.1';
 this.__defineGetter__('similarweb', function() { return window.similarweb; });
 
 this.swToggleSidebar = function(e) {
-	hideIt(mainSidebar.splitter, (!mainSidebar.box.hidden && !prefAid.renderabove));
+	hideIt(mainSidebar.splitter, (!mainSidebar.box.hidden && !Prefs.renderabove));
 	aSync(function() { try { toggleHeaders(); } catch(ex) {} });
 };
 
@@ -45,49 +45,40 @@ this.swCloseSidebarListen = function(e) {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('similarwebFix', 'similarweb');
-	
-	this.backups = {
-		checkRtlBrowser: similarweb.overlay.checkRtlBrowser,
-		initSidebarAppearance: similarweb.overlay.initSidebarAppearance,
-		moveToLeft: similarweb.overlay.moveToLeft,
-		moveToRight: similarweb.overlay.moveToRight,
-		undoSidebarAppearance: similarweb.sidebar.undoSidebarAppearance,
-		setSidebarWidth: similarweb.sidebar.setSidebarWidth
-	};
+Modules.LOADMODULE = function() {
+	Styles.load('similarwebFix', 'similarweb');
 	
 	prefAid.setDefaults({ prevWidth: '8' }, 'similarweb');
 	
 	// Bugfix: incompatibility with the SimilarWeb add-on, it has its own sidebar handling mechanism which I have to override
 	// I'm trying a radical approach, substituting all SimilarWeb functions related only to this subject with dummy functions, it doesn't break add-on functionality
-	similarweb.overlay.checkRtlBrowser = function() {
+	Piggyback.add('similarWeb', similarweb.overlay, 'checkRtlBrowser', function() {
 		similarweb.overlay.strDirection = 'ltr';
 		window.top.document.getElementById("main-window").setAttribute("sw_dir", "ltr"); 
-	};
-	similarweb.overlay.initSidebarAppearance = function() { similarweb.overlay.m_blnSidebarInitialized = true; };
-	similarweb.overlay.moveToLeft = function() { window.top.document.getElementById("main-window").setAttribute("sw_dir", "ltr"); };
-	similarweb.overlay.moveToRight = function() { window.top.document.getElementById("main-window").setAttribute("sw_dir", "ltr"); };
-	similarweb.sidebar.undoSidebarAppearance = function() {};
-	similarweb.sidebar.setSidebarWidth = function() {};
+	});
+	Piggyback.add('similarWeb', similarweb.overlay, 'initSidebarAppearance', function() { similarweb.overlay.m_blnSidebarInitialized = true; });
+	Piggyback.add('similarWeb', similarweb.overlay, 'moveToLeft', function() { window.top.document.getElementById("main-window").setAttribute("sw_dir", "ltr"); });
+	Piggyback.add('similarWeb', similarweb.overlay, 'moveToRight', function() { window.top.document.getElementById("main-window").setAttribute("sw_dir", "ltr"); });
+	Piggyback.add('similarWeb', similarweb.sidebar, 'undoSidebarAppearance', function() {});
+	Piggyback.add('similarWeb', similarweb.sidebar, 'setSidebarWidth', function() {});
 	
-	listenerAid.add(window, 'endToggleSidebar', swToggleSidebar);
-	listenerAid.add(mainSidebar.box, 'sidebarWidthChanged', swWatchWidth);
+	Listeners.add(window, 'endToggleSidebar', swToggleSidebar);
+	Listeners.add(mainSidebar.box, 'sidebarWidthChanged', swWatchWidth);
 	
 	// Do not auto-hide if the 'add site' dialog is opened
-	listenerAid.add($('pnlSimilarWebAddSite'), 'popupshowing', swPopupShowing);
-	listenerAid.add($('pnlSimilarWebAddSite'), 'popuphiding', swPopupHiding);
-	listenerAid.add($('pnlSimilarWebThankYou'), 'popupshowing', swPopupShowing);
-	listenerAid.add($('pnlSimilarWebThankYou'), 'popuphiding', swPopupHiding);
+	Listeners.add($('pnlSimilarWebAddSite'), 'popupshowing', swPopupShowing);
+	Listeners.add($('pnlSimilarWebAddSite'), 'popuphiding', swPopupHiding);
+	Listeners.add($('pnlSimilarWebThankYou'), 'popupshowing', swPopupShowing);
+	Listeners.add($('pnlSimilarWebThankYou'), 'popuphiding', swPopupHiding);
 	
-	listenerAid.add(window, 'willCloseSidebar', swCloseSidebarListen, true);
+	Listeners.add(window, 'willCloseSidebar', swCloseSidebarListen, true);
 	
 	// Try to fix the damage already done
 	$('browser').style.direction = '';
 	$('appcontent').style.direction = '';
 	
 	mainSidebar.sidebar.style.maxWidth = '';
-	mainSidebar.sidebar.style.minWidth = prefAid.minSidebarWidth+'px';
+	mainSidebar.sidebar.style.minWidth = Prefs.minSidebarWidth+'px';
 	mainSidebar.sidebar.style.overflowX = '';
 	mainSidebar.sidebar.style.width = '';
 	mainSidebar.box.style.maxWidth = '';
@@ -97,36 +88,31 @@ moduleAid.LOADMODULE = function() {
 	mainSidebar.box.style.borderLeft = '';
 	mainSidebar.box.style.borderRight = '';
 	
-	hideIt(mainSidebar.splitter, (!mainSidebar.box.hidden && !prefAid.renderabove));
+	hideIt(mainSidebar.splitter, (!mainSidebar.box.hidden && !Prefs.renderabove));
 	try { toggleHeaders(); } catch(ex) {}
 	
-	if(prefAid.prevWidth > prefAid.minSidebarWidth) {
-		mainSidebar.box.setAttribute('width', prefAid.prevWidth);
+	if(Prefs.prevWidth > Prefs.minSidebarWidth) {
+		mainSidebar.box.setAttribute('width', Prefs.prevWidth);
 	}
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove($('pnlSimilarWebAddSite'), 'popupshowing', swPopupShowing);
-	listenerAid.remove($('pnlSimilarWebAddSite'), 'popuphiding', swPopupHiding);
-	listenerAid.remove($('pnlSimilarWebThankYou'), 'popupshowing', swPopupShowing);
-	listenerAid.remove($('pnlSimilarWebThankYou'), 'popuphiding', swPopupHiding);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove($('pnlSimilarWebAddSite'), 'popupshowing', swPopupShowing);
+	Listeners.remove($('pnlSimilarWebAddSite'), 'popuphiding', swPopupHiding);
+	Listeners.remove($('pnlSimilarWebThankYou'), 'popupshowing', swPopupShowing);
+	Listeners.remove($('pnlSimilarWebThankYou'), 'popuphiding', swPopupHiding);
+	Listeners.remove(window, 'willCloseSidebar', swCloseSidebarListen, true);
+	Listeners.remove(window, 'endToggleSidebar', swToggleSidebar);
+	Listeners.remove(mainSidebar.box, 'sidebarWidthChanged', swWatchWidth);
 	
-	listenerAid.remove(window, 'willCloseSidebar', swCloseSidebarListen, true);
-	
-	listenerAid.remove(window, 'endToggleSidebar', swToggleSidebar);
-	listenerAid.remove(mainSidebar.box, 'sidebarWidthChanged', swWatchWidth);
-	
-	if(this.backups) {
-		similarweb.overlay.checkRtlBrowser = this.backups.checkRtlBrowser;
-		similarweb.overlay.initSidebarAppearance = this.backups.initSidebarAppearance;
-		similarweb.overlay.moveToLeft = this.backups.moveToLeft;
-		similarweb.overlay.moveToRight = this.backups.moveToRight;
-		similarweb.sidebar.undoSidebarAppearance = this.backups.undoSidebarAppearance;
-		similarweb.sidebar.setSidebarWidth = this.backups.setSidebarWidth;
-		delete this.backups;
-	}
+	Piggyback.revert('similarWeb', similarweb.overlay, 'checkRtlBrowser');
+	Piggyback.revert('similarWeb', similarweb.overlay, 'initSidebarAppearance');
+	Piggyback.revert('similarWeb', similarweb.overlay, 'moveToLeft');
+	Piggyback.revert('similarWeb', similarweb.overlay, 'moveToRight');
+	Piggyback.revert('similarWeb', similarweb.sidebar, 'undoSidebarAppearance');
+	Piggyback.revert('similarWeb', similarweb.sidebar, 'setSidebarWidth');
 	
 	if(UNLOADED) {
-		styleAid.unload('similarwebFix', 'similarweb');
+		Styles.unload('similarwebFix', 'similarweb');
 	}
 };

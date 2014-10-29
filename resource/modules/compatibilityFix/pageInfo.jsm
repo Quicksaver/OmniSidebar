@@ -1,6 +1,5 @@
-moduleAid.VERSION = '1.0.2';
+Modules.VERSION = '1.1.0';
 
-this.pageInfoBackup = null;
 this.pageInfoArgs = null;
 
 this.loadPageInfoFix = function(e) {
@@ -9,7 +8,7 @@ this.loadPageInfoFix = function(e) {
 			e.target.opener = window;
 		}
 		if(pageInfoArgs) {
-			if(!e.target.arguments) { e.target.arguments = new Array(); }
+			if(!e.target.arguments) { e.target.arguments = new e.target.Array(); } // Doing it this way to prevent a ZC.
 			e.target.arguments.unshift(pageInfoArgs);
 			pageInfoArgs = null;
 		}
@@ -21,45 +20,41 @@ this.openPageInfoInSidebar = function(doc, initialTab, imageElement) {
 	toggleSidebar($(objName+'-viewPageInfoSidebar'));
 };
 
-this.toggleAlwaysPageInfo = function(unloaded) {
-	if(!UNLOADED && !unloaded && prefAid.alwaysPageInfo) {
-		if(!pageInfoBackup) {
-			pageInfoBackup = window.BrowserPageInfo;
-		}
-		window.BrowserPageInfo = openPageInfoInSidebar;
-	} else if(pageInfoBackup) {
-		window.BrowserPageInfo = pageInfoBackup;
-		pageInfoBackup = null;
+this.toggleAlwaysPageInfo = function(loaded) {
+	if(loaded && Prefs.alwaysPageInfo) {
+		Piggyback.add('pageInfo', window, 'BrowserPageInfo', openPageInfoInSidebar);
+	} else {
+		Piggyback.revert('pageInfo', window, 'BrowserPageInfo');
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, 'pageInfo');
+Modules.LOADMODULE = function() {
+	Overlays.overlayWindow(window, 'pageInfo');
 	
 	forceOpenTriggers.__defineGetter__('viewPageInfoSidebar', function() { return $(objName+'-viewPageInfoSidebar'); });
 	forceReloadTriggers.__defineGetter__('viewPageInfoSidebar', function() { return $(objName+'-viewPageInfoSidebar'); });
 	dontSaveBroadcasters.pageInfo = objName+'-viewPageInfoSidebar';
 	
-	prefAid.listen('alwaysPageInfo', toggleAlwaysPageInfo);
-	toggleAlwaysPageInfo();
+	Prefs.listen('alwaysPageInfo', toggleAlwaysPageInfo);
+	toggleAlwaysPageInfo(true);
 	
-	listenerAid.add(window, 'SidebarFocusedSync', loadPageInfoFix);
+	Listeners.add(window, 'SidebarFocusedSync', loadPageInfoFix);
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	if(UNLOADED) {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewPageInfoSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewPageInfoSidebar') { closeSidebar(twinSidebar); }
 	}
 	
-	listenerAid.remove(window, 'SidebarFocusedSync', loadPageInfoFix);
+	Listeners.remove(window, 'SidebarFocusedSync', loadPageInfoFix);
 	
-	toggleAlwaysPageInfo(true);
-	prefAid.unlisten('alwaysPageInfo', toggleAlwaysPageInfo);
+	toggleAlwaysPageInfo();
+	Prefs.unlisten('alwaysPageInfo', toggleAlwaysPageInfo);
 	
 	delete forceOpenTriggers.viewPageInfoSidebar;
 	delete forceReloadTriggers.viewPageInfoSidebar;
 	delete dontSaveBroadcasters.pageInfo;
 	
-	overlayAid.removeOverlayWindow(window, 'pageInfo');
+	Overlays.removeOverlayWindow(window, 'pageInfo');
 };

@@ -1,4 +1,4 @@
-var defaultsVersion = '1.1.2';
+var defaultsVersion = '1.2.0';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -76,12 +76,10 @@ var prefList = {
 
 function waitForSessionStore(window, delayed) {
 	if(window.__SSi) {
-		window[objName].moduleAid.load(objName, delayed);
+		window[objName].Modules.load(objName, delayed);
 		return;
 	}
 	
-	// Since promises don't exist yet (at least not in their current form) in earlier versions of firefox,
-	// I'm sticking with aSync checks for now to ensure compatibility, but ideally this should be changed to promises in the future.
 	aSync(function() {
 		waitForSessionStore(window, false);
 	}, 100);
@@ -105,89 +103,67 @@ function stopAddon(window) {
 	removeObject(window);
 }
 
-function startCustomize(window) {
-	prepareObject(window);
-	window[objName].moduleAid.load('customize');
-}
-
 function startPreferences(window) {
 	replaceObjStrings(window.document);
 	preparePreferences(window);
-	window[objName].moduleAid.load('options');
-}
-
-function startConditions(aReason) {
-	return true;
+	window[objName].Modules.load('options');
 }
 
 function toggleMoveSidebars() {
-	moduleAid.loadIf('moveSidebars', !UNLOADED && prefAid.moveSidebars);
+	Modules.loadIf('moveSidebars', !UNLOADED && Prefs.moveSidebars);
 }
 
 function toggleGlass() {
-	moduleAid.loadIf('glassStyle', !UNLOADED && prefAid.glassStyle);
+	Modules.loadIf('glassStyle', !UNLOADED && Prefs.glassStyle);
 }
 
 function onStartup(aReason) {
 	// try not to show the sidebar when starting up, so the browser doesn't jump around
 	if(STARTED == APP_STARTUP) {
-		styleAid.load('startupFix', 'startupFix');
+		Styles.load('startupFix', 'startupFix');
 	}
 	
-	moduleAid.load('compatibilityFix/sandboxFixes');
-	moduleAid.load('keysets');
-	moduleAid.load('sandbox');
+	Modules.load('compatibilityFix/sandboxFixes');
+	Modules.load('keysets');
+	Modules.load('sandbox');
 	
-	prefAid.listen('moveSidebars', toggleMoveSidebars);
-	prefAid.listen('glassStyle', toggleGlass);
+	Prefs.listen('moveSidebars', toggleMoveSidebars);
+	Prefs.listen('glassStyle', toggleGlass);
 	
 	toggleMoveSidebars();
 	toggleGlass();
 	
 	// Register the global css stylesheets
-	styleAid.load('global', 'overlay');
+	Styles.load('global', 'overlay');
 	
 	// Apply the add-on to every window opened and to be opened
-	windowMediator.callOnAll(startAddon, 'navigator:browser');
-	windowMediator.register(startAddon, 'domwindowopened', 'navigator:browser');
-	
-	if(!Australis) {
-		// Apply the add-on to every customize window opened and to be opened
-		windowMediator.callOnAll(startCustomize, null, "chrome://global/content/customizeToolbar.xul");
-		windowMediator.register(startCustomize, 'domwindowopened', null, "chrome://global/content/customizeToolbar.xul");
-		browserMediator.callOnAll(startCustomize, "chrome://global/content/customizeToolbar.xul");
-		browserMediator.register(startCustomize, 'pageshow', "chrome://global/content/customizeToolbar.xul");
-	}
+	Windows.callOnAll(startAddon, 'navigator:browser');
+	Windows.register(startAddon, 'domwindowopened', 'navigator:browser');
 	
 	// Apply the add-on to every preferences window opened and to be opened
-	windowMediator.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
-	windowMediator.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
-	browserMediator.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
-	browserMediator.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
+	Windows.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
+	Windows.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
+	Browsers.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
+	Browsers.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
 }
 
 function onShutdown(aReason) {
-	// Placing these here prevents an error which I couldn't figure out why the closeCustomize() in overlayAid weren't already preventing.
-	if(!Australis) {
-		closeCustomize();
-	}
-	
 	// remove the add-on from all windows
-	windowMediator.callOnAll(stopAddon, null, null, true);
-	browserMediator.callOnAll(stopAddon, null, true);
+	Windows.callOnAll(stopAddon, null, null, true);
+	Browsers.callOnAll(stopAddon, null, true);
 	
 	toggleGlass();
 	toggleMoveSidebars();
 	
 	// Unregister stylesheets
-	styleAid.unload('global');
+	Styles.unload('global');
 	
-	prefAid.unlisten('moveSidebars', toggleMoveSidebars);
-	prefAid.unlisten('glassStyle', toggleGlass);
+	Prefs.unlisten('moveSidebars', toggleMoveSidebars);
+	Prefs.unlisten('glassStyle', toggleGlass);
 	
-	moduleAid.unload('sandbox');
-	moduleAid.unload('keysets');
-	moduleAid.unload('compatibilityFix/sandboxFixes');
+	Modules.unload('sandbox');
+	Modules.unload('keysets');
+	Modules.unload('compatibilityFix/sandboxFixes');
 	
-	styleAid.unload('startupFix');
+	Styles.unload('startupFix');
 }

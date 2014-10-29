@@ -1,24 +1,21 @@
-moduleAid.VERSION = '2.1.5';
-moduleAid.LAZY = true;
+Modules.VERSION = '2.4.2';
+Modules.UTILS = true;
+Modules.BASEUTILS = true;
 
-// xmlHttpRequest(url, callback, method, async) - aid for quickly using the nsIXMLHttpRequest interface
+// xmlHttpRequest(url, callback, method) - aid for quickly using the nsIXMLHttpRequest interface
 //	url - (string) to send the request
 //	callback - (function) to be called after request is completed; expects callback(xmlhttp, e) where xmlhttp = xmlhttprequest return object and e = event object
 //	(optional) method - either (string) "POST" or (string) "GET"
-//	(optional) async - (bool) defines whether to perform the operation asynchronously, defaults to true
-this.xmlHttpRequest = function(url, callback, method, async) {
+this.xmlHttpRequest = function(url, callback, method) {
 	if(!method) { method = "GET"; }
-	if(async !== false) { async = true; }
 	
 	var xmlhttp = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
-	xmlhttp.open(method, url, async);
-	if(async) {
-		xmlhttp.onreadystatechange = function(e) { callback(xmlhttp, e); };
+	xmlhttp.open(method, url);
+	if(url.endsWith('.json')) {
+		xmlhttp.overrideMimeType("application/json");
 	}
+	xmlhttp.onreadystatechange = function(e) { callback(xmlhttp, e); };
 	xmlhttp.send();
-	if(!async) {
-		callback(xmlhttp);
-	}
 	return xmlhttp;
 };
 
@@ -45,15 +42,33 @@ this.aSync = function(aFunc, aDelay) {
 //		(optional) cancelable - (bool) defaults to true
 //		(optional) detail - to be passed to the event
 this.dispatch = function(obj, properties) {
-	if(!obj || (!obj.ownerDocument && !obj.document) || !obj.dispatchEvent || !properties || !properties.type) { return false; }
+	if(!obj || !obj.dispatchEvent
+	|| (!obj.ownerDocument && !obj.document && (!obj.content || !obj.content.document))
+	|| !properties || !properties.type) { return false; }
 	
 	var bubbles = properties.bubbles || true;
 	var cancelable = properties.cancelable || true;
 	var detail = properties.detail || undefined;
 	
-	var event = (obj.ownerDocument) ? obj.ownerDocument.createEvent('CustomEvent') : obj.document.createEvent('CustomEvent');
+	var doc = (obj.ownerDocument) ? obj.ownerDocument : (obj.document) ? obj.document : obj.content.document; // last one's for content processes
+	var event = doc.createEvent('CustomEvent');
 	event.initCustomEvent(properties.type, bubbles, cancelable, detail);
 	return obj.dispatchEvent(event);
+};
+
+// askForOwner(aNode) - dispatches an event to node, where anyone can set event.detail to any value
+// for example, to get the id of the trigger node that opened a popup or panel programmatically
+//	aNode - (xul element) the object node to ask about
+this.askForOwner = function(aNode) {
+	if(!aNode || (!aNode.ownerDocument && !aNode.document) || !aNode.dispatchEvent) { return null; }
+	
+	var owner = null;
+	var event = (aNode.ownerDocument) ? aNode.ownerDocument.createEvent('CustomEvent') : aNode.document.createEvent('CustomEvent');
+	event.__defineGetter__('detail', function() { return owner; });
+	event.__defineSetter__('detail', function(v) { return owner = v; });
+	event.initCustomEvent('AskingForNodeOwner', true, false, owner);
+	aNode.dispatchEvent(event);
+	return owner;
 };
 
 // compareFunction(a, b, strict) - returns (bool) if a === b
@@ -80,14 +95,15 @@ this.isAncestor = function(aNode, aParent, aWindow) {
 	if(ownDocument && ownDocument == aParent) { return true; }
 	if(aNode.compareDocumentPosition && (aNode.compareDocumentPosition(aParent) & aNode.DOCUMENT_POSITION_CONTAINS)) { return true; }
 	
-	var browsers = (aParent.tagName == 'browser') ? [aParent] : aParent.getElementsByTagName('browser');
-	for(var i=0; i<browsers.length; i++) {
-		if(isAncestor(aNode, browsers[i].contentDocument, browsers[i].contentWindow)) { return true; }
+	var browserNodes = (aParent.tagName == 'browser') ? [aParent] : aParent.getElementsByTagName('browser');
+	for(var browser of browserNodes) {
+		try { if(isAncestor(aNode, browser.contentDocument, browser.contentWindow)) { return true; } }
+		catch(ex) { /* this will fail in e10s */ }
 	}
 	
 	if(!aWindow) { return false; }
-	for(var i=0; i<aWindow.frames.length; i++) {
-		if(isAncestor(aNode, aWindow.frames[i].document, aWindow.frames[i])) { return true; }
+	for(var frame of aWindow.frames) {
+		if(isAncestor(aNode, frame.document, frame)) { return true; }
 	}
 	return false;
 };
@@ -109,35 +125,7 @@ this.trim = function(str) {
 	return str.substring(Math.max(str.search(/\S/), 0), str.search(/\S\s*$/) + 1);
 };
 
-// closeCustomize() - useful for when you want to close the customize toolbar dialogs for whatever reason
-this.closeCustomize = function() {
-	if(Australis) {
-		windowMediator.callOnAll(function(aWindow) {
-			if(aWindow.gCustomizeMode) {
-				aWindow.gCustomizeMode.exit();
-			}
-		}, 'navigator:browser');
-		return;
-	}
-	
-	windowMediator.callOnAll(function(aWindow) { try { aWindow.close(); } catch(ex) {} }, null, "chrome://global/content/customizeToolbar.xul");
-	windowMediator.callOnAll(function(aWindow) {
-		if(!aWindow.gBrowser) { return; }
-		
-		for(var b=0; b<aWindow.gBrowser.browsers.length; b++) {
-			var aBrowser = aWindow.gBrowser.getBrowserAtIndex(b);
-			if(aBrowser.contentDocument.documentURI == "chrome://global/content/customizeToolbar.xul") {
-				for(var t=0; t<aWindow.gBrowser.mTabs.length; t++) {
-					if(aWindow.gBrowser.mTabs[t].linkedBrowser == aBrowser) {
-						try { aWindow.gBrowser.removeTab(aWindow.gBrowser.mTabs[t]); } catch(ex) { Cu.reportError(ex); }
-					}
-				}
-			}
-		}
-	}, 'navigator:browser');
-};
-
-// replaceObjStrings(node, prop) - replace all objName, objPathString and UserAgentLocale references in the node attributes and its children with the proper names
+// replaceObjStrings(node, prop) - replace all objName and objPathString references in the node attributes and its children with the proper names
 //	node - (xul element) to replace the strings in
 //	(optional) prop - (string) if specified, instead of checking attributes, it will check for node.prop for occurences of what needs to be replaced. This will not check child nodes.
 this.replaceObjStrings = function(node, prop) {
@@ -152,9 +140,6 @@ this.replaceObjStrings = function(node, prop) {
 		while(node[prop].indexOf('objPathString') > -1) {
 			node[prop] = node[prop].replace('objPathString', objPathString);
 		}
-		while(node[prop].indexOf('UserAgentLocale') > -1) {
-			node[prop] = node[prop].replace('UserAgentLocale', UserAgentLocale);
-		}
 		
 		return;
 	}
@@ -166,9 +151,6 @@ this.replaceObjStrings = function(node, prop) {
 			}
 			while(node.attributes[a].value.indexOf('objPathString') > -1) {
 				node.attributes[a].value = node.attributes[a].value.replace('objPathString', objPathString);
-			}
-			while(node.attributes[a].value.indexOf('UserAgentLocale') > -1) {
-				node.attributes[a].value = node.attributes[a].value.replace('UserAgentLocale', UserAgentLocale);
 			}
 		}
 	}

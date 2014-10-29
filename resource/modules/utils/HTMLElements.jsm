@@ -1,5 +1,6 @@
-moduleAid.VERSION = '1.0.0';
-moduleAid.LAZY = true;
+Modules.VERSION = '1.2.1';
+Modules.UTILS = true;
+Modules.BASEUTILS = true;
 
 // innerText(node) - returns the equivalent of IE's .innerText property of node; essentially returns .textContent stripped of all the script tags
 //	node - (xul element) to retrieve text content from
@@ -19,15 +20,15 @@ this.innerText = function(node) {
 		if(clone.getElementsByTagName) {
 			var heads = clone.getElementsByTagName('head');
 			while(heads.length > 0) {
-				heads[0].parentNode.removeChild(heads[0]);
+				heads[0].remove();
 			}
 			var scripts = clone.getElementsByTagName('script');
 			while(scripts.length > 0) {
-				scripts[0].parentNode.removeChild(scripts[0]);
+				scripts[0].remove();
 			}
 			var styles = clone.getElementsByTagName('style');
 			while(styles.length > 0) {
-				styles[0].parentNode.removeChild(styles[0]);
+				styles[0].remove();
 			}
 		}
 		

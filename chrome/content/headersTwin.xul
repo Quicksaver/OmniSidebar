@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://omnisidebar/skin/headers.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="headersTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
-	<broadcasterset id="mainBroadcasterSet">
-		<broadcaster id="objName-toggleSideToolbar-twin"
-			label="&omnisidebarToolbarTwin.label;"
-			accesskey="&omnisidebarToolbarTwin.accesskey;"
-			type="checkbox"
-			oncommand="objName.toggleToolbar(true);" />
-	</broadcasterset>
+	<commandset id="mainCommandSet">
+		<command id="objName:ToggleSideToolbar-twin" oncommand="objName.toggleToolbar(true);"/>
+	</commandset>
 	
 	<vbox id="objName-sidebar-box-twin" class="chromeclass-extrachrome sidebar-box">
 		<sidebarheader id="objName-sidebar-header-twin"
@@ -18,17 +15,16 @@
 			<stack id="objName-stackSidebar-twin"
 				class="stackSidebar"
 				insertbefore="objName-sidebar-title-twin">
-				<label id="objName-sidebar-customizingLabel-twin"
-					flex="1"
-					crop="end"
-					value="&omnisidebarButtonTwin.label;"
-					collapsed="true" />
+				<observes element="objName-Toolbar-twin" attribute="collapsed" />
+				<label crop="end" value="&omnisidebarButtonTwin.label;" />
 				<toolbar id="objName-Toolbar-twin"
 					class="omnisidebar-toolbar"
 					toolbarname="&omnisidebarToolbarTwin.label;"
+					accesskey="&omnisidebarToolbarTwin.accesskey;"
 					customizable="true"
 					mode="icons"
 					context="toolbar-context-menu"
+					menucommand="objName:ToggleSideToolbar-twin"
 					toolboxid="navigator-toolbox"
 					menuAdd="&omnisidebarToolbarTwin.menuAdd;"
 					menuMove="&omnisidebarToolbarTwin.menuMove;"

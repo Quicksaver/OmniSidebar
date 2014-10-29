@@ -1,21 +1,21 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
 
-	window[omnisidebar_Australis][tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button:not([movetoright]):-moz-system-metric(windows-classic):not(:-moz-lwtheme),
-	window[omnisidebar_Australis][tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin[movetoleft]:-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
+	window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button:not([movetoright]):-moz-system-metric(windows-classic):not(:-moz-lwtheme),
+	window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin[movetoleft]:-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
 	}
 	
-	window[omnisidebar_Australis][tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button[movetoright]:-moz-system-metric(windows-classic):not(:-moz-lwtheme),
-	window[omnisidebar_Australis][tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin:not([movetoleft]):-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
+	window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button[movetoright]:-moz-system-metric(windows-classic):not(:-moz-lwtheme),
+	window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin:not([movetoleft]):-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
 	}
 	
-	window[omnisidebar_Australis][tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-custom-button:-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
+	window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-custom-button:-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
 		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 	}
 	
-	window[omnisidebar_Australis][tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-replace-button:-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
+	window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-replace-button:-moz-system-metric(windows-classic):not(:-moz-lwtheme) {
 		list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 	}
 	
@@ -25,21 +25,21 @@
 		
 		@media (-moz-windows-compositor) {
 			
-			window[omnisidebar_Australis][darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button:not([movetoright]):not(:-moz-lwtheme):not(:-moz-window-inactive),
-			window[omnisidebar_Australis][darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin[movetoleft]:not(:-moz-lwtheme):not(:-moz-window-inactive) {
+			window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button:not([movetoright]):not(:-moz-lwtheme):not(:-moz-window-inactive),
+			window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin[movetoleft]:not(:-moz-lwtheme):not(:-moz-window-inactive) {
 				list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
 			}
 			
-			window[omnisidebar_Australis][darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button[movetoright]:not(:-moz-lwtheme):not(:-moz-window-inactive),
-			window[omnisidebar_Australis][darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin:not([movetoleft]):not(:-moz-lwtheme):not(:-moz-window-inactive) {
+			window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button[movetoright]:not(:-moz-lwtheme):not(:-moz-window-inactive),
+			window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin:not([movetoleft]):not(:-moz-lwtheme):not(:-moz-window-inactive) {
 				list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
 			}
 			
-			window[omnisidebar_Australis][darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-custom-button:not(:-moz-lwtheme):not(:-moz-window-inactive) {
+			window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-custom-button:not(:-moz-lwtheme):not(:-moz-window-inactive) {
 				list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 			}
 			
-			window[omnisidebar_Australis][darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-replace-button:not(:-moz-lwtheme):not(:-moz-window-inactive) {
+			window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-replace-button:not(:-moz-lwtheme):not(:-moz-window-inactive) {
 				list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 			}
 			
@@ -47,21 +47,21 @@
 		
 		@media (-moz-windows-glass) {
 			
-			window[omnisidebar_Australis] #toolbar-menubar #omnisidebar-button:not([movetoright]):not(:-moz-lwtheme),
-			window[omnisidebar_Australis] #toolbar-menubar #omnisidebar-button-twin[movetoleft]:not(:-moz-lwtheme) {
+			#toolbar-menubar #omnisidebar-button:not([movetoright]):not(:-moz-lwtheme),
+			#toolbar-menubar #omnisidebar-button-twin[movetoleft]:not(:-moz-lwtheme) {
 				list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
 			}
 			
-			window[omnisidebar_Australis] #toolbar-menubar #omnisidebar-button[movetoright]:not(:-moz-lwtheme),
-			window[omnisidebar_Australis] #toolbar-menubar #omnisidebar-button-twin:not([movetoleft]):not(:-moz-lwtheme) {
+			#toolbar-menubar #omnisidebar-button[movetoright]:not(:-moz-lwtheme),
+			#toolbar-menubar #omnisidebar-button-twin:not([movetoleft]):not(:-moz-lwtheme) {
 				list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
 			}
 			
-			window[omnisidebar_Australis] #toolbar-menubar .osb-custom-button:not(:-moz-lwtheme) {
+			#toolbar-menubar .osb-custom-button:not(:-moz-lwtheme) {
 				list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 			}
 			
-			window[omnisidebar_Australis] #toolbar-menubar .osb-replace-button:not(:-moz-lwtheme) {
+			#toolbar-menubar .osb-replace-button:not(:-moz-lwtheme) {
 				list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 			}
 		}

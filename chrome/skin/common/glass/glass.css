@@ -14,7 +14,6 @@ Other sidebars should also be themed although probably not perfectly! */
 	
 	/* Main window style and animation */
 	.sidebar-box[renderabove] .omnisidebar_resize_box,
-	window:not([omnisidebar_Australis]) .sidebar-box:not([renderabove])[customizing] .sidebar-header,
 	.sidebar-box:not([renderabove]) {
 		background-image: url("chrome://omnisidebar/skin/glass/glass_background.png") !important;
 		background-attachment: scroll !important;
@@ -44,6 +43,7 @@ Other sidebars should also be themed although probably not perfectly! */
 		background: none !important;
 		background-clip: padding-box !important;
 	}
+	
 	.sidebar-header > * {
 		background: none !important;
 	}

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.3';
+Modules.VERSION = '1.2.0';
 
 this.reUnloadTwin = function() {
 	if(twinSidebar.box.collapsed) {
@@ -8,10 +8,10 @@ this.reUnloadTwin = function() {
 
 this.unsetBroadcastersTwin = function() {
 	var broadcasters = $$("broadcaster[group='sidebar']");
-	for(var i = 0; i < broadcasters.length; ++i) {
-		if(trueAttribute(broadcasters[i], 'twinSidebar')) {
-			broadcasters[i].removeAttribute('checked');
-			broadcasters[i].removeAttribute('twinSidebar');
+	for(var broadcaster of broadcasters) {
+		if(trueAttribute(broadcaster, 'twinSidebar')) {
+			removeAttribute(broadcaster, 'checked');
+			removeAttribute(broadcaster, 'twinSidebar');
 		}
 	}
 };
@@ -22,17 +22,17 @@ this.fixWidths = function() {
 	var twinWidth = twinSidebar.width;
 	
 	var main = true;
-	while(mainWidth + twinWidth > browser.clientWidth - prefAid.minSpaceBetweenSidebars) {
+	while(mainWidth + twinWidth > browser.clientWidth - Prefs.minSpaceBetweenSidebars) {
 		main = !main;
 		if(main) {
-			mainWidth = mainWidth - Math.min(5, mainWidth + twinWidth - browser.clientWidth + prefAid.minSpaceBetweenSidebars);
+			mainWidth = mainWidth - Math.min(5, mainWidth + twinWidth - browser.clientWidth + Prefs.minSpaceBetweenSidebars);
 		} else {
-			twinWidth = twinWidth - Math.min(5, mainWidth + twinWidth - browser.clientWidth + prefAid.minSpaceBetweenSidebars);
+			twinWidth = twinWidth - Math.min(5, mainWidth + twinWidth - browser.clientWidth + Prefs.minSpaceBetweenSidebars);
 		}
 	}
 	
-	if(mainWidth != mainSidebar.width) { mainSidebar.box.setAttribute('width', mainWidth); }
-	if(twinWidth != twinSidebar.width) { twinSidebar.box.setAttribute('width', twinWidth); }
+	if(mainWidth != mainSidebar.width) { setAttribute(mainSidebar.box, 'width', mainWidth); }
+	if(twinWidth != twinSidebar.width) { setAttribute(twinSidebar.box, 'width', twinWidth); }
 };
 
 this.enableTwinSwitcher = function() {
@@ -50,15 +50,15 @@ this.loadTwinSidebar = function() {
 this.loadedTwin = function() {
 	// I guess some add-ons can set these, they override the css set ones so we have to erase them
 	twinSidebar.sidebar.style.maxWidth = '';
-	twinSidebar.sidebar.style.minWidth = prefAid.minSidebarWidth+'px';
+	twinSidebar.sidebar.style.minWidth = Prefs.minSidebarWidth+'px';
 	twinSidebar.sidebar.style.width = '';
 	
 	fixWidths();
 	
-	objectWatcher.addAttributeWatcher(twinSidebar.box, 'width', watchWidth, true);
+	Watchers.addAttributeWatcher(twinSidebar.box, 'width', watchWidth, true);
 	
 	// Apply initial preferences
-	listenerAid.add(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
+	Listeners.add(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
 	// there are no events dispatched when the overlay loads, so I have to do this here
 	if(typeof(toggleMenuButtonTwin) != 'undefined') {
@@ -76,14 +76,15 @@ this.unloadedTwin = function() {
 	for(var x in dontSaveBroadcasters) {
 		if(twinSidebar.box.getAttribute('sidebarcommand') == dontSaveBroadcasters[x]) {
 			closeSidebar(twinSidebar);
+			break;
 		}
 	}
 	
 	unsetBroadcastersTwin();
 };
 
-moduleAid.LOADMODULE = function() {
-	overlayAid.overlayWindow(window, "twin", null,
+Modules.LOADMODULE = function() {
+	Overlays.overlayWindow(window, "twin", null,
 		function(window) {
 			window[objName].loadedTwin();
 		},
@@ -92,8 +93,8 @@ moduleAid.LOADMODULE = function() {
 		}
 	);
 	
-	prefAid.listen('useSwitchTwin', enableTwinSwitcher);
-	prefAid.listen('keepLoaded', reUnloadTwin);
+	Prefs.listen('useSwitchTwin', enableTwinSwitcher);
+	Prefs.listen('keepLoaded', reUnloadTwin);
 	
 	twinTriggers.__defineGetter__('twinCommand', function() { return $(objName+'-cmd_twinSidebar'); });
 	twinTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
@@ -101,24 +102,24 @@ moduleAid.LOADMODULE = function() {
 	blankTriggers.__defineGetter__('twinSwitcher', function() { return twinSidebar.switcher; });
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	delete twinTriggers.twinCommand;
 	delete twinTriggers.twinSwitcher;
 	delete blankTriggers.twinCommand;
 	delete blankTriggers.twinSwitcher;
 	
-	prefAid.unlisten('useSwitchTwin', enableTwinSwitcher);
-	prefAid.unlisten('keepLoaded', reUnloadTwin);
+	Prefs.unlisten('useSwitchTwin', enableTwinSwitcher);
+	Prefs.unlisten('keepLoaded', reUnloadTwin);
 	
 	reUnloadTwin();
 	
-	listenerAid.remove(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
+	Listeners.remove(twinSidebar.sidebar, 'load', fireFocusedSyncEvent, true);
 	
-	objectWatcher.removeAttributeWatcher(twinSidebar.box, 'width', watchWidth, true);
+	Watchers.removeAttributeWatcher(twinSidebar.box, 'width', watchWidth, true);
 	
-	if(SocialSidebar && isAncestor(SocialBrowser, twinSidebar.box)) {
+	if(isAncestor(SocialBrowser, twinSidebar.box)) {
 		restoreSocialSidebar();
 	}
 	
-	overlayAid.removeOverlayWindow(window, "twin");
+	Overlays.removeOverlayWindow(window, "twin");
 };

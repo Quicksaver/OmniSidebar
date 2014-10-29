@@ -3,30 +3,13 @@
 <overlay id="menus-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<menupopup id="toolbar-context-menu">
-		<menuitem id="objName-toggle_sidebartoolbar_context" observes="objName-toggleSideToolbar"/>
-		
 		<menuseparator id="objName-contextSeparator" hidden="true"/>
-			
 		<menuitem id="objName-contextOptions"
 			label="&omnisidebarOptions.title;"
 			accesskey="&omnisidebarOptions.accesskey;"
 			oncommand="objName.doOpenOptions();"
 			hidden="true"/>
 	</menupopup>
-	
-	<menupopup id="appmenu_customizeMenu">
-		<menuitem id="objName-toggle_sidebartoolbar_appmenu" observes="objName-toggleSideToolbar"/>
-			
-		<menuitem id="objName-menuoptions_tools"
-			label="&omnisidebarOptions.title;"
-			accesskey="&omnisidebarOptions.accesskey;"
-			oncommand="objName.doOpenOptions();"
-			insertafter="appmenu_preferences"/>
-	</menupopup>
-	
-	<menu id="viewToolbarsMenu">
-		<menuitem id="objName-toggle_sidebartoolbar_viewtoolbars" hidden="true" observes="objName-toggleSideToolbar"/>
-	</menu>
 	
 	<menupopup id="menu_ToolsPopup">
 		<menuitem id="objName-menuoptions_viewmenu"

@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.1.0';
 
 this.unloadAutoPager = function(e) {
 	var box = e.target;
@@ -8,10 +8,10 @@ this.unloadAutoPager = function(e) {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	listenerAid.add(window, 'ShouldCollapseSidebar', unloadAutoPager, true);
+Modules.LOADMODULE = function() {
+	Listeners.add(window, 'ShouldCollapseSidebar', unloadAutoPager, true);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'ShouldCollapseSidebar', unloadAutoPager, true);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'ShouldCollapseSidebar', unloadAutoPager, true);
 };

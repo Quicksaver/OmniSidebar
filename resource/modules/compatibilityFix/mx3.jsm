@@ -1,9 +1,9 @@
-moduleAid.VERSION = '1.0.0';
+Modules.VERSION = '1.1.0';
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('MX3', 'mx3');
+Modules.LOADMODULE = function() {
+	Styles.load('MX3', 'mx3');
 };
 
-moduleAid.UNLOADMODULE = function() {
-	styleAid.unload('MX3');
+Modules.UNLOADMODULE = function() {
+	Styles.unload('MX3');
 };

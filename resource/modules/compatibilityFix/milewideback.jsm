@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.4';
+Modules.VERSION = '1.1.0';
 
 // keep the sidebar visible when hovering the strip if it's opened and auto-hiding
 this.mwbHover = function() {
@@ -23,21 +23,20 @@ this.mwbClick = function(e) {
 	window.MileWideBack.onClick(e.detail.clickEvent);
 };
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('milewideback', 'milewideback');
-	listenerAid.add($('back-strip'), 'mouseover', mwbHover);
-	listenerAid.add($('back-strip'), 'mouseout', mwbOut);
+Modules.LOADMODULE = function() {
+	Styles.load('milewideback', 'milewideback');
 	
-	listenerAid.add(window, 'clickedSwitcher', mwbClick, true);
+	Listeners.add($('back-strip'), 'mouseover', mwbHover);
+	Listeners.add($('back-strip'), 'mouseout', mwbOut);
+	Listeners.add(window, 'clickedSwitcher', mwbClick, true);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove($('back-strip'), 'mouseover', mwbHover);
-	listenerAid.remove($('back-strip'), 'mouseout', mwbOut);
-	
-	listenerAid.remove(window, 'clickedSwitcher', mwbClick, true);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove($('back-strip'), 'mouseover', mwbHover);
+	Listeners.remove($('back-strip'), 'mouseout', mwbOut);
+	Listeners.remove(window, 'clickedSwitcher', mwbClick, true);
 	
 	if(UNLOADED) {
-		styleAid.unload('milewideback');
+		Styles.unload('milewideback');
 	}
 };

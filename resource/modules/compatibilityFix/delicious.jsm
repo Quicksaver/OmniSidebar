@@ -1,13 +1,13 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.1.0';
 
 // I was overriding the delicious keyset before (ctrl+shift+S) I don't know why. Maybe so it wouldn't conflict with my own keyset at the time?
 // I'm not doing that anymore.
 
 this.keepDeliciousPinned = function() {
-	prefAid['sidebar.pinned'] = true;
+	Prefs['sidebar.pinned'] = true;
 };
 
-// delicious has the bad habit of hiding my box and also removing the addWatcher funcitons for some reason
+// delicious has the bad habit of hiding my box and also removing the Watchers methods for some reason
 this.boxNeverHidden = function(box) {
 	box.hidden = false;
 };
@@ -18,9 +18,9 @@ this.watchHiddenBox = function(e) {
 	
 	if(!UNLOADED) {
 		target.hidden = false;
-		objectWatcher.addPropertyWatcher(target, 'hidden', boxNeverHidden);
+		Watchers.addPropertyWatcher(target, 'hidden', boxNeverHidden);
 	} else {
-		objectWatcher.removePropertyWatcher(target, 'hidden', boxNeverHidden);
+		Watchers.removePropertyWatcher(target, 'hidden', boxNeverHidden);
 	}
 };
 
@@ -33,42 +33,42 @@ this.deliciousHeaderHideFix = function(e) {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('deliciousFix', 'delicious');
+Modules.LOADMODULE = function() {
+	Styles.load('deliciousFix', 'delicious');
 	
 	var deliciousPrefs = {};
 	deliciousPrefs['sidebar.pinned'] = true;
-	prefAid.setDefaults(deliciousPrefs, 'ybookmarks@yahoo');
+	Prefs.setDefaults(deliciousPrefs, 'ybookmarks@yahoo');
 	
 	this.backups = {
-		pinned: prefAid['sidebar.pinned']
+		pinned: Prefs['sidebar.pinned']
 	};
 	
-	prefAid.listen('sidebar.pinned', keepDeliciousPinned);
+	Prefs.listen('sidebar.pinned', keepDeliciousPinned);
 	keepDeliciousPinned();
 	
-	listenerAid.add(window, 'SidebarFocusedSync', deliciousHeaderHideFix);
-	listenerAid.add(window, 'sidebarAbove', watchHiddenBox);
+	Listeners.add(window, 'SidebarFocusedSync', deliciousHeaderHideFix);
+	Listeners.add(window, 'sidebarAbove', watchHiddenBox);
 	watchHiddenBox(mainSidebar);
 	watchHiddenBox(twinSidebar);
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	watchHiddenBox(mainSidebar);
 	watchHiddenBox(twinSidebar);
-	listenerAid.remove(window, 'sidebarAbove', watchHiddenBox);
-	listenerAid.remove(window, 'SidebarFocusedSync', deliciousHeaderHideFix);
+	Listeners.remove(window, 'sidebarAbove', watchHiddenBox);
+	Listeners.remove(window, 'SidebarFocusedSync', deliciousHeaderHideFix);
 	
-	prefAid.unlisten('sidebar.pinned', keepDeliciousPinned);
+	Prefs.unlisten('sidebar.pinned', keepDeliciousPinned);
 	
 	if(this.backups) {
-		prefAid['sidebar.pinned'] = this.backups.pinned;
+		Prefs['sidebar.pinned'] = this.backups.pinned;
 		delete this.backups;
 	}
 	
 	if(UNLOADED) {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewYBookmarksSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewYBookmarksSidebar') { closeSidebar(twinSidebar); }
-		styleAid.unload('deliciousFix', 'delicious');
+		Styles.unload('deliciousFix', 'delicious');
 	}
 };

@@ -1,16 +1,11 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.1.0';
 
 this.__defineGetter__('bookmarksBroadcaster', function() { return $('viewBookmarksSidebar'); });
 
 this.bookmarksLabel = null;
 
-moduleAid.LOADMODULE = function() {
-	setAttribute(document.documentElement, objName+'_Australis', 'true');
-	overlayAid.overlayWindow(window, 'buttons', null, null, function() {
-		removeAttribute(mainSidebar.button, 'loaded');
-		removeAttribute(twinSidebar.button, 'loaded');
-	});
-	overlayAid.overlayWindow(window, 'australis',
+Modules.LOADMODULE = function() {
+	Overlays.overlayWindow(window, 'australis',
 		function() {
 			// We want our button to keep its label, as it's different from the broadcaster's label
 			bookmarksLabel = bookmarksBroadcaster.getAttribute('label');
@@ -26,12 +21,13 @@ moduleAid.LOADMODULE = function() {
 		function() {
 			setAttribute(bookmarksBroadcaster, 'label', bookmarksLabel);
 			removeAttribute(bookmarksBroadcaster, 'sidebartitle');
+			
+			removeAttribute(mainSidebar.button, 'loaded');
+			removeAttribute(twinSidebar.button, 'loaded');
 		}
 	);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	removeAttribute(document.documentElement, objName+'_Australis');
-	overlayAid.removeOverlayWindow(window, 'australis');
-	overlayAid.removeOverlayWindow(window, 'buttons');
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, 'australis');
 };

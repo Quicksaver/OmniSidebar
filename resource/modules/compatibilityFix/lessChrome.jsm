@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.1.0';
 
 this.titlebarButtonBoxFixer = function(aEnabled) {
 	if(aEnabled) {
@@ -26,8 +26,8 @@ this.lessChromeListener = {
 	}
 };
 
-this.toggleLessChromeListener = function(unloaded) {
-	if(!UNLOADED && !unloaded && (prefAid.renderabove || prefAid.renderaboveTwin)) {
+this.toggleLessChromeListener = function(loaded) {
+	if(loaded && (Prefs.renderabove || Prefs.renderaboveTwin)) {
 		AddonManager.addAddonListener(lessChromeListener);
 		AddonManager.getAddonByID('lessChrome.HD@prospector.labs.mozilla', function(addon) {
 			if(addon && addon.isActive) { titlebarButtonBoxFixer(true); }
@@ -40,7 +40,7 @@ this.toggleLessChromeListener = function(unloaded) {
 
 // on customize the z-index of the controller buttons is reset, it won't work setting it without the timer
 this.customizeLessChrome = function() {
-	timerAid.init('customizeLessChrome', toggleLessChromeListener, 100);
+	Timers.init('customizeLessChrome', toggleLessChromeListener, 100);
 };
 
 this.cancelLessChrome = function(e) {
@@ -56,20 +56,20 @@ this.cancelLessChrome = function(e) {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('renderabove', toggleLessChromeListener);
-	prefAid.listen('renderaboveTwin', toggleLessChromeListener);
+Modules.LOADMODULE = function() {
+	Prefs.listen('renderabove', toggleLessChromeListener);
+	Prefs.listen('renderaboveTwin', toggleLessChromeListener);
 	
-	toggleLessChromeListener();
-	listenerAid.add(window, "LessChromeShowing", cancelLessChrome, true);
-	listenerAid.add(window, "aftercustomization", customizeLessChrome);
+	toggleLessChromeListener(true);
+	Listeners.add(window, "LessChromeShowing", cancelLessChrome, true);
+	Listeners.add(window, "aftercustomization", customizeLessChrome);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, "aftercustomization", customizeLessChrome);
-	listenerAid.remove(window, "LessChromeShowing", cancelLessChrome, true);
-	toggleLessChromeListener(true);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, "aftercustomization", customizeLessChrome);
+	Listeners.remove(window, "LessChromeShowing", cancelLessChrome, true);
+	toggleLessChromeListener();
 	
-	prefAid.unlisten('renderabove', toggleLessChromeListener);
-	prefAid.unlisten('renderaboveTwin', toggleLessChromeListener);
+	Prefs.unlisten('renderabove', toggleLessChromeListener);
+	Prefs.unlisten('renderaboveTwin', toggleLessChromeListener);
 };

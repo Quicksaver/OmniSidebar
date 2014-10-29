@@ -1,6 +1,8 @@
-moduleAid.VERSION = '1.0.0';
+Modules.VERSION = '1.1.0';
 
-// Compatibility fix for Totaltoolbar, setting all these options on omnisidebar's toolbars just doesn't work and I wantto prevent any possible errors from it
+// I will probably remove this for Australis...
+
+// Compatibility fix for Totaltoolbar, setting all these options on omnisidebar's toolbars just doesn't work and I want to prevent any possible errors from it
 this.setTTContextMenu = function(e) {
 	var trigger = e.originalTarget.triggerNode;
 	
@@ -13,9 +15,9 @@ this.setTTContextMenu = function(e) {
 
 this.removeTTEntries = function(e) {
 	var menu = e.target;
-	for(var i=0; i<menu.childNodes.length; i++) {
-		if(menu.childNodes[i].id.indexOf('toggle_omnisidebar') > -1) {
-			hideIt(menu.childNodes[i]);
+	for(var child of menu.childNodes) {
+		if(child.id.contains('toggle_omnisidebar')) {
+			hideIt(child);
 		}
 	}
 };
@@ -37,25 +39,25 @@ this.moveTTButtons = function() {
 	});
 };
 
-moduleAid.LOADMODULE = function() {
-	listenerAid.add(window, 'loadedSidebarHeader', moveTTButtons);
+Modules.LOADMODULE = function() {
+	Listeners.add(window, 'loadedSidebarHeader', moveTTButtons);
 	moveTTButtons();
 	
-	listenerAid.add($('toolbar-context-menu'), 'popupshown', setTTContextMenu, false);
-	listenerAid.add($('toolbar-context-menu'), 'popupshown', removeTTEntries, false);
-	listenerAid.add($('appmenu_customizeMenu'), 'popupshown', removeTTEntries, false);
-	listenerAid.add($('viewToolbarsMenu').firstChild, 'popupshown', removeTTEntries, false);
+	Listeners.add($('toolbar-context-menu'), 'popupshown', setTTContextMenu, false);
+	Listeners.add($('toolbar-context-menu'), 'popupshown', removeTTEntries, false);
+	Listeners.add($('appmenu_customizeMenu'), 'popupshown', removeTTEntries, false);
+	Listeners.add($('viewToolbarsMenu').firstChild, 'popupshown', removeTTEntries, false);
 	
 	hideIt($('tt-toolbox-sidebarheader'));
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	hideIt($('tt-toolbox-sidebarheader'), true);
 	
-	listenerAid.remove(window, 'loadedSidebarHeader', moveTTButtons);
+	Listeners.remove(window, 'loadedSidebarHeader', moveTTButtons);
 	
-	listenerAid.remove($('toolbar-context-menu'), 'popupshown', setTTContextMenu, false);
-	listenerAid.remove($('toolbar-context-menu'), 'popupshown', removeTTEntries, false);
-	listenerAid.remove($('appmenu_customizeMenu'), 'popupshown', removeTTEntries, false);
-	listenerAid.remove($('viewToolbarsMenu').firstChild, 'popupshown', removeTTEntries, false);
+	Listeners.remove($('toolbar-context-menu'), 'popupshown', setTTContextMenu, false);
+	Listeners.remove($('toolbar-context-menu'), 'popupshown', removeTTEntries, false);
+	Listeners.remove($('appmenu_customizeMenu'), 'popupshown', removeTTEntries, false);
+	Listeners.remove($('viewToolbarsMenu').firstChild, 'popupshown', removeTTEntries, false);
 };

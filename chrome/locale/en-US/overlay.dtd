@@ -21,9 +21,6 @@
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
 
-<!ENTITY consoleSidebar.label "Error Console">
-<!ENTITY consoleSidebar.tooltip "Open the Error Console in the Sidebar">
-<!ENTITY consoleSidebar.accesskey "E">
 <!ENTITY browserConsole.label "Browser Console">
 <!ENTITY browserConsole.tooltip "Open the Browser Console in the Sidebar">
 <!ENTITY browserConsole.accesskey "C">

@@ -3,21 +3,44 @@
 <overlay id="miniPanel-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<popupset id="mainPopupSet">
-		<menupopup id="objName-panel"
+		<panel id="objName-panel"
+			type="arrow"
+			class="cui-widget-panel PanelUI-subView objName-panel"
 			onpopupshowing="objName.populatePanel(this);"
 			onpopuphiding="objName.emptyPanel(this);">
-			<vbox>
+			<vbox class="cui-widget-panelview PanelUI-subView">
 				<box id="objName-panel-toolbarContainer"/>
 				<menuseparator id="objName-panel-toolbarSeparator"/>
 				<vbox id="objName-panel-menuContainer"/>
 				<menuseparator id="objName-panel-menuSeparator"/>
-				<menuitem id="objName-panelOptions"
+				<toolbarbutton id="objName-panelOptions"
 					label="&omnisidebarOptions.title;"
+					class="subviewbutton"
 					accesskey="&omnisidebarOptions.accesskey;"
 					autoCheck="false"
 					oncommand="objName.doOpenOptions();"/>
 			</vbox>
-		</menupopup>
+		</panel>
 	</popupset>
+	
+	<panelmultiview id="PanelUI-multiView">
+		<panelview id="objName-panelView"
+			flex="1"
+			class="PanelUI-subView objName-panel">
+				<label id="objName-panelView-header" class="panel-subview-header"/>
+				<vbox class="cui-widget-panelview PanelUI-subView">
+					<arrowscrollbox orient="horizontal" id="objName-panelView-toolbarContainer"/>
+					<menuseparator id="objName-panelView-toolbarSeparator"/>
+					<vbox id="objName-panelView-menuContainer"/>
+					<menuseparator id="objName-panelView-menuSeparator"/>
+					<toolbarbutton id="objName-panelViewOptions"
+						label="&omnisidebarOptions.title;"
+						class="subviewbutton"
+						accesskey="&omnisidebarOptions.accesskey;"
+						autoCheck="false"
+						oncommand="objName.doOpenOptions();"/>
+				</vbox>
+		</panelview>
+	</panelmultiview>
 	
 </overlay>

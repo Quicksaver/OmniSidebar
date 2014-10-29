@@ -9,13 +9,16 @@
 		border: 1px solid rgba(0,0,0,0) !important;
 		padding: 1px !important;
 	}
+	
 	.omnisidebar-docker[sidebarDocked] {
 		-moz-image-region: rect(0px 32px 16px 16px);
 	}
+	
 	.omnisidebar-docker image {
 		width: 16px;
 		height: 16px;
 	}
+	
 	.omnisidebar-docker:hover {
 		border: 1px solid rgba(0,0,0,.2) !important;
 		background-color: rgba(0,0,0,.1) !important;
@@ -23,8 +26,7 @@
 	}
 	
 	/* Hide a bunch of stuff */
-	.sidebar-box[nodock] .omnisidebar-docker,
-	window:not([omnisidebar_Australis]) .sidebar-box[customizing] .omnisidebar-docker {
+	.sidebar-box[nodock] .omnisidebar-docker {
 		display: none;
 	}
 	
@@ -46,8 +48,7 @@
 		z-index: 5;
 	}
 	
-	.sidebar-box[renderabove]:not([autohide]) .omnisidebar_resize_box,
-	window:not([omnisidebar_Australis]) .sidebar-box[renderabove][customizing] .omnisidebar_resize_box {
+	.sidebar-box[renderabove]:not([autohide]) .omnisidebar_resize_box {
 		opacity: 1;
 	}
 	
@@ -64,18 +65,20 @@
 		width: 4px !important;
 		min-width: 4px !important;
 	}
+	
 	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resizer {
 		-moz-border-start: 1px solid rgb(169, 183, 201);
 		-moz-border-end: none;
 	}
+	
 	#sidebar-box[movetoright] .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
 		-moz-border-start: none;
 		-moz-border-end: 1px solid rgb(169, 183, 201);
 	}
-	/* remove :not([customizing]) for Australis */
-	.sidebar-box:not([customizing]) .omnisidebar_resizer:hover,
+	
+	.sidebar-box .omnisidebar_resizer:hover,
 	.sidebar-splitter[disabled]:hover {
 		cursor: ew-resize !important;
 	}
@@ -125,6 +128,7 @@
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
 		-moz-border-start: 0 !important;
 	}
+	
 	#sidebar-box[movetoright] .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
 		-moz-border-end: 0 !important;
@@ -168,9 +172,7 @@
 	}
 	
 	/* For the status bar link display */
-	notificationbox statuspanel,
-	/* I have no idea what this is, maybe it was removed in some FF version? */
-	#appcontent > #statusbar-display {
+	notificationbox statuspanel {
 		z-index: 300;
 	}
 

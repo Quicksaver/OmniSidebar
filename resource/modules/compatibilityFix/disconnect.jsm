@@ -1,9 +1,9 @@
-moduleAid.VERSION = '1.0.0';
+Modules.VERSION = '1.1.0';
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('disconnectFix', 'disconnect');
+Modules.LOADMODULE = function() {
+	Styles.load('disconnectFix', 'disconnect');
 };
 
-moduleAid.UNLOADMODULE = function() {
-	styleAid.unload('disconnectFix');
+Modules.UNLOADMODULE = function() {
+	Styles.unload('disconnectFix');
 };

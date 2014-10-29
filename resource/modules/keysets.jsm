@@ -1,55 +1,55 @@
-moduleAid.VERSION = '1.0.3';
+Modules.VERSION = '1.1.0';
 
 this.mainKey = {
 	id: objName+'-key_mainSidebar',
 	command: objName+'-cmd_keyset_mainSidebar',
-	get keycode () { return prefAid.mainKeysetKeycode; },
-	get accel () { return prefAid.mainKeysetAccel; },
-	get shift () { return prefAid.mainKeysetShift; },
-	get alt () { return prefAid.mainKeysetAlt; }
+	get keycode () { return Prefs.mainKeysetKeycode; },
+	get accel () { return Prefs.mainKeysetAccel; },
+	get shift () { return Prefs.mainKeysetShift; },
+	get alt () { return Prefs.mainKeysetAlt; }
 };
 
 this.twinKey = {
 	id: objName+'-key_twinSidebar',
 	command: objName+'-cmd_keyset_twinSidebar',
-	get keycode () { return prefAid.twinKeysetKeycode; },
-	get accel () { return prefAid.twinKeysetAccel; },
-	get shift () { return prefAid.twinKeysetShift; },
-	get alt () { return prefAid.twinKeysetAlt; }
+	get keycode () { return Prefs.twinKeysetKeycode; },
+	get accel () { return Prefs.twinKeysetAccel; },
+	get shift () { return Prefs.twinKeysetShift; },
+	get alt () { return Prefs.twinKeysetAlt; }
 };
 
 this.setKeys = function() {
-	if(mainKey.keycode != 'none') { keysetAid.register(mainKey); }
-	else { keysetAid.unregister(mainKey); }
-	if(prefAid.twinSidebar && twinKey.keycode != 'none') { keysetAid.register(twinKey); }
-	else { keysetAid.unregister(twinKey); }
+	if(mainKey.keycode != 'none') { Keysets.register(mainKey); }
+	else { Keysets.unregister(mainKey); }
+	if(Prefs.twinSidebar && twinKey.keycode != 'none') { Keysets.register(twinKey); }
+	else { Keysets.unregister(twinKey); }
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	setKeys();
 	
-	prefAid.listen('mainKeysetKeycode', setKeys);
-	prefAid.listen('mainKeysetAccel', setKeys);
-	prefAid.listen('mainKeysetShift', setKeys);
-	prefAid.listen('mainKeysetAlt', setKeys);
-	prefAid.listen('twinKeysetKeycode', setKeys);
-	prefAid.listen('twinKeysetAccel', setKeys);
-	prefAid.listen('twinKeysetShift', setKeys);
-	prefAid.listen('twinKeysetAlt', setKeys);
-	prefAid.listen('twinSidebar', setKeys);
+	Prefs.listen('mainKeysetKeycode', setKeys);
+	Prefs.listen('mainKeysetAccel', setKeys);
+	Prefs.listen('mainKeysetShift', setKeys);
+	Prefs.listen('mainKeysetAlt', setKeys);
+	Prefs.listen('twinKeysetKeycode', setKeys);
+	Prefs.listen('twinKeysetAccel', setKeys);
+	Prefs.listen('twinKeysetShift', setKeys);
+	Prefs.listen('twinKeysetAlt', setKeys);
+	Prefs.listen('twinSidebar', setKeys);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	prefAid.unlisten('mainKeysetKeycode', setKeys);
-	prefAid.unlisten('mainKeysetAccel', setKeys);
-	prefAid.unlisten('mainKeysetShift', setKeys);
-	prefAid.unlisten('mainKeysetAlt', setKeys);
-	prefAid.unlisten('twinKeysetKeycode', setKeys);
-	prefAid.unlisten('twinKeysetAccel', setKeys);
-	prefAid.unlisten('twinKeysetShift', setKeys);
-	prefAid.unlisten('twinKeysetAlt', setKeys);
-	prefAid.unlisten('twinSidebar', setKeys);
+Modules.UNLOADMODULE = function() {
+	Prefs.unlisten('mainKeysetKeycode', setKeys);
+	Prefs.unlisten('mainKeysetAccel', setKeys);
+	Prefs.unlisten('mainKeysetShift', setKeys);
+	Prefs.unlisten('mainKeysetAlt', setKeys);
+	Prefs.unlisten('twinKeysetKeycode', setKeys);
+	Prefs.unlisten('twinKeysetAccel', setKeys);
+	Prefs.unlisten('twinKeysetShift', setKeys);
+	Prefs.unlisten('twinKeysetAlt', setKeys);
+	Prefs.unlisten('twinSidebar', setKeys);
 	
-	keysetAid.unregister(mainKey);
-	keysetAid.unregister(twinKey);
+	Keysets.unregister(mainKey);
+	Keysets.unregister(twinKey);
 };

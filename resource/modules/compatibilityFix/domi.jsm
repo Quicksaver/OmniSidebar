@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+Modules.VERSION = '1.2.0';
 
 this.doDOMICommand = function() {
 	delete holdBroadcasters.domi;
@@ -37,20 +37,20 @@ this.loadDOMI = function() {
 	aSync(function() { setAttribute($(objName+'-dominspector_sidebar_button'), 'observes', objName+'-viewDOMInspectorSidebar'); });
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	holdBroadcasters.domi = objName+'-viewDOMInspectorSidebar';
 	
 	AddonManager.getAddonByID("inspector@mozilla.org", function(addon) {
 		if(UNLOADED) { return; }
 		
 		if(addon && addon.isActive) {
-			overlayAid.overlayWindow(window, 'domi', null, loadDOMI);
-			listenerAid.add(window, 'SidebarFocusedSync', loadDOMIFix);
+			Overlays.overlayWindow(window, 'domi', null, loadDOMI);
+			Listeners.add(window, 'SidebarFocusedSync', loadDOMIFix);
 		} else {
 			AddonManager.getAddonByID("inspector-dp@mozilla.org", function(addon) {
 				if(addon && addon.isActive) {
-					overlayAid.overlayWindow(window, 'domi', null, loadDOMI);
-					listenerAid.add(window, 'SidebarFocusedSync', loadDOMIFix);
+					Overlays.overlayWindow(window, 'domi', null, loadDOMI);
+					Listeners.add(window, 'SidebarFocusedSync', loadDOMIFix);
 				} else {
 					doDOMICommand();
 				}
@@ -59,12 +59,12 @@ moduleAid.LOADMODULE = function() {
 	});
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	if(UNLOADED) {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar') { closeSidebar(twinSidebar); }
 	}
 	
-	listenerAid.remove(window, 'SidebarFocusedSync', loadDOMIFix);
-	overlayAid.removeOverlayWindow(window, 'domi');
+	Listeners.remove(window, 'SidebarFocusedSync', loadDOMIFix);
+	Overlays.removeOverlayWindow(window, 'domi');
 };

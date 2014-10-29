@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.1';
+Modules.VERSION = '1.2.0';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -16,26 +16,22 @@ this.loadScratchpadFix = function(e) {
 			scratchpadState = null;
 		}
 		
-		if(!e.target.arguments) { e.target.arguments = new Array(); }
+		if(!e.target.arguments) { e.target.arguments = new e.target.Array(); } // Doing it this way to prevent a ZC.
 		e.target.arguments.unshift(params);
 	}
 };
 
-this.toggleAlwaysScratchpad = function(unloaded) {
-	if(!UNLOADED && !unloaded && prefAid.alwaysScratchpad) {
-		ScratchpadManager._openScratchpad = ScratchpadManager.openScratchpad;
-		ScratchpadManager.openScratchpad = function(aState) {
+this.toggleAlwaysScratchpad = function(loaded) {
+	if(loaded && Prefs.alwaysScratchpad) {
+		Piggyback.add('scratchpad', ScratchpadManager, 'openScratchpad', function(aState) {
 			if(aState) {
 				if(typeof(aState) != 'object') { return; } // Just doing the same exclusion process as the original
 				scratchpadState = aState;
 			}
 			toggleSidebar($(objName+'-viewScratchpadSidebar'));
-		};
+		});
 	} else {
-		if(ScratchpadManager._openScratchpad) {
-			ScratchpadManager.openScratchpad = ScratchpadManager._openScratchpad;
-			delete ScratchpadManager._openScratchpad;
-		}
+		Piggyback.revert('scratchpad', ScratchpadManager, 'openScratchpad');
 	}
 	
 	scratchpadAcceltext();
@@ -43,8 +39,8 @@ this.toggleAlwaysScratchpad = function(unloaded) {
 
 this.scratchpadAcceltext = function() {
 	if($(objName+'-viewScratchpadSidebar')) {
-		var str = $(objName+'-viewScratchpadSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext').replace('VK_', '');
-		toggleAttribute($(objName+'-viewScratchpadSidebar'), 'acceltext', prefAid.alwaysScratchpad, str);
+		var str = $(objName+'-viewScratchpadSidebar').getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext').replace('VK_', '');
+		toggleAttribute($(objName+'-viewScratchpadSidebar'), 'acceltext', Prefs.alwaysScratchpad, str);
 	}
 };
 
@@ -145,7 +141,7 @@ this.willQuitScratchpadBar = function(aSubject, aData, bar) {
 								if(canceled.data) return false; // somebody canceled our quit request
 								
 								// disable fastload cache?
-								if(prefAid.disable_fastload) Services.appinfo.invalidateCachesOnRestart();
+								if(Prefs.disable_fastload) Services.appinfo.invalidateCachesOnRestart();
 								
 								// restart
 								var appStartup = Cc['@mozilla.org/toolkit/app-startup;1'].getService(Ci.nsIAppStartup);
@@ -213,37 +209,35 @@ this.willDisableAddonScratchpad = function() {
 	willDisableAddonScratchpadBar(twinSidebar);
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.setDefaults({ disable_fastload: false }, 'restartless-restart');
+Modules.LOADMODULE = function() {
+	Prefs.setDefaults({ disable_fastload: false }, 'restartless-restart');
 	
-	overlayAid.overlayWindow(window, 'scratchpad', null, scratchpadAcceltext);
-	styleAid.load('scratchpadSidebar', 'scratchpad');
+	Overlays.overlayWindow(window, 'scratchpad', null, scratchpadAcceltext);
+	Styles.load('scratchpadSidebar', 'scratchpad');
 	
-	prefAid.listen('alwaysScratchpad', toggleAlwaysScratchpad);
-	
-	toggleAlwaysScratchpad();
-	
-	listenerAid.add(window, 'beginToggleSidebar', confirmCloseScratchpad, true);
-	listenerAid.add(window, 'SidebarFocusedSync', loadScratchpadFix);
-	listenerAid.add(window, 'close', willCloseScratchpad, true);
-	listenerAid.add(window, objName+'-disabled', willDisableAddonScratchpad);
-	observerAid.add(willQuitScratchpad, 'quit-application-requested');
-};
-
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'beginToggleSidebar', confirmCloseScratchpad, true);
-	listenerAid.remove(window, 'SidebarFocusedSync', loadScratchpadFix);
-	listenerAid.remove(window, 'close', willCloseScratchpad, true);
-	listenerAid.remove(window, objName+'-disabled', willDisableAddonScratchpad);
-	observerAid.remove(willQuitScratchpad, 'quit-application-requested');
-	
+	Prefs.listen('alwaysScratchpad', toggleAlwaysScratchpad);
 	toggleAlwaysScratchpad(true);
 	
-	prefAid.unlisten('alwaysScratchpad', toggleAlwaysScratchpad);
+	Listeners.add(window, 'beginToggleSidebar', confirmCloseScratchpad, true);
+	Listeners.add(window, 'SidebarFocusedSync', loadScratchpadFix);
+	Listeners.add(window, 'close', willCloseScratchpad, true);
+	Listeners.add(window, objName+'-disabled', willDisableAddonScratchpad);
+	Observers.add(willQuitScratchpad, 'quit-application-requested');
+};
+
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'beginToggleSidebar', confirmCloseScratchpad, true);
+	Listeners.remove(window, 'SidebarFocusedSync', loadScratchpadFix);
+	Listeners.remove(window, 'close', willCloseScratchpad, true);
+	Listeners.remove(window, objName+'-disabled', willDisableAddonScratchpad);
+	Observers.remove(willQuitScratchpad, 'quit-application-requested');
+	
+	Prefs.unlisten('alwaysScratchpad', toggleAlwaysScratchpad);
+	toggleAlwaysScratchpad();
 	
 	if(UNLOADED) {
-		styleAid.unload('scratchpadSidebar');
+		Styles.unload('scratchpadSidebar');
 	}
 	
-	overlayAid.removeOverlayWindow(window, 'scratchpad');
+	Overlays.removeOverlayWindow(window, 'scratchpad');
 };

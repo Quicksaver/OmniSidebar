@@ -69,7 +69,7 @@
 			<vbox align="start">
 				<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
 				<checkbox id="checkbox_alternatebtns" dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
-				<groupbox id="omnisidebar_coloroption" hidden="true" align="center">
+				<groupbox id="omnisidebar_coloroption" align="center">
 					<caption label="&omnisidebarOptgroupicons.label;"/>
 					<radiogroup preference="pref-coloricons">
 						<hbox align="center">
@@ -226,7 +226,7 @@
 			<vbox align="start">
 				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
 				<checkbox id="checkbox_alternatebtnsTwin" dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
-				<groupbox id="omnisidebar_coloroptionTwin" hidden="true" align="center">
+				<groupbox id="omnisidebar_coloroptionTwin" align="center">
 					<caption label="&omnisidebarOptgroupicons.label;"/>
 					<radiogroup preference="pref-coloriconsTwin">
 						<hbox align="center">
@@ -402,7 +402,7 @@
 				<caption label="&omnisidebarOptgroupalways.label;"/>
 				<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
 				<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
-				<checkbox id="consoleCheckbox" label="&omnisidebarConsole.label;" preference="pref-alwaysConsole"/>
+				<checkbox id="consoleCheckbox" label="&omnisidebarBrowserConsole.label;" preference="pref-alwaysConsole"/>
 				<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
 				<checkbox label="&omnisidebarScratchpad.label;" preference="pref-alwaysScratchpad"/>
 			</groupbox>
@@ -429,7 +429,7 @@
 			<description>&omnisidebarabout.by;</description>
 			<description class="justify">&omnisidebarabout.desc;</description>
 			<label class="text-link closer" href="https://addons.mozilla.org/firefox/addon/omnisidebar/" value="&omnisidebarabout.home;"/>
-			<label class="text-link closer" href="https://github.com/Quicksaver/OmniSidebar/issues" value="&omnisidebarabout.tech;"/>
+			<label class="text-link closer" href="https://github.com/Quicksaver/OmniSidebar/issues/" value="&omnisidebarabout.tech;"/>
 		</vbox>
 	</prefpane>
 </prefwindow>

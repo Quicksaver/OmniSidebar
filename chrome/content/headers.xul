@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://omnisidebar/skin/headers.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="headers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-
-	<broadcasterset id="mainBroadcasterSet">
-		<broadcaster id="objName-toggleSideToolbar"
-			label="&omnisidebarToolbar.label;"
-			accesskey="&omnisidebarToolbar.accesskey;"
-			type="checkbox"
-			oncommand="objName.toggleToolbar(false);" />
-	</broadcasterset>
+	
+	<commandset id="mainCommandSet">
+		<command id="objName:ToggleSideToolbar" oncommand="objName.toggleToolbar(false);"/>
+	</commandset>
 	
 	<vbox id="sidebar-box" class="chromeclass-extrachrome sidebar-box">
 		<sidebarheader id="sidebar-header"
@@ -18,17 +15,16 @@
 			<stack id="objName-stackSidebar"
 				class="stackSidebar"
 				insertbefore="sidebar-title">
-				<label id="objName-sidebar-customizingLabel"
-					flex="1"
-					crop="end"
-					value="&omnisidebarButtonMain.label;"
-					collapsed="true" />
+				<observes element="objName-Toolbar" attribute="collapsed" />
+				<label crop="end" value="&omnisidebarButtonMain.label;" />
 				<toolbar id="objName-Toolbar"
 					class="omnisidebar-toolbar"
 					toolbarname="&omnisidebarToolbar.label;"
+					accesskey="&omnisidebarToolbar.accesskey;"
 					customizable="true"
 					mode="icons"
 					context="toolbar-context-menu"
+					menucommand="objName:ToggleSideToolbar"
 					toolboxid="navigator-toolbox"
 					menuAdd="&omnisidebarToolbar.menuAdd;"
 					menuMove="&omnisidebarToolbar.menuMove;"

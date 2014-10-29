@@ -1,7 +1,7 @@
-moduleAid.VERSION = '1.0.1';
+Modules.VERSION = '1.1.0';
 
 this.toggleForceOpenToolbars = function() {
-	if(prefAid.forceOpenToolbars) {
+	if(Prefs.forceOpenToolbars) {
 		forceOpenTriggers.__defineGetter__('mainToolbar', function() { return mainSidebar.toolbar; });
 		forceOpenTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
 	} else {
@@ -11,7 +11,7 @@ this.toggleForceOpenToolbars = function() {
 };
 
 this.toggleForceOpenMenus = function() {
-	if(prefAid.forceOpenMenus) {
+	if(Prefs.forceOpenMenus) {
 		forceOpenTriggers.__defineGetter__('viewMainSidebarMenu', function() { return $('viewSidebarMenu'); });
 		forceOpenTriggers.__defineGetter__('viewTwinSidebarMenu', function() { return $(objName+'-viewTwinSidebarMenu'); });
 		forceOpenTriggers.__defineGetter__('openMainSidebarMenu', function() { return $(objName+'-openSidebarMenu'); });
@@ -24,15 +24,15 @@ this.toggleForceOpenMenus = function() {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('forceOpenToolbars', toggleForceOpenToolbars);
-	prefAid.listen('forceOpenMenus', toggleForceOpenMenus);
+Modules.LOADMODULE = function() {
+	Prefs.listen('forceOpenToolbars', toggleForceOpenToolbars);
+	Prefs.listen('forceOpenMenus', toggleForceOpenMenus);
 	
 	toggleForceOpenToolbars();
 	toggleForceOpenMenus();
 };
 
-moduleAid.UNLOADMODULE = function() {
-	prefAid.unlisten('forceOpenToolbars', toggleForceOpenToolbars);
-	prefAid.unlisten('forceOpenMenus', toggleForceOpenMenus);
+Modules.UNLOADMODULE = function() {
+	Prefs.unlisten('forceOpenToolbars', toggleForceOpenToolbars);
+	Prefs.unlisten('forceOpenMenus', toggleForceOpenMenus);
 };

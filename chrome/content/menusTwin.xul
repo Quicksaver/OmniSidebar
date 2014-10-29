@@ -2,19 +2,6 @@
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="menusTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
-	<menupopup id="toolbar-context-menu">
-		<menuitem id="objName-toggle_sidebartoolbar_context-twin" observes="objName-toggleSideToolbar-twin"/>
-			
-	</menupopup>
-	
-	<menupopup id="appmenu_customizeMenu">
-		<menuitem id="objName-toggle_sidebartoolbar_appmenu-twin" observes="objName-toggleSideToolbar-twin"/>
-	</menupopup>
-	
-	<menu id="viewToolbarsMenu">
-		<menuitem id="objName-toggle_sidebartoolbar_viewtoolbars-twin" hidden="true" observes="objName-toggleSideToolbar-twin"/>
-	</menu>
-	
 	<menupopup id="menu_viewPopup">
 		<menu id="viewSidebarMenuMenu" label="&omnisidebarButtonMain.label;" />
 		

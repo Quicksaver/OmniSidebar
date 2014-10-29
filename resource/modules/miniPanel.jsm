@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.2.4';
+Modules.VERSION = '1.3.0';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -20,7 +20,7 @@ this.panelOpenedPanelUI = false;
 // Only open the panel if we're doing a right-click or a ctrl+click
 this.shouldFollowCommand = function(trigger, twin, e) {
 	var metaKey = e && (e.ctrlKey || e.metaKey);
-	var panelViewIsOpen = Australis && trueAttribute(panelView, 'current') && PanelUI.panel.state == 'open' && panelView._bar.twin == twin;
+	var panelViewIsOpen = trueAttribute(panelView, 'current') && PanelUI.panel.state == 'open' && panelView._bar.twin == twin;
 	
 	if(!e || e.button == 2 || (e.button == 0 && metaKey) || panelViewIsOpen) {
 		var bar = (twin) ? twinSidebar : mainSidebar;
@@ -32,10 +32,10 @@ this.shouldFollowCommand = function(trigger, twin, e) {
 		}
 		
 		// if the trigger is our button and it's placed in the PanelUI, open its subview panel instead
-		var placement = Australis && CustomizableUI.getPlacementOfWidget(bar.buttonId);
+		var placement = CustomizableUI.getPlacementOfWidget(bar.buttonId);
 		if(placement && placement.area == 'PanelUI-contents' && (!trigger || trigger == bar.button)) {
 			// I can't get to it before it opens, so I can only close it afterwards
-			if(Services.appinfo.OS != 'WINNT') {
+			if(!WINNT) {
 				var panelContext = $('customizationPanelItemContextMenu');
 				if(panelContext.state != 'closed') {
 					panelContext.hidePopup();
@@ -50,7 +50,7 @@ this.shouldFollowCommand = function(trigger, twin, e) {
 				panelOpenedPanelUI = false;
 				if(PanelUI.panel.state == 'closed') {
 					PanelUI.toggle();
-					listenerAid.add(PanelUI.panel, 'popupshown', function() {
+					Listeners.add(PanelUI.panel, 'popupshown', function() {
 						PanelUI.multiView.showSubView(panelView.id, trigger);
 					}, true, true);
 					panelOpenedPanelUI = true;
@@ -130,14 +130,14 @@ this.populatePanel = function(miniPanel) {
 		bar.stack.style.height = bar.stack.clientHeight+'px';
 		bar.stack.style.width = bar.stack.clientWidth+'px';
 		
-		if(Services.appinfo.OS == 'WINNT' && Services.navigator.oscpu.indexOf('6.') > -1) {
+		if(WINNT && Services.navigator.oscpu.contains('6.')) {
 			var color = window.getComputedStyle(miniPanel).getPropertyValue('background-color');
-			var padding = (Services.navigator.oscpu.indexOf('6.2') > -1) ? 3 : 5;
+			var padding = (Services.navigator.oscpu.contains('6.2')) ? 3 : 5;
 			bar.toolbar.style.backgroundColor = color;
 			bar.toolbar.style.paddingBottom = padding+'px';
 			toolbarSeparator.style.marginTop = '-'+(padding -1)+'px';
 		}
-		else if(Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin') {
+		else if(LINUX) {
 			var padding = 3;
 			toolbarSeparator.style.marginTop = '-'+(padding)+'px';
 		}
@@ -149,7 +149,7 @@ this.populatePanel = function(miniPanel) {
 	}
 	
 	if(bar.titleButton) {
-		populateSidebarMenu(menu, Australis);
+		populateSidebarMenu(menu, true);
 		menuSeparator.hidden = false;
 	} else {
 		menuSeparator.hidden = true;
@@ -176,12 +176,12 @@ this.emptyPanel = function(miniPanel) {
 		bar.stack.style.height = '';
 		bar.stack.style.width = '';
 		
-		if(Services.appinfo.OS == 'WINNT' && Services.navigator.oscpu.indexOf('6.') > -1) {
+		if(WINNT && Services.navigator.oscpu.contains('6.')) {
 			bar.toolbar.style.backgroundColor = '';
 			bar.toolbar.style.paddingBottom = '';
 			toolbarSeparator.style.marginTop = '';
 		}
-		else if(Services.appinfo.OS != 'WINNT' && Services.appinfo.OS != 'Darwin') {
+		else if(LINUX) {
 			toolbarSeparator.style.marginTop = '';
 		}
 		toolbar._originalParent.appendChild(bar.toolbar);
@@ -189,7 +189,7 @@ this.emptyPanel = function(miniPanel) {
 	}
 	
 	while(menu.firstChild) {
-		menu.removeChild(menu.firstChild);
+		menu.firstChild.remove();
 	}
 	
 	menuSeparator.hidden = true;
@@ -242,47 +242,40 @@ this.panelOwner = function(e) {
 
 this.loadMiniPanel = function() {
 	panel.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
+	panelView.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
 	keydownPanel.setupPanel(panel);
+	keydownPanel.setupPanel(panelView);
 	barSwitchTriggers.__defineGetter__('miniPanel', function() { return panel; });
+	barSwitchTriggers.__defineGetter__('miniPanelView', function() { return panelView; });
 	
 	// for compatibility with all the add-ons that use my backbone
-	listenerAid.add(panel, 'AskingForNodeOwner', panelOwner);
+	Listeners.add(panel, 'AskingForNodeOwner', panelOwner);
 	
-	if(Australis) {
-		keydownPanel.setupPanel(panelView);
-		barSwitchTriggers.__defineGetter__('miniPanelView', function() { return panelView; });
-		panelView.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
-		
-		listenerAid.add(panelView, 'ViewShowing', panelViewShowing);
-		listenerAid.add(panelView, 'ViewHiding', panelViewHiding);
-		listenerAid.add(panelViewToolbar, 'DOMMouseScroll', panelViewToolbarScrolling, true);
-	}
+	Listeners.add(panelView, 'ViewShowing', panelViewShowing);
+	Listeners.add(panelView, 'ViewHiding', panelViewHiding);
+	Listeners.add(panelViewToolbar, 'DOMMouseScroll', panelViewToolbarScrolling, true);
 };
 
 this.unloadMiniPanel = function() {
-	if(Australis) {
-		listenerAid.remove(panelViewToolbar, 'DOMMouseScroll', panelViewToolbarScrolling, true);
-		listenerAid.remove(panelView, 'ViewShowing', panelViewShowing);
-		listenerAid.remove(panelView, 'ViewHiding', panelViewHiding);
-		
-		keydownPanel.unsetPanel(panelView);
-		delete barSwitchTriggers.miniPanelView;
-		delete panelView._toggleKeyset;
-	}
-	
-	listenerAid.remove(panel, 'AskingForNodeOwner', panelOwner);
+	Listeners.remove(panelViewToolbar, 'DOMMouseScroll', panelViewToolbarScrolling, true);
+	Listeners.remove(panelView, 'ViewShowing', panelViewShowing);
+	Listeners.remove(panelView, 'ViewHiding', panelViewHiding);
+	Listeners.remove(panel, 'AskingForNodeOwner', panelOwner);
 	
 	delete barSwitchTriggers.miniPanel;
+	delete barSwitchTriggers.miniPanelView;
 	keydownPanel.unsetPanel(panel);
+	keydownPanel.unsetPanel(panelView);
 	delete panel._toggleKeyset;
+	delete panelView._toggleKeyset;
 };
 
-moduleAid.LOADMODULE = function() {
-	listenerAid.add(contextMenu, 'popupshowing', panelDontOpenContext, true);
-	overlayAid.overlayWindow(window, (Australis) ? "miniPanelAustralis" : "miniPanel", null, loadMiniPanel, unloadMiniPanel);
+Modules.LOADMODULE = function() {
+	Listeners.add(contextMenu, 'popupshowing', panelDontOpenContext, true);
+	Overlays.overlayWindow(window, "miniPanel", null, loadMiniPanel, unloadMiniPanel);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	overlayAid.removeOverlayWindow(window, (Australis) ? "miniPanelAustralis" : "miniPanel");
-	listenerAid.remove(contextMenu, 'popupshowing', panelDontOpenContext, true);
+Modules.UNLOADMODULE = function() {
+	Overlays.removeOverlayWindow(window, "miniPanel");
+	Listeners.remove(contextMenu, 'popupshowing', panelDontOpenContext, true);
 };

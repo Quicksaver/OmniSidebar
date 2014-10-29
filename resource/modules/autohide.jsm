@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.1.15';
+Modules.VERSION = '1.2.0';
 
 this.mainAutoHideInit = false;
 this.twinAutoHideInit = false;
@@ -10,22 +10,22 @@ this.setAutoHide = function(bar) {
 		removeAttribute(bar.resizeBox, 'hover');
 		delete bar.resizeBox.hovers;
 		
-		listenerAid.remove(bar.switcher, 'mouseover', autoHideSwitchOver);
-		listenerAid.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
-		listenerAid.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
+		Listeners.remove(bar.switcher, 'mouseover', autoHideSwitchOver);
+		Listeners.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
+		Listeners.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
 		
 		if(bar == mainSidebar) { mainAutoHideInit = false; }
 		else if(bar == twinSidebar) { twinAutoHideInit = false; }
 	} else {
 		bar.resizeBox.hovers = 0;
-		if(!prefAid.noInitialShow) {
+		if(!Prefs.noInitialShow) {
 			setHover(bar, true);
-			timerAid.init('autohideSetSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+			Timers.init('autohideSetSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
 		}
 		
-		listenerAid.add(bar.switcher, 'mouseover', autoHideSwitchOver);
-		listenerAid.add(bar.switcher, 'dragenter', autoHideSwitchOver);
-		listenerAid.add(bar.switcher, 'mouseout', autoHideSwitchOut);
+		Listeners.add(bar.switcher, 'mouseover', autoHideSwitchOver);
+		Listeners.add(bar.switcher, 'dragenter', autoHideSwitchOver);
+		Listeners.add(bar.switcher, 'mouseout', autoHideSwitchOut);
 		bar.toggleSwitcher();
 		
 		aSync(function() {
@@ -46,9 +46,9 @@ this.showOnFocus = function(e) {
 	var bar = e.detail.bar;
 	
 	// hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
-	if(bar.above && bar.autoHide && (!prefAid.noInitialShow || (bar == mainSidebar && mainAutoHideInit) || (bar == twinSidebar && twinAutoHideInit))) {
+	if(bar.above && bar.autoHide && (!Prefs.noInitialShow || (bar == mainSidebar && mainAutoHideInit) || (bar == twinSidebar && twinAutoHideInit))) {
 		setHover(bar, true, 1);
-		timerAid.init('autohideSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+		Timers.init('autohideSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
 	}
 };
 
@@ -83,7 +83,7 @@ this.hideOnResizeEnd = function(e) {
 	
 	// Delayed removal of "nohide" attribute is so the sidebar won't hide itself just after we finished resizing 
 	// (finish resizing -> new values saved -> animations) and not (finish resizing -> animations -> new values saved)
-	timerAid.init('resizeDragEnd', function() {
+	Timers.init('resizeDragEnd', function() {
 		toggleFX();
 		setHover(e.detail.bar, false);
 	}, 100);
@@ -105,12 +105,9 @@ this.hideOnMenuHidden = function() {
 };
 
 this.setAutoHideWidth = function() {
-	// Unload current stylesheet if it's been loaded
-	styleAid.unload('autoHideWidthURI_'+_UUID);
-	
 	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 	// I'm not supporting other versions of OSX, just this one isn't simple as it is
-	var moveBy = (Services.appinfo.OS != 'WINNT') ? -1 : 0;
+	var moveBy = (!WINNT) ? -1 : 0;
 	var leftOffset = moveBy +moveLeft;
 	var rightOffset = moveBy +moveRight;
 	
@@ -132,7 +129,7 @@ this.setAutoHideWidth = function() {
 	sscode += '		right: '+rightOffset+'px !important;\n';
 	sscode += '	}\n';
 	
-	if(prefAid.renderabove && prefAid.autoHide && mainSidebar.width) {
+	if(Prefs.renderabove && Prefs.autoHide && mainSidebar.width) {
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]):not([dontReHover]) #omnisidebar-resizebox:hover,\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox[hover],\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]):not([dontReHover]) #omnisidebar-resizebox[hiding],\n';
@@ -151,7 +148,7 @@ this.setAutoHideWidth = function() {
 		sscode += '	}\n';
 	}
 	
-	if(prefAid.renderaboveTwin && prefAid.autoHideTwin && twinSidebar.width) {
+	if(Prefs.renderaboveTwin && Prefs.autoHideTwin && twinSidebar.width) {
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin[hover],\n';
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin[hiding],\n';
@@ -172,14 +169,14 @@ this.setAutoHideWidth = function() {
 	
 	sscode += '}';
 	
-	styleAid.load('autoHideWidthURI_'+_UUID, sscode, true);
+	Styles.load('autoHideWidthURI_'+_UUID, sscode, true);
 };
 
 this.onDragEnter = function(bar) {
 	setHover(bar, true, 1);
-	listenerAid.add(window.gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.add(window, "drop", onDragExitAll, false);
-	listenerAid.add(window, "dragend", onDragExitAll, false);
+	Listeners.add(window.gBrowser, "dragenter", onDragExitAll);
+	Listeners.add(window, "drop", onDragExitAll);
+	Listeners.add(window, "dragend", onDragExitAll);
 };
 
 this.onDragExit = function(bar) {
@@ -190,9 +187,9 @@ this.onDragExit = function(bar) {
 };
 
 this.onDragExitAll = function() {
-	listenerAid.remove(window.gBrowser, "dragenter", onDragExitAll, false);
-	listenerAid.remove(window, "drop", onDragExitAll, false);
-	listenerAid.remove(window, "dragend", onDragExitAll, false);
+	Listeners.remove(window.gBrowser, "dragenter", onDragExitAll);
+	Listeners.remove(window, "drop", onDragExitAll);
+	Listeners.remove(window, "dragend", onDragExitAll);
 	setBothHovers(false);
 	if(mainSidebar.resizeBox) { hidingSidebar(mainSidebar); }
 	if(twinSidebar.resizeBox) { hidingSidebar(twinSidebar); }
@@ -201,9 +198,9 @@ this.onDragExitAll = function() {
 // delays auto hiding of the sidebar
 this.hidingSidebar = function(bar) {
 	bar.resizeBox.setAttribute('hiding', 'true');
-	timerAid.init('hidingSidebar'+(bar.twin ? 'Twin' : ''), function() {
+	Timers.init('hidingSidebar'+(bar.twin ? 'Twin' : ''), function() {
 		removeAttribute(bar.resizeBox, 'hiding');
-	}, prefAid.hideDelay);
+	}, Prefs.hideDelay);
 };
 
 // handles mousing over the sidebar switch
@@ -212,16 +209,16 @@ this.autoHideSwitchOver = function(e) {
 	var hover = bar.above && bar.autoHide;
 	
 	if(hover) {
-		timerAid.init('switchMouseOver', function() {
+		Timers.init('switchMouseOver', function() {
 			setHover(bar, true);
-		}, prefAid.showDelay);
+		}, Prefs.showDelay);
 	}
 };
 
 this.autoHideSwitchOut = function(e) {
 	var bar = e.target == twinSidebar.switcher ? twinSidebar : mainSidebar;
 	
-	timerAid.cancel('switchMouseOver');
+	Timers.cancel('switchMouseOver');
 	setHover(bar, false);
 };
 
@@ -235,8 +232,8 @@ this.setHover = function(bar, hover, force) {
 	
 	if(hover) {
 		bar.resizeBox.hovers++;
-		bar.resizeBox.setAttribute('hover', 'true');
-		bar.box.removeAttribute('dontReHover');
+		setAttribute(bar.resizeBox, 'hover', 'true');
+		removeAttribute(bar.box, 'dontReHover');
 		if(force != undefined && typeof(force) == 'number') {
 			bar.resizeBox.hovers = force;
 		}
@@ -248,14 +245,14 @@ this.setHover = function(bar, hover, force) {
 			bar.resizeBox.hovers--;
 		}
 		if(bar.resizeBox.hovers == 0) {
-			bar.resizeBox.removeAttribute('hover');
+			removeAttribute(bar.resizeBox, 'hover');
 		}
 	}
 };
 
 this.toggleFX = function() {
-	toggleAttribute(mainSidebar.box, 'disablefx', !prefAid.fx);
-	toggleAttribute(twinSidebar.box, 'disablefx', !prefAid.fx);
+	toggleAttribute(mainSidebar.box, 'disablefx', !Prefs.fx);
+	toggleAttribute(twinSidebar.box, 'disablefx', !Prefs.fx);
 };
 
 this.loadAutoHideMain = function(window) {
@@ -266,73 +263,73 @@ this.loadAutoHideTwin = function(window) {
 	if(window[objName] && window[objName].setAutoHide) { window[objName].setAutoHide(window[objName].twinSidebar); }
 };
 
-this.toggleAutoHide = function(e) {
-	if(prefAid.autoHide) {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide', null, loadAutoHideMain, loadAutoHideMain);
+this.toggleAutoHide = function() {
+	if(Prefs.autoHide) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide', null, loadAutoHideMain, loadAutoHideMain);
 	} else {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide');
 	}
 	
-	if(prefAid.autoHideTwin) {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin', null, loadAutoHideTwin, loadAutoHideTwin);
+	if(Prefs.autoHideTwin) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin', null, loadAutoHideTwin, loadAutoHideTwin);
 	} else {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin');
 	}
 };
 
-moduleAid.LOADMODULE = function() {
-	styleAid.load('autohideSheet', 'autohide');
+Modules.LOADMODULE = function() {
+	Styles.load('autohideSheet', 'autohide');
 	
-	prefAid.listen('autoHide', toggleAutoHide);
-	prefAid.listen('autoHideTwin', toggleAutoHide);
-	prefAid.listen('fx', toggleFX);
+	Prefs.listen('autoHide', toggleAutoHide);
+	Prefs.listen('autoHideTwin', toggleAutoHide);
+	Prefs.listen('fx', toggleFX);
 	
 	toggleAutoHide();
 	
-	listenerAid.add(window, 'endToggleSidebar', listenerToggleSwitcher);
-	listenerAid.add(window, 'SidebarFocused', showOnFocus);
-	listenerAid.add(window, 'openSidebarMenu', showOnOpenMenu);
-	listenerAid.add(window, 'closeSidebarMenu', hideOnCloseMenu);
-	listenerAid.add(window, 'openGoURIBar', showOnOpenGOMenu);
-	listenerAid.add(window, 'closeGoURIBar', hideOnCloseGOMenu);
-	listenerAid.add(window, 'startSidebarResize', showOnResizeStart);
-	listenerAid.add(window, 'endSidebarResize', hideOnResizeEnd);
-	listenerAid.add(window, 'popupshown', showOnMenuShown);
-	listenerAid.add(window, 'popuphidden', hideOnMenuHidden);
+	Listeners.add(window, 'endToggleSidebar', listenerToggleSwitcher);
+	Listeners.add(window, 'SidebarFocused', showOnFocus);
+	Listeners.add(window, 'openSidebarMenu', showOnOpenMenu);
+	Listeners.add(window, 'closeSidebarMenu', hideOnCloseMenu);
+	Listeners.add(window, 'openGoURIBar', showOnOpenGOMenu);
+	Listeners.add(window, 'closeGoURIBar', hideOnCloseGOMenu);
+	Listeners.add(window, 'startSidebarResize', showOnResizeStart);
+	Listeners.add(window, 'endSidebarResize', hideOnResizeEnd);
+	Listeners.add(window, 'popupshown', showOnMenuShown);
+	Listeners.add(window, 'popuphidden', hideOnMenuHidden);
 	
-	listenerAid.add(window, 'sidebarWidthChanged', setAutoHideWidth);
+	Listeners.add(window, 'sidebarWidthChanged', setAutoHideWidth);
 };
 
-moduleAid.UNLOADMODULE = function() {
-	listenerAid.remove(window, 'endToggleSidebar', listenerToggleSwitcher);
-	listenerAid.remove(window, 'SidebarFocused', showOnFocus);
-	listenerAid.remove(window, 'openSidebarMenu', showOnOpenMenu);
-	listenerAid.remove(window, 'closeSidebarMenu', hideOnCloseMenu);
-	listenerAid.remove(window, 'openGoURIBar', showOnOpenGOMenu);
-	listenerAid.remove(window, 'closeGoURIBar', hideOnCloseGOMenu);
-	listenerAid.remove(window, 'startSidebarResize', showOnResizeStart);
-	listenerAid.remove(window, 'endSidebarResize', hideOnResizeEnd);
-	listenerAid.remove(window, 'popupshown', showOnMenuShown);
-	listenerAid.remove(window, 'popuphidden', hideOnMenuHidden);
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'endToggleSidebar', listenerToggleSwitcher);
+	Listeners.remove(window, 'SidebarFocused', showOnFocus);
+	Listeners.remove(window, 'openSidebarMenu', showOnOpenMenu);
+	Listeners.remove(window, 'closeSidebarMenu', hideOnCloseMenu);
+	Listeners.remove(window, 'openGoURIBar', showOnOpenGOMenu);
+	Listeners.remove(window, 'closeGoURIBar', hideOnCloseGOMenu);
+	Listeners.remove(window, 'startSidebarResize', showOnResizeStart);
+	Listeners.remove(window, 'endSidebarResize', hideOnResizeEnd);
+	Listeners.remove(window, 'popupshown', showOnMenuShown);
+	Listeners.remove(window, 'popuphidden', hideOnMenuHidden);
 	
-	listenerAid.remove(mainSidebar.switcher, 'mouseover', autoHideSwitchOver);
-	listenerAid.remove(mainSidebar.switcher, 'dragenter', autoHideSwitchOver);
-	listenerAid.remove(mainSidebar.switcher, 'mouseout', autoHideSwitchOut);
-	listenerAid.remove(twinSidebar.switcher, 'mouseover', autoHideSwitchOver);
-	listenerAid.remove(twinSidebar.switcher, 'dragenter', autoHideSwitchOver);
-	listenerAid.remove(twinSidebar.switcher, 'mouseout', autoHideSwitchOut);
+	Listeners.remove(mainSidebar.switcher, 'mouseover', autoHideSwitchOver);
+	Listeners.remove(mainSidebar.switcher, 'dragenter', autoHideSwitchOver);
+	Listeners.remove(mainSidebar.switcher, 'mouseout', autoHideSwitchOut);
+	Listeners.remove(twinSidebar.switcher, 'mouseover', autoHideSwitchOver);
+	Listeners.remove(twinSidebar.switcher, 'dragenter', autoHideSwitchOver);
+	Listeners.remove(twinSidebar.switcher, 'mouseout', autoHideSwitchOut);
 	
-	listenerAid.remove(window, 'sidebarWidthChanged', setAutoHideWidth);
+	Listeners.remove(window, 'sidebarWidthChanged', setAutoHideWidth);
 	
-	prefAid.unlisten('autoHide', toggleAutoHide);
-	prefAid.unlisten('autoHideTwin', toggleAutoHide);
-	prefAid.unlisten('fx', toggleFX);
+	Prefs.unlisten('autoHide', toggleAutoHide);
+	Prefs.unlisten('autoHideTwin', toggleAutoHide);
+	Prefs.unlisten('fx', toggleFX);
 	
-	styleAid.unload('autoHideWidthURI_'+_UUID);
+	Styles.unload('autoHideWidthURI_'+_UUID);
 	
 	if(UNLOADED) {
-		styleAid.unload('autohideSheet');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin');
+		Styles.unload('autohideSheet');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin');
 	}
 };

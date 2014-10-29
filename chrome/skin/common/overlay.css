@@ -15,7 +15,7 @@
 	/* On custom themes without a default icon to load for every toolbar button, the button would never be actually loaded, thus not triggering its onload attribute */
 	#omnisidebar-button:not([loaded]),
 	#omnisidebar-button-twin:not([loaded]) {
-		list-style-image: url("chrome://omnisidebar/skin/osb-button.png");
+		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left.png");
 	}
 	
 	.omnisidebar_switch {
@@ -40,12 +40,10 @@
 	}
 	
 	.omnisidebar_switch[enabled]:hover {
-		-moz-transition: background .1s, box-shadow .18s;
-		transition: background .1s, box-shadow .18s; /* Firefox 16 */
+		transition: background .1s, box-shadow .18s;
 	}
 	.omnisidebar_switch[enabled]:not(:hover) {
-		-moz-transition: background .2s, box-shadow .25s;
-		transition: background .2s, box-shadow .25s; /* Firefox 16 */
+		transition: background .2s, box-shadow .25s;
 	}
 	
 	/* hide the sidebars when in DomFullScreen mode (HTML5) */

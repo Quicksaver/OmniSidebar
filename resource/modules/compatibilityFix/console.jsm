@@ -1,13 +1,10 @@
-moduleAid.VERSION = '1.2.0';
+Modules.VERSION = '1.3.0';
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://gre/modules/devtools/Loader.jsm");
 
 this.__defineGetter__('HUDService', function() { return devtools.require("devtools/webconsole/hudservice"); });
-
-this.whichConsole = '1';
-this.consoleBackups = {};
 
 // A lot of this comes from HUDService.toggleBrowserConsole()
 this.registerSidebarConsole = function(e) {
@@ -41,163 +38,79 @@ this.closeConsoleSidebarOnDestroy = function() {
 	}
 };
 
-this.toggleAlwaysConsole = function(unloaded) {
-	if(Australis) {
-		if(!UNLOADED && !unloaded && prefAid.alwaysConsole) {
-			if(!consoleBackups.browserConsole) {
-				consoleBackups.browserConsole = $("Tools:BrowserConsole").getAttribute('oncommand');
-			}
-			setAttribute($("Tools:BrowserConsole"), 'oncommand', 'toggleSidebar("'+objName+'-viewConsoleSidebar");');
-		} else {
-			if(consoleBackups.browserConsole) {
-				setAttribute($("Tools:BrowserConsole"), 'oncommand', consoleBackups.browserConsole);
-				delete consoleBackups.browserConsole;
-			}
+this.toggleAlwaysConsole = function(loaded) {
+	if(loaded && Prefs.alwaysConsole) {
+		if(!$("Tools:BrowserConsole").getAttribute(objName+'_backup_oncommand')) {
+			setAttribute($("Tools:BrowserConsole"), objName+'_backup_oncommand', $("Tools:BrowserConsole").getAttribute('oncommand'));
 		}
-		
-		browserConsoleAcceltext();
-		
-		return;
-	}
-			
-	if(!UNLOADED && !unloaded && prefAid.alwaysConsole) {
-		if(!consoleBackups._toJavaScriptConsole) {
-			consoleBackups._toJavaScriptConsole = window.toJavaScriptConsole;
-		}
-		window.toJavaScriptConsole = function() { toggleSidebar($("viewConsole"+whichConsole+"Sidebar")); };
-		
-		if(typeof(window.toErrorConsole) != 'undefined') {
-			if(!consoleBackups._toErrorConsole) {
-				consoleBackups._toErrorConsole = window.toErrorConsole;
-			}
-			window.toErrorConsole = function() { toggleSidebar($("viewConsole"+whichConsole+"Sidebar")); };
-		}
+		setAttribute($("Tools:BrowserConsole"), 'oncommand', 'toggleSidebar("'+objName+'-viewConsoleSidebar");');
 	} else {
-		if(consoleBackups._toJavaScriptConsole) {
-			window.toJavaScriptConsole = consoleBackups._toJavaScriptConsole;
-			delete consoleBackups._toJavaScriptConsole;
-		}
-		if(consoleBackups._toErrorConsole) {
-			window.toErrorConsole = consoleBackups._toErrorConsole;
-			delete consoleBackups._toErrorConsole;
+		if($("Tools:BrowserConsole").getAttribute(objName+'_backup_oncommand')) {
+			setAttribute($("Tools:BrowserConsole"), 'oncommand', $("Tools:BrowserConsole").getAttribute(objName+'_backup_oncommand'));
+			removeAttribute($("Tools:BrowserConsole"), objName+'_backup_oncommand');
 		}
 	}
+	
+	browserConsoleAcceltext();
 };
 
 this.browserConsoleAcceltext = function() {
 	if($(objName+'-viewConsoleSidebar')) {
-		var str = $(objName+'-viewConsoleSidebar').getAttribute((Services.appinfo.OS == 'Darwin') ? 'MacAcceltext' : 'WinLinAcceltext');
+		var str = $(objName+'-viewConsoleSidebar').getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext');
 		var parts = str.split('+');
 		parts[parts.length-1] = parts[parts.length-1].toUpperCase();
 		str = parts.join('+');
-		toggleAttribute($(objName+'-viewConsoleSidebar'), 'acceltext', prefAid.alwaysConsole, str);
+		toggleAttribute($(objName+'-viewConsoleSidebar'), 'acceltext', Prefs.alwaysConsole, str);
 	}
 };
 
 this.doConsoleCommand = function() {
-	if(Australis) {
-		delete holdBroadcasters.console;
-		
-		// We don't want it to start with the console open
-		if(mainSidebar.state.command == objName+'-viewConsoleSidebar' && !mainSidebar.state.closed) {
-			mainSidebar.stateForceClosed(true);
-			loadMainSidebar();
-		}
-		if(twinSidebar.state.command == objName+'-viewConsoleSidebar' && !twinSidebar.state.closed) {
-			twinSidebar.stateForceClosed(true);
-			loadTwinSidebar();
-		}
-		
-		browserConsoleAcceltext();
-		
-		return;
+	delete holdBroadcasters.console;
+	
+	// We don't want the browser to start with the console open
+	if(mainSidebar.state.command == objName+'-viewConsoleSidebar' && !mainSidebar.state.closed) {
+		mainSidebar.stateForceClosed(true);
+		loadMainSidebar();
+	}
+	if(twinSidebar.state.command == objName+'-viewConsoleSidebar' && !twinSidebar.state.closed) {
+		twinSidebar.stateForceClosed(true);
+		loadTwinSidebar();
 	}
 	
-	delete holdBroadcasters.console1;
-	delete holdBroadcasters.console2;
-	if(mainSidebar.loaded && (mainSidebar.state.command == 'viewConsole1Sidebar' || mainSidebar.state.command == 'viewConsole2Sidebar')) { loadMainSidebar(); }
-	if(twinSidebar.loaded && (twinSidebar.state.command == 'viewConsole1Sidebar' || twinSidebar.state.command == 'viewConsole2Sidebar')) { loadTwinSidebar(); }
+	browserConsoleAcceltext();
 };
 
-this.loadConsole = function() {
-	doConsoleCommand();
-	
-	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == 'viewConsole1Sidebar';
-	var twin = false;
-	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == 'viewConsole1Sidebar') {
-		checked = true;
-		twin = true;
-	}
-	toggleAttribute($('viewConsole1Sidebar'), 'checked', checked);
-	toggleAttribute($('viewConsole1Sidebar'), 'twinSidebar', twin);
-	loadConsoleButton();
-};
-
-this.loadConsoleButton = function() {
-	aSync(function() { setAttribute($(objName+'-console_sidebar_button'), 'observes', 'viewConsole'+whichConsole+'Sidebar'); });
-};
-
-moduleAid.LOADMODULE = function() {
-	prefAid.listen('alwaysConsole', toggleAlwaysConsole);
-	
-	toggleAlwaysConsole();
-	
-	// Users can still open the console in the sidebar if they have Console2 installed
-	styleAid.load('consoleFix', 'console');
-	
-	// The browser console was introduced way before Australis, but I don't feel like figuring out exactly on which version it was implemented
-	if(Australis) {
-		holdBroadcasters.console = objName+'-viewConsoleSidebar';
-		
-		styleAid.load('browserConsole', 'browserConsole');
-		overlayAid.overlayWindow(window, 'browserConsole', null, doConsoleCommand);
-		
-		observerAid.add(closeConsoleSidebarOnDestroy, 'web-console-destroyed');
-		
-		listenerAid.add(window, 'SidebarFocused', registerSidebarConsole);
-		return;
-	}
-	
-	holdBroadcasters.console1 = 'viewConsole1Sidebar';
-	holdBroadcasters.console2 = 'viewConsole2Sidebar';
-	
-	overlayAid.overlayWindow(window, 'consoleButton', null, loadConsoleButton);
-	AddonManager.getAddonByID("{1280606b-2510-4fe0-97ef-9b5a22eafe80}", function(addon) {
-		if(UNLOADED) { return; }
-		
-		if(addon && addon.isActive) {
-			whichConsole = '2';
-			if(mainSidebar.state.command == 'viewConsole1Sidebar') { mainSidebar.stateForceCommand('viewConsole2Sidebar'); }
-			if(twinSidebar.state.command == 'viewConsole1Sidebar') { twinSidebar.stateForceCommand('viewConsole2Sidebar'); }
-			doConsoleCommand();
-		} else {
-			overlayAid.overlayWindow(window, 'consoleSidebar', null, loadConsole);
-			if(mainSidebar.state.command == 'viewConsole2Sidebar') { mainSidebar.stateForceCommand('viewConsole1Sidebar'); }
-			if(twinSidebar.state.command == 'viewConsole2Sidebar') { twinSidebar.stateForceCommand('viewConsole1Sidebar'); }
-		}
-	});
-};
-
-moduleAid.UNLOADMODULE = function() {
-	if(Australis) {
-		listenerAid.remove(window, 'SidebarFocused', registerSidebarConsole);
-		
-		observerAid.remove(closeConsoleSidebarOnDestroy, 'web-console-destroyed');
-		
-		overlayAid.removeOverlayWindow(window, 'browserConsole');
-	} else {
-		overlayAid.removeOverlayWindow(window, 'consoleSidebar');
-		overlayAid.removeOverlayWindow(window, 'consoleButton');
-	}
-	
+Modules.LOADMODULE = function() {
+	Prefs.listen('alwaysConsole', toggleAlwaysConsole);
 	toggleAlwaysConsole(true);
 	
-	prefAid.unlisten('alwaysConsole', toggleAlwaysConsole);
+	// Users can still open the console in the sidebar if they have Console2 installed
+	Styles.load('consoleFix', 'console');
+	Styles.load('browserConsole', 'browserConsole');
+	
+	holdBroadcasters.console = objName+'-viewConsoleSidebar';
+	
+	Overlays.overlayWindow(window, 'browserConsole', null, doConsoleCommand);
+	
+	Observers.add(closeConsoleSidebarOnDestroy, 'web-console-destroyed');
+	
+	Listeners.add(window, 'SidebarFocused', registerSidebarConsole);
+};
+
+Modules.UNLOADMODULE = function() {
+	Listeners.remove(window, 'SidebarFocused', registerSidebarConsole);
+	
+	Observers.remove(closeConsoleSidebarOnDestroy, 'web-console-destroyed');
+	
+	Overlays.removeOverlayWindow(window, 'browserConsole');
+	
+	Prefs.unlisten('alwaysConsole', toggleAlwaysConsole);
+	toggleAlwaysConsole();
 	
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? objName+'-viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == ((Australis) ? objName+'-viewConsoleSidebar' : 'viewConsole1Sidebar')) { closeSidebar(twinSidebar); }
-		styleAid.unload('browserConsole');
-		styleAid.unload('consoleFix');
+		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewConsoleSidebar') { closeSidebar(mainSidebar); }
+		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewConsoleSidebar') { closeSidebar(twinSidebar); }
+		Styles.unload('browserConsole');
+		Styles.unload('consoleFix');
 	}
 };

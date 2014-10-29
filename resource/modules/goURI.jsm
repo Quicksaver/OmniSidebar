@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.3';
+Modules.VERSION = '1.1.0';
 
 this.openURIBar = function(button) {
 	var broadcaster = $(button.getAttribute('broadcaster'));
@@ -28,7 +28,7 @@ this.resetURIBar = function(menu) {
 	});
 };
 
-// loses focus from the texbox
+// loses focus from the textbox
 this.blurURIBar = function(menu) {
 	var broadcaster = $(menu.getAttribute('broadcaster'));
 	
@@ -44,14 +44,14 @@ this.blurURIBar = function(menu) {
 // Loads the uri bar value into the sidebar
 this.loadURIBar = function(button) {
 	var broadcaster = $(button.getAttribute('broadcaster'));
-	
-	if($(broadcaster.getAttribute('textbar')).value.indexOf('about:') !== 0 && $(broadcaster.getAttribute('textbar')).value.indexOf('chrome://') !== 0) { return; }
+	var textbarValue = $(broadcaster.getAttribute('textbar')).value;
+	if(!textbarValue.startsWith('about:') && !textbarValue.startsWith('chrome://')) { return; }
 	
 	blurURIBar($(broadcaster.getAttribute('menu')));
 	$(broadcaster.getAttribute('menu')).hidePopup();
 	
-	broadcaster.setAttribute('sidebarurl', $(broadcaster.getAttribute('textbar')).value);
-	broadcaster.setAttribute('sidebartitle', $(broadcaster.getAttribute('textbar')).value);
+	broadcaster.setAttribute('sidebarurl', textbarValue);
+	broadcaster.setAttribute('sidebartitle', textbarValue);
 	broadcaster.removeAttribute('checked'); // To make sure it always loads the sidebar from the same broadcaster
 	toggleSidebar(broadcaster);
 };
@@ -74,16 +74,16 @@ this.keydownURIBar = function(e, box) {
 };
 
 this.toggleGoURI = function() {
-	if(prefAid.goButton) {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain', null, toggleToolbarsGoURI, toggleToolbarsGoURI);
+	if(Prefs.goButton) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain', null, toggleToolbarsGoURI, toggleToolbarsGoURI);
 	} else {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
 	}
 	
-	if(prefAid.goButtonTwin) {
-		overlayAid.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin', null, toggleToolbarsGoURI, toggleToolbarsGoURI);
+	if(Prefs.goButtonTwin) {
+		Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin', null, toggleToolbarsGoURI, toggleToolbarsGoURI);
 	} else {
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
 	}
 };
 
@@ -100,36 +100,36 @@ this.listenGoCloseSidebar = function(e) {
 	}
 };
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	dontSaveBroadcasters.goURIMain = objName+'-viewURISidebar';
 	dontSaveBroadcasters.goURITwin = objName+'-viewURISidebar-twin';
-	styleAid.load('goURI', 'goURI');
+	Styles.load('goURI', 'goURI');
 	
-	prefAid.listen('goButton', toggleGoURI);
-	prefAid.listen('goButtonTwin', toggleGoURI);
+	Prefs.listen('goButton', toggleGoURI);
+	Prefs.listen('goButtonTwin', toggleGoURI);
 	
-	listenerAid.add(window, 'willCloseSidebar', listenGoCloseSidebar, true);
+	Listeners.add(window, 'willCloseSidebar', listenGoCloseSidebar, true);
 	
 	toggleGoURI();
 	
 	twinTriggers.__defineGetter__('goURITwin', function() { return $(objName+'-viewURISidebar-twin'); });
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	delete twinTriggers.goURITwin;
 	
-	listenerAid.remove(window, 'willCloseSidebar', listenGoCloseSidebar, true);
+	Listeners.remove(window, 'willCloseSidebar', listenGoCloseSidebar, true);
 	
-	prefAid.unlisten('goButton', toggleGoURI);
-	prefAid.unlisten('goButtonTwin', toggleGoURI);
+	Prefs.unlisten('goButton', toggleGoURI);
+	Prefs.unlisten('goButtonTwin', toggleGoURI);
 	
 	if(UNLOADED) {
 		// This is to solve a ZC when the add-on was disabled with a sidebar opened on the goURI broadcasters
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewURISidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewURISidebar-twin') { closeSidebar(twinSidebar); }
 		
-		styleAid.unload('goURI');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
+		Styles.unload('goURI');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
 	}
 };

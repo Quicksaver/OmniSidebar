@@ -1,18 +1,12 @@
-moduleAid.VERSION = '1.3.2';
+Modules.VERSION = '1.4.0';
 
+// customizeMenu
+
+this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
 this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
-this.__defineGetter__('contextItem', function() { return $(objName+'-toggle_sidebartoolbar_context'); });
-this.__defineGetter__('contextItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_context-twin'); });
-
-this.__defineGetter__('appMenu', function() { return $('appmenu_customizeMenu'); });
-this.__defineGetter__('appMenuItem', function() { return $(objName+'-toggle_sidebartoolbar_appmenu'); });
-this.__defineGetter__('appMenuItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_appmenu-twin'); });
-
-this.__defineGetter__('viewToolbarsMenu', function() { return $('viewToolbarsMenu').firstChild; }); // View - Toolbars submenu
-this.__defineGetter__('viewToolbarsMenuItem', function() { return $(objName+'-toggle_sidebartoolbar_viewtoolbars'); });
-this.__defineGetter__('viewToolbarsMenuItemTwin', function() { return $(objName+'-toggle_sidebartoolbar_viewtoolbars-twin'); });
-
+this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firstChild; }); // View - Toolbars submenu
+this.__defineGetter__('customizeMenu', function() { return $('customization-toolbar-menu'); });
 this.__defineGetter__('viewSidebarMenu', function() { return $('viewSidebarMenu'); });
 
 this._ShortcutUtils = null;
@@ -25,98 +19,54 @@ this.__defineGetter__('ShortcutUtils', function() {
 	return _ShortcutUtils;
 });
 
-this.doOpenOptions = function() {
-	openOptions();
-};
-
-// Australis adds its own menuitems for custom toolbars now, we don't want them as we use custom methods of our own
-this.cleanMenuToolbars = function(menu) {
-	if(!Australis) { return; }
-	
-	var toCheck = [];
-	if(mainSidebar.toolbar) { toCheck.push(mainSidebar.toolbar.id); }
-	if(twinSidebar.toolbar) { toCheck.push(twinSidebar.toolbar.id); }
-	if(!toCheck.length) { return; }
-	
-	var items = menu.querySelectorAll('menuitem');
-	
-	for(var i=0; i<items.length; i++) {
-		for(var t=0; t<toCheck.length; t++) {
-			if(items[i].id == 'toggle_'+toCheck[t]) {
-				items[i].parentNode.removeChild(items[i]);
-			}
-		}
-	}
-};
-
-// Sets toolbar context menu omnisidebar options item according to what called it
-// The timers is so the menus are given enough time to be populated
+// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
 this.setContextMenu = function(e) {
 	var trigger = e.originalTarget.triggerNode;
+	var hidden =	!isAncestor(trigger, mainSidebar.button)
+			&& !isAncestor(trigger, mainSidebar.header)
+			&& !isAncestor(trigger, twinSidebar.button)
+			&& !isAncestor(trigger, twinSidebar.header);
+		
+	toggleAttribute(contextOptions, 'hidden', hidden);
+	toggleAttribute(contextSeparator, 'hidden', hidden);
 	
-	toggleAttribute(contextOptions, 'hidden',
-		!isAncestor(trigger, mainSidebar.button)
-		&& !isAncestor(trigger, mainSidebar.header)
-		&& !isAncestor(trigger, twinSidebar.button)
-		&& !isAncestor(trigger, twinSidebar.header));
-	toggleAttribute(contextSeparator, 'hidden',
-		!isAncestor(trigger, mainSidebar.button)
-		&& !isAncestor(trigger, mainSidebar.header)
-		&& !isAncestor(trigger, twinSidebar.button)
-		&& !isAncestor(trigger, twinSidebar.header));
-	
-	var before = (Australis) ? contextMenu.querySelector('#toggle_PersonalToolbar').nextSibling : contextMenu.querySelector('#toggle_addon-bar');
-	if(contextItem) {
-		contextMenu.insertBefore(contextItem, before);
-	}
-	if(contextItemTwin) {
-		contextMenu.insertBefore(contextItemTwin, before);
-	}
-	
-	cleanMenuToolbars(contextMenu);
-},
-
-this.setAppMenu = function() {
-	if(appMenuItem) {
-		appMenu.insertBefore(appMenuItem, appMenu.querySelector('#toggle_addon-bar'));
-	}
-	if(appMenuItemTwin) {
-		appMenu.insertBefore(appMenuItemTwin, appMenu.querySelector('#toggle_addon-bar'));
-	}
+	setMenuEntries(contextMenu);
 };
 
-this.setViewToolbarsMenu = function() {
-	var before = (Australis) ? viewToolbarsMenu.querySelector('#toggle_PersonalToolbar').nextSibling : viewToolbarsMenu.querySelector('#toggle_addon-bar');
-	if(viewToolbarsMenuItem) {
-		viewToolbarsMenu.insertBefore(viewToolbarsMenuItem, before);
-		viewToolbarsMenuItem.hidden = false;
+this.setViewMenu = function(e) {
+	setMenuEntries(viewMenu);
+};
+
+this.setCustomizeMenu = function(e) {
+	setMenuEntries(customizeMenu);
+};
+
+this.setMenuEntries = function(menu) {
+	if(mainSidebar.toolbar) {
+		setAttribute(menu.getElementsByAttribute('toolbarId', mainSidebar.toolbar.id)[0], 'command', mainSidebar.toolbar.getAttribute('menucommand'));
 	}
-	if(viewToolbarsMenuItemTwin) {
-		viewToolbarsMenu.insertBefore(viewToolbarsMenuItemTwin, before);
-		viewToolbarsMenuItemTwin.hidden = false;
+	if(twinSidebar.toolbar) {
+		setAttribute(menu.getElementsByAttribute('toolbarId', twinSidebar.toolbar.id)[0], 'command', twinSidebar.toolbar.getAttribute('menucommand'));
 	}
-	
-	cleanMenuToolbars(viewToolbarsMenu);
 };
 
 this.populateSidebarMenu = function(menu, useButton) {
 	while(menu.firstChild) {
-		menu.removeChild(menu.firstChild);
+		menu.firstChild.remove();
 	}
 	
 	// Populate with Social API entries
-	if(SocialSidebar && SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: viewSidebarMenu }); }
+	if(SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: viewSidebarMenu }); }
 	
-	for(var i=0; i<viewSidebarMenu.childNodes.length; i++) {
+	for(var child of viewSidebarMenu.childNodes) {
 		// PanelUI styling is mostly done with toolbarbutton elements, so if I want to use the native styling, I have to use these nodes as well
-		if(useButton && viewSidebarMenu.childNodes[i].localName != 'menuseparator') {
+		if(useButton && child.localName != 'menuseparator') {
 			var newItem = document.createElement('toolbarbutton');
-			for(var a=0; a<viewSidebarMenu.childNodes[i].attributes.length; a++) {
-				setAttribute(newItem, viewSidebarMenu.childNodes[i].attributes[a].name, viewSidebarMenu.childNodes[i].attributes[a].value);
+			for(var attr of child.attributes) {
+				setAttribute(newItem, attr.name, attr.value);
 			}
 		} else {
-			// cloneNode(deep) deep argument is optional and defaults to true in Firefox 13+. For compatibility with Firefox 12-, deep must always be provided.
-			var newItem = viewSidebarMenu.childNodes[i].cloneNode(true);
+			var newItem = child.cloneNode(true);
 		}
 		
 		if(menu.id) {
@@ -129,24 +79,19 @@ this.populateSidebarMenu = function(menu, useButton) {
 };
 
 this.menuItemsCheck = function(menu) {
-	menu = (menu.target) ? menu.target : menu;
+	menu = menu.target || menu;
 	var mainMenu = (menu == viewSidebarMenu);
 	
-	for(var m=0; m<menu.childNodes.length; m++) {
-		if(!menu.childNodes[m].getAttribute('observes')) {
-			if(!UNLOADED && !SocialSidebar) {
-				// Social sidebar menu entry sometimes appears when it shouldn't
-				menu.childNodes[m].hidden = !mainMenu;
-			} else {
-				menu.childNodes[m].hidden = !SocialSidebar.canShow;
-				if(menu.childNodes[m].getAttribute('origin')) {
-					if(menu.childNodes[m].getAttribute('oncommand').indexOf('show') > -1) {
-						var command = ((!UNLOADED) ? objName+'.placeSocialSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
-						setAttribute(menu.childNodes[m], 'oncommand', command);
-					} else {
-						var command = (!UNLOADED) ? objName+'.ensureSocialSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
-						setAttribute(menu.childNodes[m], 'oncommand', command);
-					}
+	for(var child of menu.childNodes) {
+		if(!child.getAttribute('observes')) {
+			child.hidden = !SocialSidebar.canShow;
+			if(child.getAttribute('origin')) {
+				if(child.getAttribute('oncommand').contains('show')) {
+					var command = ((!UNLOADED) ? objName+'.placeSocialSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
+					setAttribute(child, 'oncommand', command);
+				} else {
+					var command = (!UNLOADED) ? objName+'.ensureSocialSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
+					setAttribute(child, 'oncommand', command);
 				}
 			}
 		}
@@ -154,23 +99,22 @@ this.menuItemsCheck = function(menu) {
 		if(mainMenu) { continue; }
 		
 		// No point in having this menu entry in our lists if it isn't going to be visible
-		if(menu.childNodes[m].hidden || menu.childNodes[m].collapsed) {
-			menu.removeChild(menu.childNodes[m]);
-			m--;
+		if(child.hidden || child.collapsed) {
+			child.remove();
 			continue;
 		}
 		
 		// if we're in the mini panel, let's try to style it like a native PanelUI-subView panel
-		if((menu == panelMenu || menu == panelViewMenu) && menu.childNodes[m].localName != 'menuseparator') {
-			menu.childNodes[m].classList.add('subviewbutton');
+		if((menu == panelMenu || menu == panelViewMenu) && child.localName != 'menuseparator') {
+			child.classList.add('subviewbutton');
 			
 			// add keyboard shortcuts, as it doesn't display them automatically in panels
-			if(menu.childNodes[m].getAttribute('acceltext')) {
-				setAttribute(menu.childNodes[m], 'shortcut', menu.childNodes[m].getAttribute('acceltext'));
-			} else if(menu.childNodes[m].getAttribute('key')) {
-				var menuKey = $(menu.childNodes[m].getAttribute('key'));
+			if(child.getAttribute('acceltext')) {
+				setAttribute(child, 'shortcut', child.getAttribute('acceltext'));
+			} else if(child.getAttribute('key')) {
+				var menuKey = $(child.getAttribute('key'));
 				if(menuKey) {
-					setAttribute(menu.childNodes[m], 'shortcut', ShortcutUtils.prettifyShortcut(menuKey));
+					setAttribute(child, 'shortcut', ShortcutUtils.prettifyShortcut(menuKey));
 				}
 			}
 		}
@@ -191,7 +135,7 @@ this.openSidebarMenu = function(e) {
 	if(!target.getAttribute('TitleButton')) { setAttribute(target, 'TitleButton', 'true'); }
 	
 	// the title needs to be visible to place the menu correctly
-	toggleTitles();
+	toggleTitles(true);
 	menu.style.minWidth = target.clientWidth +'px';
 	
 	menu.openPopup(target, 'after_start');
@@ -210,7 +154,7 @@ this.closeSidebarMenu = function(menu) {
 	var target = $(menu.getAttribute('target'));
 	target.removeAttribute('active');
 	
-	toggleTitles();
+	toggleTitles(true);
 	
 	dispatch(target, { type: 'closeSidebarMenu', cancelable: false });
 	
@@ -218,52 +162,50 @@ this.closeSidebarMenu = function(menu) {
 	aSync(function() {
 		if(!bar.box || bar.closed) { return; }
 		var command = bar.box.getAttribute('sidebarcommand');
-		if(command.indexOf(objName+'-viewBlankSidebar') == 0) {
+		if(command.startsWith(objName+'-viewBlankSidebar')) {
 			toggleSidebar(command, false, bar.twin);
 		}
 	});
 };
 
 this.toggleMenuButton = function() {
-	if(UNLOADED || window.closed || window.willClose || !prefAid.titleButton) {
+	if(UNLOADED || window.closed || window.willClose || !Prefs.titleButton) {
 		removeAttribute(mainSidebar.title, 'TitleButton');
-		listenerAid.remove(mainSidebar.title, 'mousedown', openSidebarMenu);
+		Listeners.remove(mainSidebar.title, 'mousedown', openSidebarMenu);
 	} else {
 		setAttribute(mainSidebar.title, 'TitleButton', objName+'-openSidebarMenu');
-		listenerAid.add(mainSidebar.title, 'mousedown', openSidebarMenu);
+		Listeners.add(mainSidebar.title, 'mousedown', openSidebarMenu);
 	}
 };
 
 this.toggleMenuButtonTwin = function() {
-	if(UNLOADED || window.closed || window.willClose || !prefAid.twinSidebar || !prefAid.titleButtonTwin) {
+	if(UNLOADED || window.closed || window.willClose || !Prefs.twinSidebar || !Prefs.titleButtonTwin) {
 		removeAttribute(twinSidebar.title, 'TitleButton');
-		listenerAid.remove(twinSidebar.title, 'mousedown', openSidebarMenu);
+		Listeners.remove(twinSidebar.title, 'mousedown', openSidebarMenu);
 	} else {
 		setAttribute(twinSidebar.title, 'TitleButton', objName+'-openTwinSidebarMenu');
-		listenerAid.add(twinSidebar.title, 'mousedown', openSidebarMenu);
+		Listeners.add(twinSidebar.title, 'mousedown', openSidebarMenu);
 	}
 };
 
 this.blankSidebarMenu = function(e) {
 	var bar = e.detail.bar;
 	
-	if(!bar.closed && bar.box.getAttribute('sidebarcommand').indexOf(objName+'-viewBlankSidebar') == 0) {
+	if(!bar.closed && bar.box.getAttribute('sidebarcommand').startsWith(objName+'-viewBlankSidebar')) {
 		openSidebarMenu($((bar.twin) ? objName+'-openTwinSidebarMenu' : objName+'-openSidebarMenu'));
 	}
 };
 	
-moduleAid.LOADMODULE = function() {
-	overlayAid.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
-	overlayAid.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
-	styleAid.load('menus', 'menus');
+Modules.LOADMODULE = function() {
+	Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
+	Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
+	Styles.load('menus', 'menus');
 	
-	listenerAid.add(contextMenu, 'popupshowing', setContextMenu);
-	if(!Australis) {
-		listenerAid.add(appMenu, 'popupshowing', setAppMenu);
-	}
-	listenerAid.add(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
-	listenerAid.add($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
-	listenerAid.add(window, 'endToggleSidebar', blankSidebarMenu);
+	Listeners.add(contextMenu, 'popupshowing', setContextMenu);
+	Listeners.add(viewMenu, 'popupshown', setViewMenu);
+	Listeners.add(customizeMenu, 'popupshown', setCustomizeMenu);
+	Listeners.add($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
+	Listeners.add(window, 'endToggleSidebar', blankSidebarMenu);
 	
 	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	twinTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
@@ -273,14 +215,14 @@ moduleAid.LOADMODULE = function() {
 	barSwitchTriggers.__defineGetter__('menuTitle', function() { return $(objName+'-openSidebarMenu'); });
 	barSwitchTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
 	
-	prefAid.listen('titleButton', toggleMenuButton);
-	prefAid.listen('titleButtonTwin', toggleMenuButtonTwin);
+	Prefs.listen('titleButton', toggleMenuButton);
+	Prefs.listen('titleButtonTwin', toggleMenuButtonTwin);
 	
 	toggleMenuButton();
 	toggleMenuButtonTwin();
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	delete twinTriggers.viewTwinSidebarMenuMenu;
 	delete twinTriggers.menuTitleTwin;
 	
@@ -289,16 +231,14 @@ moduleAid.UNLOADMODULE = function() {
 	delete barSwitchTriggers.menuTitle;
 	delete barSwitchTriggers.menuTitleTwin;
 	
-	prefAid.unlisten('titleButton', toggleMenuButton);
-	prefAid.unlisten('titleButtonTwin', toggleMenuButtonTwin);
+	Prefs.unlisten('titleButton', toggleMenuButton);
+	Prefs.unlisten('titleButtonTwin', toggleMenuButtonTwin);
 	
-	listenerAid.remove(contextMenu, 'popupshowing', setContextMenu);
-	if(!Australis) {
-		listenerAid.remove(appMenu, 'popupshowing', setAppMenu);
-	}
-	listenerAid.remove(viewToolbarsMenu, 'popupshowing', setViewToolbarsMenu);
-	listenerAid.remove($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
-	listenerAid.remove(window, 'endToggleSidebar', blankSidebarMenu);
+	Listeners.remove(contextMenu, 'popupshowing', setContextMenu);
+	Listeners.remove(viewMenu, 'popupshown', setViewMenu);
+	Listeners.remove(customizeMenu, 'popupshown', setCustomizeMenu);
+	Listeners.remove($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
+	Listeners.remove(window, 'endToggleSidebar', blankSidebarMenu);
 	
 	// ensure the menu is properly reset when unloading
 	menuItemsCheck($('viewSidebarMenu'));
@@ -308,8 +248,8 @@ moduleAid.UNLOADMODULE = function() {
 	toggleMenuButtonTwin();
 	
 	if(UNLOADED) {
-		styleAid.unload('menus');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
-		overlayAid.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
+		Styles.unload('menus');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
 	}
 };

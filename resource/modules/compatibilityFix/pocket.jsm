@@ -1,4 +1,4 @@
-moduleAid.VERSION = '1.0.0';
+Modules.VERSION = '1.1.0';
 
 //Error: win[objectName].xulId(...).contentWindow is undefined
 //Source file: file:///C:/Users/Quicksaver/AppData/Roaming/Mozilla/Firefox/Profiles/c0wgkj18.Nightly/extensions/isreaditlater@ideashower.com/components/RILdelegate.js
@@ -11,7 +11,7 @@ moduleAid.VERSION = '1.0.0';
 // These are probably caused by sidebar jumping around and Pocket trying to access just afterwards, when the browser elements haven't finished loading/being re-created.
 // A fix is easy, just add a check for .contentWindow and skip that part of the code if it is undefined. It will not break Pocket functionality.
 
-moduleAid.LOADMODULE = function() {
+Modules.LOADMODULE = function() {
 	toCode.modify(window.RIL, 'window.RIL.listIsOpen', [
 		["&& this.xulId('sidebar', true).contentWindow", "&& this.xulId('sidebar', true).contentWindow && this.xulId('sidebar', true).contentWindow"]
 	]);
@@ -20,7 +20,7 @@ moduleAid.LOADMODULE = function() {
 	]);
 };
 
-moduleAid.UNLOADMODULE = function() {
+Modules.UNLOADMODULE = function() {
 	toCode.revert(window.RIL, 'window.RIL.listIsOpen');
 	toCode.revert(window.RIL.APP, 'window.RIL.APP.commandInAllOpenWindows');
 };

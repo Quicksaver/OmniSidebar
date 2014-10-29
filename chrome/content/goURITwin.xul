@@ -38,16 +38,16 @@
 		</menupopup>
 	</popupset>
 	
-	<toolbar id="objName-Toolbar-twin">
+	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-uri_sidebar_button-twin" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button adequate-size osb-custom-button"
 			removable="false"
-			position="1"
+			defaultArea="objName-Toolbar-twin"
 			type="custom"
 			label="&URISidebar.buttonLabel;"
 			tooltiptext="&URISidebar.tooltip;"
 			broadcaster="objName-viewURISidebar-twin"
 			oncommand="objName.openURIBar(this);" />
-	</toolbar>
+	</toolbarpalette>
 	
 </overlay>
