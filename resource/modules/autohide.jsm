@@ -1,7 +1,4 @@
-Modules.VERSION = '1.2.0';
-
-this.mainAutoHideInit = false;
-this.twinAutoHideInit = false;
+Modules.VERSION = '1.2.1';
 
 this.setAutoHide = function(bar) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide);
@@ -14,13 +11,11 @@ this.setAutoHide = function(bar) {
 		Listeners.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
 		Listeners.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
 		
-		if(bar == mainSidebar) { mainAutoHideInit = false; }
-		else if(bar == twinSidebar) { twinAutoHideInit = false; }
+		bar.autoHideInit = false;
 	} else {
 		bar.resizeBox.hovers = 0;
 		if(!Prefs.noInitialShow) {
-			setHover(bar, true);
-			Timers.init('autohideSetSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+			initialShowBar(bar, 1000);
 		}
 		
 		Listeners.add(bar.switcher, 'mouseover', autoHideSwitchOver);
@@ -30,8 +25,7 @@ this.setAutoHide = function(bar) {
 		
 		aSync(function() {
 			if(typeof(mainSidebar) == 'undefined') { return; }
-			if(bar == mainSidebar) { mainAutoHideInit = true; }
-			else if(bar == twinSidebar) { twinAutoHideInit = true; }
+			bar.autoHideInit = true;
 		}, 2000);
 	}
 	setAutoHideWidth();
@@ -46,9 +40,8 @@ this.showOnFocus = function(e) {
 	var bar = e.detail.bar;
 	
 	// hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened
-	if(bar.above && bar.autoHide && (!Prefs.noInitialShow || (bar == mainSidebar && mainAutoHideInit) || (bar == twinSidebar && twinAutoHideInit))) {
-		setHover(bar, true, 1);
-		Timers.init('autohideSidebar'+(bar.twin ? 'Twin' : ''), function() { setHover(bar, false);}, 1000);
+	if(!Prefs.noInitialShow || bar.autoHideInit || bar.autoHideInit) {
+		initialShowBar(bar, 1000);
 	}
 };
 
@@ -223,12 +216,12 @@ this.autoHideSwitchOut = function(e) {
 };
 
 this.setBothHovers = function(hover) {
-	if(mainSidebar.resizeBox) { setHover(mainSidebar, hover); }
-	if(twinSidebar.resizeBox) { setHover(twinSidebar, hover); }
+	setHover(mainSidebar, hover);
+	setHover(twinSidebar, hover);
 };
 
 this.setHover = function(bar, hover, force) {
-	if(!bar.resizeBox) { return; }
+	if(!bar.resizeBox || !bar.above || !bar.autoHide) { return; }
 	
 	if(hover) {
 		bar.resizeBox.hovers++;
@@ -248,6 +241,27 @@ this.setHover = function(bar, hover, force) {
 			removeAttribute(bar.resizeBox, 'hover');
 		}
 	}
+};
+
+this.initialShowBar = function(bar, delay) {
+	if(!bar.resizeBox || !bar.above || !bar.autoHide) { return; }
+	
+	if(bar.box.hidden) {
+		setHover(bar, false, 0);
+		return;
+	}
+	
+	setHover(bar, true);
+	
+	// don't use Timers, because if we use multiple initialShowBar()'s it would get stuck open
+	// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
+	var thisShowing = aSync(function() {
+		if(typeof(setHover) != 'undefined' && bar.initialShowings) {
+			setHover(bar, false);
+			bar.initialShowings.splice(bar.initialShowings.indexOf(thisShowing), 1);
+		}
+	}, delay);
+	bar.initialShowings.push(thisShowing);
 };
 
 this.toggleFX = function() {

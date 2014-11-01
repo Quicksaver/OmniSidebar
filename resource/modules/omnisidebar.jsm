@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this._mainState = null;
 this._twinState = null;
@@ -7,6 +7,8 @@ this.mainSidebar = {
 	main: true,
 	twin: false,
 	loaded: false,
+	autoHideInit: false,
+	initialShowings: [],
 	get isOpen () {
 		if(!this.box
 		|| !this.box.getAttribute('sidebarcommand')
@@ -121,6 +123,8 @@ this.twinSidebar = {
 	main: false,
 	twin: true,
 	loaded: false,
+	autoHideInit: false,
+	initialShowings: [],
 	get isOpen () {
 		if(!this.box
 		|| !this.box.getAttribute('sidebarcommand')
