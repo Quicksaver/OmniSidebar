@@ -11,7 +11,6 @@
 .inSidebar #TextboxEval,
 .inSidebar #styles-filter,
 .inSidebar #tfURLBar,
-.inSidebar #panoSearchBox,
 .inSidebar #searchFilter {
 	-moz-appearance: none !important;
 	background: rgba(135,135,135,.5) !important;
@@ -67,7 +66,6 @@
 .inSidebar #sidebar-notify #feed_tree,
 .inSidebar #view-port-container,
 .inSidebar #styles,
-.inSidebar #panoTabGroupTree,
 .inSidebar #bookmarks-content-box,
 .inSidebar #placesView,
 .inSidebar #RIL_sidebar {
@@ -113,8 +111,6 @@
 .inSidebar .view-pane richlistitem[selected="true"],
 .inSidebar #styles richlistitem:hover,
 .inSidebar #styles richlistitem[selected="true"],
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-row(selected),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-row(hover),
 .inSidebar #places-content-view treechildren::-moz-tree-row(selected),
 .inSidebar #places-content-view treechildren::-moz-tree-row(hover),
 .inSidebar #downloadsRichListBox richlistitem:hover,
@@ -128,7 +124,6 @@
 
 .inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container),
 .inSidebar #feedbar_tree_container::-moz-tree-cell-text(container),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container) {
 	font-weight: bold !important;
 }
@@ -137,8 +132,6 @@
 .inSidebar .sidebar-placesTreechildren::-moz-tree-cell-text(container, open, selected),
 .inSidebar #feedbar_tree_container::-moz-tree-cell-text(container, open),
 .inSidebar #feedbar_tree_container::-moz-tree-cell-text(container, open, selected),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, open),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, open, selected),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, open, selected),
 
@@ -150,10 +143,6 @@
 .inSidebar #feedbar_tree_container::-moz-tree-cell-text(container, hover),
 .inSidebar #feedbar_tree_container::-moz-tree-cell-text(leaf),
 .inSidebar #feedbar_tree_container::-moz-tree-cell-text(leaf, hover),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(container, hover),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(leaf),
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-cell-text(leaf, hover),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(container, hover),
 .inSidebar #places-content-view treechildren::-moz-tree-cell-text(leaf),
@@ -168,7 +157,6 @@
 .inSidebar #bookmarks-view-children::-moz-tree-separator,
 .inSidebar .sidebar-placesTreechildren::-moz-tree-separator,
 .inSidebar #feedbar_tree_container::-moz-tree-separator,
-.inSidebar #panoTabGroupTreeChildren::-moz-tree-separator,
 .inSidebar #places-content-view treechildren::-moz-tree-separator {
 	border-top: 1px solid rgb(174, 183, 196) !important;
 	border-bottom: none !important;
