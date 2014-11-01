@@ -39,7 +39,7 @@
 	background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0% !important;
 }
 
-.sidebar-box .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+.sidebar-box .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
 	-moz-padding-start: 3px !important;
 	-moz-padding-end: 3px !important;
 	-moz-border-start-style: none !important;
@@ -124,9 +124,9 @@
 	opacity: .5;
 }
 
-.sidebar-box .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
-.sidebar-box .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
-.sidebar-box .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.sidebar-box .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.sidebar-box .omnisidebar-toolbar .toolbarbutton-1:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.sidebar-box .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 
 #history-panel.inSidebar #viewButton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover, 
 #downloadManager.inSidebar #clearListButton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,

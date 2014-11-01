@@ -18,7 +18,6 @@
 			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
 			<preference id="pref-hideheaderclose" name="extensions.omnisidebar.hideheaderclose" type="bool"/>
 			<preference id="pref-titleButton" name="extensions.omnisidebar.titleButton" type="bool"/>
-			<preference id="pref-alternatebtns" name="extensions.omnisidebar.alternatebtns" type="bool"/>
 			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
 			<preference id="pref-goButton" name="extensions.omnisidebar.goButton" type="bool"/>
 			<preference id="pref-mainKeysetKeycode" name="extensions.omnisidebar.mainKeysetKeycode" type="string"/>
@@ -68,7 +67,6 @@
 			<caption><checkbox label="&omnisidebarOpttoolbar.label;" preference="pref-toolbar"/></caption>
 			<vbox align="start">
 				<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
-				<checkbox id="checkbox_alternatebtns" dependson="pref-toolbar" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtns"/>
 				<groupbox id="omnisidebar_coloroption" align="center">
 					<caption label="&omnisidebarOptgroupicons.label;"/>
 					<radiogroup preference="pref-coloricons">
@@ -179,7 +177,6 @@
 			<preference id="pref-hideheaderdockTwin" name="extensions.omnisidebar.hideheaderdockTwin" type="bool"/>
 			<preference id="pref-hideheadercloseTwin" name="extensions.omnisidebar.hideheadercloseTwin" type="bool"/>
 			<preference id="pref-titleButtonTwin" name="extensions.omnisidebar.titleButtonTwin" type="bool"/>
-			<preference id="pref-alternatebtnsTwin" name="extensions.omnisidebar.alternatebtnsTwin" type="bool"/>
 			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
 			<preference id="pref-goButtonTwin" name="extensions.omnisidebar.goButtonTwin" type="bool"/>
 			<preference id="pref-twinKeysetKeycode" name="extensions.omnisidebar.twinKeysetKeycode" type="string"/>
@@ -225,7 +222,6 @@
 			<caption><checkbox dependson="pref-twinSidebar" label="&omnisidebarOpttoolbar.label;" preference="pref-toolbarTwin"/></caption>
 			<vbox align="start">
 				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
-				<checkbox id="checkbox_alternatebtnsTwin" dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptalternatebtns.label;" preference="pref-alternatebtnsTwin"/>
 				<groupbox id="omnisidebar_coloroptionTwin" align="center">
 					<caption label="&omnisidebarOptgroupicons.label;"/>
 					<radiogroup preference="pref-coloriconsTwin">

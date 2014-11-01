@@ -44,7 +44,6 @@
 <!ENTITY omnisidebarOptforceOpen.toolbars "Buttons in the sidebar toolbar">
 <!ENTITY omnisidebarOptforceOpen.menus "Drop-down menus">
 
-<!ENTITY omnisidebarOptalternatebtns.label "Alternate button style">
 <!ENTITY omnisidebarOpttoolbar.label "Sidebar Toolbar">
 <!ENTITY omnisidebarOpthideheadertitle.label "Hide sidebar title">
 <!ENTITY omnisidebarOpttitleButton.label "Sidebar menu dropdown in title">

@@ -5,20 +5,11 @@
 
 	/* General toolbar buttons */
 	
-	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 {
-		margin: 0 2px 0 2px !important;
-	}
-	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1[checked="true"],
-	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1:active {
-		margin: 0 2px 0 2px !important;
-	}
-	
 	/* I might have to review these in the future; they may not be 100% compatible with every toolbar button out there,
 	and it would be better if the buttons themselves were made compatible with the new Australis system. */
 	.omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-text { display: none !important; }
-	.omnisidebar-toolbar:not([alternatebtns]) .toolbarbutton-1 .toolbarbutton-icon { max-height: 18px !important; }
-	.omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px !important; }
-	.sidebar-box[glassStyle] .omnisidebar-toolbar[alternatebtns] .toolbarbutton-1 .toolbarbutton-icon { max-height: 17px !important; }
+	.omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px !important; }
+	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-icon { max-height: 17px !important; }
 	
 	/* OSB Button */
 	

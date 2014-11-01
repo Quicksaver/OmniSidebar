@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -24,15 +24,6 @@ this.toggleCloses = function(headers) {
 	if(headers) {
 		toggleHeaders();
 	}
-};
-
-this.toggleButtonStyle = function() {
-	// we always "load" alternate styles in mac, mac doesn't actually have an alternate style, but this is so the glass style also loads there
-	
-	toggleAttribute(mainSidebar.toolbar, 'alternatebtns', DARWIN || (!UNLOADED && Prefs.alternatebtns));
-	toggleAttribute(twinSidebar.toolbar, 'alternatebtns', DARWIN || (!UNLOADED && Prefs.alternatebtnsTwin));
-	
-	Styles.loadIf('alternatebtns', 'buttonsStyle', false, DARWIN || Prefs.alternatebtns || (Prefs.twinSidebar && Prefs.alternatebtnsTwin));
 };
 
 this.toggleIconsColor = function() {
@@ -130,7 +121,6 @@ this.toggleHeadersOnLoad = function() {
 	
 	toggleTitles();
 	toggleCloses();
-	toggleButtonStyle();
 	toggleIconsColor();
 	toggleHeaders();
 	
@@ -140,16 +130,15 @@ this.toggleHeadersOnLoad = function() {
 Modules.LOADMODULE = function() {
 	Overlays.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers', null, toggleHeadersOnLoad);
 	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOnLoad);
+	Styles.load('buttonsStyle', 'buttonsStyle');
 	
 	Prefs.listen('toolbar', toggleHeaders);
 	Prefs.listen('hideheadertitle', toggleTitles);
 	Prefs.listen('hideheaderclose', toggleCloses);
-	Prefs.listen('alternatebtns', toggleButtonStyle);
 	Prefs.listen('coloricons', toggleIconsColor);
 	Prefs.listen('toolbarTwin', toggleHeaders);
 	Prefs.listen('hideheadertitleTwin', toggleTitles);
 	Prefs.listen('hideheadercloseTwin', toggleCloses);
-	Prefs.listen('alternatebtnsTwin', toggleButtonStyle);
 	Prefs.listen('coloriconsTwin', toggleIconsColor);
 	
 	twinTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
@@ -177,12 +166,10 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('toolbar', toggleHeaders);
 	Prefs.unlisten('hideheadertitle', toggleTitles);
 	Prefs.unlisten('hideheaderclose', toggleCloses);
-	Prefs.unlisten('alternatebtns', toggleButtonStyle);
 	Prefs.unlisten('coloricons', toggleIconsColor);
 	Prefs.unlisten('toolbarTwin', toggleHeaders);
 	Prefs.unlisten('hideheadertitleTwin', toggleTitles);
 	Prefs.unlisten('hideheadercloseTwin', toggleCloses);
-	Prefs.unlisten('alternatebtnsTwin', toggleButtonStyle);
 	Prefs.unlisten('coloriconsTwin', toggleIconsColor);
 	
 	Listeners.remove(window, 'beforecustomization', headersCustomize);
@@ -198,7 +185,7 @@ Modules.UNLOADMODULE = function() {
 	removeAttribute(twinSidebar.header, 'hidden');
 	
 	if(UNLOADED) {
-		Styles.unload('alternatebtns');
+		Styles.unload('buttonsStyle');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin');
 	}
