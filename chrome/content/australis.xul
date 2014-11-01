@@ -5,13 +5,13 @@
 	
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-bookmarks_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size osb-replace-button"
+			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
 			label="&bookmarksSidebar.label;"
 			tooltiptext="&bookmarksSidebar.tooltip;"
 			type="custom"
 			observes="viewBookmarksSidebar" />
 		<toolbarbutton id="objName-history_sidebar_button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional adequate-size osb-replace-button"
+			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
 			label="&historySidebar.label;"
 			tooltiptext="&historySidebar.tooltip;"
 			type="custom"
