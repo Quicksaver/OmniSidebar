@@ -424,8 +424,18 @@
 			</hbox>
 			<description>&omnisidebarabout.by;</description>
 			<description class="justify">&omnisidebarabout.desc;</description>
-			<label class="text-link closer" href="https://addons.mozilla.org/firefox/addon/omnisidebar/" value="&omnisidebarabout.home;"/>
-			<label class="text-link closer" href="https://github.com/Quicksaver/OmniSidebar/issues/" value="&omnisidebarabout.tech;"/>
+			<label	class="text-link closer"
+					tooltiptext="https://addons.mozilla.org/firefox/addon/omnisidebar/"
+					href="https://addons.mozilla.org/firefox/addon/omnisidebar/"
+					value="&omnisidebarabout.home;"/>
+			<label	class="text-link closer"
+					tooltiptext="https://github.com/Quicksaver/OmniSidebar/issues"
+					href="https://github.com/Quicksaver/OmniSidebar/issues"
+					value="&omnisidebarabout.tech;"/>
+			<label	id="releaseNotesLink"
+					class="text-link closer"
+					tooltiptext="chrome://objPathString/content/whatsnew.xhtml"
+					value="&omnisidebarabout.notes;"/>
 		</vbox>
 	</prefpane>
 </prefwindow>

@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.2';
+var defaultsVersion = '1.2.3';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -69,7 +69,8 @@ var prefList = {
 	
 	noInitialShow: false,
 	aboveSquared: false,
-	firstEnabled: true
+	firstEnabled: true,
+	notifyOnUpdates: true
 };
 
 function waitForSessionStore(window, delayed) {

@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this._mainState = null;
 this._twinState = null;
@@ -1162,6 +1162,7 @@ Modules.LOADMODULE = function() {
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
 	Modules.load('miniPanel');
 	
+	Modules.load('whatsNew');
 	Modules.load('compatibilityFix/windowFixes');
 	
 	Overlays.overlayWindow(window, "mainSidebar", null, loadMainSidebar, unloadMainSidebar);
@@ -1350,6 +1351,7 @@ Modules.UNLOADMODULE = function() {
 	Overlays.removeOverlayWindow(window, "mainSidebar");
 	
 	Modules.unload('compatibilityFix/windowFixes');
+	Modules.unload('whatsNew');
 	Modules.unload('miniPanel');
 	Modules.unload('australis');
 };

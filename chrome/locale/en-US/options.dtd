@@ -77,3 +77,5 @@
 <!ENTITY omnisidebarabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
 <!ENTITY omnisidebarabout.home "Add-on Homepage">
 <!ENTITY omnisidebarabout.tech "Technical Support">
+<!ENTITY omnisidebarabout.notes "Release Notes">
+

@@ -1,0 +1,496 @@
+{
+	"current":"1.4.7",
+	"releases": {
+		"1.4.7":{
+			"date":"May 18, 2014",
+			"notes":[
+				["bugfix","\"Restore defaults\" in customize mode shouldn't collapse the sidebar toolbar"]
+			]
+		},
+		"1.4.6":{
+			"date":"May 6, 2014",
+			"notes":[
+				["bugfix","Get rid of some annoying (but harmless) messages in the console"],
+				["bugfix","Only the sidebar header (undocked, not autohide) would be visible after exiting customize mode"],
+				["bugfix","With the Tile Tabs add-on enabled, the sidebar will be raised slightly when undocked, so that it doesn't cover the status text display"]
+			]
+		},
+		"1.4.5":{
+			"date":"May 5, 2014",
+			"notes":[
+				["bugfix","Link display in status bar when hovering a bookmark would be hidden behind the sidebar if it was undocked (again)"]
+			]
+		},
+		"1.4.4":{
+			"date":"May 4, 2014",
+			"notes":[
+				["bugfix","Compatibility with Clickless Menu add-on, and possibly others: OSB failed to initialize and the customization area would be empty"]
+			]
+		},
+		"1.4.3":{
+			"date":"May 2, 2014",
+			"notes":[
+				["bugfix","\"Hide close button\" not working in latest Nightly"]
+			]
+		},
+		"1.4.2":{
+			"date":"April 29, 2014",
+			"notes":[
+				["bugfix","Compatibility with the latest Nightly build"],
+				["bugfix","Compatibility with Tile Tabs: if setting sidebar keyboard shortcut to the same shortcut as one of the TT's function keys, the sidebar shortcut wouldn't work after a restart"]
+			]
+		},
+		"1.4.1":{
+			"date":"April 25, 2014",
+			"notes":[
+				["bugfix","compatibility with The Fox, Only Better add-on: don't show the toolbars when opening the mini panel from the browser margin"],
+				["bugfix","OSB toolbar buttons were too large when placed in the nav-bar (OS X and Linux)"]
+			]
+		},
+		"1.4":{
+			"date":"April 15, 2014",
+			"notes":[
+				["","Important note! If you're updating from a previous version, you may have to restart your browser for the update to fully take effect."],
+				["new","Support for Social API sidebars (only one can be opened at any time!)"],
+				["new","(Australis) customize context menu entries to add and remove widgets to and from the sidebar toolbars"],
+				["new","When the sidebar is reset (there is no \"last opened sidebar\" command saved), instead of opening a blank sidebar, it will display the list dropdown, to choose what sidebar to open"],
+				["changed","Better handling on multiple and private windows"],
+				["changed","(Australis) the mini panel fits better the style of other similar panels, and integrates with the new menu panel if the sidebar toolbar button is placed there"],
+				["changed","Show keyboard shortcuts in the menu items when enabling any of the \"Always open in the sidebar\" options (except for View Page Info, which doesn't have a keyboard shortcut)"],
+				["changed","Enabled by default: click on the browser margin, automatically hide to the side, alternate button style, always open add-ons manager in the sidebar, don't close sidebar from drop-down menus"],
+				["removed","Alternate sidebar toolbar button style in Mac OS X"],
+				["bugfix","Opening the toolbar context menu would sometimes stutter a bit"],
+				["bugfix","The mini panel wouldn't open immediately the sidebar, if that panel was already opened in the opposite sidebar"],
+				["bugfix","(Australis) sometimes the bookmarks sidebar would lose its title"],
+				["bugfix","(Australis) no widgets from the add-on were appearing in the new menu-panel"],
+				["bugfix","Keyboard shortcut also closes mini panel if it's opened"],
+				["bugfix","The sidebar shouldn't have focus when opening new windows"],
+				["bugfix","Closing the sidebar with \"keep panel loaded\" preference enabled would reopen the sidebar after browser restart"],
+				["bugfix","Sometimes the docker button wouldn't have the correct state when opening new windows"],
+				["bugfix","(Australis) wrong icons and button icons in latest windows builds"],
+				["bugfix","(Australis) some appearance fixes for the sidebar toolbars when customizing them"],
+				["bugfix","Sometimes the inSidebar class wasn't applying, so the sidebar wouldn't render correctly"],
+				["bugfix","A few minor issues with the \"keep panel loade\" feature"],
+				["bugfix","(Australis) not all customization changes to the sidebar toolbars would be imediatelly visible"],
+				["bugfix","Sidebar title button behaves more like regular menu buttons, mousedown to open menu and mouseup to select an item"],
+				["bugfix","Don't automatically close the sidebar when opening links from it in the background"],
+				["bugfix","Sidebar splitter would hide the margin of the sidebar in the windows classic theme (and would be the wrong color in other OS's)"],
+				["bugfix","Compatibility with the latest version of Feed Sidebar add-on"],
+				["bugfix","Add-on could fail to (re)load after disabling/updating one of my other add-ons"],
+				["bugfix","Hovering the margin switcher would still show the undocked sidebar after closing it if both auto-hide and keep panel loaded preferences were enabled"],
+				["bugfix","(Australis) should no longer close the customize dialog by itself every now and then"],
+				["bugfix","After closing the sidebar it would remain visible if mouse was hovering it and if \"Keep panel loaded\" and autohide preferences were enabled"],
+				["updated","Many appearance improvements for Australis"],
+				["updated","pl and zh-CN locales"],
+				["general","Other minor fixes and improvements"]
+			]
+		},
+		"1.3.2":{
+			"date":"March 5, 2014",
+			"notes":[
+				["bugfix","Performance improvement when scrolling the webpage with the mouse over the sidebar margin switcher"]
+			]
+		},
+		"1.3.1":{
+			"date":"March 5, 2014",
+			"notes":[
+				["new","In Australis, open the Browser Console in the sidebar, instead of the old Error Console (still compatible with Console2 add-on)"],
+				["changed","Possible improvements to starting up the add-on"],
+				["bugfix","Compatibility with latest Nightly and Aurora builds"],
+				["bugfix","Add-on shouldn't load in certain popup windows"],
+				["bugfix","Auto-hide/margin toggle wouldn't work after opening and closing a new window"],
+				["bugfix","\"Keep Panel Loaded\" preference wasn't working"],
+				["bugfix","Sidebar is hidden when entering fullscreen mode (HTML5) and is restored when exiting it"],
+				["bugfix","(Australis) not working when opening a new window"],
+				["bugfix","Compatibility with DOM Inspector in the sidebar: correctly load the current document when opening"],
+				["bugfix","Don't lock the sidebar if trying to open a non-existing sidebars"],
+				["bugfix","Couldn't close/toggle sidebar when scratchpad was loaded and had unsaved changes"],
+				["bugfix","Major performance improvement: sidebar is no longer reloaded when un/docking (let me know if this breaks any sidebar!)"],
+				["general","Other minor appearance tweaks"]
+			]
+		},
+		"1.3":{
+			"date":"January 25, 2014",
+			"notes":[
+				["new","In Australis, restore Bookmarks and History sidebars buttons"],
+				["new","Add-on version in about tab in preferences"],
+				["new","Can adjust the width of the active margin area (to click or hover)"],
+				["new","Can keep sidebar loaded in memory after closing it, so it remembers its state when re-opening"],
+				["changed","Mini-panel opens on right-clicking the button or margin, even if the sidebar is already opened"],
+				["changed","Tweaked glass style a little, to make sidebar text more visible"],
+				["changed","Tweaked the add-ons manager appearance in the sidebar, to better fit with the default themes"],
+				["bugfix","Compatibility with Australis"],
+				["bugfix","When some menu buttons on the sidebar toolbar are open, the sidebar would still autohide"],
+				["bugfix","In Firefox 26+, the downloads sidebar wouldn't display any items"],
+				["bugfix","Twin sidebar not appearing automatically in right-to-left browser layouts"],
+				["bugfix","The link in the About tab (in OSB's preferences) to the AMO page would not be built correctly sometimes"],
+				["bugfix","Auto-hide could not apply immediately after enabling the preference"],
+				["bugfix","Sidebar would still appear on startup sometimes even with the noInitialShow preference enabled"],
+				["general","Other minor appearance tweaks"]
+			]
+		},
+		"1.2.2":{
+			"date":"October 30, 2013",
+			"notes":[
+				["new","OSB's custom preferences are now also synchronized through Firefox Sync!"],
+				["updated","pl locale"]
+			]
+		},
+		"1.2.1":{
+			"date":"October 14, 2013",
+			"notes":[
+				["updated","de locale"],
+				["bugfix","Sometimes the add-on could fail when being disabled"]
+			]
+		},
+		"1.2":{
+			"date":"October 14, 2013",
+			"notes":[
+				["new","Compatibility with the scratchpad in the sidebar; always open the scratchpad in the sidebar + toolbarbutton for scratchpad in the sidebar"],
+				["new","Mini panel when right-clicking the OmniSidebar button, for quick access to the sidebar toolbar buttons and dropdown list when the sidebar is closed"],
+				["changed","Localized accesskeys of sidebar menu entries"],
+				["updated","pt-PT locale"],
+				["bugfix","Delicious Bookmarks add-on would hide the sidebar header"]
+			]
+		},
+		"1.1.3":{
+			"date":"September 7, 2013",
+			"notes":[
+				["bugfix","Finally fixed incompatibility with Pocket (formerly Read-it-Later) where sometimes the Pocket icon would disappear from the location bar"]
+			]
+		},
+		"1.1.2":{
+			"date":"August 5, 2013",
+			"notes":[
+				["bugfix","Previous versions 1.1.* could fail to start"]
+			]
+		},
+		"1.1.1":{
+			"date":"August 5, 2013",
+			"notes":[
+				["bugfix","Installation could fail the first try"],
+				["bugfix","When first installing the add-on, the sidebar would open a blank page with a very small width; now, when first installed, it will open the bookmarks sidebar if the sidebar isn't already opened"],
+				["bugfix","Disabling the add-on could fail, possibly causing memory issues"]
+			]
+		},
+		"1.1":{
+			"date":"July 21, 2013",
+			"notes":[
+				["updated","Re-wrote preferences dialog"],
+				["updated","de, pt-PT and pl locales"],
+				["bugfix","Disabling the add-on could possibly fail"],
+				["bugfix","LastPass toolbar button (and probably others) would not stay in the sidebar toolbar after a browser restart"],
+				["bugfix","Transparent sidebar header when undocked and using personas"]
+			]
+		},
+		"1.0.11":{
+			"date":"June 23, 2013",
+			"notes":[
+				["new","pl locale"],
+				["bugfix","Compatibility with right-to-left browser layouts"],
+				["bugfix","\"View Image Info\" and \"More information\" in the identity box weren't opening the respective tabs in Page Info in the sidebar"],
+				["bugfix","can't scroll webpage/sidebar when mouse is over the sidebar switcher in the border"]
+			]
+		},
+		"1.0.10":{
+			"date":"June 3, 2013",
+			"notes":[
+				["bugfix","Can't close the downloads manager in sidebar through the keyboard shortcut"],
+				["bugfix","\"Show all downloads\" link in new downloads panel wouldn't open DM in the sidebar"],
+				["bugfix","Sidebar wouldn't reopen with firefox"]
+			]
+		},
+		"1.0.9":{
+			"date":"June 3, 2013",
+			"notes":[
+				["bugfix","Link display in status bar when hovering a bookmark would be hidden behind the sidebar if it was undocked"]
+			]
+		},
+		"1.0.8":{
+			"date":"June 3, 2013",
+			"notes":[
+				["new","Added a hidden pref \"noInitialShow\" to start the sidebar hidden when starting up firefox; added a hidden pref \"aboveSquared\" to change the undocked sidebar look back to the old style, I don't like or agree with either of these behaviors so I'm not making them full features at least for now."],
+				["updated","Removed some old and deprecated methods and replaced them with new ones"]
+			]
+		},
+		"1.0.6":{
+			"date":"May 9, 2013",
+			"notes":[
+				["change","The appearance of the sidebar when undocked and not using the glass style to more easily notice it is above the webpage, I should have done this from the beginning"]
+			]
+		},
+		"1.0.5":{
+			"date":"May 9, 2013",
+			"notes":[
+				["bugfix","OmniSidebar toolbar buttons not loading in customize window in OSX and Linux"]
+			]
+		},
+		"1.0.4":{
+			"date":"May 9, 2013",
+			"notes":[
+				["bugfix","compatibility with Yoono add-on, and possibly others"],
+				["bugfix","Better handling on multiple windows"]
+			]
+		},
+		"1.0.3":{
+			"date":"April 23, 2013",
+			"notes":[
+				["new","The first time OmniSidebar is installed, it will open the sidebar in a blank page, so the user can see something has changed"],
+				["bugfix","Sometimes the add-on wouldn't work at all when updating from a previous version"],
+				["bugfix","\"Sidebar Toolbar\" view menu item not being removed after disabling the add-on"],
+				["bugfix","Issue with opening the sidebars for the first time (width not being set)"],
+				["general","Other small bugfixes and changes for better compliance with the AMO guidelines"]
+			]
+		},
+		"1.0.2":{
+			"date":"April 7, 2013",
+			"notes":[
+				["bugfix","Compatibility with Firefox 20"],
+				["bugfix","Sidebars would hide when customizing"],
+				["bugfix","Not keeping toolbar buttons after disabling the add-on sometimes"],
+				["general","Some performance improvements"]
+			]
+		},
+		"1.0.1":{
+			"date":"April 7, 2013",
+			"notes":[
+				["bugfix","Autoclose was preventing the keyboard shortcut from functioning properly"]
+			]
+		},
+		"1.0":{
+			"date":"April 7, 2013",
+			"notes":[
+				["new","Rewritten code, add-on is now restartless with lots of performance and appearance improvements, with a shiny new logo"],
+				["new","Glass style support for Pocket (formerly Read-it-Later) sidebar"],
+				["new","Customizable master keyboard shortcuts for the sidebars"],
+				["new","Can now auto-close a sidebar both in docked and undocked mode, if set to auto-hide it will hide it instead when it loses focus"],
+				["new","Click on the browser margin to toggle the sidebar"],
+				["new","Can open page info in the sidebar"],
+				["removed","Developers toolbar, now the add-on includes customizable buttons for opening the error console and dom inspector in the sidebar and a goURI button that can be enabled in OmniSidebar's options"],
+				["changed","'insidebar' class changed to 'inSidebar'"],
+				["changed","The level of transparency of the glass style can be customized from opaque to fully transparent."],
+				["bugfix","Compatibility with DOM Inspector Plus! [dm]"],
+				["bugfix","Add-ons manager doesn't show the hidden tabs anymore in the sidebar"],
+				["bugfix","Compatibility with the developers toolbar (style sidebar) introduced in Firefox 10. It should work alongside it without either affecting each other"],
+				["","Note: SimilarWeb will not work in the twin sidebar, for now open it only in the main sidebar"]
+			]
+		},
+		"0.9.1":{
+			"date":"February 2, 2012",
+			"notes":[
+				["new","\"Menu entries and SideToolbar buttons don't close the sidebar\" feature, this actually already existed but it wasn't a choice for the user"],
+				["new","Ability to enable and disable transparency of the glass style"],
+				["new","Can set auto-show and auto-hide delay times"],
+				["new","Compatibility with Private Browsing Mode"],
+				["new","2 Pane Bookmarks add-on fully glass styled"],
+				["bugfix","Script warnings being produced when opening the downloads manager in the sidebar without DMT installed"],
+				["bugfix","Content only shown in the lower half of the sidebar when it is docked"],
+				["bugfix","Sometimes on startup the omnisidebar button wouldn't show the proper status (opened, new feeds, etc.)"],
+				["bugfix","Sidebar closes when switching between sidebars in auto-close mode in low speed CPUs"],
+				["bugfix","Compatibility fixes for the Mac OS and Linux versions of firefox"],
+				["updated","de, fr, pt-PT, sv-SE, zh-CN locales"],
+				["general","Other minor fixes and improvements"]
+			]
+		},
+		"0.9":{
+			"date":"January 22, 2012",
+			"notes":[
+				["new","de, fr, pt-PT, sv-SE, zh-CN locales"],
+				["new","White icons for the tabs toolbar"],
+				["removed","Stylesheets specific to Firefox 4 (the add-on still works, but uses the stylesheets from Firefox 5+)"],
+				["bugfix","Glass style can 'glass up' the add-ons manager tab (not in the sidebar, the actual tab)"],
+				["bugfix","When autoclosing sometimes the sidebar wouldn't autoclose and sometimes it would open again when restarting the browser"],
+				["bugfix","Sidebar stops autohiding after dragging items into it (such as dragging a link to the bookmarks pane)"],
+				["bugfix","Unusable controller buttons (minizime, restore, close, firefox app) in Windows XP"],
+				["bugfix","The sidebar is automatically hidden when toggling the undocked mode, now it delays the autohide for one second"],
+				["bugfix","Bad layout in pages with pdf iframes"],
+				["bugfix","Feed sidebar toolbar buttons with the glass style"],
+				["bugfix","Clicking on an already opened sidebar panel entry in the pop down menu would close the sidebar"],
+				["bugfix","Compatibility with the Pano and Delicious Bookmarks add-ons"]
+			]
+		},
+		"0.8.4":{
+			"date":"September 21, 2011",
+			"notes":[
+				["new","Options to always open the Downloads Manager, Add-ons Manager and Error Console in the sidebar"],
+				["bugfix","Opening/closing a sidebar where the other sidebar had the same page opened could cause the sidebar button/keyboard shortcut to become unresponsive"],
+				["general","Other minor fixes and improvements"]
+			]
+		},
+		"0.8.3":{
+			"date":"September 21, 2011",
+			"notes":[
+				["bugfix","Auto-hiding when opening context menu from sidebar header"],
+				["bugfix","Compatibility fix for the MileWideBack add-on, now works when the sidebar is set to autohide"],
+				["bugfix","Compatibility fixes for the SimilarWeb add-on"],
+				["bugfix","Resizing docked sidebars could screw up in the most recent versions of firefox"],
+				["general","Other minor fixes and improvements"]
+			]
+		},
+		"0.8.2":{
+			"date":"September 21, 2011",
+			"notes":[
+				["changed","Easier to drag buttons to the SideToolbars in the customize screen"],
+				["bugfix","Remove white gradient from the window's background when glass style is enabled (windows aero issue)"],
+				["bugfix","Resizing the sidebar can sometimes screw up (still...)"],
+				["bugfix","When the sidebar is set to auto-hide, it wouldn't appear when dragging objects to the edge of the window (e.g. dragging a link to the bookmarks button to bookmark it)"],
+				["general","Other minor performance fixes and improvements"]
+			]
+		},
+		"0.8":{
+			"date":"July 1, 2011",
+			"notes":[
+				["new","Undocked modes: autohide, autoclose and only close on command"],
+				["changed","The twin sidebar toolbar only appears in the customize screen if either the \"Enable the Twin Sidebar\" option is checked or if the toolbar contains any buttons"],
+				["bugfix","With LessChrome, stop throwing a warning (non-critical)"],
+				["bugfix","Resizing the sidebar can sometimes screw up"],
+				["bugfix","OmniSidebar buttons now properly state \"Open\" or \"Close\" the sidebar when it is closed or opened respectively"],
+				["bugfix","Incompatibility with the DragIt extension, opening the sidebar menu caused firefox to hang"]
+			]
+		},
+		"0.7.9":{
+			"date":"June 15, 2011",
+			"notes":[
+				["bugfix","sidebar sometimes disappearing when undocked"],
+				["bugfix","Compatibility fix with Tree Style Tabs: pinned tabs cover the top of the sidebar"],
+				["bugfix","Compatibility fix with LessChrome: certain popup and right click menus from the sidebar shouldn't trigger the navigation toolbox to show"]
+			]
+		},
+		"0.7.8":{
+			"date":"June, 2011",
+			"notes":[
+				["bugfix","Omnisidebar buttons not opening the correct sidebar sometimes in a newly created profile"],
+				["updated","Some button styles to better match Firefox 5"],
+				["changed","Options dialog: if the \"Enable Twin Sidebar\" option is unchecked all options related to the twin sidebar will be disabled to prevent any confusion"]
+			]
+		},
+		"0.7.7":{
+			"date":"June, 2011",
+			"notes":[
+				["changed","Clicking on already checked buttons in the sidebar toolbar doesn't close the sidebar (this prevents not being able to reopen it if you don't have any other sidebar button in the toolbars; other than using the keyboard shortcut that is)"],
+				["bugfix","(Firefox 5): Glass style properly styles add-ons manager buttons"],
+				["bugfix","Compatibility fixes for Totaltoolbar: buttons already present in Totaltoolbar's sidebar toolbar will be moved to Omnisidebar's main sidebar toolbar and it will be hidden afterwards; disabled 'Toolbar Properties' option when right clicking the sidebar header, none of the options seems to work on Omnisidebar's toolbars and most of them would be redundant anyway"]
+			]
+		},
+		"0.7.6":{
+			"date":"June, 2011",
+			"notes":[
+				["general","Improved responsiveness when resizing the window"]
+			]
+		},
+		"0.7.5":{
+			"date":"June, 2011",
+			"notes":[
+				["bugfix","Sidebar title not showing when starting firefox with the sidebar closed (this was actually the same bug I thought I'd fixed in 0.7.4)"]
+			]
+		},
+		"0.7.4":{
+			"date":"June, 2011",
+			"notes":[
+				["bugfix","Sidebar title not correctly appearing sometimes when the dropdown is activated?"]
+			]
+		},
+		"0.7.3":{
+			"date":"June, 2011",
+			"notes":[
+				["bugfix","Apply correct preferences related to specific operating systems"]
+			]
+		},
+		"0.7.2":{
+			"date":"June, 2011",
+			"notes":[
+				["changed","Sidebar title menu button is now optional"],
+				["changed","Reorganized the options dialog"],
+				["bugfix","Sidebar title menu button correctly styled"],
+				["bugfix","DOMInspector Button not being removed when DOMInspector isn't enabled"]
+			]
+		},
+		"0.7.1":{
+			"date":"June, 2011",
+			"notes":[
+				["new","Twin Sidebar menu in the View menu"],
+				["new","Clicking the sidebar title provides a menu to choose a sidebar to open"],
+				["general","Tweaked (improved?) twin sidebar handling and opening"]
+			]
+		},
+		"0.7":{
+			"date":"June, 2011",
+			"notes":[
+				["new","Twin Sidebar"],
+				["new","Glass style is already in the add-on itself, no longer used as a separate Stylish script"],
+				["new","Developers toolbar: open the error console, dom inspector (if installed and enabled) and any 'about:' or 'chrome://' uri in the sidebar"],
+				["changed","Add-ons Manager and Stylish opening in the sidebar aren't optional; Stylish button is only added if the Stylish add-on is enabled"],
+				["changed","there are a few sidebar keyboard shortcuts that can now be used, chosen in the options dialog"],
+				["bugfix","Undocking the sidebar on a newly created profile could not work well"],
+				["bugfix","Compatibility fix for Findbar Tweak 0.3.6"],
+				["general","Code cleanup and improvement"],
+				["","Important Note: Since the add-on now includes the glass style, you should disable it in the Stylish dialog, I won't be updating it at userstyles.org anymore and its previous versions don't work very well with OmniSidebar 0.7 anyway."],
+				["","Important Note: Users that are updating from a previous version (-0.6.*) will likely have their OmniSidebar preferences reset including having to place the buttons on the toolbars again, I'm sorry about this, it will be a one time thing only."]
+			]
+		},
+		"0.6.4":{
+			"date":"May, 2011",
+			"notes":[
+				["general","In accordance with AMO reviewers comments for review approval"],
+				["","Important Note: Users that are updating from a previous version will likely have their OmniSidebar preferences reset including having to place the buttons on the toolbars again, to current users: I'm sorry about this, it will be a one time thing only."],
+				["","Important Note: Everyone that uses my pseudo-Glass omnisidebar style should also update it or it won't work anymore with this version."]
+			]
+		},
+		"0.6.3":{
+			"date":"June 15, 2011",
+			"notes":[
+				["bugfix","Compatibility with Memory Fox"]
+			]
+		},
+		"0.6.2":{
+			"date":"May, 2011",
+			"notes":[
+				["bugfix","Screw up with initial max and min sidebar width settings"],
+				["bugfix","Resizing while undocked could go past the window limits"],
+				["bugfix","Sometimes added toolbar buttons (addons manager, console, stylish) wouldn't hide"]
+			]
+		},
+		"0.6.1":{
+			"date":"May, 2011",
+			"notes":[
+				["new","Dock/undock button to sidebar header"],
+				["bugfix","Fixed height of addon list entry in the addons manager"],
+				["bugfix","Options dialog in Linux not hidding the icon color sets when accessed by the addons manager"],
+				["bugfix","A couple of screw ups that would happen on installing the addon on a newly created profile (not critical) where a few assumed values weren't yet populated"],
+				["bugfix","Alternate button styles background spilling out of its borders"],
+				["bugfix","OmniSidebar Options menu entry not showing up in application - tools menu"],
+				["updated","Improved performance and startup time and a few small fixes (icons, javascript, css), not sure how my changes actually affect the performance as I can't test for that, I'm just following mozilla's guidelines"],
+				["general","Minor code cleanup and improvements"]
+			]
+		},
+		"0.6":{
+			"date":"May, 2011",
+			"notes":[
+				["new","Ability to resize the sidebar while it's in autohide mode"],
+				["new","\"Ctrl + Shift + S\" toggles the sidebar"],
+				["new","Button for opening the error console in the sidebar"],
+				["new","Button for opening stylish in the sidebar (if installed)"],
+				["new","All toolbar buttons are optionally added"],
+				["new","Added menu entries"],
+				["new","Option for disabling visual effects (transitions)"],
+				["new","[Win][Mac] Toolbar button icon sets: Firefox 4 icons and Colorful (Linux style) icons"],
+				["bugfix","Improved moving the sidebar to the right - better compatibility with other potential add-ons"],
+				["general","Lots of code improvements"]
+			]
+		},
+		"0.5.2":{
+			"date":"April, 2011",
+			"notes":[
+				["bugfix","many fixes for the customizing dialog"],
+				["removed","\"trick\" option, optimized sidebar rendering"],
+				["general","General code cleanup"]
+			]
+		},
+		"0.5":{
+			"date":"March 21, 2011",
+			"notes":[
+				["","Initial release on AMO"]
+			]
+		}
+	}
+}

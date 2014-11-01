@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 this.keys = [
 	{
@@ -62,6 +62,27 @@ this.isStillAvailable = function(key, list) {
 	return true;
 };
 
+this.openReleaseNotesTab = function(aWindow) {
+	// this doesn't work in e10s yet
+	//aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('about:'+objPathString);
+	aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('chrome://'+objPathString+'/content/whatsnew.xhtml');
+	aWindow.gBrowser.selectedTab.loadOnStartup = true; // for Tab Mix Plus
+};
+
+this.openReleaseNotes = function(e) {
+	if(e.type == 'click' && e.which != 1) { return; }
+	if(e.type == 'keypress' && e.keycode != e.DOM_VK_RETURN) { return; }
+	
+	if(window.opener && window.opener instanceof window.opener.ChromeWindow) {
+		openReleaseNotesTab(window.opener);
+	} else {
+		Windows.callOnMostRecent(openReleaseNotesTab, 'navigator:browser');
+	}
+	
+	e.preventDefault();
+	e.stopPropagation();
+};
+
 Modules.LOADMODULE = function() {
 	if(RTL) {
 		Overlays.overlayWindow(window, 'optionsRTL');
@@ -73,4 +94,7 @@ Modules.LOADMODULE = function() {
 	
 	fillKeycodes();
 	fillVersion($('addonVersion'));
+	
+	Listeners.add($('releaseNotesLink'), 'keypress', openReleaseNotes, true);
+	Listeners.add($('releaseNotesLink'), 'click', openReleaseNotes, true);
 };
