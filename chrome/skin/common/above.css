@@ -4,10 +4,10 @@
 	.omnisidebar-docker {
 		list-style-image: url("chrome://omnisidebar/skin/undock-button.png"); 
 		-moz-image-region: rect(0px 16px 16px 0px);
-		-moz-appearance: none !important;
-		border-radius: 3px !important;
-		border: 1px solid rgba(0,0,0,0) !important;
-		padding: 1px !important;
+		-moz-appearance: none;
+		border-radius: 3px;
+		border: 1px solid rgba(0,0,0,0);
+		padding: 1px;
 	}
 	
 	.omnisidebar-docker[sidebarDocked] {
@@ -20,9 +20,9 @@
 	}
 	
 	.omnisidebar-docker:hover {
-		border: 1px solid rgba(0,0,0,.2) !important;
-		background-color: rgba(0,0,0,.1) !important;
-		box-shadow: 0px 0px 3px rgba(0,0,0,.2) inset, 0px 0px 2px rgba(255,255,255,0.4) !important;
+		border: 1px solid rgba(0,0,0,.2);
+		background-color: rgba(0,0,0,.1);
+		box-shadow: 0px 0px 3px rgba(0,0,0,.2) inset, 0px 0px 2px rgba(255,255,255,0.4);
 	}
 	
 	/* Hide a bunch of stuff */
@@ -32,7 +32,7 @@
 	
 	/* Sidebar size, position and animation */
 	.sidebar-box[renderabove] {
-		-moz-appearance: none !important;
+		-moz-appearance: none;
 		position: fixed;
 		overflow: visible !important;
 		/* Compatibility with Memory Fox: !important tag in the overflow property, already talked to the developer and he will fix it in his extension himself in future versions
@@ -59,28 +59,17 @@
 	
 	/* Renderabove resizer */
 	.omnisidebar_resizer {
-		-moz-appearance: none !important;
-		background: none !important;
-		height: auto;
-		width: 4px !important;
-		min-width: 4px !important;
-	}
-	
-	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
-	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resizer {
-		-moz-border-start: 1px solid rgb(169, 183, 201);
-		-moz-border-end: none;
-	}
-	
-	#sidebar-box[movetoright] .omnisidebar_resizer,
-	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
-		-moz-border-start: none;
-		-moz-border-end: 1px solid rgb(169, 183, 201);
+		-moz-appearance: none;
+		background: none;
+		border: none;
+		height: 100%;
+		width: 4px;
+		min-width: 4px;
 	}
 	
 	.sidebar-box .omnisidebar_resizer:hover,
 	.sidebar-splitter[disabled]:hover {
-		cursor: ew-resize !important;
+		cursor: ew-resize;
 	}
 	
 	/* Tricks needed */
@@ -99,76 +88,71 @@
 	
 	/* Give it a more slick appearance, like it's really above the page */
 	#main-window[sizemode='maximized'] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
-		top: 1% !important;
-		height: 98% !important;
+		top: 1%;
+		height: 98%;
 	}
 	#main-window[sizemode='normal'] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
-		top: 2% !important;
-		height: 96% !important;
+		top: 2%;
+		height: 96%;
 	}
 	#main-window[sizemode='fullscreen'] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
-		top: 5% !important;
-		height: 90% !important;
+		top: 5%;
+		height: 90%;
 	}
 	/* Tile Tabs changes the tabpanels element to display:-moz-stack, which renders any z-index inside it useless,
 	because of this, the status display will be shown behind the sidebar, so I have no choice but to raise it in this case */
 	#main-window[sizemode='maximized'][tiletabs-ffversion] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
-		height: 95.5% !important;
+		height: 95.5%;
 	}
 	#main-window[sizemode='normal'][tiletabs-ffversion] .sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
-		height: 93.5% !important;
+		height: 93.5%;
 	}
 	
 	.sidebar-box[renderabove]:not([squareLook]) .omnisidebar_resize_box {
-		box-shadow: 1px 1px 2px rgba(0,0,0,.4), 1px 0px 3px rgba(0,0,0,.4) inset, 1px 1px 6px rgba(0,0,0,.4) !important;
-		border: 1px solid rgba(0,0,0,.4) !important;
+		box-shadow: 1px 1px 2px rgba(0,0,0,.4), 1px 0px 3px rgba(0,0,0,.4) inset, 1px 1px 6px rgba(0,0,0,.4);
+		border: 1px solid rgba(0,0,0,.4);
 	}
 	
 	#sidebar-box:not([movetoright]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resize_box {
-		-moz-border-start: 0 !important;
+		-moz-border-start: 0;
 	}
 	
 	#sidebar-box[movetoright] .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resize_box {
-		-moz-border-end: 0 !important;
+		-moz-border-end: 0;
 	}
 	
 	#sidebar-box:-moz-locale-dir(ltr):not([movetoright]):not([squareLook]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:-moz-locale-dir(ltr)[movetoleft]:not([squareLook]) .omnisidebar_resize_box,
 	#sidebar-box:-moz-locale-dir(rtl)[movetoright]:not([squareLook]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:-moz-locale-dir(rtl):not([movetoleft]):not([squareLook]) .omnisidebar_resize_box {
-		border-radius: 0 5px 5px 0 !important;
+		border-radius: 0 5px 5px 0;
 	}
 	#sidebar-box:-moz-locale-dir(ltr)[movetoright]:not([squareLook]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:-moz-locale-dir(ltr):not([movetoleft]):not([squareLook]) .omnisidebar_resize_box,
 	#sidebar-box:-moz-locale-dir(rtl):not([movetoright]):not([squareLook]) .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:-moz-locale-dir(rtl)[movetoleft]:not([squareLook]) .omnisidebar_resize_box {
-		border-radius: 5px 0 0 5px !important;
+		border-radius: 5px 0 0 5px;
 	}
 	
 	#sidebar-box:not([movetoright])[squareLook] .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin[movetoleft][squareLook] .omnisidebar_resize_box {
-		-moz-border-end: 1px solid #A9B7C9 !important;
+		-moz-border-end: 1px solid #A9B7C9;
 	}
 	#sidebar-box[movetoright][squareLook] .omnisidebar_resize_box,
 	#omnisidebar-sidebar-box-twin:not([movetoleft])[squareLook] .omnisidebar_resize_box {
-		-moz-border-start: 1px solid #A9B7C9 !important;
-	}
-	
-	.omnisidebar_resizer {
-		border: none !important;
-		height: 100%;
+		-moz-border-start: 1px solid #A9B7C9 ;
 	}
 	
 	#sidebar-box:not([movetoright]) .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin[movetoleft] .omnisidebar_resizer {
-		-moz-margin-start: -4px !important;
+		-moz-margin-start: -4px;
 	}
 	
 	#sidebar-box[movetoright] .omnisidebar_resizer,
 	#omnisidebar-sidebar-box-twin:not([movetoleft]) .omnisidebar_resizer {
-		-moz-margin-end: -4px !important;
+		-moz-margin-end: -4px;
 	}
 	
 	/* For the status bar link display */

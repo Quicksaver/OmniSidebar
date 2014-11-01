@@ -3,19 +3,19 @@
 	
 	/* Bugfix: windows theme replaces sidebar header look when using lwthemes */
 	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
-		background-color: -moz-Dialog !important;
-		-moz-appearance: toolbox !important;
-		border-top-style: solid !important;
-		border-bottom-style: solid !important;
+		background-color: -moz-dialog;
+		-moz-appearance: toolbox;
+		border-top-style: solid;
+		border-bottom-style: solid;
 		color: -moz-dialogtext;
 		text-shadow: none;
 	}
 	@media not all and (-moz-windows-classic) {
 		@media	(-moz-windows-default-theme) {
 			.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
-				-moz-appearance: none !important;
-				background-color: #EEF3FA !important;
-				border-bottom: none !important;
+				-moz-appearance: none;
+				background-color: #EEF3FA;
+				border-bottom: none;
 			}
 		}
 	}
@@ -23,7 +23,7 @@
 	@media	(-moz-os-version: windows-xp) {
 		.sidebar-title[TitleButton]:hover,
 		.sidebar-title[TitleButton][active] {
-			padding-top: 2px !important;
+			padding-top: 2px;
 		}
 	}
 	
@@ -46,40 +46,11 @@
 		}
 	}
 	
-	#nav-bar-customization-target > .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px !important; }
+	#nav-bar #nav-bar-customization-target > .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
 	
 	/* fix the look of the arrowscrollbuttons a little */
 	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
-		padding: 0 2px 5px 2px !important;
-	}
-
-}
-
-@-moz-document
-	url("chrome://browser/content/places/places.xul"),
-	url("about:addons"),
-	url("chrome://browser/content/devtools/webconsole.xul") {
-	
-	.inSidebar #placesToolbar {
-		border-top: none !important;
-		border-bottom: 1px solid ThreeDShadow !important;
-	}
-	
-	@media	(-moz-windows-default-theme) {
-		#addons-page.inSidebar:not(.glassStyle),
-		#places.inSidebar:not(.glassStyle),
-		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
-			background: #EEF3FA !important;
-		}
-		
-		.inSidebar #placesToolbar {
-			border-bottom: none !important;
-		}
-		
-		.inSidebar #downloadsRichListBox {
-			border: none !important;
-			background: none !important;
-		}
+		padding: 0 2px 5px 2px;
 	}
 
 }

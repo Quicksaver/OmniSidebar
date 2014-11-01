@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+Modules.VERSION = '1.1.2';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -130,7 +130,6 @@ this.toggleHeadersOnLoad = function() {
 Modules.LOADMODULE = function() {
 	Overlays.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers', null, toggleHeadersOnLoad);
 	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOnLoad);
-	Styles.load('buttonsStyle', 'buttonsStyle');
 	
 	Prefs.listen('toolbar', toggleHeaders);
 	Prefs.listen('hideheadertitle', toggleTitles);
@@ -185,7 +184,6 @@ Modules.UNLOADMODULE = function() {
 	removeAttribute(twinSidebar.header, 'hidden');
 	
 	if(UNLOADED) {
-		Styles.unload('buttonsStyle');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin');
 	}

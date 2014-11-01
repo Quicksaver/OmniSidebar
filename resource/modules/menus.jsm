@@ -1,4 +1,4 @@
-Modules.VERSION = '1.4.0';
+Modules.VERSION = '1.4.1';
 
 // customizeMenu
 
@@ -199,7 +199,6 @@ this.blankSidebarMenu = function(e) {
 Modules.LOADMODULE = function() {
 	Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
 	Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
-	Styles.load('menus', 'menus');
 	
 	Listeners.add(contextMenu, 'popupshowing', setContextMenu);
 	Listeners.add(viewMenu, 'popupshown', setViewMenu);
@@ -248,7 +247,6 @@ Modules.UNLOADMODULE = function() {
 	toggleMenuButtonTwin();
 	
 	if(UNLOADED) {
-		Styles.unload('menus');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
 	}

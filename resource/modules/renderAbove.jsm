@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 this.dragalt = null;
 this.dragorix = null;
@@ -236,7 +236,6 @@ this.setAbove = function(bar) {
 };
 
 Modules.LOADMODULE = function() {
-	Styles.load('aboveSheet', 'above');
 	Overlays.overlayURI("chrome://"+objPathString+"/content/headers.xul", 'renderAboveDocker', null,
 		function(aWindow) { aWindow[objName].toggleDockerStatus(aWindow[objName].mainSidebar); }
 	);
@@ -285,7 +284,6 @@ Modules.UNLOADMODULE = function() {
 	Styles.unload('aboveWidthURI_'+_UUID);
 	
 	if(UNLOADED) {
-		Styles.unload('aboveSheet');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'renderAbove');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'renderAboveTwin');
 		Overlays.removeOverlayURI("chrome://"+objPathString+"/content/headers.xul", 'renderAboveDocker');

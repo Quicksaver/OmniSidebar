@@ -1,5 +1,4 @@
 @import url("chrome://omnisidebar-os/skin/os.css");
-@import url("chrome://omnisidebar-os/skin/html.css");
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/browser.xul") {
@@ -61,7 +60,10 @@
 	}
 	
 	.sidebar-header #social-sidebar-button {
-		-moz-margin-end: 4px !important;
+		-moz-margin-start: 0;
+		-moz-margin-end: 0;
+		-moz-padding-start: 2px;
+		-moz-padding-end: 4px;
 	}
 	
 }

@@ -9,42 +9,18 @@
 	}
 	
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:not(:hover) {
-		border: 5px solid rgba(0,0,0,0) !important;
+		border: 5px solid rgba(0,0,0,0);
 	}
 	
 	.sidebar-box[glassStyle] .sidebar-title[TitleButton]:not(:hover) {
-		border: 2px solid rgba(0,0,0,0) !important;
+		border: 2px solid rgba(0,0,0,0);
 	}
 	
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:hover,
 	.sidebar-box:not([glassStyle]) .sidebar-title[TitleButton][active] {
-		-moz-padding-start: 17px !important;
+		-moz-padding-start: 17px;
 	}
 	
-	#nav-bar-customization-target > .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px !important; }
-
-}
-
-@-moz-document url("about:addons") {
-	
-	#addons-page.inSidebar:not(.glassStyle) {
-		background: none !important;
-	}
-
-}
-
-@-moz-document url("chrome://browser/content/devtools/webconsole.xul") {
-	
-	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
-		background: -moz-dialog !important;
-	}
-
-}
-
-@-moz-document url("chrome://browser/content/places/places.xul") {
-	
-	.inSidebar:not(.glassStyle) #downloadsRichListBox {
-		border: 1px solid ThreeDShadow !important;
-	}
+	#nav-bar #nav-bar-customization-target > .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
 
 }

@@ -2,11 +2,10 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 	/* Headers */
-	/* Everything related to toolbarbuttons takes an !important tag */
 	
 	.omnisidebar-toolbar { 
-		-moz-appearance: none !important; /* without !important the changes won't take effect */
-		border: none !important;
+		-moz-appearance: none;
+		border: none;
 		padding: 1px 3px;
 	}
 	
@@ -34,12 +33,8 @@
 	#omnisidebar-sidebar-throbber-twin,
 	.sidebar-box[notitle] .sidebar-title,
 	.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon,
-	.omnisidebar-toolbar toolbarbutton[disabled] {
-		display: none !important;
-	}
-	
 	.sidebar-box:not([notitle]) .header-spacer {
-		display: none;
+		display: none !important;
 	}
 	
 	.sidebar-box[notitle] .header-spacer {
@@ -48,8 +43,8 @@
 	
 	.sidebar-box .sidebar-title {
 		text-align: center;
-		padding: 0 !important;
-		margin: 1px 3px !important;
+		padding: 0;
+		margin: 1px 3px;
 	}
 	
 	.sidebar-box .stackSidebar {
@@ -104,6 +99,6 @@
 	.sidebar-browser { background-color: window; }
 	
 	.sidebar-header { min-height: 29px; } /* trying to keep it from jumping around when customizing the toolbar or toying with the other options */
-	.omnisidebar-toolbar { min-height: 28px !important; } /* this won't stick without the !important tag */
+	.omnisidebar-toolbar { min-height: 28px; }
 	
 }

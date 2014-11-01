@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.1';
+var defaultsVersion = '1.2.2';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -132,7 +132,7 @@ function onStartup(aReason) {
 	toggleGlass();
 	
 	// Register the global css stylesheets
-	Styles.load('global', 'overlay');
+	Styles.load('global', 'global');
 	
 	// Apply the add-on to every window opened and to be opened
 	Windows.callOnAll(startAddon, 'navigator:browser');

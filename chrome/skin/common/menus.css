@@ -9,26 +9,25 @@
 	.sidebar-title,
 	.sidebar-title:hover,
 	.sidebar-title[active] {
-		border: 3px solid rgba(0,0,0,0) !important;
+		border: 3px solid rgba(0,0,0,0);
 	}
 	
-	/* toolbarbuttons in panels only have a :hover state, we need our own state for keyboard navigation,
-	damn thing needs !important tag, couldn't get its specificity... */
+	/* toolbarbuttons in panels only have a :hover state, we need our own state for keyboard navigation */
 	.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover):focus {
-		background-color: hsla(210,4%,10%,.08) !important;
-		border-color: hsla(210,4%,10%,.11) !important;
+		background-color: hsla(210,4%,10%,.08);
+		border-color: hsla(210,4%,10%,.11);
 	}
 	
 	/* don't show hover style in the arrow buttons of the panelview */
 	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
-		border: none !important;
-		background: none !important;
-		box-shadow: none !important;
-		margin: 2px !important;
+		border: none;
+		background: none;
+		box-shadow: none;
+		margin: 2px;
 	}
 	
 	#omnisidebar-panelView-toolbarContainer autorepeatbutton[disabled="true"] {
-		opacity: 0 !important;
+		opacity: 0;
 	}
 	
 }

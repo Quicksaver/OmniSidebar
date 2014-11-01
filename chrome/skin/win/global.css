@@ -1,0 +1,29 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document
+	url("chrome://browser/content/places/places.xul"),
+	url("about:addons"),
+	url("chrome://browser/content/devtools/webconsole.xul") {
+	
+	.inSidebar #placesToolbar {
+		border-top: none !important;
+		border-bottom: 1px solid ThreeDShadow !important;
+	}
+	
+	@media	(-moz-windows-default-theme) {
+		#addons-page.inSidebar:not(.glassStyle),
+		#places.inSidebar:not(.glassStyle),
+		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
+			background: #EEF3FA !important;
+		}
+		
+		.inSidebar #placesToolbar {
+			border-bottom: none !important;
+		}
+		
+		.inSidebar #downloadsRichListBox {
+			border: none !important;
+			background: none !important;
+		}
+	}
+
+}

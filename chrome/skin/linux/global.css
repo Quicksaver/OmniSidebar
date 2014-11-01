@@ -1,0 +1,25 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+@-moz-document url("about:addons") {
+	
+	#addons-page.inSidebar:not(.glassStyle) {
+		background: none !important;
+	}
+
+}
+
+@-moz-document url("chrome://browser/content/devtools/webconsole.xul") {
+	
+	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
+		background: -moz-dialog !important;
+	}
+
+}
+
+@-moz-document url("chrome://browser/content/places/places.xul") {
+	
+	.inSidebar:not(.glassStyle) #downloadsRichListBox {
+		border: 1px solid ThreeDShadow !important;
+	}
+
+}

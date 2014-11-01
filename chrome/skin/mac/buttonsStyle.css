@@ -2,7 +2,7 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 	.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
-		margin: 0 !important;
+		margin: 0;
 	}
 	
 }
