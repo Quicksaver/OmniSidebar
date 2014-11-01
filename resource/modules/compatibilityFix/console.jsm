@@ -1,4 +1,4 @@
-Modules.VERSION = '1.3.0';
+Modules.VERSION = '1.3.1';
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
@@ -84,8 +84,6 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('alwaysConsole', toggleAlwaysConsole);
 	toggleAlwaysConsole(true);
 	
-	// Users can still open the console in the sidebar if they have Console2 installed
-	Styles.load('consoleFix', 'console');
 	Styles.load('browserConsole', 'browserConsole');
 	
 	holdBroadcasters.console = objName+'-viewConsoleSidebar';
@@ -111,6 +109,5 @@ Modules.UNLOADMODULE = function() {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewConsoleSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewConsoleSidebar') { closeSidebar(twinSidebar); }
 		Styles.unload('browserConsole');
-		Styles.unload('consoleFix');
 	}
 };

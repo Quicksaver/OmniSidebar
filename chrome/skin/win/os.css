@@ -58,7 +58,6 @@
 @-moz-document
 	url("chrome://browser/content/places/places.xul"),
 	url("about:addons"),
-	url("chrome://console2/content/console2.xul"),
 	url("chrome://browser/content/devtools/webconsole.xul") {
 	
 	.inSidebar #placesToolbar {
@@ -69,7 +68,6 @@
 	@media	(-moz-windows-default-theme) {
 		#addons-page.inSidebar:not(.glassStyle),
 		#places.inSidebar:not(.glassStyle),
-		#Console2Window.inSidebar:not(.glassStyle),
 		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
 			background: #EEF3FA !important;
 		}
