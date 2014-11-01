@@ -1170,6 +1170,8 @@ Modules.LOADMODULE = function() {
 	// Don't do sidebar command if it comes from the fullScreen handler, let ours do the work.
 	// Unfortunately I can't do this within toggleSidebar itself because I can't access .caller
 	// and changing the method in this way is more future-proof than replacing it completely with a hard-coded copy.
+	// In firefox 36, remove the following, and follow inDOMFullscreen attribute in the stylesheets instead
+	// https://bugzilla.mozilla.org/show_bug.cgi?id=714675
 	toCode.modify(FullScreen, 'FullScreen.enterDomFullscreen', [
 		['toggleSidebar();', '//toggleSidebar();']
 	]);
