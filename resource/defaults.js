@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.3';
+var defaultsVersion = '1.2.4';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -70,6 +70,9 @@ var prefList = {
 	noInitialShow: false,
 	aboveSquared: false,
 	firstEnabled: true,
+	
+	// for the what's new tab, it's better they're here so they're automatically carried over to content
+	lastVersionNotify: '0',
 	notifyOnUpdates: true
 };
 
