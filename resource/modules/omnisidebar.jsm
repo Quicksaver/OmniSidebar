@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this._mainState = null;
 this._twinState = null;
@@ -1177,9 +1177,11 @@ Modules.LOADMODULE = function() {
 	// and changing the method in this way is more future-proof than replacing it completely with a hard-coded copy.
 	// In firefox 36, remove the following, and follow inDOMFullscreen attribute in the stylesheets instead
 	// https://bugzilla.mozilla.org/show_bug.cgi?id=714675
-	toCode.modify(FullScreen, 'FullScreen.enterDomFullscreen', [
-		['toggleSidebar();', '//toggleSidebar();']
-	]);
+	if(Services.vc.compare(Services.appinfo.version, "36.0a1") < 0) {
+		toCode.modify(FullScreen, 'FullScreen.enterDomFullscreen', [
+			['toggleSidebar();', '//toggleSidebar();']
+		]);
+	}
 	
 	// SocialAPI compatibility
 	barSwitchTriggers.__defineGetter__('socialSidebar', function() { return SocialBroadcaster; });
@@ -1342,7 +1344,9 @@ Modules.UNLOADMODULE = function() {
 	// to prevent the sidebar from staying open with an empty panel, since the social browser is moved back to its place
 	if(mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewSocialSidebar') { closeSidebar(mainSidebar); }
 	
-	toCode.revert(FullScreen, 'FullScreen.enterDomFullscreen');
+	if(Services.vc.compare(Services.appinfo.version, "36.0a1") < 0) {
+		toCode.revert(FullScreen, 'FullScreen.enterDomFullscreen');
+	}
 	Piggyback.revert(objName, window, 'toggleSidebar');
 	Piggyback.revert(objName, window, 'fireSidebarFocusedEvent');
 	Piggyback.revert(objName, window, 'sidebarOnLoad');
