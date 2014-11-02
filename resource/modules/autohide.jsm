@@ -1,9 +1,9 @@
-Modules.VERSION = '1.3.0';
+Modules.VERSION = '1.3.1';
 
-this.setAutoHide = function(bar) {
-	toggleAttribute(bar.box, 'autohide', bar.autoHide);
+this.setAutoHide = function(bar, unloaded) {
+	toggleAttribute(bar.box, 'autohide', bar.autoHide && !unloaded);
 	
-	if(!bar.autoHide) {
+	if(!bar.autoHide || unloaded) {
 		removeAttribute(bar.resizeBox, 'hover');
 		delete bar.resizeBox.hovers;
 		
@@ -382,9 +382,9 @@ this.autoHideFocus = function(e) {
 	if(!e.target) { return; }
 	
 	var bar = null;
-	if(document.commandDispatcher.focusedWindow == mainSidebar.sidebar.contentWindow) {
+	if(mainSidebar.sidebar && document.commandDispatcher.focusedWindow == mainSidebar.sidebar.contentWindow) {
 		bar = mainSidebar;
-	} else if(document.commandDispatcher.focusedWindow == twinSidebar.sidebar.contentWindow) {
+	} else if(twinSidebar.sidebar && document.commandDispatcher.focusedWindow == twinSidebar.sidebar.contentWindow) {
 		bar = twinSidebar;
 	}
 	
@@ -470,15 +470,23 @@ this.loadAutoHideTwin = function(window) {
 	if(window[objName] && window[objName].setAutoHide) { window[objName].setAutoHide(window[objName].twinSidebar); }
 };
 
+this.unloadAutoHideMain = function(window) {
+	if(window[objName] && window[objName].setAutoHide) { window[objName].setAutoHide(window[objName].mainSidebar, true); }
+};
+
+this.unloadAutoHideTwin = function(window) {
+	if(window[objName] && window[objName].setAutoHide) { window[objName].setAutoHide(window[objName].twinSidebar, true); }
+};
+
 this.toggleAutoHide = function() {
 	if(Prefs.autoHide) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide', null, loadAutoHideMain, loadAutoHideMain);
+		Overlays.overlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide', null, loadAutoHideMain, unloadAutoHideMain);
 	} else {
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/renderAbove.xul', 'autoHide');
 	}
 	
 	if(Prefs.autoHideTwin) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin', null, loadAutoHideTwin, loadAutoHideTwin);
+		Overlays.overlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin', null, loadAutoHideTwin, unloadAutoHideTwin);
 	} else {
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/renderAboveTwin.xul', 'autoHideTwin');
 	}
