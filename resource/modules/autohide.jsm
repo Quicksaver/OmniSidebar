@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.1';
+Modules.VERSION = '1.2.2';
 
 this.setAutoHide = function(bar) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide);
@@ -215,13 +215,43 @@ this.autoHideSwitchOut = function(e) {
 	setHover(bar, false);
 };
 
+this.autoHideFocus = function(e) {
+	if(!e.target) { return; }
+	
+	var bar = null;
+	if(document.commandDispatcher.focusedWindow == mainSidebar.sidebar.contentWindow) {
+		bar = mainSidebar;
+	} else if(document.commandDispatcher.focusedWindow == twinSidebar.sidebar.contentWindow) {
+		bar = twinSidebar;
+	}
+	
+	if(bar && !bar.closed && bar.above && bar.autoHide && !bar.contentFocused && document.commandDispatcher.focusedElement
+	&& (document.commandDispatcher.focusedElement.localName == 'input' || document.commandDispatcher.focusedElement.localName == 'textarea')) {
+		setHover(bar, true);
+		bar.contentFocused = true;
+	}
+};
+
+this.autoHideBlur = function(e) {
+	if(!e.target) { return; }
+	
+	if(mainSidebar.contentFocused) {
+		setHover(mainSidebar, false);
+		mainSidebar.contentFocused = false;
+	}
+	if(twinSidebar.contentFocused) {
+		setHover(twinSidebar, false);
+		twinSidebar.contentFocused = false;
+	}
+};
+
 this.setBothHovers = function(hover) {
 	setHover(mainSidebar, hover);
 	setHover(twinSidebar, hover);
 };
 
 this.setHover = function(bar, hover, force) {
-	if(!bar.resizeBox || !bar.above || !bar.autoHide) { return; }
+	if(!bar.resizeBox || bar.closed || !bar.above || !bar.autoHide) { return; }
 	
 	if(hover) {
 		bar.resizeBox.hovers++;
@@ -244,7 +274,7 @@ this.setHover = function(bar, hover, force) {
 };
 
 this.initialShowBar = function(bar, delay) {
-	if(!bar.resizeBox || !bar.above || !bar.autoHide) { return; }
+	if(!bar.resizeBox || bar.closed || !bar.above || !bar.autoHide) { return; }
 	
 	if(bar.box.hidden) {
 		setHover(bar, false, 0);
@@ -310,6 +340,8 @@ Modules.LOADMODULE = function() {
 	Listeners.add(window, 'endSidebarResize', hideOnResizeEnd);
 	Listeners.add(window, 'popupshown', showOnMenuShown);
 	Listeners.add(window, 'popuphidden', hideOnMenuHidden);
+	Listeners.add(window, 'focus', autoHideFocus, true);
+	Listeners.add(window, 'blur', autoHideBlur, true);
 	
 	Listeners.add(window, 'sidebarWidthChanged', setAutoHideWidth);
 };
@@ -325,6 +357,8 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'endSidebarResize', hideOnResizeEnd);
 	Listeners.remove(window, 'popupshown', showOnMenuShown);
 	Listeners.remove(window, 'popuphidden', hideOnMenuHidden);
+	Listeners.remove(window, 'focus', autoHideFocus, true);
+	Listeners.remove(window, 'blur', autoHideBlur, true);
 	
 	Listeners.remove(mainSidebar.switcher, 'mouseover', autoHideSwitchOver);
 	Listeners.remove(mainSidebar.switcher, 'dragenter', autoHideSwitchOver);
