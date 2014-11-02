@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.4';
+Modules.VERSION = '2.0.5';
 
 this._mainState = null;
 this._twinState = null;
@@ -32,10 +32,11 @@ this.mainSidebar = {
 	get title () { return $('sidebar-title'); },
 	get titleButton () { return !Prefs.hideheadertitle && Prefs.titleButton; },
 	get docker () { return $(objName+'-dock_button'); },
-	get toolbar () { return $(objName+'-Toolbar'); },
+	toolbarId: objName+'-Toolbar',
+	get toolbar () { return $(this.toolbarId); },
 	get stack () { return $(objName+'-stackSidebar'); },
-	get buttonId () { return objName+'-button'; },
-	get button () { return $(objName+'-button'); },
+	buttonId: objName+'-button',
+	get button () { return $(this.buttonId); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.close-icon')[0] : null; },
 	get width () {
 		if(this.box) {
@@ -149,10 +150,11 @@ this.twinSidebar = {
 	get title () { return $(objName+'-sidebar-title-twin'); },
 	get titleButton () { return !Prefs.hideheadertitleTwin && Prefs.titleButtonTwin; },
 	get docker () { return $(objName+'-dock_button-twin'); },
-	get toolbar () { return $(objName+'-Toolbar-twin'); },
+	toolbarId: objName+'-Toolbar-twin',
+	get toolbar () { return $(this.toolbarId); },
 	get stack () { return $(objName+'-stackSidebar-twin'); },
-	get buttonId () { return objName+'-button-twin'; },
-	get button () { return $(objName+'-button-twin'); },
+	buttonId: objName+'-button-twin',
+	get button () { return $(this.buttonId); },
 	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.close-icon')[0] : null; },
 	get width () {
 		if(this.box) {
@@ -237,6 +239,10 @@ this.twinSidebar = {
 	get goURIButton () { return $(objName+'-uri_sidebar_button-twin'); }
 };
 
+this.sidebars = {
+	get main () { return mainSidebar; },
+	get twin () { return twinSidebar; }
+};
 this.__defineGetter__('leftSidebar', function() { return !Prefs.moveSidebars ? mainSidebar : twinSidebar; });
 this.__defineGetter__('rightSidebar', function() { return Prefs.moveSidebars ? mainSidebar : twinSidebar; });
 

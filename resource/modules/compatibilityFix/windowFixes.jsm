@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+Modules.VERSION = '1.1.2';
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
@@ -16,6 +16,8 @@ Modules.LOADMODULE = function() {
 	Modules.load('compatibilityFix/domi');
 	Modules.load('compatibilityFix/scratchpad');
 	Modules.load('compatibilityFix/pageInfo');
+	Modules.load('compatibilityFix/downloadsIndicator');
+	Modules.load('compatibilityFix/bookmarkedItem');
 };
 
 Modules.UNLOADMODULE = function() {
@@ -28,4 +30,6 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/domi');
 	Modules.unload('compatibilityFix/scratchpad');
 	Modules.unload('compatibilityFix/pageInfo');
+	Modules.unload('compatibilityFix/downloadsIndicator');
+	Modules.unload('compatibilityFix/bookmarkedItem');
 };

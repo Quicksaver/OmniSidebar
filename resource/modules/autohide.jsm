@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.2';
+Modules.VERSION = '1.3.0';
 
 this.setAutoHide = function(bar) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide);
@@ -11,9 +11,41 @@ this.setAutoHide = function(bar) {
 		Listeners.remove(bar.switcher, 'dragenter', autoHideSwitchOver);
 		Listeners.remove(bar.switcher, 'mouseout', autoHideSwitchOut);
 		
+		if(bar._transition) {
+			Listeners.remove(bar._transition.node, 'transitionend', bar._transition.onEnd);
+			delete bar._transition;
+		}
+		
 		bar.autoHideInit = false;
 	} else {
 		bar.resizeBox.hovers = 0;
+		
+		// for use to call certain methods when the bar is actually shown (after the CSS transition)
+		bar._transition = {
+			node: bar.resizeBox,
+			prop: 'opacity',
+			listeners: [],
+			add: function(listener) {
+				this.listeners.push(listener);
+			},
+			remove: function(listener) {
+				if(this.listeners.indexOf(listener) > -1) {
+					this.listeners.splice(this.listeners.indexOf(listener), 1);
+				}
+			}
+		};
+		bar._transition.onEnd = function(e) {
+			if(e.target != bar._transition.node || e.propertyName != bar._transition.prop || !trueAttribute(bar, 'hover')) { return; }
+			
+			for(var listener of bar._transition.listeners) {
+				try {
+					listener(e);
+				}
+				catch(ex) { Cu.reportError(ex); }
+			}
+		};
+		Listeners.add(bar._transition.node, 'transitionend', bar._transition.onEnd);
+		
 		if(!Prefs.noInitialShow) {
 			initialShowBar(bar, 1000);
 		}
@@ -45,24 +77,6 @@ this.showOnFocus = function(e) {
 	}
 };
 
-this.showOnOpenMenu = function(e) {
-	var bar = e.target == twinSidebar.title ? twinSidebar : mainSidebar;
-	setHover(bar, true);
-};
-
-this.hideOnCloseMenu = function(e) {
-	var bar = e.target == twinSidebar.title ? twinSidebar : mainSidebar;
-	setHover(bar, false);
-};
-
-this.showOnOpenGOMenu = function(e) {
-	setHover(e.detail.bar, true);
-};
-
-this.hideOnCloseGOMenu = function(e) {
-	setHover(e.detail.bar, false);
-};
-
 this.showOnResizeStart = function(e) {
 	setHover(e.detail.bar, true);
 	
@@ -82,19 +96,168 @@ this.hideOnResizeEnd = function(e) {
 	}, 100);
 };
 
-this.showOnMenuShown = function(e) {
-	var trigger = e.originalTarget.triggerNode || e.originalTarget;
+// Keep sidebar visible when opening menus within it
+this.holdPopupNodes = [];
+this.holdPopupMenu = function(e) {
+	// don't do anything on tooltips! the UI might collapse altogether
+	if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
 	
-	if(isAncestor(trigger, mainSidebar.box)) {
-		setHover(mainSidebar, true);
+	var trigger = e.originalTarget.triggerNode;
+	var target = e.target;
+	
+	// don't bother with any of this if the opened popup is a child of any currently opened panel
+	for(p of holdPopupNodes) {
+		if(target != p.popup && isAncestor(target, p.popup)) { return; }
 	}
-	else if(isAncestor(trigger, twinSidebar.box)) {
-		setHover(twinSidebar, true);
+	
+	// check if the trigger node is present in our sidebar toolbars
+	var hold = null;
+	for(var b in sidebars) {
+		if(!sidebars[b].resizeBox || sidebars[b].closed || !sidebars[b].above || !sidebars[b].autoHide) { continue; }
+		
+		if(isAncestor(trigger, sidebars[b].box) || isAncestor(e.originalTarget, sidebars[b].box)) {
+			hold = sidebars[b];
+			break;
+		}
+	}
+	
+	// try to use the anchor specified when opening the popup, if any
+	if(!hold && target.anchorNode) {
+		for(var b in sidebars) {
+			if(!sidebars[b].resizeBox || sidebars[b].closed || !sidebars[b].above || !sidebars[b].autoHide) { continue; }
+			
+			if(isAncestor(target.anchorNode, sidebars[b].box)) {
+				hold = sidebars[b];
+				break;
+			}
+		}
+	}
+	
+	// could be a CUI panel opening, which doesn't carry a triggerNode, we have to find it ourselves
+	if(!hold && !trigger) {
+		if(target.id == 'customizationui-widget-panel') {
+			barsLoop:
+			for(var b in sidebars) {
+				if(!sidebars[b].resizeBox || !sidebars[b].toolbar || sidebars[b].closed || !sidebars[b].above || !sidebars[b].autoHide) { continue; }
+				
+				var widgets = CustomizableUI.getWidgetsInArea(sidebars[b].toolbar.id);
+				for(var w=0; w<widgets.length; w++) {
+					var widget = widgets[w].forWindow(window);
+					if(!widget || !widget.node || !widget.node.open) { continue; }
+					
+					hold = sidebars[b];
+					break barsLoop;
+				}
+			}
+		}
+		
+		// let's just assume all panels that are children from these toolbars are opening from them
+		else {
+			for(var b in sidebars) {
+				if(!sidebars[b].resizeBox || sidebars[b].closed || !sidebars[b].above || !sidebars[b].autoHide) { continue; }
+				
+				if(isAncestor(target, sidebars[b].box)) {
+					hold = sidebars[b];
+					
+					// the search engine selection menu is an anonymous child of the searchbar: e.target == $('searchbar'),
+					// so we need to explicitely get the actual menu to use
+					if(target.id == 'searchbar') {
+						target = document.getAnonymousElementByAttribute(target, 'anonid', 'searchbar-popup');
+					}
+					
+					break;
+				}
+			}
+		}
+	}
+	
+	// nothing "native" is opening this popup, so let's see if someone claims it
+	if(!hold) {
+		trigger = askForOwner(target);
+		if(trigger && typeof(trigger) == 'string') {
+			trigger = $(trigger);
+			
+			if(trigger) {
+				for(var b in sidebars) {
+					if(!sidebars[b].resizeBox || sidebars[b].closed || !sidebars[b].above || !sidebars[b].autoHide) { continue; }
+					
+					if(isAncestor(trigger, sidebars[b].box)) {
+						hold = sidebars[b];
+						break;
+					}
+				}
+			}
+		}
+	}
+	
+	// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
+	if(hold && target.state == 'open') {
+		// if we're opening the sidebar now, the anchor may move, so we need to reposition the popup when it does
+		holdPopupNodes.push(target);
+		
+		if(!trueAttribute(hold.resizeBox, 'hover') && !$$('#'+hold.box.id+':hover')[0]) {
+			hideIt(target);
+			hold._transition.add(popupsFinishedVisible);
+			Timers.init('ensureHoldPopupShows', popupsFinishedVisible, 400);
+		}
+		
+		setHover(hold, true);
+		
+		var selfRemover = function(ee) {
+			if(ee.originalTarget != e.originalTarget) { return; } //submenus
+			Listeners.remove(target, 'popuphidden', selfRemover);
+			popupsRemoveListeners();
+			
+			// making sure we don't collapse it permanently
+			hideIt(target, true);
+			
+			setHover(hold, false);
+			
+			aSync(function() {
+				if(typeof(holdPopupNodes) != 'undefined' && holdPopupNodes.indexOf(target) > -1) {
+					holdPopupNodes.splice(holdPopupNodes.indexOf(target), 1);
+				}
+			}, 150);
+		}
+		Listeners.add(target, 'popuphidden', selfRemover);
 	}
 };
 
-this.hideOnMenuHidden = function() {
-	setBothHovers(false);
+this.popupsRemoveListeners = function() {
+	Timers.cancel('ensureHoldPopupShows');
+	for(var b in sidebars) {
+		if(sidebars[b].autoHide && sidebars[b]._transition) {
+			sidebars[b]._transition.remove(popupsFinishedVisible);
+		}
+	}
+};
+
+this.popupsFinishedVisible = function() {
+	popupsRemoveListeners();
+	if(holdPopupNodes.length > 0) {
+		for(var popup of holdPopupNodes) {
+			// don't bother if the popup was never hidden to begin with,
+			// it's not needed (the toolbar was already visible when it opened), so the popup is already properly placed,
+			// also this prevents some issues, for example the context menu jumping to the top left corner
+			if(!popup.collapsed) { continue; }
+			
+			// obviously we won't need to move it if it isn't open
+			if(popup.open || popup.state == 'open') {
+				popup.moveTo(-1,-1);
+				hideIt(popup, true);
+			}
+		}
+		
+		// in case opening the popup triggered the toolbar to show, and the mouse just so happens to be in that area, we need to make sure the mouse leaving
+		// won't hide the toolbar with the popup still shown
+		for(var b in sidebars) {
+			if(!sidebars[b].autoHide || !trueAttribute(sidebars[b].resizeBox, 'hover')) { continue; }
+			
+			if(sidebars[b].hovers === 1 && $$('#'+sidebars[b].box.id+':hover')[0]) {
+				setHover(sidebars[b], true);
+			}
+		}
+	}
 };
 
 this.setAutoHideWidth = function() {
@@ -332,14 +495,9 @@ Modules.LOADMODULE = function() {
 	
 	Listeners.add(window, 'endToggleSidebar', listenerToggleSwitcher);
 	Listeners.add(window, 'SidebarFocused', showOnFocus);
-	Listeners.add(window, 'openSidebarMenu', showOnOpenMenu);
-	Listeners.add(window, 'closeSidebarMenu', hideOnCloseMenu);
-	Listeners.add(window, 'openGoURIBar', showOnOpenGOMenu);
-	Listeners.add(window, 'closeGoURIBar', hideOnCloseGOMenu);
 	Listeners.add(window, 'startSidebarResize', showOnResizeStart);
 	Listeners.add(window, 'endSidebarResize', hideOnResizeEnd);
-	Listeners.add(window, 'popupshown', showOnMenuShown);
-	Listeners.add(window, 'popuphidden', hideOnMenuHidden);
+	Listeners.add(window, 'popupshown', holdPopupMenu);
 	Listeners.add(window, 'focus', autoHideFocus, true);
 	Listeners.add(window, 'blur', autoHideBlur, true);
 	
@@ -349,14 +507,9 @@ Modules.LOADMODULE = function() {
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'endToggleSidebar', listenerToggleSwitcher);
 	Listeners.remove(window, 'SidebarFocused', showOnFocus);
-	Listeners.remove(window, 'openSidebarMenu', showOnOpenMenu);
-	Listeners.remove(window, 'closeSidebarMenu', hideOnCloseMenu);
-	Listeners.remove(window, 'openGoURIBar', showOnOpenGOMenu);
-	Listeners.remove(window, 'closeGoURIBar', hideOnCloseGOMenu);
 	Listeners.remove(window, 'startSidebarResize', showOnResizeStart);
 	Listeners.remove(window, 'endSidebarResize', hideOnResizeEnd);
-	Listeners.remove(window, 'popupshown', showOnMenuShown);
-	Listeners.remove(window, 'popuphidden', hideOnMenuHidden);
+	Listeners.remove(window, 'popupshown', holdPopupMenu);
 	Listeners.remove(window, 'focus', autoHideFocus, true);
 	Listeners.remove(window, 'blur', autoHideBlur, true);
 	
