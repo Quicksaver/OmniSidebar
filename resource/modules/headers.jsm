@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.2';
+Modules.VERSION = '1.1.3';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -179,7 +179,6 @@ Modules.UNLOADMODULE = function() {
 	
 	toggleTitles();
 	toggleCloses();
-	toggleButtonStyle();
 	removeAttribute(mainSidebar.header, 'hidden');
 	removeAttribute(twinSidebar.header, 'hidden');
 	
