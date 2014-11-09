@@ -75,10 +75,10 @@
 	/* Tricks needed */
 	.omnisidebar_resize_box,
 	.omnisidebar_resize_sidebar {
-		width: 100% !important;
-		max-width: none !important;
-		min-width: 0 !important;
-		height: 100% !important;
+		width: 100%;
+		max-width: none;
+		min-width: 0;
+		height: 100%;
 	}
 	
 	/* It would hide the resizer if it was very narrow */
