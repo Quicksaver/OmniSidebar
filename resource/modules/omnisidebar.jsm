@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.5';
+Modules.VERSION = '2.0.6';
 
 this._mainState = null;
 this._twinState = null;
@@ -250,7 +250,7 @@ this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu
 this.__defineGetter__('toggleSidebar', function() { return window.toggleSidebar; });
 this.__defineGetter__('fireSidebarFocusedEvent', function() { return window.fireSidebarFocusedEvent; });
 this.__defineGetter__('sidebarOnLoad', function() { return window.sidebarOnLoad; });
-this.__defineGetter__('browser', function() { return $('browser'); });
+this.__defineGetter__('browserBox', function() { return $('browser'); });
 this.__defineGetter__('gBrowser', function() { return window.gBrowser; }); // also for FullScreen.enterDomFullscreen
 this.__defineGetter__('SessionStore', function() { return window.SessionStore; });
 
@@ -570,7 +570,7 @@ this.browserResized = function(e) {
 	
 	// The listeners to this event aren't very heavy (so far at least), it doesn't slow down the resizing of the windows when I set the delay to 0.
 	Timers.init('browserResized', function() {
-		dispatch(browser, { type: 'browserResized', cancelable: false });
+		dispatch(browserBox, { type: 'browserResized', cancelable: false });
 	}, 0);
 };
 
@@ -1259,8 +1259,8 @@ Modules.LOADMODULE = function() {
 	
 	// can't let the browser be resized below the dimensions of the sidebars
 	browserMinWidth();
-	Listeners.add(browser, 'resize', browserResized);
-	Listeners.add(browser, 'browserResized', setSwitcherHeight);
+	Listeners.add(window, 'resize', browserResized);
+	Listeners.add(browserBox, 'browserResized', setSwitcherHeight);
 	Listeners.add(window, 'endToggleSidebar', browserResized);
 	
 	// make sure our margin triggers don't interfere with webpage scrolling
@@ -1295,8 +1295,8 @@ Modules.UNLOADMODULE = function() {
 	
 	Listeners.remove(window, 'wheel', scrollSwitcher, true);
 	
-	Listeners.remove(browser, 'resize', browserResized);
-	Listeners.remove(browser, 'browserResized', setSwitcherHeight);
+	Listeners.remove(window, 'resize', browserResized);
+	Listeners.remove(browserBox, 'browserResized', setSwitcherHeight);
 	Listeners.remove(window, 'endToggleSidebar', browserResized);
 	$('main-window').style.minWidth = '';
 	

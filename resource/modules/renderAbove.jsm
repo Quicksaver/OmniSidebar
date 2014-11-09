@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+Modules.VERSION = '1.1.2';
 
 this.dragalt = null;
 this.dragorix = null;
@@ -44,8 +44,8 @@ this.dragEnd = function(e) {
 	dragTarget.target.box.style.width = '';
 	if(dragNotTarget.target.box) {
 		dragNotTarget.target.box.style.width = '';
-		if(dragTarget.target.width > browser.clientWidth -dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
-			setAttribute(dragNotTarget.target.box, 'width', browser.clientWidth -Prefs.minSpaceBetweenSidebars -dragTarget.target.width);
+		if(dragTarget.target.width > browserBox.clientWidth -dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
+			setAttribute(dragNotTarget.target.box, 'width', browserBox.clientWidth -Prefs.minSpaceBetweenSidebars -dragTarget.target.width);
 		} else {
 			setAttribute(dragNotTarget.target.box, 'width', dragNotTarget.oriW);
 		}
@@ -59,14 +59,14 @@ this.dragEnd = function(e) {
 };
 
 this.drag = function(e) {
-	var maxWidth = browser.clientWidth -Prefs.minSidebarWidth -Prefs.minSpaceBetweenSidebars;
+	var maxWidth = browserBox.clientWidth -Prefs.minSidebarWidth -Prefs.minSpaceBetweenSidebars;
 	if(dragTarget.target.width < Prefs.minSidebarWidth) { setAttribute(dragTarget.target.box, 'width', Prefs.minSidebarWidth); } // we so don't want this...
 	else if(dragTarget.target.width > maxWidth) { setAttribute(dragTarget.target.box, 'width', maxWidth); } // or this
 	
 	// If new width makes it overlap the other sidebar...
 	if(dragNotTarget.target.box) {
-		if(dragTarget.target.width > browser.clientWidth -dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
-			setAttribute(dragNotTarget.target.box, 'width', browser.clientWidth -Prefs.minSpaceBetweenSidebars -dragTarget.target.width);
+		if(dragTarget.target.width > browserBox.clientWidth -dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
+			setAttribute(dragNotTarget.target.box, 'width', browserBox.clientWidth -Prefs.minSpaceBetweenSidebars -dragTarget.target.width);
 		} else {
 			setAttribute(dragNotTarget.target.box, 'width', dragNotTarget.oriW);
 		}
@@ -258,11 +258,11 @@ Modules.LOADMODULE = function() {
 	hideMainHeader.__defineGetter__('docker', function() { return Prefs.hideheaderdock; });
 	hideTwinHeader.__defineGetter__('docker', function() { return Prefs.hideheaderdockTwin; });
 	
-	Listeners.add(browser, 'browserResized', setHeight);
+	Listeners.add(browserBox, 'browserResized', setHeight);
 };
 
 Modules.UNLOADMODULE = function() {
-	Listeners.remove(browser, 'browserResized', setHeight);
+	Listeners.remove(browserBox, 'browserResized', setHeight);
 	
 	delete hideMainHeader.docker;
 	delete hideTwinHeader.docker;
