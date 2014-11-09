@@ -13,6 +13,14 @@
 		visibility: visible; 
 	}
 	
+	/* the close button was re-styled, we have to apply the same style to the twin's close button */
+	.sidebar-header > .close-icon {
+		-moz-appearance: none;
+		padding: 4px 2px;
+		margin: 0;
+		border: none;
+	}
+	
 	/* Australis showed these, at least for a while. We don't really want these, ever */
 	.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-text {
 		display: none;
