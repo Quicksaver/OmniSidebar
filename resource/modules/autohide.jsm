@@ -1,4 +1,4 @@
-Modules.VERSION = '1.3.1';
+Modules.VERSION = '1.3.2';
 
 this.setAutoHide = function(bar, unloaded) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide && !unloaded);
@@ -68,6 +68,13 @@ this.listenerToggleSwitcher = function(e) {
 	e.detail.bar.toggleSwitcher();
 };
 
+this.visibleOnLoad = function(e) {
+	var bar = e.detail.bar;
+	
+	// visibility:hidden makes it impossible to use .focus() within the sidebar (bookmarks/history)
+	setAttribute(bar.resizeBox, 'SidebarFocused', 'true');
+};
+
 this.showOnFocus = function(e) {
 	var bar = e.detail.bar;
 	
@@ -75,6 +82,9 @@ this.showOnFocus = function(e) {
 	if(!Prefs.noInitialShow || bar.autoHideInit || bar.autoHideInit) {
 		initialShowBar(bar, 1000);
 	}
+	
+	// ensure visibleOnLoad() is undone
+	removeAttribute(bar.resizeBox, 'SidebarFocused');
 };
 
 this.showOnResizeStart = function(e) {
@@ -503,6 +513,7 @@ Modules.LOADMODULE = function() {
 	
 	Listeners.add(window, 'endToggleSidebar', listenerToggleSwitcher);
 	Listeners.add(window, 'SidebarFocused', showOnFocus);
+	Listeners.add(window, 'SidebarFocusedSync', visibleOnLoad);
 	Listeners.add(window, 'startSidebarResize', showOnResizeStart);
 	Listeners.add(window, 'endSidebarResize', hideOnResizeEnd);
 	Listeners.add(window, 'popupshown', holdPopupMenu);
@@ -515,6 +526,7 @@ Modules.LOADMODULE = function() {
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'endToggleSidebar', listenerToggleSwitcher);
 	Listeners.remove(window, 'SidebarFocused', showOnFocus);
+	Listeners.remove(window, 'SidebarFocusedSync', visibleOnLoad);
 	Listeners.remove(window, 'startSidebarResize', showOnResizeStart);
 	Listeners.remove(window, 'endSidebarResize', hideOnResizeEnd);
 	Listeners.remove(window, 'popupshown', holdPopupMenu);

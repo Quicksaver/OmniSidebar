@@ -6,6 +6,10 @@
 		visibility: hidden;
 	}
 	
+	.sidebar-box[renderabove][autohide]:not([collapsed]) .omnisidebar_resize_box[SidebarFocused] {
+		visibility: visible;
+	}
+	
 	.sidebar-box[renderabove][autohide]:not([collapsed]):not([dontReHover]) .omnisidebar_resize_box:hover,
 	.sidebar-box[renderabove][autohide]:not([collapsed]) .omnisidebar_resize_box[hover],
 	.sidebar-box[renderabove][autohide]:not([collapsed]):not([dontReHover]) .omnisidebar_resize_box[hiding] {
@@ -13,29 +17,16 @@
 		visibility: visible;
 	}
 	
-	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box,
-	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box {
-		transition: left .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
+	.sidebar-box[renderabove][autohide]:not([disablefx]) .omnisidebar_resize_box {
+		transition: left .5s linear .2s, right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
 	}
-	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box,
-	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box {
-		transition: right .5s linear .2s, opacity .5s linear .2s, z-index .5s linear .2s, visibility .6s;
+	
+	.sidebar-box[renderabove][autohide]:not([disablefx]) .omnisidebar_resize_box:-moz-any(:hover,[hover],[hiding]) {
+		transition: left .25s linear 0s, right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
 	}
-	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box:hover,
-	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box[hover],
-	#sidebar-box[renderabove][autohide]:not([movetoright]):not([disablefx]) .omnisidebar_resize_box[hiding],
-	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box:hover,
-	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box[hover],
-	#omnisidebar-sidebar-box-twin[renderabove][autohide][movetoleft]:not([disablefx]) .omnisidebar_resize_box[hiding]  {
-		transition: left .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
-	}
-	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box:hover,
-	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box[hover],
-	#sidebar-box[renderabove][autohide][movetoright]:not([disablefx]) .omnisidebar_resize_box[hiding],
-	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box:hover,
-	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box[hover],
-	#omnisidebar-sidebar-box-twin[renderabove][autohide]:not([movetoleft]):not([disablefx]) .omnisidebar_resize_box[hiding]   {
-		transition: right .25s linear 0s, opacity .25s linear 0s, z-index .25s linear 0s, visibility 0s;
+	
+	.sidebar-box[renderabove][autohide]:not([disablefx]) .omnisidebar_resize_box[SidebarFocused] {
+		transition-property: left, right, opacity, z-index;
 	}
 
 }
