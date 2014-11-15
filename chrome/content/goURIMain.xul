@@ -41,6 +41,7 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-uri_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button osb-adequate-size osb-custom-button"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			removable="false"
 			defaultArea="objName-Toolbar"
 			type="custom"

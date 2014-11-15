@@ -4,6 +4,7 @@
 	<sidebarheader id="objName-sidebar-header-twin">
 		<toolbarbutton id="objName-dock_button-twin"
 			class="omnisidebar-docker"
+			waitForSS="chrome://objPathString/skin/above.css"
 			insertafter="objName-sidebar-throbber-twin"
 			oncommand="objName.toggleAbove(true);" />
 	</sidebarheader>

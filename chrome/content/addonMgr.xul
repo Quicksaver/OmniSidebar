@@ -30,6 +30,7 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-addons_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&addonsSidebar.label;"
 			tooltiptext="&addonsSidebar.tooltip;"
 			type="custom"

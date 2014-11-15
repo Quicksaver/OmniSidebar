@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://omnisidebar/skin/overlay.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="mainSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
@@ -11,6 +11,7 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController osb-adequate-size"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&omnisidebarButton.label;"
 			tooltiptext="&omnisidebarButton.tooltip;"
 			type="custom"
@@ -44,9 +45,15 @@
 	<hbox id="browser">
 		<hbox id="objName-switch"
 			class="omnisidebar_switch"
+			waitForSS="chrome://objPathString/skin/overlay.css"
 			collapsed="true"
 			onclick="objName.clickSwitcher(event, objName.mainSidebar);"
 			insertbefore="appcontent"/>
 	</hbox>
+	
+	<vbox id="sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
+	<splitter id="sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
+	<vbox id="social-sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
+	<splitter id="social-sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	
 </overlay>

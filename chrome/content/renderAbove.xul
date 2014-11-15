@@ -5,8 +5,9 @@
 	<splitter id="objName-sidebar-splitter-twin" onmousedown="objName.dragStart(event);" />
 	
 	<vbox id="sidebar-box">
-		<hbox id="objName-resizebox" 
-			class="omnisidebar_resize_box" 
+		<hbox id="objName-resizebox"
+			class="omnisidebar_resize_box"
+			waitForSS="chrome://objPathString/skin/above.css"
 			flex="1">
 			<vbox id="objName-resizesidebar"
 				class="omnisidebar_resize_sidebar"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="chrome://omnisidebar/skin/headers.css" type="text/css"?>
-<?xml-stylesheet href="chrome://omnisidebar/skin/buttonsStyle.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/headers.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/buttonsStyle.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="headers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	

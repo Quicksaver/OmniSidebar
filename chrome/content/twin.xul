@@ -10,6 +10,7 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="objName-button-twin" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController osb-adequate-size"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&omnisidebarButtonTwin.label;"
 			tooltiptext="&omnisidebarButtonTwin.tooltip;"
 			type="custom"
@@ -31,7 +32,13 @@
 	</broadcasterset>
 	
 	<hbox id="browser">
-		<vbox id="objName-sidebar-box-twin" hidden="true" class="chromeclass-extrachrome" persist="src width sidebarcommand" insertafter="appcontent">
+		<vbox id="objName-sidebar-box-twin"
+			hidden="true"
+			class="chromeclass-extrachrome"
+			waitForSS="chrome://objPathString/skin/overlay.css"
+			persist="src width sidebarcommand"
+			insertafter="appcontent">
+			
 			<sidebarheader id="objName-sidebar-header-twin" align="center">
 				<label id="objName-sidebar-title-twin"
 					persist="value"
@@ -44,10 +51,15 @@
 			<browser id="objName-sidebar-twin" flex="1" autoscroll="false" disablehistory="true" src="about:blank" type="chrome" />
 		</vbox>
 		
-		<splitter id="objName-sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter" hidden="true" insertafter="appcontent" />
+		<splitter id="objName-sidebar-splitter-twin"
+			class="chromeclass-extrachrome sidebar-splitter"
+			waitForSS="chrome://objPathString/skin/overlay.css"
+			hidden="true"
+			insertafter="appcontent" />
 	
 		<hbox id="objName-switch-twin"
 			class="omnisidebar_switch"
+			waitForSS="chrome://objPathString/skin/overlay.css"
 			collapsed="true"
 			onclick="objName.clickSwitcher(event, objName.twinSidebar);"
 			insertafter="appcontent"/>
