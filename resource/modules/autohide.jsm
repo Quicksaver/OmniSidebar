@@ -1,4 +1,4 @@
-Modules.VERSION = '1.3.2';
+Modules.VERSION = '1.3.3';
 
 this.setAutoHide = function(bar, unloaded) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide && !unloaded);
@@ -152,7 +152,7 @@ this.holdPopupMenu = function(e) {
 				
 				var widgets = CustomizableUI.getWidgetsInArea(sidebars[b].toolbar.id);
 				for(var w=0; w<widgets.length; w++) {
-					var widget = widgets[w].forWindow(window);
+					var widget = widgets[w] && widgets[w].forWindow(window);
 					if(!widget || !widget.node || !widget.node.open) { continue; }
 					
 					hold = sidebars[b];
@@ -183,7 +183,7 @@ this.holdPopupMenu = function(e) {
 	
 	// nothing "native" is opening this popup, so let's see if someone claims it
 	if(!hold) {
-		trigger = askForOwner(target);
+		trigger = dispatch(target, { type: 'AskingForNodeOwner', asking: true });
 		if(trigger && typeof(trigger) == 'string') {
 			trigger = $(trigger);
 			
