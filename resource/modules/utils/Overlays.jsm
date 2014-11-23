@@ -1,4 +1,4 @@
-Modules.VERSION = '2.14.0';
+Modules.VERSION = '2.14.1';
 Modules.UTILS = true;
 
 // Overlays - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -2040,6 +2040,9 @@ this.Overlays = {
 	// toolbar nodes can't be registered before they're appended to the DOM, otherwise all hell breaks loose
 	registerToolbarNode: function(aToolbar, aExistingChildren) {
 		if(!aToolbar || !aToolbar.id) { return; } // is this even possible?
+		
+		// attempt at improving multi-window support, as sometimes the toolbars would force a re-register of a second window with CUI when it's closed, no clue why though...
+		if(aToolbar.ownerDocument.defaultView.closed || aToolbar.ownerDocument.defaultView.willClose) { return; }
 		
 		if(!aToolbar.ownerDocument.getElementById(aToolbar.id)) {
 			aSync(function() { CustomizableUI.registerToolbarNode(aToolbar, aExistingChildren); }, 250);

@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.6';
+Modules.VERSION = '2.0.7';
 
 this._mainState = null;
 this._twinState = null;
@@ -258,19 +258,6 @@ this.__defineGetter__('SessionStore', function() { return window.SessionStore; }
 this.__defineGetter__('FullScreen', function() { return window.FullScreen; });
 this.__defineGetter__('gFindBarInitialized', function() { return window.gFindBarInitialized; });
 this.__defineGetter__('gFindBar', function() { return window.gFindBar; });
-
-this.__defineGetter__('customizing', function() {
-	if(trueAttribute(document.documentElement, 'customizing')) { return true; }
-	
-	// this means that the window is still opening and the first tab will open customize mode
-	if(gBrowser.mCurrentBrowser
-	&& gBrowser.mCurrentBrowser.__SS_restore_data
-	&& gBrowser.mCurrentBrowser.__SS_restore_data.url == 'about:customizing') {
-		return true;
-	}
-	
-	return false;
-});
 
 this.__defineGetter__('SocialSidebar', function() { return window.SocialSidebar; });
 this.__defineGetter__('SocialBroadcaster', function() { return $(objName+'-viewSocialSidebar'); });
