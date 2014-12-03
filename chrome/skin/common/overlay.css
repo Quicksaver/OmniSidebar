@@ -21,10 +21,6 @@
 		position: fixed;
 		background: none;
 		height: 100%;
-		z-index: 3;
-	}
-	
-	.omnisidebar_switch[enabled] {
 		z-index: 20;
 	}
 	

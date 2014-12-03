@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.7';
+Modules.VERSION = '2.0.8';
 
 this._mainState = null;
 this._twinState = null;
@@ -6,7 +6,13 @@ this._twinState = null;
 this.mainSidebar = {
 	main: true,
 	twin: false,
-	loaded: false,
+	_loaded: false,
+	get loaded () { return this._loaded; },
+	set loaded (v) {
+		this._loaded = v;
+		dispatch(this.box, { type: 'LoadedSidebar', cancelable: false, detail: v });
+		return v;
+	},
 	autoHideInit: false,
 	initialShowings: [],
 	contentFocused: false,
@@ -21,7 +27,7 @@ this.mainSidebar = {
 		}
 		return true;
 	},
-	get closed () { return this.box.hidden || this.box.collapsed; },
+	get closed () { return !this.box || this.box.hidden || this.box.collapsed; },
 	get label () { return Strings.get('buttons', (Prefs.twinSidebar) ? 'buttonMainLabel' : 'buttonlabel'); },
 	get splitter () { return $('sidebar-splitter'); },
 	get header () { return $('sidebar-header'); },
@@ -124,7 +130,13 @@ this.mainSidebar = {
 this.twinSidebar = {
 	main: false,
 	twin: true,
-	loaded: false,
+	_loaded: false,
+	get loaded () { return this._loaded; },
+	set loaded (v) {
+		this._loaded = v;
+		dispatch(this.box, { type: 'LoadedSidebar', cancelable: false, detail: v });
+		return v;
+	},
 	autoHideInit: false,
 	initialShowings: [],
 	contentFocused: false,
@@ -139,7 +151,7 @@ this.twinSidebar = {
 		}
 		return true;
 	},
-	get closed () { return this.box.hidden || this.box.collapsed; },
+	get closed () { return !this.box || this.box.hidden || this.box.collapsed; },
 	get label () { return Strings.get('buttons', 'buttonTwinLabel'); },
 	get splitter () { return $(objName+'-sidebar-splitter-twin'); },
 	get header () { return $(objName+'-sidebar-header-twin'); },
@@ -243,8 +255,8 @@ this.sidebars = {
 	get main () { return mainSidebar; },
 	get twin () { return twinSidebar; }
 };
-this.__defineGetter__('leftSidebar', function() { return !Prefs.moveSidebars ? mainSidebar : twinSidebar; });
-this.__defineGetter__('rightSidebar', function() { return Prefs.moveSidebars ? mainSidebar : twinSidebar; });
+this.__defineGetter__('leftSidebar', function() { return (LTR != Prefs.moveSidebars) ? mainSidebar : twinSidebar; });
+this.__defineGetter__('rightSidebar', function() { return (LTR == Prefs.moveSidebars) ? mainSidebar : twinSidebar; });
 
 this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
 this.__defineGetter__('toggleSidebar', function() { return window.toggleSidebar; });
@@ -291,8 +303,9 @@ this.__defineSetter__('lastSocialCommand', function(v) {
 	return SessionStore.setWindowValue(window, objName+'.lastSocialCommand', v);
 });
 
+this.moveLeftBy = {};
+this.moveRightBy = {};
 this.__defineGetter__('moveLeft', function() {
-	if(typeof(moveLeftBy) == 'undefined') { return 0; }
 	var ret = 0;
 	for(var x in moveLeftBy) {
 		ret += moveLeftBy[x];
@@ -300,7 +313,6 @@ this.__defineGetter__('moveLeft', function() {
 	return ret;
 });
 this.__defineGetter__('moveRight', function() {
-	if(typeof(moveRightBy) == 'undefined') { return 0; }
 	var ret = 0;
 	for(var x in moveRightBy) {
 		ret += moveRightBy[x];
@@ -608,8 +620,8 @@ this.setSwitcherOffset = function() {
 	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 	// I'm not supporting other versions of OSX, just this one isn't simple as it is
 	var moveBy = (!WINNT) ? -1 : 0;
-	var leftOffset = moveBy +moveLeft;
-	var rightOffset = moveBy +moveRight;
+	var leftOffset = moveBy;
+	var rightOffset = moveBy;
 	
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.2';
+Modules.VERSION = '1.1.3';
 
 this.dragalt = null;
 this.dragorix = null;
@@ -98,20 +98,6 @@ this.setAboveWidth = function() {
 	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
 	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
 	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
-	
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(ltr):not([movetoright]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(ltr)[movetoleft],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(rtl)[movetoright],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(rtl):not([movetoleft]) {\n';
-	sscode += '		left: '+leftOffset+'px !important;\n';
-	sscode += '	}\n';
-	
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(ltr)[movetoright],\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(ltr):not([movetoleft]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch:-moz-locale-dir(rtl):not([movetoright]),\n';
-	sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-switch-twin:-moz-locale-dir(rtl)[movetoleft] {\n';
-	sscode += '		right: '+rightOffset+'px !important;\n';
-	sscode += '	}\n';
 	
 	if(Prefs.renderabove && mainSidebar.width) {
 		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
@@ -225,7 +211,7 @@ this.setAbove = function(bar) {
 	setAboveWidth();
 	setResizerDirection(bar.resizer);
 	
-	if(bar.above) {
+	if(!UNLOADED && bar.above) {
 		dispatch(bar.resizeBox, { type: 'sidebarAbove', cancelable: false });
 		if(!UNLOADED && !bar.closed) {
 			fireSidebarFocusedEvent(bar.twin);
