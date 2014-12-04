@@ -1,14 +1,18 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 // keep the sidebar visible when hovering the strip if it's opened and auto-hiding
 this.mwbHover = function() {
 	var bar = leftSidebar;
 	if(bar.box && !bar.closed && bar.above && bar.autoHide) {
-		setHover(bar, true);
+		Timers.init('mwbHover', function() {
+			setHover(bar, true);
+		}, Prefs.showDelay);
 	}
 };
 
 this.mwbOut = function() {
+	Timers.cancel('mwbHover');
+	
 	var bar = leftSidebar;
 	if(bar.box && !bar.closed && bar.above && bar.autoHide) {
 		setHover(bar, false);
