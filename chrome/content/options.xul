@@ -14,9 +14,9 @@
 			<preference id="pref-autoHide" name="extensions.omnisidebar.autoHide" type="bool"/>
 			<preference id="pref-autoClose" name="extensions.omnisidebar.autoClose" type="bool"/>
 			<preference id="pref-toolbar" name="extensions.omnisidebar.toolbar" type="bool"/>
-			<preference id="pref-hideheadertitle" name="extensions.omnisidebar.hideheadertitle" type="bool"/>
-			<preference id="pref-hideheaderdock" name="extensions.omnisidebar.hideheaderdock" type="bool"/>
-			<preference id="pref-hideheaderclose" name="extensions.omnisidebar.hideheaderclose" type="bool"/>
+			<preference id="pref-showheadertitle" name="extensions.omnisidebar.showheadertitle" type="bool"/>
+			<preference id="pref-showheaderdock" name="extensions.omnisidebar.showheaderdock" type="bool"/>
+			<preference id="pref-showheaderclose" name="extensions.omnisidebar.showheaderclose" type="bool"/>
 			<preference id="pref-titleButton" name="extensions.omnisidebar.titleButton" type="bool"/>
 			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
 			<preference id="pref-goButton" name="extensions.omnisidebar.goButton" type="bool"/>
@@ -53,12 +53,12 @@
 			<caption label="&omnisidebarOptgroupgen.label;"/>
 			<hbox align="center">
 				<vbox align="start">
-					<checkbox label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitle"/>
-					<checkbox dependson="!pref-hideheadertitle" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
+					<checkbox label="&omnisidebarOptshowheadertitle.label;" preference="pref-showheadertitle"/>
+					<checkbox dependson="pref-showheadertitle" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
 				</vbox>
 				<vbox align="start">
-					<checkbox label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdock"/>
-					<checkbox label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheaderclose"/>
+					<checkbox label="&omnisidebarOptshowheaderdock.label;" preference="pref-showheaderdock"/>
+					<checkbox label="&omnisidebarOptshowheaderclose.label;" preference="pref-showheaderclose"/>
 				</vbox>
 			</hbox>
 		</groupbox>
@@ -173,9 +173,9 @@
 			<preference id="pref-autoHideTwin" name="extensions.omnisidebar.autoHideTwin" type="bool"/>
 			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
 			<preference id="pref-toolbarTwin" name="extensions.omnisidebar.toolbarTwin" type="bool"/>
-			<preference id="pref-hideheadertitleTwin" name="extensions.omnisidebar.hideheadertitleTwin" type="bool"/>
-			<preference id="pref-hideheaderdockTwin" name="extensions.omnisidebar.hideheaderdockTwin" type="bool"/>
-			<preference id="pref-hideheadercloseTwin" name="extensions.omnisidebar.hideheadercloseTwin" type="bool"/>
+			<preference id="pref-showheadertitleTwin" name="extensions.omnisidebar.showheadertitleTwin" type="bool"/>
+			<preference id="pref-showheaderdockTwin" name="extensions.omnisidebar.showheaderdockTwin" type="bool"/>
+			<preference id="pref-showheadercloseTwin" name="extensions.omnisidebar.showheadercloseTwin" type="bool"/>
 			<preference id="pref-titleButtonTwin" name="extensions.omnisidebar.titleButtonTwin" type="bool"/>
 			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
 			<preference id="pref-goButtonTwin" name="extensions.omnisidebar.goButtonTwin" type="bool"/>
@@ -208,12 +208,12 @@
 			<caption label="&omnisidebarOptgroupgen.label;"/>
 			<hbox align="center">	
 				<vbox align="start">
-					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheadertitle.label;" preference="pref-hideheadertitleTwin"/>
-					<checkbox dependson="pref-twinSidebar,!pref-hideheadertitleTwin" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
+					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptshowheadertitle.label;" preference="pref-showheadertitleTwin"/>
+					<checkbox dependson="pref-twinSidebar,pref-showheadertitleTwin" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
 				</vbox>
 				<vbox align="start">
-					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderdock.label;" preference="pref-hideheaderdockTwin"/>
-					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOpthideheaderclose.label;" preference="pref-hideheadercloseTwin"/>
+					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptshowheaderdock.label;" preference="pref-showheaderdockTwin"/>
+					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptshowheaderclose.label;" preference="pref-showheadercloseTwin"/>
 				</vbox>
 			</hbox>
 		</groupbox>

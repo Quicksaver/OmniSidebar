@@ -45,10 +45,10 @@
 <!ENTITY omnisidebarOptforceOpen.menus "Drop-down menus">
 
 <!ENTITY omnisidebarOpttoolbar.label "Sidebar Toolbar">
-<!ENTITY omnisidebarOpthideheadertitle.label "Hide sidebar title">
+<!ENTITY omnisidebarOptshowheadertitle.label "Show sidebar title">
 <!ENTITY omnisidebarOpttitleButton.label "Sidebar menu dropdown in title">
-<!ENTITY omnisidebarOpthideheaderdock.label "Hide docking button">
-<!ENTITY omnisidebarOpthideheaderclose.label "Hide close button">
+<!ENTITY omnisidebarOptshowheaderdock.label "Show docking button">
+<!ENTITY omnisidebarOptshowheaderclose.label "Show close button">
 
 <!ENTITY omnisidebarOptcoloricons.nochangelabel "Default (no change)">
 <!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">

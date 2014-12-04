@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.3';
+Modules.VERSION = '1.1.4';
 
 this.dragalt = null;
 this.dragorix = null;
@@ -168,8 +168,8 @@ this.toggleAbove = function(twin) {
 };
 
 this.toggleDockers = function() {
-	toggleAttribute(mainSidebar.box, 'nodock', Prefs.hideheaderdock);
-	toggleAttribute(twinSidebar.box, 'nodock', Prefs.hideheaderdockTwin);
+	toggleAttribute(mainSidebar.box, 'nodock', !Prefs.showheaderdock);
+	toggleAttribute(twinSidebar.box, 'nodock', !Prefs.showheaderdockTwin);
 	
 	toggleHeaders();
 };
@@ -232,8 +232,8 @@ Modules.LOADMODULE = function() {
 	
 	Listeners.add(window, 'sidebarWidthChanged', setAboveWidth);
 	
-	Prefs.listen('hideheaderdock', toggleDockers);
-	Prefs.listen('hideheaderdockTwin', toggleDockers);
+	Prefs.listen('showheaderdock', toggleDockers);
+	Prefs.listen('showheaderdockTwin', toggleDockers);
 	Prefs.listen('renderabove', toggleRenderAbove);
 	Prefs.listen('renderaboveTwin', toggleRenderAbove);
 	Prefs.listen('aboveSquared', toggleSquared);
@@ -241,8 +241,8 @@ Modules.LOADMODULE = function() {
 	toggleDockers();
 	toggleRenderAbove();
 	
-	hideMainHeader.__defineGetter__('docker', function() { return Prefs.hideheaderdock; });
-	hideTwinHeader.__defineGetter__('docker', function() { return Prefs.hideheaderdockTwin; });
+	hideMainHeader.__defineGetter__('docker', function() { return !Prefs.showheaderdock; });
+	hideTwinHeader.__defineGetter__('docker', function() { return !Prefs.showheaderdockTwin; });
 	
 	Listeners.add(browserBox, 'browserResized', setHeight);
 };
@@ -260,8 +260,8 @@ Modules.UNLOADMODULE = function() {
 	
 	Listeners.remove(window, 'sidebarWidthChanged', setAboveWidth);
 	
-	Prefs.unlisten('hideheaderdock', toggleDockers);
-	Prefs.unlisten('hideheaderdockTwin', toggleDockers);
+	Prefs.unlisten('showheaderdock', toggleDockers);
+	Prefs.unlisten('showheaderdockTwin', toggleDockers);
 	Prefs.unlisten('renderabove', toggleRenderAbove);
 	Prefs.unlisten('renderaboveTwin', toggleRenderAbove);
 	Prefs.unlisten('aboveSquared', toggleSquared);

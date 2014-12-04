@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.8';
+Modules.VERSION = '2.0.9';
 
 this._mainState = null;
 this._twinState = null;
@@ -36,7 +36,7 @@ this.mainSidebar = {
 	get resizer () { return $(objName+'-resizer'); },
 	get sidebar () { return $('sidebar'); },
 	get title () { return $('sidebar-title'); },
-	get titleButton () { return !Prefs.hideheadertitle && Prefs.titleButton; },
+	get titleButton () { return Prefs.showheadertitle && Prefs.titleButton; },
 	get docker () { return $(objName+'-dock_button'); },
 	toolbarId: objName+'-Toolbar',
 	get toolbar () { return $(this.toolbarId); },
@@ -160,7 +160,7 @@ this.twinSidebar = {
 	get resizer () { return $(objName+'-resizer-twin'); },
 	get sidebar () { return $(objName+'-sidebar-twin'); },
 	get title () { return $(objName+'-sidebar-title-twin'); },
-	get titleButton () { return !Prefs.hideheadertitleTwin && Prefs.titleButtonTwin; },
+	get titleButton () { return Prefs.showheadertitleTwin && Prefs.titleButtonTwin; },
 	get docker () { return $(objName+'-dock_button-twin'); },
 	toolbarId: objName+'-Toolbar-twin',
 	get toolbar () { return $(this.toolbarId); },

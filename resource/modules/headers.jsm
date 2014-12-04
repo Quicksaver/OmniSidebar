@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.3';
+Modules.VERSION = '1.1.4';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -9,8 +9,8 @@ this.toggleToolbar = function(twin) {
 };
 
 this.toggleTitles = function(headers) {
-	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && Prefs.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'));
-	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && Prefs.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'));
+	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && !Prefs.showheadertitle && !trueAttribute(mainSidebar.title, 'active'));
+	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && !Prefs.showheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'));
 	
 	if(headers) {
 		toggleHeaders();
@@ -18,8 +18,8 @@ this.toggleTitles = function(headers) {
 };
 
 this.toggleCloses = function(headers) {
-	toggleAttribute(mainSidebar.box, 'noclose', !UNLOADED && Prefs.hideheaderclose);
-	toggleAttribute(twinSidebar.box, 'noclose', !UNLOADED && Prefs.hideheadercloseTwin);
+	toggleAttribute(mainSidebar.box, 'noclose', !UNLOADED && !Prefs.showheaderclose);
+	toggleAttribute(twinSidebar.box, 'noclose', !UNLOADED && !Prefs.showheadercloseTwin);
 	
 	if(headers) {
 		toggleHeaders();
@@ -33,13 +33,13 @@ this.toggleIconsColor = function() {
 
 this.hideMainHeader = {
 	get toolbar () { return !Prefs.toolbar || !toolbarHasButtons(mainSidebar.toolbar); },
-	get title () { return Prefs.hideheadertitle && !trueAttribute(mainSidebar.title, 'active'); },
-	get close () { return Prefs.hideheaderclose; }
+	get title () { return !Prefs.showheadertitle && !trueAttribute(mainSidebar.title, 'active'); },
+	get close () { return !Prefs.showheaderclose; }
 };
 this.hideTwinHeader = {
 	get toolbar () { return !Prefs.toolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
-	get title () { return Prefs.hideheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'); },
-	get close () { return Prefs.hideheadercloseTwin; }
+	get title () { return !Prefs.showheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'); },
+	get close () { return !Prefs.showheadercloseTwin; }
 };
 
 // Handles the headers visibility
@@ -132,12 +132,12 @@ Modules.LOADMODULE = function() {
 	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOnLoad);
 	
 	Prefs.listen('toolbar', toggleHeaders);
-	Prefs.listen('hideheadertitle', toggleTitles);
-	Prefs.listen('hideheaderclose', toggleCloses);
+	Prefs.listen('showheadertitle', toggleTitles);
+	Prefs.listen('showheaderclose', toggleCloses);
 	Prefs.listen('coloricons', toggleIconsColor);
 	Prefs.listen('toolbarTwin', toggleHeaders);
-	Prefs.listen('hideheadertitleTwin', toggleTitles);
-	Prefs.listen('hideheadercloseTwin', toggleCloses);
+	Prefs.listen('showheadertitleTwin', toggleTitles);
+	Prefs.listen('showheadercloseTwin', toggleCloses);
 	Prefs.listen('coloriconsTwin', toggleIconsColor);
 	
 	twinTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
@@ -163,12 +163,12 @@ Modules.UNLOADMODULE = function() {
 	CustomizableUI.removeListener(toolbarsCustomized);
 	
 	Prefs.unlisten('toolbar', toggleHeaders);
-	Prefs.unlisten('hideheadertitle', toggleTitles);
-	Prefs.unlisten('hideheaderclose', toggleCloses);
+	Prefs.unlisten('showheadertitle', toggleTitles);
+	Prefs.unlisten('showheaderclose', toggleCloses);
 	Prefs.unlisten('coloricons', toggleIconsColor);
 	Prefs.unlisten('toolbarTwin', toggleHeaders);
-	Prefs.unlisten('hideheadertitleTwin', toggleTitles);
-	Prefs.unlisten('hideheadercloseTwin', toggleCloses);
+	Prefs.unlisten('showheadertitleTwin', toggleTitles);
+	Prefs.unlisten('showheadercloseTwin', toggleCloses);
 	Prefs.unlisten('coloriconsTwin', toggleIconsColor);
 	
 	Listeners.remove(window, 'beforecustomization', headersCustomize);
