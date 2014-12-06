@@ -4,9 +4,9 @@
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			id="omnisidebar-options-window"
-			title="&omnisidebarOptions.title;">
+			title="&Options.title;">
 	
-	<prefpane id="mainPane" label="&omnisidebarButtonMain.label;" style="&Optwindow.style;">
+	<prefpane id="mainPane" label="&OptgroupMain.label;" style="&Optwindow.style;">
 		<preferences>
 			<preference id="pref-moveSidebars" name="extensions.omnisidebar.moveSidebars" type="bool"/>
 			<preference id="pref-useSwitch" name="extensions.omnisidebar.useSwitch" type="bool"/>
@@ -32,63 +32,89 @@
 				onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
 				onsynctopreference="return this.value == 'right';">
 				<hbox>
-					<radio id="radio_movetoleft" label="&omnisidebarOptsidebars.leftlabel;" value="left"/>
-					<radio id="radio_movetoright" label="&omnisidebarOptsidebars.rightlabel;" value="right"/>
+					<radio id="radio_movetoleft"
+						label="&Optsidebars.left.label;"
+						tooltiptext="&Optsidebars.pos.tooltip;"
+						value="left"/>
+					<radio id="radio_movetoright"
+						label="&Optsidebars.right.label;"
+						tooltiptext="&Optsidebars.pos.tooltip;"
+						value="right"/>
 				</hbox>
 			</radiogroup>
 			<vbox align="start">
-				<checkbox label="&omnisidebarOptswitchers.label;" preference="pref-useSwitch"/>
-				<checkbox label="&omnisidebarOptautoClose.label;" preference="pref-autoClose"/>
+				<checkbox label="&Optswitchers.label;"
+					tooltiptext="&Optswitchers.tooltip;"
+					preference="pref-useSwitch"/>
+				<checkbox label="&OptautoClose.label;"
+					tooltiptext="&OptautoClose.tooltip;"
+					preference="pref-autoClose"/>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption><checkbox id="aboveCheckbox" 
-				label="&omnisidebarOptundock.label;" 
+			<caption><checkbox id="aboveCheckbox"
+				label="&Optundock.label;"
+				tooltiptext="&Optundock.tooltip;"
 				preference="pref-renderabove"/></caption>
-			<checkbox dependson="pref-renderabove" label="&omnisidebarOptautohide.label;" preference="pref-autoHide"/>
+			<checkbox dependson="pref-renderabove"
+				label="&Optautohide.label;"
+				tooltiptext="&Optautohide.tooltip;"
+				preference="pref-autoHide"/>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption label="&omnisidebarOptgroupgen.label;"/>
+			<caption label="&Optgroupgen.label;"/>
 			<hbox align="center">
 				<vbox align="start">
-					<checkbox label="&omnisidebarOptshowheadertitle.label;" preference="pref-showheadertitle"/>
-					<checkbox dependson="pref-showheadertitle" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButton"/>
+					<checkbox label="&Optshowheadertitle.label;"
+						tooltiptext="&Optshowheadertitle.tooltip;"
+						preference="pref-showheadertitle"/>
+					<checkbox dependson="pref-showheadertitle"
+						label="&OpttitleButton.label;"
+						tooltiptext="&OpttitleButton.tooltip;"
+						preference="pref-titleButton"/>
 				</vbox>
 				<vbox align="start">
-					<checkbox label="&omnisidebarOptshowheaderdock.label;" preference="pref-showheaderdock"/>
-					<checkbox label="&omnisidebarOptshowheaderclose.label;" preference="pref-showheaderclose"/>
+					<checkbox label="&Optshowheaderdock.label;" tooltiptext="&Optshowheaderdock.tooltip;" preference="pref-showheaderdock"/>
+					<checkbox label="&Optshowheaderclose.label;" tooltiptext="&Optshowheaderclose.tooltip;" preference="pref-showheaderclose"/>
 				</vbox>
 			</hbox>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption><checkbox label="&omnisidebarOpttoolbar.label;" preference="pref-toolbar"/></caption>
+			<caption><checkbox label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbar"/></caption>
 			<vbox align="start">
-				<checkbox dependson="pref-toolbar" label="&omnisidebarOptGoURI.label;" preference="pref-goButton"/>
-				<groupbox id="omnisidebar_coloroption" align="center">
-					<caption label="&omnisidebarOptgroupicons.label;"/>
-					<radiogroup preference="pref-coloricons">
-						<hbox align="center">
-							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.ff4label;" value="ff"/>
-							<radio dependson="pref-toolbar" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
-						</hbox>
-					</radiogroup>
-				</groupbox>
+				<checkbox dependson="pref-toolbar" label="&OptGoURI.label;" tooltiptext="&OptGoURI.tooltip;" preference="pref-goButton"/>
+				<radiogroup preference="pref-coloricons">
+					<hbox align="center">
+						<label value="&Optcoloricons.label;"/>
+						<radio dependson="pref-toolbar"
+							label="&Optcoloricons.nochange.label;"
+							tooltiptext="&Optcoloricons.nochange.tooltip;"
+							value="default"/>
+						<radio dependson="pref-toolbar"
+							label="&Optcoloricons.firefox.label;"
+							tooltiptext="&Optcoloricons.firefox.tooltip;"
+							value="ff"/>
+						<radio dependson="pref-toolbar"
+							label="&Optcoloricons.color.label;"
+							tooltiptext="&Optcoloricons.color.tooltip;"
+							value="color"/>
+					</hbox>
+				</radiogroup>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
+			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
 			<hbox>
-				<checkbox id="accelCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-mainKeysetAccel"/>
-				<checkbox id="altCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-mainKeysetAlt"/>
-				<checkbox id="shiftCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-mainKeysetShift"/>
+				<checkbox id="accelCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&OptKeyboardShortcut.control;" preference="pref-mainKeysetAccel"/>
+				<checkbox id="altCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&OptKeyboardShortcut.alt;" preference="pref-mainKeysetAlt"/>
+				<checkbox id="shiftCheckboxMain" oncommand="objName.fillKeycodes('main');" label="&OptKeyboardShortcut.shift;" preference="pref-mainKeysetShift"/>
 				<menulist id="mainKeyset-menu" oncommand="objName.fillKeycodes('main');" preference="pref-mainKeysetKeycode">
 					<menupopup id="mainKeyset-menupopup">
-						<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
+						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>
 						<menuitem value="C" label="C"/>
@@ -115,15 +141,15 @@
 						<menuitem value="X" label="X"/>
 						<menuitem value="Y" label="Y"/>
 						<menuitem value="Z" label="Z"/>
-						<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
-						<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
-						<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
-						<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
-						<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
-						<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
-						<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
-						<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
-						<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
+						<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
 						<menuitem value="." label="."/>
 						<menuitem value="," label=","/>
 						<menuitem value=";" label=";"/>
@@ -160,12 +186,15 @@
 					</menupopup>
 				</menulist>
 			</hbox>
-			<checkbox dependson="!pref-mainKeysetKeycode:none" label="&omnisidebarOptKeysetPanel.label;" preference="pref-mainKeysetPanel"/>
+			<checkbox dependson="!pref-mainKeysetKeycode:none"
+				label="&OptKeysetPanel.label;"
+				tooltiptext="&OptKeysetPanel.tooltip;"
+				preference="pref-mainKeysetPanel"/>
 		</groupbox>
 		
 	</prefpane>
 	
-	<prefpane id="twinPane" label="&omnisidebarButtonTwin.label;" style="&Optwindow.style;">
+	<prefpane id="twinPane" label="&OptgroupTwin.label;" style="&Optwindow.style;">
 		<preferences>
 			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
 			<preference id="pref-useSwitchTwin" name="extensions.omnisidebar.useSwitchTwin" type="bool"/>
@@ -187,63 +216,97 @@
 		</preferences>
 		
 		<box class="box-groupbox" align="center">
-			<checkbox label="&omnisidebarOptsidebars.twinlabel;" preference="pref-twinSidebar"/>
+			<checkbox label="&Optsidebars.twin.label;"
+				tooltiptext="&Optsidebars.twin.tooltip;"
+				preference="pref-twinSidebar"/>
 		</box>
 		<groupbox align="center">
 			<vbox align="start">
-				<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptswitchers.label;" preference="pref-useSwitchTwin"/>
-				<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptautoClose.label;" preference="pref-autoCloseTwin"/>
+				<checkbox dependson="pref-twinSidebar"
+					label="&Optswitchers.label;"
+					tooltiptext="&Optswitchers.tooltip;"
+					preference="pref-useSwitchTwin"/>
+				<checkbox dependson="pref-twinSidebar"
+					label="&OptautoClose.label;"
+					tooltiptext="&OptautoClose.tooltip;"
+					preference="pref-autoCloseTwin"/>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="center">
 			<caption><checkbox id="aboveTwinCheckbox"
-				label="&omnisidebarOptundock.label;"
+				label="&Optundock.label;"
+				tooltiptext="&Optundock.tooltip;"
 				dependson="pref-twinSidebar"
 				preference="pref-renderaboveTwin"/></caption>
-			<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar" label="&omnisidebarOptautohide.label;" preference="pref-autoHideTwin"/>
+			<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar"
+				label="&Optautohide.label;"
+				tooltiptext="&Optautohide.tooltip;"
+				preference="pref-autoHideTwin"/>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption label="&omnisidebarOptgroupgen.label;"/>
+			<caption label="&Optgroupgen.label;"/>
 			<hbox align="center">	
 				<vbox align="start">
-					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptshowheadertitle.label;" preference="pref-showheadertitleTwin"/>
-					<checkbox dependson="pref-twinSidebar,pref-showheadertitleTwin" label="&omnisidebarOpttitleButton.label;" preference="pref-titleButtonTwin"/>
+					<checkbox dependson="pref-twinSidebar"
+						label="&Optshowheadertitle.label;"
+						tooltiptext="&Optshowheadertitle.tooltip;"
+						preference="pref-showheadertitleTwin"/>
+					<checkbox dependson="pref-twinSidebar,pref-showheadertitleTwin"
+						label="&OpttitleButton.label;"
+						tooltiptext="&OpttitleButton.tooltip;"
+						preference="pref-titleButtonTwin"/>
 				</vbox>
 				<vbox align="start">
-					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptshowheaderdock.label;" preference="pref-showheaderdockTwin"/>
-					<checkbox dependson="pref-twinSidebar" label="&omnisidebarOptshowheaderclose.label;" preference="pref-showheadercloseTwin"/>
+					<checkbox dependson="pref-twinSidebar"
+						label="&Optshowheaderdock.label;"
+						tooltiptext="&Optshowheaderdock.tooltip;"
+						preference="pref-showheaderdockTwin"/>
+					<checkbox dependson="pref-twinSidebar"
+						label="&Optshowheaderclose.label;"
+						tooltiptext="&Optshowheaderclose.tooltip;"
+						preference="pref-showheadercloseTwin"/>
 				</vbox>
 			</hbox>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption><checkbox dependson="pref-twinSidebar" label="&omnisidebarOpttoolbar.label;" preference="pref-toolbarTwin"/></caption>
+			<caption><checkbox dependson="pref-twinSidebar" label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbarTwin"/></caption>
 			<vbox align="start">
-				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptGoURI.label;" preference="pref-goButtonTwin"/>
-				<groupbox id="omnisidebar_coloroptionTwin" align="center">
-					<caption label="&omnisidebarOptgroupicons.label;"/>
-					<radiogroup preference="pref-coloriconsTwin">
-						<hbox align="center">
-							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.nochangelabel;" value="default"/>
-							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.ff4label;" value="ff"/>
-							<radio dependson="pref-twinSidebar,pref-toolbarTwin" label="&omnisidebarOptcoloricons.colorlabel;" value="color"/>
-						</hbox>
-					</radiogroup>
-				</groupbox>
+				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin"
+					label="&OptGoURI.label;"
+					tooltiptext="&OptGoURI.tooltip;"
+					preference="pref-goButtonTwin"/>
+				<radiogroup preference="pref-coloriconsTwin">
+					<hbox align="center">
+						<label value="&Optcoloricons.label;"/>
+						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
+							label="&Optcoloricons.nochange.label;"
+							tooltiptext="&Optcoloricons.nochange.tooltip;"
+							value="default"/>
+						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
+							label="&Optcoloricons.firefox.label;"
+							tooltiptext="&Optcoloricons.firefox.tooltip;"
+							value="ff"/>
+						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
+							label="&Optcoloricons.color.label;"
+							tooltiptext="&Optcoloricons.color.tooltip;"
+							value="color"/>
+					</hbox>
+				</radiogroup>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption label="&omnisidebarOptKeyboardShortcut.caption;"/>
+			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
 			<hbox>
-				<checkbox id="accelCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.control;" preference="pref-twinKeysetAccel"/>
-				<checkbox id="altCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.alt;" preference="pref-twinKeysetAlt"/>
-				<checkbox id="shiftCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&omnisidebarOptKeyboardShortcut.shift;" preference="pref-twinKeysetShift"/>
+				<checkbox id="accelCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&OptKeyboardShortcut.control;" preference="pref-twinKeysetAccel"/>
+				<checkbox id="altCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&OptKeyboardShortcut.alt;" preference="pref-twinKeysetAlt"/>
+				<checkbox id="shiftCheckboxTwin" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" label="&OptKeyboardShortcut.shift;" preference="pref-twinKeysetShift"/>
 				<menulist id="twinKeyset-menu" dependson="pref-twinSidebar" oncommand="objName.fillKeycodes('twin');" preference="pref-twinKeysetKeycode">
 					<menupopup id="twinKeyset-menupopup">
-						<menuitem value="none" label="&omnisidebarOptKeyboardShortcut.none;"/>
+						<menuitem value="none" label="&OptKeyboardShortcut.none;"/>
 						<menuitem value="A" label="A"/>
 						<menuitem value="B" label="B"/>
 						<menuitem value="C" label="C"/>
@@ -270,15 +333,15 @@
 						<menuitem value="X" label="X"/>
 						<menuitem value="Y" label="Y"/>
 						<menuitem value="Z" label="Z"/>
-						<menuitem value=" " label="&omnisidebarOptKeyboardShortcut.spacebar;"/>
-						<menuitem value="VK_PAGE_UP" label="&omnisidebarOptKeyboardShortcut.pageup;"/>
-						<menuitem value="VK_PAGE_DOWN" label="&omnisidebarOptKeyboardShortcut.pagedown;"/>
-						<menuitem value="VK_HOME" label="&omnisidebarOptKeyboardShortcut.home;"/>
-						<menuitem value="VK_END" label="&omnisidebarOptKeyboardShortcut.end;"/>
-						<menuitem value="VK_UP" label="&omnisidebarOptKeyboardShortcut.up;"/>
-						<menuitem value="VK_DOWN" label="&omnisidebarOptKeyboardShortcut.down;"/>
-						<menuitem value="VK_LEFT" label="&omnisidebarOptKeyboardShortcut.left;"/>
-						<menuitem value="VK_RIGHT" label="&omnisidebarOptKeyboardShortcut.right;"/>
+						<menuitem value=" " label="&OptKeyboardShortcut.spacebar;"/>
+						<menuitem value="VK_PAGE_UP" label="&OptKeyboardShortcut.pageup;"/>
+						<menuitem value="VK_PAGE_DOWN" label="&OptKeyboardShortcut.pagedown;"/>
+						<menuitem value="VK_HOME" label="&OptKeyboardShortcut.home;"/>
+						<menuitem value="VK_END" label="&OptKeyboardShortcut.end;"/>
+						<menuitem value="VK_UP" label="&OptKeyboardShortcut.up;"/>
+						<menuitem value="VK_DOWN" label="&OptKeyboardShortcut.down;"/>
+						<menuitem value="VK_LEFT" label="&OptKeyboardShortcut.left;"/>
+						<menuitem value="VK_RIGHT" label="&OptKeyboardShortcut.right;"/>
 						<menuitem value="." label="."/>
 						<menuitem value="," label=","/>
 						<menuitem value=";" label=";"/>
@@ -315,11 +378,14 @@
 					</menupopup>
 				</menulist>
 			</hbox>
-			<checkbox dependson="pref-twinSidebar,!pref-twinKeysetKeycode:none" label="&omnisidebarOptKeysetPanel.label;" preference="pref-twinKeysetPanel"/>
+			<checkbox dependson="pref-twinSidebar,!pref-twinKeysetKeycode:none"
+				label="&OptKeysetPanel.label;"
+				tooltiptext="&OptKeysetPanel.tooltip;"
+				preference="pref-twinKeysetPanel"/>
 		</groupbox>
 	</prefpane>
 	
-	<prefpane id="miscPane" label="&omnisidebarOptMisc.label;" style="&Optwindow.style;">
+	<prefpane id="miscPane" label="&OptMisc.label;" style="&Optwindow.style;">
 		<preferences>
 			<preference id="pref-fx" name="extensions.omnisidebar.fx" type="bool"/>
 			<preference id="pref-glassStyle" name="extensions.omnisidebar.glassStyle" type="bool"/>
@@ -341,26 +407,27 @@
 		<groupbox align="center">
 			<caption>
 				<checkbox id="glassCheckbox"
-					label="&omnisidebarOptglassStyle.label;" 
+					label="&OptglassStyle.label;"
+					tooltiptext="&OptglassStyle.tooltip;"
 					preference="pref-glassStyle" />
 			</caption>
 			<hbox>
-				<label value="&omnisidebarOptglassStyle.transparent;"/>
+				<label value="&OptglassStyle.transparent;"/>
 				<scale dependson="pref-glassStyle"
 					min="0"
 					max="1000"
 					increment="125"
 					pageincrement="375"
 					preference="pref-transparency"/>
-				<label value="&omnisidebarOptglassStyle.opaque;"/>
+				<label value="&OptglassStyle.opaque;"/>
 			</hbox>
 		</groupbox>
 		
 		<groupbox align="center">
-			<caption label="&omnisidebarOptgroupfeatures.label;"/>
+			<caption label="&Optgroupfeatures.label;"/>
 			<vbox align="start">
 				<hbox>
-					<label value="&omnisidebarOptshowDelay.label;"/>
+					<label value="&OptshowDelay.label;" tooltiptext="&OptshowDelay.tooltip;"/>
 					<textbox type="number"
 						size="3"
 						min="0"
@@ -368,7 +435,7 @@
 						preference="pref-showDelay"/>
 		        </hbox>
 				<hbox>
-					<label value="&omnisidebarOpthideDelay.label;"/>
+					<label value="&OpthideDelay.label;" tooltiptext="&OpthideDelay.tooltip;"/>
 					<textbox type="number"
 						size="3"
 						min="0"
@@ -376,41 +443,41 @@
 						preference="pref-hideDelay"/>
 		        </hbox>
 				<hbox>
-					<label value="&omnisidebarOptswitcherAdjust.label;"/>
+					<label value="&OptswitcherAdjust.label;" tooltiptext="&OptswitcherAdjust.tooltip;"/>
 					<textbox type="number"
 						size="2"
 						min="-2"
 						max="25"
 						preference="pref-switcherAdjust"/>
 		        </hbox>
-				<checkbox label="&omnisidebarOptkeepPrivate.label;" preference="pref-keepPrivate"/>
-				<checkbox label="&omnisidebarOptkeepLoaded.label;" preference="pref-keepLoaded"/>
+				<checkbox label="&OptkeepPrivate.label;" tooltiptext="&OptkeepPrivate.tooltip;" preference="pref-keepPrivate"/>
+				<checkbox label="&OptkeepLoaded.label;" tooltiptext="&OptkeepLoaded.tooltip;" preference="pref-keepLoaded"/>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="start">
-			<caption label="&omnisidebarOptgroupperformance.label;"/>
-			<checkbox label="&omnisidebarOptfx.label;" preference="pref-fx"/>
+			<caption label="&Optgroupperformance.label;"/>
+			<checkbox label="&Optfx.label;" tooltiptext="&Optfx.tooltip;" preference="pref-fx"/>
 		</groupbox>
 		
 		<hbox align="start">
 			<groupbox align="start">
-				<caption label="&omnisidebarOptgroupalways.label;"/>
-				<checkbox label="&addonsSidebar.label;" preference="pref-alwaysAddons"/>
-				<checkbox label="&omnisidebarDMT.label;" preference="pref-alwaysDMT"/>
-				<checkbox id="consoleCheckbox" label="&omnisidebarBrowserConsole.label;" preference="pref-alwaysConsole"/>
-				<checkbox label="&omnisidebarPageInfo.label;" preference="pref-alwaysPageInfo"/>
-				<checkbox label="&omnisidebarScratchpad.label;" preference="pref-alwaysScratchpad"/>
+				<caption label="&Optgroupalways.label;"/>
+				<checkbox label="&addonsSidebar.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysAddons"/>
+				<checkbox label="&omnisidebarDMT.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysDMT"/>
+				<checkbox id="consoleCheckbox" label="&omnisidebarBrowserConsole.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysConsole"/>
+				<checkbox label="&omnisidebarPageInfo.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysPageInfo"/>
+				<checkbox label="&omnisidebarScratchpad.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysScratchpad"/>
 			</groupbox>
 			<groupbox align="start">
-				<caption label="&omnisidebarOptforceOpen.label;"/>
-				<checkbox label="&omnisidebarOptforceOpen.toolbars;" preference="pref-forceOpenToolbars"/>
-				<checkbox label="&omnisidebarOptforceOpen.menus;" preference="pref-forceOpenMenus"/>
+				<caption label="&OptforceOpen.label;"/>
+				<checkbox label="&OptforceOpen.toolbars;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenToolbars"/>
+				<checkbox label="&OptforceOpen.menus;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenMenus"/>
 			</groupbox>
 		</hbox>
 	</prefpane>
 	
-	<prefpane id="aboutPane" label="&omnisidebarOptabout.label;" align="center" style="&Optwindow.style;">
+	<prefpane id="aboutPane" label="&Optabout.label;" align="center" style="&Optwindow.style;">
 		<hbox align="center">
 			<label flex="1" value=" "/>
 			<image id="logo"/>
@@ -419,23 +486,23 @@
 		
 		<vbox align="end">
 			<hbox>
-				<description class="closer">&omnisidebarabout.name;</description>
+				<description class="closer">&about.name;</description>
 				<description id="addonVersion" hidden="true" class="closer"></description>
 			</hbox>
-			<description>&omnisidebarabout.by;</description>
-			<description class="justify">&omnisidebarabout.desc;</description>
+			<description>&about.by;</description>
+			<description class="justify">&about.desc;</description>
 			<label	class="text-link closer"
 					tooltiptext="https://addons.mozilla.org/firefox/addon/omnisidebar/"
 					href="https://addons.mozilla.org/firefox/addon/omnisidebar/"
-					value="&omnisidebarabout.home;"/>
+					value="&about.home;"/>
 			<label	class="text-link closer"
 					tooltiptext="https://github.com/Quicksaver/OmniSidebar/issues"
 					href="https://github.com/Quicksaver/OmniSidebar/issues"
-					value="&omnisidebarabout.tech;"/>
+					value="&about.tech;"/>
 			<label	id="releaseNotesLink"
 					class="text-link closer"
 					tooltiptext="chrome://objPathString/content/whatsnew.xhtml"
-					value="&omnisidebarabout.notes;"/>
+					value="&about.notes;"/>
 		</vbox>
 	</prefpane>
 </prefwindow>

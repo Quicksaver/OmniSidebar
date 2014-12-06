@@ -5,65 +5,62 @@
 <!ENTITY omnisidebarDMT.label "Pobierania">
 <!ENTITY omnisidebarPageInfo.label "Informacje o stronie">
 <!ENTITY omnisidebarScratchpad.label "Brudnopis">
-<!ENTITY omnisidebarOptions.title "OmniSidebar - Opcje">
-<!ENTITY omnisidebarOptabout.label "Informacja">
-<!ENTITY omnisidebarButtonMain.label "Główny panel boczny">
-<!ENTITY omnisidebarButtonTwin.label "Drugi panel boczny">
-<!ENTITY omnisidebarOptMisc.label "Globalne">
-<!ENTITY omnisidebarOptgroupMain.label "Główny panel">
-<!ENTITY omnisidebarOptgroupTwin.label "Drugi panel">
-<!ENTITY omnisidebarOptgroupicons.label "Zestaw ikon przycisków:">
-<!ENTITY omnisidebarOptgroupgen.label "Wygląd">
-<!ENTITY omnisidebarOptgroupfeatures.label "Funkcje">
-<!ENTITY omnisidebarOptgroupperformance.label "Wydajność">
-<!ENTITY omnisidebarOptgroupalways.label "Zawsze otwieraj w panelu bocznym">
-<!ENTITY omnisidebarOptGoURI.label "Umieść przycisk 'Przejdź'">
-<!ENTITY omnisidebarOptsidebars.leftlabel "Umieść po lewej">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Umieść po prawej">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Włącz drugi panel boczny po przeciwnej stronie">
-<!ENTITY omnisidebarOptswitchers.label "Kliknięcie na marginesie przeglądarki powoduje otwarcie lub zamknięcie">
-<!ENTITY omnisidebarOptundock.label "Odepnij z okna przeglądarki">
-<!ENTITY omnisidebarOptautohide.label "Automatycznie chowaj panel na bok">
-<!ENTITY omnisidebarOptautoClose.label "Zamknij/Ukryj panel boczny przy utracie fokusu">
-<!ENTITY omnisidebarOptglassStyle.label "Styl przeźroczysty do wszystkich panelów bocznych">
-<!ENTITY omnisidebarOptglassStyle.opaque "Brak przezroczystości">
-<!ENTITY omnisidebarOptglassStyle.transparent "Całkowicie przeźroczyste">
-<!ENTITY omnisidebarOptfx.label "Włącz efekty przejścia">
-<!ENTITY omnisidebarOptshowDelay.label "Opóźnienie automatycznego pokazywania o (ms):">
-<!ENTITY omnisidebarOpthideDelay.label "Opóźnienie automatycznego chowania o (ms):">
-<!ENTITY omnisidebarOptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
-<!ENTITY omnisidebarOptswitcherAdjust.label "Dostosuj szerokość obszaru aktywnego marginesu (w pikselach):">
-<!ENTITY omnisidebarOptkeepLoaded.label "Zachowuj wczytaną zawartość panelu bocznego podczas jego zamykania">
-<!ENTITY omnisidebarOptforceOpen.label "Zapobiegaj zamykaniu panelu z">
-<!ENTITY omnisidebarOptforceOpen.toolbars "Przycisków na pasku narzędzi panelu">
-<!ENTITY omnisidebarOptforceOpen.menus "Menu rozwijanego">
-<!ENTITY omnisidebarOptalternatebtns.label "Inny styl przycisków">
-<!ENTITY omnisidebarOpttoolbar.label "Pasek narzędzi na panelu">
-<!ENTITY omnisidebarOpthideheadertitle.label "Ukryj tytuł otwartego panelu bocznego">
-<!ENTITY omnisidebarOpttitleButton.label "Tytuł jako menu rozwijane">
-<!ENTITY omnisidebarOpthideheaderdock.label "Ukryj przycisk przypinania">
-<!ENTITY omnisidebarOpthideheaderclose.label "Ukryj przycisk zamykania">
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Domyślny (bez zmian)">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefoksa">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Kolorowy">
-<!ENTITY omnisidebarOptKeyboardShortcut.caption "Skrót klawiszowy panelu bocznego">
-<!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
-<!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
-<!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
-<!ENTITY omnisidebarOptKeyboardShortcut.command "Command">
-<!ENTITY omnisidebarOptKeyboardShortcut.option "Option">
-<!ENTITY omnisidebarOptKeyboardShortcut.none "Brak">
-<!ENTITY omnisidebarOptKeyboardShortcut.spacebar "Spacja">
-<!ENTITY omnisidebarOptKeyboardShortcut.pageup "Page Up">
-<!ENTITY omnisidebarOptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY omnisidebarOptKeyboardShortcut.end "End">
-<!ENTITY omnisidebarOptKeyboardShortcut.home "Home">
-<!ENTITY omnisidebarOptKeyboardShortcut.left "Left">
-<!ENTITY omnisidebarOptKeyboardShortcut.up "Up">
-<!ENTITY omnisidebarOptKeyboardShortcut.right "Right">
-<!ENTITY omnisidebarOptKeyboardShortcut.down "Down">
-<!ENTITY omnisidebarabout.name "OmniSidebar">
-<!ENTITY omnisidebarabout.by "by Quicksaver">
-<!ENTITY omnisidebarabout.desc "Wszelkie informacje o tym dodatku i jego twórcy można znaleźć na stronie dodatków Mozilli. Jeśli podoba Ci się ten dodatek, proszę rozważ napisanie opinii o nim lub wysłanie niewielkiej dotacji, aby weprzeć dalszy rozwój dodatku. Zgłoszenia błędów i sugestie można wysyłać na stronie wsparcia technicznego.">
-<!ENTITY omnisidebarabout.home "Strona domowa dodatku">
-<!ENTITY omnisidebarabout.tech "Wsparcie techniczne">
+<!ENTITY Options.title "OmniSidebar - Opcje">
+<!ENTITY Optabout.label "Informacja">
+<!ENTITY OptMisc.label "Globalne">
+<!ENTITY OptgroupMain.label "Główny panel">
+<!ENTITY OptgroupTwin.label "Drugi panel">
+<!ENTITY Optcoloricons.label "Zestaw ikon przycisków:">
+<!ENTITY Optgroupgen.label "Wygląd">
+<!ENTITY Optgroupfeatures.label "Funkcje">
+<!ENTITY Optgroupperformance.label "Wydajność">
+<!ENTITY Optgroupalways.label "Zawsze otwieraj w panelu bocznym">
+<!ENTITY OptGoURI.label "Umieść przycisk 'Przejdź'">
+<!ENTITY Optsidebars.left.label "Umieść po lewej">
+<!ENTITY Optsidebars.right.label "Umieść po prawej">
+<!ENTITY Optsidebars.twin.label "Włącz drugi panel boczny po przeciwnej stronie">
+<!ENTITY Optswitchers.label "Kliknięcie na marginesie przeglądarki powoduje otwarcie lub zamknięcie">
+<!ENTITY Optundock.label "Odepnij z okna przeglądarki">
+<!ENTITY Optautohide.label "Automatycznie chowaj panel na bok">
+<!ENTITY OptautoClose.label "Zamknij/Ukryj panel boczny przy utracie fokusu">
+<!ENTITY OptglassStyle.label "Styl przeźroczysty do wszystkich panelów bocznych">
+<!ENTITY OptglassStyle.opaque "Brak przezroczystości">
+<!ENTITY OptglassStyle.transparent "Całkowicie przeźroczyste">
+<!ENTITY Optfx.label "Włącz efekty przejścia">
+<!ENTITY OptshowDelay.label "Opóźnienie automatycznego pokazywania o (ms):">
+<!ENTITY OpthideDelay.label "Opóźnienie automatycznego chowania o (ms):">
+<!ENTITY OptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
+<!ENTITY OptswitcherAdjust.label "Dostosuj szerokość obszaru aktywnego marginesu (w pikselach):">
+<!ENTITY OptkeepLoaded.label "Zachowuj wczytaną zawartość panelu bocznego podczas jego zamykania">
+<!ENTITY OptforceOpen.label "Zapobiegaj zamykaniu panelu z">
+<!ENTITY OptforceOpen.toolbars "Przycisków na pasku narzędzi panelu">
+<!ENTITY OptforceOpen.menus "Menu rozwijanego">
+<!ENTITY Optalternatebtns.label "Inny styl przycisków">
+<!ENTITY Opttoolbar.label "Pasek narzędzi na panelu">
+<!ENTITY Opthideheadertitle.label "Ukryj tytuł otwartego panelu bocznego">
+<!ENTITY OpttitleButton.label "Tytuł jako menu rozwijane">
+<!ENTITY Opthideheaderdock.label "Ukryj przycisk przypinania">
+<!ENTITY Opthideheaderclose.label "Ukryj przycisk zamykania">
+<!ENTITY Optcoloricons.firefox.label "Firefoksa">
+<!ENTITY Optcoloricons.color.label "Kolorowy">
+<!ENTITY OptKeyboardShortcut.caption "Skrót klawiszowy panelu bocznego">
+<!ENTITY OptKeyboardShortcut.control "Ctrl">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "Brak">
+<!ENTITY OptKeyboardShortcut.spacebar "Spacja">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Left">
+<!ENTITY OptKeyboardShortcut.up "Up">
+<!ENTITY OptKeyboardShortcut.right "Right">
+<!ENTITY OptKeyboardShortcut.down "Down">
+<!ENTITY about.name "OmniSidebar">
+<!ENTITY about.by "by Quicksaver">
+<!ENTITY about.desc "Wszelkie informacje o tym dodatku i jego twórcy można znaleźć na stronie dodatków Mozilli. Jeśli podoba Ci się ten dodatek, proszę rozważ napisanie opinii o nim lub wysłanie niewielkiej dotacji, aby weprzeć dalszy rozwój dodatku. Zgłoszenia błędów i sugestie można wysyłać na stronie wsparcia technicznego.">
+<!ENTITY about.home "Strona domowa dodatku">
+<!ENTITY about.tech "Wsparcie techniczne">

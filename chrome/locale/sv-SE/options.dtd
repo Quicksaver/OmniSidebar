@@ -5,66 +5,63 @@
 <!ENTITY omnisidebarDMT.label "Filhämtningar">
 <!ENTITY omnisidebarPageInfo.label "Sidinfo">
 <!ENTITY omnisidebarScratchpad.label "Anteckningsblock">
-<!ENTITY omnisidebarOptions.title "Inställningar för OmniSidebar">
-<!ENTITY omnisidebarOptabout.label "Om">
-<!ENTITY omnisidebarButtonMain.label "Huvudsidopanelen">
-<!ENTITY omnisidebarButtonTwin.label "Tvillingsidopanelen">
-<!ENTITY omnisidebarOptMisc.label "Allmänt">
-<!ENTITY omnisidebarOptgroupMain.label "Huvudsidopanelen">
-<!ENTITY omnisidebarOptgroupTwin.label "Tvillingsidopanelen">
-<!ENTITY omnisidebarOptgroupicons.label "Knappikonuppsättning:">
-<!ENTITY omnisidebarOptgroupgen.label "Utseende">
-<!ENTITY omnisidebarOptgroupfeatures.label "Funktioner">
-<!ENTITY omnisidebarOptgroupperformance.label "Prestanda">
-<!ENTITY omnisidebarOptgroupalways.label "Öppna alltid i sidopanelen">
-<!ENTITY omnisidebarOptGoURI.label "Inkludera Gå-knappen">
-<!ENTITY omnisidebarOptsidebars.leftlabel "Placera på vänster sida">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Placera på höger sida">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Aktivera tvillingsidopanelen på motsatt sida">
-<!ENTITY omnisidebarOptswitchers.label "Klicka i webbläsarens sidomarginal för att öppna eller stänga">
-<!ENTITY omnisidebarOptundock.label "Koppla loss från webbläsarfönstret">
-<!ENTITY omnisidebarOptautohide.label "Dölj automatiskt till kanten av fönstret">
-<!ENTITY omnisidebarOptautoClose.label "Stäng/Dölj sidopanelen när den förlorar fokus">
-<!ENTITY omnisidebarOptglassStyle.label "Använd en glaseffekt på alla sidopaneler">
-<!ENTITY omnisidebarOptglassStyle.opaque "Ogenomskinlig">
-<!ENTITY omnisidebarOptglassStyle.transparent "Transparent">
-<!ENTITY omnisidebarOptfx.label "Aktivera övergångseffekter">
-<!ENTITY omnisidebarOptshowDelay.label "Fördröj automatisk visning av sidopanelen med (ms):">
-<!ENTITY omnisidebarOpthideDelay.label "Fördröj automatisk döljning av sidopanelen med (ms):">
-<!ENTITY omnisidebarOptkeepPrivate.label "Behåll sidopanelens tillstånd i Privat surfning-läget">
-<!ENTITY omnisidebarOptswitcherAdjust.label "Justera bredden på det aktiva marginalområdet (px):">
-<!ENTITY omnisidebarOptkeepLoaded.label "Behåll panelen inläst när sidopanelen stängs">
-<!ENTITY omnisidebarOptforceOpen.label "Stäng inte sidopanelen från">
-<!ENTITY omnisidebarOptforceOpen.toolbars "Knappar i sidopanelens verktygsfält">
-<!ENTITY omnisidebarOptforceOpen.menus "Rullgardinsmenyer">
-<!ENTITY omnisidebarOptalternatebtns.label "Alternativt knapputseende">
-<!ENTITY omnisidebarOpttoolbar.label "Sidopanelens verktygsfält">
-<!ENTITY omnisidebarOpthideheadertitle.label "Dölj sidopanelens rubrik">
-<!ENTITY omnisidebarOpttitleButton.label "Rullgardinsmeny i sidopanelens rubrik">
-<!ENTITY omnisidebarOpthideheaderdock.label "Dölj dockningsknappen">
-<!ENTITY omnisidebarOpthideheaderclose.label "Dölj stängknappen">
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Standard (ingen ändring)">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Färgglad">
-<!ENTITY omnisidebarOptKeysetPanel.label "Öppna minipanelen istället för sidopanelen">
-<!ENTITY omnisidebarOptKeyboardShortcut.caption "Kortkommando för sidopanelen">
-<!ENTITY omnisidebarOptKeyboardShortcut.control "Ctrl">
-<!ENTITY omnisidebarOptKeyboardShortcut.shift "Skift">
-<!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
-<!ENTITY omnisidebarOptKeyboardShortcut.command "Cmd">
-<!ENTITY omnisidebarOptKeyboardShortcut.option "Alternativ">
-<!ENTITY omnisidebarOptKeyboardShortcut.none "Ingen">
-<!ENTITY omnisidebarOptKeyboardShortcut.spacebar "Mellanslag">
-<!ENTITY omnisidebarOptKeyboardShortcut.pageup "Page Up">
-<!ENTITY omnisidebarOptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY omnisidebarOptKeyboardShortcut.end "End">
-<!ENTITY omnisidebarOptKeyboardShortcut.home "Home">
-<!ENTITY omnisidebarOptKeyboardShortcut.left "Vänsterpil">
-<!ENTITY omnisidebarOptKeyboardShortcut.up "Uppåtpil">
-<!ENTITY omnisidebarOptKeyboardShortcut.right "Högerpil">
-<!ENTITY omnisidebarOptKeyboardShortcut.down "Nedåtpil">
-<!ENTITY omnisidebarabout.name "OmniSidebar">
-<!ENTITY omnisidebarabout.by "av Quicksaver">
-<!ENTITY omnisidebarabout.desc "All information om tillägget och dess utvecklare återfinns på dess Mozilla-sida. Om du tycker om tillägget, skriv gärna en uppskattande recension eller donera en skärv för att stödja dess fortsatta utveckling. Buggrapporter och förslag framförs med fördel på webbplatsen för teknisk support.">
-<!ENTITY omnisidebarabout.home "Tilläggets webbplats">
-<!ENTITY omnisidebarabout.tech "Teknisk support">
+<!ENTITY Options.title "Inställningar för OmniSidebar">
+<!ENTITY Optabout.label "Om">
+<!ENTITY OptMisc.label "Allmänt">
+<!ENTITY OptgroupMain.label "Huvudsidopanelen">
+<!ENTITY OptgroupTwin.label "Tvillingsidopanelen">
+<!ENTITY Optcoloricons.label "Knappikonuppsättning:">
+<!ENTITY Optgroupgen.label "Utseende">
+<!ENTITY Optgroupfeatures.label "Funktioner">
+<!ENTITY Optgroupperformance.label "Prestanda">
+<!ENTITY Optgroupalways.label "Öppna alltid i sidopanelen">
+<!ENTITY OptGoURI.label "Inkludera Gå-knappen">
+<!ENTITY Optsidebars.left.label "Placera på vänster sida">
+<!ENTITY Optsidebars.right.label "Placera på höger sida">
+<!ENTITY Optsidebars.twin.label "Aktivera tvillingsidopanelen på motsatt sida">
+<!ENTITY Optswitchers.label "Klicka i webbläsarens sidomarginal för att öppna eller stänga">
+<!ENTITY Optundock.label "Koppla loss från webbläsarfönstret">
+<!ENTITY Optautohide.label "Dölj automatiskt till kanten av fönstret">
+<!ENTITY OptautoClose.label "Stäng/Dölj sidopanelen när den förlorar fokus">
+<!ENTITY OptglassStyle.label "Använd en glaseffekt på alla sidopaneler">
+<!ENTITY OptglassStyle.opaque "Ogenomskinlig">
+<!ENTITY OptglassStyle.transparent "Transparent">
+<!ENTITY Optfx.label "Aktivera övergångseffekter">
+<!ENTITY OptshowDelay.label "Fördröj automatisk visning av sidopanelen med (ms):">
+<!ENTITY OpthideDelay.label "Fördröj automatisk döljning av sidopanelen med (ms):">
+<!ENTITY OptkeepPrivate.label "Behåll sidopanelens tillstånd i Privat surfning-läget">
+<!ENTITY OptswitcherAdjust.label "Justera bredden på det aktiva marginalområdet (px):">
+<!ENTITY OptkeepLoaded.label "Behåll panelen inläst när sidopanelen stängs">
+<!ENTITY OptforceOpen.label "Stäng inte sidopanelen från">
+<!ENTITY OptforceOpen.toolbars "Knappar i sidopanelens verktygsfält">
+<!ENTITY OptforceOpen.menus "Rullgardinsmenyer">
+<!ENTITY Optalternatebtns.label "Alternativt knapputseende">
+<!ENTITY Opttoolbar.label "Sidopanelens verktygsfält">
+<!ENTITY Opthideheadertitle.label "Dölj sidopanelens rubrik">
+<!ENTITY OpttitleButton.label "Rullgardinsmeny i sidopanelens rubrik">
+<!ENTITY Opthideheaderdock.label "Dölj dockningsknappen">
+<!ENTITY Opthideheaderclose.label "Dölj stängknappen">
+<!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.color.label "Färgglad">
+<!ENTITY OptKeysetPanel.label "Öppna minipanelen istället för sidopanelen">
+<!ENTITY OptKeyboardShortcut.caption "Kortkommando för sidopanelen">
+<!ENTITY OptKeyboardShortcut.control "Ctrl">
+<!ENTITY OptKeyboardShortcut.shift "Skift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Cmd">
+<!ENTITY OptKeyboardShortcut.option "Alternativ">
+<!ENTITY OptKeyboardShortcut.none "Ingen">
+<!ENTITY OptKeyboardShortcut.spacebar "Mellanslag">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Vänsterpil">
+<!ENTITY OptKeyboardShortcut.up "Uppåtpil">
+<!ENTITY OptKeyboardShortcut.right "Högerpil">
+<!ENTITY OptKeyboardShortcut.down "Nedåtpil">
+<!ENTITY about.name "OmniSidebar">
+<!ENTITY about.by "av Quicksaver">
+<!ENTITY about.desc "All information om tillägget och dess utvecklare återfinns på dess Mozilla-sida. Om du tycker om tillägget, skriv gärna en uppskattande recension eller donera en skärv för att stödja dess fortsatta utveckling. Buggrapporter och förslag framförs med fördel på webbplatsen för teknisk support.">
+<!ENTITY about.home "Tilläggets webbplats">
+<!ENTITY about.tech "Teknisk support">

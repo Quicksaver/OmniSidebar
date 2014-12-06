@@ -5,66 +5,63 @@
 <!ENTITY omnisidebarDMT.label "Transferências">
 <!ENTITY omnisidebarPageInfo.label "Informação da página">
 <!ENTITY omnisidebarScratchpad.label "Scratchpad">
-<!ENTITY omnisidebarOptions.title "Opções do Painel OmniLateral">
-<!ENTITY omnisidebarOptabout.label "Sobre">
-<!ENTITY omnisidebarButtonMain.label "Painel Lateral Principal">
-<!ENTITY omnisidebarButtonTwin.label "Painel Lateral Gémeo">
-<!ENTITY omnisidebarOptMisc.label "Geral">
-<!ENTITY omnisidebarOptgroupMain.label "Painel Lateral Principal">
-<!ENTITY omnisidebarOptgroupTwin.label "Painel Lateral Gémeo">
-<!ENTITY omnisidebarOptgroupicons.label "Tipo de ícones">
-<!ENTITY omnisidebarOptgroupgen.label "Aparência">
-<!ENTITY omnisidebarOptgroupfeatures.label "Funcionalidades">
-<!ENTITY omnisidebarOptgroupperformance.label "Desempenho">
-<!ENTITY omnisidebarOptgroupalways.label "Abrir sempre no painel lateral">
-<!ENTITY omnisidebarOptGoURI.label "Adicionar botão &quot;Ir&quot;">
-<!ENTITY omnisidebarOptsidebars.leftlabel "Colocar à esquerda">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Colocar à direita">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Ativar Painel Lateral Gémeo no lado oposto">
-<!ENTITY omnisidebarOptswitchers.label "Carregar na margem da janela para abrir ou fechar">
-<!ENTITY omnisidebarOptundock.label "Desacoplar da janela do navegador">
-<!ENTITY omnisidebarOptautohide.label "Esconder automaticamente para a margem">
-<!ENTITY omnisidebarOptautoClose.label "Fechar/Esconder o painel lateral ao realizar outra ação">
-<!ENTITY omnisidebarOptglassStyle.label "Aplicar o estilo de transparência a todos os paineis laterais">
-<!ENTITY omnisidebarOptglassStyle.opaque "Opaco">
-<!ENTITY omnisidebarOptglassStyle.transparent "Transparente">
-<!ENTITY omnisidebarOptfx.label "Ativar efeitos de transição">
-<!ENTITY omnisidebarOptshowDelay.label "Atrasar o mostrar automático do painel lateral em (msec):">
-<!ENTITY omnisidebarOpthideDelay.label "Atrasar o esconder automático do painel lateral em (msec):">
-<!ENTITY omnisidebarOptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
-<!ENTITY omnisidebarOptswitcherAdjust.label "Ajustar a largura da margem activa (pixels)">
-<!ENTITY omnisidebarOptkeepLoaded.label "Manter o painel na memória ao fechar">
-<!ENTITY omnisidebarOptforceOpen.label "Não fechar o painel lateral a partir de">
-<!ENTITY omnisidebarOptforceOpen.toolbars "Botões na barra de ferramentas do painel">
-<!ENTITY omnisidebarOptforceOpen.menus "Itens de menu">
-<!ENTITY omnisidebarOptalternatebtns.label "Estilo alternativo de botões">
-<!ENTITY omnisidebarOpttoolbar.label "Barra de ferramentas do painel lateral">
-<!ENTITY omnisidebarOpthideheadertitle.label "Esconder o título do painel">
-<!ENTITY omnisidebarOpttitleButton.label "Menu de seleção no título do painel">
-<!ENTITY omnisidebarOpthideheaderdock.label "Esconder botão de acoplagem">
-<!ENTITY omnisidebarOpthideheaderclose.label "Esconder botão de fecho">
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Sem Mudança">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Coloridos">
-<!ENTITY omnisidebarOptKeysetPanel.label "Abre o mini painel em vez do painel lateral">
-<!ENTITY omnisidebarOptKeyboardShortcut.caption "Atalho de teclado para o painel lateral">
-<!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
-<!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
-<!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
-<!ENTITY omnisidebarOptKeyboardShortcut.command "Comando">
-<!ENTITY omnisidebarOptKeyboardShortcut.option "Opção">
-<!ENTITY omnisidebarOptKeyboardShortcut.none "Nenhum">
-<!ENTITY omnisidebarOptKeyboardShortcut.spacebar "Barra de espaço">
-<!ENTITY omnisidebarOptKeyboardShortcut.pageup "Página para cima">
-<!ENTITY omnisidebarOptKeyboardShortcut.pagedown "Página para baixo">
-<!ENTITY omnisidebarOptKeyboardShortcut.end "Fim">
-<!ENTITY omnisidebarOptKeyboardShortcut.home "Início">
-<!ENTITY omnisidebarOptKeyboardShortcut.left "Seta esquerda">
-<!ENTITY omnisidebarOptKeyboardShortcut.up "Seta cima">
-<!ENTITY omnisidebarOptKeyboardShortcut.right "Seta direira">
-<!ENTITY omnisidebarOptKeyboardShortcut.down "Seta baixo">
-<!ENTITY omnisidebarabout.name "OmniSidebar">
-<!ENTITY omnisidebarabout.by "por Quicksaver">
-<!ENTITY omnisidebarabout.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
-<!ENTITY omnisidebarabout.home "Página do Extra do Mozilla">
-<!ENTITY omnisidebarabout.tech "Suporte Técnico">
+<!ENTITY Options.title "Opções do Painel OmniLateral">
+<!ENTITY Optabout.label "Sobre">
+<!ENTITY OptMisc.label "Geral">
+<!ENTITY OptgroupMain.label "Painel Lateral Principal">
+<!ENTITY OptgroupTwin.label "Painel Lateral Gémeo">
+<!ENTITY Optcoloricons.label "Tipo de ícones">
+<!ENTITY Optgroupgen.label "Aparência">
+<!ENTITY Optgroupfeatures.label "Funcionalidades">
+<!ENTITY Optgroupperformance.label "Desempenho">
+<!ENTITY Optgroupalways.label "Abrir sempre no painel lateral">
+<!ENTITY OptGoURI.label "Adicionar botão &quot;Ir&quot;">
+<!ENTITY Optsidebars.left.label "Colocar à esquerda">
+<!ENTITY Optsidebars.right.label "Colocar à direita">
+<!ENTITY Optsidebars.twin.label "Ativar Painel Lateral Gémeo no lado oposto">
+<!ENTITY Optswitchers.label "Carregar na margem da janela para abrir ou fechar">
+<!ENTITY Optundock.label "Desacoplar da janela do navegador">
+<!ENTITY Optautohide.label "Esconder automaticamente para a margem">
+<!ENTITY OptautoClose.label "Fechar/Esconder o painel lateral ao realizar outra ação">
+<!ENTITY OptglassStyle.label "Aplicar o estilo de transparência a todos os paineis laterais">
+<!ENTITY OptglassStyle.opaque "Opaco">
+<!ENTITY OptglassStyle.transparent "Transparente">
+<!ENTITY Optfx.label "Ativar efeitos de transição">
+<!ENTITY OptshowDelay.label "Atrasar o mostrar automático do painel lateral em (msec):">
+<!ENTITY OpthideDelay.label "Atrasar o esconder automático do painel lateral em (msec):">
+<!ENTITY OptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
+<!ENTITY OptswitcherAdjust.label "Ajustar a largura da margem activa (pixels)">
+<!ENTITY OptkeepLoaded.label "Manter o painel na memória ao fechar">
+<!ENTITY OptforceOpen.label "Não fechar o painel lateral a partir de">
+<!ENTITY OptforceOpen.toolbars "Botões na barra de ferramentas do painel">
+<!ENTITY OptforceOpen.menus "Itens de menu">
+<!ENTITY Optalternatebtns.label "Estilo alternativo de botões">
+<!ENTITY Opttoolbar.label "Barra de ferramentas do painel lateral">
+<!ENTITY Opthideheadertitle.label "Esconder o título do painel">
+<!ENTITY OpttitleButton.label "Menu de seleção no título do painel">
+<!ENTITY Opthideheaderdock.label "Esconder botão de acoplagem">
+<!ENTITY Opthideheaderclose.label "Esconder botão de fecho">
+<!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.color.label "Coloridos">
+<!ENTITY OptKeysetPanel.label "Abre o mini painel em vez do painel lateral">
+<!ENTITY OptKeyboardShortcut.caption "Atalho de teclado para o painel lateral">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Comando">
+<!ENTITY OptKeyboardShortcut.option "Opção">
+<!ENTITY OptKeyboardShortcut.none "Nenhum">
+<!ENTITY OptKeyboardShortcut.spacebar "Barra de espaço">
+<!ENTITY OptKeyboardShortcut.pageup "Página para cima">
+<!ENTITY OptKeyboardShortcut.pagedown "Página para baixo">
+<!ENTITY OptKeyboardShortcut.end "Fim">
+<!ENTITY OptKeyboardShortcut.home "Início">
+<!ENTITY OptKeyboardShortcut.left "Seta esquerda">
+<!ENTITY OptKeyboardShortcut.up "Seta cima">
+<!ENTITY OptKeyboardShortcut.right "Seta direira">
+<!ENTITY OptKeyboardShortcut.down "Seta baixo">
+<!ENTITY about.name "OmniSidebar">
+<!ENTITY about.by "por Quicksaver">
+<!ENTITY about.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
+<!ENTITY about.home "Página do Extra do Mozilla">
+<!ENTITY about.tech "Suporte Técnico">

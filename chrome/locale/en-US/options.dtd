@@ -1,81 +1,106 @@
 <!ENTITY Optwindow.style "width: 33em;">
+
+<!ENTITY Options.title "OmniSidebar Options">
+<!ENTITY Optabout.label "About">
+<!ENTITY OptMisc.label "Global">
+<!ENTITY OptgroupMain.label "Main Sidebar">
+<!ENTITY OptgroupTwin.label "Twin Sidebar">
+<!ENTITY Optgroupgen.label "Appearance">
+<!ENTITY Optgroupfeatures.label "Features">
+<!ENTITY Optgroupperformance.label "Performance">
+
+<!ENTITY Optsidebars.left.label "Place on the left">
+<!ENTITY Optsidebars.right.label "Place on the right">
+<!ENTITY Optsidebars.pos.tooltip "Choose on which side of the browser window to place the sidebar.">
+<!ENTITY Optsidebars.twin.label "Enable the Twin Sidebar on the opposite side">
+<!ENTITY Optsidebars.twin.tooltip "Gives you a second sidebar on the other side of the window, completely independent from the main sidebar.">
+
+<!ENTITY Optswitchers.label "Click on the browser margin to open or close">
+<!ENTITY Optswitchers.tooltip "Lets you click on the margin of the window to toggle the sidebar. This is better used in a maximized window! The clickable margin will turn blue when the mouse moves over it.">
+<!ENTITY OptautoClose.label "Close/Hide the sidebar when it loses focus">
+<!ENTITY OptautoClose.tooltip "The sidebar will be automatically closed when you click a link in it, or when you click outside of it for instance. If the sidebar is undocked and set to automatically hide, it will be immediately hidden instead of closed.">
+
+<!ENTITY Optundock.label "Undock from the browser window">
+<!ENTITY Optundock.tooltip "The sidebar will be shown popping out from the side, above the webpage, rather than next to it">
+<!ENTITY Optautohide.label "Automatically hide to the side">
+<!ENTITY Optautohide.tooltip "The sidebar will roll out of view when it's not needed. Simply move the mouse to the margin of the window and it will roll back out again.">
+
+<!ENTITY OptglassStyle.label "Apply glass style to all sidebars">
+<!ENTITY OptglassStyle.tooltip "A special style that gives all of your sidebar panels a glassed look. It can optionally be made see-through, so if for example the sidebar is undocked, you can see the web content behind it.">
+<!ENTITY OptglassStyle.opaque "Opaque">
+<!ENTITY OptglassStyle.transparent "Fully transparent">
+<!ENTITY Optfx.label "Enable transition effects">
+<!ENTITY Optfx.tooltip "You can disable the transition effects for automatically showing or hiding the sidebar if you dislike them or if they aren't very smooth for you.">
+<!ENTITY OptshowDelay.label "Delay sidebar auto-showing by (msec): ">
+<!ENTITY OptshowDelay.tooltip "Amount of time to wait between moving the mouse to the margin and showing the sidebar.">
+<!ENTITY OpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
+<!ENTITY OpthideDelay.tooltip "Amount of time to wait between moving the mouse out of the sidebar and hiding it.">
+<!ENTITY OptswitcherAdjust.label "Adjust width of the active margin area (pixels): ">
+<!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
+<!ENTITY OptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">
+<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
+<!ENTITY OptkeepLoaded.label "Keep the panel loaded when the sidebar closes">
+<!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
+
+<!ENTITY Optgroupalways.label "Always open in the sidebar">
+<!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
 <!ENTITY addonsSidebar.label "Add-ons Manager">
 <!ENTITY omnisidebarBrowserConsole.label "Browser Console">
 <!ENTITY omnisidebarDMT.label "Downloads">
 <!ENTITY omnisidebarPageInfo.label "Page Info">
 <!ENTITY omnisidebarScratchpad.label "Scratchpad">
 
-<!ENTITY omnisidebarOptions.title "OmniSidebar Options">
-<!ENTITY omnisidebarOptabout.label "About">
+<!ENTITY OptforceOpen.label "Don't close the sidebar from">
+<!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
+<!ENTITY OptforceOpen.toolbars "Buttons in the sidebar toolbar">
+<!ENTITY OptforceOpen.menus "Drop-down menus">
 
-<!ENTITY omnisidebarButtonMain.label "Main Sidebar">
-<!ENTITY omnisidebarButtonTwin.label "Twin Sidebar">
+<!ENTITY Opttoolbar.label "Sidebar Toolbar">
+<!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
+<!ENTITY OptGoURI.label "Include 'Go' button">
+<!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
 
-<!ENTITY omnisidebarOptMisc.label "Global">
-<!ENTITY omnisidebarOptgroupMain.label "Main Sidebar">
-<!ENTITY omnisidebarOptgroupTwin.label "Twin Sidebar">
-<!ENTITY omnisidebarOptgroupicons.label "Buttons Iconset:">
-<!ENTITY omnisidebarOptgroupgen.label "Appearance">
-<!ENTITY omnisidebarOptgroupfeatures.label "Features">
-<!ENTITY omnisidebarOptgroupperformance.label "Performance">
-<!ENTITY omnisidebarOptgroupalways.label "Always open in the sidebar">
+<!ENTITY Optshowheadertitle.label "Show sidebar title">
+<!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
+<!ENTITY OpttitleButton.label "Sidebar menu dropdown in title">
+<!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
+<!ENTITY Optshowheaderdock.label "Show docking button">
+<!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
+<!ENTITY Optshowheaderclose.label "Show close button">
+<!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
 
-<!ENTITY omnisidebarOptGoURI.label "Include 'Go' button">
+<!ENTITY Optcoloricons.label "Buttons Iconset:">
+<!ENTITY Optcoloricons.nochange.label "Default">
+<!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
+<!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
+<!ENTITY Optcoloricons.color.label "Colorful">
+<!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
 
-<!ENTITY omnisidebarOptsidebars.leftlabel "Place on the left">
-<!ENTITY omnisidebarOptsidebars.rightlabel "Place on the right">
-<!ENTITY omnisidebarOptsidebars.twinlabel "Enable the Twin Sidebar on the opposite side">
-<!ENTITY omnisidebarOptswitchers.label "Click on the browser margin to open or close">
-<!ENTITY omnisidebarOptundock.label "Undock from the browser window">
-<!ENTITY omnisidebarOptautohide.label "Automatically hide to the side">
-<!ENTITY omnisidebarOptautoClose.label "Close/Hide the sidebar when it loses focus">
+<!ENTITY OptKeysetPanel.label "Open the mini panel instead of the sidebar">
+<!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
+<!ENTITY OptKeyboardShortcut.caption "Sidebar Keyboard Shortcut">
+<!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "None">
+<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Left">
+<!ENTITY OptKeyboardShortcut.up "Up">
+<!ENTITY OptKeyboardShortcut.right "Right">
+<!ENTITY OptKeyboardShortcut.down "Down">
 
-<!ENTITY omnisidebarOptglassStyle.label "Apply glass style to all sidebars">
-<!ENTITY omnisidebarOptglassStyle.opaque "Opaque">
-<!ENTITY omnisidebarOptglassStyle.transparent "Fully transparent">
-<!ENTITY omnisidebarOptfx.label "Enable transition effects">
-<!ENTITY omnisidebarOptshowDelay.label "Delay sidebar auto-showing by (msec): ">
-<!ENTITY omnisidebarOpthideDelay.label "Delay sidebar auto-hiding by (msec): ">
-<!ENTITY omnisidebarOptkeepPrivate.label "Keep sidebar state in Private Browsing Mode">
-<!ENTITY omnisidebarOptswitcherAdjust.label "Adjust width of the active margin area (pixels): ">
-<!ENTITY omnisidebarOptkeepLoaded.label "Keep the panel loaded when the sidebar closes">
-
-<!ENTITY omnisidebarOptforceOpen.label "Don't close the sidebar from">
-<!ENTITY omnisidebarOptforceOpen.toolbars "Buttons in the sidebar toolbar">
-<!ENTITY omnisidebarOptforceOpen.menus "Drop-down menus">
-
-<!ENTITY omnisidebarOpttoolbar.label "Sidebar Toolbar">
-<!ENTITY omnisidebarOptshowheadertitle.label "Show sidebar title">
-<!ENTITY omnisidebarOpttitleButton.label "Sidebar menu dropdown in title">
-<!ENTITY omnisidebarOptshowheaderdock.label "Show docking button">
-<!ENTITY omnisidebarOptshowheaderclose.label "Show close button">
-
-<!ENTITY omnisidebarOptcoloricons.nochangelabel "Default (no change)">
-<!ENTITY omnisidebarOptcoloricons.ff4label "Firefox">
-<!ENTITY omnisidebarOptcoloricons.colorlabel "Colorful">
-
-<!ENTITY omnisidebarOptKeysetPanel.label "Open the mini panel instead of the sidebar">
-<!ENTITY omnisidebarOptKeyboardShortcut.caption "Sidebar Keyboard Shortcut">
-<!ENTITY omnisidebarOptKeyboardShortcut.control "Control">
-<!ENTITY omnisidebarOptKeyboardShortcut.shift "Shift">
-<!ENTITY omnisidebarOptKeyboardShortcut.alt "Alt">
-<!ENTITY omnisidebarOptKeyboardShortcut.command "Command">
-<!ENTITY omnisidebarOptKeyboardShortcut.option "Option">
-<!ENTITY omnisidebarOptKeyboardShortcut.none "None">
-<!ENTITY omnisidebarOptKeyboardShortcut.spacebar "Spacebar">
-<!ENTITY omnisidebarOptKeyboardShortcut.pageup "Page Up">
-<!ENTITY omnisidebarOptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY omnisidebarOptKeyboardShortcut.end "End">
-<!ENTITY omnisidebarOptKeyboardShortcut.home "Home">
-<!ENTITY omnisidebarOptKeyboardShortcut.left "Left">
-<!ENTITY omnisidebarOptKeyboardShortcut.up "Up">
-<!ENTITY omnisidebarOptKeyboardShortcut.right "Right">
-<!ENTITY omnisidebarOptKeyboardShortcut.down "Down">
-
-<!ENTITY omnisidebarabout.name "OmniSidebar">
-<!ENTITY omnisidebarabout.by "by Quicksaver">
-<!ENTITY omnisidebarabout.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
-<!ENTITY omnisidebarabout.home "Add-on Homepage">
-<!ENTITY omnisidebarabout.tech "Technical Support">
-<!ENTITY omnisidebarabout.notes "Release Notes">
+<!ENTITY about.name "OmniSidebar">
+<!ENTITY about.by "by Quicksaver">
+<!ENTITY about.desc "All information about the add-on and its developer can be found in its Mozilla Add-ons Homepage. If you liked the add-on, please consider leaving there a nice review or a small contribution to help support its continued development. Bug reports and suggestions can be made in the technical support webpage.">
+<!ENTITY about.home "Add-on Homepage">
+<!ENTITY about.tech "Technical Support">
+<!ENTITY about.notes "Release Notes">
 
