@@ -1,4 +1,4 @@
-Modules.VERSION = '1.3.0';
+Modules.VERSION = '1.3.1';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -125,7 +125,7 @@ this.populatePanel = function(miniPanel) {
 		twinTriggers.panel = miniPanel;
 	}
 	
-	if(!bar.toolbar.collapsed) {
+	if(!bar.toolbar.collapsed && typeof('toolbarHasButtons') != 'undefined' && toolbarHasButtons(bar.toolbar)) {
 		// Don't let the sidebar header jump around with this change
 		bar.stack.style.height = bar.stack.clientHeight+'px';
 		bar.stack.style.width = bar.stack.clientWidth+'px';
@@ -172,7 +172,7 @@ this.emptyPanel = function(miniPanel) {
 	
 	delete twinTriggers.panel;
 	
-	if(!bar.toolbar.collapsed && toolbar._originalParent) {
+	if(toolbar._originalParent) {
 		bar.stack.style.height = '';
 		bar.stack.style.width = '';
 		
