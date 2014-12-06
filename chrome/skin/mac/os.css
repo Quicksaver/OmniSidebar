@@ -5,7 +5,7 @@
 		display: none;
 	}
 	
-	#nav-bar #nav-bar-customization-target > .osb-adequate-size > .toolbarbutton-icon { margin: 0; }
+	#nav-bar #nav-bar-customization-target .osb-adequate-size > .toolbarbutton-icon { margin: 0; }
 	
 	.sidebar-title[TitleButton]:hover,
 	.sidebar-title[TitleButton][active] {

@@ -46,7 +46,7 @@
 		}
 	}
 	
-	#nav-bar #nav-bar-customization-target > .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
+	#nav-bar #nav-bar-customization-target .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
 	
 	/* fix the look of the arrowscrollbuttons a little */
 	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
