@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.0';
+Modules.VERSION = '1.0.1';
 
 this.__defineGetter__('puzzleBars', function() { return window.puzzleBars; });
 this.__defineGetter__('lateralBar', function() { return puzzleBars && puzzleBars.lateralBar; });
@@ -48,9 +48,11 @@ this.pztFixer = function(loaded) {
 		delete moveRightBy.pztLateralBar;
 		Timers.cancel('pztRedoWidthsLater');
 		
-		Prefs.unlisten('lateral_bar', pztRedoWidths);
-		Prefs.unlisten('lateral_placement', pztRedoWidths);
-		Prefs.unlisten('lateral_autohide', pztRedoWidths);
+		if(Prefs._prefObjects['lateral_bar']) {
+			Prefs.unlisten('lateral_bar', pztRedoWidths);
+			Prefs.unlisten('lateral_placement', pztRedoWidths);
+			Prefs.unlisten('lateral_autohide', pztRedoWidths);
+		}
 		Listeners.remove(window, 'LoadedPuzzleBar', pztRedoIfLateral);
 		Listeners.remove(window, 'UnloadedPuzzleBar', pztRedoIfLateral);
 		Listeners.remove(window, 'ToggledPuzzleBar', pztRedoIfLateral);
