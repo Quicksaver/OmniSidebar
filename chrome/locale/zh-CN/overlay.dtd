@@ -19,9 +19,6 @@
 <!ENTITY BlankSidebar.label "打开一个侧栏">
 <!ENTITY URISidebar.tooltip "输入要在侧栏中载入的地址">
 <!ENTITY URISidebar.buttonLabel "转到">
-<!ENTITY consoleSidebar.label "错误控制台">
-<!ENTITY consoleSidebar.tooltip "在侧栏打开错误控制台">
-<!ENTITY consoleSidebar.accesskey "E">
 <!ENTITY browserConsole.label "浏览器控制台">
 <!ENTITY browserConsole.tooltip "在侧栏打开浏览器控制台">
 <!ENTITY browserConsole.accesskey "C">

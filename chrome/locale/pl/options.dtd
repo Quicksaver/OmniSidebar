@@ -1,49 +1,75 @@
 <!ENTITY Optwindow.style "width: 38.833em;">
-<!ENTITY addonsSidebar.label "Dodatki">
-<!ENTITY omnisidebarConsole.label "Konsola błędów">
-<!ENTITY omnisidebarBrowserConsole.label "Konsola przeglądarki">
-<!ENTITY omnisidebarDMT.label "Pobierania">
-<!ENTITY omnisidebarPageInfo.label "Informacje o stronie">
-<!ENTITY omnisidebarScratchpad.label "Brudnopis">
 <!ENTITY Options.title "OmniSidebar - Opcje">
 <!ENTITY Optabout.label "Informacja">
 <!ENTITY OptMisc.label "Globalne">
 <!ENTITY OptgroupMain.label "Główny panel">
 <!ENTITY OptgroupTwin.label "Drugi panel">
-<!ENTITY Optcoloricons.label "Zestaw ikon przycisków:">
 <!ENTITY Optgroupgen.label "Wygląd">
 <!ENTITY Optgroupfeatures.label "Funkcje">
 <!ENTITY Optgroupperformance.label "Wydajność">
-<!ENTITY Optgroupalways.label "Zawsze otwieraj w panelu bocznym">
-<!ENTITY OptGoURI.label "Umieść przycisk 'Przejdź'">
 <!ENTITY Optsidebars.left.label "Umieść po lewej">
 <!ENTITY Optsidebars.right.label "Umieść po prawej">
+<!ENTITY Optsidebars.pos.tooltip "Choose on which side of the browser window to place the sidebar.">
 <!ENTITY Optsidebars.twin.label "Włącz drugi panel boczny po przeciwnej stronie">
+<!ENTITY Optsidebars.twin.tooltip "Gives you a second sidebar on the other side of the window, completely independent from the main sidebar.">
 <!ENTITY Optswitchers.label "Kliknięcie na marginesie przeglądarki powoduje otwarcie lub zamknięcie">
-<!ENTITY Optundock.label "Odepnij z okna przeglądarki">
-<!ENTITY Optautohide.label "Automatycznie chowaj panel na bok">
+<!ENTITY Optswitchers.tooltip "Lets you click on the margin of the window to toggle the sidebar. This is better used in a maximized window! The clickable margin will turn blue when the mouse moves over it.">
 <!ENTITY OptautoClose.label "Zamknij/Ukryj panel boczny przy utracie fokusu">
+<!ENTITY OptautoClose.tooltip "The sidebar will be automatically closed when you click a link in it, or when you click outside of it for instance. If the sidebar is undocked and set to automatically hide, it will be immediately hidden instead of closed.">
+<!ENTITY Optundock.label "Odepnij z okna przeglądarki">
+<!ENTITY Optundock.tooltip "The sidebar will be shown popping out from the side, above the webpage, rather than next to it">
+<!ENTITY Optautohide.label "Automatycznie chowaj panel na bok">
+<!ENTITY Optautohide.tooltip "The sidebar will roll out of view when it's not needed. Simply move the mouse to the margin of the window and it will roll back out again.">
 <!ENTITY OptglassStyle.label "Styl przeźroczysty do wszystkich panelów bocznych">
+<!ENTITY OptglassStyle.tooltip "A special style that gives all of your sidebar panels a glassed look. It can optionally be made see-through, so if for example the sidebar is undocked, you can see the web content behind it.">
 <!ENTITY OptglassStyle.opaque "Brak przezroczystości">
 <!ENTITY OptglassStyle.transparent "Całkowicie przeźroczyste">
 <!ENTITY Optfx.label "Włącz efekty przejścia">
+<!ENTITY Optfx.tooltip "You can disable the transition effects for automatically showing or hiding the sidebar if you dislike them or if they aren't very smooth for you.">
 <!ENTITY OptshowDelay.label "Opóźnienie automatycznego pokazywania o (ms):">
+<!ENTITY OptshowDelay.tooltip "Amount of time to wait between moving the mouse to the margin and showing the sidebar.">
 <!ENTITY OpthideDelay.label "Opóźnienie automatycznego chowania o (ms):">
-<!ENTITY OptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
+<!ENTITY OpthideDelay.tooltip "Amount of time to wait between moving the mouse out of the sidebar and hiding it.">
 <!ENTITY OptswitcherAdjust.label "Dostosuj szerokość obszaru aktywnego marginesu (w pikselach):">
+<!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
+<!ENTITY OptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
+<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
 <!ENTITY OptkeepLoaded.label "Zachowuj wczytaną zawartość panelu bocznego podczas jego zamykania">
+<!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
+<!ENTITY Optgroupalways.label "Zawsze otwieraj w panelu bocznym">
+<!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
+<!ENTITY addonsSidebar.label "Dodatki">
+<!ENTITY omnisidebarBrowserConsole.label "Konsola przeglądarki">
+<!ENTITY omnisidebarDMT.label "Pobierania">
+<!ENTITY omnisidebarPageInfo.label "Informacje o stronie">
+<!ENTITY omnisidebarScratchpad.label "Brudnopis">
 <!ENTITY OptforceOpen.label "Zapobiegaj zamykaniu panelu z">
+<!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
 <!ENTITY OptforceOpen.toolbars "Przycisków na pasku narzędzi panelu">
 <!ENTITY OptforceOpen.menus "Menu rozwijanego">
-<!ENTITY Optalternatebtns.label "Inny styl przycisków">
 <!ENTITY Opttoolbar.label "Pasek narzędzi na panelu">
-<!ENTITY Opthideheadertitle.label "Ukryj tytuł otwartego panelu bocznego">
+<!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
+<!ENTITY OptGoURI.label "Umieść przycisk 'Przejdź'">
+<!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
+<!ENTITY Optshowheadertitle.label "Show sidebar title">
+<!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
 <!ENTITY OpttitleButton.label "Tytuł jako menu rozwijane">
-<!ENTITY Opthideheaderdock.label "Ukryj przycisk przypinania">
-<!ENTITY Opthideheaderclose.label "Ukryj przycisk zamykania">
+<!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
+<!ENTITY Optshowheaderdock.label "Show docking button">
+<!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
+<!ENTITY Optshowheaderclose.label "Show close button">
+<!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
+<!ENTITY Optcoloricons.label "Zestaw ikon przycisków:">
+<!ENTITY Optcoloricons.nochange.label "Default">
+<!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
 <!ENTITY Optcoloricons.firefox.label "Firefoksa">
+<!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
 <!ENTITY Optcoloricons.color.label "Kolorowy">
+<!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
+<!ENTITY OptKeysetPanel.label "Open the mini panel instead of the sidebar">
+<!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
 <!ENTITY OptKeyboardShortcut.caption "Skrót klawiszowy panelu bocznego">
+<!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -64,3 +90,4 @@
 <!ENTITY about.desc "Wszelkie informacje o tym dodatku i jego twórcy można znaleźć na stronie dodatków Mozilli. Jeśli podoba Ci się ten dodatek, proszę rozważ napisanie opinii o nim lub wysłanie niewielkiej dotacji, aby weprzeć dalszy rozwój dodatku. Zgłoszenia błędów i sugestie można wysyłać na stronie wsparcia technicznego.">
 <!ENTITY about.home "Strona domowa dodatku">
 <!ENTITY about.tech "Wsparcie techniczne">
+<!ENTITY about.notes "Release Notes">

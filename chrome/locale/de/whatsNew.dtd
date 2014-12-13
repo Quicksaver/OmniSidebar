@@ -1,0 +1,24 @@
+<!ENTITY whatsNew.title "OmniSidebar - Versionsinformationen">
+<!ENTITY whatsNew.name "OmniSidebar">
+<!ENTITY whatsNew.version "Version {v}">
+<!ENTITY whatsNew.versionDivider " - ">
+<!ENTITY whatsNew.uptodate "auf dem neuen Stand, herzlichen Glückwunsch!">
+<!ENTITY whatsNew.needsupdate "Update verfügbar!">
+<!ENTITY whatsNew.description "Lesen Sie die Versionsinformationen und bekannten Probleme für diese Version weiter unten. Lassen Sie mich jegliche Probleme wissen, auf die Sie stoßen, oder teilen Sie mir Vorschläge für zukünftige Versionen mit.">
+<!ENTITY whatsNew.message "Weitere Informationen über dieses Add-on sind auf der Homepage von Mozilla Add-ons verfügbar. Falls Ihnen das Add-on gefällt, so denken Sie bitte darüber nach, ob Sie nicht eine gute Bewertung schreiben wollen, oder unterstützen Sie die weitere Entwicklung durch eine kleine Spende. Egal wie klein, der Entwickler ist dankbar für jede Unterstützung.">
+<!ENTITY whatsNew.allVersions "Alle Versionsinformationen vergangener Veröffentlichungen anzeigen">
+<!ENTITY whatsNew.options "Add-on-Einstellungen">
+<!ENTITY whatsNew.notifyOnUpdates "Diesen Tab beim nächsten Update anzeigen">
+<!ENTITY whatsNew.information "Weitere Informationen">
+<!ENTITY whatsNew.home "Add-on-Homepage">
+<!ENTITY whatsNew.fullchangelog "Vollständige Liste mit Änderungen">
+<!ENTITY whatsNew.problems "Haben Sie Probleme?">
+<!ENTITY whatsNew.tech "Legen Sie einen Problembericht auf der Hilfeseite an">
+<!ENTITY whatsNew.email "Oder senden Sie mir eine E-Mail darüber">
+<!ENTITY whatsNew.author "Mehr vom Entwickler">
+<!ENTITY whatsNew.trymore "Schauen Sie sich eins meiner anderen Add-ons für mehr Komfort mit Firefox an.">
+<!ENTITY whatsNew.profile "Besuchen Sie dazu mein Profil">
+<!ENTITY whatsNew.share "Teilen!">
+<!ENTITY whatsNew.friends "Seien Sie nicht die einzige Person mit einem tollen Browser. Lassen Sie Ihre Freunde davon wissen!">
+<!ENTITY whatsNew.moreshare "Weitere Dienste…">
+<!ENTITY whatsNew.tryit "Probiere dieses Add-on, welche das Beste aus deiner Sidebar herausholt: OmniSidebar!">

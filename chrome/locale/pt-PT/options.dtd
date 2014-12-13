@@ -1,50 +1,75 @@
 <!ENTITY Optwindow.style "width: 38.167em;">
-<!ENTITY addonsSidebar.label "Gestor de Extras">
-<!ENTITY omnisidebarConsole.label "Consola de Erros">
-<!ENTITY omnisidebarBrowserConsole.label "Consola do Navegador">
-<!ENTITY omnisidebarDMT.label "Transferências">
-<!ENTITY omnisidebarPageInfo.label "Informação da página">
-<!ENTITY omnisidebarScratchpad.label "Scratchpad">
 <!ENTITY Options.title "Opções do Painel OmniLateral">
 <!ENTITY Optabout.label "Sobre">
 <!ENTITY OptMisc.label "Geral">
 <!ENTITY OptgroupMain.label "Painel Lateral Principal">
 <!ENTITY OptgroupTwin.label "Painel Lateral Gémeo">
-<!ENTITY Optcoloricons.label "Tipo de ícones">
 <!ENTITY Optgroupgen.label "Aparência">
 <!ENTITY Optgroupfeatures.label "Funcionalidades">
 <!ENTITY Optgroupperformance.label "Desempenho">
-<!ENTITY Optgroupalways.label "Abrir sempre no painel lateral">
-<!ENTITY OptGoURI.label "Adicionar botão &quot;Ir&quot;">
 <!ENTITY Optsidebars.left.label "Colocar à esquerda">
 <!ENTITY Optsidebars.right.label "Colocar à direita">
+<!ENTITY Optsidebars.pos.tooltip "Escolhe em que lado da janela do navegador mostrar o painel lateral.">
 <!ENTITY Optsidebars.twin.label "Ativar Painel Lateral Gémeo no lado oposto">
+<!ENTITY Optsidebars.twin.tooltip "Coloca um segundo painel lateral no lado oposto da janela, completamente independente do painel lateral principal.">
 <!ENTITY Optswitchers.label "Carregar na margem da janela para abrir ou fechar">
-<!ENTITY Optundock.label "Desacoplar da janela do navegador">
-<!ENTITY Optautohide.label "Esconder automaticamente para a margem">
+<!ENTITY Optswitchers.tooltip "Permite-te clicar na margem da janela para accionar o painel lateral. Esta funcionaldade é melhor usada em janelas maximizadas! A margem activa torna-se azul ao mover o cursor sobre ela.">
 <!ENTITY OptautoClose.label "Fechar/Esconder o painel lateral ao realizar outra ação">
+<!ENTITY OptautoClose.tooltip "O painel lateral fecha-se automaticamente, por exemplo, ao clicar num link dentro dele, ou ao clicar fora dele. Se o painel lateral estiver desacoplado e a esconder-se automaticamente, será imediatamente escondido em vez de fechado.">
+<!ENTITY Optundock.label "Desacoplar da janela do navegador">
+<!ENTITY Optundock.tooltip "O painel lateral apresenta-se da margem, sobre a página web, em vez de ao lado dela.">
+<!ENTITY Optautohide.label "Esconder automaticamente para a margem">
+<!ENTITY Optautohide.tooltip "O painel lateral desliza para fora de vista quando não é necessário. Basta mover o cursor para a margem da janela para o voltar a mostrar.">
 <!ENTITY OptglassStyle.label "Aplicar o estilo de transparência a todos os paineis laterais">
+<!ENTITY OptglassStyle.tooltip "Um estilo especial que dá um aspecto vidrado ao painel lateral. Pode opcionalmente ser transparente, de modo a mostrar o conteúdo web debaixo dele quando está desacoplado por exemplo.">
 <!ENTITY OptglassStyle.opaque "Opaco">
 <!ENTITY OptglassStyle.transparent "Transparente">
 <!ENTITY Optfx.label "Ativar efeitos de transição">
+<!ENTITY Optfx.tooltip "Podes desactivar os efeitos de transição ao mostrar ou esconder o painel lateral se não gostar deles ou se não funcionaremm nas melhores condições.">
 <!ENTITY OptshowDelay.label "Atrasar o mostrar automático do painel lateral em (msec):">
+<!ENTITY OptshowDelay.tooltip "Tempo a esperar entre mover o cursor para a margem e mostrar o painel lateral.">
 <!ENTITY OpthideDelay.label "Atrasar o esconder automático do painel lateral em (msec):">
-<!ENTITY OptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
+<!ENTITY OpthideDelay.tooltip "Tempo a esperar entre mover o cursor para fora do painel lateral e escondê-lo.">
 <!ENTITY OptswitcherAdjust.label "Ajustar a largura da margem activa (pixels)">
+<!ENTITY OptswitcherAdjust.tooltip "A área da margem reactiva aos cliques e ao movimento do cursor pode ser aumentada.">
+<!ENTITY OptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
+<!ENTITY OptkeepPrivate.tooltip "Ao entrar ou sair do Modo Privado (MP), o painel lateral permanecerá aberto com o mesmo painel carregado. Se isto estiver desactivado, o painel lateral será sempre fechado ao entrar no MP, e retornará sempre ao painel aberto anteriormente (antes de entrar no MP) ao sair desse modo. Esta preferência é necessária caso o MP seja activado com o iniciar do navegador e queiras que o estado do painel lateral seja lembrado entre sessões.">
 <!ENTITY OptkeepLoaded.label "Manter o painel na memória ao fechar">
+<!ENTITY OptkeepLoaded.tooltip "Ao fechar o painel lateral, este mantém-se carregado. Por exemplo, assim a sua posição actual ou qualquer conteúdo de caixas de texto serão lembrados ao reabri-lo.">
+<!ENTITY Optgroupalways.label "Abrir sempre no painel lateral">
+<!ENTITY Optgroupalways.tooltip "Estas janelas serão sempre abertos no painel lateral quando activados pelos seus próprios botões ou atalhos de teclado.">
+<!ENTITY addonsSidebar.label "Gestor de Extras">
+<!ENTITY omnisidebarBrowserConsole.label "Consola do Navegador">
+<!ENTITY omnisidebarDMT.label "Transferências">
+<!ENTITY omnisidebarPageInfo.label "Informação da página">
+<!ENTITY omnisidebarScratchpad.label "Scratchpad">
 <!ENTITY OptforceOpen.label "Não fechar o painel lateral a partir de">
+<!ENTITY OptforceOpen.tooltip "Ao clicar num destes elementos para um painel lateral que já esteja carregado, este mantém-se aberto em vez de ser fechado.">
 <!ENTITY OptforceOpen.toolbars "Botões na barra de ferramentas do painel">
 <!ENTITY OptforceOpen.menus "Itens de menu">
-<!ENTITY Optalternatebtns.label "Estilo alternativo de botões">
 <!ENTITY Opttoolbar.label "Barra de ferramentas do painel lateral">
-<!ENTITY Opthideheadertitle.label "Esconder o título do painel">
+<!ENTITY Opttoolbar.tooltip "Insere uma barra de ferramentas customizável no topo do painel lateral, ao lado do seu título.">
+<!ENTITY OptGoURI.label "Adicionar botão 'Ir'">
+<!ENTITY OptGoURI.tooltip "O botão 'Ir' permite-lhe carregar no painel lateral um endereço about: ou chrome:// específico; não é possível carregar páginas remotas!">
+<!ENTITY Optshowheadertitle.label "Mostrar título do painel lateral">
+<!ENTITY Optshowheadertitle.tooltip "O nome do painel lateral actual é mostrado no seu topo.">
 <!ENTITY OpttitleButton.label "Menu de seleção no título do painel">
-<!ENTITY Opthideheaderdock.label "Esconder botão de acoplagem">
-<!ENTITY Opthideheaderclose.label "Esconder botão de fecho">
+<!ENTITY OpttitleButton.tooltip "Clica no título do painel lateral para abrir um menu com todas as opções de paineis disponíveis que podem ser carregados.">
+<!ENTITY Optshowheaderdock.label "Mostrar botão de acoplar">
+<!ENTITY Optshowheaderdock.tooltip "Mostra um botão no topo do painel lateral para o acoplar ou desacoplar rapidamente.">
+<!ENTITY Optshowheaderclose.label "Mostrar botão de fecho">
+<!ENTITY Optshowheaderclose.tooltip "Mostra um botão no topo do painel lateral para o fechar rapidamente.">
+<!ENTITY Optcoloricons.label "Tipo de ícones">
+<!ENTITY Optcoloricons.nochange.label "Sem alteraçao">
+<!ENTITY Optcoloricons.nochange.tooltip "Não são feitas alterações aos ícones dos botões da barra de ferramentas.">
 <!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.firefox.tooltip "Os ícones na barra de ferramentas são alterados para encaixarem no estilo nativo do firefox sempre que possível.">
 <!ENTITY Optcoloricons.color.label "Coloridos">
+<!ENTITY Optcoloricons.color.tooltip "Os ícones na barra de ferramentas são alterados para as suas versões coloridas sempre que possível.">
 <!ENTITY OptKeysetPanel.label "Abre o mini painel em vez do painel lateral">
+<!ENTITY OptKeysetPanel.tooltip "O atalho de teclado abre o mini painel com várias opções de acção disponíveis, em vez de abrir ou fechar o painel lateral directamente.">
 <!ENTITY OptKeyboardShortcut.caption "Atalho de teclado para o painel lateral">
+<!ENTITY OptKeyboardShortcut.tooltip "O atalho de teclado é o modo mais rápido de fechar ou voltar a abrir o painel lateral.">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -65,3 +90,4 @@
 <!ENTITY about.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
 <!ENTITY about.home "Página do Extra do Mozilla">
 <!ENTITY about.tech "Suporte Técnico">
+<!ENTITY about.notes "Notas de Lançamento">

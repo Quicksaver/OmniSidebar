@@ -75,5 +75,13 @@
 				<em:translator>http://t.qq.com/HeartBlade</em:translator>
 			</Description>
 		</em:localized>
+		<em:localized>
+			<Description>
+				<em:locale>zh-TW</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>僅僅一個手勢就能檢視你的書籤。將側邊欄移至螢幕的另一側。單擊標題即可開啟不同的側邊欄。除此之外，更讓你的側邊欄易於使用！</em:description>
+				<em:translator>Wcw5504 - Babelzilla</em:translator>
+			</Description>
+		</em:localized>
 	</Description>
 </RDF>

@@ -19,9 +19,6 @@
 <!ENTITY BlankSidebar.label "Ouvrir un panneau latéral">
 <!ENTITY URISidebar.tooltip "Indiquez un emplacement à ouvrir dans le panneau latéral">
 <!ENTITY URISidebar.buttonLabel "Go">
-<!ENTITY consoleSidebar.label "Console d'erreurs">
-<!ENTITY consoleSidebar.tooltip "Ouvrir la console d'erreurs dans le panneau latéral">
-<!ENTITY consoleSidebar.accesskey "C">
 <!ENTITY browserConsole.label "Console du navigateur">
 <!ENTITY browserConsole.tooltip "Ouvre la console dans le panneau latéral">
 <!ENTITY browserConsole.accesskey "C">

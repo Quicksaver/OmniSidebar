@@ -1,50 +1,75 @@
 <!ENTITY Optwindow.style "width: 26.25em;">
-<!ENTITY addonsSidebar.label "附加组件管理器">
-<!ENTITY omnisidebarConsole.label "错误控制台">
-<!ENTITY omnisidebarBrowserConsole.label "浏览器控制台">
-<!ENTITY omnisidebarDMT.label "下载">
-<!ENTITY omnisidebarPageInfo.label "页面信息">
-<!ENTITY omnisidebarScratchpad.label "代码片段速记器">
 <!ENTITY Options.title "OmniSidebar 选项">
 <!ENTITY Optabout.label "关于">
 <!ENTITY OptMisc.label "全局">
 <!ENTITY OptgroupMain.label "主侧栏">
 <!ENTITY OptgroupTwin.label "副侧栏">
-<!ENTITY Optcoloricons.label "按钮图标集:">
 <!ENTITY Optgroupgen.label "外观">
 <!ENTITY Optgroupfeatures.label "特性">
 <!ENTITY Optgroupperformance.label "性能">
-<!ENTITY Optgroupalways.label "总是在侧栏中打开">
-<!ENTITY OptGoURI.label "包含'前往'按钮">
 <!ENTITY Optsidebars.left.label "放于左侧">
 <!ENTITY Optsidebars.right.label "放于右侧">
+<!ENTITY Optsidebars.pos.tooltip "Choose on which side of the browser window to place the sidebar.">
 <!ENTITY Optsidebars.twin.label "在另一侧启用副侧栏">
+<!ENTITY Optsidebars.twin.tooltip "Gives you a second sidebar on the other side of the window, completely independent from the main sidebar.">
 <!ENTITY Optswitchers.label "点击浏览器边缘打开或关闭">
-<!ENTITY Optundock.label "从浏览器窗口分离">
-<!ENTITY Optautohide.label "自动隐藏到边缘">
+<!ENTITY Optswitchers.tooltip "Lets you click on the margin of the window to toggle the sidebar. This is better used in a maximized window! The clickable margin will turn blue when the mouse moves over it.">
 <!ENTITY OptautoClose.label "失去焦点时关闭/隐藏侧栏">
+<!ENTITY OptautoClose.tooltip "The sidebar will be automatically closed when you click a link in it, or when you click outside of it for instance. If the sidebar is undocked and set to automatically hide, it will be immediately hidden instead of closed.">
+<!ENTITY Optundock.label "从浏览器窗口分离">
+<!ENTITY Optundock.tooltip "The sidebar will be shown popping out from the side, above the webpage, rather than next to it">
+<!ENTITY Optautohide.label "自动隐藏到边缘">
+<!ENTITY Optautohide.tooltip "The sidebar will roll out of view when it's not needed. Simply move the mouse to the margin of the window and it will roll back out again.">
 <!ENTITY OptglassStyle.label "对所有侧栏应用玻璃样式">
+<!ENTITY OptglassStyle.tooltip "A special style that gives all of your sidebar panels a glassed look. It can optionally be made see-through, so if for example the sidebar is undocked, you can see the web content behind it.">
 <!ENTITY OptglassStyle.opaque "不透明">
 <!ENTITY OptglassStyle.transparent "完全透明">
 <!ENTITY Optfx.label "启用过渡效果">
+<!ENTITY Optfx.tooltip "You can disable the transition effects for automatically showing or hiding the sidebar if you dislike them or if they aren't very smooth for you.">
 <!ENTITY OptshowDelay.label "侧栏自动显示延时(毫秒):">
+<!ENTITY OptshowDelay.tooltip "Amount of time to wait between moving the mouse to the margin and showing the sidebar.">
 <!ENTITY OpthideDelay.label "侧栏自动隐藏延时(毫秒):">
-<!ENTITY OptkeepPrivate.label "隐私浏览模式沿用侧栏状态">
+<!ENTITY OpthideDelay.tooltip "Amount of time to wait between moving the mouse out of the sidebar and hiding it.">
 <!ENTITY OptswitcherAdjust.label "调整激活区域宽度(像素):">
+<!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
+<!ENTITY OptkeepPrivate.label "隐私浏览模式沿用侧栏状态">
+<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
 <!ENTITY OptkeepLoaded.label "关闭侧栏后仍保持面板载入状态">
+<!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
+<!ENTITY Optgroupalways.label "总是在侧栏中打开">
+<!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
+<!ENTITY addonsSidebar.label "附加组件管理器">
+<!ENTITY omnisidebarBrowserConsole.label "浏览器控制台">
+<!ENTITY omnisidebarDMT.label "下载">
+<!ENTITY omnisidebarPageInfo.label "页面信息">
+<!ENTITY omnisidebarScratchpad.label "代码片段速记器">
 <!ENTITY OptforceOpen.label "不要关闭侧栏从">
+<!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
 <!ENTITY OptforceOpen.toolbars "侧栏工具栏中的按钮">
 <!ENTITY OptforceOpen.menus "下拉菜单">
-<!ENTITY Optalternatebtns.label "备用按钮样式">
 <!ENTITY Opttoolbar.label "侧栏工具栏">
-<!ENTITY Opthideheadertitle.label "隐藏侧栏标题">
+<!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
+<!ENTITY OptGoURI.label "包含'前往'按钮">
+<!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
+<!ENTITY Optshowheadertitle.label "Show sidebar title">
+<!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
 <!ENTITY OpttitleButton.label "从标题栏下拉侧栏菜单">
-<!ENTITY Opthideheaderdock.label "隐藏停靠按钮">
-<!ENTITY Opthideheaderclose.label "隐藏关闭按钮">
+<!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
+<!ENTITY Optshowheaderdock.label "Show docking button">
+<!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
+<!ENTITY Optshowheaderclose.label "Show close button">
+<!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
+<!ENTITY Optcoloricons.label "按钮图标集:">
+<!ENTITY Optcoloricons.nochange.label "Default">
+<!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
 <!ENTITY Optcoloricons.firefox.label "FireFox">
+<!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
 <!ENTITY Optcoloricons.color.label "多彩">
+<!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
 <!ENTITY OptKeysetPanel.label "打开迷你面板而非侧栏">
+<!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
 <!ENTITY OptKeyboardShortcut.caption "侧栏键盘快捷键">
+<!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
 <!ENTITY OptKeyboardShortcut.control "Control">
 <!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -65,3 +90,4 @@
 <!ENTITY about.desc "关于本附加组件及其开发者的信息可以在其 Mozilla 附加组件主页上找到. 如果您喜欢这个附加组件, 请考虑留下好评或者一笔小小的捐献来支持它的后续开发. Bug报告和建议可在技术支持页面进行.">
 <!ENTITY about.home "附加组件主页">
 <!ENTITY about.tech "技术支持">
+<!ENTITY about.notes "Release Notes">

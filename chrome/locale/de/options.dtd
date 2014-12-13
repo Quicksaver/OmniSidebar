@@ -1,50 +1,75 @@
-<!ENTITY Optwindow.style "width: 42.75em;">
-<!ENTITY addonsSidebar.label "Add-ons-Manager">
-<!ENTITY omnisidebarConsole.label "Fehlerkonsole">
-<!ENTITY omnisidebarBrowserConsole.label "Browser-Konsole">
-<!ENTITY omnisidebarDMT.label "Downloads">
-<!ENTITY omnisidebarPageInfo.label "Seiteninformationen">
-<!ENTITY omnisidebarScratchpad.label "JavaScript-Umgebung">
+<!ENTITY Optwindow.style "width: 39.5em;">
 <!ENTITY Options.title "OmniSidebar Einstellungen">
 <!ENTITY Optabout.label "Über">
 <!ENTITY OptMisc.label "Allgemein">
 <!ENTITY OptgroupMain.label "Erste Sidebar">
 <!ENTITY OptgroupTwin.label "Zweite Sidebar">
-<!ENTITY Optcoloricons.label "Schaltflächen-Stil:">
 <!ENTITY Optgroupgen.label "Anzeige">
 <!ENTITY Optgroupfeatures.label "Verhalten">
 <!ENTITY Optgroupperformance.label "Leistung">
-<!ENTITY Optgroupalways.label "Immer in der Sidebar öffnen">
-<!ENTITY OptGoURI.label "'Laden'-Schatlfläche anzeigen">
 <!ENTITY Optsidebars.left.label "Auf der linken Seite anzeigen">
 <!ENTITY Optsidebars.right.label "Auf der rechten Seite anzeigen">
+<!ENTITY Optsidebars.pos.tooltip "Die Seite des Browsers auswählen, auf welcher die Sidebar angezeigt werden soll">
 <!ENTITY Optsidebars.twin.label "Zweite Sidebar auf der gegenüberliegenden Seite aktivieren">
+<!ENTITY Optsidebars.twin.tooltip "Stellt eine zweite Sidebar auf der anderen Seite des Browser-Fensters zur Verfügung. Diese handelt unabhängig von der ersten Sidebar.">
 <!ENTITY Optswitchers.label "Zum Öffnen und Schließen auf den Browser-Rand klicken">
-<!ENTITY Optundock.label "Aus Browser-Fenster herauslösen">
-<!ENTITY Optautohide.label "Automatisch zur Seite hin ausblenden">
+<!ENTITY Optswitchers.tooltip "Ermöglicht das Klicken auf den Browser-Rand, um die Sidebar umzuschalten. Diese Funktion empfiehlt sich vor allem in maximierten Fenstern. Der klickbare Rand wird blau hervorgehoben, wenn sich die Maus darüber befindet.">
 <!ENTITY OptautoClose.label "Sidebar schließen/ausblenden, wenn sie den Fokus verliert">
+<!ENTITY OptautoClose.tooltip "Die Sidebar wird automatisch geschlossen, wenn ein Link darin oder Inhalt außerhalb der Sidebar angeklickt wird. Falls die Sidebar herausgelöst und so konfiguriert ist, dass sie automatisch ausgeblendet wird, so wird sie ausgeblendet anstatt geschlossen.">
+<!ENTITY Optundock.label "Aus Browser-Fenster herauslösen">
+<!ENTITY Optundock.tooltip "Die Sidebar wird über der Webseite anstatt daneben angezeigt.">
+<!ENTITY Optautohide.label "Automatisch zur Seite hin ausblenden">
+<!ENTITY Optautohide.tooltip "Die Sidebar gleitet zur Seite weg, wenn sie nicht benötigt wird. Bewegen Sie einfach die Maus zum Rand des Browser-Fensters und die Sidebar wird wieder angezeigt.">
 <!ENTITY OptglassStyle.label "Glass-Stil auf alle Sidebars anwenden">
+<!ENTITY OptglassStyle.tooltip "Ein besonderer Stil, welcher der Sidebar eine glasige Darstellung verleiht. Sie kann zusätzlich durchsichtig gemacht werden, sodass Sie zum Beispiel bei einer herausgelösten Sidebar den Inhalt der dahinterliegenden Webseite sehen können.">
 <!ENTITY OptglassStyle.opaque "Gefüllt">
 <!ENTITY OptglassStyle.transparent "Vollständig transparent">
 <!ENTITY Optfx.label "Übergangseffekte verwenden">
+<!ENTITY Optfx.tooltip "Sie können die Übergangseffekte zum automatischen Anzeigen und Ausblenden der Sidebar deaktivieren, falls Sie diese nicht mögen oder Sie Ihnen nicht sanft genug angezeigt werden.">
 <!ENTITY OptshowDelay.label "Automatische Anzeige der Sidebar nach (in ms):">
+<!ENTITY OptshowDelay.tooltip "Abzuwartende Zeit nach dem Bewegen der Maus auf den Browser-Rand, bis die Sidebar angezeigt wird">
 <!ENTITY OpthideDelay.label "Automatisches Ausblenden der Sidebar nach (in ms):">
-<!ENTITY OptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
+<!ENTITY OpthideDelay.tooltip "Abzuwartende Zeit nach dem Bewegen der Maus aus der Sidebar heraus, bis die Sidebar ausgeblendet wird">
 <!ENTITY OptswitcherAdjust.label "Randbreite, welche bei Mauskontakt die Sidebar aktiviert (Pixel):">
+<!ENTITY OptswitcherAdjust.tooltip "Die Breite des auf Mausklicks und Mausbewegungen reagierenden Browser-Randes kann vergrößert werden.">
+<!ENTITY OptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
+<!ENTITY OptkeepPrivate.tooltip "Beim Starten oder Beenden des privaten Modus behält die Sidebar die geladene Ansicht. Falls diese Option deaktiviert ist, so ist die Sidebar beim Starten des privaten Modus immer geschlossen und öffnet nach dem Beenden des privaten Modus die Ansicht, welche vor dessen Starten angezeigt wurde. Das Aktivieren dieser Option ist notwendig, falls bei jedem Start automatisch in den privaten Modus gewechselt wird und Sie wollen, dass der Zustand der Sidebar zwischen den Browsersitzungen erhalten bleibt.">
 <!ENTITY OptkeepLoaded.label "Inhalt der Sidebar auch nach deren Schließen im Speicher behalten">
+<!ENTITY OptkeepLoaded.tooltip "Beim Aktivieren dieser Option bleibt die Sidebar nach deren Schließen im Hintergrund geladen und beim erneuten Öffnen bleiben die Position in der Sidebar und Inhalte von Eingabefeldern erhalten.">
+<!ENTITY Optgroupalways.label "Immer in der Sidebar öffnen">
+<!ENTITY Optgroupalways.tooltip "Diese Ansichten werden beim Aufrufen über ihre eigenen Symbolleistenschaltflächen und Tastenkombinationen immer in der Sidebar geöffnet.">
+<!ENTITY addonsSidebar.label "Add-ons-Manager">
+<!ENTITY omnisidebarBrowserConsole.label "Browser-Konsole">
+<!ENTITY omnisidebarDMT.label "Downloads">
+<!ENTITY omnisidebarPageInfo.label "Seiteninformationen">
+<!ENTITY omnisidebarScratchpad.label "JavaScript-Umgebung">
 <!ENTITY OptforceOpen.label "Sidebar nicht schließen mittels">
+<!ENTITY OptforceOpen.tooltip "Das Anklicken eines dieser Elemente bei bereits geöffneter Sidebar schließt diese nicht, sondern lässt sie offen.">
 <!ENTITY OptforceOpen.toolbars "Schaltflächen in der Sidebar-Symbolleiste">
 <!ENTITY OptforceOpen.menus "Aufklappmenüs">
-<!ENTITY Optalternatebtns.label "Alternativer Schaltflächen-Stil">
 <!ENTITY Opttoolbar.label "Sidebar-Symbolleiste">
-<!ENTITY Opthideheadertitle.label "Sidebar-Titel ausblenden">
+<!ENTITY Opttoolbar.tooltip "Fügt eine anpassbare Symbolleiste oben in der Sidebar ein (direkt unterhalb von deren Namen)">
+<!ENTITY OptGoURI.label "'Laden'-Schatlfläche anzeigen">
+<!ENTITY OptGoURI.tooltip "Die 'Laden'-Schaltfläche erlaubt das Aufrufen spezieller about:- und chrome://-Adressen in der Sidebar. Es können keine Webseiten aus dem Internet geladen werden">
+<!ENTITY Optshowheadertitle.label "Sidebar-Namen anzeigen">
+<!ENTITY Optshowheadertitle.tooltip "Der Name der derzeit geladenen Sidebar ganz oben in der Sidebar.">
 <!ENTITY OpttitleButton.label "Sidebar-Menü in Titelleiste anzeigen">
-<!ENTITY Opthideheaderdock.label "Schaltfläche zum Herauslösen ausblenden">
-<!ENTITY Opthideheaderclose.label "„Schließen“-Schaltfläche ausblenden">
+<!ENTITY OpttitleButton.tooltip "Durch einen Klick auf den Name der Sidebar wird ein Menü geöffnet, das die verfügbaren Sidebars enthält.">
+<!ENTITY Optshowheaderdock.label "Herauslösen-Schaltfläche anzeigen">
+<!ENTITY Optshowheaderdock.tooltip "Eine Schaltfläche zum Herauslösen der Sidebar aus dem Browserfenster und zum Integrieren der Sidebar in dieses anzeigen">
+<!ENTITY Optshowheaderclose.label "Schließen-Schaltfläche anzeigen">
+<!ENTITY Optshowheaderclose.tooltip "Eine Schaltfläche zum schnellen Schließen der Sidebar oben in dieser anzeigen">
+<!ENTITY Optcoloricons.label "Schaltflächen-Stil:">
+<!ENTITY Optcoloricons.nochange.label "Standard">
+<!ENTITY Optcoloricons.nochange.tooltip "Es werden keine Veränderungen an den Symbolen vorgenommen.">
 <!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.firefox.tooltip "Die Symbole in der Symbolleiste werden falls möglich so angepasst, dass sie mit dem Standard-Theme von Firefox übereinstimmen.">
 <!ENTITY Optcoloricons.color.label "Farbenfroh">
+<!ENTITY Optcoloricons.color.tooltip "Die Symbole in der Symbolleiste werden falls möglich zu ihren farbigen Versionen geändert.">
 <!ENTITY OptKeysetPanel.label "Sidebar-Menü anstatt der Sidebar öffnen">
+<!ENTITY OptKeysetPanel.tooltip "Die Tastenkombination öffnet das Sidebar-Menü mit möglichen Befehlen, anstatt die Sidebar direkt zu öffnen oder zu schließen.">
 <!ENTITY OptKeyboardShortcut.caption "Tastaturkürzel für Sidebar">
+<!ENTITY OptKeyboardShortcut.tooltip "Die Tastenkombination ist der schnellste Weg, um die Sidebar zu schließen und wieder zu öffnen.">
 <!ENTITY OptKeyboardShortcut.control "Strg">
 <!ENTITY OptKeyboardShortcut.shift "Umschalt">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -65,3 +90,4 @@
 <!ENTITY about.desc "Alle Informationen über das Add-on und seinen Entwickler können auf der Homepage bei Mozilla Add-ons gefunden werden. Falls Ihnen das Add-on gefällt, so ziehen Sie bitte einen netten Kommentar oder kleine Unterstützung in Erwägung, um die Weiterentwicklung zu unterstützen. Fehlerberichte und Vorschläge können über die Seite für technische Unterstützung mitgeteilt werden.">
 <!ENTITY about.home "Add-on-Homepage">
 <!ENTITY about.tech "Technische Unterstützung">
+<!ENTITY about.notes "Versionsinformationen">

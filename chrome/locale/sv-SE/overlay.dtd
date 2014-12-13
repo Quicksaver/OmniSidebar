@@ -19,9 +19,6 @@
 <!ENTITY BlankSidebar.label "Öppna en sidopanel">
 <!ENTITY URISidebar.tooltip "Ange en plats att öppna i sidopanelen">
 <!ENTITY URISidebar.buttonLabel "Gå">
-<!ENTITY consoleSidebar.label "Felkonsolen">
-<!ENTITY consoleSidebar.tooltip "Öppna felkonsolen i sidopanelen">
-<!ENTITY consoleSidebar.accesskey "F">
 <!ENTITY browserConsole.label "Webbläsarkonsolen">
 <!ENTITY browserConsole.tooltip "Öppna webbläsarkonsolen i sidopanelen">
 <!ENTITY browserConsole.accesskey "W">

@@ -16,11 +16,9 @@
 <!ENTITY scratchpadSidebar.label "Brudnopis">
 <!ENTITY scratchpadSidebar.tooltip "Otwórz Brudnopis w panelu bocznym">
 <!ENTITY scratchpadSidebar.accesskey "b">
+<!ENTITY BlankSidebar.label "Open a sidebar">
 <!ENTITY URISidebar.tooltip "Wpisz lokalizację, aby otworzyć ją w panelu bocznym">
 <!ENTITY URISidebar.buttonLabel "Przejdź">
-<!ENTITY consoleSidebar.label "Konsola błędów">
-<!ENTITY consoleSidebar.tooltip "Otwórz konsolę błędów w panelu bocznym">
-<!ENTITY consoleSidebar.accesskey "K">
 <!ENTITY browserConsole.label "Konsola przeglądarki">
 <!ENTITY browserConsole.tooltip "Otwórz Konsolę przeglądarki w panelu bocznym">
 <!ENTITY browserConsole.accesskey "C">
@@ -39,6 +37,14 @@
 <!ENTITY omnisidebarToolbarTwin.accesskey "d">
 <!ENTITY omnisidebarOptions.title "OmniSidebar - Opcje">
 <!ENTITY omnisidebarOptions.accesskey "r">
+<!ENTITY omnisidebarToolbar.menuAdd "Add to Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.menuMove "Move to Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.menuRemove "Remove from Sidebar Toolbar">
+<!ENTITY omnisidebarToolbar.menuMain "Move to Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Add to Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Move to Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Remove from Twin Sidebar Toolbar">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Move to Toolbar">
 <!ENTITY omnisidebarButton.label "Panel boczny">
 <!ENTITY omnisidebarButtonMain.label "Główny panel boczny">
 <!ENTITY omnisidebarButtonTwin.label "Drugi panel boczny">

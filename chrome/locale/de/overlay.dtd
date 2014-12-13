@@ -19,9 +19,6 @@
 <!ENTITY BlankSidebar.label "Eine Sidebar öffnen">
 <!ENTITY URISidebar.tooltip "Eine zu öffnende Adresse eintippen">
 <!ENTITY URISidebar.buttonLabel "Öffnen">
-<!ENTITY consoleSidebar.label "Fehlerkonsole">
-<!ENTITY consoleSidebar.tooltip "Fehlerkonsole in der Sidebar öffnen">
-<!ENTITY consoleSidebar.accesskey "F">
 <!ENTITY browserConsole.label "Browser-Konsole">
 <!ENTITY browserConsole.tooltip "Die Browser-Konsole in der Sidebar öffnen">
 <!ENTITY browserConsole.accesskey "K">

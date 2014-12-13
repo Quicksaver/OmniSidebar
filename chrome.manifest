@@ -8,6 +8,7 @@ locale    omnisidebar      pl            chrome/locale/pl/
 locale    omnisidebar      pt-PT         chrome/locale/pt-PT/
 locale    omnisidebar      sv-SE         chrome/locale/sv-SE/
 locale    omnisidebar      zh-CN         chrome/locale/zh-CN/
+locale    omnisidebar      zh-TW         chrome/locale/zh-TW/
 
 skin      omnisidebar      classic/1.0   chrome/skin/common/
 skin      omnisidebar-os   classic/1.0   chrome/skin/linux/

@@ -1,50 +1,75 @@
 <!ENTITY Optwindow.style "width: 45.75em;">
-<!ENTITY addonsSidebar.label "Gestionnaire de modules">
-<!ENTITY omnisidebarConsole.label "Console d'erreurs">
-<!ENTITY omnisidebarBrowserConsole.label "Console du navigateur">
-<!ENTITY omnisidebarDMT.label "Téléchargements">
-<!ENTITY omnisidebarPageInfo.label "Infos sur la page">
-<!ENTITY omnisidebarScratchpad.label "Ardoise JavaScript">
 <!ENTITY Options.title "Options d'OmniSidebar">
 <!ENTITY Optabout.label "À propos">
 <!ENTITY OptMisc.label "Général">
 <!ENTITY OptgroupMain.label "Panneau latéral principal">
 <!ENTITY OptgroupTwin.label "Panneau latéral secondaire">
-<!ENTITY Optcoloricons.label "Jeu d'icônes pour boutons :">
 <!ENTITY Optgroupgen.label "Apparence">
 <!ENTITY Optgroupfeatures.label "Fonctionnalités">
 <!ENTITY Optgroupperformance.label "Performance">
-<!ENTITY Optgroupalways.label "Toujours ouvrir dans le panneau latéral">
-<!ENTITY OptGoURI.label "Inclure le bouton « Go »">
 <!ENTITY Optsidebars.left.label "Placer à gauche">
 <!ENTITY Optsidebars.right.label "Placer à droite">
+<!ENTITY Optsidebars.pos.tooltip "Choisit de quel côté de la fenêtre du navigateur le panneau latéral sera placé.">
 <!ENTITY Optsidebars.twin.label "Activer le panneau latéral secondaire du côté opposé">
+<!ENTITY Optsidebars.twin.tooltip "Vous donne un deuxième panneau latéral de l'autre côté de la fenêtre, complètement indépendante du panneau latéral principal.">
 <!ENTITY Optswitchers.label "Cliquer sur le bord de la fenêtre du navigateur pour ouvrir ou fermer">
-<!ENTITY Optundock.label "Détacher de la fenêtre du navigateur">
-<!ENTITY Optautohide.label "Masquer automatiquement sur le côté">
+<!ENTITY Optswitchers.tooltip "Vous permet de cliquer au bord de la fenêtre pour afficher le panneau latéral. Cela est plus efficient dans une fenêtre maximisée ! Le bord cliquable devient bleu au survol de la souris.">
 <!ENTITY OptautoClose.label "Fermer/masquer le panneau latéral lorsqu'il perd le focus">
+<!ENTITY OptautoClose.tooltip "Le panneau latéral sera automatiquement fermé lorsque vous cliquerez sur un lien qu'il contient ou en cliquant à l'extérieur du panneau. Si le panneau latéral n'est pas attaché et défini pour se masquer automatiquement, il sera immédiatement masqué au lieu d'être fermé.">
+<!ENTITY Optundock.label "Détacher de la fenêtre du navigateur">
+<!ENTITY Optundock.tooltip "Le panneau latéral s'affichera au-dessus de la page Web au lieu de s'afficher à côté.">
+<!ENTITY Optautohide.label "Masquer automatiquement sur le côté">
+<!ENTITY Optautohide.tooltip "Le panneau latéral disparaîtra lorsqu'il ne sera plus utilisé. Déplacé la souris vers le bord de la fenêtre pour le faire réapparaître.">
 <!ENTITY OptglassStyle.label "Appliquer le style verre pour tous les panneaux latéraux">
+<!ENTITY OptglassStyle.tooltip "Un style spécial qui donne à vos panneaux latéraux un aspect vitré. Il peut facultativement être défini comme transparent afin de voir l page Web à travers lorsqu'il n'est as attaché.">
 <!ENTITY OptglassStyle.opaque "Opaque">
 <!ENTITY OptglassStyle.transparent "Complètement transparent">
 <!ENTITY Optfx.label "Activer les effets de transition">
+<!ENTITY Optfx.tooltip "Vous pouvez désactiver les effets de transition d'affichage / masquage automatique si vous ne les aimez pas ou s'il ne fonctionnent pas correctement.">
 <!ENTITY OptshowDelay.label "Délai d'affichage automatique du panneau latéral (en msec) :">
+<!ENTITY OptshowDelay.tooltip "Délai entre le déplacement de la souris et l'affichage du panneau latéral.">
 <!ENTITY OpthideDelay.label "Délai de masquage automatique du panneau latéral (en msec) :">
-<!ENTITY OptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
+<!ENTITY OpthideDelay.tooltip "Délai entre le déplacement de la souris hors du panneau et son masquage.">
 <!ENTITY OptswitcherAdjust.label "Ajuster la largeur de la marge de la zone active (pixels) :">
+<!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
+<!ENTITY OptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
+<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
 <!ENTITY OptkeepLoaded.label "Conserver le panneau lors de la fermeture du panneau latéral">
+<!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
+<!ENTITY Optgroupalways.label "Toujours ouvrir dans le panneau latéral">
+<!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
+<!ENTITY addonsSidebar.label "Gestionnaire de modules">
+<!ENTITY omnisidebarBrowserConsole.label "Console du navigateur">
+<!ENTITY omnisidebarDMT.label "Téléchargements">
+<!ENTITY omnisidebarPageInfo.label "Infos sur la page">
+<!ENTITY omnisidebarScratchpad.label "Ardoise JavaScript">
 <!ENTITY OptforceOpen.label "Ne pas fermer le panneau latéral de">
+<!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
 <!ENTITY OptforceOpen.toolbars "Boutons dans la barre d'outils du panneau latéral">
 <!ENTITY OptforceOpen.menus "Menus déroulants">
-<!ENTITY Optalternatebtns.label "Style de bouton alternatif">
 <!ENTITY Opttoolbar.label "Barre d'outils du panneau latéral">
-<!ENTITY Opthideheadertitle.label "Masquer le titre du panneau latéral">
+<!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
+<!ENTITY OptGoURI.label "Inclure le bouton « Go »">
+<!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
+<!ENTITY Optshowheadertitle.label "Show sidebar title">
+<!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
 <!ENTITY OpttitleButton.label "Menu déroulant du panneau latéral dans le titre">
-<!ENTITY Opthideheaderdock.label "Masquer le bouton d'ancrage">
-<!ENTITY Opthideheaderclose.label "Masquer le bouton de fermeture">
+<!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
+<!ENTITY Optshowheaderdock.label "Show docking button">
+<!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
+<!ENTITY Optshowheaderclose.label "Show close button">
+<!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
+<!ENTITY Optcoloricons.label "Jeu d'icônes pour boutons :">
+<!ENTITY Optcoloricons.nochange.label "Default">
+<!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
 <!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
 <!ENTITY Optcoloricons.color.label "Multicolore">
+<!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
 <!ENTITY OptKeysetPanel.label "Ouvrir le mini-panneau au lieu du panneau latéral">
+<!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
 <!ENTITY OptKeyboardShortcut.caption "Raccourcis clavier du panneau latéral">
+<!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Maj">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -65,3 +90,4 @@
 <!ENTITY about.desc "Toute information sur l'extension et son développeur peut être trouvée sur sa page d'accueil de Mozilla Add-ons. Si vous aimez l'extension, veuillez y laisser un commentaire sympathique ou faire un don pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être soumis sur la page de support technique.">
 <!ENTITY about.home "Page Web de l'extension">
 <!ENTITY about.tech "Support technique">
+<!ENTITY about.notes "Release Notes">

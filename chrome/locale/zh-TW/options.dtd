@@ -1,93 +1,93 @@
-<!ENTITY Optwindow.style "width: 35.5em;">
-<!ENTITY Options.title "Inställningar för OmniSidebar">
-<!ENTITY Optabout.label "Om">
-<!ENTITY OptMisc.label "Allmänt">
-<!ENTITY OptgroupMain.label "Huvudsidopanelen">
-<!ENTITY OptgroupTwin.label "Tvillingsidopanelen">
-<!ENTITY Optgroupgen.label "Utseende">
-<!ENTITY Optgroupfeatures.label "Funktioner">
-<!ENTITY Optgroupperformance.label "Prestanda">
-<!ENTITY Optsidebars.left.label "Placera på vänster sida">
-<!ENTITY Optsidebars.right.label "Placera på höger sida">
+<!ENTITY Optwindow.style "width: 26.25em;">
+<!ENTITY Options.title "OmniSidebar 選項">
+<!ENTITY Optabout.label "關於">
+<!ENTITY OptMisc.label "整體">
+<!ENTITY OptgroupMain.label "主側邊欄">
+<!ENTITY OptgroupTwin.label "副側邊欄">
+<!ENTITY Optgroupgen.label "外觀">
+<!ENTITY Optgroupfeatures.label "特性">
+<!ENTITY Optgroupperformance.label "效能">
+<!ENTITY Optsidebars.left.label "置於左側">
+<!ENTITY Optsidebars.right.label "置於右側">
 <!ENTITY Optsidebars.pos.tooltip "Choose on which side of the browser window to place the sidebar.">
-<!ENTITY Optsidebars.twin.label "Aktivera tvillingsidopanelen på motsatt sida">
+<!ENTITY Optsidebars.twin.label "於另一側開啟副側邊欄">
 <!ENTITY Optsidebars.twin.tooltip "Gives you a second sidebar on the other side of the window, completely independent from the main sidebar.">
-<!ENTITY Optswitchers.label "Klicka i webbläsarens sidomarginal för att öppna eller stänga">
+<!ENTITY Optswitchers.label "點擊瀏覽器邊緣以開啟或關閉">
 <!ENTITY Optswitchers.tooltip "Lets you click on the margin of the window to toggle the sidebar. This is better used in a maximized window! The clickable margin will turn blue when the mouse moves over it.">
-<!ENTITY OptautoClose.label "Stäng/Dölj sidopanelen när den förlorar fokus">
+<!ENTITY OptautoClose.label "失去焦點時關閉/隱藏側邊欄">
 <!ENTITY OptautoClose.tooltip "The sidebar will be automatically closed when you click a link in it, or when you click outside of it for instance. If the sidebar is undocked and set to automatically hide, it will be immediately hidden instead of closed.">
-<!ENTITY Optundock.label "Koppla loss från webbläsarfönstret">
+<!ENTITY Optundock.label "自瀏覽器視窗分離">
 <!ENTITY Optundock.tooltip "The sidebar will be shown popping out from the side, above the webpage, rather than next to it">
-<!ENTITY Optautohide.label "Dölj automatiskt till kanten av fönstret">
+<!ENTITY Optautohide.label "自動隱藏至邊緣">
 <!ENTITY Optautohide.tooltip "The sidebar will roll out of view when it's not needed. Simply move the mouse to the margin of the window and it will roll back out again.">
-<!ENTITY OptglassStyle.label "Använd en glaseffekt på alla sidopaneler">
+<!ENTITY OptglassStyle.label "於所有側邊欄使用玻璃樣式">
 <!ENTITY OptglassStyle.tooltip "A special style that gives all of your sidebar panels a glassed look. It can optionally be made see-through, so if for example the sidebar is undocked, you can see the web content behind it.">
-<!ENTITY OptglassStyle.opaque "Ogenomskinlig">
-<!ENTITY OptglassStyle.transparent "Transparent">
-<!ENTITY Optfx.label "Aktivera övergångseffekter">
+<!ENTITY OptglassStyle.opaque "不透明">
+<!ENTITY OptglassStyle.transparent "完全透明">
+<!ENTITY Optfx.label "啟用過渡特效">
 <!ENTITY Optfx.tooltip "You can disable the transition effects for automatically showing or hiding the sidebar if you dislike them or if they aren't very smooth for you.">
-<!ENTITY OptshowDelay.label "Fördröj automatisk visning av sidopanelen med (ms):">
+<!ENTITY OptshowDelay.label "側邊欄自動顯示延時(ms)：">
 <!ENTITY OptshowDelay.tooltip "Amount of time to wait between moving the mouse to the margin and showing the sidebar.">
-<!ENTITY OpthideDelay.label "Fördröj automatisk döljning av sidopanelen med (ms):">
+<!ENTITY OpthideDelay.label "側邊欄自動隱藏延時(ms)：">
 <!ENTITY OpthideDelay.tooltip "Amount of time to wait between moving the mouse out of the sidebar and hiding it.">
-<!ENTITY OptswitcherAdjust.label "Justera bredden på det aktiva marginalområdet (px):">
+<!ENTITY OptswitcherAdjust.label "調整有效區域寬度(px)：">
 <!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
-<!ENTITY OptkeepPrivate.label "Behåll sidopanelens tillstånd i Privat surfning-läget">
+<!ENTITY OptkeepPrivate.label "在隱私瀏覽模式下維持側邊欄狀態">
 <!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
-<!ENTITY OptkeepLoaded.label "Behåll panelen inläst när sidopanelen stängs">
+<!ENTITY OptkeepLoaded.label "關閉側邊欄後仍保持面板載入狀態">
 <!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
-<!ENTITY Optgroupalways.label "Öppna alltid i sidopanelen">
+<!ENTITY Optgroupalways.label "永遠在側邊欄開啟">
 <!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
-<!ENTITY addonsSidebar.label "Tilläggshanteraren">
-<!ENTITY omnisidebarBrowserConsole.label "Webbläsarkonsolen">
-<!ENTITY omnisidebarDMT.label "Filhämtningar">
-<!ENTITY omnisidebarPageInfo.label "Sidinfo">
-<!ENTITY omnisidebarScratchpad.label "Anteckningsblock">
-<!ENTITY OptforceOpen.label "Stäng inte sidopanelen från">
+<!ENTITY addonsSidebar.label "附加元件管理員">
+<!ENTITY omnisidebarBrowserConsole.label "瀏覽器主控台">
+<!ENTITY omnisidebarDMT.label "下載">
+<!ENTITY omnisidebarPageInfo.label "頁面資訊">
+<!ENTITY omnisidebarScratchpad.label "程式碼速記本">
+<!ENTITY OptforceOpen.label "不要關閉側邊欄從">
 <!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
-<!ENTITY OptforceOpen.toolbars "Knappar i sidopanelens verktygsfält">
-<!ENTITY OptforceOpen.menus "Rullgardinsmenyer">
-<!ENTITY Opttoolbar.label "Sidopanelens verktygsfält">
+<!ENTITY OptforceOpen.toolbars "側邊工具列中的按钮">
+<!ENTITY OptforceOpen.menus "下拉選單">
+<!ENTITY Opttoolbar.label "側邊工具列">
 <!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
-<!ENTITY OptGoURI.label "Inkludera Gå-knappen">
+<!ENTITY OptGoURI.label "包含 '前往' 按鈕">
 <!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
 <!ENTITY Optshowheadertitle.label "Show sidebar title">
 <!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
-<!ENTITY OpttitleButton.label "Rullgardinsmeny i sidopanelens rubrik">
+<!ENTITY OpttitleButton.label "標題同時作為側邊欄下拉式選單">
 <!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
 <!ENTITY Optshowheaderdock.label "Show docking button">
 <!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
 <!ENTITY Optshowheaderclose.label "Show close button">
 <!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
-<!ENTITY Optcoloricons.label "Knappikonuppsättning:">
+<!ENTITY Optcoloricons.label "按鈕圖示集：">
 <!ENTITY Optcoloricons.nochange.label "Default">
 <!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
 <!ENTITY Optcoloricons.firefox.label "Firefox">
 <!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
-<!ENTITY Optcoloricons.color.label "Färgglad">
+<!ENTITY Optcoloricons.color.label "多色">
 <!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
-<!ENTITY OptKeysetPanel.label "Öppna minipanelen istället för sidopanelen">
+<!ENTITY OptKeysetPanel.label "開啟迷你面版而非側邊欄">
 <!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
-<!ENTITY OptKeyboardShortcut.caption "Kortkommando för sidopanelen">
+<!ENTITY OptKeyboardShortcut.caption "側邊欄快捷鍵">
 <!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Skift">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Cmd">
-<!ENTITY OptKeyboardShortcut.option "Alternativ">
-<!ENTITY OptKeyboardShortcut.none "Ingen">
-<!ENTITY OptKeyboardShortcut.spacebar "Mellanslag">
+<!ENTITY OptKeyboardShortcut.command "Command">
+<!ENTITY OptKeyboardShortcut.option "Option">
+<!ENTITY OptKeyboardShortcut.none "無">
+<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
 <!ENTITY OptKeyboardShortcut.pageup "Page Up">
 <!ENTITY OptKeyboardShortcut.pagedown "Page Down">
 <!ENTITY OptKeyboardShortcut.end "End">
 <!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Vänsterpil">
-<!ENTITY OptKeyboardShortcut.up "Uppåtpil">
-<!ENTITY OptKeyboardShortcut.right "Högerpil">
-<!ENTITY OptKeyboardShortcut.down "Nedåtpil">
+<!ENTITY OptKeyboardShortcut.left "Left">
+<!ENTITY OptKeyboardShortcut.up "Up">
+<!ENTITY OptKeyboardShortcut.right "Right">
+<!ENTITY OptKeyboardShortcut.down "Down">
 <!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "av Quicksaver">
-<!ENTITY about.desc "All information om tillägget och dess utvecklare återfinns på dess Mozilla-sida. Om du tycker om tillägget, skriv gärna en uppskattande recension eller donera en skärv för att stödja dess fortsatta utveckling. Buggrapporter och förslag framförs med fördel på webbplatsen för teknisk support.">
-<!ENTITY about.home "Tilläggets webbplats">
-<!ENTITY about.tech "Teknisk support">
+<!ENTITY about.by "by Quicksaver">
+<!ENTITY about.desc "本附加元件及開發者的所有相關資訊皆可在 Mozilla 附加元件首頁找到。如果你喜歡本附加元件，不妨考慮留下高評價或送出小額捐贈以支持後續的開發。錯誤回報及建議可以在技術支援網頁進行。">
+<!ENTITY about.home "附加元件首頁">
+<!ENTITY about.tech "技術支援">
 <!ENTITY about.notes "Release Notes">
