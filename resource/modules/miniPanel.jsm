@@ -1,4 +1,4 @@
-Modules.VERSION = '1.3.1';
+Modules.VERSION = '1.3.2';
 
 this.__defineGetter__('panel', function() { return $(objName+'-panel'); });
 this.__defineGetter__('panelToolbar', function() { return $(objName+'-panel-toolbarContainer'); });
@@ -131,7 +131,7 @@ this.populatePanel = function(miniPanel) {
 		bar.stack.style.width = bar.stack.clientWidth+'px';
 		
 		if(WINNT && Services.navigator.oscpu.contains('6.')) {
-			var color = window.getComputedStyle(miniPanel).getPropertyValue('background-color');
+			var color = getComputedStyle(miniPanel).backgroundColor;
 			var padding = (Services.navigator.oscpu.contains('6.2')) ? 3 : 5;
 			bar.toolbar.style.backgroundColor = color;
 			bar.toolbar.style.paddingBottom = padding+'px';
