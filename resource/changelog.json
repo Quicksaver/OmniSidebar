@@ -1,6 +1,42 @@
 {
-	"current":"1.4.7",
+	"current":"1.5",
 	"releases": {
+		"1.5":{
+			"date":"December 13, 2014",
+			"notes":[
+				["new","Support &lt; (less than) and &gt; (greater than) characters in the keyboard shortcut"],
+				["new","Added version information to the top of the window DOM tree, for better compatibility with themes"],
+				["new","Show the release notes tab when the add-on updates"],
+				["new","zh-TW locale"],
+				["changed","\"Hide title/dock button/close button\" changed to \"Show...\" in preferences; it's possible you may have to reconfigure these preferences because of this (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/53\">issue #53</a>)"],
+				["changed","Re-organized a little the preferences dialog, and added helpful tooltips to all the preferences"],
+				["removed","Compatibility with Firefox 33 and below"],
+				["removed","Compatibility with older versions of <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/similarweb-sites-recommendatio/\">SimilarWeb</a>, simply update to the most recent version which is already fully compatible"],
+				["removed","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/prospector-lesschrome-hd/\">LessChrome HD</a>, I recommend you use my other add-on <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/the-fox-only-better/\">The Fox, Only Better</a> instead for a similar but greatly improved function"],
+				["removed","Compatibility with <a target=\"blank\" href=\"http://totaltoolbar.mozdev.org/\">TotalToolbar</a>, it no longer works in the most recent versions of firefox, I recommend you use my other add-on <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/puzzle-toolbars/\">Puzzle Toolbars</a> for a similar function"],
+				["removed","Compatibility with the old (Javascript) Error Console, I recommend you use the firefox Browser Console instead"],
+				["removed","Compatibility with Delicious Bookmarks add-on, it is no longer maintained or available anywhere"],
+				["removed","Compatibility fixes for <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/mx3/\">MX3 theme</a>, they're not really needed anymore"],
+				["removed","Compatibility fixes for Pano add-on, it is no longer maintained or officially available anywhere"],
+				["removed","Alternate toolbar buttons style option, the buttons will always have this style now"],
+				["bugfix","e10s compatibility"],
+				["bugfix","Sidebar toolbar area was broken in customize mode (too narrow)"],
+				["bugfix","Keep sidebar visible while the cursor is in a text field in it"],
+				["bugfix","Greatly improved handling when opening menus and panels in the sidebar"],
+				["bugfix","When autohide was enabled, the add-on could fail to deinitialize properly in multiple windows"],
+				["bugfix","When opening Page Info in the sidebar, the panels would be cutoff at the end unless the sidebar was very large to show its full contents (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/66\">issue #66</a>)"],
+				["bugfix","The menu items in the title menu would not extend through the whole menu area if it was too large (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/66\">issue #66</a>)"],
+				["bugfix","Try to avoid minor visual glitches during startup (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/63\">issue #63</a>)"],
+				["bugfix","Greatly improved compatibility and performance when used together with my other add-ons"],
+				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/puzzle-toolbars/\">Puzzle Toolbars</a>, should work in perfect harmony with its Lateral (Vertical) Toolbar in all modes"],
+				["bugfix","Compatibility with Firefox 34 and above"],
+				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/edgewise/\">EdgeWise</a>; its left margin clicker would be unusable with the add-on's own margin switcher; from now on use shift+click to toggle the sidebar with this add-on"],
+				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/milewideback/\">MileWideBack</a>; mousing over the margin wasn't respecting the delay to show the sidebar"],
+				["bugfix","Don't show sidebar toolbar empty space in mini panel if the corresponding sidebar toolbar is empty"],
+				["updated","Improved stylesheets so that themes can more easily style the add-on, could have broken something in the process so let me know if something looks wrong or out of place"],
+				["","Many other small fixes and improvements"]
+			]
+		},
 		"1.4.7":{
 			"date":"May 18, 2014",
 			"notes":[
