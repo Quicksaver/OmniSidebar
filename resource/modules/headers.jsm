@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.4';
+Modules.VERSION = '1.1.5';
 
 this.toggleToolbar = function(twin) {
 	if(!twin) {
@@ -68,8 +68,8 @@ this.toggleHeaders = function() {
 		}
 	}
 	
-	hideIt(mainSidebar.header, mainHeader);
-	hideIt(twinSidebar.header, twinHeader);
+	toggleAttribute(mainSidebar.box, 'noHeader', !mainHeader);
+	toggleAttribute(twinSidebar.box, 'noHeader', !twinHeader);
 	
 	hideIt($(objName+'-toolbarCustomizeWrapper'), Prefs.toolbar || (Prefs.twinSidebar && Prefs.toolbarTwin));
 };
@@ -179,8 +179,8 @@ Modules.UNLOADMODULE = function() {
 	
 	toggleTitles();
 	toggleCloses();
-	removeAttribute(mainSidebar.header, 'hidden');
-	removeAttribute(twinSidebar.header, 'hidden');
+	removeAttribute(mainSidebar.box, 'noHeader');
+	removeAttribute(twinSidebar.box, 'noHeader');
 	
 	if(UNLOADED) {
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers');

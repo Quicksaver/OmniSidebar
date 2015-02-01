@@ -59,6 +59,10 @@
 		display: -moz-box;
 	}
 	
+	/* trick to hide the header when it's empty, without screwing up the undocked layout: https://github.com/Quicksaver/OmniSidebar/issues/70 */
+	.sidebar-box[noHeader] .sidebar-header { visibility: collapse; }
+	.sidebar-box[noHeader][renderabove] .sidebar-header { position: absolute; }
+	
 	/* customize dialog */
 	
 	#omnisidebar-toolbarCustomizeWrapper {
