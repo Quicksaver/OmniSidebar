@@ -27,4 +27,14 @@
 			observes="objName-viewDmgrPlacesSidebar" />
 	</menupopup>
 	
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="objName-downloads_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
+			label="&downloadsSidebar.label;"
+			tooltiptext="&downloadsSidebar.tooltip;"
+			type="custom"
+			observes="objName-viewDmgrPlacesSidebar" />
+	</toolbarpalette>
+	
 </overlay>

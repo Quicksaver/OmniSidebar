@@ -7,6 +7,8 @@
 <!ENTITY historySidebar.label "History Sidebar">
 <!ENTITY historySidebar.tooltip "Display in the sidebar pages you've viewed recently">
 <!ENTITY historySidebar.accesskey "H">
+<!ENTITY downloadsSidebar.label "Downloads Sidebar">
+<!ENTITY downloadsSidebar.tooltip "Display in the sidebar the Progress of Ongoing Downloads">
 
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Open the DOM Inspector in the Sidebar">

@@ -53,6 +53,10 @@
 	.omnisidebar-toolbar[coloricons="color"] #omnisidebar-history_sidebar_button:hover { -moz-image-region: rect(0px 36px 18px 18px); }
 	toolbarpaletteitem[place="palette"] > #omnisidebar-history_sidebar_button:hover { -moz-image-region: rect(0px 224px 32px 192px); }
 	
+	#omnisidebar-downloads_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px, 198px, 36px, 180px); }
+	.omnisidebar-toolbar[coloricons="color"] #omnisidebar-downloads_sidebar_button:hover { -moz-image-region: rect(18px, 198px, 36px, 180px); }
+	toolbarpaletteitem[place="palette"] > #omnisidebar-downloads_sidebar_button:hover { -moz-image-region: rect(0px, 256px, 32px, 224px); }
+	
 	/* Buttons from other add-ons */
 	
 	.omnisidebar-toolbar[coloricons="color"] #feedbar-button {
