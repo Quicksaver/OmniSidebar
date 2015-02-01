@@ -2,13 +2,16 @@
 @-moz-document url("chrome://browser/content/browser.xul") {	
 	
 	/* Bugfix for Tree Style Tabs: pinned tabs hide the top of the sidebar, they have a z-index of 100 */
-	#sidebar-box[renderabove][autohide] #omnisidebar-resizebox:hover,
-	#sidebar-box[renderabove][autohide] #omnisidebar-resizebox[hover],
-	#sidebar-box[renderabove]:not([autohide]) #omnisidebar-resizebox,
-	#omnisidebar-sidebar-box-twin[renderabove][autohide] #omnisidebar-resizebox-twin:hover,
-	#omnisidebar-sidebar-box-twin[renderabove][autohide] #omnisidebar-resizebox-twin[hover],
-	#omnisidebar-sidebar-box-twin[renderabove]:not([autohide]) #omnisidebar-resizebox-twin {
+	.sidebar-box[renderabove][autohide] .omnisidebar_resize_box:hover,
+	.sidebar-box[renderabove][autohide] .omnisidebar_resize_box[hover],
+	.sidebar-box[renderabove]:not([autohide]) .omnisidebar_resize_box {
 		z-index: 200 !important;
 	}
+	
+	.omnisidebar_switch { z-index: 250 !important; }
+	
+	/* we have to adjust the lateral puzzle piece from Puzzle Toolbars accordingly as well, otherwise the sidebar occludes it */
+	#puzzleBars-lateral-PP { z-index: 275 !important; }
+	#puzzleBars-lateral-container[autohide] { z-index: 225 !important; }
 	
 }

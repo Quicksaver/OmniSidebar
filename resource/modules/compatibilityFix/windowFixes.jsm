@@ -1,18 +1,26 @@
-Modules.VERSION = '1.1.4';
+Modules.VERSION = '1.1.5';
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
 		Modules.loadIf('compatibilityFix/milewideback', (addon && addon.isActive));
 	});
+	
 	AddonManager.getAddonByID("edgewise@software.donnapaul.net", function(addon) {
 		Modules.loadIf('compatibilityFix/edgewise', (addon && addon.isActive));
 	});
+	
 	AddonManager.getAddonByID("isreaditlater@ideashower.com", function(addon) {
 		Modules.loadIf('compatibilityFix/pocket', (addon && addon.isActive));
 	});
+	
 	AddonManager.getAddonByID("autopager@mozilla.org", function(addon) {
 		Modules.loadIf('compatibilityFix/autoPager', (addon && addon.isActive));
 	});
+	
+	AddonManager.getAddonByID("treestyletab@piro.sakura.ne.jp", function(addon) {
+		Modules.loadIf('compatibilityFix/treestyletab', (addon && addon.isActive));
+	});
+	
 	Modules.load('compatibilityFix/console');
 	Modules.load('compatibilityFix/dmt');
 	Modules.load('compatibilityFix/addonMgr');
@@ -29,6 +37,7 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/edgewise');
 	Modules.unload('compatibilityFix/pocket');
 	Modules.unload('compatibilityFix/autoPager');
+	Modules.unload('compatibilityFix/treestyletab');
 	Modules.unload('compatibilityFix/console');
 	Modules.unload('compatibilityFix/dmt');
 	Modules.unload('compatibilityFix/addonMgr');
