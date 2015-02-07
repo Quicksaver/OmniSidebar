@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.0';
+Modules.VERSION = '1.1.0';
 
 this.__defineGetter__('EdgeWiseOV', function() { return window.EdgeWiseOV; });
 
@@ -51,16 +51,41 @@ this.ewMouseUp = function(e) {
 	EdgeWiseOV.onMouseUp();
 };
 
+this.ewWheel = function(e) {
+	if(e.detail.bar != leftSidebar) { return; }
+	e.preventDefault();
+	e.stopPropagation();
+	EdgeWiseOV.onScroll({ detail: e.detail.scrollEvent.deltaY });
+};
+
+// we need to make sure the margin switch is visible for this, otherwise the sidebar occludes EW's clicker
+this.ewSwitch = function() {
+	leftSidebar.needSwitch.EW = true;
+	delete rightSidebar.needSwitch.EW;
+	
+	leftSidebar.toggleSwitcher();
+	rightSidebar.toggleSwitcher();
+};
+
 Modules.LOADMODULE = function() {
 	Listeners.add(window, 'clickedSwitcher', ewClick, true);
+	Listeners.add(window, 'scrolledSwitcher', ewWheel, true);
 	Listeners.add(window, 'SidebarsMoved', ewLoad);
 	Listeners.add(window, 'LoadedSidebar', ewLoad);
+	Prefs.listen('moveSidebars', ewSwitch);
+	
 	ewLoad();
+	ewSwitch();
 };
 
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'clickedSwitcher', ewClick, true);
+	Listeners.remove(window, 'scrolledSwitcher', ewWheel, true);
 	Listeners.remove(window, 'SidebarsMoved', ewLoad);
 	Listeners.remove(window, 'LoadedSidebar', ewLoad);
+	Prefs.unlisten('moveSidebars', ewSwitch);
+	
 	ewLoad(false);
+	delete leftSidebar.needSwitch.EW;
+	delete rightSidebar.needSwitch.EW;
 };

@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.9';
+Modules.VERSION = '2.0.10';
 
 this._mainState = null;
 this._twinState = null;
@@ -113,15 +113,22 @@ this.mainSidebar = {
 		}
 		SessionStore.deleteWindowValue(window, objName+'.mainSidebar');
 	},
-	get useSwitch () { return Prefs.useSwitch; },
 	get keyset () { return mainKey; },
 	get keysetPanel () { return Prefs.mainKeysetPanel; },
 	get above () { return Prefs.renderabove; },
 	get autoHide () { return Prefs.autoHide; },
 	get autoClose () { return Prefs.autoClose; },
+	get useSwitch () { return Prefs.useSwitch; },
+	needSwitch: {},
+	get isSwitchNeeded () {
+		for(var k in this.needSwitch) {
+			if(this.needSwitch[k]) { return true; }
+		}
+		return false;
+	},
 	get switcher () { return $(objName+'-switch'); },
 	toggleSwitcher: function() {
-		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed));
+		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed) || this.isSwitchNeeded);
 	},
 	get goURI () { return $(objName+'-viewURISidebar'); },
 	get goURIButton () { return $(objName+'-uri_sidebar_button'); }
@@ -237,15 +244,22 @@ this.twinSidebar = {
 		}
 		SessionStore.deleteWindowValue(window, objName+'.twinSidebar');
 	},
-	get useSwitch () { return Prefs.useSwitchTwin; },
 	get keyset () { return twinKey; },
 	get keysetPanel () { return Prefs.twinKeysetPanel; },
 	get above () { return Prefs.renderaboveTwin; },
 	get autoHide () { return Prefs.autoHideTwin; },
 	get autoClose () { return Prefs.autoCloseTwin; },
+	get useSwitch () { return Prefs.useSwitchTwin; },
+	needSwitch: {},
+	get isSwitchNeeded () {
+		for(var k in this.needSwitch) {
+			if(this.needSwitch[k]) { return true; }
+		}
+		return false;
+	},
 	get switcher () { return $(objName+'-switch-twin'); },
 	toggleSwitcher: function() {
-		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed));
+		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed) || this.isSwitchNeeded);
 	},
 	get goURI () { return $(objName+'-viewURISidebar-twin'); },
 	get goURIButton () { return $(objName+'-uri_sidebar_button-twin'); }
@@ -596,8 +610,8 @@ this.clickSwitcher = function(e, bar) {
 
 // This makes it so we can scroll the webpage and the sidebar while the mouse is over the switch, while still able to click on it
 this.scrollNodes = {};
-this.scrollSwitcher = function(e) {
-	if(e.defaultPrevented) { return; }
+this.scrollSwitcher = function(e, bar) {
+	if(e.defaultPrevented || !dispatch(bar.switcher, { type: 'scrolledSwitcher', detail: { bar: bar, scrollEvent: e } })) { return; }
 	
 	var active = false;
 	for(var n in scrollNodes) {
@@ -1262,9 +1276,6 @@ Modules.LOADMODULE = function() {
 	Listeners.add(browserBox, 'browserResized', setSwitcherHeight);
 	Listeners.add(window, 'endToggleSidebar', browserResized);
 	
-	// make sure our margin triggers don't interfere with webpage scrolling
-	Listeners.add(window, 'wheel', scrollSwitcher, true);
-	
 	Messenger.loadInWindow(window, objName);
 	Messenger.listenWindow(window, 'DOMFullScreen', onMozEnteredFullScreen);
 	
@@ -1291,8 +1302,6 @@ Modules.UNLOADMODULE = function() {
 	}
 	
 	removeAttribute(document.documentElement, objName+'-mozFullScreen');
-	
-	Listeners.remove(window, 'wheel', scrollSwitcher, true);
 	
 	Listeners.remove(window, 'resize', browserResized);
 	Listeners.remove(browserBox, 'browserResized', setSwitcherHeight);

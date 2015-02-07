@@ -62,6 +62,7 @@
 			waitForSS="chrome://objPathString/skin/overlay.css"
 			collapsed="true"
 			onclick="objName.clickSwitcher(event, objName.twinSidebar);"
+			onwheel="objName.scrollSwitcher(event, objName.twinSidebar);"
 			insertafter="appcontent"/>
 	</hbox>
 	
