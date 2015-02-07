@@ -1,0 +1,172 @@
+/* parts of this were based on banthaz's userstyle:
+  Add-ons Manager - In the Sidebar - Companion (https://userstyles.org/styles/48732/add-ons-manager-in-the-sidebar-companion) */
+  
+@namespace url(http://www.w3.org/1999/xhtml);
+@-moz-document url-prefix("https://services.addons.mozilla.org/") {
+
+/* It's insanely hard to apply this sheet only to the iframe. So with this rule it can be applied to the sidebar
+  without affecting the regular add-ons tab, at least when the window is large enough.
+  And even if the window is small, this will make the discover panel flow better in the Add-ons Manager tab anyway. */
+@media all and (max-width: 666px) {
+	
+	/****************************** ALL PAGES *****************************/
+	
+	/* Whole page - Remove min-width & Less Margin */
+	
+	body {
+		min-width: 0 !important;
+		margin: 0 !important;
+	}
+	
+	/************************* ADD-ON DETAIL PAGES ************************/
+	
+	/* Wasted space to the left - Remove */
+	
+	body > #main:first-child,
+	#addon-reviews {
+		margin-left: -60px !important;
+	}
+	
+	#main > header {
+		margin-left: 60px !important;
+	}
+	
+	/* "Back to Add-ons" link - Move up */
+	
+	#main > header #back {
+		position:absolute!important;
+		top:-14px!important;
+		right:0!important;
+	}
+	
+	/* Add-on Info Table - Dynamic width */
+	
+	#main .addon-info {
+		width: -moz-calc(100% - 106px) !important;
+	}
+	
+	/***************************** "HOME" PAGE ****************************/
+	
+	/***************** STACK ALL CONTENT ****************/
+	
+	/* Auto height */
+	
+	section > section, /* General rule */
+	#promos .slider > li > *, /* Top slider Section - Sub-Sections */
+	#recs .gallery.js /* "Recommend for You" Section */ {
+		overflow: hidden !important;
+		height: auto !important;
+		max-height: none !important;
+	}
+	
+	/* Top slider Section - Stack */
+	
+	#promos .slider {
+		left: 0 !important;
+	}
+	
+	/* "Up & Coming", "Featured Themes" & "More Ways of Customizing" Sections - Stack */
+	
+	#up-and-coming,
+	#featured-themes,
+	#more-ways {
+		width: -moz-calc(100% - 22px) !important;
+	}
+	
+	/* Lists - Stack */
+	
+	#main :not(#install) li {
+		width: -moz-calc(100% - 2px) !important;
+		margin: 0 !important;
+		margin-bottom: 10px !important;
+		float: left !important;
+	}
+	
+	#main :not(#install) li > a {
+		height: auto !important;
+	}
+
+	#main #install li {
+		margin-bottom: 10px !important;
+		margin-right: 15px !important;
+	}
+	
+	/********************** HIDING **********************/
+	
+	/* Hiding */
+	
+	#promos #nav-features, /* Top slider Section - Scroll arrows */
+	#promos .slider > li.cloned, /* Top slider Section - Cloned Sub-Sections */
+	#nav-recs, /* "Recommend for You" Section - Scroll arrows */
+	#recs > div:first-child > h2 > a /* "Recommend for You" Section - "What is this?" Link */ {
+		display: none !important;
+	}
+	
+	/********************** OTHER ***********************/
+	
+	/* Top slider Section - Various fixes */
+	
+	.promo h2 {
+		white-space: normal !important;
+	}
+	
+	#promos > .slider > li > * {
+		padding: 10px !important;
+	}
+	
+	/* Top slider Section - "Get Add-ons On The Go" Sub-Section - Fix width */
+	
+	#go-mobile .wrap {
+		width: 100% !important;
+	}
+	
+	/* "Featured Add-ons" Section - Style like the other sections */
+	
+	#featured-addons > h2 {
+		margin: -10px !important;
+		margin-bottom: 0 !important;
+		padding: 10px !important;
+		padding-top: 0.45em !important;
+		padding-bottom: 0.45em !important;
+		background: transparent -moz-linear-gradient(center top, rgb(255, 255, 255) 0pt, rgb(166, 241, 147) 100%) !important;
+		box-shadow: 0pt -3px 0pt rgba(8, 78, 3, 0.05) inset, 0pt 3px 0pt rgba(75, 195, 120, 0.3);
+		border-radius: 8px 8px 0 0 !important;
+		border-bottom: 1px solid rgb(168, 184, 209) !important;
+	}
+	
+	#featured-addons {
+		padding: 10px !important;
+		background: transparent -moz-linear-gradient(center top, rgb(255, 255, 255) 0pt, rgb(166, 241, 147) 100%) !important;
+		box-shadow: 0pt -3px 0pt rgba(8, 78, 3, 0.05) inset, 0pt 3px 0pt rgba(75, 195, 120, 0.3);
+	}
+	
+	/* "Recommend for You" Section - Various fixes */
+	
+	#recs .gallery-wrap {
+		background-color: transparent !important;
+		margin-top: 15px !important;
+	}
+	
+	#recs .header {
+		padding-left: 1em !important;
+		width: 100% !important;
+	}
+	
+	#recs .gallery-addons {
+		width: -moz-calc(100% - 20px) !important;
+	}
+	
+	/* Add-on Video Promo (top section) fixes */
+	
+	#addon-video-promo h2,
+	#addon-video-promo h3 {
+		margin-right: 0 !important;
+	}
+	
+	#addon-video-promo .vid-button {
+		margin-bottom: 150px !important;
+	}
+	
+}
+
+}

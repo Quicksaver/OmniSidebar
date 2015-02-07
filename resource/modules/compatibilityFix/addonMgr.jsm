@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.0';
+Modules.VERSION = '1.2.1';
 
 this.toggleAlwaysAddons = function(loaded) {
 	if(loaded && Prefs.alwaysAddons) {
@@ -49,6 +49,7 @@ Modules.LOADMODULE = function() {
 	holdBroadcasters.addon = objName+'-viewAddonSidebar';
 	
 	Styles.load('addonMgrSidebar', 'addons');
+	Styles.load('addonMgrSidebarDiscover', 'addonsDiscover');
 	
 	Overlays.overlayWindow(window, 'addonMgr', null, loadAddonMgr);
 	
@@ -64,6 +65,7 @@ Modules.UNLOADMODULE = function() {
 		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(mainSidebar); }
 		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(twinSidebar); }
 		Styles.unload('addonMgrSidebar');
+		Styles.unload('addonMgrSidebarDiscover');
 	}
 	
 	Overlays.removeOverlayWindow(window, 'addonMgr');
