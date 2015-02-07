@@ -4,6 +4,7 @@ locale    omnisidebar-en   en-US         chrome/locale/en-US/
 locale    omnisidebar      en-US         chrome/locale/en-US/
 locale    omnisidebar      de            chrome/locale/de/
 locale    omnisidebar      fr            chrome/locale/fr/
+locale    omnisidebar      it            chrome/locale/it/
 locale    omnisidebar      pl            chrome/locale/pl/
 locale    omnisidebar      pt-PT         chrome/locale/pt-PT/
 locale    omnisidebar      sv-SE         chrome/locale/sv-SE/

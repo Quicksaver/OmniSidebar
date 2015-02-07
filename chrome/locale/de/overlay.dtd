@@ -7,6 +7,8 @@
 <!ENTITY historySidebar.label "Chronik-Sidebar">
 <!ENTITY historySidebar.tooltip "Die kürzlich besuchten Seiten in der Sidebar anzeigen">
 <!ENTITY historySidebar.accesskey "C">
+<!ENTITY downloadsSidebar.label "Downloads-Sidebar">
+<!ENTITY downloadsSidebar.tooltip "Den Fortschritt laufender Downloads in der Sidebar anzeigen">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "DOM Inspector in der Sidebar öffnen">
 <!ENTITY DOMInspectorSidebar.accesskey "O">

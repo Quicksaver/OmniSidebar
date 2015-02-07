@@ -1,0 +1,59 @@
+<!ENTITY addonsSidebar.label "Componenti aggiuntivi">
+<!ENTITY addonsSidebar.tooltip "Apre la gestione dei componenti aggiuntivi nella barra laterale">
+<!ENTITY addonsSidebar.accesskey "A">
+<!ENTITY bookmarksSidebar.label "Segnalibri">
+<!ENTITY bookmarksSidebar.tooltip "Visualizza i segnalibri nella barra laterale">
+<!ENTITY bookmarksSidebar.accesskey "B">
+<!ENTITY historySidebar.label "Cronologia">
+<!ENTITY historySidebar.tooltip "Visualizza nella barra laterale le pagine che hai aperto di recente">
+<!ENTITY historySidebar.accesskey "H">
+<!ENTITY downloadsSidebar.label "Download">
+<!ENTITY downloadsSidebar.tooltip "Visualizza nella barra laterale il progresso dei download in corso">
+<!ENTITY DOMInspectorSidebar.label "DOM Inspector">
+<!ENTITY DOMInspectorSidebar.tooltip "Apri il DOM Inspector nella barra laterale">
+<!ENTITY DOMInspectorSidebar.accesskey "O">
+<!ENTITY PageInfoSidebar.label "Informazioni sulla pagina">
+<!ENTITY PageInfoSidebar.tooltip "Visualizza i dettagli sulla pagina che vedi">
+<!ENTITY PageInfoSidebar.accesskey "I">
+<!ENTITY scratchpadSidebar.label "Blocco per gli appunti">
+<!ENTITY scratchpadSidebar.tooltip "Apre il blocco per gli appunti nella barra laterale">
+<!ENTITY scratchpadSidebar.accesskey "p">
+<!ENTITY BlankSidebar.label "Apri una barra laterale">
+<!ENTITY URISidebar.tooltip "Digita un indirizzo da aprire nella barra laterale">
+<!ENTITY URISidebar.buttonLabel "Vai">
+<!ENTITY browserConsole.label "Console del browser">
+<!ENTITY browserConsole.tooltip "Apre la console del browser nella barra laterale">
+<!ENTITY browserConsole.accesskey "C">
+<!ENTITY dmtSidebar.label "Download">
+<!ENTITY dmtSidebar.tooltip "Visualizza il progresso dei download in corso">
+<!ENTITY dmtSidebar.accesskey "D">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Shift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
+<!ENTITY omnisidebarToolbar.label "Strumenti della barra laterale">
+<!ENTITY omnisidebarToolbar.accesskey "S">
+<!ENTITY omnisidebarToolbarTwin.label "Strumenti della barra gemella">
+<!ENTITY omnisidebarToolbarTwin.accesskey "w">
+<!ENTITY omnisidebarOptions.title "Opzioni di OmniSidebar">
+<!ENTITY omnisidebarOptions.accesskey "r">
+<!ENTITY omnisidebarToolbar.menuAdd "Aggiungi agli strumenti della barra laterale">
+<!ENTITY omnisidebarToolbar.menuMove "Sposta negli strumenti della barra laterale">
+<!ENTITY omnisidebarToolbar.menuRemove "Rimuovi dagli strumenti della barra laterale">
+<!ENTITY omnisidebarToolbar.menuMain "Sposta negli strumenti">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Aggiungi agli strumenti della barra gemella">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Sposta negli strumenti della barra gemella">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Rimuovi dagli strumenti della barra gemella">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Sposta negli strumenti">
+<!ENTITY omnisidebarButton.label "Barra laterale">
+<!ENTITY omnisidebarButtonMain.label "Barra principale">
+<!ENTITY omnisidebarButtonTwin.label "Barra gemella">
+<!ENTITY omnisidebarButtonTwin.accesskey "w">
+<!ENTITY omnisidebarButton.tooltip "Apre la barra laterale">
+<!ENTITY omnisidebarButtonMain.tooltip "Apre la barra laterale principale">
+<!ENTITY omnisidebarButtonTwin.tooltip "Apre la barra laterale gemella">
+<!ENTITY omnisidebarButtonClose.tooltip "Chiude la barra laterale">
+<!ENTITY omnisidebarButtonMainClose.tooltip "Chiude la barra laterale principale">
+<!ENTITY omnisidebarButtonTwinClose.tooltip "Chiude la barra laterale gemella">

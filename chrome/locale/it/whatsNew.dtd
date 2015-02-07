@@ -1,0 +1,24 @@
+<!ENTITY whatsNew.title "OmniSidebar - Note di rilascio">
+<!ENTITY whatsNew.name "OmniSidebar">
+<!ENTITY whatsNew.version "Versione {v}">
+<!ENTITY whatsNew.versionDivider "-">
+<!ENTITY whatsNew.uptodate "aggiornato, congratulazioni!">
+<!ENTITY whatsNew.needsupdate "aggiornamento disponibile!">
+<!ENTITY whatsNew.description "Controllate in basso le &quot;Note di rilascio&quot; e i &quot;Problemi noti&quot; di questa versione. Fatemi sapere gli eventuali problemi trovati, o se avete suggerimenti per le versioni future.">
+<!ENTITY whatsNew.message "Maggiori informazioni sul componente aggiuntivo si trovano nella homepage dei componenti aggiuntivi di Mozilla.  Se vi piace il componente aggiuntivo, prendete in esame la possibilità di scrivere una bella recensione, oppure fate una piccola donazione per contribuire a sostenere il suo sviluppo continuo.  Ogni piccolo bit è molto apprezzato!">
+<!ENTITY whatsNew.allVersions "Mostra le note di tutte le versioni precedenti">
+<!ENTITY whatsNew.options "Opzioni del componente aggiuntivo">
+<!ENTITY whatsNew.notifyOnUpdates "Mostrami questa scheda al prossimo aggiornamento">
+<!ENTITY whatsNew.information "Maggiori informazioni">
+<!ENTITY whatsNew.home "Homepage del componente aggiuntivo">
+<!ENTITY whatsNew.fullchangelog "Storico completo">
+<!ENTITY whatsNew.problems "Avete problemi?">
+<!ENTITY whatsNew.tech "Descrivete il problema nella pagina di supporto">
+<!ENTITY whatsNew.email "Oppure mandatemi una e-mail">
+<!ENTITY whatsNew.author "Altro sull'autore">
+<!ENTITY whatsNew.trymore "Provate un altro dei miei componenti aggiuntivi per una esperienza ancora migliore di Firefox!">
+<!ENTITY whatsNew.profile "Potete trovarli sul mio profilo">
+<!ENTITY whatsNew.share "Condividi!">
+<!ENTITY whatsNew.friends "Non essere l'unico a usare un browser grandioso.  Consenti anche ai tuoi amici di sorprendersi!">
+<!ENTITY whatsNew.moreshare "Altri servizi...">
+<!ENTITY whatsNew.tryit "Prova questo componente aggiuntivo che tira fuori il meglio dalla tua barra laterale - OmniSidebar!">

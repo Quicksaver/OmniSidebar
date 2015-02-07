@@ -7,6 +7,8 @@
 <!ENTITY historySidebar.label "Painel Lateral do Histórico">
 <!ENTITY historySidebar.tooltip "Mostrar no painel lateral as páginas que visualizou recentemente">
 <!ENTITY historySidebar.accesskey "H">
+<!ENTITY downloadsSidebar.label "Painel Lateral das Transferências">
+<!ENTITY downloadsSidebar.tooltip "Mostrar no painel lateral o progresso atual das transferências">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector no Painel Lateral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">

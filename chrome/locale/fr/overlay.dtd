@@ -7,6 +7,8 @@
 <!ENTITY historySidebar.label "Panneau latéral de l'historique">
 <!ENTITY historySidebar.tooltip "Affiche les pages vues récemment dans le panneau latéral">
 <!ENTITY historySidebar.accesskey "H">
+<!ENTITY downloadsSidebar.label "Panneau latéral des téléchargements">
+<!ENTITY downloadsSidebar.tooltip "Affiche la progression des téléchargements en cours dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">
 <!ENTITY DOMInspectorSidebar.tooltip "Ouvrir l'inspecteur DOM dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">

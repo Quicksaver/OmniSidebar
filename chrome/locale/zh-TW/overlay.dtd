@@ -7,6 +7,8 @@
 <!ENTITY historySidebar.label "歷史側邊欄">
 <!ENTITY historySidebar.tooltip "在側邊欄顯示您最近瀏覽的網頁">
 <!ENTITY historySidebar.accesskey "H">
+<!ENTITY downloadsSidebar.label "Downloads Sidebar">
+<!ENTITY downloadsSidebar.tooltip "Display in the sidebar the Progress of Ongoing Downloads">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "在側邊欄中開啟DOM Inspector">
 <!ENTITY DOMInspectorSidebar.accesskey "O">

@@ -1,0 +1,93 @@
+<!ENTITY Optwindow.style "width: 33em;">
+<!ENTITY Options.title "Opzioni di OmniSidebar">
+<!ENTITY Optabout.label "Informazioni">
+<!ENTITY OptMisc.label "Globale">
+<!ENTITY OptgroupMain.label "Barra principale">
+<!ENTITY OptgroupTwin.label "Barra gemella">
+<!ENTITY Optgroupgen.label "Aspetto">
+<!ENTITY Optgroupfeatures.label "Caratteristiche">
+<!ENTITY Optgroupperformance.label "Prestazioni">
+<!ENTITY Optsidebars.left.label "Disponi a sinistra">
+<!ENTITY Optsidebars.right.label "Disponi a destra">
+<!ENTITY Optsidebars.pos.tooltip "Scegli su quale lato della finestra del browser disporre la barra laterale">
+<!ENTITY Optsidebars.twin.label "Attiva la barra laterale gemella sul lato opposto">
+<!ENTITY Optsidebars.twin.tooltip "Apre una seconda barra laterale sul lato opposto della finestra, completamente indipendente dalla barra laterale principale.">
+<!ENTITY Optswitchers.label "Clicca sul margine del browser per aprire o chiudere">
+<!ENTITY Optswitchers.tooltip "Consente di cliccare sul margine della finestra per attivare o disattivare la barra laterale.  Questo si utilizza meglio in una finestra ingrandita!  Il margine cliccabile diventa blu quando vi si sposta sopra il mouse.">
+<!ENTITY OptautoClose.label "Chiudi/Nascondi la barra laterale quando perde il focus">
+<!ENTITY OptautoClose.tooltip "La barra laterale sarà chiusa automaticamente quando si clicca, per esempio, su un collegamento al suo interno o quando si clicca al di fuori di essa.  Se la barra laterale è sganciata e impostata per nascondersi automaticamente, verrà immediatamente nascosta invece che chiusa.">
+<!ENTITY Optundock.label "Sgancia dalla finestra del browser">
+<!ENTITY Optundock.tooltip "La barra laterale verrà mostrata esternamente al lato, sopra la pagina web invece che accanto">
+<!ENTITY Optautohide.label "Nascondi automaticamente a lato">
+<!ENTITY Optautohide.tooltip "La barra laterale sparirà dalla vista quando non serve.  Basta spostare il mouse al margine della finestra e tornerà di nuovo in vista.">
+<!ENTITY OptglassStyle.label "Applica lo stile vetroso a tutte le barre laterali">
+<!ENTITY OptglassStyle.tooltip "Stile particolare che dona a tutti i pannelli della barra laterale un aspetto vetroso. Lo si può impostare in modo da vedere attraverso, quindi se per esempio la barra laterale è sganciata, è possibile vedere dietro il contenuto del web.">
+<!ENTITY OptglassStyle.opaque "Opaco">
+<!ENTITY OptglassStyle.transparent "Completamente trasparente">
+<!ENTITY Optfx.label "Attiva gli effetti di transizione">
+<!ENTITY Optfx.tooltip "Puoi disabilitare gli effetti di transizione per mostrare o nascondere automaticamente la barra laterale se non ti piacciono o se non sono regolari">
+<!ENTITY OptshowDelay.label "Ritardo dell'auto-comparsa della barra laterale (msec):">
+<!ENTITY OptshowDelay.tooltip "Quantità di tempo di attesa tra lo spostamento del mouse sul margine e la visualizzazione della barra laterale.">
+<!ENTITY OpthideDelay.label "Ritardo dell'auto-scomparsa della barra laterale (msec):">
+<!ENTITY OpthideDelay.tooltip "Quantità di tempo di attesa tra lo spostamento del mouse fuori dalla barra laterale e la sua auto-scomparsa.">
+<!ENTITY OptswitcherAdjust.label "Regola la larghezza dell'area attiva del margine (pixel):">
+<!ENTITY OptswitcherAdjust.tooltip "Puoi aumentare la dimensione della area del margine che è reattiva ai clic e al movimento del mouse.">
+<!ENTITY OptkeepPrivate.label "Mantieni lo stato della barra laterale nella modalità di navigazione anonima">
+<!ENTITY OptkeepPrivate.tooltip "All'entrata o all'uscita della modalità di navigazione anonima (MNA), la barra laterale rimarrà aperta con lo stesso pannello caricato. Se il comando è disabilitato, la barra laterale rimarrà sempre chiusa all'entrata nella MNA, e all'uscita tornerà sempre al precedente pannello aperto (prima di abilitare la MNA). Questa preferenza è necessaria se la MNA è attiva di default per ogni avvio e se vuoi che lo stato della barra laterale venga memorizzato tra le sessioni di navigazione.">
+<!ENTITY OptkeepLoaded.label "Mantieni il pannello caricato alla chiusura della barra laterale">
+<!ENTITY OptkeepLoaded.tooltip "Alla chiusura, la barra laterale sarà caricata in memoria. Per esempio, alla riapertura sarà ricordata la posizione di scorrimento o qualsiasi contenuto delle caselle di testo.">
+<!ENTITY Optgroupalways.label "Apri sempre nella barra laterale">
+<!ENTITY Optgroupalways.tooltip "Questi pannelli saranno aperti sempre nella barra laterale se richiamati dai pulsanti degli strumenti o dalle scorciatoie da tastiera.">
+<!ENTITY addonsSidebar.label "Componenti aggiuntivi">
+<!ENTITY omnisidebarBrowserConsole.label "Console del browser">
+<!ENTITY omnisidebarDMT.label "Download">
+<!ENTITY omnisidebarPageInfo.label "Informazioni sulla pagina">
+<!ENTITY omnisidebarScratchpad.label "Blocco per gli appunti">
+<!ENTITY OptforceOpen.label "Non chiudere la barra laterale con">
+<!ENTITY OptforceOpen.tooltip "Cliccando uno di questi elementi di un pannello della barra laterale già caricato, la barra rimarrà aperta invece di chiudersi.">
+<!ENTITY OptforceOpen.toolbars "Pulsanti degli strumenti della barra laterale">
+<!ENTITY OptforceOpen.menus "Menu a tendina">
+<!ENTITY Opttoolbar.label "Strumenti della barra laterale">
+<!ENTITY Opttoolbar.tooltip "Inserisce una barra degli strumenti personalizzabile nella parte superiore della barra laterale, accanto al titolo.">
+<!ENTITY OptGoURI.label "Includi il pulsante 'Vai'">
+<!ENTITY OptGoURI.tooltip "Il pulsante 'Vai' consente di caricare gli URI specifici about: e chrome:// nella barra laterale; non consente di caricare le pagine web remote!">
+<!ENTITY Optshowheadertitle.label "Mostra il titolo della barra laterale">
+<!ENTITY Optshowheadertitle.tooltip "Il nome della barra laterale attualmente aperta è visualizzato nella parte superiore.">
+<!ENTITY OpttitleButton.label "Menu a tendina nel titolo della barra laterale">
+<!ENTITY OpttitleButton.tooltip "Clicca il titolo della barra laterale per aprire un menu con tutte le barre laterali disponibili che puoi commutare.">
+<!ENTITY Optshowheaderdock.label "Mostra il pulsante di aggancio">
+<!ENTITY Optshowheaderdock.tooltip "Mostra un pulsante nella parte superiore della barra laterale per agganciarla e sganciarla rapidamente.">
+<!ENTITY Optshowheaderclose.label "Mostra il pulsante di chiusura">
+<!ENTITY Optshowheaderclose.tooltip "Mostra un pulsante nella parte superiore della barra laterale per la sua rapida chiusura.">
+<!ENTITY Optcoloricons.label "Icone dei pulsanti:">
+<!ENTITY Optcoloricons.nochange.label "Predefinite">
+<!ENTITY Optcoloricons.nochange.tooltip "Non sono stati fatti cambiamenti alle icone degli strumenti.">
+<!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.firefox.tooltip "Le icone degli strumenti vengono modificate in modo che siano in sintonia con il tema predefinito di Firefox quando possibile.">
+<!ENTITY Optcoloricons.color.label "Colorate">
+<!ENTITY Optcoloricons.color.tooltip "Le icone degli strumenti vengono cambiate con la loro versione colorata quando possibile.">
+<!ENTITY OptKeysetPanel.label "Apri il mini-pannello invece della barra laterale">
+<!ENTITY OptKeysetPanel.tooltip "La scorciatoia da tastiera apre il mini-pannello che fornisce una scelta delle possibili azioni, invece di aprire o chiudere direttamente la barra laterale.">
+<!ENTITY OptKeyboardShortcut.caption "Scorciatoia da tastiera della barra laterale">
+<!ENTITY OptKeyboardShortcut.tooltip "La scorciatoia da tastiera è la via più veloce per chiudere e riaprire la barra laterale.">
+<!ENTITY OptKeyboardShortcut.control "Control">
+<!ENTITY OptKeyboardShortcut.shift "Shift">
+<!ENTITY OptKeyboardShortcut.alt "Alt">
+<!ENTITY OptKeyboardShortcut.command "Comando">
+<!ENTITY OptKeyboardShortcut.option "Opzione">
+<!ENTITY OptKeyboardShortcut.none "Inattivo">
+<!ENTITY OptKeyboardShortcut.spacebar "Barra spaziatrice">
+<!ENTITY OptKeyboardShortcut.pageup "Page Up">
+<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
+<!ENTITY OptKeyboardShortcut.end "End">
+<!ENTITY OptKeyboardShortcut.home "Home">
+<!ENTITY OptKeyboardShortcut.left "Sinistra">
+<!ENTITY OptKeyboardShortcut.up "Su">
+<!ENTITY OptKeyboardShortcut.right "Destra">
+<!ENTITY OptKeyboardShortcut.down "Giù">
+<!ENTITY about.name "OmniSidebar">
+<!ENTITY about.by "by Quicksaver">
+<!ENTITY about.desc "Tutte le informazioni sul componente aggiuntivo si trovano nella homepage dei componenti aggiuntivi di Mozilla.  Se vi piace il componente aggiuntivo, prendete in esame la possibilità di scrivere una bella recensione, oppure fate una piccola donazione per contribuire a sostenere il suo sviluppo continuo. Le segnalazioni di bug e suggerimenti possono essere fatti nella pagina web di supporto tecnico. Traduzione italiana a cura di Styb (styb.styb@gmail.com)">
+<!ENTITY about.home "Homepage">
+<!ENTITY about.tech "Supporto tecnico">
+<!ENTITY about.notes "Note di rilascio">

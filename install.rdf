@@ -45,6 +45,14 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>it</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Visualizza i tuoi segnalibri con un semplice gesto.  Sposta la barra laterale sullo schermo.  Apri le differenti barre laterali semplicemente cliccando sul titolo.  E altro ancora!  Ottieni sempre un accesso semplice e rapido alla barra laterale.</em:description>
+				<em:translator>Styb - BabelZilla</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>pl</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Przywołuj panel boczny prostym gestem. Umieść panel w innym miejscu. Otwieraj różne zawartości panelu po prostu klikając na ich tytuł. I jeszcze więcej! Pozostaw Twój panel boczny prostym i szybko dostępnym!</em:description>

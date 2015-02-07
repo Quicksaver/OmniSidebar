@@ -31,45 +31,45 @@
 <!ENTITY OpthideDelay.label "Délai de masquage automatique du panneau latéral (en msec) :">
 <!ENTITY OpthideDelay.tooltip "Délai entre le déplacement de la souris hors du panneau et son masquage.">
 <!ENTITY OptswitcherAdjust.label "Ajuster la largeur de la marge de la zone active (pixels) :">
-<!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
+<!ENTITY OptswitcherAdjust.tooltip "Vous pouvez augmenter la taille de la marge réactive aux clics et mouvements de souris.">
 <!ENTITY OptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
-<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
+<!ENTITY OptkeepPrivate.tooltip "Lors de l'entrée ou de la sortie du mode de navigation privée, le panneau latéral restera ouvert avec les mêmes panneaux. Si cette option est désactivée, le panneau latéral sera toujours fermé lors de l'entrée en mode de navigation privée et reviendra aux panneaux ouverts précédemment (avant l'activation du mode privé) lorsqu'on repassera en mode de navigation normal. Cette option est nécessaire si le mode ne navigation privé est activé par défaut au démarrage et vous souhaitez que l'état du panneau latéral soit mémorisé entre les sessions de navigation.">
 <!ENTITY OptkeepLoaded.label "Conserver le panneau lors de la fermeture du panneau latéral">
-<!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
+<!ENTITY OptkeepLoaded.tooltip "Lorsque vous fermez le panneau latéral il restera chargé en arrière-plan. Par exemple, lorsque vous le rouvrez, la position de défilement et tout contenu de zone de texte seront mémorisés.">
 <!ENTITY Optgroupalways.label "Toujours ouvrir dans le panneau latéral">
-<!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
+<!ENTITY Optgroupalways.tooltip "Ces panneaux s'afficheront toujours dans le panneau latéral lorsqu'ils seront lancés à partir de leurs propres boutons de barre d'outils ou raccourcis claviers.">
 <!ENTITY addonsSidebar.label "Gestionnaire de modules">
 <!ENTITY omnisidebarBrowserConsole.label "Console du navigateur">
 <!ENTITY omnisidebarDMT.label "Téléchargements">
 <!ENTITY omnisidebarPageInfo.label "Infos sur la page">
 <!ENTITY omnisidebarScratchpad.label "Ardoise JavaScript">
 <!ENTITY OptforceOpen.label "Ne pas fermer le panneau latéral de">
-<!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
+<!ENTITY OptforceOpen.tooltip "En cliquant sur l'un de ces éléments pour un panneau latéral déjà chargé, cela le laissera ouvert au lieu de le fermer.">
 <!ENTITY OptforceOpen.toolbars "Boutons dans la barre d'outils du panneau latéral">
 <!ENTITY OptforceOpen.menus "Menus déroulants">
 <!ENTITY Opttoolbar.label "Barre d'outils du panneau latéral">
-<!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
+<!ENTITY Opttoolbar.tooltip "Insère une barre d'outils personnalisable en haut du panneau latéral, près du titre.">
 <!ENTITY OptGoURI.label "Inclure le bouton « Go »">
-<!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
-<!ENTITY Optshowheadertitle.label "Show sidebar title">
-<!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
+<!ENTITY OptGoURI.tooltip "Le bouton « Go » vous permet de charger des URI spécifique about: et chrome: ; il ne vous permet pas de charger des pages Web distantes !">
+<!ENTITY Optshowheadertitle.label "Afficher le titre de panneau latéral">
+<!ENTITY Optshowheadertitle.tooltip "Le nom du panneau latéral actuellement ouvert est affiché en haut.">
 <!ENTITY OpttitleButton.label "Menu déroulant du panneau latéral dans le titre">
-<!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
-<!ENTITY Optshowheaderdock.label "Show docking button">
-<!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
-<!ENTITY Optshowheaderclose.label "Show close button">
-<!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
+<!ENTITY OpttitleButton.tooltip "Cliquez sur le titre du panneau pour ouvrir un menu contenant tous les panneaux vers lesquels vous pouvez basculer.">
+<!ENTITY Optshowheaderdock.label "Afficher le bouton d'ancrage">
+<!ENTITY Optshowheaderdock.tooltip "Affiche un bouton en haut du panneau pour l'ancrer ou le détacher rapidement.">
+<!ENTITY Optshowheaderclose.label "Afficher le bouton de fermeture">
+<!ENTITY Optshowheaderclose.tooltip "Affiche un bouton en haut du panneau pour le fermer rapidement.">
 <!ENTITY Optcoloricons.label "Jeu d'icônes pour boutons :">
-<!ENTITY Optcoloricons.nochange.label "Default">
-<!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
+<!ENTITY Optcoloricons.nochange.label "Défaut">
+<!ENTITY Optcoloricons.nochange.tooltip "Aucune modification n'est faite sur les icônes de la barre d'outils.">
 <!ENTITY Optcoloricons.firefox.label "Firefox">
-<!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
+<!ENTITY Optcoloricons.firefox.tooltip "Les icônes dans la barre d'outils sont modifiées afin qu'elles s'adaptent au thème par défaut de Firefox si possible.">
 <!ENTITY Optcoloricons.color.label "Multicolore">
-<!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
+<!ENTITY Optcoloricons.color.tooltip "Les icônes dans la barre d'outils sont modifiées en utilisant la version en couleur si possible.">
 <!ENTITY OptKeysetPanel.label "Ouvrir le mini-panneau au lieu du panneau latéral">
-<!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
+<!ENTITY OptKeysetPanel.tooltip "Le raccourci clavier ouvre le mini-panneau qui vous permet de choisir des actions possibles au lieu d'ouvrir ou de fermer le panneau latéral directement.">
 <!ENTITY OptKeyboardShortcut.caption "Raccourcis clavier du panneau latéral">
-<!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
+<!ENTITY OptKeyboardShortcut.tooltip "Le raccourci clavier est le moyen le plus rapide pour fermer et rouvrir le panneau latéral.">
 <!ENTITY OptKeyboardShortcut.control "Ctrl">
 <!ENTITY OptKeyboardShortcut.shift "Maj">
 <!ENTITY OptKeyboardShortcut.alt "Alt">
@@ -90,4 +90,4 @@
 <!ENTITY about.desc "Toute information sur l'extension et son développeur peut être trouvée sur sa page d'accueil de Mozilla Add-ons. Si vous aimez l'extension, veuillez y laisser un commentaire sympathique ou faire un don pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être soumis sur la page de support technique.">
 <!ENTITY about.home "Page Web de l'extension">
 <!ENTITY about.tech "Support technique">
-<!ENTITY about.notes "Release Notes">
+<!ENTITY about.notes "Notes de versions">
