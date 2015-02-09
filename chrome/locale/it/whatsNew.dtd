@@ -1,7 +1,7 @@
 <!ENTITY whatsNew.title "OmniSidebar - Note di rilascio">
 <!ENTITY whatsNew.name "OmniSidebar">
 <!ENTITY whatsNew.version "Versione {v}">
-<!ENTITY whatsNew.versionDivider "-">
+<!ENTITY whatsNew.versionDivider " - ">
 <!ENTITY whatsNew.uptodate "aggiornato, congratulazioni!">
 <!ENTITY whatsNew.needsupdate "aggiornamento disponibile!">
 <!ENTITY whatsNew.description "Controllate in basso le &quot;Note di rilascio&quot; e i &quot;Problemi noti&quot; di questa versione. Fatemi sapere gli eventuali problemi trovati, o se avete suggerimenti per le versioni future.">
@@ -10,10 +10,10 @@
 <!ENTITY whatsNew.options "Opzioni del componente aggiuntivo">
 <!ENTITY whatsNew.notifyOnUpdates "Mostrami questa scheda al prossimo aggiornamento">
 <!ENTITY whatsNew.information "Maggiori informazioni">
-<!ENTITY whatsNew.home "Homepage del componente aggiuntivo">
+<!ENTITY whatsNew.home "Sito web del componente aggiuntivo">
 <!ENTITY whatsNew.fullchangelog "Storico completo">
 <!ENTITY whatsNew.problems "Avete problemi?">
-<!ENTITY whatsNew.tech "Descrivete il problema nella pagina di supporto">
+<!ENTITY whatsNew.tech "Descrivete il problema nella pagina del sito di supporto">
 <!ENTITY whatsNew.email "Oppure mandatemi una e-mail">
 <!ENTITY whatsNew.author "Altro sull'autore">
 <!ENTITY whatsNew.trymore "Provate un altro dei miei componenti aggiuntivi per una esperienza ancora migliore di Firefox!">

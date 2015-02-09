@@ -87,7 +87,7 @@
 <!ENTITY OptKeyboardShortcut.down "Giù">
 <!ENTITY about.name "OmniSidebar">
 <!ENTITY about.by "by Quicksaver">
-<!ENTITY about.desc "Tutte le informazioni sul componente aggiuntivo si trovano nella homepage dei componenti aggiuntivi di Mozilla.  Se vi piace il componente aggiuntivo, prendete in esame la possibilità di scrivere una bella recensione, oppure fate una piccola donazione per contribuire a sostenere il suo sviluppo continuo. Le segnalazioni di bug e suggerimenti possono essere fatti nella pagina web di supporto tecnico. Traduzione italiana a cura di Styb (styb.styb@gmail.com)">
-<!ENTITY about.home "Homepage">
-<!ENTITY about.tech "Supporto tecnico">
+<!ENTITY about.desc "Tutte le informazioni sul componente aggiuntivo e sullo sviluppatore si trovano sul sito web del componente aggiuntivo di Mozilla.  Se vi piace il componente aggiuntivo, prendete in esame la possibilità di scrivere una bella recensione, oppure fate una piccola donazione per contribuire a sostenere il suo ulteriore continuo. Le segnalazioni di bug e i suggerimenti possono essere fatti sulle pagine del sito di supporto. Traduzione italiana a cura di Styb (styb.styb@gmail.com)">
+<!ENTITY about.home "Sito web del componente aggiuntivo">
+<!ENTITY about.tech "Sito di supporto">
 <!ENTITY about.notes "Note di rilascio">
