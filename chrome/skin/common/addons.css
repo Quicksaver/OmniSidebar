@@ -7,65 +7,65 @@
 	/* general and top toolbox */
 	
 	#addons-page.inSidebar {
-		padding: 8px !important;
+		padding: 8px;
 	}
 	
 	#addons-page.inSidebar > hbox:not(#header) {
-		-moz-box-orient: vertical !important;
+		-moz-box-orient: vertical;
 	}
 	
 	.inSidebar #header {
-		font-size: 0.9em !important;
+		font-size: 0.9em;
 	}
 	
 	.inSidebar #back-btn,
 	.inSidebar #forward-btn {
-		display: -moz-box !important;
+		display: -moz-box;
 	}
 	
 	.inSidebar #header-search {
-		min-width: 10em !important;
-		max-width: 20em !important;
-		-moz-box-flex: 1 !important;
+		min-width: 10em;
+		max-width: 20em;
+		-moz-box-flex: 1;
 	}
 	
 	.inSidebar #header-utils-btn {
-		margin: 0 3px !important;
+		margin: 0 3px;
 	}
 	
 	/* horizontal categories at the top */
 	
 	.inSidebar #categories {
-		display: table-row !important;
+		display: table-row;
 	}
 	
 	.inSidebar #categories .scrollbox-innerbox {
-		overflow: hidden !important;
-		-moz-margin-start: 5px !important;
+		overflow: hidden;
+		-moz-margin-start: 5px;
 	}
 	
 	.inSidebar .category:not([disabled="true"]):not([persist="hidden"]):not([hidden="true"]) {
-		display: table-cell !important;
+		display: table-cell;
 	}
 	
 	.inSidebar .category[disabled="true"], 
 	.inSidebar .category[persist="hidden"], 
 	.inSidebar .category[hidden="true"],
 	.inSidebar #category-userstyles {
-		display: none !important;
+		display: none;
 	}
 	
 	.inSidebar .category-name,
 	.inSidebar .category-badge {
-		display: none !important;
+		display: none;
 	}
 	
 	.inSidebar .category image {
-		margin: 0 !important;
+		margin: 0;
 	}
 	
 	.inSidebar .category[selected="true"] {
-		border-bottom: none !important;
+		border-bottom: none;
 		border-right: 1px solid;
 		border-top: 1px solid;
 		border-left: 1px solid;
@@ -74,206 +74,221 @@
 		-moz-border-right-colors: rgb(195,206,223);
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
-		border-bottom-left-radius: 0 !important;
-		border-bottom-right-radius: 0 !important;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
 	}
 	
 	.inSidebar .category {
-		padding: 4px !important;
-		height: 46px !important;
+		padding: 4px;
+		height: 46px;
 	}
 	
 	/* scrollable lists panes */
 	
 	.inSidebar #view-port-container {
-		height: 1700px !important;
+		height: 1700px;
 	}
 	
 	.inSidebar .view-pane {
-		font-size: 0.85em !important;
+		font-size: 0.85em;
 	}
 	
 	.inSidebar .basicinfo-container {
-		width: 100% !important;
+		width: 100%;
 	}
 	
 	.inSidebar .disabled-postfix,
 	.inSidebar .update-postfix {
-		font-size: 0.8em !important;
+		font-size: 0.8em;
 	}
 	
 	.inSidebar .view-pane richlistitem {
-		padding: 0 5px 2px 5px !important;
+		padding: 0 5px 2px 5px;
 	}
 	
-	.inSidebar .addon .content-container { 
-		margin: 3px 0 !important;
-	}
+	/* reenable with hover effects below */
+	/*.inSidebar .addon .content-container { 
+		margin: 3px 0;
+	}*/
 	
 	.inSidebar .warning,
 	.inSidebar .error,
 	.inSidebar .pending {
-		-moz-margin-start: 0 !important;
+		-moz-margin-start: 0;
 	}
 	
 	.inSidebar .warning-icon,
 	.inSidebar .pending-icon,
 	.inSidebar .error-icon {
-		width: 16px !important;
-		height: 16px !important;
+		width: 16px;
+		height: 16px;
 	}
 	
 	.inSidebar .list .name-container {
-		font-size: 1.4em !important;
+		font-size: 1.4em;
 	}
 	
 	.inSidebar .list button {
-		margin: 1px 2px 2px 2px !important;
-		padding: 0 2px 0 2px !important;
+		margin: 1px 2px 2px 2px;
+		padding: 0 2px 0 2px;
 	}
 	
 	.inSidebar .list richlistitem .description {
-		display: none !important;
+		display: none;
 	}
 	
 	.inSidebar .list richlistitem .description-container {
-		margin: 0 !important;
+		margin: 0;
 	}
 	
 	.inSidebar #updates-list .date-updated { 
-		font-size: 1.2em !important; 
+		font-size: 1.2em; 
 	}
 	
+	/* with hover effects margin-top is 2px, recheck when reenable */
 	.inSidebar .icon-container {
-		margin: 0 !important;
-		margin-top: 2px !important;
+		margin: 9px 0 0 0;
 	}
 	
+	/* slim down unchecked and unhovered entries */
+	/* disabled for now, until this is put behind a pref; also experiment with some transitions */
+	/*
 	.inSidebar .addon:not([selected]):not(:hover) .disabled-postfix,
 	.inSidebar .addon:not([selected]):not(:hover) .update-postfix {
-		display: none !important;
+		display: none;
 	}
 	
 	.inSidebar .addon:not([selected]):not(:hover) :-moz-any(.description-outer-container,.control-container,.addon-control.update,.include-update,.update-available),
 	.inSidebar .addon:not([selected]):not(:hover) .status-container > hbox {
-		visibility: collapse !important;
+		visibility: collapse;
 	}
 	
 	.inSidebar .addon:not([selected]):not(:hover) .advancedinfo-container {
-		margin-top: -20px !important;
+		margin-top: -20px;
 	}
 	
 	.inSidebar .addon:-moz-any([selected],:hover) .icon-container,
 	.inSidebar .addon:-moz-any([selected],:hover) .icon {
-		width: 32px !important;
-		height: 32px !important;
+		width: 32px;
+		height: 32px;
 	}
 	
 	.inSidebar .addon:not([selected]):not(:hover) .icon-container,
 	.inSidebar .addon:not([selected]):not(:hover) .icon {
-		width: 16px !important;
-		height: 16px !important;
+		width: 16px;
+		height: 16px;
+	}
+	*/
+	
+	/* disable when reenabling mouse over */
+	.inSidebar .addon .advancedinfo-container {
+		margin-top: -2px;
+	}
+	.inSidebar .addon .icon-container,
+	.inSidebar .addon .icon {
+		width: 28px;
+		height: 28px;
 	}
 	
 	/* item details page */
 	
 	.inSidebar #detail-autoUpdate radio {
-		margin: 2px 0px 2px 0px !important;
+		margin: 2px 0px 2px 0px;
 	}
 	
 	.inSidebar #detail-autoUpdate radio .radio-label-box {
-		-moz-margin-start: 0px !important;
-		-moz-padding-start: 0px !important;
+		-moz-margin-start: 0px;
+		-moz-padding-start: 0px;
 	}
 	
 	.inSidebar #detail-findUpdates-btn {
-		-moz-margin-start: 0 !important;
-		-moz-margin-end: 0 !important;
+		-moz-margin-start: 0;
+		-moz-margin-end: 0;
 	}
 	
 	.inSidebar #detail-grid .detail-row-label {
-		-moz-margin-start: 0 !important;
+		-moz-margin-start: 0;
 	}
 	
 	/* Add-on detail pages - Remove wasted space */
 	
 	.inSidebar #detail-notifications + hbox {
-		-moz-box-orient: vertical !important;
-		position: relative !important;
+		-moz-box-orient: vertical;
+		position: relative;
 	}
 	
 	.inSidebar .detail-view-container {
-		padding: 0 5px !important;
+		padding: 0 5px;
 	}
 	
 	.inSidebar #detail-screenshot,
 	.inSidebar #detail-icon {
-		margin: 0 !important;
+		margin: 0;
 	}
 	
 	.inSidebar #detail-icon-container {
-		position: absolute !important;
+		position: absolute;
 	}
 	
 	.inSidebar #detail-notifications {
-		margin-top: 0.5em !important;
-		margin-bottom: 0.5em !important;
-		-moz-margin-start: 0.8em !important;
-		-moz-margin-end: 0 !important;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+		-moz-margin-start: 0.8em;
+		-moz-margin-end: 0;
 	}
 	
 	.inSidebar #detail-summary {
-		-moz-margin-start: 68px !important;
-		margin-top: 0.5em !important;
-		margin-bottom: 2.5em !important;
+		-moz-margin-start: 68px;
+		margin-top: 0.5em;
+		margin-bottom: 2.5em;
 	}
 	
 	.inSidebar #detail-desc-container {
-		display: inline !important;
-		text-align: center !important;
+		display: inline;
+		text-align: center;
 	}
 	
 	.inSidebar #detail-desc-container > * {
-		text-align: start !important;
+		text-align: start;
 	}
 	
 	.inSidebar #detail-desc-container + * {
-		margin-top: 2em !important;
+		margin-top: 2em;
 	}
 	
 	/* Add-on detail pages - Stack tables */
 	
 	.inSidebar #detail-grid {
-		display: inline !important;
+		display: inline;
 	}
 	
 	.inSidebar #detail-grid > rows > row:-moz-any(.detail-row-complex:not([hidden]),.detail-row:not([hidden])[value]) {
-		display: table !important;
+		display: table;
 	}
 	
 	.inSidebar #detail-grid > rows > row:-moz-any(.detail-row-complex:not([hidden]),.detail-row:not([hidden])[value]) > label.detail-row-label {
-		width: 95% !important;
+		width: 95%;
 	}
 	
 	.inSidebar #detail-grid > rows > row > :nth-child(2) {
-		margin-left: 2em !important;
+		margin-left: 2em;
 	}
 	
 	.inSidebar #detail-grid > rows > row:-moz-any(.detail-row-complex:not([hidden]),.detail-row:not([hidden])[value]) > label:not(.detail-row-label) {
-		margin-left: 2.5em !important;
+		margin-left: 2.5em;
 	}
 	
 	.inSidebar #detail-rows > setting,
 	.inSidebar #detail-controls {
-		width: 100% !important;
+		width: 100%;
 	}
 	
 	.inSidebar #detail-rows > setting > vbox {
-		-moz-box-ordinal-group: 2 !important;
+		-moz-box-ordinal-group: 2;
 	}
 	
 	.inSidebar #detail-rows > setting[collapsed] {
-		display: none !important;
+		display: none;
 	}
 
 }

@@ -14,8 +14,8 @@
 	/* Whole page - Remove min-width & Less Margin */
 	
 	body {
-		min-width: 0 !important;
-		margin: 0 !important;
+		min-width: 0;
+		margin: 0;
 	}
 	
 	/************************* ADD-ON DETAIL PAGES ************************/
@@ -24,25 +24,25 @@
 	
 	body > #main:first-child,
 	#addon-reviews {
-		margin-left: -60px !important;
+		margin-left: -60px;
 	}
 	
 	#main > header {
-		margin-left: 60px !important;
+		margin-left: 60px;
 	}
 	
 	/* "Back to Add-ons" link - Move up */
 	
 	#main > header #back {
-		position:absolute!important;
-		top:-14px!important;
-		right:0!important;
+		position: absolute;
+		top: -14px;
+		right: 0;
 	}
 	
 	/* Add-on Info Table - Dynamic width */
 	
 	#main .addon-info {
-		width: -moz-calc(100% - 106px) !important;
+		width: -moz-calc(100% - 106px);
 	}
 	
 	/***************************** "HOME" PAGE ****************************/
@@ -67,28 +67,27 @@
 	
 	/* "Up & Coming", "Featured Themes" & "More Ways of Customizing" Sections - Stack */
 	
-	#up-and-coming,
-	#featured-themes,
-	#more-ways {
-		width: -moz-calc(100% - 22px) !important;
+	#sub #up-and-coming,
+	#sub #featured-themes,
+	#sub #more-ways {
+		width: -moz-calc(100% - 22px);
 	}
 	
 	/* Lists - Stack */
 	
 	#main :not(#install) li {
-		width: -moz-calc(100% - 2px) !important;
-		margin: 0 !important;
-		margin-bottom: 10px !important;
-		float: left !important;
+		width: -moz-calc(100% - 2px);
+		margin: 0 0 10px 0;
+		float: left;
 	}
 	
 	#main :not(#install) li > a {
-		height: auto !important;
+		height: auto;
 	}
 
 	#main #install li {
-		margin-bottom: 10px !important;
-		margin-right: 15px !important;
+		margin-bottom: 10px;
+		margin-right: 15px;
 	}
 	
 	/********************** HIDING **********************/
@@ -107,64 +106,64 @@
 	/* Top slider Section - Various fixes */
 	
 	.promo h2 {
-		white-space: normal !important;
+		white-space: normal;
 	}
 	
 	#promos > .slider > li > * {
-		padding: 10px !important;
+		padding: 10px;
 	}
 	
 	/* Top slider Section - "Get Add-ons On The Go" Sub-Section - Fix width */
 	
 	#go-mobile .wrap {
-		width: 100% !important;
+		width: 100%;
 	}
 	
 	/* "Featured Add-ons" Section - Style like the other sections */
 	
 	#featured-addons > h2 {
-		margin: -10px !important;
-		margin-bottom: 0 !important;
-		padding: 10px !important;
-		padding-top: 0.45em !important;
-		padding-bottom: 0.45em !important;
-		background: transparent -moz-linear-gradient(center top, rgb(255, 255, 255) 0pt, rgb(166, 241, 147) 100%) !important;
+		margin: -10px;
+		margin-bottom: 0;
+		padding: 10px;
+		padding-top: 0.45em;
+		padding-bottom: 0.45em;
+		background: transparent linear-gradient(to bottom, rgb(255, 255, 255) 0pt, rgb(166, 241, 147) 100%);
 		box-shadow: 0pt -3px 0pt rgba(8, 78, 3, 0.05) inset, 0pt 3px 0pt rgba(75, 195, 120, 0.3);
-		border-radius: 8px 8px 0 0 !important;
-		border-bottom: 1px solid rgb(168, 184, 209) !important;
+		border-radius: 8px 8px 0 0;
+		border-bottom: 1px solid rgb(168, 184, 209);
 	}
 	
-	#featured-addons {
-		padding: 10px !important;
-		background: transparent -moz-linear-gradient(center top, rgb(255, 255, 255) 0pt, rgb(166, 241, 147) 100%) !important;
+	#main section#featured-addons {
+		padding: 10px;
+		background: transparent linear-gradient(to bottom, rgb(255, 255, 255) 0pt, rgb(166, 241, 147) 100%);
 		box-shadow: 0pt -3px 0pt rgba(8, 78, 3, 0.05) inset, 0pt 3px 0pt rgba(75, 195, 120, 0.3);
 	}
 	
 	/* "Recommend for You" Section - Various fixes */
 	
 	#recs .gallery-wrap {
-		background-color: transparent !important;
-		margin-top: 15px !important;
+		background-color: transparent;
+		margin-top: 15px;
 	}
 	
 	#recs .header {
-		padding-left: 1em !important;
-		width: 100% !important;
+		padding-left: 1em;
+		width: 100%;
 	}
 	
 	#recs .gallery-addons {
-		width: -moz-calc(100% - 20px) !important;
+		width: -moz-calc(100% - 20px);
 	}
 	
 	/* Add-on Video Promo (top section) fixes */
 	
 	#addon-video-promo h2,
 	#addon-video-promo h3 {
-		margin-right: 0 !important;
+		margin-right: 0;
 	}
 	
 	#addon-video-promo .vid-button {
-		margin-bottom: 150px !important;
+		margin-bottom: 150px;
 	}
 	
 }
