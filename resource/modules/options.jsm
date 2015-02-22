@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.2';
+Modules.VERSION = '1.1.3';
 
 this.keys = [
 	{
@@ -63,9 +63,7 @@ this.isStillAvailable = function(key, list) {
 };
 
 this.openReleaseNotesTab = function(aWindow) {
-	// this doesn't work in e10s yet
-	//aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('about:'+objPathString);
-	aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('chrome://'+objPathString+'/content/whatsnew.xhtml');
+	aWindow.gBrowser.selectedTab = aWindow.gBrowser.addTab('about:'+objPathString);
 	aWindow.gBrowser.selectedTab.loadOnStartup = true; // for Tab Mix Plus
 };
 
