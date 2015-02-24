@@ -13,7 +13,7 @@
 		#addons-page.inSidebar:not(.glassStyle),
 		#places.inSidebar:not(.glassStyle),
 		#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
-			background: #EEF3FA !important;
+			background: #EEF3FA;
 		}
 		
 		.inSidebar #placesToolbar {
