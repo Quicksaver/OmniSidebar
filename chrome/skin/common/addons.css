@@ -79,8 +79,12 @@
 	}
 	
 	.inSidebar .category {
-		padding: 4px;
-		height: 46px;
+		padding: 3px;
+		height: 40px;
+	}
+	.inSidebar .category image {
+		width: 28px;
+		height: 28px;
 	}
 	
 	/* scrollable lists panes */
@@ -190,6 +194,17 @@
 		height: 28px;
 	}
 	
+	/* make sure add-on names aren't truncated when lots of labels are shown, especially on Updates tab */
+	.inSidebar .basicinfo-container {
+		display: block;
+	}
+	.inSidebar .date-updated {
+		float: left;
+	}
+	.inSidebar .update-postfix {
+		visibility: collapse;
+	}
+	
 	/* item details page */
 	
 	.inSidebar #detail-autoUpdate radio {
@@ -289,6 +304,14 @@
 	
 	.inSidebar #detail-rows > setting[collapsed] {
 		display: none;
+	}
+	
+	/* Stylish tab */
+	
+	/* in small windows, like the sidebar panel, the columns (sorters) force the panel to go beyond the limits */
+	/* this forces those buttons to wrap */
+	@media all and (max-width: 25.5em) {
+		.inSidebar #list-view[type="userstyle"] #addon-list-empty[hidden] ~ #userstyle-sorting { display: block; }
 	}
 
 }
