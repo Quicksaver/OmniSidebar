@@ -1,9 +1,17 @@
 {
-	"current":"1.5.2",
+	"current":"1.5.3",
 	"knownissues": [
 		["In Direct2D 1.1 enabled builds (by default in Firefox 36+), the bookmarks sidebar, and maybe others, can have its entries invisible until moused over (<a target=\"blank\" href=\"https://bugzilla.mozilla.org/show_bug.cgi?id=1090554\">bug 1090554</a>)"]
 	],
 	"releases": {
+		"1.5.3":{
+			"date":"February 24, 2015",
+			"notes":[
+				["changed","Release Notes tab URI defaults to about:omnisidebar instead of chrome://..., which is now fully functional in multiprocess firefox (e10s)"],
+				["changed","Extra tweaks for the Add-ons Manager Sidebar: compacted top categories, and improvements to the updates and stylish userstyles tabs (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/71\">issue #71</a>)"],
+				["bugfix","The Release Notes link in the preferences dialog would sometimes fail to work"]
+			]
+		},
 		"1.5.2":{
 			"date":"February 10, 2015",
 			"notes":[
