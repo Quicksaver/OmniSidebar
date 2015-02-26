@@ -1,4 +1,4 @@
-Modules.VERSION = '1.3.3';
+Modules.VERSION = '1.3.4';
 
 this.setAutoHide = function(bar, unloaded) {
 	toggleAttribute(bar.box, 'autohide', bar.autoHide && !unloaded);
@@ -377,7 +377,7 @@ this.autoHideSwitchOver = function(e) {
 	if(hover) {
 		Timers.init('switchMouseOver', function() {
 			setHover(bar, true);
-		}, Prefs.showDelay);
+		}, (Timers['hidingSidebar'+(bar.twin ? 'Twin' : '')]) ? 0 : Prefs.showDelay); // this also nullifies the hiding if its timer was already initialized
 	}
 };
 
