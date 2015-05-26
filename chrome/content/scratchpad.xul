@@ -19,7 +19,7 @@
 			sidebartitle="&scratchpadSidebar.label;"
 			WinLinAcceltext="&acceltext.shift;+&scratchpad.keycode;"
 			MacAcceltext="&acceltext.upArrow;&scratchpad.keycode;"
-			oncommand="toggleSidebar(this);" />
+			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">

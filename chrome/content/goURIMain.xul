@@ -13,7 +13,7 @@
 			group="sidebar"
 			sidebarurl="about:blank"
 			sidebartitle="about:blank"
-			oncommand="toggleSidebar(this);" />
+			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 
 	<popupset id="mainPopupSet">
@@ -21,19 +21,19 @@
 			class="omnisidebarURIBarMenu"
 			ignorekeys="true"
 			broadcaster="objName-viewURISidebar"
-			onpopupshown="objName.resetURIBar(this);"
-			onpopuphiding="objName.blurURIBar(this);">
+			onpopupshown="objName.URIBar.reset(this);"
+			onpopuphiding="objName.URIBar.blur(this);">
 			<hbox>
 				<textbox id="objName-URIBar"
 					type="autocomplete" 
 					flex="1"
 					broadcaster="objName-viewURISidebar"
-					onkeydown="return objName.keydownURIBar(event, this);"/>
+					onkeydown="return objName.URIBar.onKeydown(event, this);"/>
 				<button id="objName-URIGo" 
 					class="omnisidebarURIGo"
 					label="&URISidebar.buttonLabel;"
 					broadcaster="objName-viewURISidebar"
-					oncommand="objName.loadURIBar(this);"/>
+					oncommand="objName.URIBar.load(this);"/>
 			</hbox>
 		</menupopup>
 	</popupset>
@@ -48,7 +48,7 @@
 			label="&URISidebar.buttonLabel;"
 			tooltiptext="&URISidebar.tooltip;"
 			broadcaster="objName-viewURISidebar"
-			oncommand="objName.openURIBar(this);" />
+			oncommand="objName.URIBar.open(this);" />
 	</toolbarpalette>
 	
 </overlay>

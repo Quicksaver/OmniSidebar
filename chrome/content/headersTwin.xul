@@ -3,7 +3,7 @@
 <overlay id="headersTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<commandset id="mainCommandSet">
-		<command id="objName:ToggleSideToolbar-twin" oncommand="objName.toggleToolbar(true);"/>
+		<command id="objName:ToggleSideToolbar-twin" oncommand="objName.headers.toggleToolbar(true);"/>
 	</commandset>
 	
 	<vbox id="objName-sidebar-box-twin" class="chromeclass-extrachrome sidebar-box">

@@ -4,7 +4,7 @@
 <overlay id="mainSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<commandset id="mainCommandSet">
-		<command id="objName-cmd_mainSidebar" oncommand="toggleSidebar(this);"/>
+		<command id="objName-cmd_mainSidebar" oncommand="SidebarUI.toggle(this);"/>
 		<command id="objName-cmd_keyset_mainSidebar" oncommand="objName.keysetCommand(false, 'cmd_mainSidebar');"/>
 	</commandset>
 	
@@ -17,7 +17,7 @@
 			type="custom"
 			defaultArea="nav-bar"
 			onload="objName.buttonLabels(this, true);"
-			onclick="return objName.shouldFollowCommand(this, false, event);"
+			onclick="return objName.panel.shouldFollowCommand(this, false, event);"
 			command="objName-cmd_mainSidebar" />
 	</toolbarpalette>
 	
@@ -32,7 +32,7 @@
 			group="sidebar"
 			sidebarurl="about:blank"
 			sidebartitle="&BlankSidebar.label;"
-			oncommand="toggleSidebar(this);" />
+			oncommand="SidebarUI.toggle(this);" />
 		
 		<broadcaster id="objName-viewSocialSidebar"
 			label=""
@@ -47,8 +47,8 @@
 			class="omnisidebar_switch"
 			waitForSS="chrome://objPathString/skin/overlay.css"
 			collapsed="true"
-			onclick="objName.clickSwitcher(event, objName.mainSidebar);"
-			onwheel="objName.scrollSwitcher(event, objName.mainSidebar);"
+			onclick="objName.switcher.onClick(event, objName.mainSidebar);"
+			onwheel="objName.switcher.onScroll(event, objName.mainSidebar);"
 			insertbefore="appcontent"/>
 	</hbox>
 	

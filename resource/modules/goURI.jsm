@@ -1,132 +1,153 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '2.0.0';
 
-this.openURIBar = function(button) {
-	var broadcaster = $(button.getAttribute('broadcaster'));
+this.URIBar = {
+	mainViewId: objName+'-viewURISidebar',
+	twinViewId: objName+'-viewURISidebar-twin',
 	
-	var anchor = $(broadcaster.getAttribute('anchor'));
-	// If the button is opened in the panel, we need to change the anchor to the actual toolbar
-	if(isAncestor(button, panel)) {
-		anchor = button.parentNode;
-	}
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'goButton':
+			case 'goButtonTwin':
+				this.toggleGo();
+				break;
+		}
+	},
 	
-	$(broadcaster.getAttribute('menu')).style.width = anchor.clientWidth -2 +'px';
-	$(broadcaster.getAttribute('menu')).openPopup(anchor, 'after_start');
-};
-
-// Set the value of the developers tools URI bar to the value in the broadcaster
-this.resetURIBar = function(menu) {
-	var broadcaster = $(menu.getAttribute('broadcaster'));
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'willCloseSidebar':
+				if((e.detail.bar.main && isAncestor(e.detail.focusedNode, $(objName+'-URIBarMenu')))
+				|| (e.detail.bar.twin && isAncestor(e.detail.focusedNode, $(objName+'-URIBarMenu-twin')))) {
+					e.preventDefault();
+				}
+				break;
+		}
+	},
 	
-	$(broadcaster.getAttribute('textbar')).value = broadcaster.getAttribute('sidebarurl');
-	$(broadcaster.getAttribute('textbar')).focus();
-	$(broadcaster.getAttribute('textbar')).select();
-	
-	dispatch($(broadcaster.getAttribute('anchor')), {
-		type: 'openGoURIBar',
-		cancelable: false,
-		detail: { bar: ($(broadcaster.getAttribute('anchor')) == twinSidebar.header) ? twinSidebar : mainSidebar }
-	});
-};
-
-// loses focus from the textbox
-this.blurURIBar = function(menu) {
-	var broadcaster = $(menu.getAttribute('broadcaster'));
-	
-	$('main-window').focus();
-	
-	dispatch($(broadcaster.getAttribute('anchor')), {
-		type: 'closeGoURIBar',
-		cancelable: false,
-		detail: { bar: ($(broadcaster.getAttribute('anchor')) == twinSidebar.header) ? twinSidebar : mainSidebar }
-	});
-};
-
-// Loads the uri bar value into the sidebar
-this.loadURIBar = function(button) {
-	var broadcaster = $(button.getAttribute('broadcaster'));
-	var textbarValue = $(broadcaster.getAttribute('textbar')).value;
-	if(!textbarValue.startsWith('about:') && !textbarValue.startsWith('chrome://')) { return; }
-	
-	blurURIBar($(broadcaster.getAttribute('menu')));
-	$(broadcaster.getAttribute('menu')).hidePopup();
-	
-	broadcaster.setAttribute('sidebarurl', textbarValue);
-	broadcaster.setAttribute('sidebartitle', textbarValue);
-	broadcaster.removeAttribute('checked'); // To make sure it always loads the sidebar from the same broadcaster
-	toggleSidebar(broadcaster);
-};
-
-this.keydownURIBar = function(e, box) {
-	var broadcaster = $(box.getAttribute('broadcaster'));
-	
-	switch(e.keyCode) {
-		case e.DOM_VK_ESCAPE:
-			blurURIBar($(broadcaster.getAttribute('menu')));
-			$(broadcaster.getAttribute('menu')).hidePopup();
-			return false;
+	open: function(button) {
+		var broadcaster = $(button.getAttribute('broadcaster'));
 		
-		case e.DOM_VK_RETURN:
-			loadURIBar($(broadcaster.getAttribute('goButton')));
-			return true;
+		var anchor = $(broadcaster.getAttribute('anchor'));
+		// If the button is opened in the panel, we need to change the anchor to the actual toolbar
+		if(isAncestor(button, panel.panel)) {
+			anchor = button.parentNode;
+		}
 		
-		default: return true;
-	}
-};
-
-this.toggleGoURI = function() {
-	if(Prefs.goButton) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain', null, toggleToolbarsGoURI, toggleToolbarsGoURI);
-	} else {
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
-	}
+		var menu = $(broadcaster.getAttribute('menu'));
+		menu.style.width = anchor.clientWidth -2 +'px';
+		menu.openPopup(anchor, 'after_start');
+	},
 	
-	if(Prefs.goButtonTwin) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin', null, toggleToolbarsGoURI, toggleToolbarsGoURI);
-	} else {
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
-	}
-};
-
-this.toggleToolbarsGoURI = function(window) {
-	if(!UNLOADED) {
-		aSync(function() { if(window[objName] && window[objName].toggleToolbars) { window[objName].toggleToolbars(); } });
-	}
-};
-
-this.listenGoCloseSidebar = function(e) {
-	if((e.detail.bar.main && isAncestor(e.detail.focusedNode, $(objName+'-URIBarMenu')))
-	|| (e.detail.bar.twin && isAncestor(e.detail.focusedNode, $(objName+'-URIBarMenu-twin')))) {
-		e.preventDefault();
+	// Set the value of the developers tools URI bar to the value in the broadcaster
+	reset: function(menu) {
+		var broadcaster = $(menu.getAttribute('broadcaster'));
+		
+		var textbar = $(broadcaster.getAttribute('textbar'));
+		textbar.value = broadcaster.getAttribute('sidebarurl');
+		textbar.focus();
+		textbar.select();
+		
+		var anchor = $(broadcaster.getAttribute('anchor'));
+		dispatch(anchor, {
+			type: 'openGoURIBar',
+			cancelable: false,
+			detail: { bar: (anchor == twinSidebar.header) ? twinSidebar : mainSidebar }
+		});
+	},
+	
+	// loses focus from the textbox
+	blur: function(menu) {
+		var broadcaster = $(menu.getAttribute('broadcaster'));
+		
+		document.documentElement.focus();
+		
+		var anchor = $(broadcaster.getAttribute('anchor'));
+		dispatch(anchor, {
+			type: 'closeGoURIBar',
+			cancelable: false,
+			detail: { bar: (anchor == twinSidebar.header) ? twinSidebar : mainSidebar }
+		});
+	},
+	
+	// Loads the uri bar value into the sidebar
+	load: function(button) {
+		var broadcaster = $(button.getAttribute('broadcaster'));
+		var textbarValue = $(broadcaster.getAttribute('textbar')).value;
+		if(!textbarValue.startsWith('about:') && !textbarValue.startsWith('chrome://')) { return; }
+		
+		var menu = $(broadcaster.getAttribute('menu'));
+		this.blur(menu);
+		menu.hidePopup();
+		
+		broadcaster.setAttribute('sidebarurl', textbarValue);
+		broadcaster.setAttribute('sidebartitle', textbarValue);
+		broadcaster.removeAttribute('checked'); // To make sure it always loads the sidebar from the same broadcaster
+		SidebarUI.toggle(broadcaster);
+	},
+	
+	onKeydown: function(e, box) {
+		var broadcaster = $(box.getAttribute('broadcaster'));
+		
+		switch(e.keyCode) {
+			case e.DOM_VK_ESCAPE:
+				var menu = $(broadcaster.getAttribute('menu'));
+				this.blur(menu);
+				menu.hidePopup();
+				return false;
+			
+			case e.DOM_VK_RETURN:
+				this.load($(broadcaster.getAttribute('goButton')));
+				return true;
+			
+			default: return true;
+		}
+	},
+	
+	toggleGo: function() {
+		if(Prefs.goButton) {
+			Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
+		} else {
+			Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');
+		}
+		
+		if(Prefs.goButtonTwin) {
+			Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
+		} else {
+			Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'goURITwin');
+		}
 	}
 };
 
 Modules.LOADMODULE = function() {
-	dontSaveBroadcasters.goURIMain = objName+'-viewURISidebar';
-	dontSaveBroadcasters.goURITwin = objName+'-viewURISidebar-twin';
+	SidebarUI.dontSaveBroadcasters.add(URIBar.mainViewId);
+	SidebarUI.dontSaveBroadcasters.add(URIBar.twinViewId);
 	Styles.load('goURI', 'goURI');
 	
-	Prefs.listen('goButton', toggleGoURI);
-	Prefs.listen('goButtonTwin', toggleGoURI);
+	Prefs.listen('goButton', URIBar);
+	Prefs.listen('goButtonTwin', URIBar);
 	
-	Listeners.add(window, 'willCloseSidebar', listenGoCloseSidebar, true);
+	Listeners.add(window, 'willCloseSidebar', URIBar, true);
 	
-	toggleGoURI();
+	URIBar.toggleGo();
 	
-	twinTriggers.__defineGetter__('goURITwin', function() { return $(objName+'-viewURISidebar-twin'); });
+	SidebarUI.triggers.twin.set('goURITwin', function() { return $(URIBar.twinViewId); });
 };
 
 Modules.UNLOADMODULE = function() {
-	delete twinTriggers.goURITwin;
+	SidebarUI.triggers.twin.delete('goURITwin');
 	
-	Listeners.remove(window, 'willCloseSidebar', listenGoCloseSidebar, true);
+	Listeners.remove(window, 'willCloseSidebar', URIBar, true);
 	
-	Prefs.unlisten('goButton', toggleGoURI);
-	Prefs.unlisten('goButtonTwin', toggleGoURI);
+	Prefs.unlisten('goButton', URIBar);
+	Prefs.unlisten('goButtonTwin', URIBar);
+	
+	SidebarUI.dontSaveBroadcasters.delete(URIBar.mainViewId);
+	SidebarUI.dontSaveBroadcasters.delete(URIBar.twinViewId);
 	
 	if(UNLOADED) {
 		// This is to solve a ZC when the add-on was disabled with a sidebar opened on the goURI broadcasters
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewURISidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewURISidebar-twin') { closeSidebar(twinSidebar); }
+		if(mainSidebar.command == URIBar.mainViewId) { SidebarUI.close(mainSidebar); }
+		if(twinSidebar.command == URIBar.twinViewId) { SidebarUI.close(twinSidebar); }
 		
 		Styles.unload('goURI');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'goURIMain');

@@ -1,7 +1,9 @@
-Modules.VERSION = '1.0.0';
+Modules.VERSION = '1.0.1';
 
 this.unloadSocialBrowser = function() {
-	docShell.createAboutBlankContentViewer(null);
+	if(docShell) {
+		docShell.createAboutBlankContentViewer(null);
+	}
 };
 
 Modules.LOADMODULE = function() {

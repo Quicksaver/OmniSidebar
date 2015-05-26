@@ -1,4 +1,4 @@
-var defaultsVersion = '1.2.6';
+var defaultsVersion = '1.2.7';
 var objName = 'omnisidebar';
 var objPathString = 'omnisidebar';
 var prefList = {
@@ -90,7 +90,7 @@ function waitForSessionStore(window, delayed) {
 function startAddon(window) {
 	// don't load in popup windows set to hide extra chrome
 	var chromeHidden = window.document.documentElement.getAttribute('chromehidden');
-	if(chromeHidden && chromeHidden.indexOf('extrachrome') > -1) { return; }
+	if(chromeHidden && chromeHidden.contains('extrachrome')) { return; }
 	
 	prepareObject(window);
 	
@@ -112,11 +112,11 @@ function startPreferences(window) {
 }
 
 function toggleMoveSidebars() {
-	Modules.loadIf('moveSidebars', !UNLOADED && Prefs.moveSidebars);
+	Modules.loadIf('moveSidebars', Prefs.moveSidebars);
 }
 
 function toggleGlass() {
-	Modules.loadIf('glassStyle', !UNLOADED && Prefs.glassStyle);
+	Modules.loadIf('glassStyle', Prefs.glassStyle);
 }
 
 function onStartup(aReason) {
@@ -154,8 +154,8 @@ function onShutdown(aReason) {
 	Windows.callOnAll(stopAddon, null, null, true);
 	Browsers.callOnAll(stopAddon, null, true);
 	
-	toggleGlass();
-	toggleMoveSidebars();
+	Modules.unload('glassStyle');
+	Modules.unload('moveSidebars');
 	
 	// Unregister stylesheets
 	Styles.unload('global');

@@ -42,9 +42,9 @@
 	}
 	
 	/* hide the sidebars when in DomFullScreen mode (HTML5) */
-	window[omnisidebar-mozFullScreen="true"] .sidebar-box,
-	window[omnisidebar-mozFullScreen="true"] .sidebar-splitter,
-	window[omnisidebar-mozFullScreen="true"] .omnisidebar_switch {
+	window[inDOMFullscreen] .sidebar-box,
+	window[inDOMFullscreen] .sidebar-splitter,
+	window[inDOMFullscreen] .omnisidebar_switch {
 		visibility: collapse !important;
 	}
 	

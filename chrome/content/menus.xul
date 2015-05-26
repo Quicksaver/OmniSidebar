@@ -20,14 +20,14 @@
 			insertbefore="prefSep"/>
 	</menupopup>
 	
-	<menupopup id="viewSidebarMenu" onpopupshowing="objName.menuItemsCheck(this);" />
+	<menupopup id="viewSidebarMenu" onpopupshowing="objName.menus.menuItemsCheck(this);" />
 	
 	<popupset id="mainPopupSet">
 		<menupopup id="objName-openSidebarMenu"
 			target="sidebar-title"
 			box="sidebar-box"
-			onpopupshowing="objName.populateSidebarMenu(this);"
-			onpopuphiding="objName.closeSidebarMenu(this);"/>
+			onpopupshowing="objName.menus.populateSidebarMenu(this);"
+			onpopuphiding="objName.menus.closeSidebarMenu(this);"/>
 	</popupset>
 	
 </overlay>

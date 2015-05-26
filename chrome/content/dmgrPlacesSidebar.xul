@@ -19,7 +19,7 @@
 			sidebartitle="&dmtSidebar.label;"
 			WinLinAcceltext="&acceltext.ctrl;+&downloads.commandkey;"
 			MacAcceltext="&acceltext.cmd;&downloads.commandkey;"
-			oncommand="toggleSidebar(this);" />
+			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">

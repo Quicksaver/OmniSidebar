@@ -2,7 +2,7 @@
 <overlay id="renderAboveTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<splitter id="objName-sidebar-splitter-twin" collapsed="true" />
-	<splitter id="sidebar-splitter" onmousedown="objName.dragStart(event);" />
+	<splitter id="sidebar-splitter" onmousedown="objName.renderAbove.dragStart(event);" />
 	
 	<vbox id="objName-sidebar-box-twin">
 		<hbox id="objName-resizebox-twin"
@@ -13,7 +13,7 @@
 				class="omnisidebar_resizer"
 				element="objName-sidebar-box-twin"
 				dir="left"
-				onmousedown="objName.dragStart(event);"/>
+				onmousedown="objName.renderAbove.dragStart(event);"/>
 			<vbox id="objName-resizesidebar-twin"
 				class="omnisidebar_resize_sidebar"
 				flex="1"

@@ -1,26 +1,26 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 this.toggleForceOpenToolbars = function() {
 	if(Prefs.forceOpenToolbars) {
-		forceOpenTriggers.__defineGetter__('mainToolbar', function() { return mainSidebar.toolbar; });
-		forceOpenTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
+		SidebarUI.triggers.forceOpen.set('mainToolbar', function() { return mainSidebar.toolbar; });
+		SidebarUI.triggers.forceOpen.set('twinToolbar', function() { return twinSidebar.toolbar; });
 	} else {
-		delete forceOpenTriggers.mainToolbar;
-		delete forceOpenTriggers.twinToolbar;
+		SidebarUI.triggers.forceOpen.delete('mainToolbar');
+		SidebarUI.triggers.forceOpen.delete('twinToolbar');
 	}
 };
 
 this.toggleForceOpenMenus = function() {
 	if(Prefs.forceOpenMenus) {
-		forceOpenTriggers.__defineGetter__('viewMainSidebarMenu', function() { return $('viewSidebarMenu'); });
-		forceOpenTriggers.__defineGetter__('viewTwinSidebarMenu', function() { return $(objName+'-viewTwinSidebarMenu'); });
-		forceOpenTriggers.__defineGetter__('openMainSidebarMenu', function() { return $(objName+'-openSidebarMenu'); });
-		forceOpenTriggers.__defineGetter__('openTwinSidebarMenu', function() { return $(objName+'-openTwinSidebarMenu'); });
+		SidebarUI.triggers.forceOpen.set('viewMainSidebarMenu', function() { return $('viewSidebarMenu'); });
+		SidebarUI.triggers.forceOpen.set('viewTwinSidebarMenu', function() { return $(objName+'-viewTwinSidebarMenu'); });
+		SidebarUI.triggers.forceOpen.set('openMainSidebarMenu', function() { return $(objName+'-openSidebarMenu'); });
+		SidebarUI.triggers.forceOpen.set('openTwinSidebarMenu', function() { return $(objName+'-openTwinSidebarMenu'); });
 	} else {
-		delete forceOpenTriggers.viewMainSidebarMenu;
-		delete forceOpenTriggers.viewTwinSidebarMenu;
-		delete forceOpenTriggers.openMainSidebarMenu;
-		delete forceOpenTriggers.openTwinSidebarMenu;
+		SidebarUI.triggers.forceOpen.delete('viewMainSidebarMenu');
+		SidebarUI.triggers.forceOpen.delete('viewTwinSidebarMenu');
+		SidebarUI.triggers.forceOpen.delete('openMainSidebarMenu');
+		SidebarUI.triggers.forceOpen.delete('openTwinSidebarMenu');
 	}
 };
 

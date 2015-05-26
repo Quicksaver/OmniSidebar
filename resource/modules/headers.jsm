@@ -1,146 +1,178 @@
-Modules.VERSION = '1.1.5';
+Modules.VERSION = '2.0.0';
 
-this.toggleToolbar = function(twin) {
-	if(!twin) {
-		Prefs.toolbar = mainSidebar.toolbar.collapsed;
-	} else {
-		Prefs.toolbarTwin = twinSidebar.toolbar.collapsed;
-	}
-};
-
-this.toggleTitles = function(headers) {
-	toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && !Prefs.showheadertitle && !trueAttribute(mainSidebar.title, 'active'));
-	toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && !Prefs.showheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'));
-	
-	if(headers) {
-		toggleHeaders();
-	}
-};
-
-this.toggleCloses = function(headers) {
-	toggleAttribute(mainSidebar.box, 'noclose', !UNLOADED && !Prefs.showheaderclose);
-	toggleAttribute(twinSidebar.box, 'noclose', !UNLOADED && !Prefs.showheadercloseTwin);
-	
-	if(headers) {
-		toggleHeaders();
-	}
-};
-
-this.toggleIconsColor = function() {
-	setAttribute(mainSidebar.toolbar, 'coloricons', Prefs.coloricons);
-	setAttribute(twinSidebar.toolbar, 'coloricons', Prefs.coloriconsTwin);
-};
-
-this.hideMainHeader = {
-	get toolbar () { return !Prefs.toolbar || !toolbarHasButtons(mainSidebar.toolbar); },
-	get title () { return !Prefs.showheadertitle && !trueAttribute(mainSidebar.title, 'active'); },
-	get close () { return !Prefs.showheaderclose; }
-};
-this.hideTwinHeader = {
-	get toolbar () { return !Prefs.toolbarTwin || !toolbarHasButtons(twinSidebar.toolbar); },
-	get title () { return !Prefs.showheadertitleTwin && !trueAttribute(twinSidebar.title, 'active'); },
-	get close () { return !Prefs.showheadercloseTwin; }
-};
-
-// Handles the headers visibility
-// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons
-this.toggleHeaders = function() {
-	// first we make sure the pref value reflects the toolbar state
-	if(mainSidebar.toolbar && Prefs.toolbar == mainSidebar.toolbar.collapsed) {
-		CustomizableUI.setToolbarVisibility(mainSidebar.toolbar.id, Prefs.toolbar);
-	}
-	if(twinSidebar.toolbar && Prefs.toolbarTwin == twinSidebar.toolbar.collapsed) {
-		CustomizableUI.setToolbarVisibility(twinSidebar.toolbar.id, Prefs.toolbarTwin);
-	}
-	
-	var mainHeader = false;
-	for(var x in hideMainHeader) {
-		if(!hideMainHeader[x]) {
-			mainHeader = true;
-			break;
+this.headers = {
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'showheadertitle':
+			case 'showheadertitleTwin':
+				this.toggleTitles();
+				this.toggleHeaders();
+				break;
+			
+			case 'showheaderclose':
+			case 'showheadercloseTwin':
+				this.toggleCloses();
+				this.toggleHeaders();
+				break;
+			
+			case 'coloricons':
+			case 'coloriconsTwin':
+				this.toggleIconsColor();
+				break;
+			
+			case 'toolbar':
+			case 'toolbarTwin':
+				this.toggleHeaders();
+				break;
+			
+			case 'beforecustomization':
+				this.customize(true);
+				break;
+			
+			case 'aftercustomization':
+				this.customize(false);
+				break;
 		}
-	}
-	var twinHeader = false;
-	for(var x in hideTwinHeader) {
-		if(!hideTwinHeader[x]) {
-			twinHeader = true;
-			break;
-		}
-	}
+	},
 	
-	toggleAttribute(mainSidebar.box, 'noHeader', !mainHeader);
-	toggleAttribute(twinSidebar.box, 'noHeader', !twinHeader);
+	onWidgetAdded: function(aWidget, aArea) { this.areaCustomized(aArea); },
+	onWidgetRemoved: function(aWidget, aArea) { this.areaCustomized(aArea); },
+	onAreaNodeRegistered: function(aArea) { this.areaCustomized(aArea); },
+	onAreaNodeUnregistered: function(aArea) { this.areaCustomized(aArea); },
 	
-	hideIt($(objName+'-toolbarCustomizeWrapper'), Prefs.toolbar || (Prefs.twinSidebar && Prefs.toolbarTwin));
-};
-
-this.toolbarHasButtons = function(toolbar) {
-	if(toolbar) {
-		for(var child of toolbar.childNodes) {
-			if(!child.collapsed && !child.hidden) { return true; }
-		}
-	}
-	return false;
-};
-
-this.headersCustomize = function(e) {
-	if((e && e.type == 'beforecustomization') || (!e && customizing)) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
-		Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
-	}
-	else {
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
-		
-		// our CUI listener doesn't run while in customize mode, we only need to do this after exiting anyway
-		toggleHeaders();
-	}
-};
-
-this.toolbarsCustomized = {
-	onWidgetAdded: function(aWidget, aArea) { this.listener(aArea); },
-	onWidgetRemoved: function(aWidget, aArea) { this.listener(aArea); },
-	onAreaNodeRegistered: function(aArea) { this.listener(aArea); },
-	onAreaNodeUnregistered: function(aArea) { this.listener(aArea); },
-	
-	listener: function(aArea) {
+	areaCustomized: function(aArea) {
 		if(customizing) { return; }
 		
 		if((mainSidebar.toolbar && mainSidebar.toolbar.id == aArea) || (twinSidebar.toolbar && twinSidebar.toolbar.id == aArea)) {
-			toggleHeaders();
+			this.toggleHeaders();
+		}
+	},
+	
+	toggleToolbar: function(twin) {
+		if(!twin) {
+			Prefs.toolbar = mainSidebar.toolbar.collapsed;
+		} else {
+			Prefs.toolbarTwin = twinSidebar.toolbar.collapsed;
+		}
+	},
+	
+	toggleTitles: function() {
+		toggleAttribute(mainSidebar.box, 'notitle', !UNLOADED && !Prefs.showheadertitle && !trueAttribute(mainSidebar.titleNode, 'active'));
+		toggleAttribute(twinSidebar.box, 'notitle', !UNLOADED && !Prefs.showheadertitleTwin && !trueAttribute(twinSidebar.titleNode, 'active'));
+	},
+	
+	toggleCloses: function() {
+		toggleAttribute(mainSidebar.box, 'noclose', !UNLOADED && !Prefs.showheaderclose);
+		toggleAttribute(twinSidebar.box, 'noclose', !UNLOADED && !Prefs.showheadercloseTwin);
+	},
+	
+	toggleIconsColor: function() {
+		setAttribute(mainSidebar.toolbar, 'coloricons', Prefs.coloricons);
+		setAttribute(twinSidebar.toolbar, 'coloricons', Prefs.coloriconsTwin);
+	},
+	
+	hideMainHeader: new Map(),
+	hideTwinHeader: new Map(),
+	
+	// Handles the headers visibility
+	// Basically this hides the sidebar header if all its items are empty or if only the toolbar is visible and it has no visible buttons
+	toggleHeaders: function() {
+		// first we make sure the pref value reflects the toolbar state
+		if(mainSidebar.toolbar && Prefs.toolbar == mainSidebar.toolbar.collapsed) {
+			CustomizableUI.setToolbarVisibility(mainSidebar.toolbar.id, Prefs.toolbar);
+		}
+		if(twinSidebar.toolbar && Prefs.toolbarTwin == twinSidebar.toolbar.collapsed) {
+			CustomizableUI.setToolbarVisibility(twinSidebar.toolbar.id, Prefs.toolbarTwin);
+		}
+		
+		var mainHeader = false;
+		for(let x of this.hideMainHeader.values()) {
+			if(!x()) {
+				mainHeader = true;
+				break;
+			}
+		}
+		var twinHeader = false;
+		for(let x of this.hideTwinHeader.values()) {
+			if(!x()) {
+				twinHeader = true;
+				break;
+			}
+		}
+		
+		toggleAttribute(mainSidebar.box, 'noHeader', !mainHeader);
+		toggleAttribute(twinSidebar.box, 'noHeader', !twinHeader);
+		
+		hideIt($(objName+'-toolbarCustomizeWrapper'), Prefs.toolbar || (Prefs.twinSidebar && Prefs.toolbarTwin));
+	},
+	
+	toolbarHasButtons: function(toolbar) {
+		if(toolbar) {
+			for(let child of toolbar.childNodes) {
+				if(!child.collapsed && !child.hidden) { return true; }
+			}
+		}
+		return false;
+	},
+	
+	customize: function(inCustomize = customizing) {
+		if(inCustomize) {
+			Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
+			Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
+		}
+		else {
+			Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
+			Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
+			
+			// our CUI listener doesn't run while in customize mode, we only need to do this after exiting anyway
+			this.toggleHeaders();
+		}
+	},
+	
+	init: function() {
+		this.hideMainHeader.set('toolbar', () => { return !Prefs.toolbar || !this.toolbarHasButtons(mainSidebar.toolbar); });
+		this.hideMainHeader.set('title', function() { return !Prefs.showheadertitle && !trueAttribute(mainSidebar.titleNode, 'active'); });
+		this.hideMainHeader.set('close', function() { return !Prefs.showheaderclose; });
+		
+		this.hideTwinHeader.set('toolbar', () => { return !Prefs.toolbarTwin || !this.toolbarHasButtons(twinSidebar.toolbar); });
+		this.hideTwinHeader.set('title', function() { return !Prefs.showheadertitleTwin && !trueAttribute(twinSidebar.titleNode, 'active'); });
+		this.hideTwinHeader.set('close', function() { return !Prefs.showheadercloseTwin; });
+		
+		Listeners.add(window, 'beforecustomization', this);
+		Listeners.add(window, 'aftercustomization', this);
+		this.customize();
+		
+		CustomizableUI.addListener(this);
+		
+		this.toggleTitles();
+		this.toggleCloses();
+		this.toggleIconsColor();
+		this.toggleHeaders();
+		
+		dispatch(window, { type: 'loadedSidebarHeader', cancelable: false });
+	},
+	
+	onLoad: function(aWindow) {
+		if(aWindow[objName] && aWindow[objName].headers) {
+			aWindow[objName].headers.init();
 		}
 	}
 };
 
-this.toggleHeadersOnLoad = function() {
-	Listeners.add(window, 'beforecustomization', headersCustomize);
-	Listeners.add(window, 'aftercustomization', headersCustomize);
-	headersCustomize();
-	
-	CustomizableUI.addListener(toolbarsCustomized);
-	
-	toggleTitles();
-	toggleCloses();
-	toggleIconsColor();
-	toggleHeaders();
-	
-	dispatch(window, { type: 'loadedSidebarHeader', cancelable: false });
-};
-
 Modules.LOADMODULE = function() {
-	Overlays.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers', null, toggleHeadersOnLoad);
-	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', null, toggleHeadersOnLoad);
+	Overlays.overlayURI('chrome://'+objPathString+'/content/mainSidebar.xul', 'headers', headers);
+	Overlays.overlayURI('chrome://'+objPathString+'/content/twin.xul', 'headersTwin', headers);
 	
-	Prefs.listen('toolbar', toggleHeaders);
-	Prefs.listen('showheadertitle', toggleTitles);
-	Prefs.listen('showheaderclose', toggleCloses);
-	Prefs.listen('coloricons', toggleIconsColor);
-	Prefs.listen('toolbarTwin', toggleHeaders);
-	Prefs.listen('showheadertitleTwin', toggleTitles);
-	Prefs.listen('showheadercloseTwin', toggleCloses);
-	Prefs.listen('coloriconsTwin', toggleIconsColor);
+	Prefs.listen('toolbar', headers);
+	Prefs.listen('showheadertitle', headers);
+	Prefs.listen('showheaderclose', headers);
+	Prefs.listen('coloricons', headers);
+	Prefs.listen('toolbarTwin', headers);
+	Prefs.listen('showheadertitleTwin', headers);
+	Prefs.listen('showheadercloseTwin', headers);
+	Prefs.listen('coloriconsTwin', headers);
 	
-	twinTriggers.__defineGetter__('twinToolbar', function() { return twinSidebar.toolbar; });
+	SidebarUI.triggers.twin.set('twinToolbar', function() { return twinSidebar.toolbar; });
 	
 	Modules.load('menus');
 	Modules.load('renderAbove');
@@ -154,31 +186,31 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('renderAbove');
 	Modules.unload('menus');
 	
-	delete twinTriggers.twinToolbar;
+	SidebarUI.triggers.twin.delete('twinToolbar');
 	
 	if(customizing) {
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'customizeMain');
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'customizeTwin');
 	}
-	CustomizableUI.removeListener(toolbarsCustomized);
+	CustomizableUI.removeListener(headers);
 	
-	Prefs.unlisten('toolbar', toggleHeaders);
-	Prefs.unlisten('showheadertitle', toggleTitles);
-	Prefs.unlisten('showheaderclose', toggleCloses);
-	Prefs.unlisten('coloricons', toggleIconsColor);
-	Prefs.unlisten('toolbarTwin', toggleHeaders);
-	Prefs.unlisten('showheadertitleTwin', toggleTitles);
-	Prefs.unlisten('showheadercloseTwin', toggleCloses);
-	Prefs.unlisten('coloriconsTwin', toggleIconsColor);
+	Prefs.unlisten('toolbar', headers);
+	Prefs.unlisten('showheadertitle', headers);
+	Prefs.unlisten('showheaderclose', headers);
+	Prefs.unlisten('coloricons', headers);
+	Prefs.unlisten('toolbarTwin', headers);
+	Prefs.unlisten('showheadertitleTwin', headers);
+	Prefs.unlisten('showheadercloseTwin', headers);
+	Prefs.unlisten('coloriconsTwin', headers);
 	
-	Listeners.remove(window, 'beforecustomization', headersCustomize);
-	Listeners.remove(window, 'aftercustomization', headersCustomize);
+	Listeners.remove(window, 'beforecustomization', headers);
+	Listeners.remove(window, 'aftercustomization', headers);
 	
 	removeAttribute(mainSidebar.toolbar, 'coloricons');
 	removeAttribute(twinSidebar.toolbar, 'coloricons');
 	
-	toggleTitles();
-	toggleCloses();
+	headers.toggleTitles();
+	headers.toggleCloses();
 	removeAttribute(mainSidebar.box, 'noHeader');
 	removeAttribute(twinSidebar.box, 'noHeader');
 	

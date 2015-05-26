@@ -1,11 +1,77 @@
-Modules.VERSION = '1.0.1';
+Modules.VERSION = '2.0.0';
 
 this.__defineGetter__('puzzleBars', function() { return window.puzzleBars; });
-this.__defineGetter__('lateralBar', function() { return puzzleBars && puzzleBars.lateralBar; });
-this.__defineGetter__('lateralPP', function() { return puzzleBars && puzzleBars.lateralPP; });
 
-this.pztFixer = function(loaded) {
-	if(loaded) {
+this.pzt = {
+	id: 'thePuzzlePiece@quicksaver',
+	
+	get lateral () { return puzzleBars && puzzleBars.lateral; },
+	
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'LoadedPuzzleBar':
+				if(this.lateral && e.target == this.lateral.bar) {
+					this.setMouseOver();
+					this.redoWidths();
+				}
+				break;
+			
+			case 'UnloadedPuzzleBar':
+				if(this.lateral && e.target == this.lateral.bar) {
+					this.unsetMouseOver();
+					this.redoWidths();
+				}
+				break;
+			
+			case 'ToggledPuzzleBar':
+			case 'PuzzleBarCustomized':
+				if(this.lateral && e.target == this.lateral.bar) {
+					this.redoWidths();
+				}
+				break;
+			
+			case 'mouseover':
+			case 'dragenter':
+			case 'mouseout':
+				var bar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
+				if(bar._autohide) {
+					bar._autohide.handleEvent(e);
+				}
+				break;
+		}
+	},
+	
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'lateral_bar':
+			case 'lateral_placement':
+			case 'lateral_autohide':
+				this.redoWidths();
+				break;
+		}
+	},
+	
+	onEnabled: function(addon) {
+		if(addon.id == this.id) { this.enable(); }
+	},
+	
+	onDisabled: function(addon) {
+		if(addon.id == this.id) { this.disable(); }
+	},
+	
+	listen: function() {
+		AddonManager.addAddonListener(this);
+		AddonManager.getAddonByID(this.id, (addon) => {
+			if(addon && addon.isActive) { this.enable(); }
+		});
+	},
+	
+	unlisten: function() {
+		AddonManager.removeAddonListener(this);
+		this.disable();
+	},
+	
+	enable: function() {
 		// we need to access and follow some of PZT's preferences
 		Prefs.setDefaults({
 			lateral_bar: true,
@@ -15,137 +81,115 @@ this.pztFixer = function(loaded) {
 		
 		// make sure the sidebars are moved in relation to the lateral bar so it isn't covered unnecessarily
 		// -1px for lateral bar's box-shadow
-		moveLeftBy.__defineGetter__('pztLateralBar', function() {
-			if(Prefs.lateral_bar && Prefs.lateral_placement == 'left' && !Prefs.lateral_autohide && puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
-			&& lateralBar && lateralBar._loaded && !lateralBar.collapsed) {
-				return lateralBar.parentNode.clientWidth -1;
+		moveLeftBy.__defineGetter__('pztLateralBar', () => {
+			if(Prefs.lateral_bar && Prefs.lateral_placement == 'left' && !Prefs.lateral_autohide
+			&& puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
+			&& this.lateral && this.lateral.bar && this.lateral.bar._loaded && !this.lateral.bar.collapsed) {
+				return this.lateral.bar.parentNode.clientWidth -1;
 			}
 			return 0;
 		});
-		moveRightBy.__defineGetter__('pztLateralBar', function() {
-			if(Prefs.lateral_bar && Prefs.lateral_placement == 'right' && !Prefs.lateral_autohide && puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
-			&& lateralBar && lateralBar._loaded && !lateralBar.collapsed) {
-				return lateralBar.parentNode.clientWidth -1;
+		moveRightBy.__defineGetter__('pztLateralBar', () => {
+			if(Prefs.lateral_bar && Prefs.lateral_placement == 'right' && !Prefs.lateral_autohide
+			&& puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
+			&& this.lateral && this.lateral.bar && this.lateral.bar._loaded && !this.lateral.bar.collapsed) {
+				return this.lateral.bar.parentNode.clientWidth -1;
 			}
 			return 0;
 		});
 		
-		Prefs.listen('lateral_bar', pztRedoWidths);
-		Prefs.listen('lateral_placement', pztRedoWidths);
-		Prefs.listen('lateral_autohide', pztRedoWidths);
-		Listeners.add(window, 'LoadedPuzzleBar', pztRedoIfLateral);
-		Listeners.add(window, 'UnloadedPuzzleBar', pztRedoIfLateral);
-		Listeners.add(window, 'ToggledPuzzleBar', pztRedoIfLateral);
-		Listeners.add(window, 'PuzzleBarCustomized', pztRedoIfLateral);
+		Prefs.listen('lateral_bar', this);
+		Prefs.listen('lateral_placement', this);
+		Prefs.listen('lateral_autohide', this);
+		Listeners.add(window, 'LoadedPuzzleBar', this);
+		Listeners.add(window, 'UnloadedPuzzleBar', this);
+		Listeners.add(window, 'ToggledPuzzleBar', this);
+		Listeners.add(window, 'PuzzleBarCustomized', this);
 		
 		// when hovering the lateral bar, show the sidebar if it's set to autohide
-		Listeners.add(window, 'LoadedPuzzleBar', pztLoadedToolbar);
-		Listeners.add(window, 'UnloadedPuzzleBar', pztLoadedToolbar);
+		Listeners.add(window, 'LoadedPuzzleBar', this);
+		Listeners.add(window, 'UnloadedPuzzleBar', this);
 		
-		pztSetMouseOverLateral(true);
-	} else {
+		this.setMouseOver();
+		this.redoWidths();
+	},
+	
+	disable: function() {
 		delete moveLeftBy.pztLateralBar;
 		delete moveRightBy.pztLateralBar;
 		Timers.cancel('pztRedoWidthsLater');
 		
 		if(Prefs._prefObjects['lateral_bar']) {
-			Prefs.unlisten('lateral_bar', pztRedoWidths);
-			Prefs.unlisten('lateral_placement', pztRedoWidths);
-			Prefs.unlisten('lateral_autohide', pztRedoWidths);
+			Prefs.unlisten('lateral_bar', this);
+			Prefs.unlisten('lateral_placement', this);
+			Prefs.unlisten('lateral_autohide', this);
 		}
-		Listeners.remove(window, 'LoadedPuzzleBar', pztRedoIfLateral);
-		Listeners.remove(window, 'UnloadedPuzzleBar', pztRedoIfLateral);
-		Listeners.remove(window, 'ToggledPuzzleBar', pztRedoIfLateral);
-		Listeners.remove(window, 'PuzzleBarCustomized', pztRedoIfLateral);
+		Listeners.remove(window, 'LoadedPuzzleBar', this);
+		Listeners.remove(window, 'UnloadedPuzzleBar', this);
+		Listeners.remove(window, 'ToggledPuzzleBar', this);
+		Listeners.remove(window, 'PuzzleBarCustomized', this);
 		
-		Listeners.remove(window, 'LoadedPuzzleBar', pztLoadedToolbar);
-		Listeners.remove(window, 'UnloadedPuzzleBar', pztLoadedToolbar);
+		Listeners.remove(window, 'LoadedPuzzleBar', this);
+		Listeners.remove(window, 'UnloadedPuzzleBar', this);
 		
-		pztSetMouseOverLateral(false);
-	}
-	
-	pztRedoWidths();
-};
-
-this.pztRedoIfLateral = function(e) {
-	if(lateralBar == e.target) {
-		pztRedoWidths();
-	}
-};
-
-this.pztRedoWidths = function() {
-	// during startup sometimes the lateralBar may not be fully initialized, probably because of overlays stuff finishing loading stylesheets
-	if(pztRedoWidthsLater()) { return; }
-	
-	if(typeof(setAboveWidth) != 'undefined') {
-		setAboveWidth();
-	}
-	if(typeof(setAutoHideWidth) != 'undefined') {
-		setAutoHideWidth();
-	}
-};
-
-this.pztRedoWidthsLater = function() {
-	if(lateralBar && lateralBar._loaded && !lateralBar.collapsed && lateralBar.parentNode.clientWidth == 0) {
-		Timers.init('pztRedoWidthsLater', pztRedoWidths, 50);
-		return true;
-	}
-	
-	Timers.cancel('pztRedoWidthsLater');
-	return false;
-};
-
-this.pztSetMouseOverLateral = function(setup) {
-	if(setup && Prefs.lateral_bar && !Prefs.lateral_autohide) {
-		Listeners.add(lateralBar, 'mouseover', pztMouseOver);
-		Listeners.add(lateralBar, 'dragenter', pztMouseOver);
-		Listeners.add(lateralBar, 'mouseout', pztMouseOut);
-		Listeners.add(lateralPP, 'mouseover', pztMouseOver);
-		Listeners.add(lateralPP, 'dragenter', pztMouseOver);
-		Listeners.add(lateralPP, 'mouseout', pztMouseOut);
-	} else {
-		Listeners.remove(lateralBar, 'mouseover', pztMouseOver);
-		Listeners.remove(lateralBar, 'dragenter', pztMouseOver);
-		Listeners.remove(lateralBar, 'mouseout', pztMouseOut);
-		Listeners.remove(lateralPP, 'mouseover', pztMouseOver);
-		Listeners.remove(lateralPP, 'dragenter', pztMouseOver);
-		Listeners.remove(lateralPP, 'mouseout', pztMouseOut);
-	}
-};
-
-this.pztMouseOver = function(e) {
-	var bar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
-	autoHideSwitchOver({ target: bar.switcher });
-};
-
-this.pztMouseOut = function(e) {
-	var bar = (Prefs.lateral_placement == 'left') ? leftSidebar : rightSidebar;
-	autoHideSwitchOut({ target: bar.switcher });
-};
-
-this.pztLoadedToolbar = function(e) {
-	if(e.target == lateralBar) {
-		pztSetMouseOverLateral(e.type == 'LoadedPuzzleBar');
-	}
-};
-
-this.pztListener = {
-	onEnabled: function(addon) {
-		if(addon.id == 'thePuzzlePiece@quicksaver') { pztFixer(true); }
+		this.unsetMouseOver();
+		this.redoWidths();
 	},
-	onDisabled: function(addon) {
-		if(addon.id == 'thePuzzlePiece@quicksaver') { pztFixer(false); }
+	
+	redoWidths: function() {
+		// during startup sometimes the lateralBar may not be fully initialized, probably because of overlays stuff finishing loading stylesheets
+		if(this.redoWidthsLater()) { return; }
+		
+		if(typeof(renderAbove) != 'undefined') {
+			renderAbove.setWidth();
+		}
+		if(typeof(autoHide) != 'undefined') {
+			autoHide.setWidth();
+		}
+	},
+	
+	redoWidthsLater: function() {
+		if(this.lateral
+		&& this.lateral.bar
+		&& this.lateral.bar._loaded
+		&& !this.lateral.bar.collapsed
+		&& this.lateral.bar.parentNode.clientWidth == 0) {
+			Timers.init('pztRedoWidthsLater', () => { this.redoWidths(); }, 50);
+			return true;
+		}
+		
+		Timers.cancel('pztRedoWidthsLater');
+		return false;
+	},
+	
+	setMouseOver: function() {
+		if(!Prefs.lateral_bar || Prefs.lateral_autohide) {
+			this.unsetMouseOver();
+			return;
+		}
+		
+		Listeners.add(this.lateral && this.lateral.bar, 'mouseover', this);
+		Listeners.add(this.lateral && this.lateral.bar, 'dragenter', this);
+		Listeners.add(this.lateral && this.lateral.bar, 'mouseout', this);
+		Listeners.add(this.lateral && this.lateral.PP, 'mouseover', this);
+		Listeners.add(this.lateral && this.lateral.PP, 'dragenter', this);
+		Listeners.add(this.lateral && this.lateral.PP, 'mouseout', this);
+	},
+	
+	unsetMouseOver: function() {
+		Listeners.remove(this.lateral && this.lateral.bar, 'mouseover', this);
+		Listeners.remove(this.lateral && this.lateral.bar, 'dragenter', this);
+		Listeners.remove(this.lateral && this.lateral.bar, 'mouseout', this);
+		Listeners.remove(this.lateral && this.lateral.PP, 'mouseover', this);
+		Listeners.remove(this.lateral && this.lateral.PP, 'dragenter', this);
+		Listeners.remove(this.lateral && this.lateral.PP, 'mouseout', this);
 	}
 };
 
 Modules.LOADMODULE = function() {
-	AddonManager.addAddonListener(pztListener);
-	AddonManager.getAddonByID('thePuzzlePiece@quicksaver', function(addon) {
-		if(addon && addon.isActive) { pztFixer(true); }
-	});
+	pzt.listen();
 };
 
 Modules.UNLOADMODULE = function() {
-	AddonManager.removeAddonListener(pztListener);
-	pztFixer(false);
+	pzt.unlisten();
 };

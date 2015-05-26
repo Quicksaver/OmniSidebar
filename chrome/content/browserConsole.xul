@@ -19,7 +19,7 @@
 			sidebartitle="&browserConsole.label;"
 			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&browserConsoleCmd.commandkey;"
 			MacAcceltext="&acceltext.upArrow;&acceltext.cmd;&browserConsoleCmd.commandkey;"
-			oncommand="toggleSidebar(this);" />
+			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 
 	<toolbarpalette id="BrowserToolbarPalette">

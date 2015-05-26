@@ -1,71 +1,87 @@
-Modules.VERSION = '1.2.0';
+Modules.VERSION = '2.0.0';
 
 this.__defineGetter__('MileWideBack', function() { return window.MileWideBack; });
 
-// keep the sidebar visible when hovering the strip if it's opened and auto-hiding
-this.mwbHover = function() {
-	var bar = leftSidebar;
-	if(bar.box && !bar.closed && bar.above && bar.autoHide) {
-		Timers.init('mwbHover', function() {
-			setHover(bar, true);
-		}, Prefs.showDelay);
-	}
-};
-
-this.mwbOut = function() {
-	Timers.cancel('mwbHover');
+this.MWB = {
+	get strip () { return $('back-strip'); },
+	 
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'mouseover':
+				// keep the sidebar visible when hovering the strip if it's opened and auto-hiding
+				var bar = leftSidebar;
+				if(bar.box && !bar.closed && bar.above && bar.autoHide) {
+					Timers.init('mwbHover', function() {
+						autoHide.setHover(bar, true);
+					}, Prefs.showDelay);
+				}
+				break;
+			
+			case 'mouseout':
+				Timers.cancel('mwbHover');
+				
+				var bar = leftSidebar;
+				if(bar.box && !bar.closed && bar.above && bar.autoHide) {
+					autoHide.setHover(bar, false);
+				}
+				break;
+			
+			case 'clickedSwitcher':
+				if(e.detail.bar != leftSidebar) { return; }
+				if(e.detail.clickEvent.shiftKey) { return; }
+				e.preventDefault();
+				e.stopPropagation();
+				MileWideBack.onClick(e.detail.clickEvent);
+				break;
+			
+			case 'scrolledSwitcher':
+				if(e.detail.bar != leftSidebar) { return; }
+				e.preventDefault();
+				e.stopPropagation();
+				MileWideBack.onScroll({ detail: e.detail.scrollEvent.deltaY });
+				break;
+		}
+	},
 	
-	var bar = leftSidebar;
-	if(bar.box && !bar.closed && bar.above && bar.autoHide) {
-		setHover(bar, false);
-	}
-};
-
-this.mwbClick = function(e) {
-	if(e.detail.bar != leftSidebar) { return; }
-	if(e.detail.clickEvent.shiftKey) { return; }
-	e.preventDefault();
-	e.stopPropagation();
-	MileWideBack.onClick(e.detail.clickEvent);
-};
-
-this.mwbWheel = function(e) {
-	if(e.detail.bar != leftSidebar) { return; }
-	e.preventDefault();
-	e.stopPropagation();
-	MileWideBack.onScroll({ detail: e.detail.scrollEvent.deltaY });
-};
-
-// we need to make sure the margin switch is visible for this, otherwise the sidebar occludes EW's clicker
-this.mwbSwitch = function() {
-	leftSidebar.needSwitch.MWB = true;
-	delete rightSidebar.needSwitch.MWB;
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'moveSidebars':
+				this.switcher();
+				break;
+		}
+	},
 	
-	leftSidebar.toggleSwitcher();
-	rightSidebar.toggleSwitcher();
+	// we need to make sure the margin switch is visible for this, otherwise the sidebar occludes MWB's clicker
+	switcher: function() {
+		leftSidebar.needSwitch.add('MWB');
+		rightSidebar.needSwitch.delete('MWB');
+		
+		leftSidebar.toggleSwitcher();
+		rightSidebar.toggleSwitcher();
+	}
 };
 
 Modules.LOADMODULE = function() {
 	Styles.load('milewideback', 'milewideback');
 	
-	Listeners.add($('back-strip'), 'mouseover', mwbHover);
-	Listeners.add($('back-strip'), 'mouseout', mwbOut);
-	Listeners.add(window, 'clickedSwitcher', mwbClick, true);
-	Listeners.add(window, 'scrolledSwitcher', mwbWheel, true);
-	Prefs.listen('moveSidebars', mwbSwitch);
+	Listeners.add(MWB.strip, 'mouseover', MWB);
+	Listeners.add(MWB.strip, 'mouseout', MWB);
+	Listeners.add(window, 'clickedSwitcher', MWB, true);
+	Listeners.add(window, 'scrolledSwitcher', MWB, true);
+	Prefs.listen('moveSidebars', MWB);
 	
-	mwbSwitch();
+	MWB.switcher();
 };
 
 Modules.UNLOADMODULE = function() {
-	Listeners.remove($('back-strip'), 'mouseover', mwbHover);
-	Listeners.remove($('back-strip'), 'mouseout', mwbOut);
-	Listeners.remove(window, 'clickedSwitcher', mwbClick, true);
-	Listeners.remove(window, 'scrolledSwitcher', mwbWheel, true);
-	Prefs.unlisten('moveSidebars', mwbSwitch);
+	Listeners.remove(MWB.strip, 'mouseover', MWB);
+	Listeners.remove(MWB.strip, 'mouseout', MWB);
+	Listeners.remove(window, 'clickedSwitcher', MWB, true);
+	Listeners.remove(window, 'scrolledSwitcher', MWB, true);
+	Prefs.unlisten('moveSidebars', MWB);
 	
-	delete leftSidebar.needSwitch.MWB;
-	delete rightSidebar.needSwitch.MWB;
+	leftSidebar.needSwitch.delete('MWB');
+	rightSidebar.needSwitch.delete('MWB');
 	
 	if(UNLOADED) {
 		Styles.unload('milewideback');

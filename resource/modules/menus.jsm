@@ -1,198 +1,240 @@
-Modules.VERSION = '1.4.1';
+Modules.VERSION = '2.0.0';
 
-// customizeMenu
-
-this.__defineGetter__('contextMenu', function() { return $('toolbar-context-menu'); });
-this.__defineGetter__('contextOptions', function() { return $(objName+'-contextOptions'); });
-this.__defineGetter__('contextSeparator', function() { return $(objName+'-contextSeparator'); });
-this.__defineGetter__('viewMenu', function() { return $('viewToolbarsMenu').firstChild; }); // View - Toolbars submenu
-this.__defineGetter__('customizeMenu', function() { return $('customization-toolbar-menu'); });
-this.__defineGetter__('viewSidebarMenu', function() { return $('viewSidebarMenu'); });
-
-this._ShortcutUtils = null;
-this.__defineGetter__('ShortcutUtils', function() {
-	if(!_ShortcutUtils) {
-		var temp = {};
-		Cu.import("resource://gre/modules/ShortcutUtils.jsm", temp);
-		_ShortcutUtils = temp.ShortcutUtils;
-	}
-	return _ShortcutUtils;
-});
-
-// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
-this.setContextMenu = function(e) {
-	var trigger = e.originalTarget.triggerNode;
-	var hidden =	!isAncestor(trigger, mainSidebar.button)
-			&& !isAncestor(trigger, mainSidebar.header)
-			&& !isAncestor(trigger, twinSidebar.button)
-			&& !isAncestor(trigger, twinSidebar.header);
-		
-	toggleAttribute(contextOptions, 'hidden', hidden);
-	toggleAttribute(contextSeparator, 'hidden', hidden);
+this.menus = {
+	get viewSidebarMenu () { return $('viewSidebarMenu'); },
 	
-	setMenuEntries(contextMenu);
-};
-
-this.setViewMenu = function(e) {
-	setMenuEntries(viewMenu);
-};
-
-this.setCustomizeMenu = function(e) {
-	setMenuEntries(customizeMenu);
-};
-
-this.setMenuEntries = function(menu) {
-	if(mainSidebar.toolbar) {
-		setAttribute(menu.getElementsByAttribute('toolbarId', mainSidebar.toolbar.id)[0], 'command', mainSidebar.toolbar.getAttribute('menucommand'));
-	}
-	if(twinSidebar.toolbar) {
-		setAttribute(menu.getElementsByAttribute('toolbarId', twinSidebar.toolbar.id)[0], 'command', twinSidebar.toolbar.getAttribute('menucommand'));
-	}
-};
-
-this.populateSidebarMenu = function(menu, useButton) {
-	while(menu.firstChild) {
-		menu.firstChild.remove();
-	}
-	
-	// Populate with Social API entries
-	if(SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: viewSidebarMenu }); }
-	
-	for(var child of viewSidebarMenu.childNodes) {
-		// PanelUI styling is mostly done with toolbarbutton elements, so if I want to use the native styling, I have to use these nodes as well
-		if(useButton && child.localName != 'menuseparator') {
-			var newItem = document.createElement('toolbarbutton');
-			for(var attr of child.attributes) {
-				setAttribute(newItem, attr.name, attr.value);
-			}
-		} else {
-			var newItem = child.cloneNode(true);
+	_ShortcutUtils: null,
+	get ShortcutUtils () {
+		if(!this._ShortcutUtils) {
+			var temp = {};
+			Cu.import("resource://gre/modules/ShortcutUtils.jsm", temp);
+			this._ShortcutUtils = temp.ShortcutUtils;
 		}
+		return this._ShortcutUtils;
+	},
+	
+	contextMenu: {
+		get menu () { return $('toolbar-context-menu'); },
+		get options () { return $(objName+'-contextOptions'); },
+		get separator () { return $(objName+'-contextSeparator'); },
 		
-		if(menu.id) {
-			newItem.id = newItem.id+'_'+menu.id;
-		}
-		menu.appendChild(newItem);
-	}
-	
-	menuItemsCheck(menu);
-};
-
-this.menuItemsCheck = function(menu) {
-	menu = menu.target || menu;
-	var mainMenu = (menu == viewSidebarMenu);
-	
-	for(var child of menu.childNodes) {
-		if(!child.getAttribute('observes')) {
-			child.hidden = !SocialSidebar.canShow;
-			if(child.getAttribute('origin')) {
-				if(child.getAttribute('oncommand').contains('show')) {
-					var command = ((!UNLOADED) ? objName+'.placeSocialSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
-					setAttribute(child, 'oncommand', command);
-				} else {
-					var command = (!UNLOADED) ? objName+'.ensureSocialSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
-					setAttribute(child, 'oncommand', command);
-				}
+		handleEvent: function(e) {
+			switch(e.type) {
+				// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
+				case 'popupshowing':
+					var trigger = e.originalTarget.triggerNode;
+					var hidden =	!isAncestor(trigger, mainSidebar.button)
+							&& !isAncestor(trigger, mainSidebar.header)
+							&& !isAncestor(trigger, twinSidebar.button)
+							&& !isAncestor(trigger, twinSidebar.header);
+						
+					toggleAttribute(this.options, 'hidden', hidden);
+					toggleAttribute(this.separator, 'hidden', hidden);
+					
+					menus.setMenuEntries(this.menu);
+					break;
 			}
 		}
+	},
+	
+	viewMenu: {
+		get viewMenu () { return $('viewToolbarsMenu').firstChild; }, // View - Toolbars submenu
 		
-		if(mainMenu) { continue; }
-		
-		// No point in having this menu entry in our lists if it isn't going to be visible
-		if(child.hidden || child.collapsed) {
-			child.remove();
-			continue;
+		handleEvent: function(e) {
+			switch(e.type) {
+				// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
+				case 'popupshown':
+					menus.setMenuEntries(this.menu);
+					break;
+			}
 		}
+	},
+	
+	customizeMenu: {
+		get viewMenu () { return $('customization-toolbar-menu'); }, // View - Toolbars submenu
 		
-		// if we're in the mini panel, let's try to style it like a native PanelUI-subView panel
-		if((menu == panelMenu || menu == panelViewMenu) && child.localName != 'menuseparator') {
-			child.classList.add('subviewbutton');
+		handleEvent: function(e) {
+			switch(e.type) {
+				// Menus are dynamic, I need to make sure the entries do what they're supposed to if they're changed
+				case 'popupshown':
+					menus.setMenuEntries(this.menu);
+					break;
+			}
+		}
+	},
+	
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'popupshowing':
+				this.menuItemsCheck(e.target);
+				break;
 			
-			// add keyboard shortcuts, as it doesn't display them automatically in panels
-			if(child.getAttribute('acceltext')) {
-				setAttribute(child, 'shortcut', child.getAttribute('acceltext'));
-			} else if(child.getAttribute('key')) {
-				var menuKey = $(child.getAttribute('key'));
-				if(menuKey) {
-					setAttribute(child, 'shortcut', ShortcutUtils.prettifyShortcut(menuKey));
+			case 'mousedown':
+				if(e.which != 1) { return; }
+				this.openSidebarMenu($(e.target.getAttribute('TitleButton')));
+				break;
+			
+			case 'endToggleSidebar':
+				var bar = e.detail.bar;
+				if(!bar.closed && bar.command.startsWith(objName+'-viewBlankSidebar')) {
+					this.openSidebarMenu($((bar.twin) ? objName+'-openTwinSidebarMenu' : objName+'-openSidebarMenu'));
+				}
+				break;
+
+		}
+	},
+	
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'titleButton':
+				this.toggleMenuButton();
+				break;
+			
+			case 'titleButtonTwin':
+				this.toggleMenuButtonTwin();
+				break;
+		}
+	},
+	
+	setMenuEntries: function(menu) {
+		if(mainSidebar.toolbar) {
+			setAttribute(menu.getElementsByAttribute('toolbarId', mainSidebar.toolbar.id)[0], 'command', mainSidebar.toolbar.getAttribute('menucommand'));
+		}
+		if(twinSidebar.toolbar) {
+			setAttribute(menu.getElementsByAttribute('toolbarId', twinSidebar.toolbar.id)[0], 'command', twinSidebar.toolbar.getAttribute('menucommand'));
+		}
+	},
+	
+	populateSidebarMenu: function(menu, useButton) {
+		while(menu.firstChild) {
+			menu.firstChild.remove();
+		}
+		
+		// Populate with Social API entries
+		if(SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: this.viewSidebarMenu }); }
+		
+		for(let child of this.viewSidebarMenu.childNodes) {
+			// PanelUI styling is mostly done with toolbarbutton elements, so if I want to use the native styling, I have to use these nodes as well
+			if(useButton && child.localName != 'menuseparator') {
+				var newItem = document.createElement('toolbarbutton');
+				for(let attr of child.attributes) {
+					setAttribute(newItem, attr.name, attr.value);
+				}
+			} else {
+				var newItem = child.cloneNode(true);
+			}
+			
+			if(menu.id) {
+				newItem.id = newItem.id+'_'+menu.id;
+			}
+			menu.appendChild(newItem);
+		}
+		
+		this.menuItemsCheck(menu);
+	},
+	
+	menuItemsCheck: function(menu) {
+		var mainMenu = (menu == this.viewSidebarMenu);
+		
+		for(let child of menu.childNodes) {
+			if(!child.getAttribute('observes')) {
+				child.hidden = !SocialSidebar.canShow;
+				if(child.getAttribute('origin')) {
+					if(child.getAttribute('oncommand').contains('show')) {
+						var command = ((!UNLOADED) ? objName+'.Social.placeSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
+						setAttribute(child, 'oncommand', command);
+					} else {
+						var command = (!UNLOADED) ? objName+'.Social.ensureSwitchBeforeHide(this); ' : 'SocialSidebar.hide();';
+						setAttribute(child, 'oncommand', command);
+					}
+				}
+			}
+			
+			if(mainMenu) { continue; }
+			
+			// No point in having this menu entry in our lists if it isn't going to be visible
+			if(child.hidden || child.collapsed) {
+				child.remove();
+				continue;
+			}
+			
+			// if we're in the mini panel, let's try to style it like a native PanelUI-subView panel
+			if((menu == panel.menu || menu == panel.viewMenu) && child.localName != 'menuseparator') {
+				child.classList.add('subviewbutton');
+				
+				// add keyboard shortcuts, as it doesn't display them automatically in panels
+				if(child.getAttribute('acceltext')) {
+					setAttribute(child, 'shortcut', child.getAttribute('acceltext'));
+				} else if(child.getAttribute('key')) {
+					var menuKey = $(child.getAttribute('key'));
+					if(menuKey) {
+						setAttribute(child, 'shortcut', this.ShortcutUtils.prettifyShortcut(menuKey));
+					}
 				}
 			}
 		}
-	}
-};
-
-this.openSidebarMenu = function(e) {
-	if(e.target) {
-		if(e.which != 1) { return; }
-		var menu = $(e.target.getAttribute('TitleButton'));
-	} else {
-		var menu = e;
-	}
+	},
 	
-	var target = $(menu.getAttribute('target'));
+	openSidebarMenu: function(menu) {
+		var target = $(menu.getAttribute('target'));
+		
+		setAttribute(target, 'active', 'true');
+		if(!target.getAttribute('TitleButton')) { setAttribute(target, 'TitleButton', 'true'); }
+		
+		// the title needs to be visible to place the menu correctly
+		headers.toggleTitles();
+		headers.toggleHeaders();
+		menu.style.minWidth = target.clientWidth +'px';
+		
+		menu.openPopup(target, 'after_start');
+		dispatch(target, { type: 'openSidebarMenu', cancelable: false });
+	},
 	
-	setAttribute(target, 'active', 'true');
-	if(!target.getAttribute('TitleButton')) { setAttribute(target, 'TitleButton', 'true'); }
-	
-	// the title needs to be visible to place the menu correctly
-	toggleTitles(true);
-	menu.style.minWidth = target.clientWidth +'px';
-	
-	menu.openPopup(target, 'after_start');
-	dispatch(target, { type: 'openSidebarMenu', cancelable: false });
-};
-
-this.closeSidebarMenu = function(menu) {
-	var bar = (trueAttribute(menu, 'twinSidebar')) ? twinSidebar : mainSidebar;
-	
-	if(bar.twin) {
-		toggleMenuButtonTwin();
-	} else {
-		toggleMenuButton();
-	}
-	
-	var target = $(menu.getAttribute('target'));
-	target.removeAttribute('active');
-	
-	toggleTitles(true);
-	
-	dispatch(target, { type: 'closeSidebarMenu', cancelable: false });
-	
-	// the aSync is probably unnecessary, but I think it'll work better and it'll be smoother
-	aSync(function() {
-		if(!bar.box || bar.closed) { return; }
-		var command = bar.box.getAttribute('sidebarcommand');
-		if(command.startsWith(objName+'-viewBlankSidebar')) {
-			toggleSidebar(command, false, bar.twin);
+	closeSidebarMenu: function(menu) {
+		var bar = (trueAttribute(menu, 'twinSidebar')) ? twinSidebar : mainSidebar;
+		
+		if(bar.twin) {
+			this.toggleMenuButtonTwin();
+		} else {
+			this.toggleMenuButton();
 		}
-	});
-};
-
-this.toggleMenuButton = function() {
-	if(UNLOADED || window.closed || window.willClose || !Prefs.titleButton) {
-		removeAttribute(mainSidebar.title, 'TitleButton');
-		Listeners.remove(mainSidebar.title, 'mousedown', openSidebarMenu);
-	} else {
-		setAttribute(mainSidebar.title, 'TitleButton', objName+'-openSidebarMenu');
-		Listeners.add(mainSidebar.title, 'mousedown', openSidebarMenu);
-	}
-};
-
-this.toggleMenuButtonTwin = function() {
-	if(UNLOADED || window.closed || window.willClose || !Prefs.twinSidebar || !Prefs.titleButtonTwin) {
-		removeAttribute(twinSidebar.title, 'TitleButton');
-		Listeners.remove(twinSidebar.title, 'mousedown', openSidebarMenu);
-	} else {
-		setAttribute(twinSidebar.title, 'TitleButton', objName+'-openTwinSidebarMenu');
-		Listeners.add(twinSidebar.title, 'mousedown', openSidebarMenu);
-	}
-};
-
-this.blankSidebarMenu = function(e) {
-	var bar = e.detail.bar;
+		
+		var target = $(menu.getAttribute('target'));
+		target.removeAttribute('active');
+		
+		headers.toggleTitles();
+		headers.toggleHeaders();
+		
+		dispatch(target, { type: 'closeSidebarMenu', cancelable: false });
+		
+		// the aSync is probably unnecessary, but I think it'll work better and it'll be smoother
+		aSync(function() {
+			if(bar.closed) { return; }
+			var command = bar.command;
+			if(command.startsWith(objName+'-viewBlankSidebar')) {
+				SidebarUI.toggle(command, false, bar.twin);
+			}
+		});
+	},
 	
-	if(!bar.closed && bar.box.getAttribute('sidebarcommand').startsWith(objName+'-viewBlankSidebar')) {
-		openSidebarMenu($((bar.twin) ? objName+'-openTwinSidebarMenu' : objName+'-openSidebarMenu'));
+	toggleMenuButton: function() {
+		if(UNLOADED || window.closed || window.willClose || !Prefs.titleButton) {
+			removeAttribute(mainSidebar.titleNode, 'TitleButton');
+			Listeners.remove(mainSidebar.titleNode, 'mousedown', this);
+		} else {
+			setAttribute(mainSidebar.titleNode, 'TitleButton', objName+'-openSidebarMenu');
+			Listeners.add(mainSidebar.titleNode, 'mousedown', this);
+		}
+	},
+	
+	toggleMenuButtonTwin: function() {
+		if(UNLOADED || window.closed || window.willClose || !Prefs.twinSidebar || !Prefs.titleButtonTwin) {
+			removeAttribute(twinSidebar.titleNode, 'TitleButton');
+			Listeners.remove(twinSidebar.titleNode, 'mousedown', this);
+		} else {
+			setAttribute(twinSidebar.titleNode, 'TitleButton', objName+'-openTwinSidebarMenu');
+			Listeners.add(twinSidebar.titleNode, 'mousedown', this);
+		}
 	}
 };
 	
@@ -200,51 +242,51 @@ Modules.LOADMODULE = function() {
 	Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
 	Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
 	
-	Listeners.add(contextMenu, 'popupshowing', setContextMenu);
-	Listeners.add(viewMenu, 'popupshown', setViewMenu);
-	Listeners.add(customizeMenu, 'popupshown', setCustomizeMenu);
-	Listeners.add($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
-	Listeners.add(window, 'endToggleSidebar', blankSidebarMenu);
+	Listeners.add(menus.contextMenu.menu, 'popupshowing', menus.contextMenu);
+	Listeners.add(menus.viewMenu.menu, 'popupshown', menus.viewMenu);
+	Listeners.add(menus.customizeMenu.menu, 'popupshown', menus.customizeMenu);
+	Listeners.add($('social-statusarea-popup'), 'popupshowing', menus);
+	Listeners.add(window, 'endToggleSidebar', menus);
 	
-	twinTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
-	twinTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
+	SidebarUI.triggers.twin.set('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
+	SidebarUI.triggers.twin.set('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
 	
-	barSwitchTriggers.__defineGetter__('viewSidebarMenuMenu', function() { return $('viewSidebarMenuMenu'); });
-	barSwitchTriggers.__defineGetter__('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
-	barSwitchTriggers.__defineGetter__('menuTitle', function() { return $(objName+'-openSidebarMenu'); });
-	barSwitchTriggers.__defineGetter__('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
+	SidebarUI.triggers.barSwitch.set('viewSidebarMenuMenu', function() { return $('viewSidebarMenuMenu'); });
+	SidebarUI.triggers.barSwitch.set('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
+	SidebarUI.triggers.barSwitch.set('menuTitle', function() { return $(objName+'-openSidebarMenu'); });
+	SidebarUI.triggers.barSwitch.set('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
 	
-	Prefs.listen('titleButton', toggleMenuButton);
-	Prefs.listen('titleButtonTwin', toggleMenuButtonTwin);
+	Prefs.listen('titleButton', menus);
+	Prefs.listen('titleButtonTwin', menus);
 	
-	toggleMenuButton();
-	toggleMenuButtonTwin();
+	menus.toggleMenuButton();
+	menus.toggleMenuButtonTwin();
 };
 
 Modules.UNLOADMODULE = function() {
-	delete twinTriggers.viewTwinSidebarMenuMenu;
-	delete twinTriggers.menuTitleTwin;
+	SidebarUI.triggers.twin.delete('viewTwinSidebarMenuMenu');
+	SidebarUI.triggers.twin.delete('menuTitleTwin');
 	
-	delete barSwitchTriggers.viewSidebarMenuMenu;
-	delete barSwitchTriggers.viewTwinSidebarMenuMenu;
-	delete barSwitchTriggers.menuTitle;
-	delete barSwitchTriggers.menuTitleTwin;
+	SidebarUI.triggers.barSwitch.delete('viewSidebarMenuMenu');
+	SidebarUI.triggers.barSwitch.delete('viewTwinSidebarMenuMenu');
+	SidebarUI.triggers.barSwitch.delete('menuTitle');
+	SidebarUI.triggers.barSwitch.delete('menuTitleTwin');
 	
-	Prefs.unlisten('titleButton', toggleMenuButton);
-	Prefs.unlisten('titleButtonTwin', toggleMenuButtonTwin);
+	Prefs.unlisten('titleButton', menus);
+	Prefs.unlisten('titleButtonTwin', menus);
 	
-	Listeners.remove(contextMenu, 'popupshowing', setContextMenu);
-	Listeners.remove(viewMenu, 'popupshown', setViewMenu);
-	Listeners.remove(customizeMenu, 'popupshown', setCustomizeMenu);
-	Listeners.remove($('social-statusarea-popup'), 'popupshowing', menuItemsCheck);
-	Listeners.remove(window, 'endToggleSidebar', blankSidebarMenu);
+	Listeners.remove(menus.contextMenu.menu, 'popupshowing', menus.contextMenu);
+	Listeners.remove(menus.viewMenu.menu, 'popupshown', menus.viewMenu);
+	Listeners.remove(menus.customizeMenu.menu, 'popupshown', menus.customizeMenu);
+	Listeners.remove($('social-statusarea-popup'), 'popupshowing', menus);
+	Listeners.remove(window, 'endToggleSidebar', menus);
 	
 	// ensure the menu is properly reset when unloading
-	menuItemsCheck($('viewSidebarMenu'));
-	if($('social-statusarea-popup')) { menuItemsCheck($('social-statusarea-popup')); }
+	menus.menuItemsCheck(menus.viewSidebarMenu);
+	if($('social-statusarea-popup')) { menus.menuItemsCheck($('social-statusarea-popup')); }
 	
-	toggleMenuButton();
-	toggleMenuButtonTwin();
+	menus.toggleMenuButton();
+	menus.toggleMenuButtonTwin();
 	
 	if(UNLOADED) {
 		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');

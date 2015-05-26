@@ -1,69 +1,77 @@
-Modules.VERSION = '1.2.1';
+Modules.VERSION = '2.0.0';
 
-this.toggleAlwaysAddons = function(loaded) {
-	if(loaded && Prefs.alwaysAddons) {
-		toCode.modify(window, 'window.BrowserOpenAddonsMgr', [
-			['var newLoad = !switchToTabHavingURI("about:addons", true);',
-				 'var newLoad = !window.switchToTabHavingURI("about:addons", false);'
-				+'if(newLoad) {'
-				+"	toggleSidebar('omnisidebar-viewAddonSidebar');"
-				+'}'
-			]
-		]);
-	} else {
-		toCode.revert(window, 'window.BrowserOpenAddonsMgr');
-	}
+this.addonMgr = {
+	broadcasterId: objName+'-viewAddonSidebar',
+	get broadcaster () { return $(this.broadcasterId); },
 	
-	addonMgrAcceltext();
-};
-
-this.addonMgrAcceltext = function() {
-	if($(objName+'-viewAddonSidebar')) {
-		toggleAttribute($(objName+'-viewAddonSidebar'), 'acceltext', Prefs.alwaysAddons,
-			$(objName+'-viewAddonSidebar').getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext'));
-	}
-};
-
-this.doAddonCommand = function() {
-	delete holdBroadcasters.addon;
-	if(mainSidebar.loaded && mainSidebar.state.command == objName+'-viewAddonSidebar') { loadMainSidebar(); }
-	if(twinSidebar.loaded && twinSidebar.state.command == objName+'-viewAddonSidebar') { loadTwinSidebar(); }
-};
-
-this.loadAddonMgr = function() {
-	doAddonCommand();
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'alwaysAddons':
+				this.toggleAlways(Prefs.alwaysAddons);
+				break;
+		}
+	},
 	
-	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar';
-	var twin = false;
-	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') {
-		checked = true;
-		twin = true;
+	toggleAlways: function(enable) {
+		if(enable) {
+			toCode.modify(window, 'window.BrowserOpenAddonsMgr', [
+				['var newLoad = !switchToTabHavingURI("about:addons", true);',
+					 'var newLoad = !window.switchToTabHavingURI("about:addons", false);'
+					+'if(newLoad) {'
+					+"	SidebarUI.toggle('omnisidebar-viewAddonSidebar');"
+					+'}'
+				]
+			]);
+		} else {
+			toCode.revert(window, 'window.BrowserOpenAddonsMgr');
+		}
+		
+		this.acceltext();
+	},
+	
+	acceltext: function() {
+		if(this.broadcaster) {
+			toggleAttribute(this.broadcaster, 'acceltext', Prefs.alwaysAddons, this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext'));
+		}
+	},
+	
+	onLoad: function() {
+		SidebarUI.holdBroadcasters.delete(this.broadcasterId);
+		if(mainSidebar.loaded && mainSidebar.state.command == this.broadcasterId) { self.onLoad(); }
+		if(twinSidebar.loaded && twinSidebar.state.command == this.broadcasterId) { twin.load(); }
+		
+		var checked = mainSidebar.command == this.broadcasterId;
+		var twin = false;
+		if(!checked && twinSidebar.command == this.broadcasterId) {
+			checked = true;
+			twin = true;
+		}
+		toggleAttribute(this.broadcaster, 'checked', checked);
+		toggleAttribute(this.broadcaster, 'twinSidebar', twin);
+		this.acceltext();
+		aSync(() => { setAttribute($(objName+'-addons_sidebar_button'), 'observes', this.broadcasterId); });
 	}
-	toggleAttribute($(objName+'-viewAddonSidebar'), 'checked', checked);
-	toggleAttribute($(objName+'-viewAddonSidebar'), 'twinSidebar', twin);
-	addonMgrAcceltext();
-	aSync(function() { setAttribute($(objName+'-addons_sidebar_button'), 'observes', objName+'-viewAddonSidebar'); });
 };
 
 Modules.LOADMODULE = function() {
-	holdBroadcasters.addon = objName+'-viewAddonSidebar';
+	SidebarUI.holdBroadcasters.add(addonMgr.broadcasterId);
 	
 	Styles.load('addonMgrSidebar', 'addons');
 	Styles.load('addonMgrSidebarDiscover', 'addonsDiscover');
 	
-	Overlays.overlayWindow(window, 'addonMgr', null, loadAddonMgr);
+	Overlays.overlayWindow(window, 'addonMgr', addonMgr);
 	
-	Prefs.listen('alwaysAddons', toggleAlwaysAddons);
-	toggleAlwaysAddons(true);
+	Prefs.listen('alwaysAddons', addonMgr);
+	addonMgr.toggleAlways(Prefs.alwaysAddons);
 };
 
 Modules.UNLOADMODULE = function() {
-	Prefs.unlisten('alwaysAddons', toggleAlwaysAddons);
-	toggleAlwaysAddons();
+	Prefs.unlisten('alwaysAddons', addonMgr);
+	addonMgr.toggleAlways(false);
 	
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewAddonSidebar') { closeSidebar(twinSidebar); }
+		if(mainSidebar.command == addonMgr.broadcasterId) { SidebarUI.close(mainSidebar); }
+		if(twinSidebar.command == addonMgr.broadcasterId) { SidebarUI.close(twinSidebar); }
 		Styles.unload('addonMgrSidebar');
 		Styles.unload('addonMgrSidebarDiscover');
 	}

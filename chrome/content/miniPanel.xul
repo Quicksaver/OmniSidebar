@@ -6,8 +6,8 @@
 		<panel id="objName-panel"
 			type="arrow"
 			class="cui-widget-panel PanelUI-subView objName-panel"
-			onpopupshowing="objName.populatePanel(this);"
-			onpopuphiding="objName.emptyPanel(this);">
+			onpopupshowing="objName.panel.populate(this);"
+			onpopuphiding="objName.panel.empty(this);">
 			<vbox class="cui-widget-panelview PanelUI-subView">
 				<box id="objName-panel-toolbarContainer"/>
 				<menuseparator id="objName-panel-toolbarSeparator"/>

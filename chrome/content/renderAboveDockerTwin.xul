@@ -6,7 +6,7 @@
 			class="omnisidebar-docker"
 			waitForSS="chrome://objPathString/skin/above.css"
 			insertafter="objName-sidebar-throbber-twin"
-			oncommand="objName.toggleAbove(true);" />
+			oncommand="objName.renderAbove.toggle(true);" />
 	</sidebarheader>
 	
 </overlay>

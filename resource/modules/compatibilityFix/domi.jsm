@@ -1,58 +1,66 @@
-Modules.VERSION = '1.2.0';
+Modules.VERSION = '2.0.0';
 
-this.doDOMICommand = function() {
-	delete holdBroadcasters.domi;
-	if(mainSidebar.loaded && mainSidebar.state.command == objName+'-viewDOMInspectorSidebar') { loadMainSidebar(); }
-	if(twinSidebar.loaded && twinSidebar.state.command == objName+'-viewDOMInspectorSidebar') { loadTwinSidebar(); }
-};
-
-this.isDOMISidebar = function(bar) {
-	return (bar && bar.box && bar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar');
-};
-
-this.loadDOMIFix = function(e) {
-	if(e.target
-	&& e.target.document
-	&& e.target.document.baseURI == 'chrome://inspector/content/inspector.xul'
-	&& e.detail
-	&& isDOMISidebar(e.detail.bar)) {
-		if(!e.target.arguments) {
-			e.target.arguments = new e.target.Array(); // Doing it this way to prevent a ZC.
-		}
-		e.target.arguments.push(window.content.document);
-	}
-};
-
-this.loadDOMI = function() {
-	doDOMICommand();
+this.DOMi = {
+	broadcasterId: objName+'-viewDOMInspectorSidebar',
+	get broadcaster () { return $(this.broadcasterId); },
 	
-	var checked = mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar';
-	var twin = false;
-	if(!checked && twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar') {
-		checked = true;
-		twin = true;
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'SidebarFocusedSync':
+				if(e.target
+				&& e.target.document
+				&& e.target.document.baseURI == 'chrome://inspector/content/inspector.xul'
+				&& e.detail && this.is(e.detail.bar)) {
+					if(!e.target.arguments) {
+						e.target.arguments = new e.target.Array(); // Doing it this way to prevent a ZC.
+					}
+					e.target.arguments.push(window.content.document);
+				}
+				break;
+		}
+	},
+	
+	init: function() {
+		SidebarUI.holdBroadcasters.delete(this.broadcasterId);
+		if(mainSidebar.loaded && mainSidebar.state.command == this.broadcasterId) { self.onLoad(); }
+		if(twinSidebar.loaded && twinSidebar.state.command == this.broadcasterId) { twin.load(); }
+	},
+	
+	is: function(bar) {
+		return (bar && bar.command == this.broadcasterId);
+	},
+	
+	onLoad: function() {
+		this.init();
+		
+		var checked = mainSidebar.command == this.broadcasterId;
+		var twin = false;
+		if(!checked && twinSidebar.command == this.broadcasterId) {
+			checked = true;
+			twin = true;
+		}
+		toggleAttribute(this.broadcaster, 'checked', checked);
+		toggleAttribute(this.broadcaster, 'twinSidebar', twin);
+		aSync(() => { setAttribute($(objName+'-dominspector_sidebar_button'), 'observes', this.broadcasterId); });
 	}
-	toggleAttribute($(objName+'-viewDOMInspectorSidebar'), 'checked', checked);
-	toggleAttribute($(objName+'-viewDOMInspectorSidebar'), 'twinSidebar', twin);
-	aSync(function() { setAttribute($(objName+'-dominspector_sidebar_button'), 'observes', objName+'-viewDOMInspectorSidebar'); });
 };
 
 Modules.LOADMODULE = function() {
-	holdBroadcasters.domi = objName+'-viewDOMInspectorSidebar';
+	SidebarUI.holdBroadcasters.add(DOMi.broadcasterId);
 	
 	AddonManager.getAddonByID("inspector@mozilla.org", function(addon) {
 		if(UNLOADED) { return; }
 		
 		if(addon && addon.isActive) {
-			Overlays.overlayWindow(window, 'domi', null, loadDOMI);
-			Listeners.add(window, 'SidebarFocusedSync', loadDOMIFix);
+			Overlays.overlayWindow(window, 'domi', DOMi);
+			Listeners.add(window, 'SidebarFocusedSync', DOMi);
 		} else {
 			AddonManager.getAddonByID("inspector-dp@mozilla.org", function(addon) {
 				if(addon && addon.isActive) {
-					Overlays.overlayWindow(window, 'domi', null, loadDOMI);
-					Listeners.add(window, 'SidebarFocusedSync', loadDOMIFix);
+					Overlays.overlayWindow(window, 'domi', DOMi);
+					Listeners.add(window, 'SidebarFocusedSync', DOMi);
 				} else {
-					doDOMICommand();
+					DOMi.init();
 				}
 			});
 		}
@@ -61,10 +69,10 @@ Modules.LOADMODULE = function() {
 
 Modules.UNLOADMODULE = function() {
 	if(UNLOADED) {
-		if(mainSidebar.box && mainSidebar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar') { closeSidebar(mainSidebar); }
-		if(twinSidebar.box && twinSidebar.box.getAttribute('sidebarcommand') == objName+'-viewDOMInspectorSidebar') { closeSidebar(twinSidebar); }
+		if(mainSidebar.command == DOMi.broadcasterId) { SidebarUI.close(mainSidebar); }
+		if(twinSidebar.command == DOMi.broadcasterId) { SidebarUI.close(twinSidebar); }
 	}
 	
-	Listeners.remove(window, 'SidebarFocusedSync', loadDOMIFix);
+	Listeners.remove(window, 'SidebarFocusedSync', DOMi);
 	Overlays.removeOverlayWindow(window, 'domi');
 };

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '1.1.1';
 
 //Error: win[objectName].xulId(...).contentWindow is undefined
 //Source file: file:///C:/Users/Quicksaver/AppData/Roaming/Mozilla/Firefox/Profiles/c0wgkj18.Nightly/extensions/isreaditlater@ideashower.com/components/RILdelegate.js
@@ -13,7 +13,7 @@ Modules.VERSION = '1.1.0';
 
 Modules.LOADMODULE = function() {
 	toCode.modify(window.RIL, 'window.RIL.listIsOpen', [
-		["&& this.xulId('sidebar', true).contentWindow", "&& this.xulId('sidebar', true).contentWindow && this.xulId('sidebar', true).contentWindow"]
+		["&& this.xulId('sidebar', true).contentWindow", "&& this.xulId('sidebar', true) && this.xulId('sidebar', true).contentWindow"]
 	]);
 	toCode.modify(window.RIL.APP, 'window.RIL.APP.commandInAllOpenWindows', [
 		["&& win[objectName].xulId('sidebar', true)", "&& win[objectName].xulId('sidebar', true) && win[objectName].xulId('sidebar', true).contentWindow"]

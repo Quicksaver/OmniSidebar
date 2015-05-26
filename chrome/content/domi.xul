@@ -12,7 +12,7 @@
 			group="sidebar"
 			sidebarurl="chrome://inspector/content/inspector.xul"
 			sidebartitle="&DOMInspectorSidebar.label;"
-			oncommand="toggleSidebar(this);" />
+			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">

@@ -5,7 +5,7 @@
 <overlay id="headers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
 	<commandset id="mainCommandSet">
-		<command id="objName:ToggleSideToolbar" oncommand="objName.toggleToolbar(false);"/>
+		<command id="objName:ToggleSideToolbar" oncommand="objName.headers.toggleToolbar(false);"/>
 	</commandset>
 	
 	<vbox id="sidebar-box" class="chromeclass-extrachrome sidebar-box">

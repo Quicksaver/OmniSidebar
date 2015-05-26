@@ -11,7 +11,7 @@
 			insertafter="viewSidebarMenuMenu">
 			<menupopup id="objName-viewTwinSidebarMenu"
 				twinSidebar="true"
-				onpopupshowing="objName.populateSidebarMenu(this);"/>
+				onpopupshowing="objName.menus.populateSidebarMenu(this);"/>
 		</menu>
 	</menupopup>
 	
@@ -20,8 +20,8 @@
 			target="objName-sidebar-title-twin"
 			box="objName-sidebar-box-twin"
 			twinSidebar="true"
-			onpopupshowing="objName.populateSidebarMenu(this);"
-			onpopuphiding="objName.closeSidebarMenu(this);"/>
+			onpopupshowing="objName.menus.populateSidebarMenu(this);"
+			onpopuphiding="objName.menus.closeSidebarMenu(this);"/>
 	</popupset>
 	
 </overlay>

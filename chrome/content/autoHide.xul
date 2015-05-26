@@ -2,7 +2,7 @@
 <overlay id="autoHide-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
 	
 	<hbox id="objName-resizebox" 
-		onmouseout="objName.hidingSidebar(objName.mainSidebar);"
-		ondragenter="objName.onDragEnter(objName.mainSidebar);" />
+		onmouseout="objName.autoHide.hidingSidebar(objName.mainSidebar);"
+		ondragenter="objName.autoHide.onDragEnter(objName.mainSidebar);" />
 	
 </overlay>

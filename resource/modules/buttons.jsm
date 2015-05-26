@@ -1,144 +1,154 @@
-Modules.VERSION = '1.1.0';
+Modules.VERSION = '2.0.0';
 
-this.buttonsToWatch = [
-	{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
-	{ id: 'tools-updatescan-button', watchAttr: 'status', trueVal: 'CHANGE', modifierAttr: 'updscannew' },
-	{ id: 'tools-updatescan-button', watchAttr: 'status', trueVal: 'CHANGE_DISABLED', modifierAttr: 'updscannew' }
-];
-
-this.setButtonModifiers = function(bar) {
-	if(!bar.button) { return; }
+this.buttons = {
+	toWatch: [
+		{ id: 'feedbar-button', watchAttr: 'new', trueVal: 'true', modifierAttr: 'feednew' },
+		{ id: 'tools-updatescan-button', watchAttr: 'status', trueVal: 'CHANGE', modifierAttr: 'updscannew' },
+		{ id: 'tools-updatescan-button', watchAttr: 'status', trueVal: 'CHANGE_DISABLED', modifierAttr: 'updscannew' }
+	],
 	
-	var modifiers = {};
-	for(var watch of buttonsToWatch) {
-		if(modifiers[watch.modifierAttr]) { continue; }
+	attrWatcher: function(obj, attr, oldValue, newValue) {
+		var bar = (isAncestor(obj, mainSidebar.toolbar)) ? mainSidebar : (isAncestor(obj, twinSidebar.toolbar)) ? twinSidebar : null;
 		
-		modifiers[watch.modifierAttr] = !customizing && isAncestor($(watch.id), bar.toolbar) && $(watch.id).getAttribute(watch.watchAttr) == watch.trueVal;
-	}
-	
-	for(var a in modifiers) {
-		toggleAttribute(bar.button, a, modifiers[a]);
-	}
-};
-
-this.updateButtonModifier = function(obj, attr, oldValue, newValue) {
-	var bar = (isAncestor(obj, mainSidebar.toolbar)) ? mainSidebar : (isAncestor(obj, twinSidebar.toolbar)) ? twinSidebar : null;
-	
-	if(bar && bar.button) {
-		var modifiers = {};
-		for(var watch of buttonsToWatch) {
-			if(watch.id == obj.id && watch.watchAttr == attr) {
-				if(modifiers[watch.modifierAttr]) { continue; }
-				
-				modifiers[watch.modifierAttr] = newValue == watch.trueVal;
+		if(bar && bar.button) {
+			var modifiers = {};
+			for(let watch of this.toWatch) {
+				if(watch.id == obj.id && watch.watchAttr == attr) {
+					if(modifiers[watch.modifierAttr]) { continue; }
+					
+					modifiers[watch.modifierAttr] = newValue == watch.trueVal;
+				}
 			}
+			
+			for(var a in modifiers) {
+				toggleAttribute(bar.button, a, modifiers[a]);
+			}
+		}
+	},
+	
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'beforecustomization':
+			case 'aftercustomization':
+			case 'loadedSidebarHeader':
+				this.customizeModifiers();
+				break;
+		}
+	},
+	
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'moveSidebars':
+				if(mainSidebar.button) { this.labels(mainSidebar.button); }
+				if(twinSidebar.button) { this.labels(twinSidebar.button); }
+				break;
+		}
+	},
+	
+	setModifiers: function(bar) {
+		if(!bar.button) { return; }
+		
+		var modifiers = {};
+		for(let watch of this.toWatch) {
+			if(modifiers[watch.modifierAttr]) { continue; }
+			
+			modifiers[watch.modifierAttr] = !customizing && isAncestor($(watch.id), bar.toolbar) && $(watch.id).getAttribute(watch.watchAttr) == watch.trueVal;
 		}
 		
 		for(var a in modifiers) {
 			toggleAttribute(bar.button, a, modifiers[a]);
 		}
-	}
-};
-
-this.customizeButtonModifiers = function() {
-	for(var watch of buttonsToWatch) {
-		if(customizing || (!isAncestor($(watch.id), mainSidebar.toolbar) && !isAncestor($(watch.id), twinSidebar.toolbar))) {
-			Watchers.removeAttributeWatcher($(watch.id), watch.watchAttr, updateButtonModifier);
-		} else {
-			Watchers.addAttributeWatcher($(watch.id), watch.watchAttr, updateButtonModifier);
-		}
-	}
-		
-	setButtonModifiers(mainSidebar);
-	setButtonModifiers(twinSidebar);
-};
-
-// Keep the button label and tooltip when the observe attribute changes
-this.buttonLabels = function(btn, onLoad) {
-	if(!btn) { return; }
+	},
 	
-	aSync(function() { setAttribute(btn, 'loaded', 'true'); });
-	if(btn == mainSidebar.button) {
-		var box = mainSidebar.box;
-		var check = !box || mainSidebar.closed || customizing;
-		
-		if(onLoad && window.document.baseURI == 'chrome://browser/content/browser.xul') {
-			setButtonModifiers(mainSidebar);
-		}
-		
-		setAttribute(btn, 'label', mainSidebar.label);
-		if(Prefs.twinSidebar) {
-			if(check) {
-				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonMainTooltip'));
+	customizeModifiers: function() {
+		for(let watch of this.toWatch) {
+			var node = $(watch.id);
+			if(customizing || (!isAncestor(node, mainSidebar.toolbar) && !isAncestor(node, twinSidebar.toolbar))) {
+				Watchers.removeAttributeWatcher(node, watch.watchAttr, this);
 			} else {
-				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonMainCloseTooltip'));
-			}
-		} else {
-			if(check) {
-				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTooltip'));
-			} else {
-				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonCloseTooltip'));
+				Watchers.addAttributeWatcher(node, watch.watchAttr, this);
 			}
 		}
-		
-		toggleAttribute(btn, 'checked', !check);
-		toggleAttribute(btn, 'movetoright', Prefs.moveSidebars);
-		
-		setAttribute($('wrapper-'+objName+'-button'), 'title', btn.getAttribute('label'));
-		
-		return;
-	}
+			
+		this.setModifiers(mainSidebar);
+		this.setModifiers(twinSidebar);
+	},
 	
-	if(btn == twinSidebar.button) {
-		var box = twinSidebar.box;
-		var check = !box || twinSidebar.closed || customizing;
+	// Keep the button label and tooltip when the observe attribute changes
+	labels: function(btn, onLoad) {
+		if(!btn) { return; }
 		
-		if(onLoad && window.document.baseURI == 'chrome://browser/content/browser.xul') {
-			setButtonModifiers(twinSidebar);
+		aSync(function() { setAttribute(btn, 'loaded', 'true'); });
+		if(btn == mainSidebar.button) {
+			var check = mainSidebar.closed || customizing;
+			
+			if(onLoad && window.document.baseURI == 'chrome://browser/content/browser.xul') {
+				this.setModifiers(mainSidebar);
+			}
+			
+			setAttribute(btn, 'label', mainSidebar.label);
+			if(Prefs.twinSidebar) {
+				if(check) {
+					setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonMainTooltip'));
+				} else {
+					setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonMainCloseTooltip'));
+				}
+			} else {
+				if(check) {
+					setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTooltip'));
+				} else {
+					setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonCloseTooltip'));
+				}
+			}
+			
+			toggleAttribute(btn, 'checked', !check);
+			toggleAttribute(btn, 'movetoright', Prefs.moveSidebars);
+			
+			setAttribute($('wrapper-'+objName+'-button'), 'title', btn.getAttribute('label'));
+			
+			return;
 		}
 		
-		setAttribute(btn, 'label', twinSidebar.label);
-		if(check) {
-			setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTwinTooltip'));
-		} else {
-			setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTwinCloseTooltip'));
+		if(btn == twinSidebar.button) {
+			var check = twinSidebar.closed || customizing;
+			
+			if(onLoad && window.document.baseURI == 'chrome://browser/content/browser.xul') {
+				this.setModifiers(twinSidebar);
+			}
+			
+			setAttribute(btn, 'label', twinSidebar.label);
+			if(check) {
+				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTwinTooltip'));
+			} else {
+				setAttribute(btn, 'tooltiptext', Strings.get('buttons', 'buttonTwinCloseTooltip'));
+			}
+			
+			toggleAttribute(btn, 'checked', !check);
+			toggleAttribute(btn, 'movetoleft', Prefs.moveSidebars);
+			
+			setAttribute($('wrapper-'+objName+'-button-twin'), 'title', btn.getAttribute('label'));
 		}
-		
-		toggleAttribute(btn, 'checked', !check);
-		toggleAttribute(btn, 'movetoleft', Prefs.moveSidebars);
-		
-		setAttribute($('wrapper-'+objName+'-button-twin'), 'title', btn.getAttribute('label'));
 	}
-};
-
-this.updateButtons = function() {
-	if(mainSidebar.button) { buttonLabels(mainSidebar.button); }
-	if(twinSidebar.button) { buttonLabels(twinSidebar.button); }
 };
 
 Modules.LOADMODULE = function() {
-	Prefs.listen('moveSidebars', updateButtons);
+	Prefs.listen('moveSidebars', buttons);
 	
-	Listeners.add(window, 'beforecustomization', customizeButtonModifiers);
-	Listeners.add(window, 'aftercustomization', customizeButtonModifiers);
-	Listeners.add(window, 'loadedSidebarHeader', customizeButtonModifiers);
+	Listeners.add(window, 'beforecustomization', buttons);
+	Listeners.add(window, 'aftercustomization', buttons);
+	Listeners.add(window, 'loadedSidebarHeader', buttons);
 
-	customizeButtonModifiers();
+	buttons.customizeModifiers();
 };
 
 Modules.UNLOADMODULE = function() {
-	for(var watch of buttonsToWatch) {
-		Watchers.removeAttributeWatcher($(watch.id), watch.watchAttr, updateButtonModifier);
+	for(let watch of buttons.toWatch) {
+		Watchers.removeAttributeWatcher($(watch.id), watch.watchAttr, buttons);
 	}
 	
-	Listeners.remove(window, 'beforecustomization', customizeButtonModifiers);
-	Listeners.remove(window, 'aftercustomization', customizeButtonModifiers);
-	Listeners.remove(window, 'loadedSidebarHeader', customizeButtonModifiers);
+	Listeners.remove(window, 'beforecustomization', buttons);
+	Listeners.remove(window, 'aftercustomization', buttons);
+	Listeners.remove(window, 'loadedSidebarHeader', buttons);
 		
-	Prefs.unlisten('moveSidebars', updateButtons);
-	
-	self.buttonLabels = function(btn, onLoad) {
-		if(UNLOADED) { return; }
-		if(toggleButtons()) { buttonLabels(btn, onLoad); }
-	};
+	Prefs.unlisten('moveSidebars', buttons);
 };

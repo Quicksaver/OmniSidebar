@@ -1,270 +1,321 @@
-Modules.VERSION = '1.1.4';
+Modules.VERSION = '2.0.0';
 
-this.dragalt = null;
-this.dragorix = null;
-this.dragTarget = null;
-this.dragNotTarget = null;
-this.dragNewW = null;
-this.dragOtherW = null;
-
-// Drag (resize when renderabove) handlers
-this.dragStart = function(e) {
-	if(e.which != '1' || customizing) { return; }
+this.renderAbove = {
+	dragalt: null,
+	dragorix: null,
+	dragTarget: null,
+	dragNotTarget: null,
+	dragNewW: null,
+	dragOtherW: null,
 	
-	Listeners.add(window, "mousemove", drag);
-	Listeners.add(window, "mouseup", dragEnd);
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'mousemove':
+				var maxWidth = browserBox.clientWidth -Prefs.minSidebarWidth -Prefs.minSpaceBetweenSidebars;
+				// we so don't want this...
+				if(this.dragTarget.target.width < Prefs.minSidebarWidth) {
+					setAttribute(this.dragTarget.target.box, 'width', Prefs.minSidebarWidth);
+				}
+				// or this
+				else if(this.dragTarget.target.width > maxWidth) {
+					setAttribute(this.dragTarget.target.box, 'width', maxWidth);
+				}
+				
+				// If new width makes it overlap the other sidebar...
+				if(this.dragNotTarget.target.box) {
+					if(this.dragTarget.target.width > browserBox.clientWidth -this.dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
+						setAttribute(this.dragNotTarget.target.box, 'width', browserBox.clientWidth -Prefs.minSpaceBetweenSidebars -this.dragTarget.target.width);
+					} else {
+						setAttribute(this.dragNotTarget.target.box, 'width', this.dragNotTarget.oriW);
+					}
+				}
+				
+				// Temporarily apply new widths in renderabove
+				if(this.dragTarget.target.above) {
+					this.dragTarget.target.box.style.width = this.dragTarget.target.width +'px';
+				}
+				if(this.dragNotTarget.target.box && this.dragNotTarget.target.above) {
+					this.dragNotTarget.target.box.style.width = this.dragNotTarget.target.width +'px';
+				}
+				break;
+				
+			case 'mouseup':
+				Listeners.remove(window, "mousemove", this);
+				Listeners.remove(window, "mouseup", this);
+				
+				this.dragTarget.target.box.style.width = '';
+				if(this.dragNotTarget.target.box) {
+					this.dragNotTarget.target.box.style.width = '';
+					if(this.dragTarget.target.width > browserBox.clientWidth -this.dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
+						setAttribute(this.dragNotTarget.target.box, 'width', browserBox.clientWidth -Prefs.minSpaceBetweenSidebars -this.dragTarget.target.width);
+					} else {
+						setAttribute(this.dragNotTarget.target.box, 'width', this.dragNotTarget.oriW);
+					}
+				}
+				
+				// Don't need to wait for the timers to fire themselves, since we've finished resizing at this point
+				// No weird jump of sidebar size back to the original size for a moment when renderabove is on.
+				this.setWidth();
+				
+				dispatch(this.dragTarget.target.box, { type: 'endSidebarResize', cancelable: false, detail: { bar: this.dragTarget.target } });
+				break;
+			
+			case 'browserResized':
+				this.setHeight();
+				break;
+			
+			case 'sidebarWidthChanged':
+				this.setWidth();
+				break;
+		}
+	},
 	
-	if(e.target.id == objName+'-resizer' || e.target.id == 'sidebar-splitter') {
-		dragTarget = {
-			target: mainSidebar,
-			oriW: mainSidebar.width
-		};
-		dragNotTarget = {
-			target: twinSidebar,
-			oriW: twinSidebar.width
-		};
-	} else {
-		dragTarget = {
-			target: twinSidebar,
-			oriW: twinSidebar.width
-		};
-		dragNotTarget = {
-			target: mainSidebar,
-			oriW: mainSidebar.width
-		};
-	}
+	observe: function(aSubject, aTopic, aData) {
+		switch(aSubject) {
+			case 'aboveSquared':
+				toggleAttribute(mainSidebar.box, 'squareLook', Prefs.aboveSquared);
+				toggleAttribute(twinSidebar.box, 'squareLook', Prefs.aboveSquared);
+				break;
+			
+			case 'showheaderdock':
+			case 'showheaderdockTwin':
+				this.toggleDockers();
+				break;
+			
+			case 'renderabove':
+			case 'renderaboveTwin':
+				this.start();
+				break;
+		}
+	},
 	
-	dispatch(dragTarget.target.box, { type: 'startSidebarResize', cancelable: false, detail: { bar: dragTarget.target } });
-};
-
-this.dragEnd = function(e) {
-	Listeners.remove(window, "mousemove", drag);
-	Listeners.remove(window, "mouseup", dragEnd);
-	
-	dragTarget.target.box.style.width = '';
-	if(dragNotTarget.target.box) {
-		dragNotTarget.target.box.style.width = '';
-		if(dragTarget.target.width > browserBox.clientWidth -dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
-			setAttribute(dragNotTarget.target.box, 'width', browserBox.clientWidth -Prefs.minSpaceBetweenSidebars -dragTarget.target.width);
+	// Drag (resize when renderabove) handlers
+	dragStart: function(e) {
+		if(e.which != '1' || customizing) { return; }
+		
+		Listeners.add(window, "mousemove", this);
+		Listeners.add(window, "mouseup", this);
+		
+		if(e.target.id == objName+'-resizer' || e.target.id == 'sidebar-splitter') {
+			this.dragTarget = {
+				target: mainSidebar,
+				oriW: mainSidebar.width
+			};
+			this.dragNotTarget = {
+				target: twinSidebar,
+				oriW: twinSidebar.width
+			};
 		} else {
-			setAttribute(dragNotTarget.target.box, 'width', dragNotTarget.oriW);
+			this.dragTarget = {
+				target: twinSidebar,
+				oriW: twinSidebar.width
+			};
+			this.dragNotTarget = {
+				target: mainSidebar,
+				oriW: mainSidebar.width
+			};
 		}
-	}
+		
+		dispatch(this.dragTarget.target.box, { type: 'startSidebarResize', cancelable: false, detail: { bar: this.dragTarget.target } });
+	},
 	
-	// Don't need to wait for the timers to fire themselves, since we've finished resizing at this point
-	// No weird jump of sidebar size back to the original size for a moment when renderabove is on.
-	setAboveWidth();
+	setHeight: function() {
+		var moveBy = document.documentElement.getAttribute('sizemode') == 'normal' ? +1 : 0;
+		// I can't set these by css, cpu usage goes through the roof?!
+		if(mainSidebar.box) { mainSidebar.box.style.height = (Prefs.renderabove) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
+		if(twinSidebar.box) { twinSidebar.box.style.height = (Prefs.renderaboveTwin) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
+	},
 	
-	dispatch(dragTarget.target.box, { type: 'endSidebarResize', cancelable: false, detail: { bar: dragTarget.target } });
-};
-
-this.drag = function(e) {
-	var maxWidth = browserBox.clientWidth -Prefs.minSidebarWidth -Prefs.minSpaceBetweenSidebars;
-	if(dragTarget.target.width < Prefs.minSidebarWidth) { setAttribute(dragTarget.target.box, 'width', Prefs.minSidebarWidth); } // we so don't want this...
-	else if(dragTarget.target.width > maxWidth) { setAttribute(dragTarget.target.box, 'width', maxWidth); } // or this
+	setWidth: function() {
+		// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
+		// I'm not supporting other versions of OSX, just this one isn't simple as it is
+		var moveBy = (!WINNT) ? -1 : 0;
+		var leftOffset = moveBy +moveLeft;
+		var rightOffset = moveBy +moveRight;
+		
+		var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
+		sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
+		sscode += '@-moz-document url("'+document.baseURI+'") {\n';
+		
+		if(Prefs.renderabove && mainSidebar.width) {
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(ltr):not([movetoright]),\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(rtl)[movetoright] {\n';
+			sscode += '		left: -' + mainSidebar.width + 'px;\n';
+			sscode += '	}\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(ltr)[movetoright],\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(rtl):not([movetoright]) {\n';
+			sscode += '		right: -' + mainSidebar.width + 'px;\n';
+			sscode += '	}\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox {\n';
+			sscode += '		left: ' + (mainSidebar.width +leftOffset) + 'px !important;\n';
+			sscode += '	}\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox {\n';
+			sscode += '		right: ' + (mainSidebar.width +rightOffset) + 'px !important;\n';
+			sscode += '	}\n';
+		}
+		
+		if(Prefs.renderaboveTwin && twinSidebar.width) {
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove] { width: ' + twinSidebar.width + 'px; }\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(ltr):not([movetoleft]),\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(rtl)[movetoleft] {\n';
+			sscode += '		right: -' + twinSidebar.width + 'px;\n';
+			sscode += '	}\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(ltr)[movetoleft],\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(rtl):not([movetoleft]) {\n';
+			sscode += '		left: -' + twinSidebar.width + 'px;\n';
+			sscode += '	}\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin {\n';
+			sscode += '		right: ' + (twinSidebar.width +rightOffset) + 'px !important;\n';
+			sscode += '	}\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
+			sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin {\n';
+			sscode += '		left: ' + (twinSidebar.width +leftOffset) + 'px !important;\n';
+			sscode += '	}\n';
+		}
+		
+		sscode += '}';
+		
+		Styles.load('aboveWidthURI_'+_UUID, sscode, true);
+	},
 	
-	// If new width makes it overlap the other sidebar...
-	if(dragNotTarget.target.box) {
-		if(dragTarget.target.width > browserBox.clientWidth -dragNotTarget.oriW -Prefs.minSpaceBetweenSidebars) {
-			setAttribute(dragNotTarget.target.box, 'width', browserBox.clientWidth -Prefs.minSpaceBetweenSidebars -dragTarget.target.width);
+	setResizerDirection: function(resizer) {
+		if(RTL) {
+			var value = resizer.getAttribute('dir');
+			if(value == 'left') { value = 'right'; } else { value = 'left'; }
+			setAttribute(resizer, 'dir', value);
+		}
+	},
+	
+	toggle: function(twin) {
+		if(customizing) { return; }
+		
+		if(twin) {
+			Prefs.renderaboveTwin = !Prefs.renderaboveTwin;
 		} else {
-			setAttribute(dragNotTarget.target.box, 'width', dragNotTarget.oriW);
+			Prefs.renderabove = !Prefs.renderabove;
 		}
-	}
+	},
 	
-	// Temporarily apply new widths in renderabove
-	if(dragTarget.target.above) {
-		dragTarget.target.box.style.width = dragTarget.target.width +'px';
-	}
-	if(dragNotTarget.target.box && dragNotTarget.target.above) {
-		dragNotTarget.target.box.style.width = dragNotTarget.target.width +'px';
-	}
-};
-
-this.setHeight = function() {
-	var moveBy = $('main-window').getAttribute('sizemode') == 'normal' ? +1 : 0;
-	// I can't set these by css, cpu usage goes through the roof?!
-	if(mainSidebar.box) { mainSidebar.box.style.height = (Prefs.renderabove) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
-	if(twinSidebar.box) { twinSidebar.box.style.height = (Prefs.renderaboveTwin) ? $('appcontent').clientHeight +moveBy +'px' : ''; }
-};
-
-this.setAboveWidth = function() {
-	// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
-	// I'm not supporting other versions of OSX, just this one isn't simple as it is
-	var moveBy = (!WINNT) ? -1 : 0;
-	var leftOffset = moveBy +moveLeft;
-	var rightOffset = moveBy +moveRight;
+	toggleDockers: function() {
+		toggleAttribute(mainSidebar.box, 'nodock', !Prefs.showheaderdock);
+		toggleAttribute(twinSidebar.box, 'nodock', !Prefs.showheaderdockTwin);
+		
+		headers.toggleHeaders();
+	},
 	
-	var sscode = '/*OmniSidebar CSS declarations of variable values*/\n';
-	sscode += '@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n';
-	sscode += '@-moz-document url("'+document.baseURI+'") {\n';
+	toggleDockerStatus: function(bar) {
+		toggleAttribute(bar.docker, 'sidebarDocked', bar.above);
+		toggleAttribute(bar.docker, 'tooltiptext', bar.above, Strings.get('buttons', 'dockbutton'), Strings.get('buttons', 'undockbutton'));
+	},
 	
-	if(Prefs.renderabove && mainSidebar.width) {
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove] { width: ' + mainSidebar.width + 'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(ltr):not([movetoright]),\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(rtl)[movetoright] {\n';
-		sscode += '		left: -' + mainSidebar.width + 'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(ltr)[movetoright],\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:-moz-locale-dir(rtl):not([movetoright]) {\n';
-		sscode += '		right: -' + mainSidebar.width + 'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox {\n';
-		sscode += '		left: ' + (mainSidebar.width +leftOffset) + 'px !important;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove]:not([autohide]):-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox {\n';
-		sscode += '		right: ' + (mainSidebar.width +rightOffset) + 'px !important;\n';
-		sscode += '	}\n';
-	}
-	
-	if(Prefs.renderaboveTwin && twinSidebar.width) {
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove] { width: ' + twinSidebar.width + 'px; }\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(ltr):not([movetoleft]),\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(rtl)[movetoleft] {\n';
-		sscode += '		right: -' + twinSidebar.width + 'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(ltr)[movetoleft],\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:-moz-locale-dir(rtl):not([movetoleft]) {\n';
-		sscode += '		left: -' + twinSidebar.width + 'px;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin {\n';
-		sscode += '		right: ' + (twinSidebar.width +rightOffset) + 'px !important;\n';
-		sscode += '	}\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin,\n';
-		sscode += '	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove]:not([autohide]):-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin {\n';
-		sscode += '		left: ' + (twinSidebar.width +leftOffset) + 'px !important;\n';
-		sscode += '	}\n';
-	}
-	
-	sscode += '}';
-	
-	Styles.load('aboveWidthURI_'+_UUID, sscode, true);
-};
-
-this.setResizerDirection = function(resizer) {
-	if(RTL) {
-		var value = resizer.getAttribute('dir');
-		if(value == 'left') { value = 'right'; } else { value = 'left'; }
-		setAttribute(resizer, 'dir', value);
-	}
-};
-
-this.toggleSquared = function() {
-	toggleAttribute(mainSidebar.box, 'squareLook', Prefs.aboveSquared);
-	toggleAttribute(twinSidebar.box, 'squareLook', Prefs.aboveSquared);
-};
-
-this.toggleAbove = function(twin) {
-	if(customizing) { return; }
-	
-	if(twin) {
-		Prefs.renderaboveTwin = !Prefs.renderaboveTwin;
-	} else {
-		Prefs.renderabove = !Prefs.renderabove;
-	}
-};
-
-this.toggleDockers = function() {
-	toggleAttribute(mainSidebar.box, 'nodock', !Prefs.showheaderdock);
-	toggleAttribute(twinSidebar.box, 'nodock', !Prefs.showheaderdockTwin);
-	
-	toggleHeaders();
-};
-
-this.toggleDockerStatus = function(bar) {
-	toggleAttribute(bar.docker, 'sidebarDocked', bar.above);
-	toggleAttribute(bar.docker, 'tooltiptext', bar.above, Strings.get('buttons', 'dockbutton'), Strings.get('buttons', 'undockbutton'));
-};
-
-this.toggleRenderAbove = function() {
-	if(Prefs.renderabove) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'renderAbove', null, loadRenderAboveMain, loadRenderAboveMain);
-	} else {
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'renderAbove');
-	}
-	
-	if(Prefs.renderaboveTwin) {
-		Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'renderAboveTwin', null, loadRenderAboveTwin, loadRenderAboveTwin);
-	} else {
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'renderAboveTwin');
-	}
-};
-
-this.loadRenderAboveMain = function(window) {
-	if(window[objName] && window[objName].setAbove) { window[objName].setAbove(window[objName].mainSidebar); }
-};
-
-this.loadRenderAboveTwin = function(window) {
-	if(window[objName] && window[objName].setAbove) { window[objName].setAbove(window[objName].twinSidebar); }
-};
-
-this.setAbove = function(bar) {
-	toggleAttribute(bar.box, 'renderabove', bar.above);
-	toggleAttribute(bar.box, 'squareLook', Prefs.aboveSquared);
-	
-	toggleDockerStatus(bar);
-	
-	setHeight();
-	setAboveWidth();
-	setResizerDirection(bar.resizer);
-	
-	if(!UNLOADED && bar.above) {
-		dispatch(bar.resizeBox, { type: 'sidebarAbove', cancelable: false });
-		if(!UNLOADED && !bar.closed) {
-			fireSidebarFocusedEvent(bar.twin);
+	start: function() {
+		if(Prefs.renderabove) {
+			Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'renderAbove', {
+				onLoad: this.loadRenderAboveMain,
+				onUnload: this.loadRenderAboveMain
+			});
+		} else {
+			Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headers.xul', 'renderAbove');
 		}
-	} else {
-		dispatch(bar.box, { type: 'sidebarDocked', cancelable: false });
+		
+		if(Prefs.renderaboveTwin) {
+			Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'renderAboveTwin', {
+				onLoad: this.loadRenderAboveTwin,
+				onUnload: this.loadRenderAboveTwin
+			});
+		} else {
+			Overlays.removeOverlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'renderAboveTwin');
+		}
+	},
+	
+	init: function(bar) {
+		toggleAttribute(bar.box, 'renderabove', bar.above);
+		toggleAttribute(bar.box, 'squareLook', Prefs.aboveSquared);
+		
+		this.toggleDockerStatus(bar);
+		this.setHeight();
+		this.setWidth();
+		this.setResizerDirection(bar.resizer);
+		
+		if(!UNLOADED && bar.above) {
+			dispatch(bar.resizeBox, { type: 'sidebarAbove', cancelable: false });
+			if(!UNLOADED && !bar.closed) {
+				SidebarUI._fireFocusedEvent(bar);
+			}
+		} else {
+			dispatch(bar.box, { type: 'sidebarDocked', cancelable: false });
+		}
+	},
+	
+	loadRenderAboveMain: function(aWindow) {
+		if(aWindow[objName] && aWindow[objName].renderAbove) {
+			aWindow[objName].renderAbove.init(aWindow[objName].mainSidebar);
+		}
+	},
+	
+	loadRenderAboveTwin: function(aWindow) {
+		if(aWindow[objName] && aWindow[objName].renderAbove) {
+			aWindow[objName].renderAbove.init(aWindow[objName].twinSidebar);
+		}
+	},
+	
+	loadDockerMain: function(aWindow) {
+		if(aWindow[objName] && aWindow[objName].renderAbove) {
+			aWindow[objName].renderAbove.toggleDockerStatus(aWindow[objName].mainSidebar);
+		}
+	},
+	
+	loadDockerTwin: function(aWindow) {
+		if(aWindow[objName] && aWindow[objName].renderAbove) {
+			aWindow[objName].renderAbove.toggleDockerStatus(aWindow[objName].twinSidebar);
+		}
 	}
 };
 
 Modules.LOADMODULE = function() {
-	Overlays.overlayURI("chrome://"+objPathString+"/content/headers.xul", 'renderAboveDocker', null,
-		function(aWindow) { aWindow[objName].toggleDockerStatus(aWindow[objName].mainSidebar); }
-	);
-	Overlays.overlayURI("chrome://"+objPathString+"/content/headersTwin.xul", 'renderAboveDockerTwin', null,
-		function(aWindow) { aWindow[objName].toggleDockerStatus(aWindow[objName].twinSidebar); }
-	);
+	Overlays.overlayURI("chrome://"+objPathString+"/content/headers.xul", 'renderAboveDocker', { onLoad: renderAbove.loadDockerMain });
+	Overlays.overlayURI("chrome://"+objPathString+"/content/headersTwin.xul", 'renderAboveDockerTwin', { onLoad: renderAbove.loadDockerTwin });
 	Modules.load('autohide');
 	
-	Listeners.add(window, 'sidebarWidthChanged', setAboveWidth);
+	Listeners.add(window, 'sidebarWidthChanged', renderAbove);
 	
-	Prefs.listen('showheaderdock', toggleDockers);
-	Prefs.listen('showheaderdockTwin', toggleDockers);
-	Prefs.listen('renderabove', toggleRenderAbove);
-	Prefs.listen('renderaboveTwin', toggleRenderAbove);
-	Prefs.listen('aboveSquared', toggleSquared);
+	Prefs.listen('showheaderdock', renderAbove);
+	Prefs.listen('showheaderdockTwin', renderAbove);
+	Prefs.listen('renderabove', renderAbove);
+	Prefs.listen('renderaboveTwin', renderAbove);
+	Prefs.listen('aboveSquared', renderAbove);
 	
-	toggleDockers();
-	toggleRenderAbove();
+	renderAbove.toggleDockers();
+	renderAbove.start();
 	
-	hideMainHeader.__defineGetter__('docker', function() { return !Prefs.showheaderdock; });
-	hideTwinHeader.__defineGetter__('docker', function() { return !Prefs.showheaderdockTwin; });
+	headers.hideMainHeader.set('docker', function() { return !Prefs.showheaderdock; });
+	headers.hideTwinHeader.set('docker', function() { return !Prefs.showheaderdockTwin; });
 	
-	Listeners.add(browserBox, 'browserResized', setHeight);
+	Listeners.add(browserBox, 'browserResized', renderAbove);
 };
 
 Modules.UNLOADMODULE = function() {
-	Listeners.remove(browserBox, 'browserResized', setHeight);
+	Listeners.remove(browserBox, 'browserResized', renderAbove);
 	
-	delete hideMainHeader.docker;
-	delete hideTwinHeader.docker;
+	headers.hideMainHeader.delete('docker');
+	headers.hideTwinHeader.delete('docker');
 	
 	removeAttribute(mainSidebar.box, 'renderabove');
 	removeAttribute(twinSidebar.box, 'renderabove');
 	removeAttribute(mainSidebar.box, 'squareLook');
 	removeAttribute(twinSidebar.box, 'squareLook');
 	
-	Listeners.remove(window, 'sidebarWidthChanged', setAboveWidth);
+	Listeners.remove(window, 'sidebarWidthChanged', renderAbove);
 	
-	Prefs.unlisten('showheaderdock', toggleDockers);
-	Prefs.unlisten('showheaderdockTwin', toggleDockers);
-	Prefs.unlisten('renderabove', toggleRenderAbove);
-	Prefs.unlisten('renderaboveTwin', toggleRenderAbove);
-	Prefs.unlisten('aboveSquared', toggleSquared);
+	Prefs.unlisten('showheaderdock', renderAbove);
+	Prefs.unlisten('showheaderdockTwin', renderAbove);
+	Prefs.unlisten('renderabove', renderAbove);
+	Prefs.unlisten('renderaboveTwin', renderAbove);
+	Prefs.unlisten('aboveSquared', renderAbove);
 	
 	Modules.unload('autohide');
 	Styles.unload('aboveWidthURI_'+_UUID);
