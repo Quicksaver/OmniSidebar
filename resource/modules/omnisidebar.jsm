@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.0';
+Modules.VERSION = '3.0.1';
 
 this.mainSidebar = {
 	main: true,
@@ -47,7 +47,7 @@ this.mainSidebar = {
 	get stack () { return $(objName+'-stackSidebar'); },
 	buttonId: objName+'-button',
 	get button () { return $(this.buttonId); },
-	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.close-icon')[0] : null; },
+	get close () { return this.header ? $$('toolbarbutton.close-icon', this.header)[0] : null; },
 	get width () {
 		if(this.box) {
 			var width = this.box.getAttribute('width');
@@ -189,7 +189,7 @@ this.twinSidebar = {
 	get stack () { return $(objName+'-stackSidebar-twin'); },
 	buttonId: objName+'-button-twin',
 	get button () { return $(this.buttonId); },
-	get close () { return this.header ? this.header.querySelectorAll('toolbarbutton.close-icon')[0] : null; },
+	get close () { return this.header ? $$('toolbarbutton.close-icon', this.header)[0] : null; },
 	get width () {
 		if(this.box) {
 			var width = this.box.getAttribute('width');

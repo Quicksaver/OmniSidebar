@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -270,7 +270,7 @@ this.autoHide = {
 						// the search engine selection menu is an anonymous child of the searchbar: e.target == $('searchbar'),
 						// so we need to explicitely get the actual menu to use
 						if(target.id == 'searchbar') {
-							target = document.getAnonymousElementByAttribute(target, 'anonid', 'searchbar-popup');
+							target = $ª(target, 'searchbar-popup');
 						}
 						
 						break;
