@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.headers = {
 	observe: function(aSubject, aTopic, aData) {
@@ -24,7 +24,11 @@ this.headers = {
 			case 'toolbarTwin':
 				this.toggleHeaders();
 				break;
-			
+		}
+	},
+	
+	handleEvent: function(e) {
+		switch(e.type) {
 			case 'beforecustomization':
 				this.customize(true);
 				break;
