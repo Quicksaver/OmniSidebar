@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.1';
+Modules.VERSION = '3.0.2';
 
 this.mainSidebar = {
 	main: true,
@@ -27,6 +27,9 @@ this.mainSidebar = {
 			return false;
 		}
 		return true;
+	},
+	get focused () {
+		return (document.commandDispatcher.focusedWindow == this.sidebar.contentWindow.content || document.commandDispatcher.focusedWindow == this.sidebar.contentWindow);
 	},
 	get closed () { return !this.box || this.box.hidden || this.box.collapsed; },
 	get label () { return Strings.get('buttons', (Prefs.twinSidebar) ? 'buttonMainLabel' : 'buttonlabel'); },
@@ -169,6 +172,9 @@ this.twinSidebar = {
 			return false;
 		}
 		return true;
+	},
+	get focused () {
+		return (document.commandDispatcher.focusedWindow == this.sidebar.contentWindow.content || document.commandDispatcher.focusedWindow == this.sidebar.contentWindow);
 	},
 	get closed () { return !this.box || this.box.hidden || this.box.collapsed; },
 	get label () { return Strings.get('buttons', 'buttonTwinLabel'); },
@@ -405,22 +411,14 @@ this.openLast = function(bar) {
 	if(!bar.state.closed) {
 		var lastBroadcaster = $(bar.state.command);
 		if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster' && !trueAttribute(lastBroadcaster, 'disabled')) {
-			// ensure the focus is on content at startup/opening new window
-			var listener = function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				
-				// ensure that the main content (tab) stays focused on startup
-				if(document.commandDispatcher.focusedWindow == bar.sidebar.contentWindow.content
-				|| document.commandDispatcher.focusedWindow == bar.sidebar.contentWindow) {
-					window.content.focus();
-				}
-			};
-			Listeners.add(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
-			
 			SidebarUI.toggle(lastBroadcaster, true, bar.twin).then(toggled => {
-				if(!toggled) {
-					Listeners.remove(bar.sidebar.contentWindow, "SidebarFocused", listener, true, true);
+				// ensure the focus is on content at startup/opening new window
+				if(toggled) {
+					Listeners.add(bar.sidebar, "SidebarFocused", function() {
+						if(bar.focused) {
+							SidebarUI.focusContent(window.gBrowserInit._getUriToLoad());
+						}
+					}, false, true);
 				}
 			});
 			return;
@@ -831,7 +829,7 @@ this.SidebarUI = {
 		}
 		
 		// can we close the sidebar (if it's opened or if we need to)?
-		var tryClose = trueAttribute(sidebarBroadcaster, "checked");
+		var tryClose = trueAttribute(sidebarBroadcaster, "checked") && bar.isOpen;
 		if(tryClose) {
 			for(let l of this._listeners) {
 				if(l.tryClose) {
@@ -1000,12 +998,16 @@ this.SidebarUI = {
 		bar.state = bar.state.command;
 	},
 	
-	focusContent: function() {
-		if(window.content) {
-			try { window.content.focus(); }
-			catch(ex) { gBrowser.selectedBrowser.focus(); }
-		} else {
-			gBrowser.selectedBrowser.focus();
+	focusContent: function(uri = gBrowser.currentURI.spec) {
+		// this check comes from gBrowserInit._delayedStartup, it tries to focus the location bar first if applicable, otherwise it focused the tab content
+		// http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.js#1297
+		if(!(window.isBlankPageURL(uri) || uri == "about:privatebrowsing") || !window.focusAndSelectUrlBar()) {
+			if(window.content) {
+				try { window.content.focus(); }
+				catch(ex) { gBrowser.selectedBrowser.focus(); }
+			} else {
+				gBrowser.selectedBrowser.focus();
+			}
 		}
 	},
 	

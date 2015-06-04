@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.renderAbove = {
 	dragalt: null,
@@ -233,6 +233,8 @@ this.renderAbove = {
 	},
 	
 	init: function(bar) {
+		let focused = !UNLOADED && !bar.closed && bar.focused;
+		
 		toggleAttribute(bar.box, 'renderabove', bar.above);
 		toggleAttribute(bar.box, 'squareLook', Prefs.aboveSquared);
 		
@@ -243,7 +245,7 @@ this.renderAbove = {
 		
 		if(!UNLOADED && bar.above) {
 			dispatch(bar.resizeBox, { type: 'sidebarAbove', cancelable: false });
-			if(!UNLOADED && !bar.closed) {
+			if(focused) {
 				SidebarUI._fireFocusedEvent(bar);
 			}
 		} else {
