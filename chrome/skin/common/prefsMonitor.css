@@ -1,0 +1,22 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@-moz-document url("about:addons") {
+	
+	/* For compatibility with Preferences Monitor add-on */
+	
+	.inSidebar setting[spec="preferencesmonitor"] {
+		position: static !important;
+		margin-top: auto !important;
+		margin-bottom: auto !important;
+		clip: unset !important;
+		background: -moz-radial-gradient(circle, rgba(190,190,170,0.4), transparent) !important;
+		font: bold 14px serif !important;
+		letter-spacing: 0.2em !important;
+		text-transform: uppercase !important;
+	}
+	
+	.inSidebar setting[spec="preferencesmonitor"]:before,
+	.inSidebar setting[spec="preferencesmonitor"] .preferences-learnmore {
+		display: none !important;
+	}
+
+}

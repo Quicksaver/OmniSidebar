@@ -293,17 +293,47 @@
 		margin-left: 2.5em;
 	}
 	
-	.inSidebar #detail-rows > setting,
-	.inSidebar #detail-controls {
+	.inSidebar #detail-controls,
+	.inSidebar #detail-rows > * {
 		width: 100%;
 	}
 	
-	.inSidebar #detail-rows > setting > vbox {
-		-moz-box-ordinal-group: 2;
+	.inSidebar #detail-rows,
+	.inSidebar #detail-rows > setting:not([desc=""]) > vbox {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.inSidebar #detail-rows > setting {
+		display: flex;
+		flex-direction: row;
 	}
 	
 	.inSidebar #detail-rows > setting[collapsed] {
 		display: none;
+	}
+	
+	.inSidebar #detail-rows > setting > vbox,
+	.inSidebar #detail-rows > setting:not([desc=""]) > vbox > * {
+		flex: 1 1 auto;
+	}
+	
+	.inSidebar #detail-rows > setting > hbox {
+		flex: 0 0 auto;
+		margin: auto !important;
+	}
+	
+	.inSidebar #detail-rows > setting:not([type="string"]):not([type="integer"]) > hbox {
+		display: flex;
+	}
+	
+	.inSidebar #detail-rows > setting[type="menulist"] menulist {
+		margin-top: auto;
+		margin-bottom: auto;
+	}
+	
+	.inSidebar #detail-rows > setting .preferences-description {
+		-moz-margin-start: 6px;
 	}
 	
 	/* Stylish tab */
