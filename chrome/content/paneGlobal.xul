@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<richlistbox id="categories">
+		<richlistitem id="category-global"
+			class="category"
+			value="paneGlobal"
+			tooltiptext="&OptMisc.label;"
+			position="3"
+			align="center">
+			
+			<image class="category-icon"/>
+			<label class="category-name" flex="1" value="&OptMisc.label;"/>
+		</richlistitem>
+	</richlistbox>
+	
+	<prefpane id="mainPrefPane">
+		<preferences>
+			<preference id="pref-fx" name="extensions.omnisidebar.fx" type="bool"/>
+			<preference id="pref-glassStyle" name="extensions.omnisidebar.glassStyle" type="bool"/>
+			<preference id="pref-transparency" name="extensions.omnisidebar.transparency" type="int"/>
+			<preference id="pref-alwaysAddons" name="extensions.omnisidebar.alwaysAddons" type="bool"/>
+			<preference id="pref-alwaysConsole" name="extensions.omnisidebar.alwaysConsole" type="bool"/>
+			<preference id="pref-alwaysDMT" name="extensions.omnisidebar.alwaysDMT" type="bool"/>
+			<preference id="pref-alwaysPageInfo" name="extensions.omnisidebar.alwaysPageInfo" type="bool"/>
+			<preference id="pref-alwaysScratchpad" name="extensions.omnisidebar.alwaysScratchpad" type="bool"/>
+			<preference id="pref-forceOpenToolbars" name="extensions.omnisidebar.forceOpenToolbars" type="bool"/>
+			<preference id="pref-forceOpenMenus" name="extensions.omnisidebar.forceOpenMenus" type="bool"/>
+			<preference id="pref-showDelay" name="extensions.omnisidebar.showDelay" type="int"/>
+			<preference id="pref-hideDelay" name="extensions.omnisidebar.hideDelay" type="int"/>
+			<preference id="pref-switcherAdjust" name="extensions.omnisidebar.switcherAdjust" type="int"/>
+			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
+			<preference id="pref-keepLoaded" name="extensions.omnisidebar.keepLoaded" type="bool"/>
+		</preferences>
+		
+		<hbox id="header-global" class="header" collapsed="true" data-category="paneGlobal">
+			<label class="header-name">&OptMisc.label;</label>
+		</hbox>
+		
+		<groupbox id="paneGlobal-glass" data-category="paneGlobal" collapsed="true">
+			<caption>
+				<checkbox id="glassCheckbox"
+					label="&OptglassStyle.label;"
+					tooltiptext="&OptglassStyle.tooltip;"
+					preference="pref-glassStyle" />
+			</caption>
+			<hbox class="indent">
+				<label value="&OptglassStyle.transparent;"/>
+				<scale dependson="pref-glassStyle"
+					min="0"
+					max="1000"
+					increment="125"
+					pageincrement="375"
+					width="200"
+					preference="pref-transparency"/>
+				<label value="&OptglassStyle.opaque;"/>
+			</hbox>
+		</groupbox>
+		
+		<groupbox id="paneGlobal-features" data-category="paneGlobal" collapsed="true">
+			<caption label="&Optgroupfeatures.label;"/>
+			<vbox align="start">
+				<hbox>
+					<label value="&OptshowDelay.label;" tooltiptext="&OptshowDelay.tooltip;"/>
+					<textbox type="number"
+						size="3"
+						min="0"
+						max="2000"
+						preference="pref-showDelay"/>
+		        </hbox>
+				<hbox>
+					<label value="&OpthideDelay.label;" tooltiptext="&OpthideDelay.tooltip;"/>
+					<textbox type="number"
+						size="3"
+						min="0"
+						max="2000"
+						preference="pref-hideDelay"/>
+		        </hbox>
+				<hbox>
+					<label value="&OptswitcherAdjust.label;" tooltiptext="&OptswitcherAdjust.tooltip;"/>
+					<textbox type="number"
+						size="2"
+						min="-2"
+						max="25"
+						preference="pref-switcherAdjust"/>
+		        </hbox>
+				<checkbox label="&OptkeepPrivate.label;" tooltiptext="&OptkeepPrivate.tooltip;" preference="pref-keepPrivate"/>
+				<checkbox label="&OptkeepLoaded.label;" tooltiptext="&OptkeepLoaded.tooltip;" preference="pref-keepLoaded"/>
+			</vbox>
+		</groupbox>
+		
+		<groupbox id="paneGlobal-performance" data-category="paneGlobal" collapsed="true">
+			<caption label="&Optgroupperformance.label;"/>
+			<checkbox label="&Optfx.label;" tooltiptext="&Optfx.tooltip;" preference="pref-fx"/>
+		</groupbox>
+		
+		<groupbox id="paneGlobal-always" data-category="paneGlobal" collapsed="true">
+			<caption label="&Optgroupalways.label;"/>
+			<checkbox label="&addonsSidebar.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysAddons"/>
+			<checkbox label="&omnisidebarDMT.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysDMT"/>
+			<checkbox id="consoleCheckbox" label="&omnisidebarBrowserConsole.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysConsole"/>
+			<checkbox label="&omnisidebarPageInfo.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysPageInfo"/>
+			<checkbox label="&omnisidebarScratchpad.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysScratchpad"/>
+		</groupbox>
+		
+		<groupbox id="paneGlobal-forceOpen" data-category="paneGlobal" collapsed="true">
+			<caption label="&OptforceOpen.label;"/>
+			<checkbox label="&OptforceOpen.toolbars;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenToolbars"/>
+			<checkbox label="&OptforceOpen.menus;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenMenus"/>
+		</groupbox>
+	</prefpane>
+	
+</overlay>

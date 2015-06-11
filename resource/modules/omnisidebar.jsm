@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.2';
+Modules.VERSION = '3.0.3';
 
 this.mainSidebar = {
 	main: true,
@@ -1065,8 +1065,9 @@ this.onUnload = function() {
 	}
 };
 
-this.doOpenOptions = function() {
-	openOptions();
+this.openOptions = function() {
+	PrefPanes.open(window);
+	panel.hide();
 };
 
 // Dummy method that will follow through to the corresponding module when it is loaded
@@ -1090,7 +1091,6 @@ Modules.LOADMODULE = function() {
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
 	Modules.load('miniPanel');
 	
-	Modules.load('whatsNew');
 	Modules.load('compatibilityFix/windowFixes');
 	
 	Overlays.overlayWindow(window, "mainSidebar", self);
@@ -1200,7 +1200,6 @@ Modules.UNLOADMODULE = function() {
 	Overlays.removeOverlayWindow(window, "mainSidebar");
 	
 	Modules.unload('compatibilityFix/windowFixes');
-	Modules.unload('whatsNew');
 	Modules.unload('miniPanel');
 	Modules.unload('australis');
 };

@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<richlistbox id="categories">
+		<richlistitem id="category-twin"
+			class="category"
+			value="paneTwin"
+			tooltiptext="&OptgroupTwin.label;"
+			position="2"
+			align="center">
+			
+			<image class="category-icon"/>
+			<label class="category-name" flex="1" value="&OptgroupTwin.label;"/>
+		</richlistitem>
+	</richlistbox>
+	
+	<prefpane id="mainPrefPane">
+		<preferences>
+			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
+			<preference id="pref-useSwitchTwin" name="extensions.omnisidebar.useSwitchTwin" type="bool"/>
+			<preference id="pref-renderaboveTwin" name="extensions.omnisidebar.renderaboveTwin" type="bool"/>
+			<preference id="pref-autoHideTwin" name="extensions.omnisidebar.autoHideTwin" type="bool"/>
+			<preference id="pref-autoCloseTwin" name="extensions.omnisidebar.autoCloseTwin" type="bool"/>
+			<preference id="pref-toolbarTwin" name="extensions.omnisidebar.toolbarTwin" type="bool"/>
+			<preference id="pref-showheadertitleTwin" name="extensions.omnisidebar.showheadertitleTwin" type="bool"/>
+			<preference id="pref-showheaderdockTwin" name="extensions.omnisidebar.showheaderdockTwin" type="bool"/>
+			<preference id="pref-showheadercloseTwin" name="extensions.omnisidebar.showheadercloseTwin" type="bool"/>
+			<preference id="pref-titleButtonTwin" name="extensions.omnisidebar.titleButtonTwin" type="bool"/>
+			<preference id="pref-coloriconsTwin" name="extensions.omnisidebar.coloriconsTwin" type="string"/>
+			<preference id="pref-goButtonTwin" name="extensions.omnisidebar.goButtonTwin" type="bool"/>
+			<preference id="pref-twinKeysetKeycode" name="extensions.omnisidebar.twinKeysetKeycode" type="string"/>
+			<preference id="pref-twinKeysetAccel" name="extensions.omnisidebar.twinKeysetAccel" type="bool"/>
+			<preference id="pref-twinKeysetShift" name="extensions.omnisidebar.twinKeysetShift" type="bool"/>
+			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
+			<preference id="pref-twinKeysetPanel" name="extensions.omnisidebar.twinKeysetPanel" type="bool"/>
+		</preferences>
+		
+		<hbox id="header-twin" class="header" collapsed="true" data-category="paneTwin">
+			<label class="header-name">&OptgroupTwin.label;</label>
+		</hbox>
+		
+		<checkbox id="paneTwin-toggler"
+			label="&Optsidebars.twin.label;"
+			tooltiptext="&Optsidebars.twin.tooltip;"
+			preference="pref-twinSidebar"
+			collapsed="true" data-category="paneTwin"/>
+		
+		<groupbox id="paneTwin-general" data-category="paneTwin" collapsed="true">
+			<vbox align="start">
+				<checkbox dependson="pref-twinSidebar"
+					label="&Optswitchers.label;"
+					tooltiptext="&Optswitchers.tooltip;"
+					preference="pref-useSwitchTwin"/>
+				<checkbox dependson="pref-twinSidebar"
+					label="&OptautoClose.label;"
+					tooltiptext="&OptautoClose.tooltip;"
+					preference="pref-autoCloseTwin"/>
+			</vbox>
+		</groupbox>
+		
+		<groupbox id="paneTwin-above" data-category="paneTwin" collapsed="true">
+			<caption><checkbox id="aboveTwinCheckbox"
+				label="&Optundock.label;"
+				tooltiptext="&Optundock.tooltip;"
+				dependson="pref-twinSidebar"
+				preference="pref-renderaboveTwin"/></caption>
+			<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar"
+				class="indent"
+				label="&Optautohide.label;"
+				tooltiptext="&Optautohide.tooltip;"
+				preference="pref-autoHideTwin"/>
+		</groupbox>
+		
+		<groupbox id="paneTwin-display" data-category="paneTwin" collapsed="true">
+			<caption label="&Optgroupgen.label;"/>
+			<hbox align="center">	
+				<vbox align="start">
+					<checkbox dependson="pref-twinSidebar"
+						label="&Optshowheadertitle.label;"
+						tooltiptext="&Optshowheadertitle.tooltip;"
+						preference="pref-showheadertitleTwin"/>
+					<checkbox dependson="pref-twinSidebar,pref-showheadertitleTwin"
+						label="&OpttitleButton.label;"
+						tooltiptext="&OpttitleButton.tooltip;"
+						preference="pref-titleButtonTwin"/>
+				</vbox>
+				<vbox class="smallindent" align="start">
+					<checkbox dependson="pref-twinSidebar"
+						label="&Optshowheaderdock.label;"
+						tooltiptext="&Optshowheaderdock.tooltip;"
+						preference="pref-showheaderdockTwin"/>
+					<checkbox dependson="pref-twinSidebar"
+						label="&Optshowheaderclose.label;"
+						tooltiptext="&Optshowheaderclose.tooltip;"
+						preference="pref-showheadercloseTwin"/>
+				</vbox>
+			</hbox>
+		</groupbox>
+		
+		<groupbox id="paneTwin-toolbar" data-category="paneTwin" collapsed="true">
+			<caption><checkbox dependson="pref-twinSidebar" label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbarTwin"/></caption>
+			<vbox class="indent" align="start">
+				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin"
+					label="&OptGoURI.label;"
+					tooltiptext="&OptGoURI.tooltip;"
+					preference="pref-goButtonTwin"/>
+				<radiogroup preference="pref-coloriconsTwin">
+					<hbox align="center">
+						<label value="&Optcoloricons.label;"/>
+						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
+							class="smallindent"
+							label="&Optcoloricons.nochange.label;"
+							tooltiptext="&Optcoloricons.nochange.tooltip;"
+							value="default"/>
+						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
+							class="smallindent"
+							label="&Optcoloricons.firefox.label;"
+							tooltiptext="&Optcoloricons.firefox.tooltip;"
+							value="ff"/>
+						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
+							class="smallindent"
+							label="&Optcoloricons.color.label;"
+							tooltiptext="&Optcoloricons.color.tooltip;"
+							value="color"/>
+					</hbox>
+				</radiogroup>
+			</vbox>
+		</groupbox>
+		
+		<groupbox id="paneTwin-keyset" data-category="paneTwin" collapsed="true">
+			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
+			<hbox>
+				<checkbox keysetAccel="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAccel"/>
+				<checkbox class="smallindent" keysetAlt="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAlt"/>
+				<checkbox class="smallindent" keysetShift="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetShift"/>
+				<menulist class="smallindent" keyset="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetKeycode"/>
+			</hbox>
+			<checkbox dependson="pref-twinSidebar,!pref-twinKeysetKeycode:none"
+				label="&OptKeysetPanel.label;"
+				tooltiptext="&OptKeysetPanel.tooltip;"
+				preference="pref-twinKeysetPanel"/>
+		</groupbox>
+	</prefpane>
+	
+</overlay>

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.5';
+Modules.VERSION = '1.1.6';
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
@@ -30,6 +30,8 @@ Modules.LOADMODULE = function() {
 	Modules.load('compatibilityFix/downloadsIndicator');
 	Modules.load('compatibilityFix/bookmarkedItem');
 	Modules.load('compatibilityFix/puzzleToolbars');
+	
+	Modules.loadIf('compatibilityFix/RTL', RTL);
 };
 
 Modules.UNLOADMODULE = function() {
@@ -47,4 +49,8 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/downloadsIndicator');
 	Modules.unload('compatibilityFix/bookmarkedItem');
 	Modules.unload('compatibilityFix/puzzleToolbars');
+	
+	if(UNLOADED) {
+		Modules.unload('compatibilityFix/RTL');
+	}
 };

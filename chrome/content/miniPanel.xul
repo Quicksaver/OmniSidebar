@@ -18,7 +18,7 @@
 					class="subviewbutton"
 					accesskey="&omnisidebarOptions.accesskey;"
 					autoCheck="false"
-					oncommand="objName.doOpenOptions();"/>
+					oncommand="objName.openOptions();"/>
 			</vbox>
 		</panel>
 	</popupset>
@@ -38,7 +38,7 @@
 						class="subviewbutton"
 						accesskey="&omnisidebarOptions.accesskey;"
 						autoCheck="false"
-						oncommand="objName.doOpenOptions();"/>
+						oncommand="objName.openOptions();"/>
 				</vbox>
 		</panelview>
 	</panelmultiview>

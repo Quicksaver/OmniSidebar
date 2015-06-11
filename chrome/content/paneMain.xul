@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://omnisidebar/skin/options.css"?>
+<!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<richlistbox id="categories">
+		<richlistitem id="category-main"
+			class="category"
+			value="paneMain"
+			tooltiptext="&OptgroupMain.label;"
+			position="1"
+			align="center">
+			
+			<image class="category-icon"/>
+			<label class="category-name" flex="1" value="&OptgroupMain.label;"/>
+		</richlistitem>
+	</richlistbox>
+	
+	<prefpane id="mainPrefPane">
+		<preferences>
+			<preference id="pref-moveSidebars" name="extensions.omnisidebar.moveSidebars" type="bool"/>
+			<preference id="pref-useSwitch" name="extensions.omnisidebar.useSwitch" type="bool"/>
+			<preference id="pref-renderabove" name="extensions.omnisidebar.renderabove" type="bool"/>
+			<preference id="pref-autoHide" name="extensions.omnisidebar.autoHide" type="bool"/>
+			<preference id="pref-autoClose" name="extensions.omnisidebar.autoClose" type="bool"/>
+			<preference id="pref-toolbar" name="extensions.omnisidebar.toolbar" type="bool"/>
+			<preference id="pref-showheadertitle" name="extensions.omnisidebar.showheadertitle" type="bool"/>
+			<preference id="pref-showheaderdock" name="extensions.omnisidebar.showheaderdock" type="bool"/>
+			<preference id="pref-showheaderclose" name="extensions.omnisidebar.showheaderclose" type="bool"/>
+			<preference id="pref-titleButton" name="extensions.omnisidebar.titleButton" type="bool"/>
+			<preference id="pref-coloricons" name="extensions.omnisidebar.coloricons" type="string"/>
+			<preference id="pref-goButton" name="extensions.omnisidebar.goButton" type="bool"/>
+			<preference id="pref-mainKeysetKeycode" name="extensions.omnisidebar.mainKeysetKeycode" type="string"/>
+			<preference id="pref-mainKeysetAccel" name="extensions.omnisidebar.mainKeysetAccel" type="bool"/>
+			<preference id="pref-mainKeysetShift" name="extensions.omnisidebar.mainKeysetShift" type="bool"/>
+			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
+			<preference id="pref-mainKeysetPanel" name="extensions.omnisidebar.mainKeysetPanel" type="bool"/>
+		</preferences>
+		
+		<hbox id="header-main" class="header" collapsed="true" data-category="paneMain">
+			<label class="header-name">&OptgroupMain.label;</label>
+		</hbox>
+		
+		<radiogroup id="paneMain-position"
+			collapsed="true" data-category="paneMain"
+			preference="pref-moveSidebars"
+			onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
+			onsynctopreference="return this.value == 'right';">
+			<hbox>
+				<radio id="radio_movetoleft"
+					label="&Optsidebars.left.label;"
+					tooltiptext="&Optsidebars.pos.tooltip;"
+					value="left"/>
+				<radio id="radio_movetoright"
+					label="&Optsidebars.right.label;"
+					tooltiptext="&Optsidebars.pos.tooltip;"
+					value="right"/>
+			</hbox>
+		</radiogroup>
+		
+		<groupbox id="paneMain-general" data-category="paneMain" collapsed="true">
+			<vbox align="start">
+				<checkbox label="&Optswitchers.label;"
+					tooltiptext="&Optswitchers.tooltip;"
+					preference="pref-useSwitch"/>
+				<checkbox label="&OptautoClose.label;"
+					tooltiptext="&OptautoClose.tooltip;"
+					preference="pref-autoClose"/>
+			</vbox>
+		</groupbox>
+		
+		<groupbox id="paneMain-above" data-category="paneMain" collapsed="true">
+			<caption><checkbox id="aboveCheckbox"
+				label="&Optundock.label;"
+				tooltiptext="&Optundock.tooltip;"
+				preference="pref-renderabove"/></caption>
+			<checkbox dependson="pref-renderabove"
+				class="indent"
+				label="&Optautohide.label;"
+				tooltiptext="&Optautohide.tooltip;"
+				preference="pref-autoHide"/>
+		</groupbox>
+		
+		<groupbox id="paneMain-display" data-category="paneMain" collapsed="true">
+			<caption label="&Optgroupgen.label;"/>
+			<hbox align="center">
+				<vbox align="start">
+					<checkbox label="&Optshowheadertitle.label;"
+						tooltiptext="&Optshowheadertitle.tooltip;"
+						preference="pref-showheadertitle"/>
+					<checkbox dependson="pref-showheadertitle"
+						label="&OpttitleButton.label;"
+						tooltiptext="&OpttitleButton.tooltip;"
+						preference="pref-titleButton"/>
+				</vbox>
+				<vbox class="smallindent" align="start">
+					<checkbox label="&Optshowheaderdock.label;" tooltiptext="&Optshowheaderdock.tooltip;" preference="pref-showheaderdock"/>
+					<checkbox label="&Optshowheaderclose.label;" tooltiptext="&Optshowheaderclose.tooltip;" preference="pref-showheaderclose"/>
+				</vbox>
+			</hbox>
+		</groupbox>
+		
+		<groupbox id="paneMain-toolbar" data-category="paneMain" collapsed="true">
+			<caption><checkbox label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbar"/></caption>
+			<vbox class="indent" align="start">
+				<checkbox dependson="pref-toolbar" label="&OptGoURI.label;" tooltiptext="&OptGoURI.tooltip;" preference="pref-goButton"/>
+				<radiogroup preference="pref-coloricons">
+					<hbox align="center">
+						<label value="&Optcoloricons.label;"/>
+						<radio dependson="pref-toolbar"
+							class="smallindent"
+							label="&Optcoloricons.nochange.label;"
+							tooltiptext="&Optcoloricons.nochange.tooltip;"
+							value="default"/>
+						<radio dependson="pref-toolbar"
+							class="smallindent"
+							label="&Optcoloricons.firefox.label;"
+							tooltiptext="&Optcoloricons.firefox.tooltip;"
+							value="ff"/>
+						<radio dependson="pref-toolbar"
+							class="smallindent"
+							label="&Optcoloricons.color.label;"
+							tooltiptext="&Optcoloricons.color.tooltip;"
+							value="color"/>
+					</hbox>
+				</radiogroup>
+			</vbox>
+		</groupbox>
+		
+		<groupbox id="paneMain-keyset" data-category="paneMain" collapsed="true">
+			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
+			<hbox>
+				<checkbox keysetAccel="objName-main" preference="pref-mainKeysetAccel"/>
+				<checkbox class="smallindent" keysetAlt="objName-main" preference="pref-mainKeysetAlt"/>
+				<checkbox class="smallindent" keysetShift="objName-main" preference="pref-mainKeysetShift"/>
+				<menulist class="smallindent" keyset="objName-main" preference="pref-mainKeysetKeycode"/>
+			</hbox>
+			<checkbox dependson="!pref-mainKeysetKeycode:none"
+				label="&OptKeysetPanel.label;"
+				tooltiptext="&OptKeysetPanel.tooltip;"
+				preference="pref-mainKeysetPanel"/>
+		</groupbox>
+	</prefpane>
+	
+</overlay>

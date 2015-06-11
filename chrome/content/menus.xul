@@ -8,7 +8,7 @@
 		<menuitem id="objName-contextOptions"
 			label="&omnisidebarOptions.title;"
 			accesskey="&omnisidebarOptions.accesskey;"
-			oncommand="objName.doOpenOptions();"
+			oncommand="objName.openOptions();"
 			hidden="true"/>
 	</menupopup>
 	
@@ -16,7 +16,7 @@
 		<menuitem id="objName-menuoptions_viewmenu"
 			label="&omnisidebarOptions.title;"
 			accesskey="&omnisidebarOptions.accesskey;"
-			oncommand="objName.doOpenOptions();"
+			oncommand="objName.openOptions();"
 			insertbefore="prefSep"/>
 	</menupopup>
 	

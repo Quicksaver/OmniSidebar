@@ -1,7 +1,20 @@
-var defaultsVersion = '1.2.7';
-var objName = 'omnisidebar';
-var objPathString = 'omnisidebar';
-var prefList = {
+// VERSION = '1.3';
+
+objName = 'omnisidebar';
+objPathString = 'omnisidebar';
+addonUUID = '8f7da5c0-61c7-11e4-9803-0800200c9a66';
+
+addonUris = {
+	homepage: 'https://addons.mozilla.org/firefox/addon/omnisidebar/',
+	support: 'https://github.com/Quicksaver/OmniSidebar/issues',
+	fullchangelog: 'https://github.com/Quicksaver/OmniSidebar/commits/master',
+	email: 'mailto:quicksaver@gmail.com',
+	profile: 'https://addons.mozilla.org/firefox/user/quicksaver/',
+	api: 'http://fasezero.com/addons/api/omnisidebar',
+	development: 'http://fasezero.com/addons/'
+};
+
+prefList = {
 	NoSync_firstEnabled: true,
 	NoSync_lastStateMain: true,
 	NoSync_lastStateTwin: true,
@@ -69,12 +82,14 @@ var prefList = {
 	
 	noInitialShow: false,
 	aboveSquared: false,
-	firstEnabled: true,
-	
-	// for the what's new tab, it's better they're here so they're automatically carried over to content
-	lastVersionNotify: '0',
-	notifyOnUpdates: true
+	firstEnabled: true
 };
+
+paneList = [
+	['paneMain'],
+	['paneTwin'],
+	['paneGlobal']
+];
 
 function waitForSessionStore(window, delayed) {
 	if(window.__SSi) {
@@ -105,12 +120,6 @@ function stopAddon(window) {
 	removeObject(window);
 }
 
-function startPreferences(window) {
-	replaceObjStrings(window.document);
-	preparePreferences(window);
-	window[objName].Modules.load('options');
-}
-
 function toggleMoveSidebars() {
 	Modules.loadIf('moveSidebars', Prefs.moveSidebars);
 }
@@ -119,7 +128,7 @@ function toggleGlass() {
 	Modules.loadIf('glassStyle', Prefs.glassStyle);
 }
 
-function onStartup(aReason) {
+function onStartup() {
 	// try not to show the sidebar when starting up, so the browser doesn't jump around
 	if(STARTED == APP_STARTUP) {
 		Styles.load('startupFix', 'startupFix');
@@ -141,15 +150,9 @@ function onStartup(aReason) {
 	// Apply the add-on to every window opened and to be opened
 	Windows.callOnAll(startAddon, 'navigator:browser');
 	Windows.register(startAddon, 'domwindowopened', 'navigator:browser');
-	
-	// Apply the add-on to every preferences window opened and to be opened
-	Windows.callOnAll(startPreferences, null, "chrome://"+objPathString+"/content/options.xul");
-	Windows.register(startPreferences, 'domwindowopened', null, "chrome://"+objPathString+"/content/options.xul");
-	Browsers.callOnAll(startPreferences, "chrome://"+objPathString+"/content/options.xul");
-	Browsers.register(startPreferences, 'pageshow', "chrome://"+objPathString+"/content/options.xul");
 }
 
-function onShutdown(aReason) {
+function onShutdown() {
 	// remove the add-on from all windows
 	Windows.callOnAll(stopAddon, null, null, true);
 	Browsers.callOnAll(stopAddon, null, true);

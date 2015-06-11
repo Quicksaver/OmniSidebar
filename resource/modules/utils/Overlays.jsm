@@ -1,4 +1,4 @@
-Modules.VERSION = '2.15.1';
+Modules.VERSION = '2.15.2';
 Modules.UTILS = true;
 
 // Overlays - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -1780,30 +1780,38 @@ this.Overlays = {
 		var prefPane = aWindow.document.getElementById(node.parentNode.id);
 		if(!prefPane) { return; }
 		
-		var preferences = prefPane.getElementsByTagName('preferences');
-		if(preferences.length == 0) {
+		var preferences = prefPane.getElementsByTagName('preferences')[0];
+		if(!preferences) {
 			try {
-				var prefsNode = aWindow.document.importNode(node, true);
+				// don't clone, it bugs out saying this.preferences (on each preference) doesn't exist
+				preferences = aWindow.document.createElement('preferences');
 				prefPane.appendChild(preferences);
-			} catch(ex) {}
-			this.traceBack(aWindow, {
-				action: 'addPreferencesElement',
-				prefs: preferences
-			});
-			return;
+				
+				this.traceBack(aWindow, {
+					action: 'addPreferencesElement',
+					prefs: preferences
+				});
+			}
+			catch(ex) { Cu.reportError(ex); }
 		}
 		
-		for(let p of node.childNodes) {
-			if(!p.id) { continue; }
+		for(let child of node.childNodes) {
+			if(!child.id) { continue; }
 			
 			try {
-				var pref = aWindow.document.importNode(p, true);
-				preferences[0].appendChild(pref);
-			} catch(ex) {}
-			this.traceBack(aWindow, {
-				action: 'addPreference',
-				pref: pref
-			});
+				// don't clone, same as above
+				var pref = aWindow.document.createElement('preference');
+				for(let attr of child.attributes) {
+					pref.setAttribute(attr.name, attr.value);
+				}
+				preferences.appendChild(pref);
+				
+				this.traceBack(aWindow, {
+					action: 'addPreference',
+					pref: pref
+				});
+			}
+			catch(ex) { Cu.reportError(ex); }
 		}
 	},
 	

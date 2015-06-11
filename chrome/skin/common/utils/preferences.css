@@ -1,0 +1,13 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+.smallindent {
+	-moz-margin-start: 14px;
+}
+
+.header,
+caption {
+	text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+	color: #484848;
+}
+
+[invisible="true"] { visibility: hidden; }
