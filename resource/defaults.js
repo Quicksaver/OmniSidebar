@@ -86,9 +86,9 @@ prefList = {
 };
 
 paneList = [
-	['paneMain'],
-	['paneTwin'],
-	['paneGlobal']
+	[ 'paneMain' ],
+	[ 'paneTwin' ],
+	[ 'paneGlobal' ]
 ];
 
 function waitForSessionStore(window, delayed) {
