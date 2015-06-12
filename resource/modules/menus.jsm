@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.menus = {
 	get viewSidebarMenu () { return $('viewSidebarMenu'); },
@@ -38,7 +38,7 @@ this.menus = {
 	},
 	
 	viewMenu: {
-		get viewMenu () { return $('viewToolbarsMenu').firstChild; }, // View - Toolbars submenu
+		get menu () { return $('viewToolbarsMenu').firstChild; }, // View - Toolbars submenu
 		
 		handleEvent: function(e) {
 			switch(e.type) {
@@ -51,7 +51,7 @@ this.menus = {
 	},
 	
 	customizeMenu: {
-		get viewMenu () { return $('customization-toolbar-menu'); }, // View - Toolbars submenu
+		get menu () { return $('customization-toolbar-menu'); },
 		
 		handleEvent: function(e) {
 			switch(e.type) {
@@ -63,10 +63,31 @@ this.menus = {
 		}
 	},
 	
+	socialStatusArea: {
+		get menu () { return $('social-statusarea-popup'); },
+		
+		handleEvent: function(e) {
+			switch(e.type) {
+				case 'popupshowing':
+					this.menuItemsCheck(e.target);
+					break;
+			}
+		}
+	},
+	
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'popupshowing':
-				this.menuItemsCheck(e.target);
+				// the bookmarks sidebar menu entry has the annoying habit of losing its label during startup, for reasons...
+				var bookmarksEntry = $('menu_bookmarksSidebar');
+				var labelValue = $('viewBookmarksSidebar') && $('viewBookmarksSidebar').getAttribute('sidebartitle');
+				if(bookmarksEntry && labelValue) {
+					if(bookmarksEntry.getAttribute('label') != labelValue) {
+						setAttribute(bookmarksEntry, 'label', labelValue);
+					} else {
+						Listeners.remove(window, 'popupshowing', this, true);
+					}
+				}
 				break;
 			
 			case 'mousedown':
@@ -80,7 +101,6 @@ this.menus = {
 					this.openSidebarMenu($((bar.twin) ? objName+'-openTwinSidebarMenu' : objName+'-openSidebarMenu'));
 				}
 				break;
-
 		}
 	},
 	
@@ -242,11 +262,12 @@ Modules.LOADMODULE = function() {
 	Overlays.overlayURI('chrome://'+objPathString+'/content/headers.xul', 'menus');
 	Overlays.overlayURI('chrome://'+objPathString+'/content/headersTwin.xul', 'menusTwin');
 	
+	Listeners.add(window, 'endToggleSidebar', menus);
+	Listeners.add(window, 'popupshowing', menus, true);
 	Listeners.add(menus.contextMenu.menu, 'popupshowing', menus.contextMenu);
 	Listeners.add(menus.viewMenu.menu, 'popupshown', menus.viewMenu);
 	Listeners.add(menus.customizeMenu.menu, 'popupshown', menus.customizeMenu);
-	Listeners.add($('social-statusarea-popup'), 'popupshowing', menus);
-	Listeners.add(window, 'endToggleSidebar', menus);
+	Listeners.add(menus.socialStatusArea.menu, 'popupshowing', menus.socialStatusArea);
 	
 	SidebarUI.triggers.twin.set('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	SidebarUI.triggers.twin.set('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
@@ -275,15 +296,16 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('titleButton', menus);
 	Prefs.unlisten('titleButtonTwin', menus);
 	
+	Listeners.remove(window, 'popupshowing', menus, true);
+	Listeners.remove(window, 'endToggleSidebar', menus);
 	Listeners.remove(menus.contextMenu.menu, 'popupshowing', menus.contextMenu);
 	Listeners.remove(menus.viewMenu.menu, 'popupshown', menus.viewMenu);
 	Listeners.remove(menus.customizeMenu.menu, 'popupshown', menus.customizeMenu);
-	Listeners.remove($('social-statusarea-popup'), 'popupshowing', menus);
-	Listeners.remove(window, 'endToggleSidebar', menus);
+	Listeners.remove(menus.socialStatusArea.menu, 'popupshowing', menus.socialStatusArea);
 	
 	// ensure the menu is properly reset when unloading
 	menus.menuItemsCheck(menus.viewSidebarMenu);
-	if($('social-statusarea-popup')) { menus.menuItemsCheck($('social-statusarea-popup')); }
+	if(menus.socialStatusArea.menu) { menus.menuItemsCheck(menus.socialStatusArea.menu); }
 	
 	menus.toggleMenuButton();
 	menus.toggleMenuButtonTwin();
