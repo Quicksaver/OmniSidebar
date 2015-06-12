@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.renderAbove = {
 	dragalt: null,
@@ -208,6 +208,7 @@ this.renderAbove = {
 	},
 	
 	toggleDockerStatus: function(bar) {
+		this.toggleDockers();
 		toggleAttribute(bar.docker, 'sidebarDocked', bar.above);
 		toggleAttribute(bar.docker, 'tooltiptext', bar.above, Strings.get('buttons', 'dockbutton'), Strings.get('buttons', 'undockbutton'));
 	},
