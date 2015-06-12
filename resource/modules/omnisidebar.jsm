@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.4';
+Modules.VERSION = '3.0.5';
 
 this.mainSidebar = {
 	main: true,
@@ -57,6 +57,7 @@ this.mainSidebar = {
 			if(!width || width == '0' || width == 'NaN') {
 				width = (!width) ? 300 : Math.max(this.box.clientWidth, Prefs.minSidebarWidth) || 300;
 				this.box.setAttribute('width', width);
+				document.persist(this.box.id, 'width');
 			}
 			return parseInt(width);
 		}
@@ -70,6 +71,8 @@ this.mainSidebar = {
 	_state: null,
 	get state () {
 		if(!this._state) {
+			this.noPersist();
+			
 			var data = SessionStore.getWindowValue(window, objName+'.mainSidebar');
 			
 			// if this window doesn't have it's own state, use the state from the opener
@@ -97,10 +100,8 @@ this.mainSidebar = {
 		return this._state;
 	},
 	set state (v) {
-		this._state = {
-			command: v,
-			closed: this.closed
-		};
+		this._state.command = v;
+		this._state.closed = this.closed;
 		this.saveState();
 	},
 	stateForceClosed: function(v) {
@@ -126,6 +127,16 @@ this.mainSidebar = {
 			Prefs.reset('lastStateMain');
 		}
 		SessionStore.deleteWindowValue(window, objName+'.mainSidebar');
+	},
+	noPersist: function() {
+		// the native SidebarUI persists the attributes of sidebar-box,
+		// which can cause the sidebar to open after restarting firefox when it's not supposed to
+		if(Services.xulStore.hasValue(document.documentURI, 'sidebar-box', 'src')) {
+			Services.xulStore.removeValue(document.documentURI, 'sidebar-box', 'src');
+		}
+		if(Services.xulStore.hasValue(document.documentURI, 'sidebar-box', 'sidebarcommand')) {
+			Services.xulStore.removeValue(document.documentURI, 'sidebar-box', 'sidebarcommand');
+		}
 	},
 	get keyset () { return mainKey; },
 	get keysetPanel () { return Prefs.mainKeysetPanel; },
@@ -215,6 +226,8 @@ this.twinSidebar = {
 	_state: null,
 	get state () {
 		if(!this._state) {
+			this.noPersist();
+			
 			var data = SessionStore.getWindowValue(window, objName+'.twinSidebar');
 			
 			// if this window doesn't have it's own state, use the state from the opener
@@ -242,10 +255,8 @@ this.twinSidebar = {
 		return this._state;
 	},
 	set state (v) {
-		this._state = {
-			command: v,
-			closed: this.closed
-		};
+		this._state.command = v;
+		this._state.closed = this.closed;
 		this.saveState();
 	},
 	stateForceClosed: function(v) {
@@ -271,6 +282,16 @@ this.twinSidebar = {
 			Prefs.reset('lastStateTwin');
 		}
 		SessionStore.deleteWindowValue(window, objName+'.twinSidebar');
+	},
+	noPersist: function() {
+		// the native SidebarUI persists the attributes of sidebar-box,
+		// which can cause the sidebar to open after restarting firefox when it's not supposed to
+		if(Services.xulStore.hasValue(document.documentURI, objName+'-sidebar-box-twin', 'src')) {
+			Services.xulStore.removeValue(document.documentURI, objName+'-sidebar-box-twin', 'src');
+		}
+		if(Services.xulStore.hasValue(document.documentURI, objName+'-sidebar-box-twin', 'sidebarcommand')) {
+			Services.xulStore.removeValue(document.documentURI, objName+'-sidebar-box-twin', 'sidebarcommand');
+		}
 	},
 	get keyset () { return twinKey; },
 	get keysetPanel () { return Prefs.twinKeysetPanel; },
@@ -319,6 +340,10 @@ this.__defineGetter__('moveRight', function() {
 this.handleEvent = function(e) {
 	switch(e.type) {
 		case 'SidebarFocused':
+			// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
+			if(!e.detail) { return; }
+			// no break;
+			
 		case 'SidebarFocusedSync':
 			setClass(e.detail.bar);
 			break;
@@ -376,7 +401,14 @@ this.attrWatcher = function(obj, prop, oldVal, newVal) {
 				obj.setAttribute('width', width);
 			}
 			
-			widthChanged((obj == mainSidebar.box) ? mainSidebar : (obj == twinSidebar.box) ? twinSidebar : null);
+			var bar = (obj == mainSidebar.box) ? mainSidebar : (obj == twinSidebar.box) ? twinSidebar : null;
+			if(bar) {
+				document.persist(obj.id, 'width');
+				
+				Timers.init('boxResize_'+bar.box.id, function() {
+					dispatch(bar.box, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: bar } });
+				}, 500);
+			}
 			return true;
 	}
 };
@@ -511,14 +543,6 @@ this.customize = function(inCustomize = customizing) {
 			broadcaster.setAttribute('twinSidebar', 'true');
 		}
 	}
-};
-
-this.widthChanged = function(bar) {
-	if(!bar) { return; }
-	
-	Timers.init('boxResize_'+bar.box.id, function() {
-		dispatch(bar.box, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: bar } });
-	}, 500);
 };
 
 this.browserResized = function(resize) {
@@ -965,7 +989,7 @@ this.SidebarUI = {
 		if(!broadcaster && commandID) {
 			broadcaster = $(commandID);
 		}
-		if(broadcaster.localName == 'broadcaster' && trueAttribute(broadcaster, 'checked')) {
+		if(broadcaster && broadcaster.localName == 'broadcaster' && trueAttribute(broadcaster, 'checked')) {
 			broadcaster.removeAttribute('checked');
 			broadcaster.removeAttribute('twinSidebar');
 			

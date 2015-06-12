@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
@@ -14,6 +14,9 @@ this.sidebarConsole = {
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'SidebarFocused':
+				// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
+				if(!e.detail) { return; }
+				
 				if(e.detail.bar.command != this.broadcasterId) { return; }
 				
 				if(!DebuggerServer.initialized) {

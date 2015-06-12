@@ -36,7 +36,7 @@
 			hidden="true"
 			class="chromeclass-extrachrome"
 			waitForSS="chrome://objPathString/skin/overlay.css"
-			persist="src width sidebarcommand"
+			persist="width"
 			insertafter="appcontent">
 			
 			<sidebarheader id="objName-sidebar-header-twin" align="center">

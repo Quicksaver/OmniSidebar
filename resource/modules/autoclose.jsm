@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.autoClose = {
 	handleEvent: function(e) {
@@ -18,6 +18,8 @@ this.autoClose = {
 				break;
 			
 			case 'SidebarFocused':
+				// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
+				if(!e.detail) { return; }
 				var bar = e.detail.bar;
 				
 				// we need to focus the sidebar on open or it won't be focused

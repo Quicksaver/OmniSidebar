@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -14,6 +14,8 @@ this.autoHide = {
 				break;
 			
 			case 'SidebarFocused':
+				// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
+				if(!e.detail) { return; }
 				var bar = e.detail.bar;
 				
 				// hover the sidebar for a moment when it opens even if the mouse isn't there, so the user knows the sidebar opened

@@ -12,6 +12,7 @@
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewBookmarksSidebar"
 			sidebartitle="&bookmarksSidebar.title;"
+			label="__remove"
 			accesskey="&bookmarksSidebar.accesskey;"/>
 			
 		<broadcaster id="viewHistorySidebar"
@@ -51,15 +52,8 @@
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&bookmarksSidebar.label;"
 			tooltiptext="&bookmarksSidebar.tooltip;"
-			type="custom">
-				<observes element="viewBookmarksSidebar" attribute="sidebartitle"/>
-				<observes element="viewBookmarksSidebar" attribute="sidebarurl"/>
-				<observes element="viewBookmarksSidebar" attribute="checked"/>
-				<observes element="viewBookmarksSidebar" attribute="group"/>
-				<observes element="viewBookmarksSidebar" attribute="twin"/>
-				<observes element="viewBookmarksSidebar" attribute="oncommand"/>
-				<observes element="viewBookmarksSidebar" attribute="accesskey"/>
-		</toolbarbutton>
+			type="custom"
+			observes="viewBookmarksSidebar" />
 		
 		<toolbarbutton id="objName-history_sidebar_button" 
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
@@ -69,6 +63,9 @@
 			type="custom"
 			observes="viewHistorySidebar" />
 	</toolbarpalette>
+	
+	<menuitem id="menu_bookmarksSidebar"
+		label="&bookmarksSidebar.title;"/>
 	
 	<hbox id="browser">
 		<hbox id="objName-switch"
@@ -80,7 +77,7 @@
 			insertbefore="appcontent"/>
 	</hbox>
 	
-	<vbox id="sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
+	<vbox id="sidebar-box" persist="width" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<vbox id="social-sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="social-sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>

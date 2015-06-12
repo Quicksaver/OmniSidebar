@@ -1,4 +1,4 @@
-Modules.VERSION = '2.15.2';
+Modules.VERSION = '2.15.3';
 Modules.UTILS = true;
 
 // Overlays - to use overlays in my bootstraped add-ons. The behavior is as similar to what is described in https://developer.mozilla.org/en/XUL_Tutorial/Overlays as I could manage.
@@ -16,14 +16,15 @@ Modules.UTILS = true;
 // Its content will be added to the window where a similar element exists with the same id value. If such an element does not exist, that part of the overlay is ignored.
 // If there is content inside both the XUL window and in the overlay, the window's content will be used as is and the overlay's content will be appended to the end.
 // The children of the overlay's element are inserted as children of the base window's element. The following attributes are processed in the order they are declared in the overlay:
-//	If the overlay's element contains an insertbefore attribute, the element is added just before the element in the base window with the id that matches the value of this attribute.
-//	If the overlay's element contains an insertafter attribute, the element is added just after the element in the base window with the id that matches the value of this attribute.
+//	If the overlay's element contains an insertbefore attribute, the element is added just before the element in the base window with the id that matches this attribute.
+//	If the overlay's element contains an insertafter attribute, the element is added just after the element in the base window with the id that matches this attribute.
 //	If the overlay's element contains an position attribute, the element is added at the one-based index specified in this attribute.
 //	Otherwise, the element is added as the last child.
 // If you would like to remove an element that is already in the XUL file, create elements with removeelement attribute.
 // Attention: this won't work in customizable elements, such as toolbars or palette items!
 // To move an already existant node to another place, add a newparent attribute with the id of the new parent element. If it exists, it will be moved there. This can be used
 //	together with insertafter, insertbefore and position attributes, which will be relative to the new parent and consequently new siblings.
+// To remove an attribute from an overlayed element, simply set its value to "__remove".
 // 
 // For overlaying preferences dialogs, you can add new preferences in an unnamed <preferences> element. They will be added to an already existing <preferences> element if present,
 // or the whole element will be overlayed if not.
@@ -1751,7 +1752,8 @@ this.Overlays = {
 				name: attr.name,
 				value: node.getAttribute(attr.name)
 			});
-		} else {
+		}
+		else if(attr.value != '__remove') {
 			this.traceBack(aWindow, {
 				action: 'addAttribute',
 				node: node,
@@ -1759,7 +1761,14 @@ this.Overlays = {
 			});
 		}
 		
-		try { node.setAttribute(attr.name, attr.value); } catch(ex) {}
+		try { 
+			if(attr.value == '__remove') {
+				node.removeAttribute(attr.name);
+			} else {
+				node.setAttribute(attr.name, attr.value);
+			}
+		}
+		catch(ex) {}
 	},
 	
 	appendXMLSS: function(aWindow, node) {
