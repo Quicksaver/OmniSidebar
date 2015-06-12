@@ -61,7 +61,7 @@
 			class="omnisidebar_switch"
 			waitForSS="chrome://objPathString/skin/overlay.css"
 			collapsed="true"
-			onclick="objName.switcher.onClick(event, objName.twinSidebar);"
+			onmousedown="objName.switcher.onClick(event, objName.twinSidebar);"
 			onwheel="objName.switcher.onScroll(event, objName.twinSidebar);"
 			insertafter="appcontent"/>
 	</hbox>

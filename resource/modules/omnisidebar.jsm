@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.5';
+Modules.VERSION = '3.0.6';
 
 this.mainSidebar = {
 	main: true,
@@ -588,10 +588,10 @@ this.switcher = {
 	},
 	
 	onClick: function(e, bar) {
-		if(e.button == 0
-		&& dispatch(bar.switcher, { type: 'clickedSwitcher', detail: { bar: bar, clickEvent: e } })
+		if(dispatch(bar.switcher, { type: 'clickedSwitcher', detail: { bar: bar, clickEvent: e } })
 		&& trueAttribute(bar.switcher, 'enabled')
-		&& panel.shouldFollowCommand(bar.switcher, bar.twin, e)) {
+		&& panel.shouldFollowCommand(bar.switcher, bar.twin, e)
+		&& e.button == 0) {
 			SidebarUI.toggle(bar.switcher);
 		}
 	},
