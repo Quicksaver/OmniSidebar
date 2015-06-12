@@ -9,14 +9,12 @@
 
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewDmgrPlacesSidebar"
-			label="&dmtSidebar.label;"
-			tooltiptext="&dmtSidebar.tooltip;" 
-			accesskey="&dmtSidebar.accesskey;"
+			accesskey="&downloadsSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
 			sidebarurl="chrome://browser/content/places/places.xul"
-			sidebartitle="&dmtSidebar.label;"
+			sidebartitle="&downloadsSidebar.title;"
 			WinLinAcceltext="&acceltext.ctrl;+&downloads.commandkey;"
 			MacAcceltext="&acceltext.cmd;&downloads.commandkey;"
 			oncommand="SidebarUI.toggle(this);" />
@@ -24,6 +22,7 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="menu_dmSidebar"
+			label="&downloadsSidebar.title;"
 			observes="objName-viewDmgrPlacesSidebar" />
 	</menupopup>
 	

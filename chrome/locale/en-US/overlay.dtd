@@ -1,4 +1,5 @@
 <!ENTITY addonsSidebar.label "Add-ons Sidebar">
+<!ENTITY addonsSidebar.title "Add-ons">
 <!ENTITY addonsSidebar.tooltip "Open the add-ons manager in the sidebar">
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "Bookmarks Sidebar">
@@ -9,12 +10,14 @@
 <!ENTITY historySidebar.tooltip "Display in the sidebar pages you've viewed recently">
 <!ENTITY historySidebar.accesskey "H">
 <!ENTITY downloadsSidebar.label "Downloads Sidebar">
+<!ENTITY downloadsSidebar.title "Downloads">
 <!ENTITY downloadsSidebar.tooltip "Display in the sidebar the Progress of Ongoing Downloads">
+<!ENTITY downloadsSidebar.accesskey "D">
 
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Open the DOM Inspector in the Sidebar">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.label "View Page Info">
+<!ENTITY PageInfoSidebar.labelB "Page Info">
 <!ENTITY PageInfoSidebar.tooltip "View details about the page you're on">
 <!ENTITY PageInfoSidebar.accesskey "I">
 <!ENTITY scratchpadSidebar.label "Scratchpad">
@@ -23,13 +26,9 @@
 <!ENTITY BlankSidebar.label "Open a sidebar">
 <!ENTITY URISidebar.tooltip "Type a location to open in the sidebar">
 <!ENTITY URISidebar.buttonLabel "Go">
-
 <!ENTITY browserConsole.label "Browser Console">
 <!ENTITY browserConsole.tooltip "Open the Browser Console in the Sidebar">
 <!ENTITY browserConsole.accesskey "C">
-<!ENTITY dmtSidebar.label "Downloads">
-<!ENTITY dmtSidebar.tooltip "Display the Progress of Ongoing Downloads">
-<!ENTITY dmtSidebar.accesskey "D">
 
 <!ENTITY acceltext.ctrl "Ctrl">
 <!ENTITY acceltext.shift "Shift">

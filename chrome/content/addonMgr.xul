@@ -9,14 +9,12 @@
 	
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewAddonSidebar"
-			label="&addonsSidebar.label;"
-			tooltiptext="&addonsSidebar.tooltip;"
 			accesskey="&addonsSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
 			sidebarurl="about:addons"
-			sidebartitle="&addonsSidebar.label;"
+			sidebartitle="&addonsSidebar.title;"
 			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&addons.commandkey;"
 			MacAcceltext="&acceltext.upArrow;&acceltext.cmd;&addons.commandkey;"
 			oncommand="SidebarUI.toggle(this);" />
@@ -24,6 +22,7 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_addonsSidebar"
+			label="&addonsSidebar.title;"
 			observes="objName-viewAddonSidebar" />
 	</menupopup>
 	

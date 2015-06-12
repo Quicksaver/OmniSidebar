@@ -54,12 +54,10 @@
 			type="custom">
 				<observes element="viewBookmarksSidebar" attribute="sidebartitle"/>
 				<observes element="viewBookmarksSidebar" attribute="sidebarurl"/>
-				<observes element="viewBookmarksSidebar" attribute="type"/>
 				<observes element="viewBookmarksSidebar" attribute="checked"/>
 				<observes element="viewBookmarksSidebar" attribute="group"/>
 				<observes element="viewBookmarksSidebar" attribute="twin"/>
 				<observes element="viewBookmarksSidebar" attribute="oncommand"/>
-				<observes element="viewBookmarksSidebar" attribute="autoCheck"/>
 				<observes element="viewBookmarksSidebar" attribute="accesskey"/>
 		</toolbarbutton>
 		

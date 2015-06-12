@@ -9,8 +9,6 @@
 	
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewScratchpadSidebar"
-			label="&scratchpadSidebar.label;"
-			tooltiptext="&scratchpadSidebar.tooltip;"
 			accesskey="&scratchpadSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
@@ -24,6 +22,7 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_scratchpadSidebar"
+			label="&scratchpadSidebar.label;"
 			observes="objName-viewScratchpadSidebar" />
 	</menupopup>
 	

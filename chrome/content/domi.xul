@@ -4,8 +4,6 @@
 	
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewDOMInspectorSidebar"
-			label="&DOMInspectorSidebar.label;"
-			tooltiptext="&DOMInspectorSidebar.tooltip;"
 			accesskey="&DOMInspectorSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
@@ -17,6 +15,7 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_domiSidebar"
+			label="&DOMInspectorSidebar.label;"
 			observes="objName-viewDOMInspectorSidebar" />
 	</menupopup>
 	

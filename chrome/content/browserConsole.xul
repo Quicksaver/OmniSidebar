@@ -9,8 +9,6 @@
 
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewConsoleSidebar"
-			label="&browserConsole.label;"
-			tooltiptext="&browserConsole.tooltip;" 
 			accesskey="&browserConsole.accesskey;"
 			autoCheck="false"
 			type="checkbox"
@@ -34,6 +32,7 @@
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="menu_consoleSidebar"
+			label="&browserConsole.label;"
 			observes="objName-viewConsoleSidebar" />
 	</menupopup>
 	

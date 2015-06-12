@@ -4,19 +4,18 @@
 	
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewPageInfoSidebar"
-			label="&PageInfoSidebar.label;"
-			tooltiptext="&PageInfoSidebar.tooltip;"
 			accesskey="&PageInfoSidebar.accesskey;"
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
 			sidebarurl="chrome://browser/content/pageinfo/pageInfo.xul"
-			sidebartitle="&PageInfoSidebar.label;"
+			sidebartitle="&PageInfoSidebar.labelB;"
 			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 	
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_pageInfoSidebar"
+			label="&PageInfoSidebar.labelB;"
 			observes="objName-viewPageInfoSidebar" />
 	</menupopup>
 		
