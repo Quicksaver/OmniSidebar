@@ -2,6 +2,7 @@
 <!ENTITY addonsSidebar.tooltip "Open the add-ons manager in the sidebar">
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "Bookmarks Sidebar">
+<!ENTITY bookmarksSidebar.title "Bookmarks">
 <!ENTITY bookmarksSidebar.tooltip "Display your bookmarks in the sidebar">
 <!ENTITY bookmarksSidebar.accesskey "B">
 <!ENTITY historySidebar.label "History Sidebar">

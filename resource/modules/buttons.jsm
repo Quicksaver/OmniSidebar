@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.buttons = {
 	toWatch: [
@@ -151,4 +151,7 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'loadedSidebarHeader', buttons);
 		
 	Prefs.unlisten('moveSidebars', buttons);
+	
+	removeAttribute(mainSidebar.button, 'loaded');
+	removeAttribute(twinSidebar.button, 'loaded');
 };

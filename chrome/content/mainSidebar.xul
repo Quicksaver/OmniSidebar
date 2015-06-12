@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://objPathString/skin/overlay.css" type="text/css"?>
+<?xml-stylesheet href="chrome://objPathString/skin/buttons.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="mainSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
@@ -8,22 +9,13 @@
 		<command id="objName-cmd_keyset_mainSidebar" oncommand="objName.keysetCommand(false, 'cmd_mainSidebar');"/>
 	</commandset>
 	
-	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-button" 
-			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController osb-adequate-size"
-			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
-			label="&omnisidebarButton.label;"
-			tooltiptext="&omnisidebarButton.tooltip;"
-			type="custom"
-			defaultArea="nav-bar"
-			onload="objName.buttonLabels(this, true);"
-			onclick="return objName.panel.shouldFollowCommand(this, false, event);"
-			command="objName-cmd_mainSidebar" />
-	</toolbarpalette>
-	
 	<broadcasterset id="mainBroadcasterSet">
-		<broadcaster id="viewBookmarksSidebar" accesskey="&bookmarksSidebar.accesskey;"/>
-		<broadcaster id="viewHistorySidebar" accesskey="&historySidebar.accesskey;"/>
+		<broadcaster id="viewBookmarksSidebar"
+			sidebartitle="&bookmarksSidebar.title;"
+			accesskey="&bookmarksSidebar.accesskey;"/>
+			
+		<broadcaster id="viewHistorySidebar"
+			accesskey="&historySidebar.accesskey;"/>
 		
 		<broadcaster id="objName-viewBlankSidebar"
 			label="&BlankSidebar.label;"
@@ -42,6 +34,44 @@
 			sidebartitle="" />
 	</broadcasterset>
 	
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="objName-button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController osb-adequate-size"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
+			label="&omnisidebarButton.label;"
+			tooltiptext="&omnisidebarButton.tooltip;"
+			type="custom"
+			defaultArea="nav-bar"
+			onload="objName.buttonLabels(this, true);"
+			onclick="return objName.panel.shouldFollowCommand(this, false, event);"
+			command="objName-cmd_mainSidebar" />
+			
+		<toolbarbutton id="objName-bookmarks_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
+			label="&bookmarksSidebar.label;"
+			tooltiptext="&bookmarksSidebar.tooltip;"
+			type="custom">
+				<observes element="viewBookmarksSidebar" attribute="sidebartitle"/>
+				<observes element="viewBookmarksSidebar" attribute="sidebarurl"/>
+				<observes element="viewBookmarksSidebar" attribute="type"/>
+				<observes element="viewBookmarksSidebar" attribute="checked"/>
+				<observes element="viewBookmarksSidebar" attribute="group"/>
+				<observes element="viewBookmarksSidebar" attribute="twin"/>
+				<observes element="viewBookmarksSidebar" attribute="oncommand"/>
+				<observes element="viewBookmarksSidebar" attribute="autoCheck"/>
+				<observes element="viewBookmarksSidebar" attribute="accesskey"/>
+		</toolbarbutton>
+		
+		<toolbarbutton id="objName-history_sidebar_button" 
+			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
+			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
+			label="&historySidebar.label;"
+			tooltiptext="&historySidebar.tooltip;"
+			type="custom"
+			observes="viewHistorySidebar" />
+	</toolbarpalette>
+	
 	<hbox id="browser">
 		<hbox id="objName-switch"
 			class="omnisidebar_switch"
@@ -56,5 +86,13 @@
 	<splitter id="sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<vbox id="social-sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="social-sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
+	
+	<vbox id="customization-palette-container">
+		<hbox id="objName-toolbarCustomizeWrapper" insertafter="puzzleBars-urlbar-customize-wrapper" insertbefore="customization-header">
+			<hbox id="objName-toolbarCustomizeWrapper-main"/>
+			<label id="objName-toolbarCustomize-spacer"/>
+			<hbox id="objName-toolbarCustomizeWrapper-twin"/>
+		</hbox>
+	</vbox>
 	
 </overlay>

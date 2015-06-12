@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.3';
+Modules.VERSION = '3.0.4';
 
 this.mainSidebar = {
 	main: true,
@@ -1086,8 +1086,6 @@ this.toggleTwin = function() {
 };
 
 Modules.LOADMODULE = function() {
-	Modules.load('australis');
-	
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
 	Modules.load('miniPanel');
 	
@@ -1201,5 +1199,5 @@ Modules.UNLOADMODULE = function() {
 	
 	Modules.unload('compatibilityFix/windowFixes');
 	Modules.unload('miniPanel');
-	Modules.unload('australis');
+	Modules.unload('buttons');
 };
