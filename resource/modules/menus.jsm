@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.menus = {
 	get viewSidebarMenu () { return $('viewSidebarMenu'); },
@@ -78,9 +78,15 @@ this.menus = {
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'popupshowing':
+				if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
+				
 				// the bookmarks sidebar menu entry has the annoying habit of losing its label during startup, for reasons...
+				// see https://github.com/Quicksaver/OmniSidebar/issues/81
+				// this probably has to do with the menu entry getting its label from the broadcaster and the add-on removing the label attribute from it,
+				// even though it adds it directly to the menu entry and that seems to work in most cases, sometimes when restarting firefox it's lost.
 				var bookmarksEntry = $('menu_bookmarksSidebar');
-				var labelValue = $('viewBookmarksSidebar') && $('viewBookmarksSidebar').getAttribute('sidebartitle');
+				var bookmarksBroadcaster = $('viewBookmarksSidebar');
+				var labelValue = bookmarksBroadcaster && bookmarksBroadcaster.getAttribute('sidebartitle');
 				if(bookmarksEntry && labelValue) {
 					if(bookmarksEntry.getAttribute('label') != labelValue) {
 						setAttribute(bookmarksEntry, 'label', labelValue);
