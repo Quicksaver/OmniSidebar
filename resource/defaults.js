@@ -155,7 +155,6 @@ function onStartup() {
 function onShutdown() {
 	// remove the add-on from all windows
 	Windows.callOnAll(stopAddon, null, null, true);
-	Browsers.callOnAll(stopAddon, null, true);
 	
 	Modules.unload('glassStyle');
 	Modules.unload('moveSidebars');
