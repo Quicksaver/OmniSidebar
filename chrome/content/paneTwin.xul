@@ -40,13 +40,11 @@
 			<label class="header-name">&OptgroupTwin.label;</label>
 		</hbox>
 		
-		<checkbox id="paneTwin-toggler"
-			label="&Optsidebars.twin.label;"
-			tooltiptext="&Optsidebars.twin.tooltip;"
-			preference="pref-twinSidebar"
-			collapsed="true" data-category="paneTwin"/>
+		<hbox id="paneTwin-toggler" align="start" collapsed="true" data-category="paneTwin">
+			<checkbox label="&Optsidebars.twin.label;" tooltiptext="&Optsidebars.twin.tooltip;" preference="pref-twinSidebar"/>
+		</hbox>
 		
-		<groupbox id="paneTwin-general" data-category="paneTwin" collapsed="true">
+		<groupbox align="start" id="paneTwin-general" data-category="paneTwin" collapsed="true">
 			<vbox align="start">
 				<checkbox dependson="pref-twinSidebar"
 					label="&Optswitchers.label;"
@@ -59,7 +57,7 @@
 			</vbox>
 		</groupbox>
 		
-		<groupbox id="paneTwin-above" data-category="paneTwin" collapsed="true">
+		<groupbox align="start" id="paneTwin-above" data-category="paneTwin" collapsed="true">
 			<caption><checkbox id="aboveTwinCheckbox"
 				label="&Optundock.label;"
 				tooltiptext="&Optundock.tooltip;"
@@ -72,7 +70,7 @@
 				preference="pref-autoHideTwin"/>
 		</groupbox>
 		
-		<groupbox id="paneTwin-display" data-category="paneTwin" collapsed="true">
+		<groupbox align="start" id="paneTwin-display" data-category="paneTwin" collapsed="true">
 			<caption label="&Optgroupgen.label;"/>
 			<hbox align="center">	
 				<vbox align="start">
@@ -98,7 +96,7 @@
 			</hbox>
 		</groupbox>
 		
-		<groupbox id="paneTwin-toolbar" data-category="paneTwin" collapsed="true">
+		<groupbox align="start" id="paneTwin-toolbar" data-category="paneTwin" collapsed="true">
 			<caption><checkbox dependson="pref-twinSidebar" label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbarTwin"/></caption>
 			<vbox class="indent" align="start">
 				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin"
@@ -107,7 +105,7 @@
 					preference="pref-goButtonTwin"/>
 				<radiogroup preference="pref-coloriconsTwin">
 					<hbox align="center">
-						<label value="&Optcoloricons.label;"/>
+						<label class="smallindent" value="&Optcoloricons.label;"/>
 						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
 							class="smallindent"
 							label="&Optcoloricons.nochange.label;"
@@ -128,10 +126,10 @@
 			</vbox>
 		</groupbox>
 		
-		<groupbox id="paneTwin-keyset" data-category="paneTwin" collapsed="true">
+		<groupbox align="start" id="paneTwin-keyset" data-category="paneTwin" collapsed="true">
 			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
 			<hbox>
-				<checkbox keysetAccel="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAccel"/>
+				<checkbox class="smallindent" keysetAccel="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAccel"/>
 				<checkbox class="smallindent" keysetAlt="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAlt"/>
 				<checkbox class="smallindent" keysetShift="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetShift"/>
 				<menulist class="smallindent" keyset="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetKeycode"/>

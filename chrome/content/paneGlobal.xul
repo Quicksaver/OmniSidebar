@@ -38,7 +38,7 @@
 			<label class="header-name">&OptMisc.label;</label>
 		</hbox>
 		
-		<groupbox id="paneGlobal-glass" data-category="paneGlobal" collapsed="true">
+		<groupbox align="start" id="paneGlobal-glass" data-category="paneGlobal" collapsed="true">
 			<caption>
 				<checkbox id="glassCheckbox"
 					label="&OptglassStyle.label;"
@@ -58,7 +58,7 @@
 			</hbox>
 		</groupbox>
 		
-		<groupbox id="paneGlobal-features" data-category="paneGlobal" collapsed="true">
+		<groupbox align="start" id="paneGlobal-features" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupfeatures.label;"/>
 			<vbox align="start">
 				<hbox>
@@ -90,12 +90,12 @@
 			</vbox>
 		</groupbox>
 		
-		<groupbox id="paneGlobal-performance" data-category="paneGlobal" collapsed="true">
+		<groupbox align="start" id="paneGlobal-performance" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupperformance.label;"/>
 			<checkbox label="&Optfx.label;" tooltiptext="&Optfx.tooltip;" preference="pref-fx"/>
 		</groupbox>
 		
-		<groupbox id="paneGlobal-always" data-category="paneGlobal" collapsed="true">
+		<groupbox align="start" id="paneGlobal-always" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupalways.label;"/>
 			<checkbox label="&addonsSidebar.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysAddons"/>
 			<checkbox label="&omnisidebarDMT.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysDMT"/>
@@ -104,7 +104,7 @@
 			<checkbox label="&omnisidebarScratchpad.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysScratchpad"/>
 		</groupbox>
 		
-		<groupbox id="paneGlobal-forceOpen" data-category="paneGlobal" collapsed="true">
+		<groupbox align="start" id="paneGlobal-forceOpen" data-category="paneGlobal" collapsed="true">
 			<caption label="&OptforceOpen.label;"/>
 			<checkbox label="&OptforceOpen.toolbars;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenToolbars"/>
 			<checkbox label="&OptforceOpen.menus;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenMenus"/>

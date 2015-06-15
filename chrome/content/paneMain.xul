@@ -41,24 +41,26 @@
 			<label class="header-name">&OptgroupMain.label;</label>
 		</hbox>
 		
-		<radiogroup id="paneMain-position"
-			collapsed="true" data-category="paneMain"
-			preference="pref-moveSidebars"
-			onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
-			onsynctopreference="return this.value == 'right';">
-			<hbox>
-				<radio id="radio_movetoleft"
-					label="&Optsidebars.left.label;"
-					tooltiptext="&Optsidebars.pos.tooltip;"
-					value="left"/>
-				<radio id="radio_movetoright"
-					label="&Optsidebars.right.label;"
-					tooltiptext="&Optsidebars.pos.tooltip;"
-					value="right"/>
-			</hbox>
-		</radiogroup>
+		<hbox id="paneMain-position" align="start" collapsed="true" data-category="paneMain">
+			<radiogroup preference="pref-moveSidebars"
+				onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
+				onsynctopreference="return this.value == 'right';">
+				<hbox>
+					<radio id="radio_movetoleft"
+						label="&Optsidebars.left.label;"
+						tooltiptext="&Optsidebars.pos.tooltip;"
+						class="smallindent"
+						value="left"/>
+					<radio id="radio_movetoright"
+						label="&Optsidebars.right.label;"
+						tooltiptext="&Optsidebars.pos.tooltip;"
+						class="smallindent"
+						value="right"/>
+				</hbox>
+			</radiogroup>
+		</hbox>
 		
-		<groupbox id="paneMain-general" data-category="paneMain" collapsed="true">
+		<groupbox align="start" id="paneMain-general" data-category="paneMain" collapsed="true">
 			<vbox align="start">
 				<checkbox label="&Optswitchers.label;"
 					tooltiptext="&Optswitchers.tooltip;"
@@ -69,7 +71,7 @@
 			</vbox>
 		</groupbox>
 		
-		<groupbox id="paneMain-above" data-category="paneMain" collapsed="true">
+		<groupbox align="start" id="paneMain-above" data-category="paneMain" collapsed="true">
 			<caption><checkbox id="aboveCheckbox"
 				label="&Optundock.label;"
 				tooltiptext="&Optundock.tooltip;"
@@ -81,7 +83,7 @@
 				preference="pref-autoHide"/>
 		</groupbox>
 		
-		<groupbox id="paneMain-display" data-category="paneMain" collapsed="true">
+		<groupbox align="start" id="paneMain-display" data-category="paneMain" collapsed="true">
 			<caption label="&Optgroupgen.label;"/>
 			<hbox align="center">
 				<vbox align="start">
@@ -100,13 +102,13 @@
 			</hbox>
 		</groupbox>
 		
-		<groupbox id="paneMain-toolbar" data-category="paneMain" collapsed="true">
+		<groupbox align="start" id="paneMain-toolbar" data-category="paneMain" collapsed="true">
 			<caption><checkbox label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbar"/></caption>
 			<vbox class="indent" align="start">
 				<checkbox dependson="pref-toolbar" label="&OptGoURI.label;" tooltiptext="&OptGoURI.tooltip;" preference="pref-goButton"/>
 				<radiogroup preference="pref-coloricons">
 					<hbox align="center">
-						<label value="&Optcoloricons.label;"/>
+						<label class="smallindent" value="&Optcoloricons.label;"/>
 						<radio dependson="pref-toolbar"
 							class="smallindent"
 							label="&Optcoloricons.nochange.label;"
@@ -127,10 +129,10 @@
 			</vbox>
 		</groupbox>
 		
-		<groupbox id="paneMain-keyset" data-category="paneMain" collapsed="true">
+		<groupbox align="start" id="paneMain-keyset" data-category="paneMain" collapsed="true">
 			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
 			<hbox>
-				<checkbox keysetAccel="objName-main" preference="pref-mainKeysetAccel"/>
+				<checkbox class="smallindent" keysetAccel="objName-main" preference="pref-mainKeysetAccel"/>
 				<checkbox class="smallindent" keysetAlt="objName-main" preference="pref-mainKeysetAlt"/>
 				<checkbox class="smallindent" keysetShift="objName-main" preference="pref-mainKeysetShift"/>
 				<menulist class="smallindent" keyset="objName-main" preference="pref-mainKeysetKeycode"/>
