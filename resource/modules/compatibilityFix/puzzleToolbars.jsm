@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.__defineGetter__('puzzleBars', function() { return window.puzzleBars; });
 
@@ -83,7 +83,7 @@ this.pzt = {
 		// -1px for lateral bar's box-shadow
 		moveLeftBy.__defineGetter__('pztLateralBar', () => {
 			if(Prefs.lateral_bar && Prefs.lateral_placement == 'left' && !Prefs.lateral_autohide
-			&& puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
+			&& puzzleBars && puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
 			&& this.lateral && this.lateral.bar && this.lateral.bar._loaded && !this.lateral.bar.collapsed) {
 				return this.lateral.bar.parentNode.clientWidth -1;
 			}
@@ -91,7 +91,7 @@ this.pzt = {
 		});
 		moveRightBy.__defineGetter__('pztLateralBar', () => {
 			if(Prefs.lateral_bar && Prefs.lateral_placement == 'right' && !Prefs.lateral_autohide
-			&& puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
+			&& puzzleBars && puzzleBars.onFullScreen && !puzzleBars.onFullScreen.hideBars
 			&& this.lateral && this.lateral.bar && this.lateral.bar._loaded && !this.lateral.bar.collapsed) {
 				return this.lateral.bar.parentNode.clientWidth -1;
 			}
