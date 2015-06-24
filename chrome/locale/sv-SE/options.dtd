@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 35.5em;">
-<!ENTITY Options.title "Inställningar för OmniSidebar">
-<!ENTITY Optabout.label "Om">
 <!ENTITY OptMisc.label "Allmänt">
 <!ENTITY OptgroupMain.label "Huvudsidopanelen">
 <!ENTITY OptgroupTwin.label "Tvillingsidopanelen">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
 <!ENTITY OptKeyboardShortcut.caption "Kortkommando för sidopanelen">
 <!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Skift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Cmd">
-<!ENTITY OptKeyboardShortcut.option "Alternativ">
-<!ENTITY OptKeyboardShortcut.none "Ingen">
-<!ENTITY OptKeyboardShortcut.spacebar "Mellanslag">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Vänsterpil">
-<!ENTITY OptKeyboardShortcut.up "Uppåtpil">
-<!ENTITY OptKeyboardShortcut.right "Högerpil">
-<!ENTITY OptKeyboardShortcut.down "Nedåtpil">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "av Quicksaver">
-<!ENTITY about.desc "All information om tillägget och dess utvecklare återfinns på dess Mozilla-sida. Om du tycker om tillägget, skriv gärna en uppskattande recension eller donera en skärv för att stödja dess fortsatta utveckling. Buggrapporter och förslag framförs med fördel på webbplatsen för teknisk support.">
-<!ENTITY about.home "Tilläggets webbplats">
-<!ENTITY about.tech "Teknisk support">
-<!ENTITY about.notes "Release Notes">

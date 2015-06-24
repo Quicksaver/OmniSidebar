@@ -1,18 +1,22 @@
 <!ENTITY addonsSidebar.label "附加组件侧栏">
+<!ENTITY addonsSidebar.title "Add-ons">
 <!ENTITY addonsSidebar.tooltip "在侧栏中打开附加组件管理器">
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "书签侧栏">
+<!ENTITY bookmarksSidebar.title "Bookmarks">
 <!ENTITY bookmarksSidebar.tooltip "在侧栏中显示您的书签">
 <!ENTITY bookmarksSidebar.accesskey "B">
 <!ENTITY historySidebar.label "历史侧栏">
 <!ENTITY historySidebar.tooltip "在侧栏显示您最近浏览的页面">
 <!ENTITY historySidebar.accesskey "H">
 <!ENTITY downloadsSidebar.label "Downloads Sidebar">
+<!ENTITY downloadsSidebar.title "下载">
 <!ENTITY downloadsSidebar.tooltip "Display in the sidebar the Progress of Ongoing Downloads">
+<!ENTITY downloadsSidebar.accesskey "D">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "在侧栏中打开DOM Inspector">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.label "查看页面信息">
+<!ENTITY PageInfoSidebar.labelB "Page Info">
 <!ENTITY PageInfoSidebar.tooltip "查看当前页面的细节信息">
 <!ENTITY PageInfoSidebar.accesskey "I">
 <!ENTITY scratchpadSidebar.label "代码片段速记器">
@@ -24,9 +28,6 @@
 <!ENTITY browserConsole.label "浏览器控制台">
 <!ENTITY browserConsole.tooltip "在侧栏打开浏览器控制台">
 <!ENTITY browserConsole.accesskey "C">
-<!ENTITY dmtSidebar.label "下载">
-<!ENTITY dmtSidebar.tooltip "显示正在进行的下载进度">
-<!ENTITY dmtSidebar.accesskey "D">
 <!ENTITY acceltext.ctrl "Ctrl">
 <!ENTITY acceltext.shift "Shift">
 <!ENTITY acceltext.alt "Alt">

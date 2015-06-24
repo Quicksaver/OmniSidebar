@@ -1,0 +1,24 @@
+<!ENTITY about.paneTitle "Über">
+<!ENTITY about.version "Version {v}">
+<!ENTITY about.versionDivider " - ">
+<!ENTITY about.uptodate "auf dem neuen Stand, herzlichen Glückwunsch!">
+<!ENTITY about.needsupdate "Update verfügbar!">
+<!ENTITY about.description "Lesen Sie die Versionsinformationen und bekannten Probleme für diese Version weiter unten. Lassen Sie mich jegliche Probleme wissen, auf die Sie stoßen, oder teilen Sie mir Vorschläge für zukünftige Versionen mit.">
+<!ENTITY about.descriptionB "The add-on is free, but fixing problems, adding new features and ensuring everything works with each new Firefox release is laborious and can be difficult at times. If you enjoy the add-on, please support its continued development. As the link says, &quot;You Can Help&quot;!">
+<!ENTITY about.allVersions "Alle Versionsinformationen vergangener Veröffentlichungen anzeigen">
+<!ENTITY about.notifyOnUpdates "Diesen Tab beim nächsten Update anzeigen">
+<!ENTITY about.development "Development Status">
+<!ENTITY about.helpdevelopment "YOU CAN HELP">
+<!ENTITY about.information "Weitere Informationen">
+<!ENTITY about.home "Add-on-Homepage">
+<!ENTITY about.fullchangelog "Vollständige Liste mit Änderungen">
+<!ENTITY about.problems "Haben Sie Probleme?">
+<!ENTITY about.tech "Legen Sie einen Problembericht auf der Hilfeseite an">
+<!ENTITY about.email "Oder senden Sie mir eine E-Mail darüber">
+<!ENTITY about.author "Mehr vom Entwickler">
+<!ENTITY about.trymore "Schauen Sie sich eins meiner anderen Add-ons für mehr Komfort mit Firefox an.">
+<!ENTITY about.profile "Besuchen Sie dazu mein Profil">
+<!ENTITY about.share "Teilen!">
+<!ENTITY about.friends "Seien Sie nicht die einzige Person mit einem tollen Browser. Lassen Sie Ihre Freunde davon wissen!">
+<!ENTITY about.moreshare "Weitere Dienste…">
+<!ENTITY about.tryit "Probiere dieses Add-on, welche das Beste aus deiner Sidebar herausholt: OmniSidebar!">

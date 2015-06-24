@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 26.25em;">
-<!ENTITY Options.title "OmniSidebar 選項">
-<!ENTITY Optabout.label "關於">
 <!ENTITY OptMisc.label "整體">
 <!ENTITY OptgroupMain.label "主側邊欄">
 <!ENTITY OptgroupTwin.label "副側邊欄">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
 <!ENTITY OptKeyboardShortcut.caption "側邊欄快捷鍵">
 <!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "無">
-<!ENTITY OptKeyboardShortcut.spacebar "Spacebar">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Left">
-<!ENTITY OptKeyboardShortcut.up "Up">
-<!ENTITY OptKeyboardShortcut.right "Right">
-<!ENTITY OptKeyboardShortcut.down "Down">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "by Quicksaver">
-<!ENTITY about.desc "本附加元件及開發者的所有相關資訊皆可在 Mozilla 附加元件首頁找到。如果你喜歡本附加元件，不妨考慮留下高評價或送出小額捐贈以支持後續的開發。錯誤回報及建議可以在技術支援網頁進行。">
-<!ENTITY about.home "附加元件首頁">
-<!ENTITY about.tech "技術支援">
-<!ENTITY about.notes "Release Notes">

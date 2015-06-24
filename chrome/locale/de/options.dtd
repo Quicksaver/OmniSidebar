@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 39.5em;">
-<!ENTITY Options.title "OmniSidebar Einstellungen">
-<!ENTITY Optabout.label "Über">
 <!ENTITY OptMisc.label "Allgemein">
 <!ENTITY OptgroupMain.label "Erste Sidebar">
 <!ENTITY OptgroupTwin.label "Zweite Sidebar">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "Die Tastenkombination öffnet das Sidebar-Menü mit möglichen Befehlen, anstatt die Sidebar direkt zu öffnen oder zu schließen.">
 <!ENTITY OptKeyboardShortcut.caption "Tastaturkürzel für Sidebar">
 <!ENTITY OptKeyboardShortcut.tooltip "Die Tastenkombination ist der schnellste Weg, um die Sidebar zu schließen und wieder zu öffnen.">
-<!ENTITY OptKeyboardShortcut.control "Strg">
-<!ENTITY OptKeyboardShortcut.shift "Umschalt">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Befehlstaste">
-<!ENTITY OptKeyboardShortcut.option "Wahltaste">
-<!ENTITY OptKeyboardShortcut.none "Kein">
-<!ENTITY OptKeyboardShortcut.spacebar "Leerzeichen">
-<!ENTITY OptKeyboardShortcut.pageup "Bild auf">
-<!ENTITY OptKeyboardShortcut.pagedown "Bild ab">
-<!ENTITY OptKeyboardShortcut.end "Ende">
-<!ENTITY OptKeyboardShortcut.home "Pos1">
-<!ENTITY OptKeyboardShortcut.left "Links">
-<!ENTITY OptKeyboardShortcut.up "Oben">
-<!ENTITY OptKeyboardShortcut.right "Rechts">
-<!ENTITY OptKeyboardShortcut.down "Unten">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "von Quicksaver">
-<!ENTITY about.desc "Alle Informationen über das Add-on und seinen Entwickler können auf der Homepage bei Mozilla Add-ons gefunden werden. Falls Ihnen das Add-on gefällt, so ziehen Sie bitte einen netten Kommentar oder kleine Unterstützung in Erwägung, um die Weiterentwicklung zu unterstützen. Fehlerberichte und Vorschläge können über die Seite für technische Unterstützung mitgeteilt werden.">
-<!ENTITY about.home "Add-on-Homepage">
-<!ENTITY about.tech "Technische Unterstützung">
-<!ENTITY about.notes "Versionsinformationen">

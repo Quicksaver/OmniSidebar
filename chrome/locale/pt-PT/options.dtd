@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 38.167em;">
-<!ENTITY Options.title "Opções do Painel OmniLateral">
-<!ENTITY Optabout.label "Sobre">
 <!ENTITY OptMisc.label "Geral">
 <!ENTITY OptgroupMain.label "Painel Lateral Principal">
 <!ENTITY OptgroupTwin.label "Painel Lateral Gémeo">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "O atalho de teclado abre o mini painel com várias opções de acção disponíveis, em vez de abrir ou fechar o painel lateral directamente.">
 <!ENTITY OptKeyboardShortcut.caption "Atalho de teclado para o painel lateral">
 <!ENTITY OptKeyboardShortcut.tooltip "O atalho de teclado é o modo mais rápido de fechar ou voltar a abrir o painel lateral.">
-<!ENTITY OptKeyboardShortcut.control "Control">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Comando">
-<!ENTITY OptKeyboardShortcut.option "Opção">
-<!ENTITY OptKeyboardShortcut.none "Nenhum">
-<!ENTITY OptKeyboardShortcut.spacebar "Barra de espaço">
-<!ENTITY OptKeyboardShortcut.pageup "Página para cima">
-<!ENTITY OptKeyboardShortcut.pagedown "Página para baixo">
-<!ENTITY OptKeyboardShortcut.end "Fim">
-<!ENTITY OptKeyboardShortcut.home "Início">
-<!ENTITY OptKeyboardShortcut.left "Seta esquerda">
-<!ENTITY OptKeyboardShortcut.up "Seta cima">
-<!ENTITY OptKeyboardShortcut.right "Seta direira">
-<!ENTITY OptKeyboardShortcut.down "Seta baixo">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "por Quicksaver">
-<!ENTITY about.desc "Toda a informação relativa a este extra e ao seu autor pode ser encontrada na página dos Extras do Mozilla. Se gostou da extensão, pode mostrar o seu agrado ao lá deixar um comentário ou pode também fazer uma pequena contribuição para manter o seu desenvolvimento. Sugestões e problemas podem ser comunicados na página de suporte técnico.">
-<!ENTITY about.home "Página do Extra do Mozilla">
-<!ENTITY about.tech "Suporte Técnico">
-<!ENTITY about.notes "Notas de Lançamento">

@@ -1,18 +1,22 @@
 <!ENTITY addonsSidebar.label "Gestionnaire de modules">
+<!ENTITY addonsSidebar.title "Extensions">
 <!ENTITY addonsSidebar.tooltip "Ouvrir le gestionnaire de modules dans le panneau latéral">
 <!ENTITY addonsSidebar.accesskey "G">
 <!ENTITY bookmarksSidebar.label "Panneau latéral des marque-pages">
+<!ENTITY bookmarksSidebar.title "Marque-pages">
 <!ENTITY bookmarksSidebar.tooltip "Afficher vos marque-pages dans le panneau latéral">
 <!ENTITY bookmarksSidebar.accesskey "M">
 <!ENTITY historySidebar.label "Panneau latéral de l'historique">
 <!ENTITY historySidebar.tooltip "Affiche les pages vues récemment dans le panneau latéral">
 <!ENTITY historySidebar.accesskey "H">
 <!ENTITY downloadsSidebar.label "Panneau latéral des téléchargements">
+<!ENTITY downloadsSidebar.title "Téléchargements">
 <!ENTITY downloadsSidebar.tooltip "Affiche la progression des téléchargements en cours dans le panneau latéral">
+<!ENTITY downloadsSidebar.accesskey "h">
 <!ENTITY DOMInspectorSidebar.label "Inspecteur DOM">
 <!ENTITY DOMInspectorSidebar.tooltip "Ouvrir l'inspecteur DOM dans le panneau latéral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.label "Afficher les infos sur la page">
+<!ENTITY PageInfoSidebar.labelB "Info sur la page">
 <!ENTITY PageInfoSidebar.tooltip "Affiche les informations à propos de la page sur laquelle vous êtes">
 <!ENTITY PageInfoSidebar.accesskey "i">
 <!ENTITY scratchpadSidebar.label "Ardoise JavaScript">
@@ -24,9 +28,6 @@
 <!ENTITY browserConsole.label "Console du navigateur">
 <!ENTITY browserConsole.tooltip "Ouvre la console dans le panneau latéral">
 <!ENTITY browserConsole.accesskey "C">
-<!ENTITY dmtSidebar.label "Téléchargements">
-<!ENTITY dmtSidebar.tooltip "Afficher la progression des téléchargements en cours">
-<!ENTITY dmtSidebar.accesskey "h">
 <!ENTITY acceltext.ctrl "Ctrl">
 <!ENTITY acceltext.shift "Maj">
 <!ENTITY acceltext.alt "Alt">

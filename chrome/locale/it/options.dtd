@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 33em;">
-<!ENTITY Options.title "Opzioni di OmniSidebar">
-<!ENTITY Optabout.label "Informazioni">
 <!ENTITY OptMisc.label "Globale">
 <!ENTITY OptgroupMain.label "Barra principale">
 <!ENTITY OptgroupTwin.label "Barra gemella">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "La scorciatoia da tastiera apre il mini-pannello che fornisce una scelta delle possibili azioni, invece di aprire o chiudere direttamente la barra laterale.">
 <!ENTITY OptKeyboardShortcut.caption "Scorciatoia da tastiera della barra laterale">
 <!ENTITY OptKeyboardShortcut.tooltip "La scorciatoia da tastiera è la via più veloce per chiudere e riaprire la barra laterale.">
-<!ENTITY OptKeyboardShortcut.control "Control">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Comando">
-<!ENTITY OptKeyboardShortcut.option "Opzione">
-<!ENTITY OptKeyboardShortcut.none "Inattivo">
-<!ENTITY OptKeyboardShortcut.spacebar "Barra spaziatrice">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Sinistra">
-<!ENTITY OptKeyboardShortcut.up "Su">
-<!ENTITY OptKeyboardShortcut.right "Destra">
-<!ENTITY OptKeyboardShortcut.down "Giù">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "by Quicksaver">
-<!ENTITY about.desc "Tutte le informazioni sul componente aggiuntivo e sullo sviluppatore si trovano sul sito web del componente aggiuntivo di Mozilla.  Se vi piace il componente aggiuntivo, prendete in esame la possibilità di scrivere una bella recensione, oppure fate una piccola donazione per contribuire a sostenere il suo ulteriore continuo. Le segnalazioni di bug e i suggerimenti possono essere fatti sulle pagine del sito di supporto. Traduzione italiana a cura di Styb (styb.styb@gmail.com)">
-<!ENTITY about.home "Sito web del componente aggiuntivo">
-<!ENTITY about.tech "Sito di supporto">
-<!ENTITY about.notes "Note di rilascio">

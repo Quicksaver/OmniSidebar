@@ -1,18 +1,22 @@
 <!ENTITY addonsSidebar.label "Dodatki">
+<!ENTITY addonsSidebar.title "Add-ons">
 <!ENTITY addonsSidebar.tooltip "Otwórz menedżer dodatków w panelu bocznym">
 <!ENTITY addonsSidebar.accesskey "D">
 <!ENTITY bookmarksSidebar.label "Zakładki">
+<!ENTITY bookmarksSidebar.title "Bookmarks">
 <!ENTITY bookmarksSidebar.tooltip "Wyświetl zakładki w panelu bocznym">
 <!ENTITY bookmarksSidebar.accesskey "Z">
 <!ENTITY historySidebar.label "Historia">
 <!ENTITY historySidebar.tooltip "Wyświetl w panelu bocznym strony, które odwiedziłeś niedawno">
 <!ENTITY historySidebar.accesskey "H">
 <!ENTITY downloadsSidebar.label "Downloads Sidebar">
+<!ENTITY downloadsSidebar.title "Pobierania">
 <!ENTITY downloadsSidebar.tooltip "Display in the sidebar the Progress of Ongoing Downloads">
+<!ENTITY downloadsSidebar.accesskey "P">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Otwórz DOM Inspector w panelu bocznym">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.label "Informacje o stronie">
+<!ENTITY PageInfoSidebar.labelB "Page Info">
 <!ENTITY PageInfoSidebar.tooltip "Wyświetl szczegóły o stronie, na której się znajdujesz">
 <!ENTITY PageInfoSidebar.accesskey "I">
 <!ENTITY scratchpadSidebar.label "Brudnopis">
@@ -24,9 +28,6 @@
 <!ENTITY browserConsole.label "Konsola przeglądarki">
 <!ENTITY browserConsole.tooltip "Otwórz Konsolę przeglądarki w panelu bocznym">
 <!ENTITY browserConsole.accesskey "C">
-<!ENTITY dmtSidebar.label "Pobierania">
-<!ENTITY dmtSidebar.tooltip "Wyświetl ostatnio pobierane pliki">
-<!ENTITY dmtSidebar.accesskey "P">
 <!ENTITY acceltext.ctrl "Ctrl">
 <!ENTITY acceltext.shift "Shift">
 <!ENTITY acceltext.alt "Alt">

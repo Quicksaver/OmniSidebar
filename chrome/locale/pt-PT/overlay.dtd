@@ -1,18 +1,22 @@
 <!ENTITY addonsSidebar.label "Gestor de Extras">
+<!ENTITY addonsSidebar.title "Gestor de Extras">
 <!ENTITY addonsSidebar.tooltip "Abrir o Gestor de Extras no Painel Lateral">
 <!ENTITY addonsSidebar.accesskey "G">
-<!ENTITY bookmarksSidebar.label "Painel Lateral dos Favoritos">
-<!ENTITY bookmarksSidebar.tooltip "Mostrar os seus favoritos no painel lateral">
+<!ENTITY bookmarksSidebar.label "Painel Lateral dos Marcadores">
+<!ENTITY bookmarksSidebar.title "Marcadores">
+<!ENTITY bookmarksSidebar.tooltip "Mostrar os seus marcadores no painel lateral">
 <!ENTITY bookmarksSidebar.accesskey "M">
 <!ENTITY historySidebar.label "Painel Lateral do Histórico">
 <!ENTITY historySidebar.tooltip "Mostrar no painel lateral as páginas que visualizou recentemente">
 <!ENTITY historySidebar.accesskey "H">
 <!ENTITY downloadsSidebar.label "Painel Lateral das Transferências">
+<!ENTITY downloadsSidebar.title "Transferências">
 <!ENTITY downloadsSidebar.tooltip "Mostrar no painel lateral o progresso atual das transferências">
+<!ENTITY downloadsSidebar.accesskey "r">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abrir o DOM Inspector no Painel Lateral">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.label "Vêr informação da página">
+<!ENTITY PageInfoSidebar.labelB "Informações da Página">
 <!ENTITY PageInfoSidebar.tooltip "Informações detalhadas sobre a página que está a visitar">
 <!ENTITY PageInfoSidebar.accesskey "i">
 <!ENTITY scratchpadSidebar.label "Scratchpad">
@@ -24,9 +28,6 @@
 <!ENTITY browserConsole.label "Consola do Navegador">
 <!ENTITY browserConsole.tooltip "Abrir a consola do navegador no painel lateral">
 <!ENTITY browserConsole.accesskey "C">
-<!ENTITY dmtSidebar.label "Transferências">
-<!ENTITY dmtSidebar.tooltip "Mostrar o Progresso Atual das Transferências">
-<!ENTITY dmtSidebar.accesskey "r">
 <!ENTITY acceltext.ctrl "Ctrl">
 <!ENTITY acceltext.shift "Shift">
 <!ENTITY acceltext.alt "Alt">

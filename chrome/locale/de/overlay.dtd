@@ -1,18 +1,22 @@
 <!ENTITY addonsSidebar.label "Add-ons-Manager">
+<!ENTITY addonsSidebar.title "Add-ons">
 <!ENTITY addonsSidebar.tooltip "Add-ons-Manager in der Sidebar öffnen">
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "Lesezeichen-Sidebar">
+<!ENTITY bookmarksSidebar.title "Bookmarks">
 <!ENTITY bookmarksSidebar.tooltip "Die Lesezeichen in der Sidebar anzeigen">
 <!ENTITY bookmarksSidebar.accesskey "L">
 <!ENTITY historySidebar.label "Chronik-Sidebar">
 <!ENTITY historySidebar.tooltip "Die kürzlich besuchten Seiten in der Sidebar anzeigen">
 <!ENTITY historySidebar.accesskey "C">
 <!ENTITY downloadsSidebar.label "Downloads-Sidebar">
+<!ENTITY downloadsSidebar.title "Downloads">
 <!ENTITY downloadsSidebar.tooltip "Den Fortschritt laufender Downloads in der Sidebar anzeigen">
+<!ENTITY downloadsSidebar.accesskey "D">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "DOM Inspector in der Sidebar öffnen">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.label "Seiteninformationen">
+<!ENTITY PageInfoSidebar.labelB "Page Info">
 <!ENTITY PageInfoSidebar.tooltip "Informationen über die geöffnete Seite anzeigen">
 <!ENTITY PageInfoSidebar.accesskey "m">
 <!ENTITY scratchpadSidebar.label "JavaScript-Umgebung">
@@ -24,9 +28,6 @@
 <!ENTITY browserConsole.label "Browser-Konsole">
 <!ENTITY browserConsole.tooltip "Die Browser-Konsole in der Sidebar öffnen">
 <!ENTITY browserConsole.accesskey "K">
-<!ENTITY dmtSidebar.label "Downloads">
-<!ENTITY dmtSidebar.tooltip "Download-Fortschritt anzeigen">
-<!ENTITY dmtSidebar.accesskey "D">
 <!ENTITY acceltext.ctrl "Strg">
 <!ENTITY acceltext.shift "Umschalt">
 <!ENTITY acceltext.alt "Alt">

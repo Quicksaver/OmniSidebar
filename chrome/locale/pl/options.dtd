@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 38.833em;">
-<!ENTITY Options.title "OmniSidebar - Opcje">
-<!ENTITY Optabout.label "Informacja">
 <!ENTITY OptMisc.label "Globalne">
 <!ENTITY OptgroupMain.label "Główny panel">
 <!ENTITY OptgroupTwin.label "Drugi panel">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
 <!ENTITY OptKeyboardShortcut.caption "Skrót klawiszowy panelu bocznego">
 <!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Shift">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "Brak">
-<!ENTITY OptKeyboardShortcut.spacebar "Spacja">
-<!ENTITY OptKeyboardShortcut.pageup "Page Up">
-<!ENTITY OptKeyboardShortcut.pagedown "Page Down">
-<!ENTITY OptKeyboardShortcut.end "End">
-<!ENTITY OptKeyboardShortcut.home "Home">
-<!ENTITY OptKeyboardShortcut.left "Left">
-<!ENTITY OptKeyboardShortcut.up "Up">
-<!ENTITY OptKeyboardShortcut.right "Right">
-<!ENTITY OptKeyboardShortcut.down "Down">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "by Quicksaver">
-<!ENTITY about.desc "Wszelkie informacje o tym dodatku i jego twórcy można znaleźć na stronie dodatków Mozilli. Jeśli podoba Ci się ten dodatek, proszę rozważ napisanie opinii o nim lub wysłanie niewielkiej dotacji, aby weprzeć dalszy rozwój dodatku. Zgłoszenia błędów i sugestie można wysyłać na stronie wsparcia technicznego.">
-<!ENTITY about.home "Strona domowa dodatku">
-<!ENTITY about.tech "Wsparcie techniczne">
-<!ENTITY about.notes "Release Notes">

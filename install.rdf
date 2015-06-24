@@ -67,7 +67,7 @@
 			<Description>
 				<em:locale>pt-PT</em:locale>
 				<em:name>Painel OmniLateral</em:name>
-				<em:description>Mostre os favoritos apenas com um gesto. Mova o painel lateral para o lado oposto do ecrã. Abra um painel lateral diferente apenas com um clique no seu título. E mais! Mantém o seu painel lateral simples e de rápido acesso!</em:description>
+				<em:description>Mostre os seus marcadores apenas com um gesto. Mova o painel lateral para o lado oposto do ecrã. Abra um painel lateral diferente apenas com um clique no seu título. E mais! Mantém o seu painel lateral simples e de rápido acesso!</em:description>
 				<em:translator>Quicksaver</em:translator>
 			</Description>
 		</em:localized>

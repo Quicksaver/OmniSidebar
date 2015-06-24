@@ -1,0 +1,24 @@
+<!ENTITY about.paneTitle "À propos">
+<!ENTITY about.version "Version {v}">
+<!ENTITY about.versionDivider " - ">
+<!ENTITY about.uptodate "à jour, félicitations !">
+<!ENTITY about.needsupdate "mise à jour disponible !">
+<!ENTITY about.description "Vérifier les « Notes de version » et les « Problèmes connus » pour la version ci-dessous. Signalez-moi tout problème rencontré ou suggérez-moi des améliorations pour les versions à venir.">
+<!ENTITY about.descriptionB "L'extension est gratuite, mais régler des problèmes, ajouter de nouvelles fonctionnalités et assurer la maintenance et l'adaptabilité sur chaque version de Firefox est laborieux et pleut être compliqué parfois. Si vous aimez l'extension, merci de soutenir son développement constant. Comme le dit le lien : « Vous pouvez aider ! »">
+<!ENTITY about.allVersions "Afficher les notes de toutes les versions précédentes">
+<!ENTITY about.notifyOnUpdates "Afficher cet onglet à la prochaine mise à jour">
+<!ENTITY about.development "État de développement">
+<!ENTITY about.helpdevelopment "VOUS POUVEZ AIDER">
+<!ENTITY about.information "Plus d'informations">
+<!ENTITY about.home "Page Web de l'extension">
+<!ENTITY about.fullchangelog "Historique des modifications">
+<!ENTITY about.problems "Des problèmes ?">
+<!ENTITY about.tech "Signalez le problème dans la page d'assistance">
+<!ENTITY about.email "Ou envoyez-moi un message à ce sujet">
+<!ENTITY about.author "Davantage à propos de l'auteur">
+<!ENTITY about.trymore "Essayez une de mes autres extensions pour une expérience Firefox encore plus intéressante !">
+<!ENTITY about.profile "Trouvez-les dans mon profil">
+<!ENTITY about.share "Partager !">
+<!ENTITY about.friends "Ne soyez pas seul à utiliser un navigateur exceptionnel. Faites le découvrir à vos amis !">
+<!ENTITY about.moreshare "Autres services…">
+<!ENTITY about.tryit "Essayez cette extension qui améliore notablement l'utilisation des panneaux latéraux - OmniSidebar !">

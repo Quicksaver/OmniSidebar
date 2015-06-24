@@ -1,6 +1,3 @@
-<!ENTITY Optwindow.style "width: 45.75em;">
-<!ENTITY Options.title "Options d'OmniSidebar">
-<!ENTITY Optabout.label "À propos">
 <!ENTITY OptMisc.label "Général">
 <!ENTITY OptgroupMain.label "Panneau latéral principal">
 <!ENTITY OptgroupTwin.label "Panneau latéral secondaire">
@@ -70,24 +67,3 @@
 <!ENTITY OptKeysetPanel.tooltip "Le raccourci clavier ouvre le mini-panneau qui vous permet de choisir des actions possibles au lieu d'ouvrir ou de fermer le panneau latéral directement.">
 <!ENTITY OptKeyboardShortcut.caption "Raccourcis clavier du panneau latéral">
 <!ENTITY OptKeyboardShortcut.tooltip "Le raccourci clavier est le moyen le plus rapide pour fermer et rouvrir le panneau latéral.">
-<!ENTITY OptKeyboardShortcut.control "Ctrl">
-<!ENTITY OptKeyboardShortcut.shift "Maj">
-<!ENTITY OptKeyboardShortcut.alt "Alt">
-<!ENTITY OptKeyboardShortcut.command "Command">
-<!ENTITY OptKeyboardShortcut.option "Option">
-<!ENTITY OptKeyboardShortcut.none "Aucune">
-<!ENTITY OptKeyboardShortcut.spacebar "Barre d'espace">
-<!ENTITY OptKeyboardShortcut.pageup "Monter d'une page">
-<!ENTITY OptKeyboardShortcut.pagedown "Descendre d'une page">
-<!ENTITY OptKeyboardShortcut.end "Fin">
-<!ENTITY OptKeyboardShortcut.home "Accueil">
-<!ENTITY OptKeyboardShortcut.left "Gauche">
-<!ENTITY OptKeyboardShortcut.up "Monter">
-<!ENTITY OptKeyboardShortcut.right "Droite">
-<!ENTITY OptKeyboardShortcut.down "Descendre">
-<!ENTITY about.name "OmniSidebar">
-<!ENTITY about.by "par Quicksaver">
-<!ENTITY about.desc "Toute information sur l'extension et son développeur peut être trouvée sur sa page d'accueil de Mozilla Add-ons. Si vous aimez l'extension, veuillez y laisser un commentaire sympathique ou faire un don pour soutenir son développement. Les signalements de bogues et les suggestions peuvent être soumis sur la page de support technique.">
-<!ENTITY about.home "Page Web de l'extension">
-<!ENTITY about.tech "Support technique">
-<!ENTITY about.notes "Notes de versions">
