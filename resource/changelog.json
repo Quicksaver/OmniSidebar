@@ -2,7 +2,7 @@
 	"current":"1.6",
 	"releases": {
 		"1.6":{
-			"date":"June 24, 2015",
+			"date":"June 25, 2015",
 			"notes":[
 				["new","Brand new preferences tab with a new \"About\" pane (previously the \"Release Notes\" tab)"],
 				["changed","The active development process for the add-on is undergoing a few changes, check out the information and links at the top of this pane for more details"],
