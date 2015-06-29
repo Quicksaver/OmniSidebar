@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.6';
+Modules.VERSION = '3.0.7';
 
 this.mainSidebar = {
 	main: true,
@@ -13,6 +13,7 @@ this.mainSidebar = {
 	autoHideInit: false,
 	initialShowings: new Set(),
 	contentFocused: false,
+	holdFocused: false,
 	get command () { return this.box && this.box.getAttribute('sidebarcommand'); },
 	set command (v) { return setAttribute(this.box, 'sidebarcommand', v); },
 	get isSocial () { return !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
@@ -169,6 +170,7 @@ this.twinSidebar = {
 	autoHideInit: false,
 	initialShowings: new Set(),
 	contentFocused: false,
+	holdFocused: false,
 	get command () { return this.box && this.box.getAttribute('sidebarcommand'); },
 	set command (v) { return setAttribute(this.box, 'sidebarcommand', v); },
 	get isSocial () { return !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
@@ -443,10 +445,19 @@ this.openLast = function(bar) {
 	if(!bar.state.closed) {
 		var lastBroadcaster = $(bar.state.command);
 		if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster' && !trueAttribute(lastBroadcaster, 'disabled')) {
+			// make sure nothing triggers the SidebarFocused event too soon (i.e. renderAbove), so that the correct panel is loaded and (not) focused during startup
+			bar.holdFocused = true;
+			
 			SidebarUI.toggle(lastBroadcaster, true, bar.twin).then(toggled => {
 				// ensure the focus is on content at startup/opening new window
 				if(toggled) {
+					// ensure we don't lock the SidebarFocused event forever, in case something goes wrong
+					aSync(function() {
+						try { bar.holdFocused = false; } catch(ex) {}
+					}, 5000);
+					
 					Listeners.add(bar.sidebar, "SidebarFocused", function() {
+						bar.holdFocused = false;
 						if(bar.focused) {
 							SidebarUI.focusContent(window.gBrowserInit._getUriToLoad());
 						}
@@ -712,6 +723,8 @@ this.SidebarUI = {
 	// Fire a "SidebarFocused" event on the sidebar's |window| to give the sidebar a chance to adjust focus as needed. An additional event is needed, because
 	// we don't want to focus the sidebar when it's opened on startup or in a new window, only when the user opens the sidebar.
 	_fireFocusedEvent: function(bar = mainSidebar) {
+		if(bar.holdFocused) { return; }
+		
 		aSync(function() { dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocused', cancelable: false, detail: { bar: bar } }); });
 		
 		// Run the original function for backwards compatibility.
@@ -1023,7 +1036,7 @@ this.SidebarUI = {
 	},
 	
 	focusContent: function(uri = gBrowser.currentURI.spec) {
-		// this check comes from gBrowserInit._delayedStartup, it tries to focus the location bar first if applicable, otherwise it focused the tab content
+		// this check comes from gBrowserInit._delayedStartup, it tries to focus the location bar first if applicable, otherwise it focuses the tab content
 		// http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.js#1297
 		if(!(window.isBlankPageURL(uri) || uri == "about:privatebrowsing") || !window.focusAndSelectUrlBar()) {
 			if(window.content) {
