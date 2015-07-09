@@ -145,7 +145,7 @@
 	}
 	
 	.omnisidebar-toolbar[coloricons="color"] #downloads-button {
-		list-style-image: list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png");
+		list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png");
 		-moz-image-region: rect(0px 54px 18px 36px);
 	}
 	
