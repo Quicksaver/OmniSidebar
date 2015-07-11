@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.7';
+Modules.VERSION = '3.0.8';
 
 this.mainSidebar = {
 	main: true,
@@ -30,7 +30,8 @@ this.mainSidebar = {
 		return true;
 	},
 	get focused () {
-		return (document.commandDispatcher.focusedWindow == this.sidebar.contentWindow.content || document.commandDispatcher.focusedWindow == this.sidebar.contentWindow);
+		return	this.sidebar && this.sidebar.contentWindow
+			&& (document.commandDispatcher.focusedWindow == this.sidebar.contentWindow.content || document.commandDispatcher.focusedWindow == this.sidebar.contentWindow);
 	},
 	get closed () { return !this.box || this.box.hidden || this.box.collapsed; },
 	get label () { return Strings.get('buttons', (Prefs.twinSidebar) ? 'buttonMainLabel' : 'buttonlabel'); },
@@ -187,7 +188,8 @@ this.twinSidebar = {
 		return true;
 	},
 	get focused () {
-		return (document.commandDispatcher.focusedWindow == this.sidebar.contentWindow.content || document.commandDispatcher.focusedWindow == this.sidebar.contentWindow);
+		return	this.sidebar && this.sidebar.contentWindow
+			&& (document.commandDispatcher.focusedWindow == this.sidebar.contentWindow.content || document.commandDispatcher.focusedWindow == this.sidebar.contentWindow);
 	},
 	get closed () { return !this.box || this.box.hidden || this.box.collapsed; },
 	get label () { return Strings.get('buttons', 'buttonTwinLabel'); },

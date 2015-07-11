@@ -1,6 +1,8 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.autoClose = {
+	cancelAutoClose: null,
+	
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'beginToggleSidebar':
@@ -20,21 +22,19 @@ this.autoClose = {
 			case 'SidebarFocused':
 				// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
 				if(!e.detail) { return; }
-				var bar = e.detail.bar;
 				
-				// we need to focus the sidebar on open or it won't be focused
-				if(bar.autoClose) {
-					if(bar.sidebar.contentDocument && bar.sidebar.contentDocument.documentElement) {
-						bar.sidebar.contentDocument.documentElement.focus();
-					} else {
-						bar.sidebar.focus();
-					}
-				}
+				// we need to focus the sidebar on open or it won't be focused,
+				// aSync so it lets it focus itself if it wants to
+				aSync(() => {
+					var bar = e.detail.bar;
+					
+					this.tryFocus(bar);
+				});
 				break;
 			
 			case 'TabSelect':
 				Timers.cancel('stopCancelAutoClose');
-				Timers.cancel('cancelAutoClose');
+				this.cancelAutoClose = null;
 				// no break;
 			
 			case 'focus':
@@ -45,7 +45,18 @@ this.autoClose = {
 			case 'sidebarDocked':
 			case 'TabOpen':
 				Timers.cancel('autoClose');
-				Timers.init('cancelAutoClose', function() {}, 2000);
+				
+				if(mainSidebar.focused) {
+					this.cancelAutoClose = mainSidebar;
+				} else if(twinSidebar.focused) {
+					this.cancelAutoClose = twinSidebar;
+				}
+				
+				if(this.cancelAutoClose) {
+					Timers.init('stopCancelAutoClose', () => {
+						this.cancelAutoClose = null;
+					}, 2000);
+				}
 				break;
 		}
 	},
@@ -68,16 +79,18 @@ this.autoClose = {
 	},
 	
 	tryClose: function(e) {
-		if(Timers.cancelAutoClose) {
-			Timers.init('stopCancelAutoClose', function() {
-				Timers.cancel('cancelAutoClose');
+		if(this.cancelAutoClose) {
+			this.tryFocus(this.cancelAutoClose);
+			
+			Timers.init('stopCancelAutoClose', () => {
+				this.cancelAutoClose = null;
 			}, 250);
 			return;
 		}
 		
 		Timers.init('autoClose', () => {
-			if(Timers.cancelAutoClose) {
-				Timers.cancel('cancelAutoClose');
+			if(this.cancelAutoClose) {
+				this.cancelAutoClose = null;
 				return;
 			}
 			
@@ -103,6 +116,16 @@ this.autoClose = {
 				}
 			}
 		}, 100);
+	},
+	
+	tryFocus: function(bar) {
+		if(bar.autoClose && document.commandDispatcher.focusedWindow != bar.sidebar.contentWindow) {
+			if(bar.sidebar.contentDocument && bar.sidebar.contentDocument.documentElement) {
+				bar.sidebar.contentDocument.documentElement.focus();
+			} else {
+				bar.sidebar.focus();
+			}
+		}
 	},
 	
 	closeHide: function(bar) {
