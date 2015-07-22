@@ -1,10 +1,10 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.4.0';
 Modules.UTILS = true;
 
 // dependsOn - object that adds a dependson attribute functionality to xul preference elements.
 // Just add the attribute to the desired xul element and let the script do its thing. dependson accepts comma-separated or semicolon-separated strings in the following format:
 //	[!]element[:value] where:
-//		element - id of an element associated with a preference or the id of the preference element
+//		element - id of the preference element
 //		(optional) ! - before element, checks for the opposite condition
 //		(optional) :value - value is some specific value that element must have in order for the condition to return true
 //	To condition for several dependencies: ',' is equivalent to AND and ';' to OR
@@ -24,7 +24,7 @@ this.dependsOn = {
 	handleEvent: function(e) {
 		if(e.target.localName != 'preference' || !e.target.id) { return; }
 		
-		var fields = $$("[preference='"+e.target.id+"']");
+		var fields = $$("[delayPreference='"+e.target.id+"'],[preference='"+e.target.id+"']");
 		var elements = this.getAll();
 		var alreadyChanged = new Set();
 		
@@ -51,14 +51,24 @@ this.dependsOn = {
 		}
 	},
 	
-	updateAll: function() {
+	init: function() {
+		this.updateAll();
+		
+		Listeners.add(window, "change", this);
+	},
+	
+	uninit: function() {
+		Listeners.remove(window, "change", this);
+	},
+	
+	updateAll: function(override) {
 		let elements = this.getAll();
 		for(let node of elements) {
-			this.updateElement(node);
+			this.updateElement(node, override);
 		}
 	},
 	
-	updateElement: function(el) {
+	updateElement: function(el, override) {
 		let attr = el.getAttribute('dependson');
 		if(!attr) { return; }
 		
@@ -87,9 +97,6 @@ this.dependsOn = {
 					return;
 				}
 				
-				if(pref.localName != 'preference') {
-					pref = $(pref.getAttribute('preference'));
-				}
 				switch(pref.type) {
 					case 'int':
 						var value = (dependency.length == 2) ? parseInt(dependency[1]) : 0;
@@ -103,8 +110,10 @@ this.dependsOn = {
 						break;
 				}
 				
+				let prefValue = (override && override.id == pref.id) ? override.value : pref.value;
+				
 				a++;
-				if( (!inverse && pref.value !== value) || (inverse && pref.value === value) ) {
+				if( (!inverse && prefValue !== value) || (inverse && prefValue === value) ) {
 					if(a < alternates.length) { continue; }
 					
 					el.setAttribute('disabled', 'true');
@@ -121,23 +130,144 @@ this.dependsOn = {
 };
 
 
-// initScales - every <scale> node should be properly initialized if it has a preference attribute; should work in most cases.
-// If you want to bypass this you can set onsyncfrompreference attribute on the scale.
-this.initScales = function() {
-	var scales = $$('scale');
-	for(let scale of scales) {
-		if(!scale.getAttribute('onsyncfrompreference') && scale.getAttribute('preference')) {
-			scale.value = $(scale.getAttribute('preference')).value;
+// delayPreferences -	every node pointing to a preference should be properly initialized with a "delayPreference" attribute instead of a "preference" attribute.
+//			The native handler is very jumpy, for example a scale is very sluggish to move. Instead, we use a more aSynchronous process, so the UI doesn't stutter.
+//			This is similar to the dealyPreference attribute in the native handler, the biggest is the delay is different, and that is only present in FF41+;
+//			see http://mxr.mozilla.org/mozilla-central/source/toolkit/content/widgets/preferences.xml or https://bugzilla.mozilla.org/show_bug.cgi?id=1008169
+this.delayPreferences = {
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'command':
+				if(e.sourceEvent) {
+					e = e.sourceEvent;
+				}
+				this.updateElement(e.target);
+				break;
+			
+			case 'select':
+				if(e.target.localName != 'colorpicker') { break; }
+				// no break;
+				
+			case 'change':
+				if(e.target.localName == 'preference') {
+					if(e.target._updateItems) {
+						for(let item of e.target._updateItems) {
+							item._updateFromPref();
+						}
+					}
+					break;
+				}
+				// no break;
+				
+			case 'input':
+				this.updateElement(e.target);
+				break;
+		}
+	},
+	
+	updateElement: function(aElement) {
+		var element = aElement;
+		while(element && element.nodeType == window.Node.ELEMENT_NODE && !element.hasAttribute("delayPreference")) {
+			element = element.parentNode;
+		}
+		if(element.nodeType != window.Node.ELEMENT_NODE) {
+			element = aElement;
+		}
+		
+		if(element._persistToPref) {
+			element._persistToPref();
+		}
+	},
+	
+	init: function() {
+		// listen to changes made in the window
+		Listeners.add(window, 'change', this);
+		Listeners.add(window, 'input', this);
+		Listeners.add(window, 'select', this);
+		Listeners.add(window, 'command', this);
+		
+		var nodes = $$('[delayPreference]');
+		for(let node of nodes) {
+			node._pref = $(node.getAttribute('delayPreference'));
+			node._pref.setElementValue(node);
+			
+			// add this item (node) to the list of nodes to be updated when the preference changes, so it doesn't have to look up through the DOM every time
+			if(!node._pref._updateItems) {
+				node._pref._updateItems = [];
+				
+				Listeners.add(node._pref, 'change', this);
+			}
+			node._pref._updateItems.push(node);
+			
+			node._checkHandling = function() {
+				if(this._timer) {
+					this._timer.cancel();
+					delete this._timer;
+				}
+				return !this._handling;
+			};
+			
+			// will be called when a user changes any preference in the pane
+			node._persistToPref = function() {
+				if(!this._checkHandling()) { return; }
+				
+				// our delayed system of persisting prefs shouldn't interfere with the changes in the UI being immediate
+				dependsOn.updateAll({
+					id: this._pref.id,
+					value: this._pref.getElementValue(this)
+				});
+				
+				this._timer = aSync(() => {
+					this._handling = true;
+					this._pref.value = this._pref.getElementValue(this);
+					this._handling = false;
+					delete this._timer;
+				}, 250);
+			};
+			
+			// this updates the value on the item node from the preference
+			node._updateFromPref = function() {
+				if(!this._checkHandling()) { return; }
+				
+				this._handling = true;
+				this._pref.setElementValue(this);
+				this._handling = false;
+			};
+		}
+	},
+	
+	uninit: function() {
+		Listeners.remove(window, 'change', this);
+		Listeners.remove(window, 'input', this);
+		Listeners.remove(window, 'select', this);
+		Listeners.remove(window, 'command', this);
+		
+		var nodes = $$('[delayPreference]');
+		for(let node of nodes) {
+			Listeners.remove(node._pref, 'change', this);
+			
+			// make sure we don't lose any changes, for those fast as lightning users out there
+			if(node._timer) {
+				node._timer.cancel();
+				node._timer.handler();
+				delete node._timer;
+			}
+			
+			delete node._pref._updateItems;
+			delete node._pref;
+			delete node._checkHandling;
+			delete node._persistToPref;
+			delete node._updateFromPref;
 		}
 	}
 };
 
 // keys - should automatically take care of all the labels, entries and actions of any keysets to be registered through the Keysets object.
 // It looks for and expects each keyset to be layouted (is this even a word?) in the XUL options page as such:
-// 	<checkbox keysetAccel="keyName" preference="pref-to-accel"/>
-//	<checkbox keysetAlt="keyName" preference="pref-to-alt"/>
-//	<checkbox keysetShift="keyName" preference="pref-to-shift"/>
-//	<menulist keyset="keyName" preference="pref-to-keycode"/>
+// 	<checkbox keysetAccel="keyName" delayPreference="pref-to-accel"/>
+//	<checkbox keysetAlt="keyName" delayPreference="pref-to-alt"/>
+//	<checkbox keysetShift="keyName" delayPreference="pref-to-shift"/>
+//	<menulist keyset="keyName" delayPreference="pref-to-keycode"/>
 this.keys = {
 	all: [],
 	
@@ -205,7 +335,7 @@ this.keys = {
 			}
 			if(key.keycode == 'none') {
 				key.menu.parentNode.selectedItem = key.menu.firstChild;
-				$(key.menu.parentNode.getAttribute('preference')).value = 'none';
+				$(key.menu.parentNode.getAttribute('delayPreference')).value = 'none';
 			}
 			
 			for(let item of key.menu.childNodes) {
@@ -338,6 +468,8 @@ this.categories = {
 		// Updating the hash (below) or changing the selected category will re-enter gotoPref.
 		if(this.lastHash == category) { return; }
 		
+		let activeElement = document.activeElement;
+		
 		let item = this.categories.querySelector(".category[value="+category+"]");
 		if(!item) {
 			category = kDefaultCategoryInternalName;
@@ -363,6 +495,14 @@ this.categories = {
 		window.history.replaceState(category, document.title);
 		this.search(category, "data-category");
 		document.querySelector(".main-content").scrollTop = 0;
+		
+		// changing the location hash will cause the focus to shift to the page, and we want it to stay in the jumpto box if it was there before
+		if(category != 'paneAbout'
+		&& activeElement && controllers.nodes.jumpto
+		&& activeElement == controllers.nodes.jumpto.inputField
+		&& activeElement != document.activeElement) {
+			activeElement.focus();
+		}
 	},
 	
 	search: function(aQuery, aAttribute) {
@@ -389,21 +529,626 @@ this.categories = {
 	}
 };
 
-Modules.LOADMODULE = function() {
-	callOnLoad(window, function() {
-		dependsOn.updateAll();
-		Listeners.add(window, "change", dependsOn);
+// helptext -	mostly a fancy tooltip system for the in-content preferences, the help text is shown on the right at the edge of the prefPane node,
+//		or right next to the hovered item when there is not enough space at the edge.
+// Simply add any of the following attributes to any nodes that are meant to show the helptext when they are hovered or selected:
+//	helptext - text value to be used directly as the helptext content, the simplest form of this feature and the one most closely resembling a native tooltip
+//	helpbox - id pointing to a node that will be shown in the helptext panel, useful for more complex instances and takes precedence over helptext
+//	helpactive - set in nodes that will be selectable using the keyboard (i.e. scales, radiogroups), the script will look for the other attributes in any related node 
+this.helptext = {
+	kPanelWidth: 310, // roughly the maximum size of the panel node
+	kContentsWidth: 275, // the actual maximum size of the helptext contents
+	
+	root: null,
+	panel: null,
+	contents: null,
+	main: null,
+	prefPane: null,
+	
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'focus':
+			case 'mouseover':
+				this.show(e.target);
+				break;
+			
+			case 'blur':
+				// don't hide the popup when clicking a preference to toggle it (which in turn blurs it)
+				if(this.panel._activeItem) {
+					let checkers = [];
+					if(this.panel._activeItem.hasAttribute('helptext')) {
+						checkers.push('[helptext="'+this.panel._activeItem.getAttribute('helptext')+'"]:hover');
+					}
+					if(this.panel._activeItem.hasAttribute('helpbox')) {
+						checkers.push('[helpbox="'+this.panel._activeItem.getAttribute('helpbox')+'"]:hover');
+					}
+					
+					let hovered = checkers.length > 0 && $$(checkers.join(','))[0];
+					if(hovered) { return; }
+				}
+				// no break;
+				
+			case 'mouseout':
+				this.hide();
+				break;
+			
+			case 'popuphidden':
+				while(this.contents.firstChild) {
+					this.contents.firstChild.remove();
+				}
+				break;
+		}
+	},
+	
+	show: function(target) {
+		// duh
+		Timers.cancel('closeHelpText');
 		
-		initScales();
+		// immediately hide the panel if the mouse touches it, the user might be trying to reach something behind
+		if(target == this.panel) {
+			this.panel.hidePopup();
+			return;
+		}
+		else {
+			// special case for radiogroup
+			if(target._helpactive && target.selectedItem) {
+				target = target.selectedItem;
+			}
+			
+			if(!target || target.disabled) {
+				this.hide();
+				return;
+			}
+			
+			while(!target._helptext && !target._helpbox) {
+				target = target.parentNode;
+				if(!target || target.disabled) {
+					this.hide();
+					return;
+				}
+			}
+		}
+		
+		// no point in reshowing if the box is already showing what it's supposed to
+		if(this.panel.state == 'open' && this.panel._activeItem == target) { return; }
+		
+		// append the current helptext relative to the hovered item
+		var text = target._helpbox;
+		if(text) {
+			text = $(text);
+			if(text) {
+				text = this.panel.ownerDocument.importNode(text, true);
+				text.collapsed = false;
+			}
+		}
+		if(!text) {
+			text = target._helptext;
+			if(!text) {
+				this.hide();
+				return;
+			}
+			
+			let description = this.panel.ownerDocument.createElement('description');
+			description.textContent = text;
+			text = description;
+		}
+		
+		// remove any previous helptext
+		while(this.contents.firstChild) {
+			this.contents.firstChild.remove();
+		}
+		
+		this.contents.appendChild(text);
+		this.panel._activeItem = target;
+		
+		let position = 'rightcenter bottomleft';
+		let x = 0;
+		let free = 0;
+		
+		if(LTR) {
+			// try to open the helptext at the end of the prefPane element (about where the header underline ends)
+			x = (this.prefPane.boxObject.x +this.prefPane.boxObject.width) - (target.boxObject.x +target.boxObject.width);
+			
+			// but whenever possible don't show the helptext outside of the tab's boundaries, in case the window isn't wide enough
+			free = (this.main.boxObject.x +this.main.boxObject.width) - (this.prefPane.boxObject.x +this.prefPane.boxObject.width);
+		}
+		else {
+			// same thing except reversed on the left for RTL layouts
+			x = target.boxObject.x -this.prefPane.boxObject.x;
+			
+			free = this.prefPane.boxObject.x -this.main.boxObject.x;
+		}
+		
+		if(free < this.kPanelWidth) {
+			x -= this.kPanelWidth -free;
+		}
+		
+		// negative values for this would be silly, the helptext would appear over the item it's supposed to help with,
+		// so show it right next to the item if this happens for some reason
+		x = Math.max(x, 0);
+		
+		if(this.panel.state == 'open') {
+			this.panel.moveToAnchor(target, position, x);
+		} else {
+			this.panel.openPopup(target, position, x);
+		}
+	},
+	
+	hide: function() {
+		Timers.init('closeHelpText', () => {
+			if(this.panel.state == 'closed') { return; }
+			
+			this.panel.hidePopup();
+		}, 250);
+	},
+	
+	onLoad: function() {
+		this.panel = this.root.document.getElementById(objName+'-helptext');
+		this.contents = this.root.document.getElementById(objName+'-helptext-contents');
+		this.main = $$('.main-content')[0];
+		this.prefPane = this.main.firstChild;
+		
+		// avoid using a stylesheet for this, it's just simpler this way because of this being used by multiple add-ons
+		// (hence avoid using multiple stylesheets with the same declarations)
+		this.contents.style.maxWidth = this.kContentsWidth+'px';
+		
+		// ensure the direction of the panel is the same as the preferences tab direction (main window could be different if add-on doesn't include the RTL locale used)
+		this.panel.style.direction = getComputedStyle(document.documentElement).direction;
+		
+		Listeners.add(this.panel, 'mouseover', this);
+		Listeners.add(this.panel, 'popuphidden', this);
+		
+		let nodes = $$('[helptext],[helpbox],[helpactive]');
+		for(let node of nodes) {
+			if(node._helptext || node._helpbox || node._helpactive) { continue; }
+			node._helptext = node.getAttribute('helptext');
+			node._helpbox = node.getAttribute('helpbox');
+			node._helpactive = node.getAttribute('helpactive');
+			
+			// there's this weird bug where the style attributes don't take effect until they're re-added, go figure...
+			if(node._helpbox) {
+				let box = $(node._helpbox);
+				if(box) {
+					let styled = $$('[style]', box);
+					for(let inner of styled) {
+						setAttribute(inner, 'style', inner.getAttribute('style')+' ');
+					}
+				}
+			}
+			
+			Listeners.add(node, 'mouseover', this);
+			Listeners.add(node, 'mouseout', this);
+			Listeners.add(node, 'focus', this);
+			Listeners.add(node, 'blur', this);
+		}
+	},
+	
+	uninit: function() {
+		Timers.cancel('closeHelpText');
+		Listeners.remove(this.panel, 'mouseover', this);
+		Listeners.remove(this.panel, 'popuphidden', this);
+		
+		let nodes = $$('[helptext],[helpbox],[helpactive]');
+		for(let node of nodes) {
+			if(!node._helptext && !node._helpbox && !node._helpactive) { continue; }
+			
+			delete node._helptext;
+			delete node._helpbox;
+			delete node._helpactive;
+			Listeners.remove(node, 'mouseover', this);
+			Listeners.remove(node, 'mouseout', this);
+			Listeners.remove(node, 'focus', this);
+			Listeners.remove(node, 'blur', this);
+		}
+	}
+};
+
+// controllers - object that manages the buttons and jump to field at the footer of the preferences tab
+//	undo() - undoes the last action, self-explanatory
+//	redo() - undoes the undo(), self-explanatory
+//	reset() - resets all preferences in the prefList object
+//	export() - presents a dialog to the user, to choose a file location to export the add-on's current preferences values (exported as JSON data)
+//	import() - presents a dialog to the user, to choose a JSON file from which to import preferences; any preferences are missing from the file will be reset
+//	jumpto() -	brings the user to the first node containing the word searched for; only nodes containing a "jump" attribute are considered in the following order:
+//				1) match the word with a partial of the "jump" attribute value; good for keywords or preference names
+//				2) match the word with the collective text value of all descendents of the node
+this.controllers = {
+	initialized: false,
+	
+	nodes: {
+		undo: null,
+		redo: null,
+		import: null,
+		export: null,
+		reset: null,
+		jumpto: null
+	},
+	
+	current: {},
+	past: [],
+	future: [],
+	
+	jumpNodes: [],
+	highlighted: null,
+	
+	handleEvent: function(e) {
+		switch(e.type) {
+			case 'command':
+				switch(e.target) {
+					case this.nodes.undo:
+						this.undo();
+						break;
+						
+					case this.nodes.redo:
+						this.redo();
+						break;
+						
+					case this.nodes.import:
+						this.import();
+						break;
+						
+					case this.nodes.export:
+						this.export();
+						break;
+						
+					case this.nodes.reset:
+						this.reset();
+						break;
+				}
+				break;
+			
+			case 'input':
+				this.jumpto();
+				break;
+			
+			case 'keypress':
+				if(e.keyCode == e.DOM_VK_RETURN) {
+					this.jumpto();
+				}
+				break;
+			
+			case 'dragover':
+				if(e.dataTransfer.types.contains("text/plain")) {
+					e.preventDefault();
+				}
+				break;
+			
+			case 'drop':
+				let value = e.dataTransfer.getData("text/plain");
+				this.nodes.jumpto.value = value;
+				this.jumpto();
+				e.stopPropagation();
+				e.preventDefault();
+				break;
+		}
+	},
+	
+	observe: function(aSubject, aTopic, aData) {
+		Timers.init('delaySaveState', () => {
+			// 'current' now refers to the previous preferences state, so we add it to the list of past states for the undo button to cycle through
+			this.past.push(this.current);
+			
+			// any change to the preferences should null any redo function that might have been enabled by hitting undo
+			this.future = [];
+			
+			// get a new 'current' state from the actual current preferences values
+			this.init(true);
+		}, 50);
+	},
+	
+	init: function(prefsOnly) {
+		if(!prefsOnly) {
+			this.nodes.undo = $('undoButton');
+			this.nodes.redo = $('redoButton');
+			this.nodes.import = $('importButton');
+			this.nodes.export = $('exportButton');
+			this.nodes.reset = $('resetButton');
+			this.nodes.jumpto = $('jumpto');
+			
+			Listeners.add(this.nodes.undo, 'command', this);
+			Listeners.add(this.nodes.redo, 'command', this);
+			Listeners.add(this.nodes.import, 'command', this);
+			Listeners.add(this.nodes.export, 'command', this);
+			Listeners.add(this.nodes.reset, 'command', this);
+			
+			Listeners.add(this.nodes.jumpto, 'input', this);
+			Listeners.add(this.nodes.jumpto, 'keypress', this);
+			Listeners.add(this.nodes.jumpto, 'dragover', this);
+			Listeners.add(this.nodes.jumpto, 'drop', this);
+			
+			this.getJumpNodes();
+			this.nodes.jumpto.value = '';
+			this.jumpto(); // set an initial state
+			
+			// when first opening the preferences tab, set the cursor in there, so the user can start typing right away
+			this.focusJumpto();
+		}
+		
+		this.current = {};
+		for(let pref in prefList) {
+			if(pref.startsWith('NoSync_')) { continue; }
+			
+			this.current[pref] = Prefs[pref];
+			if(!this.initialized) {
+				Prefs.listen(pref, this);
+			}
+		}
+		
+		this.checkButtons();
+		this.initialized = true;
+	},
+	
+	uninit: function(prefsOnly) {
+		Timers.cancel('delaySaveState'); // this shouldn't be needed to be called but better make sure
+		
+		if(!prefsOnly) {
+			Timers.cancel('showHelptextOnHighlight');
+			
+			Listeners.remove(this.nodes.undo, 'command', this);
+			Listeners.remove(this.nodes.redo, 'command', this);
+			Listeners.remove(this.nodes.import, 'command', this);
+			Listeners.remove(this.nodes.export, 'command', this);
+			Listeners.remove(this.nodes.reset, 'command', this);
+			
+			Listeners.remove(this.nodes.jumpto, 'input', this);
+			Listeners.remove(this.nodes.jumpto, 'keypress', this);
+			Listeners.remove(this.nodes.jumpto, 'dragover', this);
+			Listeners.remove(this.nodes.jumpto, 'drop', this);
+		}
+		
+		if(this.initialized) {
+			for(let pref in prefList) {
+				if(pref.startsWith('NoSync_')) { continue; }
+				Prefs.unlisten(pref, this);
+			}
+			
+			this.initialized = false;
+		}
+	},
+	
+	checkButtons: function() {
+		$('undoButton').disabled = this.past.length == 0;
+		$('redoButton').disabled = this.future.length == 0;
+	},
+	
+	undo: function() {
+		this.undoRedo('past', 'future');
+	},
+	
+	redo: function() {
+		this.undoRedo('future', 'past');
+	},
+	
+	undoRedo: function(from, to) {
+		if(this[from].length == 0) { return; }
+		
+		// remove the listeners
+		this.uninit(true);
+		
+		this[to].push(this.current);
+		
+		let state = this[from].pop();
+		for(let pref in state) {
+			// I don't think this would trigger any change events when assigning the same value, but didn't feel like testing...
+			if(state[pref] != Prefs[pref]) {
+				Prefs[pref] = state[pref];
+			}
+		}
+		
+		// reimplement the listeners and get a new 'current' state
+		this.init(true);
+	},
+	
+	reset: function() {
+		for(let pref in prefList) {
+			if(pref.startsWith('NoSync_')) { continue; }
+			Prefs.reset(pref);
+		}
+	},
+	
+	export: function() {
+		this.showFilePicker(Ci.nsIFilePicker.modeSave, function(aFile) {
+			let { TextEncoder, OS } = Cu.import("resource://gre/modules/osfile.jsm", {});
+			
+			let list = { [objName]: AddonData.version };
+			for(let pref in prefList) {
+				list[pref] = Prefs[pref];
+			}
+			let save = (new TextEncoder()).encode(JSON.stringify(list));
+			
+			OS.File.open(aFile.path, { truncate: true }).then(function(ref) {
+				ref.write(save).then(function() {
+					ref.close();
+				});
+			});
+		});
+	},
+	
+	import: function() {
+		this.showFilePicker(Ci.nsIFilePicker.modeOpen, function(aFile) {
+			let { TextDecoder, OS } = Cu.import("resource://gre/modules/osfile.jsm", {});
+			
+			OS.File.open(aFile.path, { read: true }).then(function(ref) {
+				ref.read().then(function(saved) {
+					ref.close();
+					
+					try {
+						let list = JSON.parse((new TextDecoder()).decode(saved));
+						if(!list[objName]) { return; }
+						
+						for(let pref in prefList) {
+							if(pref in list) {
+								Prefs[pref] = list[pref];
+							} else {
+								Prefs.reset(pref);
+							}
+						}
+					}
+					// this doesn't really matter, for the user an invalid file will seem like it no-ops
+					catch(ex) { Cu.reportError(ex); }
+				});
+			});
+		});
+	},
+	
+	showFilePicker: function(mode, aCallback) {
+		let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
+		fp.defaultExtension = 'json';
+		fp.appendFilter('JSON data', '*.json');
+		
+		if(mode == Ci.nsIFilePicker.modeSave) {
+			let date = new Date();
+			let dateStr = date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'-'+date.getHours()+'-'+date.getMinutes()+'-'+date.getSeconds();
+			fp.defaultString = objPathString+'-'+dateStr;
+		}
+		
+		fp.init(window, null, mode);
+		fp.open(function(aResult) {
+			if(aResult != Ci.nsIFilePicker.returnCancel) {
+				aCallback(fp.file);
+			}
+		});
+	},
+	
+	getJumpNodes: function() {
+		this.jumpNodes = $$('[jump]');
+		for(let node of this.jumpNodes) {
+			node._jumpPref = node.getAttribute('jump').toLowerCase();
+			node._jumpText = this.getJumpText(node).toLowerCase();
+		}
+	},
+	
+	getJumpText: function(node) {
+		switch(node.nodeName) {
+			case 'checkbox':
+			case 'radio':
+			case 'button':
+				return node.getAttribute('label');
+			
+			case 'label':
+			case 'description':
+				return node.textContent || node.value;
+			
+			default:
+				if(!node.childNodes || node.childNodes.length == 0) { return ''; }
+				
+				let ret = '';
+				for(let child of node.childNodes) {
+					ret += this.getJumpText(child);
+				}
+				return ret;
+		}
+	},
+	
+	jumpto: function() {
+		let val = this.nodes.jumpto.value;
+		if(!val) {
+			this.clearHighlighted(false);
+			helptext.hide();
+			return;
+		}
+		val = val.toLowerCase();
+		
+		// first find the exact word in the jump attributes
+		for(let node of this.jumpNodes) {
+			if(node._jumpPref.contains(val)) {
+				this.highlight(node);
+				return;
+			}
+		}
+		
+		// try to find the word in the collective text of the nodes childNodes
+		for(let node of this.jumpNodes) {
+			if(node._jumpText.contains(val)) {
+				this.highlight(node);
+				return;
+			}
+		}
+		
+		// couldn't find the word, so tell that to the user
+		this.clearHighlighted(true);
+		helptext.hide();
+	},
+	
+	clearHighlighted: function(notfound) {
+		Timers.cancel('showHelptextOnHighlight');
+		
+		if(this.highlighted) {
+			this.highlighted.classList.remove('highlight');
+			this.highlighted = null;
+		}
+		
+		toggleAttribute(this.nodes.jumpto, 'notfound', notfound);
+	},
+	
+	highlight: function(node) {
+		this.clearHighlighted(false);
+		
+		// in case the node is in another pane, we need to show it first, otherwise we can't scroll to it
+		let pane = node;
+		while(!pane.hasAttribute('data-category')) {
+			pane = pane.parentNode;
+			
+			// we went too far, something went wrong
+			if(!pane.parentNode) { return; }
+		}
+		
+		pane = pane.getAttribute('data-category');
+		categories.gotoPref(pane);
+		
+		node.scrollIntoView();
+		node.classList.add('highlight');
+		this.highlighted = node;
+		
+		// show the helptext in the found item if it can; aSync works best, with all the possible scrolling and all
+		Timers.init('showHelptextOnHighlight', function() {
+			helptext.show(node);
+		}, 100);
+	},
+	
+	focusJumpto: function() {
+		if(categories.lasthash != 'paneAbout') {
+			this.nodes.jumpto.select();
+			this.nodes.jumpto.focus();
+		}
+	}
+};
+
+Modules.LOADMODULE = function() {
+	alwaysRunOnClose.push(function() {
+		Overlays.removeOverlayWindow(helptext.root, 'utils/helptext');
+	});
+	
+	callOnLoad(window, function() {
+		delayPreferences.init();
+		dependsOn.init();
 		keys.init();
 		categories.init();
+		controllers.init();
+		
+		// investigate when exactly I can use windowRoot
+		helptext.root = window.windowRoot
+			? window.windowRoot.ownerGlobal
+			: window.QueryInterface(Ci.nsIInterfaceRequestor)
+				.getInterface(Ci.nsIWebNavigation)
+				.QueryInterface(Ci.nsIDocShellTreeItem)
+				.rootTreeItem
+				.QueryInterface(Ci.nsIInterfaceRequestor)
+				.getInterface(Ci.nsIDOMWindow);
+		
+		Overlays.overlayWindow(helptext.root, 'utils/helptext', helptext);
 	});
 };
 
 Modules.UNLOADMODULE = function() {
-	Listeners.remove(window, "change", dependsOn);
+	dependsOn.uninit();
+	delayPreferences.uninit();
 	keys.uninit();
 	categories.uninit();
+	controllers.uninit();
+	helptext.uninit();
+	
+	Overlays.removeOverlayWindow(helptext.root, 'utils/helptext');
 	
 	if(UNLOADED) {
 		window.close();

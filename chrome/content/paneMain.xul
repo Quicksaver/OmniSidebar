@@ -42,18 +42,17 @@
 		</hbox>
 		
 		<hbox id="paneMain-position" align="start" collapsed="true" data-category="paneMain">
-			<radiogroup preference="pref-moveSidebars"
-				onsyncfrompreference="return document.getElementById(this.getAttribute('preference')).value ? 'right' : 'left';"
+			<radiogroup delayPreference="pref-moveSidebars"
+				jump="moveSidebars"
+				onsyncfrompreference="return document.getElementById(this.getAttribute('delayPreference')).value ? 'right' : 'left';"
 				onsynctopreference="return this.value == 'right';">
-				<hbox>
+				<hbox helptext="&Optsidebars.pos.tooltip;">
 					<radio id="radio_movetoleft"
 						label="&Optsidebars.left.label;"
-						tooltiptext="&Optsidebars.pos.tooltip;"
 						class="smallindent"
 						value="left"/>
 					<radio id="radio_movetoright"
 						label="&Optsidebars.right.label;"
-						tooltiptext="&Optsidebars.pos.tooltip;"
 						class="smallindent"
 						value="right"/>
 				</hbox>
@@ -63,24 +62,33 @@
 		<groupbox align="start" id="paneMain-general" data-category="paneMain" collapsed="true">
 			<vbox align="start">
 				<checkbox label="&Optswitchers.label;"
-					tooltiptext="&Optswitchers.tooltip;"
-					preference="pref-useSwitch"/>
+					jump="useSwitch"
+					helptext="&Optswitchers.tooltip;"
+					delayPreference="pref-useSwitch"/>
 				<checkbox label="&OptautoClose.label;"
-					tooltiptext="&OptautoClose.tooltip;"
-					preference="pref-autoClose"/>
+					jump="autoClose"
+					helptext="&OptautoClose.tooltip;"
+					delayPreference="pref-autoClose"/>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneMain-above" data-category="paneMain" collapsed="true">
 			<caption><checkbox id="aboveCheckbox"
 				label="&Optundock.label;"
-				tooltiptext="&Optundock.tooltip;"
-				preference="pref-renderabove"/></caption>
+				jump="renderabove"
+				helpbox="paneMain-above-helptext"
+				delayPreference="pref-renderabove"/></caption>
 			<checkbox dependson="pref-renderabove"
 				class="indent"
 				label="&Optautohide.label;"
-				tooltiptext="&Optautohide.tooltip;"
-				preference="pref-autoHide"/>
+				jump="autoHide"
+				helpbox="paneMain-above-helptext"
+				delayPreference="pref-autoHide"/>
+			<vbox id="paneMain-above-helptext" collapsed="true">
+				<description>&Optundock.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optautohide.label;</description>
+				<description>&Optautohide.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneMain-display" data-category="paneMain" collapsed="true">
@@ -88,59 +96,104 @@
 			<hbox align="center">
 				<vbox align="start">
 					<checkbox label="&Optshowheadertitle.label;"
-						tooltiptext="&Optshowheadertitle.tooltip;"
-						preference="pref-showheadertitle"/>
+						jump="showheadertitle"
+						helpbox="paneMain-display-helptext"
+						delayPreference="pref-showheadertitle"/>
 					<checkbox dependson="pref-showheadertitle"
 						label="&OpttitleButton.label;"
-						tooltiptext="&OpttitleButton.tooltip;"
-						preference="pref-titleButton"/>
+						jump="titleButton"
+						helpbox="paneMain-display-helptext"
+						delayPreference="pref-titleButton"/>
 				</vbox>
 				<vbox class="smallindent" align="start">
-					<checkbox label="&Optshowheaderdock.label;" tooltiptext="&Optshowheaderdock.tooltip;" preference="pref-showheaderdock"/>
-					<checkbox label="&Optshowheaderclose.label;" tooltiptext="&Optshowheaderclose.tooltip;" preference="pref-showheaderclose"/>
+					<checkbox label="&Optshowheaderdock.label;"
+						jump="showheaderdock"
+						helpbox="paneMain-display-helptext"
+						delayPreference="pref-showheaderdock"/>
+					<checkbox label="&Optshowheaderclose.label;"
+						jump="showheaderclose"
+						helpbox="paneMain-display-helptext"
+						delayPreference="pref-showheaderclose"/>
 				</vbox>
 			</hbox>
+			<vbox id="paneMain-display-helptext" collapsed="true">
+				<description style="font-weight:bold;">&Optshowheadertitle.label;</description>
+				<description>&Optshowheadertitle.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OpttitleButton.label;</description>
+				<description>&OpttitleButton.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optshowheaderdock.label;</description>
+				<description>&Optshowheaderdock.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optshowheaderclose.label;</description>
+				<description>&Optshowheaderclose.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneMain-toolbar" data-category="paneMain" collapsed="true">
-			<caption><checkbox label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbar"/></caption>
+			<caption>
+				<checkbox label="&Opttoolbar.label;"
+					jump="toolbar"
+					helpbox="paneMain-toolbar-helptext"
+					delayPreference="pref-toolbar"/>
+			</caption>
 			<vbox class="indent" align="start">
-				<checkbox dependson="pref-toolbar" label="&OptGoURI.label;" tooltiptext="&OptGoURI.tooltip;" preference="pref-goButton"/>
-				<radiogroup preference="pref-coloricons">
+				<checkbox dependson="pref-toolbar"
+					label="&OptGoURI.label;"
+					jump="goButton"
+					helpbox="paneMain-toolbar-helptext"
+					delayPreference="pref-goButton"/>
+				<radiogroup delayPreference="pref-coloricons" jump="coloricons" helpbox="paneMain-coloricons-helptext">
 					<hbox align="center">
 						<label class="smallindent" value="&Optcoloricons.label;"/>
 						<radio dependson="pref-toolbar"
 							class="smallindent"
 							label="&Optcoloricons.nochange.label;"
-							tooltiptext="&Optcoloricons.nochange.tooltip;"
 							value="default"/>
 						<radio dependson="pref-toolbar"
 							class="smallindent"
 							label="&Optcoloricons.firefox.label;"
-							tooltiptext="&Optcoloricons.firefox.tooltip;"
 							value="ff"/>
 						<radio dependson="pref-toolbar"
 							class="smallindent"
 							label="&Optcoloricons.color.label;"
-							tooltiptext="&Optcoloricons.color.tooltip;"
 							value="color"/>
 					</hbox>
 				</radiogroup>
 			</vbox>
+			<vbox id="paneMain-toolbar-helptext" collapsed="true">
+				<description>&Opttoolbar.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptGoURI.label;</description>
+				<description>&OptGoURI.tooltip;</description>
+			</vbox>
+			<vbox id="paneMain-coloricons-helptext" collapsed="true">
+				<description style="font-weight:bold;">&Optcoloricons.label;</description>
+				<box style="background-image:url('chrome://omnisidebar/skin/helptext-colorIcons.jpg'); width:275x; height:81px; margin:0 auto;"/>
+				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.nochange.label;</description>
+				<description>&Optcoloricons.nochange.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.firefox.label;</description>
+				<description>&Optcoloricons.firefox.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.color.label;</description>
+				<description>&Optcoloricons.color.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneMain-keyset" data-category="paneMain" collapsed="true">
-			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="objName-main" preference="pref-mainKeysetAccel"/>
-				<checkbox class="smallindent" keysetAlt="objName-main" preference="pref-mainKeysetAlt"/>
-				<checkbox class="smallindent" keysetShift="objName-main" preference="pref-mainKeysetShift"/>
-				<menulist class="smallindent" keyset="objName-main" preference="pref-mainKeysetKeycode"/>
+			<caption label="&OptKeyboardShortcut.caption;"/>
+			<hbox jump="mainKeyset,&OptKeyboardShortcut.caption;">
+				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetAccel="objName-main" delayPreference="pref-mainKeysetAccel"/>
+				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetAlt="objName-main" delayPreference="pref-mainKeysetAlt"/>
+				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetShift="objName-main" delayPreference="pref-mainKeysetShift"/>
+				<menulist class="smallindent" helpbox="paneMain-keyset-helptext" keyset="objName-main" delayPreference="pref-mainKeysetKeycode"/>
 			</hbox>
 			<checkbox dependson="!pref-mainKeysetKeycode:none"
 				label="&OptKeysetPanel.label;"
-				tooltiptext="&OptKeysetPanel.tooltip;"
-				preference="pref-mainKeysetPanel"/>
+				jump="mainKeysetPanel"
+				helpbox="paneMain-keyset-helptext"
+				delayPreference="pref-mainKeysetPanel"/>
+			<vbox id="paneMain-keyset-helptext" collapsed="true">
+				<description>&OptKeyboardShortcut.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptKeysetPanel.label;</description>
+				<description>&OptKeysetPanel.tooltip;</description>
+			</vbox>
 		</groupbox>
 	</prefpane>
 	

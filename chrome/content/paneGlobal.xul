@@ -42,10 +42,11 @@
 			<caption>
 				<checkbox id="glassCheckbox"
 					label="&OptglassStyle.label;"
-					tooltiptext="&OptglassStyle.tooltip;"
-					preference="pref-glassStyle" />
+					jump="glassStyle"
+					helptext="&OptglassStyle.tooltip;"
+					delayPreference="pref-glassStyle" />
 			</caption>
-			<hbox class="indent">
+			<hbox class="indent" jump="transparency">
 				<label value="&OptglassStyle.transparent;"/>
 				<scale dependson="pref-glassStyle"
 					min="0"
@@ -53,7 +54,8 @@
 					increment="125"
 					pageincrement="375"
 					width="200"
-					preference="pref-transparency"/>
+					preference-editable="true"
+					delayPreference="pref-transparency"/>
 				<label value="&OptglassStyle.opaque;"/>
 			</hbox>
 		</groupbox>
@@ -61,53 +63,89 @@
 		<groupbox align="start" id="paneGlobal-features" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupfeatures.label;"/>
 			<vbox align="start">
-				<hbox>
-					<label value="&OptshowDelay.label;" tooltiptext="&OptshowDelay.tooltip;"/>
+				<hbox align="center" jump="showDelay">
+					<label value="&OptshowDelay.label;" helptext="&OptshowDelay.tooltip;"/>
 					<textbox type="number"
 						size="3"
 						min="0"
 						max="2000"
-						preference="pref-showDelay"/>
+						delayPreference="pref-showDelay"/>
 		        </hbox>
-				<hbox>
-					<label value="&OpthideDelay.label;" tooltiptext="&OpthideDelay.tooltip;"/>
+				<hbox align="center" jump="hideDelay">
+					<label value="&OpthideDelay.label;" helptext="&OpthideDelay.tooltip;"/>
 					<textbox type="number"
 						size="3"
 						min="0"
 						max="2000"
-						preference="pref-hideDelay"/>
+						delayPreference="pref-hideDelay"/>
 		        </hbox>
-				<hbox>
-					<label value="&OptswitcherAdjust.label;" tooltiptext="&OptswitcherAdjust.tooltip;"/>
+				<hbox align="center" jump="switcherAdjust">
+					<label value="&OptswitcherAdjust.label;" helptext="&OptswitcherAdjust.tooltip;"/>
 					<textbox type="number"
 						size="2"
 						min="-2"
 						max="25"
-						preference="pref-switcherAdjust"/>
+						delayPreference="pref-switcherAdjust"/>
 		        </hbox>
-				<checkbox label="&OptkeepPrivate.label;" tooltiptext="&OptkeepPrivate.tooltip;" preference="pref-keepPrivate"/>
-				<checkbox label="&OptkeepLoaded.label;" tooltiptext="&OptkeepLoaded.tooltip;" preference="pref-keepLoaded"/>
+				<checkbox label="&OptkeepPrivate.label;"
+					jump="keepPrivate"
+					helpbox="paneGlobal-keepPrivate-helptext"
+					delayPreference="pref-keepPrivate"/>
+				<vbox id="paneGlobal-keepPrivate-helptext" collapsed="true">
+					<description>&OptkeepPrivate.tooltip.a;</description>
+					<description>&OptkeepPrivate.tooltip.b;</description>
+					<description>&OptkeepPrivate.tooltip.c;</description>
+				</vbox>
+				<checkbox label="&OptkeepLoaded.label;"
+					jump="keepLoaded"
+					helptext="&OptkeepLoaded.tooltip;"
+					delayPreference="pref-keepLoaded"/>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneGlobal-performance" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupperformance.label;"/>
-			<checkbox label="&Optfx.label;" tooltiptext="&Optfx.tooltip;" preference="pref-fx"/>
+			<checkbox label="&Optfx.label;"
+				jump="fx"
+				helptext="&Optfx.tooltip;"
+				delayPreference="pref-fx"/>
 		</groupbox>
 		
 		<groupbox align="start" id="paneGlobal-always" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupalways.label;"/>
-			<checkbox label="&addonsSidebar.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysAddons"/>
-			<checkbox label="&omnisidebarDMT.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysDMT"/>
-			<checkbox id="consoleCheckbox" label="&omnisidebarBrowserConsole.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysConsole"/>
-			<checkbox label="&omnisidebarPageInfo.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysPageInfo"/>
-			<checkbox label="&omnisidebarScratchpad.label;" tooltiptext="&Optgroupalways.tooltip;" preference="pref-alwaysScratchpad"/>
+			<checkbox label="&addonsSidebar.label;"
+				jump="alwaysAddons"
+				helptext="&Optgroupalways.tooltip;"
+				delayPreference="pref-alwaysAddons"/>
+			<checkbox label="&omnisidebarDMT.label;"
+				jump="alwaysDMT"
+				helptext="&Optgroupalways.tooltip;"
+				delayPreference="pref-alwaysDMT"/>
+			<checkbox id="consoleCheckbox"
+				label="&omnisidebarBrowserConsole.label;"
+				jump="alwaysConsole"
+				helptext="&Optgroupalways.tooltip;"
+				delayPreference="pref-alwaysConsole"/>
+			<checkbox label="&omnisidebarPageInfo.label;"
+				jump="alwaysPageInfo"
+				helptext="&Optgroupalways.tooltip;"
+				delayPreference="pref-alwaysPageInfo"/>
+			<checkbox label="&omnisidebarScratchpad.label;"
+				jump="alwaysScratchpad"
+				helptext="&Optgroupalways.tooltip;"
+				delayPreference="pref-alwaysScratchpad"/>
 		</groupbox>
 		
 		<groupbox align="start" id="paneGlobal-forceOpen" data-category="paneGlobal" collapsed="true">
 			<caption label="&OptforceOpen.label;"/>
-			<checkbox label="&OptforceOpen.toolbars;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenToolbars"/>
-			<checkbox label="&OptforceOpen.menus;" tooltiptext="&OptforceOpen.tooltip;" preference="pref-forceOpenMenus"/>
+			<checkbox label="&OptforceOpen.toolbars;"
+				jump="forceOpenToolbars"
+				helptext="&OptforceOpen.tooltip;"
+				delayPreference="pref-forceOpenToolbars"/>
+			<checkbox label="&OptforceOpen.menus;"
+				jump="forceOpenMenus"
+				helptext="&OptforceOpen.tooltip;"
+				delayPreference="pref-forceOpenMenus"/>
 		</groupbox>
 	</prefpane>
 	

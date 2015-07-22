@@ -41,33 +41,45 @@
 		</hbox>
 		
 		<hbox id="paneTwin-toggler" align="start" collapsed="true" data-category="paneTwin">
-			<checkbox label="&Optsidebars.twin.label;" tooltiptext="&Optsidebars.twin.tooltip;" preference="pref-twinSidebar"/>
+			<checkbox label="&Optsidebars.twin.label;"
+				jump="twinSidebar"
+				helptext="&Optsidebars.twin.tooltip;"
+				delayPreference="pref-twinSidebar"/>
 		</hbox>
 		
 		<groupbox align="start" id="paneTwin-general" data-category="paneTwin" collapsed="true">
 			<vbox align="start">
 				<checkbox dependson="pref-twinSidebar"
 					label="&Optswitchers.label;"
-					tooltiptext="&Optswitchers.tooltip;"
-					preference="pref-useSwitchTwin"/>
+					jump="useSwitchTwin"
+					helptext="&Optswitchers.tooltip;"
+					delayPreference="pref-useSwitchTwin"/>
 				<checkbox dependson="pref-twinSidebar"
 					label="&OptautoClose.label;"
-					tooltiptext="&OptautoClose.tooltip;"
-					preference="pref-autoCloseTwin"/>
+					jump="autoCloseTwin"
+					helptext="&OptautoClose.tooltip;"
+					delayPreference="pref-autoCloseTwin"/>
 			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneTwin-above" data-category="paneTwin" collapsed="true">
 			<caption><checkbox id="aboveTwinCheckbox"
 				label="&Optundock.label;"
-				tooltiptext="&Optundock.tooltip;"
+				jump="renderaboveTwin"
+				helpbox="paneTwin-above-helptext"
 				dependson="pref-twinSidebar"
-				preference="pref-renderaboveTwin"/></caption>
+				delayPreference="pref-renderaboveTwin"/></caption>
 			<checkbox dependson="pref-renderaboveTwin,pref-twinSidebar"
 				class="indent"
 				label="&Optautohide.label;"
-				tooltiptext="&Optautohide.tooltip;"
-				preference="pref-autoHideTwin"/>
+				jump="autoHideTwin"
+				helpbox="paneTwin-above-helptext"
+				delayPreference="pref-autoHideTwin"/>
+			<vbox id="paneTwin-above-helptext" collapsed="true">
+				<description>&Optundock.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optautohide.label;</description>
+				<description>&Optautohide.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneTwin-display" data-category="paneTwin" collapsed="true">
@@ -76,68 +88,107 @@
 				<vbox align="start">
 					<checkbox dependson="pref-twinSidebar"
 						label="&Optshowheadertitle.label;"
-						tooltiptext="&Optshowheadertitle.tooltip;"
-						preference="pref-showheadertitleTwin"/>
+						jump="showheadertitleTwin"
+						helpbox="paneTwin-display-helptext"
+						delayPreference="pref-showheadertitleTwin"/>
 					<checkbox dependson="pref-twinSidebar,pref-showheadertitleTwin"
 						label="&OpttitleButton.label;"
-						tooltiptext="&OpttitleButton.tooltip;"
-						preference="pref-titleButtonTwin"/>
+						jump="titleButtonTwin"
+						helpbox="paneTwin-display-helptext"
+						delayPreference="pref-titleButtonTwin"/>
 				</vbox>
 				<vbox class="smallindent" align="start">
 					<checkbox dependson="pref-twinSidebar"
 						label="&Optshowheaderdock.label;"
-						tooltiptext="&Optshowheaderdock.tooltip;"
-						preference="pref-showheaderdockTwin"/>
+						jump="showheaderdockTwin"
+						helpbox="paneTwin-display-helptext"
+						delayPreference="pref-showheaderdockTwin"/>
 					<checkbox dependson="pref-twinSidebar"
 						label="&Optshowheaderclose.label;"
-						tooltiptext="&Optshowheaderclose.tooltip;"
-						preference="pref-showheadercloseTwin"/>
+						jump="showheadercloseTwin"
+						helpbox="paneTwin-display-helptext"
+						delayPreference="pref-showheadercloseTwin"/>
 				</vbox>
 			</hbox>
+			<vbox id="paneTwin-display-helptext" collapsed="true">
+				<description style="font-weight:bold;">&Optshowheadertitle.label;</description>
+				<description>&Optshowheadertitle.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OpttitleButton.label;</description>
+				<description>&OpttitleButton.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optshowheaderdock.label;</description>
+				<description>&Optshowheaderdock.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optshowheaderclose.label;</description>
+				<description>&Optshowheaderclose.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneTwin-toolbar" data-category="paneTwin" collapsed="true">
-			<caption><checkbox dependson="pref-twinSidebar" label="&Opttoolbar.label;" tooltiptext="&Opttoolbar.tooltip;" preference="pref-toolbarTwin"/></caption>
+			<caption>
+				<checkbox dependson="pref-twinSidebar"
+					label="&Opttoolbar.label;"
+					jump="toolbarTwin"
+					helpbox="paneTwin-toolbar-helptext"
+					delayPreference="pref-toolbarTwin"/>
+			</caption>
 			<vbox class="indent" align="start">
 				<checkbox dependson="pref-twinSidebar,pref-toolbarTwin"
 					label="&OptGoURI.label;"
-					tooltiptext="&OptGoURI.tooltip;"
-					preference="pref-goButtonTwin"/>
-				<radiogroup preference="pref-coloriconsTwin">
+					jump="goButtonTwin"
+					helpbox="paneTwin-toolbar-helptext"
+					delayPreference="pref-goButtonTwin"/>
+				<radiogroup delayPreference="pref-coloriconsTwin" jump="coloriconsTwin" helpbox="paneTwin-coloricons-helptext">
 					<hbox align="center">
 						<label class="smallindent" value="&Optcoloricons.label;"/>
 						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
 							class="smallindent"
 							label="&Optcoloricons.nochange.label;"
-							tooltiptext="&Optcoloricons.nochange.tooltip;"
 							value="default"/>
 						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
 							class="smallindent"
 							label="&Optcoloricons.firefox.label;"
-							tooltiptext="&Optcoloricons.firefox.tooltip;"
 							value="ff"/>
 						<radio dependson="pref-twinSidebar,pref-toolbarTwin"
 							class="smallindent"
 							label="&Optcoloricons.color.label;"
-							tooltiptext="&Optcoloricons.color.tooltip;"
 							value="color"/>
 					</hbox>
 				</radiogroup>
 			</vbox>
+			<vbox id="paneTwin-toolbar-helptext" collapsed="true">
+				<description>&Opttoolbar.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptGoURI.label;</description>
+				<description>&OptGoURI.tooltip;</description>
+			</vbox>
+			<vbox id="paneTwin-coloricons-helptext" collapsed="true">
+				<description style="font-weight:bold;">&Optcoloricons.label;</description>
+				<box style="background-image:url('chrome://omnisidebar/skin/helptext-colorIcons.jpg'); width:275x; height:81px; margin:0 auto;"/>
+				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.nochange.label;</description>
+				<description>&Optcoloricons.nochange.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.firefox.label;</description>
+				<description>&Optcoloricons.firefox.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.color.label;</description>
+				<description>&Optcoloricons.color.tooltip;</description>
+			</vbox>
 		</groupbox>
 		
 		<groupbox align="start" id="paneTwin-keyset" data-category="paneTwin" collapsed="true">
-			<caption label="&OptKeyboardShortcut.caption;" tooltiptext="&OptKeyboardShortcut.tooltip;"/>
-			<hbox>
-				<checkbox class="smallindent" keysetAccel="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAccel"/>
-				<checkbox class="smallindent" keysetAlt="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetAlt"/>
-				<checkbox class="smallindent" keysetShift="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetShift"/>
-				<menulist class="smallindent" keyset="objName-twin" dependson="pref-twinSidebar" preference="pref-twinKeysetKeycode"/>
+			<caption label="&OptKeyboardShortcut.caption;"/>
+			<hbox jump="twinKeyset,&OptKeyboardShortcut.caption;">
+				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetAccel="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetAccel"/>
+				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetAlt="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetAlt"/>
+				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetShift="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetShift"/>
+				<menulist class="smallindent" helpbox="paneTwin-keyset-helptext" keyset="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetKeycode"/>
 			</hbox>
 			<checkbox dependson="pref-twinSidebar,!pref-twinKeysetKeycode:none"
 				label="&OptKeysetPanel.label;"
-				tooltiptext="&OptKeysetPanel.tooltip;"
-				preference="pref-twinKeysetPanel"/>
+				jump="twinKeysetPanel"
+				helpbox="paneTwin-keyset-helptext"
+				delayPreference="pref-twinKeysetPanel"/>
+			<vbox id="paneTwin-keyset-helptext" collapsed="true">
+				<description>&OptKeyboardShortcut.tooltip;</description>
+				<description style="font-weight:bold; margin-top:1em;">&OptKeysetPanel.label;</description>
+				<description>&OptKeysetPanel.tooltip;</description>
+			</vbox>
 		</groupbox>
 	</prefpane>
 	
