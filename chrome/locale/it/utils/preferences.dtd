@@ -1,0 +1,13 @@
+<!ENTITY preferences.button "Preferenze">
+<!ENTITY preferences.undo.label "Annulla">
+<!ENTITY preferences.redo.label "Ripeti">
+<!ENTITY preferences.undoredo.tooltip "Reimposta le modifiche eseguite sulle preferenze, incluso l'importazione da file e il ripristino dei predefiniti.">
+<!ENTITY preferences.import.label "Importa da file...">
+<!ENTITY preferences.import.tooltip "Carica le preferenze da un file precedentemente esportato sul computer.">
+<!ENTITY preferences.export.label "Esporta nel file...">
+<!ENTITY preferences.export.tooltip "Salva le preferenze in un file esterno per sicurezza.">
+<!ENTITY preferences.reset.label "Ripristina predefiniti">
+<!ENTITY preferences.reset.tooltip.a "Tutte le preferenze torneranno ai valori predefiniti, come se il componente fosse stato appena installato.">
+<!ENTITY preferences.reset.tooltip.b "Le posizioni dei pulsanti nelle barre non cambieranno, per reimpostarle dovrai usare il pulsante Ripristina predefiniti in Personalizza.">
+<!ENTITY preferences.jumpto.label "Vai alla preferenza...">
+<!ENTITY preferences.jumpto.tooltip "Digita una parola e sarai portato alla prima preferenza che la contiene.">

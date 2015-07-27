@@ -30,7 +30,9 @@
 <!ENTITY OptswitcherAdjust.label "Regola la larghezza dell'area attiva del margine (pixel):">
 <!ENTITY OptswitcherAdjust.tooltip "Puoi aumentare la dimensione della area del margine che è reattiva ai clic e al movimento del mouse.">
 <!ENTITY OptkeepPrivate.label "Mantieni lo stato della barra laterale nella modalità di navigazione anonima">
-<!ENTITY OptkeepPrivate.tooltip "All'entrata o all'uscita della modalità di navigazione anonima (MNA), la barra laterale rimarrà aperta con lo stesso pannello caricato. Se il comando è disabilitato, la barra laterale rimarrà sempre chiusa all'entrata nella MNA, e all'uscita tornerà sempre al precedente pannello aperto (prima di abilitare la MNA). Questa preferenza è necessaria se la MNA è attiva di default per ogni avvio e se vuoi che lo stato della barra laterale venga memorizzato tra le sessioni di navigazione.">
+<!ENTITY OptkeepPrivate.tooltip.a "All'entrata o all'uscita della modalità di navigazione anonima (MNA), la barra laterale rimarrà aperta con lo stesso pannello caricato.">
+<!ENTITY OptkeepPrivate.tooltip.b "Se il comando è disabilitato, la barra laterale rimarrà sempre chiusa all'entrata nella MNA, e all'uscita tornerà sempre al precedente pannello aperto (prima di abilitare la MNA).">
+<!ENTITY OptkeepPrivate.tooltip.c "Questa preferenza è necessaria se la MNA è attiva di default per ogni avvio e se vuoi che lo stato della barra laterale venga memorizzato tra le sessioni di navigazione.">
 <!ENTITY OptkeepLoaded.label "Mantieni il pannello caricato alla chiusura della barra laterale">
 <!ENTITY OptkeepLoaded.tooltip "Alla chiusura, la barra laterale sarà caricata in memoria. Per esempio, alla riapertura sarà ricordata la posizione di scorrimento o qualsiasi contenuto delle caselle di testo.">
 <!ENTITY Optgroupalways.label "Apri sempre nella barra laterale">

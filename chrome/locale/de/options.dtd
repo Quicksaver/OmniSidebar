@@ -30,7 +30,9 @@
 <!ENTITY OptswitcherAdjust.label "Randbreite, welche bei Mauskontakt die Sidebar aktiviert (Pixel):">
 <!ENTITY OptswitcherAdjust.tooltip "Die Breite des auf Mausklicks und Mausbewegungen reagierenden Browser-Randes kann vergrößert werden.">
 <!ENTITY OptkeepPrivate.label "Sidebar-Status bei Wechsel in Privaten Modus übernehmen">
-<!ENTITY OptkeepPrivate.tooltip "Beim Starten oder Beenden des privaten Modus behält die Sidebar die geladene Ansicht. Falls diese Option deaktiviert ist, so ist die Sidebar beim Starten des privaten Modus immer geschlossen und öffnet nach dem Beenden des privaten Modus die Ansicht, welche vor dessen Starten angezeigt wurde. Das Aktivieren dieser Option ist notwendig, falls bei jedem Start automatisch in den privaten Modus gewechselt wird und Sie wollen, dass der Zustand der Sidebar zwischen den Browsersitzungen erhalten bleibt.">
+<!ENTITY OptkeepPrivate.tooltip.a "Beim Starten oder Beenden des privaten Modus behält die Sidebar die geladene Ansicht.">
+<!ENTITY OptkeepPrivate.tooltip.b "Falls diese Option deaktiviert ist, so ist die Sidebar beim Starten des privaten Modus immer geschlossen und öffnet nach dem Beenden des privaten Modus die Ansicht, welche vor dessen Starten angezeigt wurde.">
+<!ENTITY OptkeepPrivate.tooltip.c "Das Aktivieren dieser Option ist notwendig, falls bei jedem Start automatisch in den privaten Modus gewechselt wird und Sie wollen, dass der Zustand der Sidebar zwischen den Browsersitzungen erhalten bleibt.">
 <!ENTITY OptkeepLoaded.label "Inhalt der Sidebar auch nach deren Schließen im Speicher behalten">
 <!ENTITY OptkeepLoaded.tooltip "Beim Aktivieren dieser Option bleibt die Sidebar nach deren Schließen im Hintergrund geladen und beim erneuten Öffnen bleiben die Position in der Sidebar und Inhalte von Eingabefeldern erhalten.">
 <!ENTITY Optgroupalways.label "Immer in der Sidebar öffnen">

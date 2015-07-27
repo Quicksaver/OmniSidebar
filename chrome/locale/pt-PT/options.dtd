@@ -30,7 +30,9 @@
 <!ENTITY OptswitcherAdjust.label "Ajustar a largura da margem activa (pixels)">
 <!ENTITY OptswitcherAdjust.tooltip "A área da margem reactiva aos cliques e ao movimento do cursor pode ser aumentada.">
 <!ENTITY OptkeepPrivate.label "Manter o estado do painel lateral quando em modo de Navegação Privada">
-<!ENTITY OptkeepPrivate.tooltip "Ao entrar ou sair do Modo Privado (MP), o painel lateral permanecerá aberto com o mesmo painel carregado. Se isto estiver desactivado, o painel lateral será sempre fechado ao entrar no MP, e retornará sempre ao painel aberto anteriormente (antes de entrar no MP) ao sair desse modo. Esta preferência é necessária caso o MP seja activado com o iniciar do navegador e queiras que o estado do painel lateral seja lembrado entre sessões.">
+<!ENTITY OptkeepPrivate.tooltip.a "Ao entrar ou sair do Modo Privado (MP), o painel lateral permanecerá aberto com o mesmo painel carregado.">
+<!ENTITY OptkeepPrivate.tooltip.b "Se isto estiver desactivado, o painel lateral será sempre fechado ao entrar no MP, e retornará sempre ao painel aberto anteriormente (antes de entrar no MP) ao sair desse modo.">
+<!ENTITY OptkeepPrivate.tooltip.c "Esta preferência é necessária caso o MP seja activado com o iniciar do navegador e queiras que o estado do painel lateral seja lembrado entre sessões.">
 <!ENTITY OptkeepLoaded.label "Manter o painel na memória ao fechar">
 <!ENTITY OptkeepLoaded.tooltip "Ao fechar o painel lateral, este mantém-se carregado. Por exemplo, assim a sua posição actual ou qualquer conteúdo de caixas de texto serão lembrados ao reabri-lo.">
 <!ENTITY Optgroupalways.label "Abrir sempre no painel lateral">

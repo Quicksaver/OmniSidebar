@@ -30,7 +30,9 @@
 <!ENTITY OptswitcherAdjust.label "調整有效區域寬度(px)：">
 <!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
 <!ENTITY OptkeepPrivate.label "在隱私瀏覽模式下維持側邊欄狀態">
-<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
+<!ENTITY OptkeepPrivate.tooltip.a "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded.">
+<!ENTITY OptkeepPrivate.tooltip.b "If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it.">
+<!ENTITY OptkeepPrivate.tooltip.c "This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
 <!ENTITY OptkeepLoaded.label "關閉側邊欄後仍保持面板載入狀態">
 <!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
 <!ENTITY Optgroupalways.label "永遠在側邊欄開啟">

@@ -30,7 +30,9 @@
 <!ENTITY OptswitcherAdjust.label "Dostosuj szerokość obszaru aktywnego marginesu (w pikselach):">
 <!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
 <!ENTITY OptkeepPrivate.label "Zachowuj stan panelu bocznego przy przeglądaniu prywatnym">
-<!ENTITY OptkeepPrivate.tooltip "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded. If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it. This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
+<!ENTITY OptkeepPrivate.tooltip.a "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded.">
+<!ENTITY OptkeepPrivate.tooltip.b "If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it.">
+<!ENTITY OptkeepPrivate.tooltip.c "This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
 <!ENTITY OptkeepLoaded.label "Zachowuj wczytaną zawartość panelu bocznego podczas jego zamykania">
 <!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
 <!ENTITY Optgroupalways.label "Zawsze otwieraj w panelu bocznym">

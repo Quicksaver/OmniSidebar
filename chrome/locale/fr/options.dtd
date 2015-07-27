@@ -30,7 +30,9 @@
 <!ENTITY OptswitcherAdjust.label "Ajuster la largeur de la marge de la zone active (pixels) :">
 <!ENTITY OptswitcherAdjust.tooltip "Vous pouvez augmenter la taille de la marge réactive aux clics et mouvements de souris.">
 <!ENTITY OptkeepPrivate.label "Conserver l'état du panneau latéral en mode de navigation privée">
-<!ENTITY OptkeepPrivate.tooltip "Lors de l'entrée ou de la sortie du mode de navigation privée, le panneau latéral restera ouvert avec les mêmes panneaux. Si cette option est désactivée, le panneau latéral sera toujours fermé lors de l'entrée en mode de navigation privée et reviendra aux panneaux ouverts précédemment (avant l'activation du mode privé) lorsqu'on repassera en mode de navigation normal. Cette option est nécessaire si le mode ne navigation privé est activé par défaut au démarrage et vous souhaitez que l'état du panneau latéral soit mémorisé entre les sessions de navigation.">
+<!ENTITY OptkeepPrivate.tooltip.a "Lors de l'entrée ou de la sortie du mode de navigation privée, le panneau latéral restera ouvert avec les mêmes panneaux.">
+<!ENTITY OptkeepPrivate.tooltip.b "Si cette option est désactivée, le panneau latéral sera toujours fermé lors de l'entrée en mode de navigation privée et reviendra aux panneaux ouverts précédemment (avant l'activation du mode privé) lorsqu'on repassera en mode de navigation normal.">
+<!ENTITY OptkeepPrivate.tooltip.c "Cette option est nécessaire si le mode ne navigation privé est activé par défaut au démarrage et vous souhaitez que l'état du panneau latéral soit mémorisé entre les sessions de navigation.">
 <!ENTITY OptkeepLoaded.label "Conserver le panneau lors de la fermeture du panneau latéral">
 <!ENTITY OptkeepLoaded.tooltip "Lorsque vous fermez le panneau latéral il restera chargé en arrière-plan. Par exemple, lorsque vous le rouvrez, la position de défilement et tout contenu de zone de texte seront mémorisés.">
 <!ENTITY Optgroupalways.label "Toujours ouvrir dans le panneau latéral">

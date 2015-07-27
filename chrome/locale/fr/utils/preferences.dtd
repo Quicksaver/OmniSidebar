@@ -1,0 +1,13 @@
+<!ENTITY preferences.button "Préférences">
+<!ENTITY preferences.undo.label "Annuler">
+<!ENTITY preferences.redo.label "Rétablir">
+<!ENTITY preferences.undoredo.tooltip "Rétablir rapidement toute modifications sur les préférences de l'extension, y compris l'importation à partir d'un fichier et le rétablissement des valeurs par défaut.">
+<!ENTITY preferences.import.label "Importer à partir d'un fichier…">
+<!ENTITY preferences.import.tooltip "Charger les préférences de l'extension à partir d'un fichier exporté précédemment sur votre ordinateur.">
+<!ENTITY preferences.export.label "Exporter vers un fichier…">
+<!ENTITY preferences.export.tooltip "Sauvegarder les préférences de l'extension dans un fichier externe.">
+<!ENTITY preferences.reset.label "Rétablir les valeurs par défaut">
+<!ENTITY preferences.reset.tooltip.a "Toutes les préférences sont rétablies à leur valeur par défaut, comme si l'extension avait été fraîchement installée.">
+<!ENTITY preferences.reset.tooltip.b "Le placement des boutons dans les barres d'outils ne sont pas affectés, pour rétablir leur emplacement d'origine, utilisez le bouton de rétablissement dans la boîte de personnalisation.">
+<!ENTITY preferences.jumpto.label "Basculer vers la préférence…">
+<!ENTITY preferences.jumpto.tooltip "Saisissez un mot et vous serez dirigé vers la première préférence le contenant.">
