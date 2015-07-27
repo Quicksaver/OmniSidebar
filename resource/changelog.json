@@ -1,6 +1,20 @@
 {
-	"current":"1.6",
+	"current":"1.6.1",
 	"releases": {
+		"1.6.1":{
+			"date":"July 27, 2015",
+			"notes":[
+				["new","Undo/Redo/Import/Export/Restore-defaults/Jump-to functions in the preferences"],
+				["changed","Re-styled and optimized the help tooltips in the preferences"],
+				["changed","Only request the Development Status information when the About pane in the preferences is accessed"],
+				["bugfix","Starting the browser or opening a new window with the sidebar undocked would not place focus in the web content"],
+				["bugfix","Force LTR layout for the preferences tab options, at least until any RTL locales are included"],
+				["bugfix","Color version of downloads button not appearing"],
+				["bugfix","Close/Hide when losing focus wouldn't work after opening a bookmark in the background (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/95\">issue #95</a>)"],
+				["bugfix","Minor startup improvements"],
+				["bugfix","The preferences, especially the glass transparency slider, were very sluggish to change, all should be much smoother now"]
+			]
+		},
 		"1.6":{
 			"date":"June 25, 2015",
 			"notes":[
