@@ -2,11 +2,12 @@
   Add-ons Manager - In the Sidebar (https://userstyles.org/styles/48731/add-ons-manager-in-the-sidebar) */
   
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+@namespace html url(http://www.w3.org/1999/xhtml);
 @-moz-document url("about:addons") {
 	
 	/* general and top toolbox */
 	
-	#addons-page.inSidebar {
+	#addons-page.inSidebar:not([omnisidebar-FF40]) {
 		padding: 8px;
 	}
 	
@@ -14,23 +15,70 @@
 		-moz-box-orient: vertical;
 	}
 	
+	.inSidebar #nav-header {
+		margin: 0 4px 15px 4px;
+	}
+	
 	.inSidebar #header {
 		font-size: 0.9em;
+		margin: 0;
 	}
 	
 	.inSidebar #back-btn,
 	.inSidebar #forward-btn {
 		display: -moz-box;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	
+	.inSidebar #back-btn {
+		border-radius: 2px 0 0 2px;
+		-moz-margin-start: 2px;
+	}
+	.inSidebar #forward-btn {
+		border-radius: 0 2px 2px 0;
+		-moz-margin-end: 2px;
+		-moz-border-start: none;
+	}
+	
+	.inSidebar #nav-header > .nav-button:-moz-any([disabled="true"],:not(:hover)) {
+		border-color: #c1c1c1;
+		background-color: #fbfbfb;
+	}
+	
+	.inSidebar #nav-header > .nav-button:not([disabled="true"]):hover {
+		border-color: #c1c1c1;
 	}
 	
 	.inSidebar #header-search {
-		min-width: 10em;
 		max-width: 20em;
 		-moz-box-flex: 1;
 	}
+	.inSidebar:not([omnisidebar-FF40]) #header-search {
+		min-width: 10em;
+	}
+	.inSidebar[omnisidebar-FF40] #header-search {
+		min-width: 5em;
+	}
 	
-	.inSidebar #header-utils-btn {
+	.inSidebar:not([omnisidebar-FF40]) #header-utils-btn {
 		margin: 0 3px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] #header-utils-btn,
+	.inSidebar[omnisidebar-FF40] #header button.button-link {
+		margin: 0;
+	}
+	
+	.inSidebar[omnisidebar-FF40] #header-utils-btn,
+	.inSidebar[omnisidebar-FF40] #header-search {
+		padding: 1px 5px;
+		height: 26px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] #search-filter {
+		-moz-margin-end: 0;
+		padding: 5px;
 	}
 	
 	/* horizontal categories at the top */
@@ -60,11 +108,24 @@
 		display: none;
 	}
 	
+	.inSidebar .category {
+		padding: 3px;
+		height: 40px;
+	}
+	#addons-page.inSidebar[omnisidebar-FF40] .category {
+		border-radius: 4px 4px 0 0;
+		border-top: 1px solid transparent;
+		border-right: 1px solid transparent;
+		border-left: 1px solid transparent;
+	}
+	
 	.inSidebar .category image {
+		width: 28px;
+		height: 28px;
 		margin: 0;
 	}
 	
-	.inSidebar .category[selected="true"] {
+	#addons-page.inSidebar:not([omnisidebar-FF40]) .category[selected="true"] {
 		border-bottom: none;
 		border-right: 1px solid;
 		border-top: 1px solid;
@@ -77,20 +138,39 @@
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
-	
-	.inSidebar .category {
-		padding: 3px;
-		height: 40px;
-	}
-	.inSidebar .category image {
-		width: 28px;
-		height: 28px;
+	#addons-page.inSidebar[omnisidebar-FF40] .category[selected="true"],
+	#addons-page.inSidebar[omnisidebar-FF40] .category:hover {
+		-moz-border-top-colors: #c1c1c1;
+		-moz-border-left-colors: #c1c1c1;
+		-moz-border-right-colors: #c1c1c1;
+		background-color: transparent;
+		background-image: linear-gradient(to bottom, #fbfbfb 0px, #fbfbfb 50%, transparent 100%);
 	}
 	
 	/* scrollable lists panes */
 	
+	#addons-page.inSidebar[omnisidebar-FF40] .main-content {
+		border-top: 1px solid #c1c1c1;
+	}
+	
+	.inSidebar .main-content,
+	#addons-page.inSidebar[omnisidebar-FF40] .view-pane > .list > scrollbox {
+		padding: 0;
+	}
+	
+	.inSidebar[omnisidebar-FF40] .view-header {
+		-moz-margin-end: 0;
+	}
+	
+	.inSidebar[omnisidebar-FF40] .sorter[checkState="1"],
+	.inSidebar[omnisidebar-FF40] .sorter[checkState="2"],
+	.inSidebar[omnisidebar-FF40] .sorter:hover {
+		box-shadow: inset 1px 0 0 #c1c1c1, inset -1px 0 0 #c1c1c1;
+		background-color: #fbfbfb;
+	}
+	
 	.inSidebar #view-port-container {
-		height: 1700px;
+		height: 3700px;
 	}
 	
 	.inSidebar .view-pane {
@@ -110,6 +190,10 @@
 		padding: 0 5px 2px 5px;
 	}
 	
+	#addons-page.inSidebar[omnisidebar-FF40] .view-pane richlistitem[selected="true"] {
+		-moz-border-start: none;
+	}
+	
 	/* reenable with hover effects below */
 	/*.inSidebar .addon .content-container { 
 		margin: 3px 0;
@@ -126,6 +210,10 @@
 	.inSidebar .error-icon {
 		width: 16px;
 		height: 16px;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] .list {
+		border: none;
 	}
 	
 	.inSidebar .list .name-container {
@@ -147,6 +235,65 @@
 	
 	.inSidebar #updates-list .date-updated { 
 		font-size: 1.2em; 
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .update-info-container > *,
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .control-container > *,
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .install-status > * {
+		max-height: 20px;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .content-container {
+		position: relative;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .control-container,
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .install-status {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .control-container:not([hidden="true"]),
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .install-status:not([hidden="true"]) {
+		display: flex;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .control-container menulist,
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .install-status .download-progress {
+		margin-top: 1px;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .status-container {
+		margin-top: -2em;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] .status-control-wrapper button,
+	#addons-page.inSidebar[omnisidebar-FF40] .status-control-wrapper menulist {
+		min-width: 5em;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] .details.button-link > *.button-box,
+	#addons-page.inSidebar[omnisidebar-FF40] .status-control-wrapper button > *.button-box,
+	#addons-page.inSidebar[omnisidebar-FF40] .status-control-wrapper menulist > *.menulist-label-box {
+		padding-right: 0 !important;
+		padding-left: 0 !important;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .install-status .status-container {
+		margin-top: 0;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem .install-status .download-progress .progress .progress-bar  {
+		min-height: 17px;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem[status="installing"] .content-container {
+		margin-bottom: 25px;
+	}
+	
+	#addons-page.inSidebar[omnisidebar-FF40] richlistitem[status="installing"] .install-status {
+		bottom: -25px;
 	}
 	
 	/* with hover effects margin-top is 2px, recheck when reenable */
@@ -205,7 +352,21 @@
 		visibility: collapse;
 	}
 	
+	/* e.g. Release Notes section would always be white and with a huge font */
+	.inSidebar[omnisidebar-FF40] html|body {
+		background: transparent;
+		font-size: 1em;
+	}
+	
+	.inSidebar[omnisidebar-FF40] .addon:not([selected]) .relnotes-toggle:hover {
+		background-color: #fafafa;
+	}
+	
 	/* item details page */
+	
+	.inSidebar[omnisidebar-FF40] #detail-view {
+		-moz-margin-end: 0;
+	}
 	
 	.inSidebar #detail-autoUpdate radio {
 		margin: 2px 0px 2px 0px;
@@ -226,6 +387,10 @@
 	}
 	
 	/* Add-on detail pages - Remove wasted space */
+	
+	.inSidebar[omnisidebar-FF40] #detail-name-container {
+		-moz-box-orient: vertical;
+	}
 	
 	.inSidebar #detail-notifications + hbox {
 		-moz-box-orient: vertical;
@@ -262,6 +427,9 @@
 		display: inline;
 		text-align: center;
 	}
+	.inSidebar[omnisidebar-FF40] #detail-desc-container {
+		word-wrap: break-word;
+	}
 	
 	.inSidebar #detail-desc-container > * {
 		text-align: start;
@@ -271,10 +439,37 @@
 		margin-top: 2em;
 	}
 	
+	 @media all and (max-width: 20.25em) {
+		.inSidebar[omnisidebar-FF40] #detail-contributions {
+			padding: 0.25em;
+		}
+	}
+	
+	.inSidebar[omnisidebar-FF40] #detail-grid #detail-findUpdates-btn > .button-box {
+		-moz-padding-end: 5px !important;
+	}
+	
+	.inSidebar[omnisidebar-FF40] :-moz-any(row,#search-filter) radio > *,
+	.inSidebar[omnisidebar-FF40] :-moz-any(row,.status-control-wrapper) checkbox > * {
+		-moz-margin-end: 4px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] :-moz-any(row,#search-filter) radio .radio-check,
+	.inSidebar[omnisidebar-FF40] :-moz-any(row,.status-control-wrapper) checkbox .checkbox-check {
+		width: 16px;
+		height: 16px;
+	}
+	
 	/* Add-on detail pages - Stack tables */
 	
 	.inSidebar #detail-grid {
 		display: inline;
+	}
+	
+	.inSidebar[omnisidebar-FF40] .detail-row,
+	.inSidebar[omnisidebar-FF40] .detail-row-complex,
+	.inSidebar[omnisidebar-FF40] setting{
+		font-size: 1em;
 	}
 	
 	.inSidebar #detail-grid > rows > row:-moz-any(.detail-row-complex:not([hidden]),.detail-row:not([hidden])[value]) {
@@ -331,6 +526,28 @@
 		margin-top: auto;
 		margin-bottom: auto;
 	}
+
+	.inSidebar[omnisidebar-FF40] setting radio > * {
+		-moz-margin-end: 4px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] setting radio .radio-check,
+	.inSidebar[omnisidebar-FF40] setting checkbox .checkbox-check {
+		width: 20px;
+		height: 20px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] setting textbox {
+		height: 28px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] setting menulist {
+		height: 24px;
+	}
+	
+	.inSidebar[omnisidebar-FF40] setting > vbox .preferences-alignment {
+		height: 100%;
+	}
 	
 	.inSidebar #detail-rows > setting .preferences-description {
 		-moz-margin-start: 6px;
@@ -341,7 +558,10 @@
 	/* in small windows, like the sidebar panel, the columns (sorters) force the panel to go beyond the limits */
 	/* this forces those buttons to wrap */
 	@media all and (max-width: 25.5em) {
-		.inSidebar #list-view[type="userstyle"] #addon-list-empty[hidden] ~ #userstyle-sorting { display: block; }
+		.inSidebar:not([omnisidebar-FF40]) #list-view[type="userstyle"] #addon-list-empty[hidden] ~ #userstyle-sorting { display: block; }
+	}
+	@media all and (max-width: 23.3em) {
+		.inSidebar[omnisidebar-FF40] #list-view[type="userstyle"] #addon-list-empty[hidden] ~ #userstyle-sorting { display: block; }
 	}
 
 }

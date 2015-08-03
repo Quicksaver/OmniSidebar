@@ -64,7 +64,8 @@
 .inSidebar #placesView,
 .inSidebar #updatescan-bookmarks-view,
 .inSidebar #sidebar-notify #feed_tree,
-.inSidebar #view-port-container,
+.inSidebar:not([omnisidebar-FF40]) #view-port-container,
+#addons-page.inSidebar[omnisidebar-FF40] .main-content,
 .inSidebar #styles,
 .inSidebar #bookmarks-content-box,
 .inSidebar #placesView,
@@ -189,32 +190,32 @@
 
 /*--Scrollbars by makondo--*/
 /* I honestly don't remember where I got these from... */
-.inSidebar scrollbar * { 
-	-moz-appearance: none !important;
-	background: none !important; 
-}
-
-.inSidebar scrollbar { 
+.inSidebar scrollbar * {
 	-moz-appearance: none !important;
 	background: none !important;
-	border: none !important; 
 }
 
-.inSidebar scrollcorner { 
+.inSidebar scrollbar {
+	-moz-appearance: none !important;
+	background: none !important;
+	border: none !important;
+}
+
+.inSidebar scrollcorner {
 	-moz-appearance: none !important;
 	background: none !important; 
 	width: 0 !important;
-	height: 0 !important; 
+	height: 0 !important;
 }
 
-.inSidebar scrollbar thumb { 
-	-moz-appearance: none !important; 
+.inSidebar scrollbar thumb {
+	-moz-appearance: none !important;
 	border: none !important;
-	opacity: .2 !important; 
+	opacity: .2 !important;
 	border-radius: 10px !important;
 }
 .inSidebar scrollbar[orient="vertical"] thumb {
-	background: transparent url("data:image/gif;base64,R0lGODlhBwDCAbMAAAsLC7q6uqSkpICAgFdXV+Li4rCwsCgoKMzMzFlZWa6urkhISUVFRt3d3ZeWlRETEywAAAAABwDCAUAE/vA9QKkIpRgCbt4dpnHeGH6kCJarmqKnyb6yG7fwfNNGsv+6oE2YGxqLyFoSp2wyFbwo8OiUEqvTJDTr9F2ZPYBCYUAoEo9Lo7H9Wqng91Le5cbt9Lv75oXn/3iBe4MibX6Ch4Rzdn2LV4YwBgIOAgNoX40amWGKWJ16KpuAJZCeiaeOqAWloKkZrKOqraautLazuLG1uYi7ure/vJ88or3AxrjFw8h5yqF8zNGEa1sJBAwLDAcPBgYBAQJvDXWY0J/OWsHqyJmw5rLox8vzsuvl9B/xwvXS/Pjy/gLWcvdvn69+BwvSISgQ4EB7cPRBTNjQoC2GFPMhdMjRoseJJh1BcqoocmHJjR+5YAyJ8uQ9ki1jFpSokgMZBGa8CFAQwMCAAxEAADs=") center no-repeat !important; 
+	background: transparent url("data:image/gif;base64,R0lGODlhBwDCAbMAAAsLC7q6uqSkpICAgFdXV+Li4rCwsCgoKMzMzFlZWa6urkhISUVFRt3d3ZeWlRETEywAAAAABwDCAUAE/vA9QKkIpRgCbt4dpnHeGH6kCJarmqKnyb6yG7fwfNNGsv+6oE2YGxqLyFoSp2wyFbwo8OiUEqvTJDTr9F2ZPYBCYUAoEo9Lo7H9Wqng91Le5cbt9Lv75oXn/3iBe4MibX6Ch4Rzdn2LV4YwBgIOAgNoX40amWGKWJ16KpuAJZCeiaeOqAWloKkZrKOqraautLazuLG1uYi7ure/vJ88or3AxrjFw8h5yqF8zNGEa1sJBAwLDAcPBgYBAQJvDXWY0J/OWsHqyJmw5rLox8vzsuvl9B/xwvXS/Pjy/gLWcvdvn69+BwvSISgQ4EB7cPRBTNjQoC2GFPMhdMjRoseJJh1BcqoocmHJjR+5YAyJ8uQ9ki1jFpSokgMZBGa8CFAQwMCAAxEAADs=") center no-repeat !important;
 	min-height: 50px !important;
 	width: 0 !important;
 }
@@ -227,13 +228,13 @@
 .inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="decrement"],
 .inSidebar scrollbar[orient="vertical"] > scrollbarbutton[type="increment"] {
 	-moz-margin-start: 0px !important;
-	-moz-margin-end: 1px !important; 
+	-moz-margin-end: 1px !important;
 }
 
 .inSidebar scrollbarbutton {
 	border: none !important;
 	background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA4klEQVR42jXPPaqDQBAH8CWdJ3hd6kD6QO4gYuEBBMEP0EIFP0BEz+CKjZ0nSKGlvPeQgIWVHsQixGiKzYyQ4rf8dxh2Zkkcx4ckSQhyXfcHfe9oP8IwPJVleZum6TGO46MoilsQBKe9QdO0KzT8DsPA5nl+o77vGdTugCM8z1Pf95emaV5d163gVdf10/M8pqrqkYiiSBVFWSilK9jyPN+yLFtkWWa6rh+J4zhXaPqDeaxt2w280zRlgiDcoyji9iUtyzobhvFfVdWKMJumed6XhG9yGGzbvkiSRBFmrMELhw9B4Yc3YgC0lAAAAABJRU5ErkJggg==) center no-repeat !important;
-	opacity: .2 !important; 
+	opacity: .2 !important;
 }
 
 /* Other stuff */

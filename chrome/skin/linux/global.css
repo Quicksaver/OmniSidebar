@@ -2,7 +2,8 @@
 
 @-moz-document url("about:addons") {
 	
-	#addons-page.inSidebar:not(.glassStyle) {
+	#addons-page.inSidebar:not(.glassStyle),
+	#addons-page.inSidebar:not(.glassStyle) :-moz-any(#nav-header,#categories) {
 		background: none !important;
 	}
 

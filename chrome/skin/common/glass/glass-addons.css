@@ -1,6 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("about:addons") {
 	
+	.inSidebar[omnisidebar-FF40] #nav-header,
+	.inSidebar[omnisidebar-FF40] #categories {
+		background: transparent !important;
+	}
+	
 	.inSidebar #categories richlistitem[selected="true"] {
 		border-color: rgb(174,183,196) !important;
 		background-color: rgba(255,255,255,0.57) !important;
