@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.1';
+Modules.VERSION = '1.2.2';
 
 this.setTransparency = function() {
 	var alpha = Prefs.transparency /1000;
@@ -22,6 +22,7 @@ Modules.LOADMODULE = function() {
 	Styles.load('glassStyle', 'glass/glass');
 	Styles.load('glassStyleFF', 'glass/glass-ff5');
 	Styles.load('glassStyleGeneral', 'glass/glass-general');
+	Styles.load('glassStyleScrollbars', 'glass/glass-scrollbars', false, 'agent');
 	Styles.load('glassStyleNative', 'glass/glass-nativeSidebars');
 	Styles.load('glassStyleFeed', 'glass/glass-feedbar');
 	Styles.load('glassStyleUpdScanner', 'glass/glass-updscanner');
@@ -44,6 +45,7 @@ Modules.UNLOADMODULE = function() {
 	Styles.unload('glassStyle');
 	Styles.unload('glassStyleFF');
 	Styles.unload('glassStyleGeneral');
+	Styles.unload('glassStyleScrollbars');
 	Styles.unload('glassStyleNative');
 	Styles.unload('glassStyleFeed');
 	Styles.unload('glassStyleUpdScanner');
