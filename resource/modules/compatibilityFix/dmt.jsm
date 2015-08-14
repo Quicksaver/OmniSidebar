@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.dmgrPlaces = {
 	broadcasterId: objName+'-viewDmgrPlacesSidebar',
@@ -32,7 +32,7 @@ this.dmgrPlaces = {
 	
 	toggleAlways: function(enable) {
 		if(enable) {
-			Piggyback.add('dmt', window, 'BrowserDownloadsUI', function() { SidebarUI.toggle(this.broadcaster); });
+			Piggyback.add('dmt', window, 'BrowserDownloadsUI', () => { SidebarUI.toggle(this.broadcaster); });
 		} else {
 			Piggyback.revert('dmt', window, 'BrowserDownloadsUI');
 		}
