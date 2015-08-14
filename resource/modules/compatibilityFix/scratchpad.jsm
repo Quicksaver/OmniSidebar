@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+Modules.VERSION = '2.0.1';
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -57,6 +57,20 @@ this.scratchpad = {
 						});
 					}
 				}
+				break;
+			
+			case 'willCloseSidebar':
+				try {
+					if(e.detail.bar.state.command == this.broadcasterId
+					&& e.detail.bar.sidebar.contentDocument
+					&& e.detail.focusedNode.ownerDocument == e.detail.bar.sidebar.contentDocument.getElementById('scratchpad-editor').firstChild.contentDocument) {
+						e.preventDefault();
+						e.stopPropagation();
+						return false;
+					}
+				}
+				// the above should always follow through, I'm just preventing anything going wrong with the DOM queries, in case anything changes in scratchpad
+				catch(ex) { Cu.reportError(ex); }
 				break;
 			
 			case 'close':
@@ -247,6 +261,7 @@ Modules.LOADMODULE = function() {
 	scratchpad.toggleAlways(Prefs.alwaysScratchpad);
 	
 	Listeners.add(window, 'beginToggleSidebar', scratchpad, true);
+	Listeners.add(window, 'willCloseSidebar', scratchpad, true);
 	Listeners.add(window, 'SidebarFocusedSync', scratchpad);
 	Listeners.add(window, 'close', scratchpad, true);
 	Listeners.add(window, objName+'-disabled', scratchpad);
@@ -255,6 +270,7 @@ Modules.LOADMODULE = function() {
 
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'beginToggleSidebar', scratchpad, true);
+	Listeners.remove(window, 'willCloseSidebar', scratchpad, true);
 	Listeners.remove(window, 'SidebarFocusedSync', scratchpad);
 	Listeners.remove(window, 'close', scratchpad, true);
 	Listeners.remove(window, objName+'-disabled', scratchpad);
