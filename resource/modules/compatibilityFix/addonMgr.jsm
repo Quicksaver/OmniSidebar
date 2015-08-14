@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.addonMgr = {
 	broadcasterId: objName+'-viewAddonSidebar',
@@ -19,6 +19,12 @@ this.addonMgr = {
 					let header = doc.getElementById('header');
 					setAttribute(header, 'flex', '1');
 					navHeader.appendChild(header);
+					
+					// "Install Add-on From File" routine expects to be passed the current tab's browser,
+					// it won't work if this method passes the sidebar browser
+					Piggyback.add('addonMgr', doc.defaultView, 'getBrowserElement', function() {
+						return window.gBrowser.mCurrentBrowser;
+					});
 				}
 				break;
 		}
