@@ -1,6 +1,14 @@
 {
-	"current":"1.6.2",
+	"current":"1.6.3",
 	"releases": {
+		"1.6.3":{
+			"date":"August 21, 2015",
+			"notes":[
+				["bugfix","\"Install Add-on From File\" wouldn't work from the Add-ons sidebar"],
+				["bugfix","With \"Always open Downloads in the sidebar\" enabled, Ctrl+J would toggle the last opened sidebar instead"],
+				["bugfix","Scratchpad wouldn't open in the sidebar if \"Close/Hide the sidebar when it loses focus\" was enabled"]
+			]
+		},
 		"1.6.2":{
 			"date":"August 9, 2015",
 			"notes":[
