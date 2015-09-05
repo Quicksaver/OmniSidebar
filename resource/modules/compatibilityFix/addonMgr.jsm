@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.addonMgr = {
 	broadcasterId: objName+'-viewAddonSidebar',
@@ -11,8 +11,6 @@ this.addonMgr = {
 				&& e.target.document
 				&& e.target.document.baseURI == 'about:addons') {
 					let doc = e.target.document;
-					// for the stylesheet, to differentiate from the previous style, this will be gone soon
-					setAttribute(doc.documentElement, objName+'-FF40', 'true');
 					
 					// move the header back to the top of the sidebar
 					let navHeader = doc.getElementById('nav-header');
@@ -90,15 +88,11 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('alwaysAddons', addonMgr);
 	addonMgr.toggleAlways(Prefs.alwaysAddons);
 	
-	if(Services.vc.compare(Services.appinfo.version, "40.0a1") >= 0) {
-		Listeners.add(window, 'SidebarFocusedSync', addonMgr);
-	}
+	Listeners.add(window, 'SidebarFocusedSync', addonMgr);
 };
 
 Modules.UNLOADMODULE = function() {
-	if(Services.vc.compare(Services.appinfo.version, "40.0a1") >= 0) {
-		Listeners.remove(window, 'SidebarFocusedSync', addonMgr);
-	}
+	Listeners.remove(window, 'SidebarFocusedSync', addonMgr);
 	
 	Prefs.unlisten('alwaysAddons', addonMgr);
 	addonMgr.toggleAlways(false);

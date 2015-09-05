@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.__defineGetter__('PanelUI', function() { return window.PanelUI; });
 
@@ -180,9 +180,9 @@ this.panel = {
 			bar.stack.style.height = bar.stack.clientHeight+'px';
 			bar.stack.style.width = bar.stack.clientWidth+'px';
 			
-			if(WINNT && Services.navigator.oscpu.contains('6.')) {
+			if(WINNT && Services.navigator.oscpu.includes('6.')) {
 				var color = getComputedStyle(miniPanel).backgroundColor;
-				var padding = (Services.navigator.oscpu.contains('6.2')) ? 3 : 5;
+				var padding = (Services.navigator.oscpu.includes('6.2')) ? 3 : 5;
 				bar.toolbar.style.backgroundColor = color;
 				bar.toolbar.style.paddingBottom = padding+'px';
 				toolbarSeparator.style.marginTop = '-'+(padding -1)+'px';
@@ -226,7 +226,7 @@ this.panel = {
 			bar.stack.style.height = '';
 			bar.stack.style.width = '';
 			
-			if(WINNT && Services.navigator.oscpu.contains('6.')) {
+			if(WINNT && Services.navigator.oscpu.includes('6.')) {
 				bar.toolbar.style.backgroundColor = '';
 				bar.toolbar.style.paddingBottom = '';
 				toolbarSeparator.style.marginTop = '';

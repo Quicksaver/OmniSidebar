@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.2';
+Modules.VERSION = '2.0.3';
 
 this.menus = {
 	get viewSidebarMenu () { return $('viewSidebarMenu'); },
@@ -166,7 +166,7 @@ this.menus = {
 			if(!child.getAttribute('observes')) {
 				child.hidden = !SocialSidebar.canShow;
 				if(child.getAttribute('origin')) {
-					if(child.getAttribute('oncommand').contains('show')) {
+					if(child.getAttribute('oncommand').includes('show')) {
 						var command = ((!UNLOADED) ? objName+'.Social.placeSidebar(this); ' : '')+"SocialSidebar.show(this.getAttribute('origin'));";
 						setAttribute(child, 'oncommand', command);
 					} else {

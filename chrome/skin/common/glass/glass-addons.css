@@ -1,8 +1,8 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("about:addons") {
 	
-	.inSidebar[omnisidebar-FF40] #nav-header,
-	.inSidebar[omnisidebar-FF40] #categories {
+	.inSidebar #nav-header,
+	.inSidebar #categories {
 		background: transparent !important;
 	}
 	
