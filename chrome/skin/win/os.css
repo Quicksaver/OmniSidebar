@@ -1,56 +1,53 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
-	
-	/* Bugfix: windows theme replaces sidebar header look when using lwthemes */
-	.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
-		background-color: -moz-dialog;
-		-moz-appearance: toolbox;
-		border-top-style: solid;
-		border-bottom-style: solid;
-		color: -moz-dialogtext;
-		text-shadow: none;
-	}
-	@media not all and (-moz-windows-classic) {
-		@media	(-moz-windows-default-theme) {
-			.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
-				-moz-appearance: none;
-				background-color: #EEF3FA;
-				border-bottom: none;
-			}
-		}
-	}
-	
-	@media	(-moz-os-version: windows-xp) {
-		.sidebar-title[TitleButton]:hover,
-		.sidebar-title[TitleButton][active] {
-			padding-top: 2px;
-		}
-	}
-	
-	/* I'm not sure if this one is correct here, I'm just copying from firefox source */
-	@media (-moz-windows-theme: luna-silver) {
-		#omnisidebar-button:not([movetoright]),
-		#omnisidebar-button-twin[movetoleft] {
-			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-lunaSilver.png");
-		}
-		
-		#omnisidebar-button[movetoright],
-		#omnisidebar-button-twin:not([movetoleft]) {
-			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-lunaSilver.png");
-		}
-		
-		.osb-custom-button,
-		.omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"],
-		.omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]) {
-			list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-lunaSilver.png");
-		}
-	}
-	
-	#nav-bar #nav-bar-customization-target .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
-	
-	/* fix the look of the arrowscrollbuttons a little */
-	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
-		padding: 0 2px 5px 2px;
-	}
 
+/* Bugfix: windows theme replaces sidebar header look when using lwthemes */
+.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
+	background-color: -moz-dialog;
+	-moz-appearance: toolbox;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	color: -moz-dialogtext;
+	text-shadow: none;
+}
+@media not all and (-moz-windows-classic) {
+	@media	(-moz-windows-default-theme) {
+		.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
+			-moz-appearance: none;
+			background-color: #EEF3FA;
+			border-bottom: none;
+		}
+	}
+}
+
+@media	(-moz-os-version: windows-xp) {
+	.sidebar-title[TitleButton]:hover,
+	.sidebar-title[TitleButton][active] {
+		padding-top: 2px;
+	}
+}
+
+/* I'm not sure if this one is correct here, I'm just copying from firefox source */
+@media (-moz-windows-theme: luna-silver) {
+	#omnisidebar-button:not([movetoright]),
+	#omnisidebar-button-twin[movetoleft] {
+		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-lunaSilver.png");
+	}
+	
+	#omnisidebar-button[movetoright],
+	#omnisidebar-button-twin:not([movetoleft]) {
+		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-lunaSilver.png");
+	}
+	
+	.osb-custom-button,
+	.omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"],
+	.omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]) {
+		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-lunaSilver.png");
+	}
+}
+
+#nav-bar #nav-bar-customization-target .osb-adequate-size > .toolbarbutton-icon { padding: 2px 6px; }
+
+/* fix the look of the arrowscrollbuttons a little */
+#omnisidebar-panelView-toolbarContainer autorepeatbutton {
+	padding: 0 2px 5px 2px;
 }

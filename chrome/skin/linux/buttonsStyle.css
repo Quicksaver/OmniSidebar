@@ -1,95 +1,92 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* Alternate toolbar buttons style */
-	/* NavBar button effect, copied from http://mxr.mozilla.org/mozilla-central/source/browser/themes/windows/browser.css */
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 {
-		-moz-appearance: none;
-		background: none;
-		border: none;
-		box-shadow: none;
-		padding: 3px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open="true"],
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:hover:active {
-		padding: 3px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-badge-container > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
-		-moz-margin-end: 0;
-		padding: 2px 6px;
-		border: 1px solid transparent;
-		border-radius: 2px;
-		transition-property: background-color, border-color;
-		transition-duration: 150ms;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
-		/* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
-		width: 32px !important;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-badge-container > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-icon {
-		background-color: hsla(0,0%,100%,.3);
-		background-image: linear-gradient(hsla(0,0%,100%,.7), hsla(0,0%,100%,.2));
-		border: 1px solid rgb(154,154,154);
-		box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset, 0 0 0 1px hsla(0,0%,100%,.2) inset, 0 1px 0 hsla(0,0%,0%,.03);
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:hover > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
-		margin-top: 4px;
-		margin-bottom: 4px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled=true]):hover:active > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open="true"] > .toolbarbutton-menubutton-dropmarker:not([disabled=true]) > .dropmarker-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon {
-		background-color: rgba(154,154,154,.5);
-		background-image: linear-gradient(hsla(0,0%,100%,.7), hsla(0,0%,100%,.4));
-		border: 1px solid rgb(154,154,154);
-		box-shadow: 0 1px 1px hsla(0,0%,0%,.1) inset, 0 0 1px hsla(0,0%,0%,.3) inset;
-		transition-duration: 10ms;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[checked]:not(:active):hover > .toolbarbutton-icon {
-		background-color: rgba(90%,90%,90%,.4);
-		transition: background-color 150ms;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:hover:active,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:hover:active {
-		padding: 3px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not(:hover):not(:active):not([open]) > .toolbarbutton-menubutton-dropmarker::before {
-		content: "";
-		display: -moz-box;
-		width: 1px;
-		height: 18px;
-		-moz-margin-end: -1px;
-		background-image: linear-gradient(hsla(210,54%,20%,.2) 0, hsla(210,54%,20%,.2) 18px);
-		background-clip: padding-box;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: 1px 18px;
-		box-shadow: 0 0 0 1px hsla(0,0%,100%,.2);
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		-moz-margin-start: -4px;
-		margin-top: 3px;
-		margin-bottom: 3px;
-	}
+/* Alternate toolbar buttons style */
+/* NavBar button effect, copied from http://mxr.mozilla.org/mozilla-central/source/browser/themes/windows/browser.css */
 
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 {
+	-moz-appearance: none;
+	background: none;
+	border: none;
+	box-shadow: none;
+	padding: 3px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open="true"],
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:hover:active {
+	padding: 3px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-badge-container > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon {
+	-moz-margin-end: 0;
+	padding: 2px 6px;
+	border: 1px solid transparent;
+	border-radius: 2px;
+	transition-property: background-color, border-color;
+	transition-duration: 150ms;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
+	/* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
+	width: 32px !important;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-badge-container > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):hover > .toolbarbutton-icon {
+	background-color: hsla(0,0%,100%,.3);
+	background-image: linear-gradient(hsla(0,0%,100%,.7), hsla(0,0%,100%,.2));
+	border: 1px solid rgb(154,154,154);
+	box-shadow: 0 1px 0 hsla(0,0%,100%,.3) inset, 0 0 0 1px hsla(0,0%,100%,.2) inset, 0 1px 0 hsla(0,0%,0%,.03);
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:hover > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled=true]):hover:active > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open="true"] > .toolbarbutton-menubutton-dropmarker:not([disabled=true]) > .dropmarker-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon {
+	background-color: rgba(154,154,154,.5);
+	background-image: linear-gradient(hsla(0,0%,100%,.7), hsla(0,0%,100%,.4));
+	border: 1px solid rgb(154,154,154);
+	box-shadow: 0 1px 1px hsla(0,0%,0%,.1) inset, 0 0 1px hsla(0,0%,0%,.3) inset;
+	transition-duration: 10ms;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[checked]:not(:active):hover > .toolbarbutton-icon {
+	background-color: rgba(90%,90%,90%,.4);
+	transition: background-color 150ms;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:hover:active,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:hover:active {
+	padding: 3px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not(:hover):not(:active):not([open]) > .toolbarbutton-menubutton-dropmarker::before {
+	content: "";
+	display: -moz-box;
+	width: 1px;
+	height: 18px;
+	-moz-margin-end: -1px;
+	background-image: linear-gradient(hsla(210,54%,20%,.2) 0, hsla(210,54%,20%,.2) 18px);
+	background-clip: padding-box;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 1px 18px;
+	box-shadow: 0 0 0 1px hsla(0,0%,100%,.2);
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	-moz-margin-start: -4px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }

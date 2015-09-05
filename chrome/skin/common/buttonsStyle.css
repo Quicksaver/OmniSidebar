@@ -1,79 +1,76 @@
 @import url("chrome://omnisidebar-os/skin/buttonsStyle.css");
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* Legacy alternate toolbar buttons for the glass style, applied to all OS's when glassStyle is enabled */
-	
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
-		-moz-appearance: none;
-		opacity: 1;
-		background-clip: padding-box;
-	  	color: black;
-	 	text-shadow: 0 0 2px white;
-	}
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 {
-		margin: 1px 3px;
-	}
+/* Legacy alternate toolbar buttons for the glass style, applied to all OS's when glassStyle is enabled */
 
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]),
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		border: 1px solid;
-		border-color: rgba(0,0,0,.12) rgba(0,0,0,.19) rgba(0,0,0,.38);
-		padding: 1px 5px;
-		box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset;
-		background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0%;
-	}
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]) {
-		border-radius: 3.5px;
-	}
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
-		-moz-border-end: none;
-		border-radius: 3.5px 0 0 3.5px;
-	}
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menu-dropmarker,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		-moz-border-start: none;
-		border-radius: 0 3.5px 3.5px 0;
-		background-position: 10px;
-		-moz-padding-start: 3px;
-	}
-	
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[disabled="true"] {
-		opacity: .8;
-	}
-	
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[disabled="true"] > .toolbarbutton-icon {
-		opacity: .5;
-	}
-	
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
-		background-color: hsla(190,60%,70%,.5);
-		border-color: hsla(190,50%,65%,.8) hsla(190,50%,50%,.8) hsla(190,50%,40%,.8);
-		box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 0 0 1.5px rgba(255,255,255,.1) inset, 0 0 3.5px hsl(190,90%,80%);
-		transition: background-color .4s ease-in, border-color .3s ease-in, box-shadow .3s ease-in;
-	}
-	
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[open="true"] > .toolbarbutton-menubutton-dropmarker,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):hover:active,
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"])[checked="true"],
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[open="true"] {
-		background-color: transparent;
-		border-color: rgba(0,0,0,.65) rgba(0,0,0,.55) rgba(0,0,0,.5);
-		box-shadow: 0 0 6.5px rgba(0,0,0,.4) inset, 0 0 2px rgba(0,0,0,.4) inset,  0 1px 0 rgba(200,200,200,.4);
-		text-shadow: none;
-	}
-	
-	.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[checked="true"]:not(:active):hover {
-		background-color: rgba(90%,90%,90%,.4);
-		transition: background-color .4s;
-	}
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+	-moz-appearance: none;
+	opacity: 1;
+	background-clip: padding-box;
+  	color: black;
+ 	text-shadow: 0 0 2px white;
+}
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 {
+	margin: 1px 3px;
+}
 
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]),
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	border: 1px solid;
+	border-color: rgba(0,0,0,.12) rgba(0,0,0,.19) rgba(0,0,0,.38);
+	padding: 1px 5px;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0 0 2px rgba(255, 255, 255, 0.1) inset;
+	background: rgba(151, 152, 153, 0.05) linear-gradient(rgba(251, 252, 253, 0.95), rgba(246, 247, 248, 0.47) 49%, rgba(231, 232, 233, 0.45) 51%, rgba(225, 226, 229, 0.3)) repeat scroll 0% 0%;
+}
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]) {
+	border-radius: 3.5px;
+}
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+	-moz-border-end: none;
+	border-radius: 3.5px 0 0 3.5px;
+}
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menu-dropmarker,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	-moz-border-start: none;
+	border-radius: 0 3.5px 3.5px 0;
+	background-position: 10px;
+	-moz-padding-start: 3px;
+}
+
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[disabled="true"] {
+	opacity: .8;
+}
+
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[disabled="true"] > .toolbarbutton-icon {
+	opacity: .5;
+}
+
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
+	background-color: hsla(190,60%,70%,.5);
+	border-color: hsla(190,50%,65%,.8) hsla(190,50%,50%,.8) hsla(190,50%,40%,.8);
+	box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 0 0 1.5px rgba(255,255,255,.1) inset, 0 0 3.5px hsl(190,90%,80%);
+	transition: background-color .4s ease-in, border-color .3s ease-in, box-shadow .3s ease-in;
+}
+
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"]):not([disabled="true"]):hover:active,
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1:not([type="menu-button"])[checked="true"],
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[open="true"] {
+	background-color: transparent;
+	border-color: rgba(0,0,0,.65) rgba(0,0,0,.55) rgba(0,0,0,.5);
+	box-shadow: 0 0 6.5px rgba(0,0,0,.4) inset, 0 0 2px rgba(0,0,0,.4) inset,  0 1px 0 rgba(200,200,200,.4);
+	text-shadow: none;
+}
+
+.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1[checked="true"]:not(:active):hover {
+	background-color: rgba(90%,90%,90%,.4);
+	transition: background-color .4s;
 }

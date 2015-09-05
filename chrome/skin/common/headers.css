@@ -1,116 +1,113 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* Headers */
-	
-	.omnisidebar-toolbar { 
-		-moz-appearance: none;
-		border: none;
-		padding: 1px 3px;
-	}
-	
-	window[sizemode="fullscreen"] .omnisidebar-toolbar[moz-collapsed="true"]:not([collapsed="true"]) { 
-		visibility: visible; 
-	}
-	
-	/* the close button was re-styled, we have to apply the same style to the twin's close button */
-	.sidebar-header > .close-icon {
-		-moz-appearance: none;
-		padding: 4px 2px;
-		margin: 0;
-		border: none;
-	}
-	
-	/* Australis showed these, at least for a while. We don't really want these, ever */
-	.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-text {
-		display: none;
-	}
-	
-	.sidebar-header {
-		max-height: none !important;
-		padding: 0;
-		overflow: hidden;
-	}
-	
-	.sidebar-box[noclose] .sidebar-header {
-		-moz-padding-end: 3px;
-	}
-	
-	/* Hide a bunch of stuff */
-	#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
-	#omnisidebar-sidebar-throbber-twin,
-	.sidebar-box[notitle] .sidebar-title,
-	.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon,
-	.sidebar-box:not([notitle]) .header-spacer {
-		display: none !important;
-	}
-	
-	.sidebar-box[notitle] .header-spacer {
-		display: -moz-box;
-	}
-	
-	.sidebar-box .sidebar-title {
-		text-align: center;
-		padding: 0;
-		margin: 1px 3px;
-	}
-	
-	.sidebar-box .stackSidebar {
-		display: -moz-box;
-	}
-	
-	/* trick to hide the header when it's empty, without screwing up the undocked layout: https://github.com/Quicksaver/OmniSidebar/issues/70 */
-	.sidebar-box[noHeader] .sidebar-header { visibility: collapse; }
-	.sidebar-box[noHeader][renderabove] .sidebar-header { position: absolute; }
-	
-	/* customize dialog */
-	
-	#omnisidebar-toolbarCustomizeWrapper {
-		margin: 15px;
-		display: flex;
-	}
-	
-	#omnisidebar-toolbarCustomizeWrapper > :not(label) { flex: 3 3 auto; }
-	#omnisidebar-toolbarCustomizeWrapper > label { flex: 1 1 auto; }
-	
-	#omnisidebar-toolbarCustomizeWrapper .stackSidebar {
-		border: 1px solid rgba(0,0,0,.3);
-		box-shadow: 0 0 4px rgba(0,0,0,.3);
-		background: rgba(250, 250, 250, 0.8);
-		width: 100%;
-	}
-	
-  	#omnisidebar-toolbarCustomizeWrapper .stackSidebar > label {
-		margin: 5px 15px;
-		color: #777;
-	}
-	#omnisidebar-toolbarCustomizeWrapper .stackSidebar:-moz-locale-dir(ltr) > label { text-align: right; }
-	#omnisidebar-toolbarCustomizeWrapper .stackSidebar:-moz-locale-dir(rtl) > label { text-align: left; }
-	
-	window:not([customizing="true"]) .stackSidebar > label {
-		visibility: collapse;
-	}
-	
-	/* sometimes the buttons would still be visible, and the toolbar would still have a small dropable area,
-	this is probably because of a freak combination of display:flex and visibility:collapse */
-	#omnisidebar-toolbarCustomizeWrapper[collapsed="true"] {
-		opacity: 0;
-		pointer-events: none;
-	}
-	
-	/* Tricks needed */
-	.sidebar-header,
-	.sidebar-browser,
-	.omnisidebar-toolbar {
-		width: 100%;
-		max-width: none;
-		min-width: 0;
-		height: 100% !important;
-	}
-	
-	.sidebar-browser { background-color: window; }
-	
-	.sidebar-header { min-height: 29px; } /* trying to keep it from jumping around when customizing the toolbar or toying with the other options */
-	.omnisidebar-toolbar { min-height: 28px; }
-	
+/* Headers */
+
+.omnisidebar-toolbar { 
+	-moz-appearance: none;
+	border: none;
+	padding: 1px 3px;
 }
+
+window[sizemode="fullscreen"] .omnisidebar-toolbar[moz-collapsed="true"]:not([collapsed="true"]) { 
+	visibility: visible; 
+}
+
+/* the close button was re-styled, we have to apply the same style to the twin's close button */
+.sidebar-header > .close-icon {
+	-moz-appearance: none;
+	padding: 4px 2px;
+	margin: 0;
+	border: none;
+}
+
+/* Australis showed these, at least for a while. We don't really want these, ever */
+.omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-text {
+	display: none;
+}
+
+.sidebar-header {
+	max-height: none !important;
+	padding: 0;
+	overflow: hidden;
+}
+
+.sidebar-box[noclose] .sidebar-header {
+	-moz-padding-end: 3px;
+}
+
+/* Hide a bunch of stuff */
+#sidebar-throbber, /* I still don't know why this exists, but I added one to the twin as well since I ended up using it as a xul reference point in overlays */
+#omnisidebar-sidebar-throbber-twin,
+.sidebar-box[notitle] .sidebar-title,
+.sidebar-box[noclose] .sidebar-header > toolbarbutton.close-icon,
+.sidebar-box:not([notitle]) .header-spacer {
+	display: none !important;
+}
+
+.sidebar-box[notitle] .header-spacer {
+	display: -moz-box;
+}
+
+.sidebar-box .sidebar-title {
+	text-align: center;
+	padding: 0;
+	margin: 1px 3px;
+}
+
+.sidebar-box .stackSidebar {
+	display: -moz-box;
+}
+
+/* trick to hide the header when it's empty, without screwing up the undocked layout: https://github.com/Quicksaver/OmniSidebar/issues/70 */
+.sidebar-box[noHeader] .sidebar-header { visibility: collapse; }
+.sidebar-box[noHeader][renderabove] .sidebar-header { position: absolute; }
+
+/* customize dialog */
+
+#omnisidebar-toolbarCustomizeWrapper {
+	margin: 15px;
+	display: flex;
+}
+
+#omnisidebar-toolbarCustomizeWrapper > :not(label) { flex: 3 3 auto; }
+#omnisidebar-toolbarCustomizeWrapper > label { flex: 1 1 auto; }
+
+#omnisidebar-toolbarCustomizeWrapper .stackSidebar {
+	border: 1px solid rgba(0,0,0,.3);
+	box-shadow: 0 0 4px rgba(0,0,0,.3);
+	background: rgba(250, 250, 250, 0.8);
+	width: 100%;
+}
+
+#omnisidebar-toolbarCustomizeWrapper .stackSidebar > label {
+	margin: 5px 15px;
+	color: #777;
+}
+#omnisidebar-toolbarCustomizeWrapper .stackSidebar:-moz-locale-dir(ltr) > label { text-align: right; }
+#omnisidebar-toolbarCustomizeWrapper .stackSidebar:-moz-locale-dir(rtl) > label { text-align: left; }
+
+window:not([customizing="true"]) .stackSidebar > label {
+	visibility: collapse;
+}
+
+/* sometimes the buttons would still be visible, and the toolbar would still have a small dropable area,
+this is probably because of a freak combination of display:flex and visibility:collapse */
+#omnisidebar-toolbarCustomizeWrapper[collapsed="true"] {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Tricks needed */
+.sidebar-header,
+.sidebar-browser,
+.omnisidebar-toolbar {
+	width: 100%;
+	max-width: none;
+	min-width: 0;
+	height: 100% !important;
+}
+
+.sidebar-browser { background-color: window; }
+
+.sidebar-header { min-height: 29px; } /* trying to keep it from jumping around when customizing the toolbar or toying with the other options */
+.omnisidebar-toolbar { min-height: 28px; }

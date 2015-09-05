@@ -1,41 +1,38 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
-	
-	.sidebar-title[TitleButton]:hover,
-	.sidebar-title[TitleButton][active] {
-		-moz-appearance: menulist;
-	}
-	
-	.sidebar-title,
-	.sidebar-title:hover,
-	.sidebar-title[active] {
-		border: 3px solid rgba(0,0,0,0);
-	}
-	
-	/* menu items have a maximum width set apparently,
-	see https://github.com/Quicksaver/OmniSidebar/issues/66 */
-	#omnisidebar-openSidebarMenu > *,
-	#omnisidebar-openTwinSidebarMenu > * { 
-		width: auto;
-		max-width: none;
-	}
-	
-	/* toolbarbuttons in panels only have a :hover state, we need our own state for keyboard navigation */
-	.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover):focus {
-		background-color: hsla(210,4%,10%,.08);
-		border-color: hsla(210,4%,10%,.11);
-	}
-	
-	/* don't show hover style in the arrow buttons of the panelview */
-	#omnisidebar-panelView-toolbarContainer autorepeatbutton {
-		border: none;
-		background: none;
-		box-shadow: none;
-		margin: 2px;
-	}
-	
-	#omnisidebar-panelView-toolbarContainer autorepeatbutton[disabled="true"] {
-		opacity: 0;
-	}
-	
+
+.sidebar-title[TitleButton]:hover,
+.sidebar-title[TitleButton][active] {
+	-moz-appearance: menulist;
+}
+
+.sidebar-title,
+.sidebar-title:hover,
+.sidebar-title[active] {
+	border: 3px solid rgba(0,0,0,0);
+}
+
+/* menu items have a maximum width set apparently,
+see https://github.com/Quicksaver/OmniSidebar/issues/66 */
+#omnisidebar-openSidebarMenu > *,
+#omnisidebar-openTwinSidebarMenu > * { 
+	width: auto;
+	max-width: none;
+}
+
+/* toolbarbuttons in panels only have a :hover state, we need our own state for keyboard navigation */
+.omnisidebar-panel toolbarbutton.subviewbutton:not([disabled]):not([open]):not(:active):not(:hover):focus {
+	background-color: hsla(210,4%,10%,.08);
+	border-color: hsla(210,4%,10%,.11);
+}
+
+/* don't show hover style in the arrow buttons of the panelview */
+#omnisidebar-panelView-toolbarContainer autorepeatbutton {
+	border: none;
+	background: none;
+	box-shadow: none;
+	margin: 2px;
+}
+
+#omnisidebar-panelView-toolbarContainer autorepeatbutton[disabled="true"] {
+	opacity: 0;
 }

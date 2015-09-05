@@ -1,25 +1,22 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
-	
-	@media (min-resolution: 2dppx) {
-		
-		:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button:not([movetoright]):-moz-lwtheme-brighttext,
-		:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin[movetoleft]:-moz-lwtheme-brighttext {
-			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
-		}
-		
-		:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button[movetoright]:-moz-lwtheme-brighttext,
-		:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin:not([movetoleft]):-moz-lwtheme-brighttext {
-			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
-		}
-		
-		:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) .osb-custom-button:-moz-lwtheme-brighttext {
-			list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
-		}
-		
-		:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) .osb-replace-button:-moz-lwtheme-brighttext {
-			list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
-		}
-	}
 
+@media (min-resolution: 2dppx) {
+	
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button:not([movetoright]):-moz-lwtheme-brighttext,
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin[movetoleft]:-moz-lwtheme-brighttext {
+		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
+	}
+	
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button[movetoright]:-moz-lwtheme-brighttext,
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) #omnisidebar-button-twin:not([movetoleft]):-moz-lwtheme-brighttext {
+		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
+	}
+	
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) .osb-custom-button:-moz-lwtheme-brighttext {
+		list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
+	}
+	
+	:-moz-any(#navigator-toolbox, #browser-bottombox, .sidebar-box[glassStyle]) .osb-replace-button:-moz-lwtheme-brighttext {
+		list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
+	}
 }

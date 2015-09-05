@@ -1,219 +1,216 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/browser.xul") {
 
-	/* Alternate toolbar buttons style */
-	/* NavBar button effect, copied from http://mxr.mozilla.org/mozilla-central/source/browser/themes/windows/browser.css */
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
-		-moz-appearance: none;
-		border: none;
-		padding: 0;
-		background: none;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([type=menu-button]),
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		padding: 1px 2px;
-		-moz-box-pack: center;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[type=menu] {
-		padding-left: 5px;
-		padding-right: 5px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > menupopup {
-		margin-top: -3px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > menupopup.cui-widget-panel {
-		margin-top: -8px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
-		-moz-padding-end: 0;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
-		-moz-padding-start: 0;
-		-moz-box-align: center;
-	}
+/* Alternate toolbar buttons style */
+/* NavBar button effect, copied from http://mxr.mozilla.org/mozilla-central/source/browser/themes/windows/browser.css */
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+	-moz-appearance: none;
+	border: none;
+	padding: 0;
+	background: none;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([type=menu-button]),
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	padding: 1px 2px;
+	-moz-box-pack: center;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[type=menu] {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > menupopup {
+	margin-top: -3px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > menupopup.cui-widget-panel {
+	margin-top: -8px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button {
+	-moz-padding-end: 0;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker {
+	-moz-padding-start: 0;
+	-moz-box-align: center;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-text,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-badge-container,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+	padding: 2px 6px;
+	border: 1px solid;
+	border-color: transparent;
+	transition-property: background-color, border-color;
+	transition-duration: 150ms;
+}
+
+@media	(-moz-os-version: windows-xp),
+	(-moz-os-version: windows-vista),
+	(-moz-os-version: windows-win7) {
 	
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon,
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-text,
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-badge-container,
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
-		padding: 2px 6px;
-		border: 1px solid;
-		border-color: transparent;
-		transition-property: background-color, border-color;
+		background-color: hsla(210,32%,93%,0);
+		background-origin: padding-box;
+		border-radius: 2px;
+		border-color: hsla(210,54%,20%,0) hsla(210,54%,20%,0) hsla(210,54%,20%,0);
+		box-shadow: 0 1px hsla(0,0%,100%,0) inset, 0 1px hsla(210,54%,20%,0), 0 0 2px hsla(210,54%,20%,0);
+		transition-property: background-color, border-color, box-shadow;
 		transition-duration: 150ms;
 	}
-	
-	@media	(-moz-os-version: windows-xp),
-		(-moz-os-version: windows-vista),
-		(-moz-os-version: windows-win7) {
-		
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-text,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-badge-container,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
-			background-color: hsla(210,32%,93%,0);
-			background-origin: padding-box;
-			border-radius: 2px;
-			border-color: hsla(210,54%,20%,0) hsla(210,54%,20%,0) hsla(210,54%,20%,0);
-			box-shadow: 0 1px hsla(0,0%,100%,0) inset, 0 1px hsla(210,54%,20%,0), 0 0 2px hsla(210,54%,20%,0);
-			transition-property: background-color, border-color, box-shadow;
-			transition-duration: 150ms;
-		}
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
-		/* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
-		width: 32px !important;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[type=menu] > .toolbarbutton-icon,
-	/* hack for add-ons that forcefully display the label */
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[type=menu] > .toolbarbutton-text {
-		-moz-padding-end: 17px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menu-dropmarker {
-		-moz-margin-start: -15px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
-		-moz-border-end: none !important;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
-		padding: 8px 5px 7px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons {
-		margin-left: 2px;
-		margin-right: 2px;
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons > .toolbarbutton-1 {
-		padding-left: 0;
-		padding-right: 0;
-	}
-	
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
+	/* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
+	width: 32px !important;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[type=menu] > .toolbarbutton-icon,
+/* hack for add-ons that forcefully display the label */
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[type=menu] > .toolbarbutton-text {
+	-moz-padding-end: 17px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menu-dropmarker {
+	-moz-margin-start: -15px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon {
+	-moz-border-end: none !important;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+	padding: 8px 5px 7px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons > .toolbarbutton-1 {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not(:hover):not(:active):not([open]) > .toolbarbutton-menubutton-dropmarker::before,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons > .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled=true]) + .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled=true])::before {
+	content: "";
+	display: -moz-box;
+	width: 1px;
+	height: 16px;
+	-moz-margin-end: -1px;
+	background-image: linear-gradient(hsla(210,54%,20%,.2) 0, hsla(210,54%,20%,.2) 16px);
+	background-clip: padding-box;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 1px 16px;
+}
+
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-container,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([buttonover]):not([open]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon {
+	background-color: hsla(210,4%,10%,.08);
+	border-color: hsla(210,4%,10%,.1);
+}
+
+@media	(-moz-os-version: windows-xp),
+	(-moz-os-version: windows-vista),
+	(-moz-os-version: windows-win7) {
+
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not(:hover):not(:active):not([open]) > .toolbarbutton-menubutton-dropmarker::before,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons > .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled=true]) + .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled=true])::before {
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons > .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled]) + .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled])::before {
 		content: "";
 		display: -moz-box;
 		width: 1px;
-		height: 16px;
+		height: 18px;
 		-moz-margin-end: -1px;
-		background-image: linear-gradient(hsla(210,54%,20%,.2) 0, hsla(210,54%,20%,.2) 16px);
+		background-image: linear-gradient(hsla(210,54%,20%,.2) 0, hsla(210,54%,20%,.2) 18px);
 		background-clip: padding-box;
 		background-position: center;
 		background-repeat: no-repeat;
-		background-size: 1px 16px;
+		background-size: 1px 18px;
+		box-shadow: 0 0 0 1px hsla(0,0%,100%,.2);
 	}
 	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-container,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon:-moz-locale-dir(ltr),
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon:-moz-locale-dir(rtl) {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon:-moz-locale-dir(rtl),
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon:-moz-locale-dir(ltr) {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+	
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):hover > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-container {
+		background-image: linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
+		background-color: transparent;
+		border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.2) hsla(210,54%,20%,.25);
+		box-shadow: 0 1px hsla(0,0%,100%,.3) inset, 0 1px hsla(210,54%,20%,.03), 0 0 2px hsla(210,54%,20%,.1);
+	}
+	
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):not([open]):not(:active):hover > .toolbarbutton-icon,
 	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([buttonover]):not([open]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon {
-		background-color: hsla(210,4%,10%,.08);
-		border-color: hsla(210,4%,10%,.1);
+		border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
+		background-color: hsla(210,48%,96%,.75);
+		box-shadow: 0 0 1px hsla(210,54%,20%,.03), 0 0 2px hsla(210,54%,20%,.1);
 	}
-	
-	@media	(-moz-os-version: windows-xp),
-		(-moz-os-version: windows-vista),
-		(-moz-os-version: windows-win7) {
-	
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not(:hover):not(:active):not([open]) > .toolbarbutton-menubutton-dropmarker::before,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbaritem-combined-buttons > .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled]) + .toolbarbutton-1:-moz-any(:not(:hover):not([open]),[disabled])::before {
-			content: "";
-			display: -moz-box;
-			width: 1px;
-			height: 18px;
-			-moz-margin-end: -1px;
-			background-image: linear-gradient(hsla(210,54%,20%,.2) 0, hsla(210,54%,20%,.2) 18px);
-			background-clip: padding-box;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: 1px 18px;
-			box-shadow: 0 0 0 1px hsla(0,0%,100%,.2);
-		}
-		
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon:-moz-locale-dir(ltr),
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon:-moz-locale-dir(rtl) {
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 0;
-		}
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon:-moz-locale-dir(rtl),
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon:-moz-locale-dir(ltr) {
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
-		}
-		
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any(:hover,[open]) > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):hover > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-container {
-			background-image: linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
-			background-color: transparent;
-			border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.2) hsla(210,54%,20%,.25);
-			box-shadow: 0 1px hsla(0,0%,100%,.3) inset, 0 1px hsla(210,54%,20%,.03), 0 0 2px hsla(210,54%,20%,.1);
-		}
-		
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):not([open]):not(:active):hover > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([buttonover]):not([open]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon {
-			border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
-			background-color: hsla(210,48%,96%,.75);
-			box-shadow: 0 0 1px hsla(210,54%,20%,.03), 0 0 2px hsla(210,54%,20%,.1);
-		}
-	}
-	
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled=true]):hover:active > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker:not([disabled=true]) > .dropmarker-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-text,
-	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container {
-		background-color: hsla(210,4%,10%,.12);
-		border-top-color: hsla(210,4%,10%,.2);
-		box-shadow: 0 1px 0 0 hsla(210,4%,10%,.1) inset;
-		transition-duration: 10ms;
-	}
-	
-	@media	(-moz-os-version: windows-xp),
-		(-moz-os-version: windows-vista),
-		(-moz-os-version: windows-win7) {
-	
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover:active > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-text,
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container {
-			background-image: linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
-			background-color: hsla(210,54%,20%,.15);
-			border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
-			box-shadow: 0 1px 1px hsla(210,54%,20%,.1) inset, 0 0 1px hsla(210,54%,20%,.2) inset, 0 1px 0 hsla(210,54%,20%,0), 0 0 2px hsla(210,54%,20%,0);
-			text-shadow: none;
-			transition: none;
-		}
-		
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:-moz-any(:hover,[open]) > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon {
-			-moz-border-start-color: hsla(210,54%,20%,.35);
-		}
-		
-		:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[checked]:not(:active):hover > .toolbarbutton-icon {
-			background-color: rgba(90%,90%,90%,.4);
-			transition: background-color .4s;
-		}
-	}
+}
 
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled=true]):hover:active > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker:not([disabled=true]) > .dropmarker-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-text,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled=true]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container {
+	background-color: hsla(210,4%,10%,.12);
+	border-top-color: hsla(210,4%,10%,.2);
+	box-shadow: 0 1px 0 0 hsla(210,4%,10%,.1) inset;
+	transition-duration: 10ms;
+}
+
+@media	(-moz-os-version: windows-xp),
+	(-moz-os-version: windows-vista),
+	(-moz-os-version: windows-win7) {
+
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button:not([disabled]):hover:active > .toolbarbutton-icon,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[open] > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-icon,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-text,
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:not([disabled]):-moz-any([open],[checked],:hover:active) > .toolbarbutton-badge-container {
+		background-image: linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,.1));
+		background-color: hsla(210,54%,20%,.15);
+		border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.35) hsla(210,54%,20%,.4);
+		box-shadow: 0 1px 1px hsla(210,54%,20%,.1) inset, 0 0 1px hsla(210,54%,20%,.2) inset, 0 1px 0 hsla(210,54%,20%,0), 0 0 2px hsla(210,54%,20%,0);
+		text-shadow: none;
+		transition: none;
+	}
+	
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1:-moz-any(:hover,[open]) > .toolbarbutton-menubutton-dropmarker:not([disabled]) > .dropmarker-icon {
+		-moz-border-start-color: hsla(210,54%,20%,.35);
+	}
+	
+	:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1[checked]:not(:active):hover > .toolbarbutton-icon {
+		background-color: rgba(90%,90%,90%,.4);
+		transition: background-color .4s;
+	}
 }
