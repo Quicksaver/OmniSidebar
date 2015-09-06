@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.8';
+Modules.VERSION = '3.0.9';
 
 this.mainSidebar = {
 	main: true,
@@ -152,7 +152,8 @@ this.mainSidebar = {
 	},
 	get switcher () { return $(objName+'-switch'); },
 	toggleSwitcher: function() {
-		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed) || this.isSwitchNeeded);
+		if(!this.switcher) { return; }
+		this.switcher.collapsed = !(this.useSwitch || (this.above && this.autoHide && !this.closed) || this.isSwitchNeeded);
 	},
 	get goURI () { return $(objName+'-viewURISidebar'); },
 	get goURIButton () { return $(objName+'-uri_sidebar_button'); }
@@ -309,7 +310,8 @@ this.twinSidebar = {
 	},
 	get switcher () { return $(objName+'-switch-twin'); },
 	toggleSwitcher: function() {
-		hideIt(this.switcher, this.useSwitch || (this.above && this.autoHide && !this.closed) || this.isSwitchNeeded);
+		if(!this.switcher) { return; }
+		this.switcher.collapsed = !(this.useSwitch || (this.above && this.autoHide && !this.closed) || this.isSwitchNeeded);
 	},
 	get goURI () { return $(objName+'-viewURISidebar-twin'); },
 	get goURIButton () { return $(objName+'-uri_sidebar_button-twin'); }
@@ -926,7 +928,7 @@ this.SidebarUI = {
 			}
 		}
 		bar.box.hidden = false;
-		hideIt(bar.box, true);
+		bar.box.collapsed = false;
 		bar.splitter.hidden = false;
 		
 		buttonLabels(bar.button);
@@ -1024,10 +1026,10 @@ this.SidebarUI = {
 			bar.title = "";
 			bar.command = "";
 			bar.box.hidden = true;
-			hideIt(bar.box, true);
+			bar.box.collapsed = false;
 		}
 		else {
-			hideIt(bar.box);
+			bar.box.collapsed = true;
 		}
 		
 		removeAttribute(bar.box, 'origin');

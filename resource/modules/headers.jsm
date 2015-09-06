@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+Modules.VERSION = '2.0.2';
 
 this.headers = {
 	observe: function(aSubject, aTopic, aData) {
@@ -107,7 +107,10 @@ this.headers = {
 		toggleAttribute(mainSidebar.box, 'noHeader', !mainHeader);
 		toggleAttribute(twinSidebar.box, 'noHeader', !twinHeader);
 		
-		hideIt($(objName+'-toolbarCustomizeWrapper'), Prefs.toolbar || (Prefs.twinSidebar && Prefs.toolbarTwin));
+		let wrapper = $(objName+'-toolbarCustomizeWrapper');
+		if(wrapper) {
+			wrapper.collapsed = !(Prefs.toolbar || (Prefs.twinSidebar && Prefs.toolbarTwin));
+		}
 	},
 	
 	toolbarHasButtons: function(toolbar) {
