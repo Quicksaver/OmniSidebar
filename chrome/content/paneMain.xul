@@ -166,7 +166,7 @@
 			</vbox>
 			<vbox id="paneMain-coloricons-helptext" collapsed="true">
 				<description style="font-weight:bold;">&Optcoloricons.label;</description>
-				<box style="background-image:url('chrome://omnisidebar/skin/helptext-colorIcons.jpg'); width:275x; height:81px; margin:0 auto;"/>
+				<box style="background-image:url('chrome://omnisidebar/skin/helptext-colorIcons.jpg'); width:275px; height:81px; margin:0 auto;"/>
 				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.nochange.label;</description>
 				<description>&Optcoloricons.nochange.tooltip;</description>
 				<description style="font-weight:bold; margin-top:1em;">&Optcoloricons.firefox.label;</description>
