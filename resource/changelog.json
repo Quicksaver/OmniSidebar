@@ -12,7 +12,7 @@
 		"1.6.2":{
 			"date":"August 9, 2015",
 			"notes":[
-				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/puzzle-toolbars/\">Puzzle Toolbars</a> and <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/the-fox-only-better/\">The Fox, Only Better</a>: the Bookmark This Page button would stop working if one of the add-ons was disabled/updated; this fix requires a browser restart"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/puzzle-toolbars/>Puzzle Toolbars</a> and <a=https://addons.mozilla.org/firefox/addon/the-fox-only-better/>The Fox, Only Better</a>: the Bookmark This Page button would stop working if one of the add-ons was disabled/updated; this fix requires a browser restart"],
 				["bugfix","(Firefox 40+) appearance of the Add-ons Sidebar"],
 				["bugfix","The scrollbar of the Add-ons Sidebar was not properly styled with the Glass style"],
 				["","Other minor fixes"]
@@ -27,7 +27,7 @@
 				["bugfix","Starting the browser or opening a new window with the sidebar undocked would not place focus in the web content"],
 				["bugfix","Force LTR layout for the preferences tab options, at least until any RTL locales are included"],
 				["bugfix","Color version of downloads button not appearing"],
-				["bugfix","Close/Hide when losing focus wouldn't work after opening a bookmark in the background (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/95\">issue #95</a>)"],
+				["bugfix","Close/Hide when losing focus wouldn't work after opening a bookmark in the background (<a=https://github.com/Quicksaver/OmniSidebar/issues/95>issue #95</a>)"],
 				["bugfix","Minor startup improvements"],
 				["bugfix","The preferences, especially the glass transparency slider, were very sluggish to change, all should be much smoother now"]
 			]
@@ -37,16 +37,16 @@
 			"notes":[
 				["new","Brand new preferences tab with a new \"About\" pane (previously the \"Release Notes\" tab)"],
 				["changed","The active development process for the add-on is undergoing a few changes, check out the information and links at the top of this pane for more details"],
-				["changed","Simplified some sidebar titles and button names (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/79\">issue #79</a>)"],
+				["changed","Simplified some sidebar titles and button names (<a=https://github.com/Quicksaver/OmniSidebar/issues/79>issue #79</a>)"],
 				["removed","Compatibility for Firefox 37 and below"],
 				["bugfix","Focus would be stolen to the sidebar when opening a new window"],
-				["bugfix","Display issues for add-ons with inline preferences in the Add-on Manager sidebar (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/82\">issue #82</a>)"],
-				["bugfix","Bookmarks menu item could sometimes lose its label (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/81\">issue #81</a>)"],
-				["bugfix","Sidebar state not remembered correctly between browser sessions and when opening new windows (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/89\">issue #89</a>)"],
-				["bugfix","un/dock button in twin sidebar was always visible when starting up the browser, regardless of the preference (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/92\">issue #92</a>)"],
+				["bugfix","Display issues for add-ons with inline preferences in the Add-on Manager sidebar (<a=https://github.com/Quicksaver/OmniSidebar/issues/82>issue #82</a>)"],
+				["bugfix","Bookmarks menu item could sometimes lose its label (<a=https://github.com/Quicksaver/OmniSidebar/issues/81>issue #81</a>)"],
+				["bugfix","Sidebar state not remembered correctly between browser sessions and when opening new windows (<a=https://github.com/Quicksaver/OmniSidebar/issues/89>issue #89</a>)"],
+				["bugfix","un/dock button in twin sidebar was always visible when starting up the browser, regardless of the preference (<a=https://github.com/Quicksaver/OmniSidebar/issues/92>issue #92</a>)"],
 				["bugfix","The mini panel was not opening when right-clicking the margin switcher"],
 				["bugfix","Sometimes the add-on could fail to initialize"],
-				["bugfix","Enhanced compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/puzzle-toolbars/\">Puzzle Toolbars</a>"],
+				["bugfix","Enhanced compatibility with <a=https://addons.mozilla.org/firefox/addon/puzzle-toolbars/>Puzzle Toolbars</a>"],
 				["updated","Reorganized code and did some cleanup"],
 				["","Other minor fixes and improvements"]
 			]
@@ -54,14 +54,14 @@
 		"1.5.4":{
 			"date":"March 4, 2015",
 			"notes":[
-				["bugfix","With certain show/hide delay settings, the sidebar would jump when moving the mouse to the edge of the window (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/77\">issue #77</a>)"]
+				["bugfix","With certain show/hide delay settings, the sidebar would jump when moving the mouse to the edge of the window (<a=https://github.com/Quicksaver/OmniSidebar/issues/77>issue #77</a>)"]
 			]
 		},
 		"1.5.3":{
 			"date":"February 24, 2015",
 			"notes":[
 				["changed","Release Notes tab URI defaults to about:omnisidebar instead of chrome://..., which is now fully functional in multiprocess firefox (e10s)"],
-				["changed","Extra tweaks for the Add-ons Manager Sidebar: compacted top categories, and improvements to the updates and stylish userstyles tabs (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/71\">issue #71</a>)"],
+				["changed","Extra tweaks for the Add-ons Manager Sidebar: compacted top categories, and improvements to the updates and stylish userstyles tabs (<a=https://github.com/Quicksaver/OmniSidebar/issues/71>issue #71</a>)"],
 				["bugfix","The Release Notes link in the preferences dialog would sometimes fail to work"]
 			]
 		},
@@ -69,7 +69,7 @@
 			"date":"February 10, 2015",
 			"notes":[
 				["updated","it locale"],
-				["changed","Removed the mouse over effects in the Add-ons Manager Sidebar introduced in the last version, until I add a preference to quickly enable or disable them. Read <a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/71\">issue #71</a> for more details and for instructions on how to easily re-enable them if you liked them."]
+				["changed","Removed the mouse over effects in the Add-ons Manager Sidebar introduced in the last version, until I add a preference to quickly enable or disable them. Read <a=https://github.com/Quicksaver/OmniSidebar/issues/71>issue #71</a> for more details and for instructions on how to easily re-enable them if you liked them."]
 			]
 		},
 		"1.5.1":{
@@ -77,28 +77,28 @@
 			"notes":[
 				["new","Toolbarbutton to open the downloads panel in the sidebar"],
 				["new","it locale"],
-				["changed","Many improvements to the add-ons manager in the sidebar (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/71\">issue #71</a>)"],
-				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/tree-style-tab/\">Tree Style Tab</a>, tabs would not be positioned correctly when toggling the sidebar"],
-				["bugfix","Undocked sidebar would not be positioned correctly when its header was empty (no buttons, title or toolbar) (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/70\">issue #70</a>)"],
-				["bugfix","Compatibility with scrolling action of <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/milewideback/\">MileWideBack</a> and <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/edgewise/\">EdgeWise</a> (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/75\">issue #75</a>)"]
+				["changed","Many improvements to the add-ons manager in the sidebar (<a=https://github.com/Quicksaver/OmniSidebar/issues/71>issue #71</a>)"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/tree-style-tab/>Tree Style Tab</a>, tabs would not be positioned correctly when toggling the sidebar"],
+				["bugfix","Undocked sidebar would not be positioned correctly when its header was empty (no buttons, title or toolbar) (<a=https://github.com/Quicksaver/OmniSidebar/issues/70>issue #70</a>)"],
+				["bugfix","Compatibility with scrolling action of <a=https://addons.mozilla.org/firefox/addon/milewideback/>MileWideBack</a> and <a=https://addons.mozilla.org/firefox/addon/edgewise/>EdgeWise</a> (<a=https://github.com/Quicksaver/OmniSidebar/issues/75>issue #75</a>)"]
 			]
 		},
 		"1.5":{
 			"date":"December 13, 2014",
 			"notes":[
-				["new","Support &lt; (less than) and &gt; (greater than) characters in the keyboard shortcut"],
+				["new","Support < (less than) and > (greater than) characters in the keyboard shortcut"],
 				["new","Added version information to the top of the window DOM tree, for better compatibility with themes"],
 				["new","Show the release notes tab when the add-on updates"],
 				["new","zh-TW locale"],
-				["changed","\"Hide title/dock button/close button\" changed to \"Show...\" in preferences; it's possible you may have to reconfigure these preferences because of this (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/53\">issue #53</a>)"],
+				["changed","\"Hide title/dock button/close button\" changed to \"Show...\" in preferences; it's possible you may have to reconfigure these preferences because of this (<a=https://github.com/Quicksaver/OmniSidebar/issues/53>issue #53</a>)"],
 				["changed","Re-organized a little the preferences dialog, and added helpful tooltips to all the preferences"],
 				["removed","Compatibility with Firefox 33 and below"],
-				["removed","Compatibility with older versions of <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/similarweb-sites-recommendatio/\">SimilarWeb</a>, simply update to the most recent version which is already fully compatible"],
-				["removed","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/prospector-lesschrome-hd/\">LessChrome HD</a>, I recommend you use my other add-on <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/the-fox-only-better/\">The Fox, Only Better</a> instead for a similar but greatly improved function"],
-				["removed","Compatibility with <a target=\"blank\" href=\"http://totaltoolbar.mozdev.org/\">TotalToolbar</a>, it no longer works in the most recent versions of firefox, I recommend you use my other add-on <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/puzzle-toolbars/\">Puzzle Toolbars</a> for a similar function"],
+				["removed","Compatibility with older versions of <a=https://addons.mozilla.org/firefox/addon/similarweb-sites-recommendatio/>SimilarWeb</a>, simply update to the most recent version which is already fully compatible"],
+				["removed","Compatibility with <a=https://addons.mozilla.org/firefox/addon/prospector-lesschrome-hd/>LessChrome HD</a>, I recommend you use my other add-on <a=https://addons.mozilla.org/firefox/addon/the-fox-only-better/>The Fox, Only Better</a> instead for a similar but greatly improved function"],
+				["removed","Compatibility with <a=http://totaltoolbar.mozdev.org/>TotalToolbar</a>, it no longer works in the most recent versions of firefox, I recommend you use my other add-on <a=https://addons.mozilla.org/firefox/addon/puzzle-toolbars/>Puzzle Toolbars</a> for a similar function"],
 				["removed","Compatibility with the old (Javascript) Error Console, I recommend you use the firefox Browser Console instead"],
 				["removed","Compatibility with Delicious Bookmarks add-on, it is no longer maintained or available anywhere"],
-				["removed","Compatibility fixes for <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/mx3/\">MX3 theme</a>, they're not really needed anymore"],
+				["removed","Compatibility fixes for <a=https://addons.mozilla.org/firefox/addon/mx3/>MX3 theme</a>, they're not really needed anymore"],
 				["removed","Compatibility fixes for Pano add-on, it is no longer maintained or officially available anywhere"],
 				["removed","Alternate toolbar buttons style option, the buttons will always have this style now"],
 				["bugfix","e10s compatibility"],
@@ -106,14 +106,14 @@
 				["bugfix","Keep sidebar visible while the cursor is in a text field in it"],
 				["bugfix","Greatly improved handling when opening menus and panels in the sidebar"],
 				["bugfix","When autohide was enabled, the add-on could fail to deinitialize properly in multiple windows"],
-				["bugfix","When opening Page Info in the sidebar, the panels would be cutoff at the end unless the sidebar was very large to show its full contents (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/66\">issue #66</a>)"],
-				["bugfix","The menu items in the title menu would not extend through the whole menu area if it was too large (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/66\">issue #66</a>)"],
-				["bugfix","Try to avoid minor visual glitches during startup (<a target=\"blank\" href=\"https://github.com/Quicksaver/OmniSidebar/issues/63\">issue #63</a>)"],
+				["bugfix","When opening Page Info in the sidebar, the panels would be cutoff at the end unless the sidebar was very large to show its full contents (<a=https://github.com/Quicksaver/OmniSidebar/issues/66>issue #66</a>)"],
+				["bugfix","The menu items in the title menu would not extend through the whole menu area if it was too large (<a=https://github.com/Quicksaver/OmniSidebar/issues/66>issue #66</a>)"],
+				["bugfix","Try to avoid minor visual glitches during startup (<a=https://github.com/Quicksaver/OmniSidebar/issues/63>issue #63</a>)"],
 				["bugfix","Greatly improved compatibility and performance when used together with my other add-ons"],
-				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/puzzle-toolbars/\">Puzzle Toolbars</a>, should work in perfect harmony with its Lateral (Vertical) Toolbar in all modes"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/puzzle-toolbars/>Puzzle Toolbars</a>, should work in perfect harmony with its Lateral (Vertical) Toolbar in all modes"],
 				["bugfix","Compatibility with Firefox 34 and above"],
-				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/edgewise/\">EdgeWise</a>; its left margin clicker would be unusable with the add-on's own margin switcher; from now on use shift+click to toggle the sidebar with this add-on"],
-				["bugfix","Compatibility with <a target=\"blank\" href=\"https://addons.mozilla.org/firefox/addon/milewideback/\">MileWideBack</a>; mousing over the margin wasn't respecting the delay to show the sidebar"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/edgewise/>EdgeWise</a>; its left margin clicker would be unusable with the add-on's own margin switcher; from now on use shift+click to toggle the sidebar with this add-on"],
+				["bugfix","Compatibility with <a=https://addons.mozilla.org/firefox/addon/milewideback/>MileWideBack</a>; mousing over the margin wasn't respecting the delay to show the sidebar"],
 				["bugfix","Don't show sidebar toolbar empty space in mini panel if the corresponding sidebar toolbar is empty"],
 				["updated","Improved stylesheets so that themes can more easily style the add-on, could have broken something in the process so let me know if something looks wrong or out of place"],
 				["","Many other small fixes and improvements"]
