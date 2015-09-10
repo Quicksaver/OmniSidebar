@@ -1,6 +1,17 @@
 {
-	"current":"1.6.3",
+	"current":"1.6.4",
 	"releases": {
+		"1.6.4":{
+			"date":"September 10, 2015",
+			"notes":[
+				["new","es-ES locale"],
+				["changed","The \"Show this tab on the next update\" checkbox will be highlighted the first time the About pane is shown on an update, to better mark where future notifications can be easily disabled"],
+				["removed","Compatibility with Firefox 39 and below"],
+				["bugfix","Compatibility with latest Nightly build (Firefox 43)"],
+				["bugfix","The helptext panel in the add-on's preferences would sometimes cover the options on small screens or if the sidebar was open"],
+				["","Other minor fixes and improvements"]
+			]
+		},
 		"1.6.3":{
 			"date":"August 21, 2015",
 			"notes":[
