@@ -41,6 +41,14 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>es-ES</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Trae sus marcadores a la vista con tan solo un gesto. Mueve la barra lateral por la pantalla. Abre una barra lateral diferente tan solo haciendo clic en su título. ¡Y más! ¡Mantiene la sencillez y fácil acceso de su barra lateral!</em:description>
+				<em:translator>Alejandro Pérez Martín, strel</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>fr</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Faire apparaître vos marque-pages en un seul geste. Déplacer le panneau latéral sur tout l'écran. Ouvrir un nouveau panneau latéral juste en cliquant sur son intitulé. Et bien plus ! Rends votre panneau latéral accessible simplement et rapidement !</em:description>
