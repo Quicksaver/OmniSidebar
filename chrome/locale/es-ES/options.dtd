@@ -4,52 +4,52 @@
 <!ENTITY Optgroupgen.label "Apariencia">
 <!ENTITY Optgroupfeatures.label "Características">
 <!ENTITY Optgroupperformance.label "Rendimiento">
-<!ENTITY Optsidebars.left.label "Colocar a la izquierda">
-<!ENTITY Optsidebars.right.label "Colocar a la derecha">
-<!ENTITY Optsidebars.pos.tooltip "Elija en qué lado de la ventana del navegador colocar la barra lateral.">
+<!ENTITY Optsidebars.left.label "Situar a la izquierda">
+<!ENTITY Optsidebars.right.label "Situar a la derecha">
+<!ENTITY Optsidebars.pos.tooltip "Elija en qué lado de la ventana del navegador situar la barra lateral.">
 <!ENTITY Optsidebars.twin.label "Habilitar la barra lateral gemela en el lado opuesto">
 <!ENTITY Optsidebars.twin.tooltip "Le proporciona una barra lateral secundaria en el otro lado de la ventana, completamente independiente de la barra lateral principal.">
-<!ENTITY Optswitchers.label "Pulsa en el margen del navegador para abrir o cerrar">
+<!ENTITY Optswitchers.label "Pulse en el margen del navegador para abrir o cerrar">
 <!ENTITY Optswitchers.tooltip "Le permite hacer clic en el margen de la ventana para accionar la barra lateral. ¡Esto es mejor cuando se usa en una ventana maximizada! El margen clicable se volverá azul cuando el ratón se mueva sobre él.">
 <!ENTITY OptautoClose.label "Cerrar/Ocultar la barra lateral al perder el foco">
-<!ENTITY OptautoClose.tooltip "La barra lateral se cerrará automáticamente cuando haga clic sobre un enlace en ella, o cuando haga clic fuera de ella. Si la barra lateral está desacoplada y está establecido el ocultamiento automático, se ocultará inmediatamente en lugar de cerrarse.">
+<!ENTITY OptautoClose.tooltip "La barra lateral se cerrará automáticamente, por ejemplo, cuando haga clic sobre un enlace en ella, o cuando haga clic fuera de ella. Si la barra lateral está desacoplada y está establecido su ocultamiento automático, se ocultará inmediatamente en lugar de cerrarse.">
 <!ENTITY Optundock.label "Desacoplar de la ventana del navegador">
-<!ENTITY Optundock.tooltip "La barra lateral se mostrará emergiendo del lateral, superponiéndose a la página web en lugar de desplazarla.">
+<!ENTITY Optundock.tooltip "La barra lateral se mostrará emergiendo del lateral, superponiéndose a la página web en lugar de junto a ella.">
 <!ENTITY Optautohide.label "Ocultar automáticamente a un lado">
-<!ENTITY Optautohide.tooltip "La barra lateral se replegará fuera de la vista cuando no sea necesaria. Sencillamente mueva el ratón hacia el margen de la ventana y se desplegará de nuevo.">
-<!ENTITY OptglassStyle.label "Aplicar estilo cristal a todas las barras laterales">
-<!ENTITY OptglassStyle.tooltip "Un estilo especial que proporciona a todos los paneles de su barra lateral un aspecto vidriado. Opcionalmente puede hacerse transparente, así que si, por ejemplo, la barra lateral está desacoplada, puede ver el contenido de la web que está detrás de ella.">
-<!ENTITY OptglassStyle.opaque "Opaco">
+<!ENTITY Optautohide.tooltip "La barra lateral se replegará fuera de la vista cuando no sea necesaria. Simplemente mueva el ratón hacia el margen de la ventana y se desplegará de nuevo.">
+<!ENTITY OptglassStyle.label "Aplicar estilo cristalino todas las barras laterales">
+<!ENTITY OptglassStyle.tooltip "Un estilo especial que proporciona a todos los paneles de su barra lateral un aspecto cristalino. Opcionalmente puede hacerse transparente, así que, por ejemplo, si la barra lateral está desacoplada puede ver el contenido de la web que está detrás de ella.">
+<!ENTITY OptglassStyle.opaque "Opaca">
 <!ENTITY OptglassStyle.transparent "Totalmente transparente">
 <!ENTITY Optfx.label "Activar efectos de transición">
-<!ENTITY Optfx.tooltip "Puede deshabilitar los efectos de transición para mostrar automáticamente u ocultar la barra lateral si no le gustan o si no son lo suficientemente suaves para usted.">
+<!ENTITY Optfx.tooltip "Puede deshabilitar los efectos de transición para mostrar u ocultar automáticamente la barra lateral, si no le gustan o no son lo suficientemente fluídos para usted.">
 <!ENTITY OptshowDelay.label "Retrasar mostrado automático de la barra lateral durante (mseg):">
 <!ENTITY OptshowDelay.tooltip "Periodo de espera entre el movimiento del ratón hasta el margen y la aparición de la barra lateral.">
 <!ENTITY OpthideDelay.label "Retrasar ocultado automático de la barra lateral durante (mseg):">
 <!ENTITY OpthideDelay.tooltip "Periodo de espera entre el movimiento del ratón fuera de la barra lateral y su ocultamiento.">
-<!ENTITY OptswitcherAdjust.label "Ajustar el ancho del área de margen activo (píxeles):">
-<!ENTITY OptswitcherAdjust.tooltip "Puede incrementar el tamaño del área del margen que es reactiva a los clics y el movimiento del ratón.">
+<!ENTITY OptswitcherAdjust.label "Ajustar ancho del área del margen activo (píxeles):">
+<!ENTITY OptswitcherAdjust.tooltip "Puede incrementar el tamaño del área del margen que es reactiva a los clics y al movimiento del ratón.">
 <!ENTITY OptkeepPrivate.label "Conservar el estado de la barra lateral en el modo de navegación privada">
 <!ENTITY OptkeepPrivate.tooltip.a "Al entrar o salir del modo de navegación privada (MNP), la barra lateral permanecerá abierta con el mismo panel cargado.">
-<!ENTITY OptkeepPrivate.tooltip.b "Si esto se deshabilita, la barra lateral siempre se cerrará al entrar en el MNP, y siempre volverá al panel abierto previamente a la habilitación del MNP al salir de él.">
+<!ENTITY OptkeepPrivate.tooltip.b "Si esto se deshabilita, al entrar en el MNP la barra lateral siempre se cerrará, y al salir de él siempre volverá al panel abierto previamente a la habilitación del MNP.">
 <!ENTITY OptkeepPrivate.tooltip.c "Esta preferencia es necesaria si el MNP está habilitado por defecto en cada inicio y quiere que el estado de la barra lateral sea recordado entre sesiones de navegación.">
 <!ENTITY OptkeepLoaded.label "Mantener el panel cargado cuando se cierre la barra lateral">
-<!ENTITY OptkeepLoaded.tooltip "Cuando cierre la barra lateral permanecerá cargada en segundo plano. Por ejemplo, cuando la reabra, su posición actual en el desplazamiento por la página o cualquier contenido de cuadro de texto serán recordados.">
+<!ENTITY OptkeepLoaded.tooltip "Cuando cierre la barra lateral esta permanecerá cargada en segundo plano. Por ejemplo, cuando la reabra, se recordará su posición actual en el desplazamiento por la página o los contenidos de cualquier cuadro de texto.">
 <!ENTITY Optgroupalways.label "Abrir siempre en la barra lateral">
 <!ENTITY Optgroupalways.tooltip "Estos paneles siempre se abrirán en la barra lateral al ser accionados desde su propios botones de barra de herramientas o atajos de teclado.">
-<!ENTITY addonsSidebar.label "Gestor de extensiones">
+<!ENTITY addonsSidebar.label "Administrador de complementos">
 <!ENTITY omnisidebarBrowserConsole.label "Consola del navegador">
 <!ENTITY omnisidebarDMT.label "Descargas">
-<!ENTITY omnisidebarPageInfo.label "Info de página">
-<!ENTITY omnisidebarScratchpad.label "Panel de Borrador">
+<!ENTITY omnisidebarPageInfo.label "Información de la página">
+<!ENTITY omnisidebarScratchpad.label "Borrador">
 <!ENTITY OptforceOpen.label "No cerrar la barra lateral desde">
 <!ENTITY OptforceOpen.tooltip "Cuando haga clic en uno de estos elementos para un panel de barra lateral ya cargado, este permanecerá abierto en lugar de cerrarse.">
-<!ENTITY OptforceOpen.toolbars "Botones en la barra de herramientas de la barra lateral.">
+<!ENTITY OptforceOpen.toolbars "Botones en la barra de herramientas de la barra lateral">
 <!ENTITY OptforceOpen.menus "Menús desplegables">
 <!ENTITY Opttoolbar.label "Barra de herramientas de la barra lateral">
 <!ENTITY Opttoolbar.tooltip "Inserta una barra de herramientras personalizable en la parte superior de la barra lateral, junto a su título.">
 <!ENTITY OptGoURI.label "Incluir botón 'Ir'">
-<!ENTITY OptGoURI.tooltip "El botón 'Ir' le permite cargar URIs about: y chrome:// en la barra lateral; ¡no le permitirá cargar páginas web remotas!">
+<!ENTITY OptGoURI.tooltip "El botón 'Ir' le permite cargar URIs about: y chrome:// específicas en la barra lateral; ¡no le permitirá cargar páginas web remotas!">
 <!ENTITY Optshowheadertitle.label "Mostrar título de la barra lateral">
 <!ENTITY Optshowheadertitle.tooltip "El nombre de la barra lateral actualmente abierta se muestra en la parte superior.">
 <!ENTITY OpttitleButton.label "Menú desplegable de barra lateral en el título">
@@ -57,15 +57,15 @@
 <!ENTITY Optshowheaderdock.label "Mostrar botón de acoplamiento">
 <!ENTITY Optshowheaderdock.tooltip "Muestra un botón en la parte superior de la barra lateral para acoplarla y desacoplarla con rapidez.">
 <!ENTITY Optshowheaderclose.label "Mostrar botón de cierre">
-<!ENTITY Optshowheaderclose.tooltip "Muestra un botón en la parte superior de la barra lateral para cerrarla con rápidez.">
+<!ENTITY Optshowheaderclose.tooltip "Muestra un botón en la parte superior de la barra lateral para cerrarla con rapidez.">
 <!ENTITY Optcoloricons.label "Juego de iconos de botones:">
 <!ENTITY Optcoloricons.nochange.label "Por defecto">
-<!ENTITY Optcoloricons.nochange.tooltip "No se hace ningún cambio a los iconos de la barra de herramientas.">
+<!ENTITY Optcoloricons.nochange.tooltip "(Default) No se hizo ningún cambio a los iconos de la barra de herramientas.">
 <!ENTITY Optcoloricons.firefox.label "Firefox">
-<!ENTITY Optcoloricons.firefox.tooltip "Los iconos de la barra de herramientras se cambian para que encajen con el tema decorativo por defecto de Firefox siempre que sea posible.">
+<!ENTITY Optcoloricons.firefox.tooltip "(Colorful) Los iconos de la barra de herramientras se cambian para que encajen con el tema decorativo por defecto de Firefox siempre que sea posible.">
 <!ENTITY Optcoloricons.color.label "Colorido">
-<!ENTITY Optcoloricons.color.tooltip "Los iconos en la barra de herramientas se cambian a sus versiones coloridas siempre que es posible.">
-<!ENTITY OptKeysetPanel.label "Abrir el panel mini en lugar de la barra lateral">
-<!ENTITY OptKeysetPanel.tooltip "El atajo de teclado abre el mini panel proporcionándole una selección de posibles acciones, en lugar de abrir o cerrar directamente la barra lateral.">
+<!ENTITY Optcoloricons.color.tooltip "Los iconos en la barra de herramientas se cambian a sus versiones coloridas siempre que sea posible.">
+<!ENTITY OptKeysetPanel.label "Abrir el mini panel en lugar de la barra lateral">
+<!ENTITY OptKeysetPanel.tooltip "El atajo de teclado abre el mini panel presentándole una elección entre posibles acciones, en lugar de abrir o cerrar la barra lateral directamente .">
 <!ENTITY OptKeyboardShortcut.caption "Atajo de teclado de la barra lateral">
-<!ENTITY OptKeyboardShortcut.tooltip "El atajo de teclado es la forma más rápida de cerrar y reabrir la barra de tareas.">
+<!ENTITY OptKeyboardShortcut.tooltip "El atajo de teclado es la forma más rápida de cerrar y reabrir la barra lateral.">

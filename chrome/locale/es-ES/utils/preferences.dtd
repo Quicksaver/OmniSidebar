@@ -1,13 +1,13 @@
 <!ENTITY preferences.button "Preferencias">
 <!ENTITY preferences.undo.label "Deshacer">
 <!ENTITY preferences.redo.label "Rehacer">
-<!ENTITY preferences.undoredo.tooltip "Revertir rápidamente cualquier camibio hecho a las preferencias del complemento, incluyendo importar desde un fichero y restaurar valores predeterminados.">
+<!ENTITY preferences.undoredo.tooltip "Revierte rápidamente cualquier cambio realizado a las preferencias del complemento, incluyendo importar desde un fichero y restaurar valores predeterminados.">
 <!ENTITY preferences.import.label "Importar desde fichero...">
 <!ENTITY preferences.import.tooltip "Carga las preferencias del complemento desde un fichero exportado previamente en su computadora.">
 <!ENTITY preferences.export.label "Exportar a fichero...">
-<!ENTITY preferences.export.tooltip "Guardar las preferencias de su complemento en un fichero externo para salvaguarda.">
+<!ENTITY preferences.export.tooltip "Guardar las preferencias de su complemento en un fichero externo para salvaguardarlas.">
 <!ENTITY preferences.reset.label "Restaurar valores predeterminados">
 <!ENTITY preferences.reset.tooltip.a "Todas las preferencias son devueltas a sus valores predeterminados, como si el complemento estuviera recién instalado.">
-<!ENTITY preferences.reset.tooltip.b "Los emplazamientos de botones en las barras de herramientas no se ven afectados, en su lugar, para revertir a estos use el botón 'Restaurar valores predeterminados' en la vista de Personalización.">
+<!ENTITY preferences.reset.tooltip.b "Los emplazamientos de botones en las barras de herramientas no se ven afectados, para revertirlos use el botón 'Restaurar valores predeterminados' en la vista de Personalización, en su lugar.">
 <!ENTITY preferences.jumpto.label "Saltar a la preferencia...">
-<!ENTITY preferences.jumpto.tooltip "Escriba una palabra y se le llevará hasta la primera preferencia que la contenga.">
+<!ENTITY preferences.jumpto.tooltip "Escriba una palabra y será llevado hasta la primera preferencia que la contenga.">

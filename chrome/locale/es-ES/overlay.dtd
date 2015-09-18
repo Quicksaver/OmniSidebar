@@ -7,7 +7,7 @@
 <!ENTITY bookmarksSidebar.tooltip "Muestra sus marcadores en la barra lateral">
 <!ENTITY bookmarksSidebar.accesskey "M">
 <!ENTITY historySidebar.label "Barra lateral de historial">
-<!ENTITY historySidebar.tooltip "Muestra páginas que ha visto recientemente en la barra lateral">
+<!ENTITY historySidebar.tooltip "Muestra páginas que ha visitado recientemente en la barra lateral">
 <!ENTITY historySidebar.accesskey "H">
 <!ENTITY downloadsSidebar.label "Barra lateral de descargas">
 <!ENTITY downloadsSidebar.title "Descargas">
@@ -16,14 +16,14 @@
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "Abre el DOM Inspector en la barra lateral">
 <!ENTITY DOMInspectorSidebar.accesskey "M">
-<!ENTITY PageInfoSidebar.labelB "Información de página">
-<!ENTITY PageInfoSidebar.tooltip "Ver detalles acerca de la página en la que se encuentra">
+<!ENTITY PageInfoSidebar.labelB "Información de la página">
+<!ENTITY PageInfoSidebar.tooltip "Muestra los detalles de la página en la que se encuentra">
 <!ENTITY PageInfoSidebar.accesskey "I">
 <!ENTITY scratchpadSidebar.label "Borrador">
 <!ENTITY scratchpadSidebar.tooltip "Abre el panel de borrador en la barra lateral">
 <!ENTITY scratchpadSidebar.accesskey "B">
 <!ENTITY BlankSidebar.label "Abrir una barra lateral">
-<!ENTITY URISidebar.tooltip "Escriba una ubicación para abrir en la barra lateral">
+<!ENTITY URISidebar.tooltip "Escriba una ubicación a abrir en la barra lateral">
 <!ENTITY URISidebar.buttonLabel "ir">
 <!ENTITY browserConsole.label "Consola del navegador">
 <!ENTITY browserConsole.tooltip "Abre la consola del navegador en la barra lateral">
