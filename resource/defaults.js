@@ -1,4 +1,4 @@
-// VERSION = '1.3';
+// VERSION = '1.3.1';
 
 objName = 'omnisidebar';
 objPathString = 'omnisidebar';
@@ -75,7 +75,7 @@ prefList = {
 	mainKeysetAlt: false,
 	mainKeysetPanel: false,
 	twinKeysetKeycode: 'VK_F8',
-	twinKeysetAccel: false,
+	twinKeysetAccel: true,
 	twinKeysetShift: true,
 	twinKeysetAlt: false,
 	twinKeysetPanel: false,
