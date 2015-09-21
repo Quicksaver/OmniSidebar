@@ -4,7 +4,11 @@
 	.inSidebar:not(.glassStyle) { background: -moz-dialog; }
 	
 	@media	(-moz-windows-default-theme) {
-		.inSidebar:not(.glassStyle) { background: #EEF3FA; }
+		@media	(-moz-os-version: windows-vista),
+			(-moz-os-version: windows-win7) {
+			
+			.inSidebar:not(.glassStyle) { background: #EEF3FA; }
+		}
 	}
 
 }
