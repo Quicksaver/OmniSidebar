@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.9';
+Modules.VERSION = '3.0.10';
 
 this.mainSidebar = {
 	main: true,
@@ -684,6 +684,18 @@ this.switcher = {
 
 // replacement of SidebarUI that works with two sidebars
 this.SidebarUI = {
+	sidebars: function*() {
+		for(let bar of sidebars) {
+			yield bar;
+		}
+	},
+	
+	browsers: function*() {
+		for(let bar of sidebars) {
+			yield bar.sidebar;
+		}
+	},
+	
 	main: mainSidebar,
 	twin: twinSidebar,
 	
@@ -744,6 +756,11 @@ this.SidebarUI = {
 		aSync(function() { panel.hide(); });
 		
 		if(customizing) { return false; }
+		
+		// there's no point in toggling the twin sidebar if it doesn't exist
+		if(twin && !Prefs.twinSidebar) {
+			twin = false;
+		}
 		
 		var bar = (twin) ? twinSidebar : mainSidebar;
 		
@@ -998,9 +1015,6 @@ this.SidebarUI = {
 	},
 	
 	close: function(bar = mainSidebar, broadcaster = null, forceUnload = true) {
-		// the sidebar shouldn't be remote, so we can do this
-		dispatch(bar.sidebar.contentWindow, { type: 'SidebarClosed', cancelable: false });
-		
 		var commandID = bar.command;
 		
 		if(!broadcaster && commandID) {
@@ -1063,8 +1077,8 @@ this.SidebarUI = {
 	
 	// shims for compatibility with the new SidebarUI object
 	
-	show: function(commandID) {
-		return this.toggle(commandID, true);
+	show: function(commandID, twin) {
+		return this.toggle(commandID, true, twin);
 	},
 	
 	hide: function(bar = mainSidebar) {

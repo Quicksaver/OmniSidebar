@@ -23,7 +23,8 @@
 .inSidebar #bookmarks-dustbox,
 .inSidebar #placesToolbar > toolbarbutton,
 .inSidebar #RIL_sort,
-.inSidebar #RIL_listPage {
+.inSidebar #RIL_listPage,
+.inSidebar #FindToolbar toolbarbutton {
 	-moz-appearance: none !important;
 	opacity: 1 !important;
 	background-clip: padding-box !important;
@@ -66,7 +67,8 @@
 .inSidebar #bookmarks-dustbox[disabled="true"],
 .inSidebar #placesToolbar > toolbarbutton[disabled="true"],
 .inSidebar #RIL_sort[disabled="true"],
-.inSidebar #RIL_listPage[disabled="true"] {
+.inSidebar #RIL_listPage[disabled="true"],
+.inSidebar #FindToolbar toolbarbutton[disabled="true"] {
 	opacity: .8;
 }
 
@@ -93,6 +95,7 @@
 .inSidebar #placesToolbar > toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .inSidebar #RIL_sort[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 .inSidebar #RIL_listPage[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+.inSidebar #FindToolbar toolbarbutton[disabled="true"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
 
 #history-panel.inSidebar #viewButton[disabled="true"] > .toolbarbutton-icon, 
 #downloadManager.inSidebar #clearListButton[disabled="true"] > .toolbarbutton-icon,
@@ -116,7 +119,8 @@
 .inSidebar #bookmarks-dustbox[disabled="true"] > .toolbarbutton-icon,
 .inSidebar #placesToolbar > toolbarbutton[disabled="true"] > .toolbarbutton-icon,
 .inSidebar #RIL_sort[disabled="true"] > .toolbarbutton-icon,
-.inSidebar #RIL_listPage[disabled="true"] > .toolbarbutton-icon {
+.inSidebar #RIL_listPage[disabled="true"] > .toolbarbutton-icon,
+.inSidebar #FindToolbar toolbarbutton[disabled="true"] > .toolbarbutton-icon {
 	opacity: .5;
 }
 
@@ -145,6 +149,7 @@
 .inSidebar #placesToolbar > toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .inSidebar #RIL_sort > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 .inSidebar #RIL_listPage > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
+.inSidebar #FindToolbar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):not(:active):hover,
 
 #history-panel.inSidebar #viewButton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]), 
 #downloadManager.inSidebar #clearListButton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -167,6 +172,7 @@
 .inSidebar #placesToolbar > toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_sort:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_listPage:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.inSidebar #FindToolbar toolbarbutton:not([open="true"]):not(:active):hover > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
 #history-panel.inSidebar #viewButton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover, 
 #downloadManager.inSidebar #clearListButton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
@@ -188,7 +194,8 @@
 .inSidebar #bookmarks-dustbox:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .inSidebar #placesToolbar > toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
 .inSidebar #RIL_sort:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
-.inSidebar #RIL_listPage:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
+.inSidebar #RIL_listPage:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover,
+.inSidebar #FindToolbar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):not([checked="true"]):not([open="true"]):not(:active):hover {
 	background-color: hsla(190,60%,70%,.5) !important;
 	border-color: hsla(190,50%,65%,.8) hsla(190,50%,50%,.8) hsla(190,50%,40%,.8) !important;
 	box-shadow: 0 0 0 1px rgba(255,255,255,.3) inset, 0 0 0 1.5px rgba(255,255,255,.1) inset, 0 0 3.5px hsl(190,90%,80%) !important;
@@ -227,6 +234,7 @@
 .inSidebar #placesToolbar > toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .inSidebar #RIL_sort > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 .inSidebar #RIL_listPage > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
+.inSidebar #FindToolbar toolbarbutton > .toolbarbutton-menubutton-button:not([disabled="true"]):hover:active,
 
 #history-panel.inSidebar #viewButton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]), 
 #downloadManager.inSidebar #clearListButton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
@@ -251,6 +259,7 @@
 .inSidebar #placesToolbar > toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_sort:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 .inSidebar #RIL_listPage:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
+.inSidebar #FindToolbar toolbarbutton:hover:active > .toolbarbutton-menubutton-dropmarker:not([disabled="true"]),
 
 #history-panel.inSidebar #viewButton[open="true"] > .toolbarbutton-menubutton-dropmarker, 
 #downloadManager.inSidebar #clearListButton[open="true"] > .toolbarbutton-menubutton-dropmarker,
@@ -275,6 +284,7 @@
 .inSidebar #placesToolbar > toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .inSidebar #RIL_sort[open="true"] > .toolbarbutton-menubutton-dropmarker,
 .inSidebar #RIL_listPage[open="true"] > .toolbarbutton-menubutton-dropmarker,
+.inSidebar #FindToolbar toolbarbutton[open="true"] > .toolbarbutton-menubutton-dropmarker,
 
 #history-panel.inSidebar #viewButton:not([type="menu-button"]):not([disabled="true"]):hover:active, 
 #downloadManager.inSidebar #clearListButton:not([type="menu-button"]):not([disabled="true"]):hover:active,
@@ -299,6 +309,7 @@
 .inSidebar #placesToolbar > toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .inSidebar #RIL_sort:not([type="menu-button"]):not([disabled="true"]):hover:active,
 .inSidebar #RIL_listPage:not([type="menu-button"]):not([disabled="true"]):hover:active,
+.inSidebar #FindToolbar toolbarbutton:not([type="menu-button"]):not([disabled="true"]):hover:active,
 
 #history-panel.inSidebar #viewButton:not([type="menu-button"])[checked="true"], 
 #downloadManager.inSidebar #clearListButton:not([type="menu-button"])[checked="true"],
@@ -323,6 +334,7 @@
 .inSidebar #placesToolbar > toolbarbutton:not([type="menu-button"])[checked="true"],
 .inSidebar #RIL_sort:not([type="menu-button"])[checked="true"],
 .inSidebar #RIL_listPage:not([type="menu-button"])[checked="true"],
+.inSidebar #FindToolbar toolbarbutton:not([type="menu-button"])[checked="true"],
 
 #history-panel.inSidebar #viewButton[open="true"], 
 #downloadManager.inSidebar #clearListButton[open="true"],
@@ -346,7 +358,8 @@
 .inSidebar #bookmarks-dustbox[open="true"],
 .inSidebar #placesToolbar > toolbarbutton[open="true"],
 .inSidebar #RIL_sort[open="true"],
-.inSidebar #RIL_listPage[open="true"] {
+.inSidebar #RIL_listPage[open="true"],
+.inSidebar #FindToolbar toolbarbutton[open="true"] {
 	background-color: transparent !important;
 	border-color: rgba(0,0,0,.65) rgba(0,0,0,.55) rgba(0,0,0,.5) !important;
 	box-shadow: 0 0 6.5px rgba(0,0,0,.4) inset, 0 0 2px rgba(0,0,0,.4) inset,  0 1px 0 rgba(200,200,200,.4) !important;
@@ -375,7 +388,8 @@
 .inSidebar #bookmarks-dustbox[checked="true"]:not(:active):hover,
 .inSidebar #placesToolbar > toolbarbutton[checked="true"]:not(:active):hover,
 .inSidebar #RIL_sort[checked="true"]:not(:active):hover,
-.inSidebar #RIL_listPage[checked="true"]:not(:active):hover {
+.inSidebar #RIL_listPage[checked="true"]:not(:active):hover,
+.inSidebar #FindToolbar toolbarbutton[checked="true"]:not(:active):hover {
 	background-color: rgba(90%,90%,90%,.4) !important;
 	transition: background-color .4s !important;
 }

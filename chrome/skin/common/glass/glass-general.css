@@ -68,7 +68,9 @@
 .inSidebar #styles,
 .inSidebar #bookmarks-content-box,
 .inSidebar #placesView,
-.inSidebar #RIL_sidebar {
+.inSidebar #RIL_sidebar,
+.inSidebar #findbartweak-findInTabs-tabs richlistbox,
+.inSidebar #findbartweak-findInTabs-hits richlistbox {
 	-moz-appearance: none !important;
 	border: 1px solid rgb(174, 183, 196) !important;
 	border-radius: 5px !important;
@@ -115,6 +117,10 @@
 .inSidebar #places-content-view treechildren::-moz-tree-row(hover),
 .inSidebar #downloadsRichListBox richlistitem:hover,
 .inSidebar #downloadsRichListBox richlistitem[selected="true"],
+.inSidebar #findbartweak-findInTabs-tabs richlistitem:hover,
+.inSidebar #findbartweak-findInTabs-tabs richlistitem[selected="true"],
+.inSidebar #findbartweak-findInTabs-hits richlistitem:hover,
+.inSidebar #findbartweak-findInTabs-hits richlistitem[selected="true"],
 
 .inSidebar .RIL_row:hover {
 	color: black !important;
@@ -189,9 +195,23 @@
 /* Other stuff */
 
 .inSidebar toolbox,
-.inSidebar toolbar:not(#sp-toolbar):not(.devtools-toolbar) {
+.inSidebar toolbar:not(#sp-toolbar):not(.devtools-toolbar),
+.inSidebar #FindToolbar,
+#findbartweak-findInTabs.inSidebar #contentBox,
+.inSidebar #FindToolbar toolbarbutton .toolbarbutton-text,
+.inSidebar #FindToolbar toolbarbutton .toolbarbutton-icon {
 	-moz-appearance: none !important;
 	background: rgba(0, 0, 0, 0) !important;
 	margin: 0 !important;
 	border: none !important;
+}
+
+.inSidebar #FindToolbar toolbarbutton {
+	outline: 0 !important;
+}
+
+.inSidebar #FindToolbar toolbarbutton .toolbarbutton-text,
+.inSidebar #FindToolbar toolbarbutton .toolbarbutton-icon {
+	padding: 0 !important;
+	box-shadow: none !important;
 }
