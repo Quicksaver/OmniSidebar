@@ -476,7 +476,7 @@
 		flex-direction: row;
 	}
 	
-	.inSidebar #detail-rows > setting[collapsed] {
+	.inSidebar #detail-rows > setting[collapsed="true"] {
 		display: none;
 	}
 	
