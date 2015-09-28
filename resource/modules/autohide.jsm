@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.4';
+Modules.VERSION = '2.0.5';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -375,62 +375,63 @@ this.autoHide = {
 		var leftOffset = moveBy +moveLeft;
 		var rightOffset = moveBy +moveRight;
 		
-		let sscode = 
-			'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
-			'@-moz-document url("'+document.baseURI+'") {\n' +
-		
-			'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(ltr):not([movetoright]) .omnisidebar_resize_box,\n' +
-			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(ltr)[movetoleft] .omnisidebar_resize_box,\n' +
-			'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(rtl)[movetoright] .omnisidebar_resize_box,\n' +
-			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(rtl):not([movetoleft]) .omnisidebar_resize_box {\n' +
-			'		left: '+leftOffset+'px !important;\n' +
-			'	}\n' +
-		
-			'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(ltr)[movetoright] .omnisidebar_resize_box,\n' +
-			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(ltr):not([movetoleft]) .omnisidebar_resize_box,\n' +
-			'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(rtl):not([movetoright]) .omnisidebar_resize_box,\n' +
-			'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(rtl)[movetoleft] .omnisidebar_resize_box {\n' +
-			'		right: '+rightOffset+'px !important;\n' +
-			'	}\n';
+		let sscode = '\
+			@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n\
+			@-moz-document url("'+document.baseURI+'") {\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(ltr):not([movetoright]) .omnisidebar_resize_box,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(ltr)[movetoleft] .omnisidebar_resize_box,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(rtl)[movetoright] .omnisidebar_resize_box,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(rtl):not([movetoleft]) .omnisidebar_resize_box {\n\
+					left: '+leftOffset+'px !important;\n\
+				}\n\
+				\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(ltr)[movetoright] .omnisidebar_resize_box,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(ltr):not([movetoleft]) .omnisidebar_resize_box,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:-moz-locale-dir(rtl):not([movetoright]) .omnisidebar_resize_box,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:-moz-locale-dir(rtl)[movetoleft] .omnisidebar_resize_box {\n\
+					right: '+rightOffset+'px !important;\n\
+				}\n';
 		
 		if(Prefs.renderabove && Prefs.autoHide && mainSidebar.width) {
-			sscode +=
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]):not([dontReHover]) #omnisidebar-resizebox:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]) #omnisidebar-resizebox[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]):not([dontReHover]) #omnisidebar-resizebox[hiding],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoright]:not([dontReHover]) #omnisidebar-resizebox:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoright] #omnisidebar-resizebox[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoright]:not([dontReHover]) #omnisidebar-resizebox[hiding] {\n' +
-				'		left: ' + (mainSidebar.width +leftOffset) + 'px !important;\n' +
-				'	}\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoright]:not([dontReHover]) #omnisidebar-resizebox:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoright] #omnisidebar-resizebox[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoright]:not([dontReHover]) #omnisidebar-resizebox[hiding],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoright]):not([dontReHover]) #omnisidebar-resizebox:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoright]) #omnisidebar-resizebox[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoright]):not([dontReHover]) #omnisidebar-resizebox[hiding] {\n' +
-				'		right: ' + (mainSidebar.width +rightOffset) + 'px !important;\n' +
-				'	}\n';
+			sscode += '\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]):not([dontReHover]) #'+objName+'-resizebox:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]) #'+objName+'-resizebox[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoright]):not([dontReHover]) #'+objName+'-resizebox[hiding],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoright]:not([dontReHover]) #'+objName+'-resizebox:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoright] #'+objName+'-resizebox[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoright]:not([dontReHover]) #'+objName+'-resizebox[hiding] {\n\
+					left: ' + (mainSidebar.width +leftOffset) + 'px !important;\n\
+				}\n\
+				\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoright]:not([dontReHover]) #'+objName+'-resizebox:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoright] #'+objName+'-resizebox[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoright]:not([dontReHover]) #'+objName+'-resizebox[hiding],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoright]):not([dontReHover]) #'+objName+'-resizebox:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoright]) #'+objName+'-resizebox[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #sidebar-box[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoright]):not([dontReHover]) #'+objName+'-resizebox[hiding] {\n\
+					right: ' + (mainSidebar.width +rightOffset) + 'px !important;\n\
+				}\n';
 		}
 		
 		if(Prefs.renderaboveTwin && Prefs.autoHideTwin && twinSidebar.width) {
-			sscode +=
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]) #omnisidebar-resizebox-twin[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin[hiding],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoleft]:not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoleft] #omnisidebar-resizebox-twin[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoleft]:not([dontReHover]) #omnisidebar-resizebox-twin[hiding] {\n' +
-				'		right: ' + (twinSidebar.width +rightOffset) + 'px !important;\n' +
-				'	}\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoleft]:not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoleft] #omnisidebar-resizebox-twin[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoleft]:not([dontReHover]) #omnisidebar-resizebox-twin[hiding],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin:hover,\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoleft]) #omnisidebar-resizebox-twin[hover],\n' +
-				'	window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoleft]):not([dontReHover]) #omnisidebar-resizebox-twin[hiding] {\n' +
-				'		left: ' + (twinSidebar.width +leftOffset) + 'px !important;\n' +
-				'	}\n';
+			sscode += '\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]):not([dontReHover]) #'+objName+'-resizebox-twin:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]) #'+objName+'-resizebox-twin[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr):not([movetoleft]):not([dontReHover]) #'+objName+'-resizebox-twin[hiding],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoleft]:not([dontReHover]) #'+objName+'-resizebox-twin:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoleft] #'+objName+'-resizebox-twin[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl)[movetoleft]:not([dontReHover]) #'+objName+'-resizebox-twin[hiding] {\n\
+					right: ' + (twinSidebar.width +rightOffset) + 'px !important;\n\
+				}\n\
+				\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoleft]:not([dontReHover]) #'+objName+'-resizebox-twin:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoleft] #'+objName+'-resizebox-twin[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(ltr)[movetoleft]:not([dontReHover]) #'+objName+'-resizebox-twin[hiding],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoleft]):not([dontReHover]) #'+objName+'-resizebox-twin:hover,\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoleft]) #'+objName+'-resizebox-twin[hover],\n\
+				window['+objName+'_UUID="'+_UUID+'"] #'+objName+'-sidebar-box-twin[renderabove][autohide]:not([collapsed]):-moz-locale-dir(rtl):not([movetoleft]):not([dontReHover]) #'+objName+'-resizebox-twin[hiding] {\n\
+					left: ' + (twinSidebar.width +leftOffset) + 'px !important;\n\
+				}\n';
 		}
 		
 		sscode += '}';

@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.3';
+Modules.VERSION = '1.2.4';
 
 this.setTransparency = function() {
 	var alpha = Prefs.transparency /1000;
@@ -6,14 +6,14 @@ this.setTransparency = function() {
 	var b = 128 -m;
 	var color = Math.max(Math.round((alpha *m) +b), 0);
 	
-	let sscode = 
-		'@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n' +
-		'@-moz-document url("chrome://browser/content/browser.xul") {\n' +
-		'	.sidebar-box[renderabove] .omnisidebar_resize_box,\n' +
-		'	.sidebar-box:not([renderabove]) {\n' +
-		'		background-color: rgba('+color+','+color+','+color+','+alpha+') !important;\n' +
-		'	}\n' +
-		'}';
+	let sscode = '\
+		@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n\
+		@-moz-document url("chrome://browser/content/browser.xul") {\n\
+			.sidebar-box[renderabove] .omnisidebar_resize_box,\n\
+			.sidebar-box:not([renderabove]) {\n\
+				background-color: rgba('+color+','+color+','+color+','+alpha+') !important;\n\
+			}\n\
+		}';
 	
 	Styles.load('glassStyleTransparency', sscode, true);
 };
