@@ -43,7 +43,7 @@
 			<Description>
 				<em:locale>es-ES</em:locale>
 				<em:name>OmniSidebar</em:name>
-				<em:description>Trae sus marcadores a la vista con tan solo un gesto. Mueve la barra lateral por la pantalla. Abre una barra lateral diferente tan solo haciendo clic en su título. ¡Y más! ¡Mantiene la sencillez y fácil acceso de su barra lateral!</em:description>
+				<em:description>Trae sus marcadores a la vista con tan solo un gesto. Mueve la barra lateral al otro lado de la pantalla. Abre una barra lateral distinta simplemente haciendo clic en su título. ¡Y más! ¡Mantiene la barra lateral simple y de rápido acceso!</em:description>
 				<em:translator>Alejandro Pérez Martín, strel</em:translator>
 			</Description>
 		</em:localized>
