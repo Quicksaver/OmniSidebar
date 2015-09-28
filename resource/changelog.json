@@ -1,6 +1,18 @@
 {
-	"current":"1.6.4",
+	"current":"1.6.5",
 	"releases": {
+		"1.6.5":{
+			"date":"September 28, 2015",
+			"notes":[
+				["new","Support for FindBar Tweak's new Find All feature"],
+				["changed","Some minor appearance tweaks for Windows 8 and 10"],
+				["changed","Default keyboard shortcut for the Twin Sidebar is now Ctrl+Shift+F8, since Firefox's WebIDE uses Shift+F8"],
+				["removed","Compatibility with Firefox 40"],
+				["updated","es-ES locale"],
+				["updated","Improvements when enabling/disabling the add-on"],
+				["bugfix","Plugin preferences were not visible in the add-ons sidebar"]
+			]
+		},
 		"1.6.4":{
 			"date":"September 10, 2015",
 			"notes":[
