@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.5';
+Modules.VERSION = '2.0.6';
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -172,15 +172,34 @@ this.autoHide = {
 						var hover = bar.above && bar.autoHide;
 						
 						if(hover) {
+							let delay = (Timers['hidingSidebar'+(bar.twin ? 'Twin' : '')]) ? 0 : Prefs.showDelay;
+							
 							// this also cancels the hiding if that was already initialized
 							Timers.init('switchMouseOver', () => {
+								// Try not to double-mouseover items in child popups, otherwise it could lead to the toolbar getting stuck open.
+								// For instance, NoScript's "dis/allow scripts on this page" changes the DOM of the popup, where hovered items could
+								// be removed without triggering a mouseout event, leading to a subsequent mouseover on new/moved items.
+								if(isAncestor(e.target, autoHide.hoveredPopup)) { return; }
+								for(let popup of autoHide.holdPopupNodes) {
+									if(isAncestor(e.target, popup)) {
+										autoHide.hoveredPopup = popup;
+										break;
+									}
+								}
+								
 								autoHide.setHover(bar, true);
-							}, (Timers['hidingSidebar'+(bar.twin ? 'Twin' : '')]) ? 0 : Prefs.showDelay);
+							}, delay);
 						}
 						break;
 					
 					case 'mouseout':
 						Timers.cancel('switchMouseOver');
+						
+						// see note above about preventing double-mouseovers
+						if(isAncestor(e.target, autoHide.hoveredPopup)) {
+							autoHide.hoveredPopup = null;
+						}
+						
 						autoHide.setHover(bar, false);
 						break;
 				}
@@ -208,7 +227,9 @@ this.autoHide = {
 	},
 	
 	// Keep sidebar visible when opening menus within it
+	hoveredPopup: null,
 	holdPopupNodes: new Set(),
+	releasePopups: new Map(),
 	holdPopupMenu: function(e) {
 		// don't do anything on tooltips! the UI might collapse altogether
 		if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
@@ -305,6 +326,13 @@ this.autoHide = {
 			// if we're opening the sidebar now, the anchor may move, so we need to reposition the popup when it does
 			this.holdPopupNodes.add(target);
 			
+			// make sure the popup stays in the set, so that ones that open and close quickly
+			// (i.e. multiple dis/allow actions in NoScript's popup) aren't removed while they're still open
+			if(this.releasePopups.has(target)) {
+				this.releasePopups.get(target).cancel();
+				this.releasePopups.delete(target);
+			}
+			
 			if(!trueAttribute(hold.resizeBox, 'hover') && !$$('#'+hold.box.id+':hover')[0]) {
 				target.collapsed = true;
 				hold._autohide.add(this);
@@ -313,19 +341,27 @@ this.autoHide = {
 			
 			this.setHover(hold, true);
 			
-			var selfRemover = (ee) => {
+			let selfRemover = (ee) => {
 				if(ee.originalTarget != e.originalTarget) { return; } //submenus
 				Listeners.remove(target, 'popuphidden', selfRemover);
+				
 				this.popupsRemoveListeners();
+				if(this.hoveredPopup == target) {
+					// it's unlikely that a mouseout will occur once the popup is hidden,
+					// so make sure to undo whatever mouseover event hovered the popup
+					this.setHover(hold, false);
+					
+					this.hoveredPopup = null;
+				}
 				
 				// making sure we don't collapse it permanently
 				target.collapsed = false;
 				
 				this.setHover(hold, false);
 				
-				aSync(() => {
+				this.releasePopups.set(target, aSync(() => {
 					this.holdPopupNodes.delete(target);
-				}, 150);
+				}, 150));
 			}
 			Listeners.add(target, 'popuphidden', selfRemover);
 		}
