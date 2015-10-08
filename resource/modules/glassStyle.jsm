@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.4';
+// VERSION 1.2.4
 
 this.setTransparency = function() {
 	var alpha = Prefs.transparency /1000;

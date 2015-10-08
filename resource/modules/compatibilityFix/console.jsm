@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+// VERSION 2.0.1
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");

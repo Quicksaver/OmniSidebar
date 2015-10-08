@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.0';
+// VERSION 2.0.0
 
 this.__defineGetter__('EdgeWiseOV', function() { return window.EdgeWiseOV; });
 

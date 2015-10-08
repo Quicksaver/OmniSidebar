@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+// VERSION 1.1.1
 
 //Error: win[objectName].xulId(...).contentWindow is undefined
 //Source file: file:///C:/Users/Quicksaver/AppData/Roaming/Mozilla/Firefox/Profiles/c0wgkj18.Nightly/extensions/isreaditlater@ideashower.com/components/RILdelegate.js

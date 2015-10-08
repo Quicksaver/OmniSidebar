@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.2';
+// VERSION 1.1.2
 
 this.setSwitcherWidth = function() {
 	var width = (WINNT) ? 3 : (DARWIN) ? 8 : 4;

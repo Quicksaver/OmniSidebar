@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.0';
+// VERSION 1.1.0
 
 this.mainKey = {
 	id: objName+'-key_mainSidebar',

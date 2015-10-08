@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.1';
+// VERSION 1.1.1
 
 this.toggleForceOpenToolbars = function() {
 	if(Prefs.forceOpenToolbars) {

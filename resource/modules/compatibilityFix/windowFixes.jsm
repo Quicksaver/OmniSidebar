@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.7';
+// VERSION 1.1.7
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {

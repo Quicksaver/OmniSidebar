@@ -1,4 +1,4 @@
-Modules.VERSION = '1.2.0';
+// VERSION 1.2.0
 
 this.TSTresize = function() {
 	gBrowser.treeStyleTab.onResize({ originalTarget: window });

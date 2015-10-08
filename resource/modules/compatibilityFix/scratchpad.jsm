@@ -1,4 +1,4 @@
-Modules.VERSION = '2.0.1';
+// VERSION 2.0.1
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });

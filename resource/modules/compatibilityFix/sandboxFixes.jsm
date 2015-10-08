@@ -1,4 +1,4 @@
-Modules.VERSION = '1.1.3';
+// VERSION 1.1.3
 
 Modules.LOADMODULE = function() {
 	AddonManager.getAddonByID("2.0@disconnect.me", function(addon) {

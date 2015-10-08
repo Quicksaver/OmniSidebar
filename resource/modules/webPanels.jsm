@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.0';
+// VERSION 1.0.0
 
 // for now this works only with the main sidebar
 this.webPanels = {

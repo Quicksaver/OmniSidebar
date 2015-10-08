@@ -1,4 +1,4 @@
-Modules.VERSION = '1.0.0';
+// VERSION 1.0.0
 
 this.prefsMonitorAddon = {
 	id: '{517f9e52-c795-4764-bf77-5e2db596cee6}',

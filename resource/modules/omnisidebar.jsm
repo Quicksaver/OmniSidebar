@@ -1,4 +1,4 @@
-Modules.VERSION = '3.0.12';
+// VERSION 3.0.12
 
 this.mainSidebar = {
 	main: true,
