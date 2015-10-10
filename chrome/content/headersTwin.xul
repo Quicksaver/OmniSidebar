@@ -18,6 +18,7 @@
 				<label crop="end" value="&omnisidebarButtonTwin.label;" />
 				<toolbar id="objName-Toolbar-twin"
 					class="omnisidebar-toolbar"
+					fullscreentoolbar="true"
 					toolbarname="&omnisidebarToolbarTwin.label;"
 					accesskey="&omnisidebarToolbarTwin.accesskey;"
 					customizable="true"

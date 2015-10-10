@@ -20,6 +20,7 @@
 				<label crop="end" value="&omnisidebarButtonMain.label;" />
 				<toolbar id="objName-Toolbar"
 					class="omnisidebar-toolbar"
+					fullscreentoolbar="true"
 					toolbarname="&omnisidebarToolbar.label;"
 					accesskey="&omnisidebarToolbar.accesskey;"
 					customizable="true"
