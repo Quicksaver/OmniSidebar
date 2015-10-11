@@ -1,4 +1,4 @@
-// VERSION 3.0.12
+// VERSION 3.0.13
 
 this.mainSidebar = {
 	main: true,
@@ -834,6 +834,12 @@ this.SidebarUI = {
 				commandID = commandID.id;
 			}
 		}
+		
+		// bugfix: don't toggle the sidebar if it hasn't finished loading yet.
+		// For instance, SessionStore tracks the sidebar on startup separately through the sidebarcommand attribute on sidebar-box,
+		// this attribute still exists when the sidebar is just collapsed, so the sidebar would reopen when restarting the browser.
+		// (we can't remove the attribute on shutdown because the window will no longer be tracked by SessionStore by then)
+		if(!bar.loaded) { return false; }
 		
 		var otherBar = (twin) ? mainSidebar : twinSidebar;
 		var sidebarBroadcaster = $(commandID);
