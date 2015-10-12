@@ -1,13 +1,13 @@
-<!ENTITY preferences.button "Preferences">
-<!ENTITY preferences.undo.label "Undo">
-<!ENTITY preferences.redo.label "Redo">
-<!ENTITY preferences.undoredo.tooltip "Quickly revert any change made to the add-on's preferences, including importing from a file and restoring defaults.">
-<!ENTITY preferences.import.label "Import from file...">
-<!ENTITY preferences.import.tooltip "Load add-on preferences from a previously exported file on your computer.">
-<!ENTITY preferences.export.label "Export to file...">
-<!ENTITY preferences.export.tooltip "Save your add-on preferences into an external file for safekeeping.">
-<!ENTITY preferences.reset.label "Restore defaults">
-<!ENTITY preferences.reset.tooltip.a "All preferences are rolled back to their default values, as if the add-on was fresh installed.">
-<!ENTITY preferences.reset.tooltip.b "Button placements in toolbars are unaffected, to revert those use the Restore Defaults button in Customize view instead.">
-<!ENTITY preferences.jumpto.label "Jump to preference...">
-<!ENTITY preferences.jumpto.tooltip "Type in a word and you'll be taken to the first preference that contains it.">
+<!ENTITY preferences.button "Einstellungen">
+<!ENTITY preferences.undo.label "Rückgängig">
+<!ENTITY preferences.redo.label "Wiederherstellen">
+<!ENTITY preferences.undoredo.tooltip "Vorgenommene Änderungen an den Einstellungen des Add-ons einschließlich Import aus einer Datei und Zurücksetzen auf Standardwerte rückgängig machen.">
+<!ENTITY preferences.import.label "Importieren aus Datei…">
+<!ENTITY preferences.import.tooltip "Add-on-Einstellungen aus einer eher exportierten Datei wiederherstellen.">
+<!ENTITY preferences.export.label "Exportieren in Datei…">
+<!ENTITY preferences.export.tooltip "Die Add-on-Einstellungen in einer externen Datei sichern.">
+<!ENTITY preferences.reset.label "Standard wiederherstellen">
+<!ENTITY preferences.reset.tooltip.a "Alle Einstellungen auf die Standardwerte wiederherstellen, wie sie direkt nach einer ersten Installation des Add-ons vorzufinden sind.">
+<!ENTITY preferences.reset.tooltip.b "Die Position der Schaltflächen wird dadurch nicht verändert, verwenden Sie dazu die Schaltfläche &quot;Standard wiederherstellen&quot; im Dialog &quot;Firefox anpassen&quot;.">
+<!ENTITY preferences.jumpto.label "Zu Einstellung gehen…">
+<!ENTITY preferences.jumpto.tooltip "Durch Eingabe eines Wortes wird zur ersten Einstellung gewechselt, welche dieses enthält.">

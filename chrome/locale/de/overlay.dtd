@@ -3,7 +3,7 @@
 <!ENTITY addonsSidebar.tooltip "Add-ons-Manager in der Sidebar öffnen">
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "Lesezeichen-Sidebar">
-<!ENTITY bookmarksSidebar.title "Bookmarks">
+<!ENTITY bookmarksSidebar.title "Lesezeichen">
 <!ENTITY bookmarksSidebar.tooltip "Die Lesezeichen in der Sidebar anzeigen">
 <!ENTITY bookmarksSidebar.accesskey "L">
 <!ENTITY historySidebar.label "Chronik-Sidebar">
@@ -16,7 +16,7 @@
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "DOM Inspector in der Sidebar öffnen">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.labelB "Page Info">
+<!ENTITY PageInfoSidebar.labelB "Seiteninformationen">
 <!ENTITY PageInfoSidebar.tooltip "Informationen über die geöffnete Seite anzeigen">
 <!ENTITY PageInfoSidebar.accesskey "m">
 <!ENTITY scratchpadSidebar.label "JavaScript-Umgebung">
