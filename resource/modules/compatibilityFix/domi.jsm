@@ -1,4 +1,4 @@
-// VERSION 2.0.0
+// VERSION 2.0.1
 
 this.DOMi = {
 	broadcasterId: objName+'-viewDOMInspectorSidebar',
@@ -68,7 +68,7 @@ Modules.LOADMODULE = function() {
 };
 
 Modules.UNLOADMODULE = function() {
-	if(UNLOADED) {
+	if(UNLOADED && UNLOADED != APP_SHUTDOWN) {
 		if(mainSidebar.command == DOMi.broadcasterId) { SidebarUI.close(mainSidebar); }
 		if(twinSidebar.command == DOMi.broadcasterId) { SidebarUI.close(twinSidebar); }
 	}

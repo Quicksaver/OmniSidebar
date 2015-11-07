@@ -1,4 +1,4 @@
-// VERSION 2.0.1
+// VERSION 2.0.2
 
 this.dmgrPlaces = {
 	broadcasterId: objName+'-viewDmgrPlacesSidebar',
@@ -123,7 +123,7 @@ Modules.LOADMODULE = function() {
 };
 
 Modules.UNLOADMODULE = function() {
-	if(UNLOADED) {
+	if(UNLOADED && UNLOADED != APP_SHUTDOWN) {
 		if(dmgrPlaces.is(mainSidebar)) {
 			SidebarUI.close(mainSidebar);
 		}

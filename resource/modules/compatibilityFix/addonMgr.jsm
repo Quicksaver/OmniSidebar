@@ -1,4 +1,4 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.addonMgr = {
 	broadcasterId: objName+'-viewAddonSidebar',
@@ -98,8 +98,10 @@ Modules.UNLOADMODULE = function() {
 	addonMgr.toggleAlways(false);
 	
 	if(UNLOADED) {
-		if(mainSidebar.command == addonMgr.broadcasterId) { SidebarUI.close(mainSidebar); }
-		if(twinSidebar.command == addonMgr.broadcasterId) { SidebarUI.close(twinSidebar); }
+		if(UNLOADED != APP_SHUTDOWN) {
+			if(mainSidebar.command == addonMgr.broadcasterId) { SidebarUI.close(mainSidebar); }
+			if(twinSidebar.command == addonMgr.broadcasterId) { SidebarUI.close(twinSidebar); }
+		}
 		Styles.unload('addonMgrSidebar');
 		Styles.unload('addonMgrSidebarDiscover');
 	}

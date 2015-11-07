@@ -1,4 +1,4 @@
-// VERSION 2.0.0
+// VERSION 2.0.1
 
 this.pageInfo = {
 	broadcasterId: objName+'-viewPageInfoSidebar',
@@ -59,7 +59,7 @@ Modules.LOADMODULE = function() {
 };
 
 Modules.UNLOADMODULE = function() {
-	if(UNLOADED) {
+	if(UNLOADED && UNLOADED != APP_SHUTDOWN) {
 		if(mainSidebar.command == pageInfo.broadcasterId) { SidebarUI.close(mainSidebar); }
 		if(twinSidebar.command == pageInfo.broadcasterId) { SidebarUI.close(twinSidebar); }
 	}

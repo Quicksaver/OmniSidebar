@@ -1,4 +1,4 @@
-// VERSION 2.0.1
+// VERSION 2.0.2
 
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
@@ -131,8 +131,10 @@ Modules.UNLOADMODULE = function() {
 	sidebarConsole.toggleAlways(false);
 	
 	if(UNLOADED) {
-		if(mainSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(mainSidebar); }
-		if(twinSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(twinSidebar); }
+		if(UNLOADED != APP_SHUTDOWN) {
+			if(mainSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(mainSidebar); }
+			if(twinSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(twinSidebar); }
+		}
 		Styles.unload('browserConsole');
 	}
 };
