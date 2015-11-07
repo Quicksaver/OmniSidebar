@@ -214,7 +214,8 @@
 	#addons-page.inSidebar richlistitem .update-info-container > *,
 	#addons-page.inSidebar richlistitem .control-container > *,
 	#addons-page.inSidebar richlistitem .install-status > * {
-		max-height: 20px;
+		min-height: 2em;
+		max-height: 2em;
 	}
 	
 	#addons-page.inSidebar richlistitem .content-container {
