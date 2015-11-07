@@ -1,4 +1,4 @@
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.renderAbove = {
 	dragalt: null,
@@ -66,6 +66,18 @@ this.renderAbove = {
 			
 			case 'sidebarWidthChanged':
 				this.setWidth();
+				break;
+			
+			case 'aftercustomization':
+				// force a reflow, to prevent the sidebar being shorter momentarily after exiting customize mode
+				aSync(function() {
+					if(!mainSidebar.closed && mainSidebar.above) {
+						mainSidebar.box.clientHeight;
+					}
+					if(!twinSidebar.closed && twinSidebar.above) {
+						twinSidebar.box.clientHeight;
+					}
+				});
 				break;
 		}
 	},
@@ -287,6 +299,7 @@ Modules.LOADMODULE = function() {
 	Modules.load('autohide');
 	
 	Listeners.add(window, 'sidebarWidthChanged', renderAbove);
+	Listeners.add(window, 'aftercustomization', renderAbove);
 	
 	Prefs.listen('showheaderdock', renderAbove);
 	Prefs.listen('showheaderdockTwin', renderAbove);
@@ -315,6 +328,7 @@ Modules.UNLOADMODULE = function() {
 	removeAttribute(twinSidebar.box, 'squareLook');
 	
 	Listeners.remove(window, 'sidebarWidthChanged', renderAbove);
+	Listeners.remove(window, 'aftercustomization', renderAbove);
 	
 	Prefs.unlisten('showheaderdock', renderAbove);
 	Prefs.unlisten('showheaderdockTwin', renderAbove);
