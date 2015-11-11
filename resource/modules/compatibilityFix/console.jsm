@@ -1,10 +1,16 @@
-// VERSION 2.0.2
+// VERSION 2.0.3
 
-XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://gre/modules/devtools/Loader.jsm");
-
-this.__defineGetter__('HUDService', function() { return devtools.require("devtools/webconsole/hudservice"); });
+if(Services.vc.compare(Services.appinfo.version, "44.0a1") < 0) {
+	XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
+	XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
+	XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://gre/modules/devtools/Loader.jsm");
+	this.__defineGetter__('HUDService', function() { return devtools.require("devtools/webconsole/hudservice"); });
+} else {
+	XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://devtools/shared/Loader.jsm");
+	this.__defineGetter__('DebuggerServer', function() { return devtools.require("devtools/server/main").DebuggerServer; });
+	this.__defineGetter__('DebuggerClient', function() { return devtools.require("devtools/shared/client/main").DebuggerClient; });
+	this.__defineGetter__('HUDService', function() { return devtools.require("devtools/client/webconsole/hudservice"); });
+}
 
 this.sidebarConsole = {
 	broadcasterId: objName+'-viewConsoleSidebar',
@@ -23,22 +29,25 @@ this.sidebarConsole = {
 					DebuggerServer.init();
 					DebuggerServer.addBrowserActors();
 				}
+				DebuggerServer.allowChromeProcess = true;
 				
-				var client = new DebuggerClient(DebuggerServer.connectPipe());
+				let client = new DebuggerClient(DebuggerServer.connectPipe());
 				client.connect(function() {
-					client.listTabs(function(aResponse) {
-						// Add Global Process debugging...
-						var form = JSON.parse(JSON.stringify(aResponse));
-						delete form.tabs;
-						delete form.selected;
-						// ...only if there are appropriate actors (a 'from' property will always be there).
-						if(Object.keys(form).length > 1) {
-							devtools.TargetFactory.forRemoteTab({ form: form, client: client, chrome: true }).then(function(target) {
-								HUDService.openBrowserConsole(target, e.target, e.target);
-							});
-						}
+					client.getProcess().then(function(aResponse) {
+						// Set chrome:false in order to attach to the target
+						// (i.e. send an `attach` request to the chrome actor)
+						devtools.TargetFactory.forRemoteTab({ form: aResponse.form, client: client, chrome: false }).then(function(target) {
+							HUDService.openBrowserConsole(target, e.target, e.target);
+						});
 					});
 				});
+				break;
+			
+			case 'ShouldCollapseSidebar':
+				if(e.target.getAttribute('sidebarcommand') == this.broadcasterId) {
+					e.preventDefault();
+					e.stopPropagation();
+				}
 				break;
 		}
 	},
@@ -118,10 +127,12 @@ Modules.LOADMODULE = function() {
 	Observers.add(sidebarConsole, 'web-console-destroyed');
 	
 	Listeners.add(window, 'SidebarFocused', sidebarConsole);
+	Listeners.add(window, 'ShouldCollapseSidebar', sidebarConsole);
 };
 
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'SidebarFocused', sidebarConsole);
+	Listeners.remove(window, 'ShouldCollapseSidebar', sidebarConsole);
 	
 	Observers.remove(sidebarConsole, 'web-console-destroyed');
 	

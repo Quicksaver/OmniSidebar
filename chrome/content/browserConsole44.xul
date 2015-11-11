@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overlay id="browserConsole44-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<broadcaster id="objName-viewConsoleSidebar"
+		sidebarurl="chrome://devtools/content/webconsole/webconsole.xul" />
+	
+</overlay>

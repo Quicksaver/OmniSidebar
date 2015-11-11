@@ -1,7 +1,10 @@
-// VERSION 1.1.8
+// VERSION 1.1.9
 
 Modules.LOADMODULE = function() {
-	toggleAttribute(document.documentElement, objName+'-FF44', Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0);
+	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
+		setAttribute(document.documentElement, objName+'-FF44', 'true');
+		Overlays.overlayURI('chrome://'+objPathString+'/content/browserConsole.xul', 'browserConsole44');
+	}
 	
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
 		Modules.loadIf('compatibilityFix/milewideback', (addon && addon.isActive));
@@ -58,5 +61,8 @@ Modules.UNLOADMODULE = function() {
 		Modules.unload('compatibilityFix/RTL');
 	}
 	
-	removeAttribute(document.documentElement, objName+'-FF44');
+	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
+		removeAttribute(document.documentElement, objName+'-FF44');
+		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/browserConsole.xul', 'browserConsole44');
+	}
 };
