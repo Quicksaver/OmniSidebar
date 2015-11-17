@@ -1,4 +1,4 @@
-// VERSION 2.0.6
+// VERSION 2.0.7
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -127,6 +127,8 @@ this.autoHide = {
 		Listeners.remove(bar.switcher, 'mouseover', bar._autohide);
 		Listeners.remove(bar.switcher, 'dragenter', bar._autohide);
 		Listeners.remove(bar.switcher, 'mouseout', bar._autohide);
+		Listeners.remove(bar.resizeBox, 'click', bar._autohide);
+		Listeners.remove(bar.switcher, 'click', bar._autohide);
 		delete bar._autohide;
 		
 		bar.autoHideInit = false;
@@ -202,6 +204,14 @@ this.autoHide = {
 						
 						autoHide.setHover(bar, false);
 						break;
+					
+					case 'click':
+						// When pressing a button in the sidebar toolbar while keeping the mouse moving, it's possible the mouse would leave the sidebar/toolbar
+						// before a popup is opened. So the siebar could temporarily start to hide because it is only stuck open *after*
+						// the popup is finished opening. This would cause some visual glitches in the popups, like them flashing, showing only the borders,
+						// or jumping to the top-left edge of the window.
+						autoHide.initialShow(bar, 500);
+						break;
 				}
 			}
 		};
@@ -210,6 +220,8 @@ this.autoHide = {
 		Listeners.add(bar.switcher, 'mouseover', bar._autohide);
 		Listeners.add(bar.switcher, 'dragenter', bar._autohide);
 		Listeners.add(bar.switcher, 'mouseout', bar._autohide);
+		Listeners.add(bar.resizeBox, 'click', bar._autohide);
+		Listeners.add(bar.switcher, 'click', bar._autohide);
 		
 		if(!Prefs.noInitialShow) {
 			this.initialShow(bar, 1000);
@@ -525,7 +537,7 @@ this.autoHide = {
 		
 		// don't use Timers, because if we use multiple initialShow()'s it would get stuck open
 		// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
-		var thisShowing = aSync(() => {
+		let thisShowing = aSync(() => {
 			if(typeof(autoHide) != 'undefined' && bar.initialShowings.has(thisShowing)) {
 				this.setHover(bar, false);
 				bar.initialShowings.delete(thisShowing);
