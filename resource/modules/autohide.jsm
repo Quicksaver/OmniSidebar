@@ -1,4 +1,4 @@
-// VERSION 2.0.7
+// VERSION 2.0.8
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -45,6 +45,7 @@ this.autoHide = {
 				}, 100);
 				break;
 			
+			case 'popupshowing':
 			case 'popupshown':
 				this.holdPopupMenu(e);
 				break;
@@ -246,6 +247,16 @@ this.autoHide = {
 		// don't do anything on tooltips! the UI might collapse altogether
 		if(!e.target || e.target.nodeName == 'window' || e.target.nodeName == 'tooltip') { return; }
 		
+		// no need to do any of this if none of the sidebars are autohiding (or are closed)
+		let proceed = false;
+		for(let bar of sidebars) {
+			if(bar.resizeBox && !bar.closed && bar.above && bar.autoHide) {
+				proceed = true;
+				break;
+			}
+		}
+		if(!proceed) { return; }
+		
 		var trigger = e.originalTarget.triggerNode;
 		var target = e.target;
 		
@@ -331,6 +342,15 @@ this.autoHide = {
 					}
 				}
 			}
+		}
+		
+		// Similarly to the 'click' handler above,
+		// popups shouldn't flash or jump around because the sidebars are temporarily hidden before the popup is fully shown.
+		if(e.type == 'popupshowing') {
+			if(hold && (trueAttribute(hold.resizeBox, 'hover') || $$('#'+hold.box.id+':hover')[0])) {
+				this.initialShow(hold, 500);
+			}
+			return;
 		}
 		
 		// some menus, like NoScript's button menu, like to open multiple times (I think), or at least they don't actually open the first time... or something...
@@ -610,6 +630,7 @@ Modules.LOADMODULE = function() {
 	Listeners.add(window, 'SidebarFocusedSync', autoHide);
 	Listeners.add(window, 'startSidebarResize', autoHide);
 	Listeners.add(window, 'endSidebarResize', autoHide);
+	Listeners.add(window, 'popupshowing', autoHide);
 	Listeners.add(window, 'popupshown', autoHide);
 	Listeners.add(window, 'focus', autoHide, true);
 	Listeners.add(window, 'blur', autoHide, true);
@@ -622,6 +643,7 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'SidebarFocusedSync', autoHide);
 	Listeners.remove(window, 'startSidebarResize', autoHide);
 	Listeners.remove(window, 'endSidebarResize', autoHide);
+	Listeners.remove(window, 'popupshowing', autoHide);
 	Listeners.remove(window, 'popupshown', autoHide);
 	Listeners.remove(window, 'focus', autoHide, true);
 	Listeners.remove(window, 'blur', autoHide, true);
