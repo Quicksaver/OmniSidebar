@@ -1,7 +1,7 @@
 {
-	"current":"1.6.7",
+	"current":"1.6.7.1",
 	"releases": {
-		"1.6.7":{
+		"1.6.7.1":{
 			"date":"November 18, 2015",
 			"notes":[
 				["bugfix","OmniSidebar buttons weren't reflecting the correct new feeds state (from <a=https://addons.mozilla.org/firefox/addon/feed-sidebar/>Feed Sidebar</a>)"],
