@@ -1,4 +1,4 @@
-content   omnisidebar                    chrome/content/
+content   omnisidebar                    chrome/content/   contentaccessible=yes
 resource  omnisidebar                    resource/
 
 locale    omnisidebar-en   en-US         chrome/locale/en-US/
