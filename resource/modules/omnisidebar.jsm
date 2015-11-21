@@ -1,4 +1,4 @@
-// VERSION 3.0.13
+// VERSION 3.0.14
 
 this.mainSidebar = {
 	main: true,
@@ -55,9 +55,9 @@ this.mainSidebar = {
 	get close () { return this.header ? $$('toolbarbutton.close-icon', this.header)[0] : null; },
 	get width () {
 		if(this.box) {
-			var width = this.box.getAttribute('width');
+			let width = this.box.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				width = (!width) ? 300 : Math.max(this.box.clientWidth, Prefs.minSidebarWidth) || 300;
+				width = (!width) ? 300 : Math.max(this.box.boxObject.width, Prefs.minSidebarWidth) || 300;
 				this.box.setAttribute('width', width);
 				document.persist(this.box.id, 'width');
 			}
@@ -214,10 +214,11 @@ this.twinSidebar = {
 	get close () { return this.header ? $$('toolbarbutton.close-icon', this.header)[0] : null; },
 	get width () {
 		if(this.box) {
-			var width = this.box.getAttribute('width');
+			let width = this.box.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				width = (!width) ? 300 : Math.max(this.box.clientWidth, Prefs.minSidebarWidth) || 300;
+				width = (!width) ? 300 : Math.max(this.box.boxObject.width, Prefs.minSidebarWidth) || 300;
 				this.box.setAttribute('width', width);
+				document.persist(this.box.id, 'width');
 			}
 			return parseInt(width);
 		}
@@ -390,7 +391,7 @@ this.observe = function(aSubject, aTopic, aData) {
 	}
 };
 
-this.attrWatcher = function(obj, prop, oldVal, newVal) {
+this.attrWatcher = function(obj, prop, oldVal, newVal, lastCapture) {
 	switch(prop) {
 		case 'disabled':
 			setLastCommand(mainSidebar);
@@ -401,13 +402,17 @@ this.attrWatcher = function(obj, prop, oldVal, newVal) {
 			// Reject the change if it's invalid
 			if(!newVal || newVal == '0' || newVal == 'NaN') { return false; }
 			
-			var width = obj.getAttribute('width');
+			if(!lastCapture) {
+				return true;
+			}
+			
+			let width = obj.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
-				width = (!width) ? 300 : Math.max(obj.clientWidth, Prefs.minSidebarWidth) || 300;
+				width = (!width) ? 300 : Math.max(obj.boxObject.width, Prefs.minSidebarWidth) || 300;
 				obj.setAttribute('width', width);
 			}
 			
-			var bar = (obj == mainSidebar.box) ? mainSidebar : (obj == twinSidebar.box) ? twinSidebar : null;
+			let bar = (obj == mainSidebar.box) ? mainSidebar : (obj == twinSidebar.box) ? twinSidebar : null;
 			if(bar) {
 				document.persist(obj.id, 'width');
 				
@@ -571,9 +576,9 @@ this.browserResized = function(resize) {
 
 // this simulates the default browser behavior when the sidebars are docked
 this.browserMinWidth = function(resize) {
-	var minWidth = Prefs.minSpaceBetweenSidebars;
-	if(mainSidebar.width && !mainSidebar.closed) { minWidth += mainSidebar.width; }
-	if(twinSidebar.width && !twinSidebar.closed) { minWidth += twinSidebar.width; }
+	let minWidth = Prefs.minSpaceBetweenSidebars;
+	if(!mainSidebar.closed && mainSidebar.width) { minWidth += mainSidebar.width; }
+	if(!twinSidebar.closed && twinSidebar.width) { minWidth += twinSidebar.width; }
 	document.documentElement.style.minWidth = minWidth+'px';
 	
 	if(resize && document.documentElement.clientWidth < minWidth) {
