@@ -1,7 +1,7 @@
 {
-	"current":"1.6.8",
+	"current":"1.6.8.0",
 	"releases": {
-		"1.6.8":{
+		"1.6.8.0":{
 			"date":"December 1, 2015",
 			"notes":[
 				["updated","Simplified share icons in about page"],
