@@ -1,6 +1,13 @@
 {
-	"current":"1.6.7.1",
+	"current":"1.6.8",
 	"releases": {
+		"1.6.8":{
+			"date":"December 1, 2015",
+			"notes":[
+				["updated","Simplified share icons in about page"],
+				["bugfix","Resizing a sidebar could cause the opposite sidebar to collapse to a very thin width"]
+			]
+		},
 		"1.6.7.1":{
 			"date":"November 18, 2015",
 			"notes":[
