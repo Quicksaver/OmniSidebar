@@ -1,7 +1,7 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 
 .omnisidebar-docker {
-	list-style-image: url("chrome://omnisidebar/skin/undock-button.png"); 
+	list-style-image: url("chrome://omnisidebar/skin/undock-button.png");
 	-moz-image-region: rect(0px 16px 16px 0px);
 	-moz-appearance: none;
 	border-radius: 3px;
@@ -51,8 +51,8 @@
 	opacity: 1;
 }
 
-#main-window[sizemode='normal'] .sidebar-box[renderabove] { 
-	border: 1px solid rgba(0,0,0,0); 
+#main-window[sizemode='normal'] .sidebar-box[renderabove] {
+	border: 1px solid rgba(0,0,0,0);
 	border-top: none;
 }
 

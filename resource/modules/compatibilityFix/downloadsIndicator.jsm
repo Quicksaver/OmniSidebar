@@ -5,7 +5,7 @@ this.__defineGetter__('DownloadsCommon', function() { return window.DownloadsCom
 
 this.downloadsIndicator = {
 	notification: null,
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'popupshowing':
@@ -14,12 +14,12 @@ this.downloadsIndicator = {
 					Listeners.add(e.target, 'AskingForNodeOwner', this);
 				}
 				break;
-			
+
 			case 'AskingForNodeOwner':
 				e.detail = 'downloads-button';
 				e.stopPropagation();
 				break;
-			
+
 			case 'transitionend':
 				if(this.notification) {
 					DownloadsIndicatorView._showEventNotification(this.notification);
@@ -28,7 +28,7 @@ this.downloadsIndicator = {
 				break;
 		}
 	},
-	
+
 	init: function() {
 		Piggyback.add('downloadsIndicator', DownloadsIndicatorView, 'showEventNotification', (aType) => {
 			// we're already opening to animate, so don't animate again, just replace the previous animation type
@@ -36,11 +36,11 @@ this.downloadsIndicator = {
 				this.notification = aType;
 				return false;
 			}
-			
+
 			// only pause animation if the button is in our toolbars
 			for(let bar of sidebars) {
 				if(!bar.resizeBox || bar.closed || !bar.above || !bar.autoHide) { continue; }
-				
+
 				if(DownloadsIndicatorView._initialized && DownloadsCommon.animateNotifications
 				&& isAncestor($('downloads-button'), bar.resizeBox)) {
 					// if toolbar is hidden, pause until it is shown
@@ -50,22 +50,22 @@ this.downloadsIndicator = {
 							this.handleEvent(e);
 						};
 						bar._autohide.add(selfRemove);
-						
+
 						this.notification = aType;
 						autoHide.initialShow(bar, 1500);
 						return false;
 					}
-					
+
 					// toolbar is not hidden, so keep showing it until animation is done at least
 					autoHide.initialShow(bar, 1500);
-					
+
 					break;
 				}
 			}
-			
+
 			return true;
 		}, Piggyback.MODE_BEFORE);
-		
+
 		// the downloadsPanel is only created when first called
 		if($('downloadsPanel')) {
 			Listeners.add($('downloadsPanel'), 'AskingForNodeOwner', this);
@@ -73,11 +73,11 @@ this.downloadsIndicator = {
 			Listeners.add(window, 'popupshowing', this);
 		}
 	},
-	
+
 	uninit: function() {
 		Listeners.remove($('downloadsPanel'), 'AskingForNodeOwner', this);
 		Listeners.remove(window, 'popupshowing', this);
-		
+
 		Piggyback.revert('downloadsIndicator', DownloadsIndicatorView, 'showEventNotification');
 	}
 };

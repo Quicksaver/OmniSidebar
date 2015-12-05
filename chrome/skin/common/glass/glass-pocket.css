@@ -1,15 +1,15 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://isreaditlater/content/list.xul") {
-	
+
 	.inSidebar #RIL_list,
 	.inSidebar #RIL_list_inner,
 	.inSidebar #RIL_menu,
 	.inSidebar #RIL_list_body {
 		background: none !important;
 	}
-	
+
 	.inSidebar #RIL_chooser {
 		background-color: transparent !important;
 	}
-	
+
 }

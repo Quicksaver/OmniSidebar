@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<richlistbox id="categories">
 		<richlistitem id="category-twin"
 			class="category"
@@ -9,12 +9,12 @@
 			tooltiptext="&OptgroupTwin.label;"
 			position="2"
 			align="center">
-			
+
 			<image class="category-icon"/>
 			<label class="category-name" flex="1" value="&OptgroupTwin.label;"/>
 		</richlistitem>
 	</richlistbox>
-	
+
 	<prefpane id="mainPrefPane">
 		<preferences>
 			<preference id="pref-twinSidebar" name="extensions.omnisidebar.twinSidebar" type="bool"/>
@@ -35,18 +35,18 @@
 			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
 			<preference id="pref-twinKeysetPanel" name="extensions.omnisidebar.twinKeysetPanel" type="bool"/>
 		</preferences>
-		
+
 		<hbox id="header-twin" class="header" collapsed="true" data-category="paneTwin">
 			<label class="header-name">&OptgroupTwin.label;</label>
 		</hbox>
-		
+
 		<hbox id="paneTwin-toggler" align="start" collapsed="true" data-category="paneTwin">
 			<checkbox label="&Optsidebars.twin.label;"
 				jump="twinSidebar"
 				helptext="&Optsidebars.twin.tooltip;"
 				delayPreference="pref-twinSidebar"/>
 		</hbox>
-		
+
 		<groupbox align="start" id="paneTwin-general" data-category="paneTwin" collapsed="true">
 			<vbox align="start">
 				<checkbox dependson="pref-twinSidebar"
@@ -61,7 +61,7 @@
 					delayPreference="pref-autoCloseTwin"/>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneTwin-above" data-category="paneTwin" collapsed="true">
 			<caption><checkbox id="aboveTwinCheckbox"
 				label="&Optundock.label;"
@@ -81,10 +81,10 @@
 				<description>&Optautohide.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneTwin-display" data-category="paneTwin" collapsed="true">
 			<caption label="&Optgroupgen.label;"/>
-			<hbox align="center">	
+			<hbox align="center">
 				<vbox align="start">
 					<checkbox dependson="pref-twinSidebar"
 						label="&Optshowheadertitle.label;"
@@ -121,7 +121,7 @@
 				<description>&Optshowheaderclose.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneTwin-toolbar" data-category="paneTwin" collapsed="true">
 			<caption>
 				<checkbox dependson="pref-twinSidebar"
@@ -170,7 +170,7 @@
 				<description>&Optcoloricons.color.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneTwin-keyset" data-category="paneTwin" collapsed="true">
 			<caption label="&OptKeyboardShortcut.caption;"/>
 			<hbox jump="twinKeyset,&OptKeyboardShortcut.caption;">
@@ -191,5 +191,5 @@
 			</vbox>
 		</groupbox>
 	</prefpane>
-	
+
 </overlay>

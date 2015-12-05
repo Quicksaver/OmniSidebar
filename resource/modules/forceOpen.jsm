@@ -27,7 +27,7 @@ this.toggleForceOpenMenus = function() {
 Modules.LOADMODULE = function() {
 	Prefs.listen('forceOpenToolbars', toggleForceOpenToolbars);
 	Prefs.listen('forceOpenMenus', toggleForceOpenMenus);
-	
+
 	toggleForceOpenToolbars();
 	toggleForceOpenMenus();
 };

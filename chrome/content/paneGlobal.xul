@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<richlistbox id="categories">
 		<richlistitem id="category-global"
 			class="category"
@@ -9,12 +9,12 @@
 			tooltiptext="&OptMisc.label;"
 			position="3"
 			align="center">
-			
+
 			<image class="category-icon"/>
 			<label class="category-name" flex="1" value="&OptMisc.label;"/>
 		</richlistitem>
 	</richlistbox>
-	
+
 	<prefpane id="mainPrefPane">
 		<preferences>
 			<preference id="pref-fx" name="extensions.omnisidebar.fx" type="bool"/>
@@ -33,11 +33,11 @@
 			<preference id="pref-keepPrivate" name="extensions.omnisidebar.keepPrivate" type="bool"/>
 			<preference id="pref-keepLoaded" name="extensions.omnisidebar.keepLoaded" type="bool"/>
 		</preferences>
-		
+
 		<hbox id="header-global" class="header" collapsed="true" data-category="paneGlobal">
 			<label class="header-name">&OptMisc.label;</label>
 		</hbox>
-		
+
 		<groupbox align="start" id="paneGlobal-glass" data-category="paneGlobal" collapsed="true">
 			<caption>
 				<checkbox id="glassCheckbox"
@@ -59,7 +59,7 @@
 				<label value="&OptglassStyle.opaque;"/>
 			</hbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneGlobal-features" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupfeatures.label;"/>
 			<vbox align="start">
@@ -102,7 +102,7 @@
 					delayPreference="pref-keepLoaded"/>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneGlobal-performance" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupperformance.label;"/>
 			<checkbox label="&Optfx.label;"
@@ -110,7 +110,7 @@
 				helptext="&Optfx.tooltip;"
 				delayPreference="pref-fx"/>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneGlobal-always" data-category="paneGlobal" collapsed="true">
 			<caption label="&Optgroupalways.label;"/>
 			<checkbox label="&addonsSidebar.label;"
@@ -135,7 +135,7 @@
 				helptext="&Optgroupalways.tooltip;"
 				delayPreference="pref-alwaysScratchpad"/>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneGlobal-forceOpen" data-category="paneGlobal" collapsed="true">
 			<caption label="&OptforceOpen.label;"/>
 			<checkbox label="&OptforceOpen.toolbars;"
@@ -148,5 +148,5 @@
 				delayPreference="pref-forceOpenMenus"/>
 		</groupbox>
 	</prefpane>
-	
+
 </overlay>

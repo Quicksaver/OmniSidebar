@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="pageInfo-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewPageInfoSidebar"
 			accesskey="&PageInfoSidebar.accesskey;"
@@ -12,11 +12,11 @@
 			sidebartitle="&PageInfoSidebar.labelB;"
 			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
-	
+
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_pageInfoSidebar"
 			label="&PageInfoSidebar.labelB;"
 			observes="objName-viewPageInfoSidebar" />
 	</menupopup>
-		
+
 </overlay>

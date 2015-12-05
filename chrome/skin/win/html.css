@@ -1,12 +1,12 @@
 @namespace url(http://www.w3.org/1999/xhtml);
 @-moz-document url("about:blank") {
-	
+
 	.inSidebar:not(.glassStyle) { background: -moz-dialog; }
-	
+
 	@media	(-moz-windows-default-theme) {
 		@media	(-moz-os-version: windows-vista),
 			(-moz-os-version: windows-win7) {
-			
+
 			.inSidebar:not(.glassStyle) { background: #EEF3FA; }
 		}
 	}

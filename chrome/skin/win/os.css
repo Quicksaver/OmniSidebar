@@ -12,7 +12,7 @@
 @media (-moz-windows-default-theme) {
 	@media	(-moz-os-version: windows-vista),
 		(-moz-os-version: windows-win7) {
-		
+
 		.sidebar-box[renderabove]:not([glassStyle]) .sidebar-header:-moz-lwtheme {
 			-moz-appearance: none;
 			background-color: #EEF3FA;
@@ -34,12 +34,12 @@
 	#omnisidebar-button-twin[movetoleft] {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-lunaSilver.png");
 	}
-	
+
 	#omnisidebar-button[movetoright],
 	#omnisidebar-button-twin:not([movetoleft]) {
 		list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-lunaSilver.png");
 	}
-	
+
 	.osb-custom-button,
 	.omnisidebar-toolbar[coloricons="ff"] #tools-updatescan-button[status="NO_CHANGE"],
 	.omnisidebar-toolbar[coloricons="ff"] #feedbar-button:not([new="true"]) {

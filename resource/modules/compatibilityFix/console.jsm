@@ -15,22 +15,22 @@ if(Services.vc.compare(Services.appinfo.version, "44.0a1") < 0) {
 this.sidebarConsole = {
 	broadcasterId: objName+'-viewConsoleSidebar',
 	get broadcaster () { return $(this.broadcasterId); },
-	
+
 	// A lot of this comes from HUDService.toggleBrowserConsole()
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'SidebarFocused':
 				// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
 				if(!e.detail) { return; }
-				
+
 				if(e.detail.bar.command != this.broadcasterId) { return; }
-				
+
 				if(!DebuggerServer.initialized) {
 					DebuggerServer.init();
 					DebuggerServer.addBrowserActors();
 				}
 				DebuggerServer.allowChromeProcess = true;
-				
+
 				let client = new DebuggerClient(DebuggerServer.connectPipe());
 				client.connect(function() {
 					client.getProcess().then(function(aResponse) {
@@ -42,7 +42,7 @@ this.sidebarConsole = {
 					});
 				});
 				break;
-			
+
 			case 'ShouldCollapseSidebar':
 				if(e.target.getAttribute('sidebarcommand') == this.broadcasterId) {
 					e.preventDefault();
@@ -51,7 +51,7 @@ this.sidebarConsole = {
 				break;
 		}
 	},
-	
+
 	observe: function(aSubject, aTopic, aData) {
 		switch(aTopic) {
 			case 'web-console-destroyed':
@@ -59,7 +59,7 @@ this.sidebarConsole = {
 					SidebarUI.toggle(this.broadcasterId);
 				}
 				break;
-			
+
 			case 'nsPref:changed':
 				switch(aSubject) {
 					case 'alwaysConsole':
@@ -83,10 +83,10 @@ this.sidebarConsole = {
 				removeAttribute(command, objName+'_backup_oncommand');
 			}
 		}
-		
+
 		this.acceltext();
 	},
-	
+
 	acceltext: function() {
 		if(this.broadcaster) {
 			var str = this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext');
@@ -96,10 +96,10 @@ this.sidebarConsole = {
 			toggleAttribute(this.broadcaster, 'acceltext', Prefs.alwaysConsole, str);
 		}
 	},
-	
+
 	onLoad: function() {
 		SidebarUI.holdBroadcasters.delete(this.broadcasterId);
-		
+
 		// We don't want the browser to start with the console open
 		if(mainSidebar.state.command == this.broadcasterId && !mainSidebar.state.closed) {
 			mainSidebar.stateForceClosed(true);
@@ -109,7 +109,7 @@ this.sidebarConsole = {
 			twinSidebar.stateForceClosed(true);
 			twin.load();
 		}
-		
+
 		this.acceltext();
 	}
 };
@@ -117,15 +117,15 @@ this.sidebarConsole = {
 Modules.LOADMODULE = function() {
 	Prefs.listen('alwaysConsole', sidebarConsole);
 	sidebarConsole.toggleAlways(Prefs.alwaysConsole);
-	
+
 	Styles.load('browserConsole', 'browserConsole');
-	
+
 	SidebarUI.holdBroadcasters.add(sidebarConsole.broadcasterId);
-	
+
 	Overlays.overlayWindow(window, 'browserConsole', sidebarConsole);
-	
+
 	Observers.add(sidebarConsole, 'web-console-destroyed');
-	
+
 	Listeners.add(window, 'SidebarFocused', sidebarConsole);
 	Listeners.add(window, 'ShouldCollapseSidebar', sidebarConsole);
 };
@@ -133,14 +133,14 @@ Modules.LOADMODULE = function() {
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'SidebarFocused', sidebarConsole);
 	Listeners.remove(window, 'ShouldCollapseSidebar', sidebarConsole);
-	
+
 	Observers.remove(sidebarConsole, 'web-console-destroyed');
-	
+
 	Overlays.removeOverlayWindow(window, 'browserConsole');
-	
+
 	Prefs.unlisten('alwaysConsole', sidebarConsole);
 	sidebarConsole.toggleAlways(false);
-	
+
 	if(UNLOADED) {
 		if(UNLOADED != APP_SHUTDOWN) {
 			if(mainSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(mainSidebar); }

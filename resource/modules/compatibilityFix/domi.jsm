@@ -3,7 +3,7 @@
 this.DOMi = {
 	broadcasterId: objName+'-viewDOMInspectorSidebar',
 	get broadcaster () { return $(this.broadcasterId); },
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'SidebarFocusedSync':
@@ -19,20 +19,20 @@ this.DOMi = {
 				break;
 		}
 	},
-	
+
 	init: function() {
 		SidebarUI.holdBroadcasters.delete(this.broadcasterId);
 		if(mainSidebar.loaded && mainSidebar.state.command == this.broadcasterId) { self.onLoad(); }
 		if(twinSidebar.loaded && twinSidebar.state.command == this.broadcasterId) { twin.load(); }
 	},
-	
+
 	is: function(bar) {
 		return (bar && bar.command == this.broadcasterId);
 	},
-	
+
 	onLoad: function() {
 		this.init();
-		
+
 		var checked = mainSidebar.command == this.broadcasterId;
 		var twin = false;
 		if(!checked && twinSidebar.command == this.broadcasterId) {
@@ -47,10 +47,10 @@ this.DOMi = {
 
 Modules.LOADMODULE = function() {
 	SidebarUI.holdBroadcasters.add(DOMi.broadcasterId);
-	
+
 	AddonManager.getAddonByID("inspector@mozilla.org", function(addon) {
 		if(UNLOADED) { return; }
-		
+
 		if(addon && addon.isActive) {
 			Overlays.overlayWindow(window, 'domi', DOMi);
 			Listeners.add(window, 'SidebarFocusedSync', DOMi);
@@ -72,7 +72,7 @@ Modules.UNLOADMODULE = function() {
 		if(mainSidebar.command == DOMi.broadcasterId) { SidebarUI.close(mainSidebar); }
 		if(twinSidebar.command == DOMi.broadcasterId) { SidebarUI.close(twinSidebar); }
 	}
-	
+
 	Listeners.remove(window, 'SidebarFocusedSync', DOMi);
 	Overlays.removeOverlayWindow(window, 'domi');
 };

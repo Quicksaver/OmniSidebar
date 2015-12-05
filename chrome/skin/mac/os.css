@@ -62,9 +62,9 @@ toolbarpaletteitem[place="palette"] > #omnisidebar-downloads_sidebar_button:hove
 	list-style-image: url(chrome://omnisidebar-os/skin/feed.png);
 	-moz-image-region: rect(0px, 24px, 24px, 0px);
 }
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover:active, 
+.omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover:active,
 .omnisidebar-toolbar[coloricons="color"] #feedbar-button:hover,
-.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover:active, 
+.omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover:active,
 .omnisidebar-toolbar[coloricons="color"] #feedbar-button[checked="true"]:hover {
 	-moz-image-region: rect(48px, 24px, 72px, 0px);
 }

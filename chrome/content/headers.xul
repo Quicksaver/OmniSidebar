@@ -3,11 +3,11 @@
 <?xml-stylesheet href="chrome://objPathString/skin/buttonsStyle.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="headers-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName:ToggleSideToolbar" oncommand="objName.headers.toggleToolbar(false);"/>
 	</commandset>
-	
+
 	<vbox id="sidebar-box" class="chromeclass-extrachrome sidebar-box">
 		<sidebarheader id="sidebar-header"
 			class="sidebar-header"
@@ -42,7 +42,7 @@
 		</sidebarheader>
 		<browser id="sidebar" class="sidebar-browser" />
 	</vbox>
-	
+
 	<splitter id="sidebar-splitter" class="chromeclass-extrachrome sidebar-splitter"/>
-	
+
 </overlay>

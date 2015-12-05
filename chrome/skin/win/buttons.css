@@ -21,48 +21,48 @@ window[tabsintitlebar]:not([inFullscreen]) :-moz-any(#TabsToolbar, #toolbar-menu
 @media	(-moz-os-version: windows-vista),
 	(-moz-os-version: windows-win7),
 	(-moz-os-version: windows-win8) {
-	
+
 	@media (-moz-windows-compositor) {
-		
+
 		window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button:not([movetoright]):not(:-moz-lwtheme):not(:-moz-window-inactive),
 		window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin[movetoleft]:not(:-moz-lwtheme):not(:-moz-window-inactive) {
 			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
 		}
-		
+
 		window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button[movetoright]:not(:-moz-lwtheme):not(:-moz-window-inactive),
 		window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) #omnisidebar-button-twin:not([movetoleft]):not(:-moz-lwtheme):not(:-moz-window-inactive) {
 			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
 		}
-		
+
 		window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-custom-button:not(:-moz-lwtheme):not(:-moz-window-inactive) {
 			list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 		}
-		
+
 		window[darkwindowframe="true"] :-moz-any(#TabsToolbar, #toolbar-menubar) .osb-replace-button:not(:-moz-lwtheme):not(:-moz-window-inactive) {
 			list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 		}
-		
+
 	}
-	
+
 	@media (-moz-windows-glass) {
-		
+
 		#toolbar-menubar #omnisidebar-button:not([movetoright]):not(:-moz-lwtheme),
 		#toolbar-menubar #omnisidebar-button-twin[movetoleft]:not(:-moz-lwtheme) {
 			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left-inv.png");
 		}
-		
+
 		#toolbar-menubar #omnisidebar-button[movetoright]:not(:-moz-lwtheme),
 		#toolbar-menubar #omnisidebar-button-twin:not([movetoleft]):not(:-moz-lwtheme) {
 			list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-right-inv.png");
 		}
-		
+
 		#toolbar-menubar .osb-custom-button:not(:-moz-lwtheme) {
 			list-style-image: url("chrome://omnisidebar-os/skin/custom-buttons-toolbar-inv.png");
 		}
-		
+
 		#toolbar-menubar .osb-replace-button:not(:-moz-lwtheme) {
 			list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
 		}
 	}
-		
+
 }

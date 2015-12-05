@@ -14,7 +14,7 @@
 /* menu items have a maximum width set apparently,
 see https://github.com/Quicksaver/OmniSidebar/issues/66 */
 #omnisidebar-openSidebarMenu > *,
-#omnisidebar-openTwinSidebarMenu > * { 
+#omnisidebar-openTwinSidebarMenu > * {
 	width: auto;
 	max-width: none;
 }

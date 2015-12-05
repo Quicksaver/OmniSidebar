@@ -8,21 +8,21 @@
 	.inSidebar #historyTree {
 		padding-top: 5px !important;
 	}
-	
+
 	#history-panel.inSidebar #viewButton > hbox {
 		padding: 1px !important;
 	}
-	
+
 	.inSidebar #downloadsRichListBox {
 		background: none !important;
 		border: none !important;
 	}
-	
+
 	.inSidebar #placesToolbar {
 		border: none !important;
 		border-bottom: none !important;
 	}
-	
+
 	/* 2 Pane Bookmarks */
 	.inSidebar #bookmarks-panes-splitter {
 		background: rgba(255,255,255,.5) !important;

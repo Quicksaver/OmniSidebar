@@ -2,14 +2,14 @@
 
 /* Headers */
 
-.omnisidebar-toolbar { 
+.omnisidebar-toolbar {
 	-moz-appearance: none;
 	border: none;
 	padding: 1px 3px;
 }
 
-window[sizemode="fullscreen"] .omnisidebar-toolbar[moz-collapsed="true"]:not([collapsed="true"]) { 
-	visibility: visible; 
+window[sizemode="fullscreen"] .omnisidebar-toolbar[moz-collapsed="true"]:not([collapsed="true"]) {
+	visibility: visible;
 }
 
 /* the close button was re-styled, we have to apply the same style to the twin's close button */

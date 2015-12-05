@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="headersTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName:ToggleSideToolbar-twin" oncommand="objName.headers.toggleToolbar(true);"/>
 	</commandset>
-	
+
 	<vbox id="objName-sidebar-box-twin" class="chromeclass-extrachrome sidebar-box">
 		<sidebarheader id="objName-sidebar-header-twin"
 			class="sidebar-header"
@@ -40,7 +40,7 @@
 		</sidebarheader>
 		<browser id="objName-sidebar-twin" class="sidebar-browser" />
 	</vbox>
-	
+
 	<splitter id="objName-sidebar-splitter-twin" class="chromeclass-extrachrome sidebar-splitter"/>
-	
+
 </overlay>

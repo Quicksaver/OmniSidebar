@@ -3,31 +3,31 @@
 	url("chrome://browser/content/places/places.xul"),
 	url("about:addons"),
 	url("chrome://browser/content/devtools/webconsole.xul") {
-	
+
 	.inSidebar #placesToolbar {
 		border-top: none !important;
 		border-bottom: 1px solid ThreeDShadow !important;
 	}
-	
+
 	#addons-page.inSidebar:not(.glassStyle) :-moz-any(#nav-header,#categories) {
 		background: none;
 	}
-	
+
 	@media	(-moz-windows-default-theme) {
 		@media	(-moz-os-version: windows-vista),
 			(-moz-os-version: windows-win7) {
-			
+
 			#addons-page.inSidebar:not(.glassStyle),
 			#addons-page.inSidebar:not(.glassStyle) :-moz-any(#nav-header,#categories),
 			#places.inSidebar:not(.glassStyle),
 			#devtools-webconsole.inSidebar:not(.glassStyle) toolbar.devtools-toolbar {
 				background: #EEF3FA;
 			}
-			
+
 			.inSidebar #placesToolbar {
 				border-bottom: none !important;
 			}
-			
+
 			.inSidebar #downloadsRichListBox {
 				border: none !important;
 				background: none !important;

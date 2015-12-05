@@ -3,21 +3,21 @@
 <?xml-stylesheet href="chrome://objPathString/skin/buttons.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="mainSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName-cmd_mainSidebar" oncommand="SidebarUI.toggle(this);"/>
 		<command id="objName-cmd_keyset_mainSidebar" oncommand="objName.keysetCommand(false, 'cmd_mainSidebar');"/>
 	</commandset>
-	
+
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewBookmarksSidebar"
 			sidebartitle="&bookmarksSidebar.title;"
 			label="__remove"
 			accesskey="&bookmarksSidebar.accesskey;"/>
-			
+
 		<broadcaster id="viewHistorySidebar"
 			accesskey="&historySidebar.accesskey;"/>
-		
+
 		<broadcaster id="objName-viewBlankSidebar"
 			label="&BlankSidebar.label;"
 			autoCheck="false"
@@ -26,7 +26,7 @@
 			sidebarurl="about:blank"
 			sidebartitle="&BlankSidebar.label;"
 			oncommand="SidebarUI.toggle(this);" />
-		
+
 		<broadcaster id="objName-viewSocialSidebar"
 			label=""
 			autoCheck="false"
@@ -34,9 +34,9 @@
 			group="sidebar"
 			sidebartitle="" />
 	</broadcasterset>
-	
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-button" 
+		<toolbarbutton id="objName-button"
 			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController osb-adequate-size"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&omnisidebarButton.label;"
@@ -46,16 +46,16 @@
 			onload="objName.buttonLabels(this, true);"
 			onclick="return objName.panel.shouldFollowCommand(this, false, event);"
 			command="objName-cmd_mainSidebar" />
-			
-		<toolbarbutton id="objName-bookmarks_sidebar_button" 
+
+		<toolbarbutton id="objName-bookmarks_sidebar_button"
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&bookmarksSidebar.label;"
 			tooltiptext="&bookmarksSidebar.tooltip;"
 			type="custom"
 			observes="viewBookmarksSidebar" />
-		
-		<toolbarbutton id="objName-history_sidebar_button" 
+
+		<toolbarbutton id="objName-history_sidebar_button"
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&historySidebar.label;"
@@ -63,10 +63,10 @@
 			type="custom"
 			observes="viewHistorySidebar" />
 	</toolbarpalette>
-	
+
 	<menuitem id="menu_bookmarksSidebar"
 		label="&bookmarksSidebar.title;"/>
-	
+
 	<hbox id="browser">
 		<hbox id="objName-switch"
 			class="omnisidebar_switch"
@@ -76,12 +76,12 @@
 			onwheel="objName.switcher.onScroll(event, objName.mainSidebar);"
 			insertbefore="appcontent"/>
 	</hbox>
-	
+
 	<vbox id="sidebar-box" persist="width" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<vbox id="social-sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="social-sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
-	
+
 	<vbox id="customization-palette-container">
 		<hbox id="objName-toolbarCustomizeWrapper" insertafter="puzzleBars-urlbar-customize-wrapper" insertbefore="customization-header">
 			<hbox id="objName-toolbarCustomizeWrapper-main"/>
@@ -89,5 +89,5 @@
 			<hbox id="objName-toolbarCustomizeWrapper-twin"/>
 		</hbox>
 	</vbox>
-	
+
 </overlay>

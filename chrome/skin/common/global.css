@@ -3,9 +3,9 @@
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/pageinfo/pageInfo.xul") {
-	
+
 	/* bugfix the Page Info sidebar having a very large minimum width
 	see https://github.com/Quicksaver/OmniSidebar/issues/66 */
 	#security-technical-shortform { min-width: 1px !important; }
-	
+
 }

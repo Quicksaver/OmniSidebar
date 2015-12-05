@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="domi-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewDOMInspectorSidebar"
 			accesskey="&DOMInspectorSidebar.accesskey;"
@@ -12,15 +12,15 @@
 			sidebartitle="&DOMInspectorSidebar.label;"
 			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
-	
+
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_domiSidebar"
 			label="&DOMInspectorSidebar.label;"
 			observes="objName-viewDOMInspectorSidebar" />
 	</menupopup>
-	
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-dominspector_sidebar_button" 
+		<toolbarbutton id="objName-dominspector_sidebar_button"
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-custom-button"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&DOMInspectorSidebar.label;"
@@ -28,5 +28,5 @@
 			type="custom"
 			observes="objName-viewDOMInspectorSidebar" />
 	</toolbarpalette>
-		
+
 </overlay>

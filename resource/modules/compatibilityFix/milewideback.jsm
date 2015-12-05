@@ -4,7 +4,7 @@ this.__defineGetter__('MileWideBack', function() { return window.MileWideBack; }
 
 this.MWB = {
 	get strip () { return $('back-strip'); },
-	 
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'mouseover':
@@ -16,16 +16,16 @@ this.MWB = {
 					}, Prefs.showDelay);
 				}
 				break;
-			
+
 			case 'mouseout':
 				Timers.cancel('mwbHover');
-				
+
 				var bar = leftSidebar;
 				if(bar.box && !bar.closed && bar.above && bar.autoHide) {
 					autoHide.setHover(bar, false);
 				}
 				break;
-			
+
 			case 'clickedSwitcher':
 				if(e.detail.bar != leftSidebar) { return; }
 				if(e.detail.clickEvent.shiftKey) { return; }
@@ -33,7 +33,7 @@ this.MWB = {
 				e.stopPropagation();
 				MileWideBack.onClick(e.detail.clickEvent);
 				break;
-			
+
 			case 'scrolledSwitcher':
 				if(e.detail.bar != leftSidebar) { return; }
 				e.preventDefault();
@@ -42,7 +42,7 @@ this.MWB = {
 				break;
 		}
 	},
-	
+
 	observe: function(aSubject, aTopic, aData) {
 		switch(aSubject) {
 			case 'moveSidebars':
@@ -50,12 +50,12 @@ this.MWB = {
 				break;
 		}
 	},
-	
+
 	// we need to make sure the margin switch is visible for this, otherwise the sidebar occludes MWB's clicker
 	switcher: function() {
 		leftSidebar.needSwitch.add('MWB');
 		rightSidebar.needSwitch.delete('MWB');
-		
+
 		leftSidebar.toggleSwitcher();
 		rightSidebar.toggleSwitcher();
 	}
@@ -63,13 +63,13 @@ this.MWB = {
 
 Modules.LOADMODULE = function() {
 	Styles.load('milewideback', 'milewideback');
-	
+
 	Listeners.add(MWB.strip, 'mouseover', MWB);
 	Listeners.add(MWB.strip, 'mouseout', MWB);
 	Listeners.add(window, 'clickedSwitcher', MWB, true);
 	Listeners.add(window, 'scrolledSwitcher', MWB, true);
 	Prefs.listen('moveSidebars', MWB);
-	
+
 	MWB.switcher();
 };
 
@@ -79,10 +79,10 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'clickedSwitcher', MWB, true);
 	Listeners.remove(window, 'scrolledSwitcher', MWB, true);
 	Prefs.unlisten('moveSidebars', MWB);
-	
+
 	leftSidebar.needSwitch.delete('MWB');
 	rightSidebar.needSwitch.delete('MWB');
-	
+
 	if(UNLOADED) {
 		Styles.unload('milewideback');
 	}

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="twinSidebar-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<commandset id="mainCommandSet">
 		<command id="objName-cmd_twinSidebar" oncommand="SidebarUI.toggle(this);"/>
 		<command id="objName-cmd_keyset_twinSidebar" oncommand="objName.keysetCommand(true, 'cmd_twinSidebar');"/>
 	</commandset>
-	
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-button-twin" 
+		<toolbarbutton id="objName-button-twin"
 			class="toolbarbutton-1 chromeclass-toolbar-additional sidebarController osb-adequate-size"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&omnisidebarButtonTwin.label;"
@@ -19,7 +19,7 @@
 			onclick="return objName.panel.shouldFollowCommand(this, true, event);"
 			command="objName-cmd_twinSidebar" />
 	</toolbarpalette>
-	
+
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewBlankSidebar-twin"
 			label="&BlankSidebar.label;"
@@ -30,7 +30,7 @@
 			sidebartitle="&BlankSidebar.label;"
 			oncommand="SidebarUI.toggle(this, false, true);" />
 	</broadcasterset>
-	
+
 	<hbox id="browser">
 		<vbox id="objName-sidebar-box-twin"
 			hidden="true"
@@ -38,25 +38,25 @@
 			waitForSS="chrome://objPathString/skin/overlay.css"
 			persist="width"
 			insertafter="appcontent">
-			
+
 			<sidebarheader id="objName-sidebar-header-twin" align="center">
 				<label id="objName-sidebar-title-twin"
 					persist="value"
-					flex="1" 
-					crop="end" 
+					flex="1"
+					crop="end"
 					control="objName-sidebar-twin"/>
 				<image id="objName-sidebar-throbber-twin" />
 				<toolbarbutton class="tabs-closebutton close-icon" tooltiptext="&omnisidebarButtonClose.tooltip;" oncommand="SidebarUI.toggle(null, false, true);" />
 			</sidebarheader>
 			<browser id="objName-sidebar-twin" flex="1" autoscroll="false" disablehistory="true" src="about:blank" type="chrome" />
 		</vbox>
-		
+
 		<splitter id="objName-sidebar-splitter-twin"
 			class="chromeclass-extrachrome sidebar-splitter"
 			waitForSS="chrome://objPathString/skin/overlay.css"
 			hidden="true"
 			insertafter="appcontent" />
-	
+
 		<hbox id="objName-switch-twin"
 			class="omnisidebar_switch"
 			waitForSS="chrome://objPathString/skin/overlay.css"
@@ -65,5 +65,5 @@
 			onwheel="objName.switcher.onScroll(event, objName.twinSidebar);"
 			insertafter="appcontent"/>
 	</hbox>
-	
+
 </overlay>

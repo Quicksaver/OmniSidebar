@@ -11,7 +11,7 @@ Other sidebars should also be themed although probably not perfectly! */
 	/*#main-window:not([title*="application/pdf"]):not([disablechrome="true"]) #appcontent {
 		-moz-appearance: none !important;
 	}*/
-	
+
 	/* Main window style and animation */
 	.sidebar-box[renderabove] .omnisidebar_resize_box,
 	.sidebar-box:not([renderabove]) {
@@ -20,20 +20,20 @@ Other sidebars should also be themed although probably not perfectly! */
 		background-repeat: no-repeat !important;
 		background-size: cover !important;
 	}
-	
+
 	.sidebar-box[renderabove] .omnisidebar_resize_sidebar {
 		background: none !important;
 	}
-	
+
 	.sidebar-browser {
 		padding: 1px 3px 4px 3px !important;
 		background: none !important;
 	}
-	
+
 	/* Header styling */
-	
+
 	.sidebar-header {
-		-moz-appearance: none !important; 
+		-moz-appearance: none !important;
 		-moz-binding: url("chrome://global/content/bindings/toolbar.xml#toolbar") !important;
 		margin: 0 !important;
 		border: none !important;
@@ -43,18 +43,18 @@ Other sidebars should also be themed although probably not perfectly! */
 		background: none !important;
 		background-clip: padding-box !important;
 	}
-	
+
 	.sidebar-header > * {
 		background: none !important;
 	}
-	
+
 	.omnisidebarURIBarMenu {
 		-moz-appearance: none !important;
 		background: rgba(50, 50, 50, 0.75) !important;
 		border: none !important;
 		border-radius: 5px !important;
 	}
-	
+
 	.omnisidebarURIBarMenu button.omnisidebarURIGo {
 		padding: 0 2px !important;
 	}

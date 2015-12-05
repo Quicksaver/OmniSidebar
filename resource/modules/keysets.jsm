@@ -27,7 +27,7 @@ this.setKeys = function() {
 
 Modules.LOADMODULE = function() {
 	setKeys();
-	
+
 	Prefs.listen('mainKeysetKeycode', setKeys);
 	Prefs.listen('mainKeysetAccel', setKeys);
 	Prefs.listen('mainKeysetShift', setKeys);
@@ -49,7 +49,7 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('twinKeysetShift', setKeys);
 	Prefs.unlisten('twinKeysetAlt', setKeys);
 	Prefs.unlisten('twinSidebar', setKeys);
-	
+
 	Keysets.unregister(mainKey);
 	Keysets.unregister(twinKey);
 };

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="renderAboveTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<splitter id="objName-sidebar-splitter-twin" collapsed="true" />
 	<splitter id="sidebar-splitter" onmousedown="objName.renderAbove.dragStart(event);" />
-	
+
 	<vbox id="objName-sidebar-box-twin">
 		<hbox id="objName-resizebox-twin"
 			class="omnisidebar_resize_box"
@@ -20,5 +20,5 @@
 				getchildrenof="objName-sidebar-box-twin" />
 		</hbox>
 	</vbox>
-	
+
 </overlay>

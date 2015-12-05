@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="menusTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<menupopup id="menu_viewPopup">
 		<menu id="viewSidebarMenuMenu" label="&omnisidebarButtonMain.label;" />
-		
+
 		<menu id="objName-viewTwinSidebarMenuMenu"
 			label="&omnisidebarButtonTwin.label;"
 			accesskey="&omnisidebarButtonTwin.accesskey;"
@@ -14,7 +14,7 @@
 				onpopupshowing="objName.menus.populateSidebarMenu(this);"/>
 		</menu>
 	</menupopup>
-	
+
 	<popupset id="mainPopupSet">
 		<menupopup id="objName-openTwinSidebarMenu"
 			target="objName-sidebar-title-twin"
@@ -23,5 +23,5 @@
 			onpopupshowing="objName.menus.populateSidebarMenu(this);"
 			onpopuphiding="objName.menus.closeSidebarMenu(this);"/>
 	</popupset>
-	
+
 </overlay>

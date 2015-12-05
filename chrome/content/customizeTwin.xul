@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="customizeTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<stack id="objName-stackSidebar-twin"
 		newparent="objName-toolbarCustomizeWrapper-twin"
 		insertafter="objName-toolbarCustomize-spacer"/>
-	
+
 </overlay>

@@ -19,7 +19,7 @@ this.mainSidebar = {
 	get isSocial () { return !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
 	get isOpen () {
 		if(this.isSocial) { return true; }
-		
+
 		if(!this.command
 		|| !$(this.command)
 		|| $(this.command).localName != 'broadcaster'
@@ -74,20 +74,20 @@ this.mainSidebar = {
 	get state () {
 		if(!this._state) {
 			this.noPersist();
-			
+
 			var data = SessionStore.getWindowValue(window, objName+'.mainSidebar');
-			
+
 			// if this window doesn't have it's own state, use the state from the opener
 			if(!data && window.opener && !window.opener.closed
 			&& (!PrivateBrowsing.isPrivate(window) == PrivateBrowsing.isPrivate(window.opener) || Prefs.keepPrivate)) {
 				data = SessionStore.getWindowValue(window.opener, objName+'.mainSidebar');
 			}
-			
+
 			// fallback to a global pref value so the sidebar is rarely reset when it's not supposed to
 			if(!data && (!PrivateBrowsing.inPrivateBrowsing || Prefs.keepPrivate)) {
 				data = Prefs.lastStateMain;
 			}
-			
+
 			if(data) {
 				this._state = JSON.parse(data);
 			} else {
@@ -98,7 +98,7 @@ this.mainSidebar = {
 				this.saveState();
 			}
 		}
-		
+
 		return this._state;
 	},
 	set state (v) {
@@ -178,7 +178,7 @@ this.twinSidebar = {
 	get isSocial () { return !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
 	get isOpen () {
 		if(this.isSocial) { return true; }
-		
+
 		if(!this.command
 		|| !$(this.command)
 		|| $(this.command).localName != 'broadcaster'
@@ -233,20 +233,20 @@ this.twinSidebar = {
 	get state () {
 		if(!this._state) {
 			this.noPersist();
-			
+
 			var data = SessionStore.getWindowValue(window, objName+'.twinSidebar');
-			
+
 			// if this window doesn't have it's own state, use the state from the opener
 			if(!data && window.opener && !window.opener.closed
 			&& (!PrivateBrowsing.isPrivate(window) == PrivateBrowsing.isPrivate(window.opener) || Prefs.keepPrivate)) {
 				data = SessionStore.getWindowValue(window.opener, objName+'.twinSidebar');
 			}
-			
+
 			// fallback to a global pref value so the sidebar is rarely reset when it's not supposed to
 			if(!data && (!PrivateBrowsing.inPrivateBrowsing || Prefs.keepPrivate)) {
 				data = Prefs.lastStateTwin;
 			}
-			
+
 			if(data) {
 				this._state = JSON.parse(data);
 			} else {
@@ -257,7 +257,7 @@ this.twinSidebar = {
 				this.saveState();
 			}
 		}
-		
+
 		return this._state;
 	},
 	set state (v) {
@@ -350,24 +350,24 @@ this.handleEvent = function(e) {
 			// this is probably the event from the native SidebarUI that can be fired during startup, it doesn't really matter to us
 			if(!e.detail) { return; }
 			// no break;
-			
+
 		case 'SidebarFocusedSync':
 			setClass(e.detail.bar);
 			break;
-		
+
 		case 'endToggleSidebar':
 			setLastCommand(e.detail.bar);
 			browserResized(true);
 			break;
-		
+
 		case 'beforecustomization':
 			customize(true);
 			break;
-		
+
 		case 'aftercustomization':
 			customize(false);
 			break;
-		
+
 		case 'resize':
 			browserResized(false);
 			break;
@@ -380,11 +380,11 @@ this.observe = function(aSubject, aTopic, aData) {
 			setClass(mainSidebar);
 			setClass(twinSidebar);
 			break;
-		
+
 		case 'keepLoaded':
 			mainSidebar.reUnload();
 			break;
-		
+
 		case 'useSwitch':
 			switcher.enable(mainSidebar);
 			break;
@@ -397,25 +397,25 @@ this.attrWatcher = function(obj, prop, oldVal, newVal, lastCapture) {
 			setLastCommand(mainSidebar);
 			setLastCommand(twinSidebar);
 			break;
-		
+
 		case 'width':
 			// Reject the change if it's invalid
 			if(!newVal || newVal == '0' || newVal == 'NaN') { return false; }
-			
+
 			if(!lastCapture) {
 				return true;
 			}
-			
+
 			let width = obj.getAttribute('width');
 			if(!width || width == '0' || width == 'NaN') {
 				width = (!width) ? 300 : Math.max(obj.boxObject.width, Prefs.minSidebarWidth) || 300;
 				obj.setAttribute('width', width);
 			}
-			
+
 			let bar = (obj == mainSidebar.box) ? mainSidebar : (obj == twinSidebar.box) ? twinSidebar : null;
 			if(bar) {
 				document.persist(obj.id, 'width');
-				
+
 				Timers.init('boxResize_'+bar.box.id, function() {
 					dispatch(bar.box, { type: 'sidebarWidthChanged', cancelable: false, detail: { bar: bar } });
 				}, 500);
@@ -429,7 +429,7 @@ this.attrWatcher = function(obj, prop, oldVal, newVal, lastCapture) {
 // so I'm jsut "always" placing these classes to prevent all of this.
 this.setClass = function(bar) {
 	if(!bar) { return; } // failsafe, could happen if a sidebar is closing when this is triggered
-	
+
 	if(bar.sidebar.contentDocument) { // Fix for newly created profiles (unloaded sidebars)
 		if(!UNLOADED) {
 			bar.sidebar.contentDocument.documentElement.classList.add('inSidebar');
@@ -450,13 +450,13 @@ this.openLast = function(bar) {
 	for(let id of SidebarUI.holdBroadcasters) {
 		if(id == bar.state.command) { return; }
 	}
-	
+
 	if(!bar.state.closed) {
 		var lastBroadcaster = $(bar.state.command);
 		if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster' && !trueAttribute(lastBroadcaster, 'disabled')) {
 			// make sure nothing triggers the SidebarFocused event too soon (i.e. renderAbove), so that the correct panel is loaded and (not) focused during startup
 			bar.holdFocused = true;
-			
+
 			SidebarUI.toggle(lastBroadcaster, true, bar.twin).then(toggled => {
 				// ensure the focus is on content at startup/opening new window
 				if(toggled) {
@@ -464,7 +464,7 @@ this.openLast = function(bar) {
 					aSync(function() {
 						try { bar.holdFocused = false; } catch(ex) {}
 					}, 5000);
-					
+
 					Listeners.add(bar.sidebar, "SidebarFocused", function() {
 						bar.holdFocused = false;
 						if(bar.focused) {
@@ -485,7 +485,7 @@ this.openLast = function(bar) {
 
 // omnisidebar button opens the last sidebar opened
 this.setLastCommand = function(bar) {
-	if(bar.command 
+	if(bar.command
 	&& $(bar.command)
 	&& $(bar.command).localName == 'broadcaster'
 	&& !trueAttribute($(bar.command), 'disabled')) {
@@ -509,7 +509,7 @@ this.setLastCommand = function(bar) {
 		|| trueAttribute(lastBroadcaster, 'disabled')) {
 			bar.stateReset();
 			SidebarUI.close(bar);
-			
+
 			lastBroadcaster = $(bar.state.command);
 			if(lastBroadcaster && lastBroadcaster.localName == 'broadcaster') {
 				lastBroadcaster.removeAttribute('checked');
@@ -548,7 +548,7 @@ this.customize = function(inCustomize = customizing) {
 		buttonLabels(mainSidebar.button);
 		buttonLabels(twinSidebar.button);
 	}
-	
+
 	var broadcasters = $$("broadcaster[group='sidebar']");
 	for(let broadcaster of broadcasters) {
 		if(inCustomize) {
@@ -567,7 +567,7 @@ this.customize = function(inCustomize = customizing) {
 
 this.browserResized = function(resize) {
 	browserMinWidth(resize); // this needs to be immediate, so the browser width never goes below these values
-	
+
 	// The listeners to this event aren't very heavy (so far at least), it doesn't slow down the resizing of the windows when I set the delay to 0.
 	Timers.init('browserResized', function() {
 		dispatch(browserBox, { type: 'browserResized', cancelable: false });
@@ -580,7 +580,7 @@ this.browserMinWidth = function(resize) {
 	if(!mainSidebar.closed && mainSidebar.width) { minWidth += mainSidebar.width; }
 	if(!twinSidebar.closed && twinSidebar.width) { minWidth += twinSidebar.width; }
 	document.documentElement.style.minWidth = minWidth+'px';
-	
+
 	if(resize && document.documentElement.clientWidth < minWidth) {
 		window.resizeBy(0, 0); // The values don't matter as minWidth takes precedence
 	}
@@ -600,13 +600,13 @@ this.switcher = {
 			case 'sidebarWidthChanged':
 				this.setOffset();
 				break;
-			
+
 			case 'browserResized':
 				this.setHeight();
 				break;
 		}
 	},
-	
+
 	onClick: function(e, bar) {
 		if(dispatch(bar.switcher, { type: 'clickedSwitcher', detail: { bar: bar, clickEvent: e } })
 		&& trueAttribute(bar.switcher, 'enabled')
@@ -615,18 +615,18 @@ this.switcher = {
 			SidebarUI.toggle(bar.switcher);
 		}
 	},
-	
+
 	// This makes it so we can scroll the webpage and the sidebar while the mouse is over the switch, while still able to click on it
 	scrollNodes: new Set(),
 	onScroll: function(e, bar) {
 		if(e.defaultPrevented || !dispatch(bar.switcher, { type: 'scrolledSwitcher', detail: { bar: bar, scrollEvent: e } })) { return; }
-		
+
 		var active = false;
 		for(let node of this.scrollNodes) {
 			setAttribute(node, 'scrolling', 'true');
 			active = true;
 		}
-		
+
 		if(active) {
 			// restore the switcher's mouse events
 			Timers.init('scrollSwitcher', () => {
@@ -636,14 +636,14 @@ this.switcher = {
 			}, 200);
 		}
 	},
-	
+
 	setOffset: function() {
 		// OSX Lion needs the sidebar to be moved one pixel or it will have a space between it and the margin of the window
 		// I'm not supporting other versions of OSX, just this one isn't simple as it is
 		var moveBy = (!WINNT) ? -1 : 0;
 		var leftOffset = moveBy;
 		var rightOffset = moveBy;
-		
+
 		let sscode = '\
 			@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);\n\
 			@-moz-document url("'+document.baseURI+'") {\n\
@@ -660,25 +660,25 @@ this.switcher = {
 					right: '+rightOffset+'px;\n\
 				}\n\
 			}';
-		
+
 		Styles.load('switcherOffset_'+_UUID, sscode, true);
 	},
-	
+
 	setHeight: function() {
 		var moveBy = document.documentElement.getAttribute('sizemode') == 'normal' ? +1 : 0;
-		
+
 		// I can't set these by css, cpu usage goes bonkers?!
 		if(mainSidebar.switcher) { mainSidebar.switcher.style.height = $('appcontent').clientHeight +moveBy +'px'; }
 		if(twinSidebar.switcher) { twinSidebar.switcher.style.height = $('appcontent').clientHeight +moveBy +'px'; }
 	},
-	
+
 	enable: function(bar) {
 		toggleAttribute(bar.switcher, 'enabled', bar.useSwitch);
 		this.setHeight();
 		bar.toggleSwitcher();
 		this.scrollNodes.add(bar.switcher);
 	},
-	
+
 	disable: function(bar) {
 		this.scrollNodes.delete(bar.switcher);
 	}
@@ -691,21 +691,21 @@ this.SidebarUI = {
 			yield bar;
 		}
 	},
-	
+
 	browsers: function*() {
 		for(let bar of sidebars) {
 			yield bar.sidebar;
 		}
 	},
-	
+
 	main: mainSidebar,
 	twin: twinSidebar,
-	
+
 	// object of broadcaster id's that shouldn't be saved between sessions
 	dontSaveBroadcasters: new Set(),
 	// object of broadcaster id's that may be added after the sidebars are loaded
 	holdBroadcasters: new Set(),
-	
+
 	triggers: {
 		// object of elements or parent elements that only open the sidebar and don't close it
 		forceOpen: new Map(),
@@ -718,17 +718,17 @@ this.SidebarUI = {
 		// object of elements or parent elements that should reload the sidebar if it's already opened and forceOpen is true
 		forceReload: new Map(),
 	},
-	
+
 	_listeners: new Set(),
-	
+
 	addListener: function(aListener) {
 		this._listeners.add(aListener);
 	},
-	
+
 	removeListener: function(aListener) {
 		this._listeners.delete(aListener);
 	},
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'load':
@@ -737,35 +737,35 @@ this.SidebarUI = {
 				break;
 		}
 	},
-	
+
 	// Fire a "SidebarFocused" event on the sidebar's |window| to give the sidebar a chance to adjust focus as needed. An additional event is needed, because
 	// we don't want to focus the sidebar when it's opened on startup or in a new window, only when the user opens the sidebar.
 	_fireFocusedEvent: function(bar = mainSidebar) {
 		if(bar.holdFocused) { return; }
-		
+
 		aSync(function() { dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocused', cancelable: false, detail: { bar: bar } }); });
-		
+
 		// Run the original function for backwards compatibility.
 		window.fireSidebarFocusedEvent();
 	},
-	
+
 	_fireFocusedSyncEvent: function(bar = mainSidebar) {
 		dispatch(bar.sidebar.contentWindow, { type: 'SidebarFocusedSync', cancelable: false, detail: { bar: bar } });
 	},
-	
+
 	toggle: Task.async(function* (commandID, forceOpen = false, twin = false, forceUnload = false, forceBlank = false, forceBarSwitch = false, forceReload = false) {
 		// Always make sure we hide our popup
 		aSync(function() { panel.hide(); });
-		
+
 		if(customizing) { return false; }
-		
+
 		// there's no point in toggling the twin sidebar if it doesn't exist
 		if(twin && !Prefs.twinSidebar) {
 			twin = false;
 		}
-		
+
 		var bar = (twin) ? twinSidebar : mainSidebar;
-		
+
 		if(!commandID) {
 			commandID = bar.command || bar.state.command;
 		}
@@ -778,7 +778,7 @@ this.SidebarUI = {
 					}
 				}
 			}
-			
+
 			if(!forceReload && forceOpen) {
 				for(let trigger of this.triggers.forceReload.values()) {
 					if(isAncestor(commandID, (typeof(trigger) == 'function') ? trigger() : trigger)) {
@@ -787,7 +787,7 @@ this.SidebarUI = {
 					}
 				}
 			}
-			
+
 			if(!twin) {
 				for(let l of this._listeners) {
 					if(l.forceTwin) {
@@ -802,7 +802,7 @@ this.SidebarUI = {
 					}
 				}
 			}
-			
+
 			if(!twin) {
 				for(let trigger of this.triggers.twin.values()) {
 					if(isAncestor(commandID, (typeof(trigger) == 'function') ? trigger() : trigger)) {
@@ -812,7 +812,7 @@ this.SidebarUI = {
 					}
 				}
 			}
-			
+
 			if(!forceBlank) {
 				for(let trigger of this.triggers.blank.values()) {
 					if(isAncestor(commandID, (typeof(trigger) == 'function') ? trigger() : trigger)) {
@@ -822,7 +822,7 @@ this.SidebarUI = {
 					}
 				}
 			}
-			
+
 			if(!forceBlank && !forceBarSwitch) {
 				for(let trigger of this.triggers.barSwitch.values()) {
 					if(isAncestor(commandID, (typeof(trigger) == 'function') ? trigger() : trigger)) {
@@ -831,7 +831,7 @@ this.SidebarUI = {
 					}
 				}
 			}
-			
+
 			if(typeof(commandID) != "string") {
 				while(commandID && commandID.localName != 'broadcaster' && commandID.getAttribute('observes')) {
 					commandID = $(commandID.getAttribute('observes'));
@@ -839,25 +839,25 @@ this.SidebarUI = {
 				commandID = commandID.id;
 			}
 		}
-		
+
 		// bugfix: don't toggle the sidebar if it hasn't finished loading yet.
 		// For instance, SessionStore tracks the sidebar on startup separately through the sidebarcommand attribute on sidebar-box,
 		// this attribute still exists when the sidebar is just collapsed, so the sidebar would reopen when restarting the browser.
 		// (we can't remove the attribute on shutdown because the window will no longer be tracked by SessionStore by then)
 		if(!bar.loaded) { return false; }
-		
+
 		var otherBar = (twin) ? mainSidebar : twinSidebar;
 		var sidebarBroadcaster = $(commandID);
-		
+
 		// if the last command was an add-on's sidebar, and it's been disabled/removed
 		if(!sidebarBroadcaster) {
 			commandID = objName+'-viewBlankSidebar';
 			if(twin) { commandID += '-twin'; }
 			sidebarBroadcaster = $(commandID);
-			
+
 			if(!sidebarBroadcaster) { return false; } // we're not ready for this yet
 		}
-		
+
 		if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: {
 			bar: bar,
 			commandID: commandID,
@@ -869,7 +869,7 @@ this.SidebarUI = {
 		} })) {
 			return false;
 		}
-		
+
 		// Can't let both sidebars display the same page, it becomes unstable
 		if(trueAttribute(sidebarBroadcaster, "checked")
 		&& Prefs.twinSidebar
@@ -884,16 +884,16 @@ this.SidebarUI = {
 					yield this.toggle(commandID, false, !twin, true).then((toggled) => {
 						if(!toggled) { return false; }
 					});
-					
+
 					if(!forceBarSwitch) { return true; }
 				}
 		}
-		
+
 		// in case the other sidebar is still loaded with the sidebar we want to open, make sure we unload it
 		if(otherBar.box && otherBar.command == sidebarBroadcaster.id) {
 			this.close(otherBar);
 		}
-		
+
 		// can we close the sidebar (if it's opened or if we need to)?
 		var tryClose = trueAttribute(sidebarBroadcaster, "checked") && bar.isOpen;
 		if(tryClose) {
@@ -916,7 +916,7 @@ this.SidebarUI = {
 			else {
 				if(!forceOpen) {
 					this.close(bar, sidebarBroadcaster, forceUnload);
-					
+
 					if(dispatch(bar.sidebar, { type: 'closedSidebar', detail: { bar: bar } })) {
 						this.focusContent();
 						this.visibilityChange(commandID, false);
@@ -924,11 +924,11 @@ this.SidebarUI = {
 				} else {
 					this._fireFocusedEvent(bar);
 				}
-				
+
 				return this.endToggle(bar);
 			}
 		}
-		
+
 		// can we actually toggle the sidebar?
 		for(let l of this._listeners) {
 			if(l.tryOpen) {
@@ -940,10 +940,10 @@ this.SidebarUI = {
 				catch(ex) { Cu.reportError(ex); }
 			}
 		}
-		
+
 		setAttribute(sidebarBroadcaster, "checked", "true");
 		toggleAttribute(sidebarBroadcaster, 'twinSidebar', twin);
-		
+
 		var broadcasters = $$("broadcaster[group='sidebar']");
 		for(let broadcaster of broadcasters) {
 			if(broadcaster != sidebarBroadcaster
@@ -955,9 +955,9 @@ this.SidebarUI = {
 		bar.box.hidden = false;
 		bar.box.collapsed = false;
 		bar.splitter.hidden = false;
-		
+
 		buttonLabels(bar.button);
-		
+
 		// let something else handle the sidebar open command if necessary
 		for(let l of this._listeners) {
 			if(l.tryHandle) {
@@ -970,12 +970,12 @@ this.SidebarUI = {
 				catch(ex) { Cu.reportError(ex); }
 			}
 		}
-		
+
 		// nothing handled, so use default routines
-		
+
 		var title = sidebarBroadcaster.getAttribute("sidebartitle") || sidebarBroadcaster.getAttribute("label");
 		var url = sidebarBroadcaster.getAttribute("sidebarurl");
-		
+
 		if(!Prefs.keepLoaded || forceUnload || bar.sidebar.getAttribute('src') != url || url == 'about:blank') {
 			// anything special that needs to be done to unload the current sidebar
 			for(let l of this._listeners) {
@@ -986,52 +986,52 @@ this.SidebarUI = {
 					catch(ex) { Cu.reportError(ex); }
 				}
 			}
-			
+
 			bar.sidebar.hidden = false;
-			
+
 			setAttribute(bar.sidebar, "src", url);
 			bar.command = sidebarBroadcaster.id;
-			
+
 			// We set this attribute here in addition to setting it on the <browser> element itself, because the code in SidebarUI.uninit() persists this
 			// attribute, not the "src" of the <browser id="sidebar">. The reason it does that is that we want to delay sidebar load a bit when a browser
 			// window opens. See delayedStartup() and SidebarUI.startDelayedLoad().
 			setAttribute(bar.box, "src", url);
-			
+
 			bar.title = title;
 		}
-		
+
 		if(!bar.sidebar.contentDocument || bar.sidebar.contentDocument.readyState != 'complete' || bar.sidebar.contentDocument.location.href != url) {
 			Listeners.add(bar.sidebar, "load", (e) => {
 				// We're handling the 'load' event before it bubbles up to the usual (non-capturing) event handlers.
 				// Let it bubble up before firing the SidebarFocused event.
 				aSync(() => { this._fireFocusedEvent(bar); });
-				
+
 				// Run the original function for backwards compatibility.
 				window.sidebarOnLoad(e);
 			}, true, true);
 		} else {
 			this._fireFocusedEvent(bar);
 		}
-		
+
 		this.visibilityChange(commandID, true);
 		return this.endToggle(bar);
 	}),
-	
+
 	endToggle: function(bar) {
 		dispatch(bar.sidebar, { type: 'endToggleSidebar', cancelable: false, detail: { bar: bar } });
 		return true;
 	},
-	
+
 	close: function(bar = mainSidebar, broadcaster = null, forceUnload = true) {
 		var commandID = bar.command;
-		
+
 		if(!broadcaster && commandID) {
 			broadcaster = $(commandID);
 		}
 		if(broadcaster && broadcaster.localName == 'broadcaster' && trueAttribute(broadcaster, 'checked')) {
 			broadcaster.removeAttribute('checked');
 			broadcaster.removeAttribute('twinSidebar');
-			
+
 			// anything special that needs to be done when closing the current sidebar
 			for(let l of this._listeners) {
 				if(l.onClose) {
@@ -1042,7 +1042,7 @@ this.SidebarUI = {
 				}
 			}
 		}
-		
+
 		if(!Prefs.keepLoaded || forceUnload || UNLOADED || !dispatch(bar.box, { type: 'ShouldCollapseSidebar' })) {
 			this.unloadBrowser(bar.sidebar);
 			bar.title = "";
@@ -1053,14 +1053,14 @@ this.SidebarUI = {
 		else {
 			bar.box.collapsed = true;
 		}
-		
+
 		removeAttribute(bar.box, 'origin');
 		bar.splitter.hidden = true;
 		buttonLabels(bar.button);
-		
+
 		bar.state = bar.state.command;
 	},
-	
+
 	focusContent: function(uri = gBrowser.currentURI.spec) {
 		// this check comes from gBrowserInit._delayedStartup, it tries to focus the location bar first if applicable, otherwise it focuses the tab content
 		// http://mxr.mozilla.org/mozilla-central/source/browser/base/content/browser.js#1297
@@ -1073,29 +1073,29 @@ this.SidebarUI = {
 			}
 		}
 	},
-	
+
 	visibilityChange: function(commandID, isOpen) {
 		gBrowser.selectedBrowser.messageManager.sendAsyncMessage("Sidebar:VisibilityChange", { commandID: commandID, isOpen: isOpen });
 	},
-	
+
 	unloadBrowser: function(browser) {
 		setAttribute(browser, "src", "about:blank");
 		if(browser.docShell) { browser.docShell.createAboutBlankContentViewer(null); }
 	},
-	
+
 	// shims for compatibility with the new SidebarUI object
-	
+
 	show: function(commandID, twin) {
 		return this.toggle(commandID, true, twin);
 	},
-	
+
 	hide: function(bar = mainSidebar) {
 		if(bar.isOpen) {
 			this.visibilityChange(bar.command, false);
 			this.close(bar, null, false);
 		}
 	},
-	
+
 	init: function() {},
 	uninit: function() {},
 	startDelayedLoad: function() {}
@@ -1106,7 +1106,7 @@ this.onLoad = function() {
 	switcher.enable(mainSidebar);
 	openLast(mainSidebar);
 	setClass(mainSidebar);
-	
+
 	// The first time we install the add-on lets open the sidebar so the user knows something's changed
 	if(Prefs.firstEnabled) {
 		Prefs.firstEnabled = false;
@@ -1119,7 +1119,7 @@ this.onLoad = function() {
 this.onUnload = function() {
 	mainSidebar.loaded = false;
 	switcher.disable(mainSidebar);
-	
+
 	for(let id of SidebarUI.dontSaveBroadcasters) {
 		if(mainSidebar.command == id) {
 			SidebarUI.close(mainSidebar);
@@ -1151,60 +1151,60 @@ this.toggleTwin = function() {
 Modules.LOADMODULE = function() {
 	// We make a lot of assumptions in the code that the panel is always loaded, so never remove this from here
 	Modules.load('miniPanel');
-	
+
 	Modules.load('compatibilityFix/windowFixes');
-	
+
 	Overlays.overlayWindow(window, "mainSidebar", self);
 	setBroadcasters();
-	
+
 	this._SidebarUI = window.SidebarUI;
 	window.SidebarUI = SidebarUI;
-	
+
 	Modules.load('webPanels');
 	Modules.load('social');
-	
+
 	// I guess some add-ons can set these, they override the css set ones so we have to erase them
 	mainSidebar.sidebar.style.maxWidth = '';
 	mainSidebar.sidebar.style.minWidth = Prefs.minSidebarWidth+'px';
 	mainSidebar.sidebar.style.width = '';
-	
+
 	Watchers.addAttributeWatcher(mainSidebar.box, 'width', self, true);
 	Listeners.add(window, 'sidebarWidthChanged', switcher);
 	switcher.setOffset();
-	
+
 	// Toggle modules
 	Prefs.listen('useSwitch', self);
 	Prefs.listen('twinSidebar', toggleTwin);
-	
+
 	Modules.load('headers');
 	Modules.load('forceOpen');
 	toggleTwin();
-	
+
 	// Apply initial preferences
 	Prefs.listen('glassStyle', self);
 	Prefs.listen('keepLoaded', self);
-	
+
 	Listeners.add(window, 'endToggleSidebar', self);
 	Listeners.add(mainSidebar.sidebar, 'load', SidebarUI, true);
-	
+
 	Listeners.add(window, 'beforecustomization', self);
 	Listeners.add(window, 'aftercustomization', self);
 	customize();
-	
+
 	// set our custom classes so the sidebars can be styled properly
 	Listeners.add(window, 'SidebarFocusedSync', self);
 	Listeners.add(window, 'SidebarFocused', self);
-	
+
 	// can't let the browser be resized below the dimensions of the sidebars
 	browserMinWidth();
 	Listeners.add(window, 'resize', self);
 	Listeners.add(browserBox, 'browserResized', switcher);
-	
+
 	if(!mainSidebar.close._tooltiptext) {
 		mainSidebar.close._tooltiptext = mainSidebar.close.getAttribute('tooltiptext');
 		mainSidebar.close.setAttribute('tooltiptext', Strings.get('buttons', 'buttonCloseTooltip'));
 	}
-	
+
 	SidebarUI.triggers.blank.set('mainCommand', function() { return $(objName+'-cmd_mainSidebar'); });
 	SidebarUI.triggers.blank.set('mainSwitcher', function() { return mainSidebar.switcher; });
 };
@@ -1213,53 +1213,53 @@ Modules.UNLOADMODULE = function() {
 	if(UNLOADED && mainSidebar.isOpen) {
 		setClass(mainSidebar);
 	}
-	
+
 	SidebarUI.triggers.blank.delete('mainCommand');
 	SidebarUI.triggers.blank.delete('mainSwitcher');
-	
+
 	if(mainSidebar.close._tooltiptext) {
 		mainSidebar.close.setAttribute('tooltiptext', mainSidebar.close._tooltiptext);
 		delete mainSidebar.close._tooltiptext;
 	}
-	
+
 	Listeners.remove(window, 'resize', self);
 	Listeners.remove(browserBox, 'browserResized', switcher);
 	document.documentElement.style.minWidth = '';
-	
+
 	Listeners.remove(window, 'SidebarFocusedSync', self);
 	Listeners.remove(window, 'SidebarFocused', self);
-	
+
 	Listeners.remove(window, 'beforecustomization', self);
 	Listeners.remove(window, 'aftercustomization', self);
-	
+
 	Listeners.remove(mainSidebar.sidebar, 'load', SidebarUI, true);
 	Listeners.remove(window, 'endToggleSidebar', self);
-	
+
 	Prefs.unlisten('glassStyle', self);
 	Prefs.unlisten('keepLoaded', self);
-	
+
 	mainSidebar.reUnload();
-	
+
 	Listeners.remove(window, 'sidebarWidthChanged', switcher);
 	Watchers.removeAttributeWatcher(mainSidebar.box, 'width', self, true);
-	
+
 	Modules.unload('twin');
 	Modules.unload('forceOpen');
 	Modules.unload('headers');
-	
+
 	Prefs.unlisten('twinSidebar', toggleTwin);
 	Prefs.unlisten('useSwitch', self);
 	Styles.unload('switcherOffset_'+_UUID);
-	
+
 	Modules.unload('social');
 	Modules.unload('webPanels');
-	
+
 	window.SidebarUI = this._SidebarUI;
 	delete this._SidebarUI;
-	
+
 	unsetBroadcasters();
 	Overlays.removeOverlayWindow(window, "mainSidebar");
-	
+
 	Modules.unload('compatibilityFix/windowFixes');
 	Modules.unload('miniPanel');
 	Modules.unload('buttons');

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://objPathString/skin/above.css" type="text/css"?>
 <overlay id="renderAboveDocker-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<sidebarheader id="sidebar-header">
 		<toolbarbutton id="objName-dock_button"
 			class="omnisidebar-docker"
@@ -9,5 +9,5 @@
 			insertafter="sidebar-throbber"
 			oncommand="objName.renderAbove.toggle(false);" />
 	</sidebarheader>
-	
+
 </overlay>

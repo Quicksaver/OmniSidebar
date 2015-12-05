@@ -6,7 +6,7 @@
   %browserDTD;
 ]>
 <overlay id="scratchpad-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewScratchpadSidebar"
 			accesskey="&scratchpadSidebar.accesskey;"
@@ -19,15 +19,15 @@
 			MacAcceltext="&acceltext.upArrow;&scratchpad.keycode;"
 			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
-	
+
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="objName-menu_scratchpadSidebar"
 			label="&scratchpadSidebar.label;"
 			observes="objName-viewScratchpadSidebar" />
 	</menupopup>
-	
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-scratchpad_sidebar_button" 
+		<toolbarbutton id="objName-scratchpad_sidebar_button"
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-custom-button"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&scratchpadSidebar.label;"
@@ -35,5 +35,5 @@
 			type="custom"
 			observes="objName-viewScratchpadSidebar" />
 	</toolbarpalette>
-	
+
 </overlay>

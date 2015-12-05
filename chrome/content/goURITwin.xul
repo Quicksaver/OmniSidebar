@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="goURIMainTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="objName-viewURISidebar-twin"
 			autoCheck="false"
@@ -25,11 +25,11 @@
 			onpopuphiding="objName.URIBar.blur(this);">
 			<hbox>
 				<textbox id="objName-URIBar-twin"
-					type="autocomplete" 
+					type="autocomplete"
 					flex="1"
 					broadcaster="objName-viewURISidebar-twin"
 					onkeydown="return objName.URIBar.onKeydown(event, this);"/>
-				<button id="objName-URIGo-twin" 
+				<button id="objName-URIGo-twin"
 					class="omnisidebarURIGo"
 					label="&URISidebar.buttonLabel;"
 					broadcaster="objName-viewURISidebar-twin"
@@ -37,9 +37,9 @@
 			</hbox>
 		</menupopup>
 	</popupset>
-	
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-uri_sidebar_button-twin" 
+		<toolbarbutton id="objName-uri_sidebar_button-twin"
 			class="toolbarbutton-1 chromeclass-toolbar-additional uri-sidebar-button osb-adequate-size osb-custom-button"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			removable="false"
@@ -50,5 +50,5 @@
 			broadcaster="objName-viewURISidebar-twin"
 			oncommand="objName.URIBar.open(this);" />
 	</toolbarpalette>
-	
+
 </overlay>

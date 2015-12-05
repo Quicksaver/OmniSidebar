@@ -7,22 +7,22 @@
 		background: rgba(0, 0, 0, 0) !important;
 		padding: 8px !important;
 	}
-	
+
 	.inSidebar #sidebar-notify #feed_tree {
 		padding-top: 2px !important;
 	}
-	
+
 	.inSidebar #feedbar-loading-text-container {
 		-moz-appearance: none !important;
 		border: none !important;
 	}
-	
+
 	.inSidebar #preview-splitter {
 		background: rgba(255,255,255,.5) !important;
 		height: 3px !important;
 		min-height: 1px !important;
 	}
-	
+
 	.inSidebar #feedbarTooltipSummaryGroupbox {
 		-moz-appearance: none !important;
 		border-style: solid !important;
@@ -30,30 +30,30 @@
 		padding: 3px !important;
 		margin: 0px !important;
 	}
-	
+
 	.inSidebar #feedbarTooltipSummaryGroupbox .groupbox-body {
 		padding: 3px;
 	}
-	
+
 	.inSidebar #feedbar-loading-text-container {
 		overflow: hidden !important;
 	}
-	
+
 	.inSidebar .toolbox-top toolbarbutton#all-toggle image {
 		display: none !important;
 	}
-	
+
 	.inSidebar #navigator-toolbox #search-toggle,
 	.inSidebar #navigator-toolbox #all-toggle {
 		padding: 2px 7px !important;
 	}
-	
+
 	.inSidebar #nav-bar {
 		box-shadow: none !important;
 	}
-	
+
 	/* we also need to overrule the buttons styling (equal to the nav-bar, we'd have both stylings */
-	
+
 	.inSidebar .toolbarbutton-1 > .toolbarbutton-text,
 	.inSidebar .toolbarbutton-1 > .toolbarbutton-icon,
 	.inSidebar .toolbarbutton-1[type="menu-button"] > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
@@ -66,7 +66,7 @@
 		transition: none !important;
 		margin: 0 !important;
 	}
-	
+
 	/* I have no idea where I got these values from... */
 	.inSidebar .toolbarbutton-1[type="menu"] > .toolbarbutton-icon {
 		width: auto !important;
@@ -75,7 +75,7 @@
 	.inSidebar .toolbarbutton-1[type="menu"] > .toolbarbutton-menu-dropmarker {
 		-moz-margin-start: -9px !important;
 	}
-	
+
 	.inSidebar .toolbarbutton-1[type="menu-button"] > .toolbarbutton-menubutton-dropmarker:before {
 		display: none !important;
 	}

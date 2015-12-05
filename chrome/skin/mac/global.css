@@ -1,6 +1,6 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("about:addons") {
-	
+
 	#addons-page.inSidebar:not(.glassStyle),
 	#addons-page.inSidebar:not(.glassStyle) :-moz-any(#nav-header,#categories) {
 		background: none !important;
@@ -10,27 +10,27 @@
 
 @-moz-document	url("chrome://browser/content/devtools/webconsole.xul"),
 		url("chrome://browser/content/places/places.xul") {
-	
+
 	.inSidebar:not(.glassStyle) #downloadsRichListBox,
 	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar {
 		background: #e2e7ed !important;
 	}
-	
+
 	.inSidebar:not(.glassStyle) #downloadsRichListBox:-moz-window-inactive,
 	#devtools-webconsole.inSidebar:not(.glassStyle) .devtools-toolbar:-moz-window-inactive {
 		background: #e8e8e8 !important;
 	}
-	
+
 	#places.inSidebar,
 	.inSidebar #placesToolbar {
 		-moz-appearance: none !important;
 		background: none !important;
 	}
-	
+
 	.inSidebar:not(.glassStyle) #downloadsRichListBox {
 		border: 1px solid #bdbdbd !important;
 	}
-	
+
 	.inSidebar:not(.glassStyle) #downloadsRichListBox richlistitem[selected] {
 		font-weight: bold !important;
 		color: #ffffff !important;
@@ -41,7 +41,7 @@
 		background: linear-gradient(#6494D4, #2559AC) repeat-x !important;
 		border-top: 1px solid #5382C5 !important;
 	}
-	
+
 	.inSidebar:not(.glassStyle) #downloadsRichListBox richlistitem[selected]:-moz-system-metric(mac-graphite-theme) {
 		background: linear-gradient(#AAB7C4, #8393A4) repeat-x !important;
 		border-top: 1px solid #97A4B1 !important;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="renderAboveDockerTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<sidebarheader id="objName-sidebar-header-twin">
 		<toolbarbutton id="objName-dock_button-twin"
 			class="omnisidebar-docker"
@@ -8,5 +8,5 @@
 			insertafter="objName-sidebar-throbber-twin"
 			oncommand="objName.renderAbove.toggle(true);" />
 	</sidebarheader>
-	
+
 </overlay>

@@ -1,35 +1,35 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://inspector/content/inspector.xul") {
-	
-	.inSidebar #splPanels { 
+
+	.inSidebar #splPanels {
 		background: rgba(255,255,255,.5) !important;
 		width: 3px !important;
 		min-width: 1px !important;
 	}
-	
+
 	.inSidebar domi-panel .viewer-pane-box-1 {
 		border: 1px solid rgba(255,255,255,.5) !important;
 	}
-	
+
 	.inSidebar #bxURLBar toolbarbutton:not(#btnSelecting):not(#btnFind) {
 		padding: 2px 5px !important;
 	}
-	
+
 	.inSidebar #tbxInsToolbox #bxURLBar toolbarbutton {
 		padding: 0 2px !important;
 	}
-	
+
 	.inSidebar #tbxInsToolbox #mbrInspectorMain > menu {
 		padding: 0 !important;
 	}
-	
+
 	.inSidebar #bxPanelSet .viewer-list,
 	.inSidebar #bxPanelSet .viewer-menu {
 		padding: 3px !important;
 	}
-	
+
 	.inSidebar #bxURLBar toolbarbutton:not(#btnSelecting):not(#btnFind) image {
 		display: none !important;
 	}
-	
+
 }

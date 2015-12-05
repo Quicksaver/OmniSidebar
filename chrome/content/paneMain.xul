@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://omnisidebar/skin/options.css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/options.dtd">
 <overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<richlistbox id="categories">
 		<richlistitem id="category-main"
 			class="category"
@@ -10,12 +10,12 @@
 			tooltiptext="&OptgroupMain.label;"
 			position="1"
 			align="center">
-			
+
 			<image class="category-icon"/>
 			<label class="category-name" flex="1" value="&OptgroupMain.label;"/>
 		</richlistitem>
 	</richlistbox>
-	
+
 	<prefpane id="mainPrefPane">
 		<preferences>
 			<preference id="pref-moveSidebars" name="extensions.omnisidebar.moveSidebars" type="bool"/>
@@ -36,11 +36,11 @@
 			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
 			<preference id="pref-mainKeysetPanel" name="extensions.omnisidebar.mainKeysetPanel" type="bool"/>
 		</preferences>
-		
+
 		<hbox id="header-main" class="header" collapsed="true" data-category="paneMain">
 			<label class="header-name">&OptgroupMain.label;</label>
 		</hbox>
-		
+
 		<hbox id="paneMain-position" align="start" collapsed="true" data-category="paneMain">
 			<radiogroup delayPreference="pref-moveSidebars"
 				jump="moveSidebars"
@@ -58,7 +58,7 @@
 				</hbox>
 			</radiogroup>
 		</hbox>
-		
+
 		<groupbox align="start" id="paneMain-general" data-category="paneMain" collapsed="true">
 			<vbox align="start">
 				<checkbox label="&Optswitchers.label;"
@@ -71,7 +71,7 @@
 					delayPreference="pref-autoClose"/>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneMain-above" data-category="paneMain" collapsed="true">
 			<caption><checkbox id="aboveCheckbox"
 				label="&Optundock.label;"
@@ -90,7 +90,7 @@
 				<description>&Optautohide.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneMain-display" data-category="paneMain" collapsed="true">
 			<caption label="&Optgroupgen.label;"/>
 			<hbox align="center">
@@ -127,7 +127,7 @@
 				<description>&Optshowheaderclose.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneMain-toolbar" data-category="paneMain" collapsed="true">
 			<caption>
 				<checkbox label="&Opttoolbar.label;"
@@ -175,7 +175,7 @@
 				<description>&Optcoloricons.color.tooltip;</description>
 			</vbox>
 		</groupbox>
-		
+
 		<groupbox align="start" id="paneMain-keyset" data-category="paneMain" collapsed="true">
 			<caption label="&OptKeyboardShortcut.caption;"/>
 			<hbox jump="mainKeyset,&OptKeyboardShortcut.caption;">
@@ -196,5 +196,5 @@
 			</vbox>
 		</groupbox>
 	</prefpane>
-	
+
 </overlay>

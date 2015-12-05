@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="miniPanel-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	
+
 	<popupset id="mainPopupSet">
 		<panel id="objName-panel"
 			type="arrow"
@@ -22,7 +22,7 @@
 			</vbox>
 		</panel>
 	</popupset>
-	
+
 	<panelmultiview id="PanelUI-multiView">
 		<panelview id="objName-panelView"
 			flex="1"
@@ -42,5 +42,5 @@
 				</vbox>
 		</panelview>
 	</panelmultiview>
-	
+
 </overlay>

@@ -3,7 +3,7 @@
 // for now this works only with the main sidebar
 this.webPanels = {
 	uri: "",
-	
+
 	open: function(title, uri) {
 		// Ensure that the web panels sidebar is open.
 		SidebarUI.show("viewWebPanelsSidebar").then((toggled) => {
@@ -12,7 +12,7 @@ this.webPanels = {
 				mainSidebar.title = title;
 			}
 		});
-		
+
 		// Tell the Web Panels sidebar to load the bookmark.
 		if(mainSidebar.sidebar.docShell && mainSidebar.sidebar.contentDocument && mainSidebar.sidebar.contentDocument.getElementById("web-panels-browser")) {
 			mainSidebar.sidebar.contentWindow.loadWebPanel(uri);
@@ -28,7 +28,7 @@ this.webPanels = {
 			this.uri = uri;
 		}
 	},
-	
+
 	handleEvent: function(e) {
 		if(this.uri && mainSidebar.sidebar.contentDocument && mainSidebar.sidebar.contentDocument.getElementById("web-panels-browser")) {
 			mainSidebar.sidebar.contentWindow.loadWebPanel(this.uri);

@@ -3,9 +3,9 @@
 this.pageInfo = {
 	broadcasterId: objName+'-viewPageInfoSidebar',
 	get broadcaster () { return $(this.broadcasterId); },
-	
+
 	args: null,
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'SidebarFocusedSync':
@@ -24,7 +24,7 @@ this.pageInfo = {
 				break;
 		}
 	},
-	
+
 	observe: function(aSubject, aTopic, aData) {
 		switch(aSubject) {
 			case 'alwaysPageInfo':
@@ -32,7 +32,7 @@ this.pageInfo = {
 				break;
 		}
 	},
-	
+
 	toggleAlways: function(enable) {
 		if(enable) {
 			Piggyback.add('pageInfo', window, 'BrowserPageInfo', (doc, initialTab, imageElement) => {
@@ -47,14 +47,14 @@ this.pageInfo = {
 
 Modules.LOADMODULE = function() {
 	Overlays.overlayWindow(window, 'pageInfo');
-	
+
 	SidebarUI.triggers.forceOpen.set('viewPageInfoSidebar', function() { return pageInfo.broadcaster; });
 	SidebarUI.triggers.forceReload.set('viewPageInfoSidebar', function() { return pageInfo.broadcaster; });
 	SidebarUI.dontSaveBroadcasters.add(pageInfo.broadcasterId);
-	
+
 	Prefs.listen('alwaysPageInfo', pageInfo);
 	pageInfo.toggleAlways(Prefs.alwaysPageInfo);
-	
+
 	Listeners.add(window, 'SidebarFocusedSync', pageInfo);
 };
 
@@ -63,15 +63,15 @@ Modules.UNLOADMODULE = function() {
 		if(mainSidebar.command == pageInfo.broadcasterId) { SidebarUI.close(mainSidebar); }
 		if(twinSidebar.command == pageInfo.broadcasterId) { SidebarUI.close(twinSidebar); }
 	}
-	
+
 	Listeners.remove(window, 'SidebarFocusedSync', pageInfo);
-	
+
 	Prefs.unlisten('alwaysPageInfo', pageInfo);
 	pageInfo.toggleAlways(false);
-	
+
 	SidebarUI.triggers.forceOpen.delete('viewPageInfoSidebar');
 	SidebarUI.triggers.forceReload.delete('viewPageInfoSidebar');
 	SidebarUI.dontSaveBroadcasters.delete(pageInfo.broadcasterId);
-	
+
 	Overlays.removeOverlayWindow(window, 'pageInfo');
 };

@@ -1,11 +1,11 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("chrome://browser/content/devtools/scratchpad.xul") {
-	
+
 	/* it's not like this works anyway */
 	.inSidebar #sp-menu-close {
 		display: none;
 	}
-	
+
 	.inSidebar .devtools-toolbarbutton {
 		min-width: 0 !important;
 		padding-left: 4px !important;

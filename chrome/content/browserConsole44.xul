@@ -3,5 +3,5 @@
 
 	<broadcaster id="objName-viewConsoleSidebar"
 		sidebarurl="chrome://devtools/content/webconsole/webconsole.xul" />
-	
+
 </overlay>

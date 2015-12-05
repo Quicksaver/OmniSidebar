@@ -12,7 +12,7 @@ Modules.LOADMODULE = function() {
 	// AddonManagerInternal isn't exported, so we need to access it through the module's backstage pass
 	AddonManagerBackstage = Cu.import("resource://gre/modules/AddonManager.jsm", {});
 	AddonManagerBackstage.__AddonManagerInternal = AddonManagerBackstage.AddonManagerInternal;
-	
+
 	// AddonManagerInternal is frozen, so replace it with another one we can modify
 	let InternalNew = {};
 	for(let p in AddonManagerBackstage.AddonManagerInternal) {
@@ -34,25 +34,25 @@ Modules.LOADMODULE = function() {
 		}
 	}
 	AddonManagerBackstage.AddonManagerInternal = InternalNew;
-	
+
 	// this is the same code that can be found in the original (http://mxr.mozilla.org/mozilla-central/source/toolkit/mozapps/extensions/AddonManager.jsm)
 	// except where noted by |OSB CODE|; in this instance this was actually easier than using toCode (eval)
 	AddonManagerBackstage.AddonManagerInternal.installAddonsFromWebpage = function AMI_installAddonsFromWebpage(aMimetype, aBrowser, aInstallingPrincipal, aInstalls) {
 		if(!AddonManagerBackstage.gStarted)
 			throw Components.Exception("AddonManager is not initialized", Cr.NS_ERROR_NOT_INITIALIZED);
-		
+
 		if(!aMimetype || typeof aMimetype != "string")
 			throw Components.Exception("aMimetype must be a non-empty string", Cr.NS_ERROR_INVALID_ARG);
-		
+
 		if(aBrowser && !(aBrowser instanceof Ci.nsIDOMElement))
 			throw Components.Exception("aSource must be a nsIDOMElement, or null", Cr.NS_ERROR_INVALID_ARG);
-		
+
 		if(!aInstallingPrincipal || !(aInstallingPrincipal instanceof Ci.nsIPrincipal))
 			throw Components.Exception("aInstallingPrincipal must be a nsIPrincipal", Cr.NS_ERROR_INVALID_ARG);
-		
+
 		if(!Array.isArray(aInstalls))
 			throw Components.Exception("aInstalls must be an array", Cr.NS_ERROR_INVALID_ARG);
-		
+
 		if(!("@mozilla.org/addons/web-install-listener;1" in Cc)) {
 			AddonManagerBackstage.logger.warn("No web installer available, cancelling all installs");
 			for(let install of aInstalls) {
@@ -60,7 +60,7 @@ Modules.LOADMODULE = function() {
 			}
 			return;
 		}
-		
+
 		// When a chrome in-content UI has loaded a <browser> inside to host a website we want to do our security checks on the inner-browser but
 		// notify front-end that install events came from the outer-browser (the main tab's browser). Check this by seeing if the browser we've been
 		// passed is in a content type docshell and if so get the outer-browser.
@@ -69,7 +69,7 @@ Modules.LOADMODULE = function() {
 		if(docShell.itemType == Ci.nsIDocShellTreeItem.typeContent) {
 			topBrowser = docShell.chromeEventHandler;
 		}
-		
+
 		// OSB CODE begin
 		try {
 			if(topBrowser.id == "discover-browser") {
@@ -80,7 +80,7 @@ Modules.LOADMODULE = function() {
 					.rootTreeItem
 					.QueryInterface(Ci.nsIInterfaceRequestor)
 					.getInterface(Ci.nsIDOMWindow);
-				
+
 				if(ownerWindow && ownerWindow[objName]) {
 					for(let bar of ownerWindow[objName].sidebars) {
 						if(browserWindow == bar.sidebar.contentWindow) {
@@ -92,15 +92,15 @@ Modules.LOADMODULE = function() {
 		}
 		catch(ex) { /* we don't care, just proceed normally */ }
 		// OSB CODE end
-		
+
 		try {
 			let weblistener = Cc["@mozilla.org/addons/web-install-listener;1"].getService(Ci.amIWebInstallListener);
-			
+
 			if(!this.isInstallEnabled(aMimetype)) {
 				for(let install of aInstalls) {
 					install.cancel();
 				}
-				
+
 				weblistener.onWebInstallDisabled(topBrowser, aInstallingPrincipal.URI, aInstalls, aInstalls.length);
 				return;
 			}
@@ -108,16 +108,16 @@ Modules.LOADMODULE = function() {
 				for(let install of aInstalls) {
 					install.cancel();
 				}
-				
+
 				if(weblistener instanceof Ci.amIWebInstallListener2) {
 					weblistener.onWebInstallOriginBlocked(topBrowser, aInstallingPrincipal.URI, aInstalls, aInstalls.length);
 				}
 				return;
 			}
-			
+
 			// The installs may start now depending on the web install listener, listen for the browser navigating to a new origin and cancel the installs in that case.
 			new AddonManagerBackstage.BrowserListener(aBrowser, aInstallingPrincipal, aInstalls);
-			
+
 			if(!this.isInstallAllowed(aMimetype, aInstallingPrincipal)) {
 				if(weblistener.onWebInstallBlocked(topBrowser, aInstallingPrincipal.URI, aInstalls, aInstalls.length)) {
 					for(let install of aInstalls) {

@@ -19,15 +19,15 @@
 			MacAcceltext="&acceltext.cmd;&downloads.commandkey;"
 			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
-	
+
 	<menupopup id="viewSidebarMenu">
 		<menuitem id="menu_dmSidebar"
 			label="&downloadsSidebar.title;"
 			observes="objName-viewDmgrPlacesSidebar" />
 	</menupopup>
-	
+
 	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="objName-downloads_sidebar_button" 
+		<toolbarbutton id="objName-downloads_sidebar_button"
 			class="toolbarbutton-1 chromeclass-toolbar-additional osb-adequate-size osb-replace-button"
 			waitForSS="chrome://objPathString/skin/overlay.css chrome://objPathString/skin/buttons.css"
 			label="&downloadsSidebar.label;"
@@ -35,5 +35,5 @@
 			type="custom"
 			observes="objName-viewDmgrPlacesSidebar" />
 	</toolbarpalette>
-	
+
 </overlay>

@@ -3,9 +3,9 @@
 this.dmgrPlaces = {
 	broadcasterId: objName+'-viewDmgrPlacesSidebar',
 	get broadcaster () { return $(this.broadcasterId); },
-	
+
 	dmtLoaded: false,
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'SidebarFocusedSync':
@@ -21,7 +21,7 @@ this.dmgrPlaces = {
 				break;
 		}
 	},
-	
+
 	observe: function(aSubject, aTopic, aData) {
 		switch(aSubject) {
 			case 'alwaysDMT':
@@ -29,17 +29,17 @@ this.dmgrPlaces = {
 				break;
 		}
 	},
-	
+
 	toggleAlways: function(enable) {
 		if(enable) {
 			Piggyback.add('dmt', window, 'BrowserDownloadsUI', () => { SidebarUI.toggle(this.broadcaster); });
 		} else {
 			Piggyback.revert('dmt', window, 'BrowserDownloadsUI');
 		}
-		
+
 		this.acceltext();
 	},
-	
+
 	acceltext: function() {
 		if(this.broadcaster) {
 			var str = this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext');
@@ -49,28 +49,28 @@ this.dmgrPlaces = {
 			toggleAttribute(this.broadcaster, 'acceltext', Prefs.alwaysDMT, str);
 		}
 	},
-	
+
 	init: function() {
 		SidebarUI.holdBroadcasters.delete('viewDmtSidebar');
 		SidebarUI.holdBroadcasters.delete(this.broadcasterId);
-		
+
 		if(mainSidebar.loaded
 		&& (mainSidebar.state.command == 'viewDmtSidebar' || mainSidebar.state.command == this.broadcasterId)) {
 			self.onLoad();
 		}
-		
+
 		if(twinSidebar.loaded
 		&& (twinSidebar.state.command == 'viewDmtSidebar' || twinSidebar.state.command == this.broadcasterId)) {
 			twin.load();
 		}
 	},
-	
+
 	onLoad: function() {
 		this.init();
-		
+
 		Prefs.listen('alwaysDMT', this);
 		this.toggleAlways(Prefs.alwaysDMT);
-		
+
 		var checked = mainSidebar.command == this.broadcasterId;
 		var twin = false;
 		if(!checked && twinSidebar.command == this.broadcasterId) {
@@ -78,15 +78,15 @@ this.dmgrPlaces = {
 			twin = true;
 		}
 		toggleAttribute(this.broadcaster, 'checked', checked);
-		toggleAttribute(this.broadcaster, 'twinSidebar', twin);	
+		toggleAttribute(this.broadcaster, 'twinSidebar', twin);
 		this.acceltext();
 	},
-	
+
 	onUnload: function() {
 		Prefs.unlisten('alwaysDMT', this);
 		this.toggleAlways(false);
 	},
-	
+
 	is: function(bar) {
 		return (bar && bar.command == this.broadcasterId);
 	}
@@ -95,7 +95,7 @@ this.dmgrPlaces = {
 Modules.LOADMODULE = function() {
 	SidebarUI.holdBroadcasters.add('viewDmtSidebar');
 	SidebarUI.holdBroadcasters.add(dmgrPlaces.broadcasterId);
-	
+
 	AddonManager.getAddonByID("{F8A55C97-3DB6-4961-A81D-0DE0080E53CB}", function(addon) {
 		if(!addon || !addon.isActive) {
 			if(mainSidebar.state.command == 'viewDmtSidebar') {
@@ -104,10 +104,10 @@ Modules.LOADMODULE = function() {
 			if(twinSidebar.state.command == 'viewDmtSidebar') {
 				twinSidebar.stateForceCommand(dmgrPlaces.broadcasterId);
 			}
-			
+
 			Styles.load('dmgrPlaces', 'dmgrPlaces');
 			Overlays.overlayWindow(window, 'dmgrPlacesSidebar', dmgrPlaces);
-			
+
 			Listeners.add(window, 'SidebarFocusedSync', dmgrPlaces);
 		} else {
 			dmgrPlaces.dmtLoaded = true;
@@ -131,14 +131,14 @@ Modules.UNLOADMODULE = function() {
 			SidebarUI.close(twinSidebar);
 		}
 	}
-	
+
 	if(dmgrPlaces.dmtLoaded) { return; }
-	
+
 	Listeners.remove(window, 'SidebarFocusedSync', dmgrPlaces);
-	
+
 	if(UNLOADED) {
 		Styles.unload('dmgrPlaces');
 	}
-	
+
 	Overlays.removeOverlayWindow(window, 'dmgrPlacesSidebar');
 };

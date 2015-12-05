@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://objPathString/skin/menus.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
 <overlay id="menus-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
+
 	<menupopup id="toolbar-context-menu">
 		<menuseparator id="objName-contextSeparator" hidden="true"/>
 		<menuitem id="objName-contextOptions"
@@ -11,7 +11,7 @@
 			oncommand="objName.openOptions();"
 			hidden="true"/>
 	</menupopup>
-	
+
 	<menupopup id="menu_ToolsPopup">
 		<menuitem id="objName-menuoptions_viewmenu"
 			label="&omnisidebarOptions.title;"
@@ -19,9 +19,9 @@
 			oncommand="objName.openOptions();"
 			insertbefore="prefSep"/>
 	</menupopup>
-	
+
 	<menupopup id="viewSidebarMenu" onpopupshowing="objName.menus.menuItemsCheck(this);" />
-	
+
 	<popupset id="mainPopupSet">
 		<menupopup id="objName-openSidebarMenu"
 			target="sidebar-title"
@@ -29,5 +29,5 @@
 			onpopupshowing="objName.menus.populateSidebarMenu(this);"
 			onpopuphiding="objName.menus.closeSidebarMenu(this);"/>
 	</popupset>
-	
+
 </overlay>

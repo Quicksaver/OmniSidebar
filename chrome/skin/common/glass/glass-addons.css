@@ -1,37 +1,37 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 @-moz-document url("about:addons") {
-	
+
 	.inSidebar #nav-header,
 	.inSidebar #categories {
 		background: transparent !important;
 	}
-	
+
 	.inSidebar #categories richlistitem[selected="true"] {
 		border-color: rgb(174,183,196) !important;
 		background-color: rgba(255,255,255,0.57) !important;
 	}
-	
+
 	#addons-page.inSidebar toolbarbutton.header-button:not(.nav-button) {
 		margin: 0 5px !important;
 	}
-	
+
 	#addons-page.inSidebar toolbarbutton.header-button.nav-button {
 		margin: 0 0 !important;
 	}
-	
+
 	#addons-page.inSidebar:-moz-locale-dir(ltr) #back-btn,
 	#addons-page.inSidebar:-moz-locale-dir(rtl) #forward-btn {
 		border-radius: 4.5px 0 0 4.5px !important;
 	}
-	
+
 	#addons-page.inSidebar:-moz-locale-dir(ltr) #forward-btn,
 	#addons-page.inSidebar:-moz-locale-dir(rtl) #back-btn {
 		border-radius: 0 4.5px 4.5px 0 !important;
 	}
-	
+
 	#addons-page.inSidebar button.addon-control {
 		margin: 1px 2px 2px 2px !important;
 		padding: 0 2px 0 2px !important;
 	}
-	
+
 }

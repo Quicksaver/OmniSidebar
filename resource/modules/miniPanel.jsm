@@ -8,16 +8,16 @@ this.panel = {
 	get menu () { return $(objName+'-panel-menuContainer'); },
 	get toolbarSeparator () { return $(objName+'-panel-toolbarSeparator'); },
 	get menuSeparator () { return $(objName+'-panel-menuSeparator'); },
-	
+
 	get view () { return $(objName+'-panelView'); },
 	get viewHeader () { return $(objName+'-panelView-header'); },
 	get viewToolbar () { return $(objName+'-panelView-toolbarContainer'); },
 	get viewMenu () { return $(objName+'-panelView-menuContainer'); },
 	get viewToolbarSeparator () { return $(objName+'-panelView-toolbarSeparator'); },
 	get viewMenuSeparator () { return $(objName+'-panelView-menuSeparator'); },
-	
+
 	openedPanelUI: false,
-	
+
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'popupshowing':
@@ -28,17 +28,17 @@ this.panel = {
 					e.stopPropagation();
 				}
 				break;
-			
+
 			case 'ViewShowing':
 				if(e.target == this.view) {
 					this.populate(this.view);
 				}
 				break;
-			
+
 			case 'ViewHiding':
 				if(e.target == this.view) {
 					this.empty(this.view);
-					
+
 					if(this.openedPanelUI) {
 						this.openedPanelUI = false;
 						if(PanelUI.panel.state == 'open') {
@@ -47,7 +47,7 @@ this.panel = {
 					}
 				}
 				break;
-			
+
 			case 'DOMMouseScroll':
 				// there's a madening bug where, if you scroll while it's still scrolling, the box will just scroll back to the start,
 				// so I'm just preventing all extra scrolling while it's still scrolling
@@ -56,7 +56,7 @@ this.panel = {
 					e.stopPropagation();
 				}
 				break;
-			
+
 			case 'AskingForNodeOwner':
 				if(isAncestor(this.panel.anchorNode, this.panel._bar.button)) {
 					e.detail = this.panel._bar.buttonId;
@@ -65,12 +65,12 @@ this.panel = {
 				break;
 		}
 	},
-	
+
 	// Only open the panel if we're doing a right-click or a ctrl+click
 	shouldFollowCommand: function(trigger, twin, e) {
 		var metaKey = e && (e.ctrlKey || e.metaKey);
 		var panelViewIsOpen = trueAttribute(this.view, 'current') && PanelUI.panel.state == 'open' && this.view._bar.twin == twin;
-		
+
 		if(!e || e.button == 2 || (e.button == 0 && metaKey) || panelViewIsOpen) {
 			var bar = (twin) ? twinSidebar : mainSidebar;
 			if(e) {
@@ -79,7 +79,7 @@ this.panel = {
 			} else {
 				trigger = bar.button;
 			}
-			
+
 			// if the trigger is our button and it's placed in the PanelUI, open its subview panel instead
 			var placement = CustomizableUI.getPlacementOfWidget(bar.buttonId);
 			if(placement && placement.area == 'PanelUI-contents' && (!trigger || trigger == bar.button)) {
@@ -90,11 +90,11 @@ this.panel = {
 						panelContext.hidePopup();
 					}
 				}
-				
+
 				if(!trueAttribute(this.view, 'current') || this.view._bar != bar || PanelUI.panel.state == 'closed') {
 					this.view._bar = bar;
 					setAttribute(this.viewHeader, 'value', bar.label);
-					
+
 					// we kind'a need it open for this...
 					this.openedPanelUI = false;
 					if(PanelUI.panel.state == 'closed') {
@@ -112,14 +112,14 @@ this.panel = {
 				}
 				return false;
 			}
-			
+
 			if(this.panel.state == 'closed' || this.panel._bar != bar) {
 				var position = 'bottomcenter topright';
 				if(!trigger) {
 					trigger = $('navigator-toolbox');
 					var side = (bar == leftSidebar) ? 'left' : 'right';
 					position = 'bottom'+side+' top'+side;
-					
+
 					// it would conserve the last position attr's always with this kind of anchor
 					removeAttribute(this.panel, 'position');
 					removeAttribute(this.panel, 'flip');
@@ -135,13 +135,13 @@ this.panel = {
 		}
 		return true;
 	},
-	
+
 	open: function(trigger, bar, e, position) {
 		this.panel._bar = bar;
 		var anchor = null;
 		var x = 0;
 		var y = 0;
-		
+
 		if(position == 'after_pointer') {
 			x = e.clientX +1;
 			y = e.clientY +1;
@@ -149,14 +149,14 @@ this.panel = {
 		else if(trigger) {
 			anchor = $ª(trigger, "toolbarbutton-icon", "class") || trigger;
 		}
-		
+
 		this.panel.openPopup(anchor, position, x, y, false, false, e);
 	},
-	
+
 	hide: function() {
 		if(this.panel && this.panel.state == 'open') { this.panel.hidePopup(); }
 	},
-	
+
 	populate: function(miniPanel) {
 		var bar = miniPanel._bar;
 		if(miniPanel == this.view) {
@@ -170,16 +170,16 @@ this.panel = {
 			var toolbarSeparator = this.toolbarSeparator;
 			var menuSeparator = this.menuSeparator;
 		}
-		
+
 		if(bar.twin) {
 			SidebarUI.triggers.twin.set('panel', miniPanel);
 		}
-		
+
 		if(!bar.toolbar.collapsed && typeof('headers') != 'undefined' && headers.toolbarHasButtons(bar.toolbar)) {
 			// Don't let the sidebar header jump around with this change
 			bar.stack.style.height = bar.stack.clientHeight+'px';
 			bar.stack.style.width = bar.stack.clientWidth+'px';
-			
+
 			if(WINNT && Services.navigator.oscpu.includes('6.')) {
 				var color = getComputedStyle(miniPanel).backgroundColor;
 				var padding = (Services.navigator.oscpu.includes('6.2')) ? 3 : 5;
@@ -197,7 +197,7 @@ this.panel = {
 		} else {
 			toolbarSeparator.hidden = true;
 		}
-		
+
 		if(bar.titleButton) {
 			menus.populateSidebarMenu(menu, true);
 			menuSeparator.hidden = false;
@@ -205,7 +205,7 @@ this.panel = {
 			menuSeparator.hidden = true;
 		}
 	},
-	
+
 	empty: function(miniPanel) {
 		var bar = miniPanel._bar;
 		if(miniPanel == this.view) {
@@ -219,13 +219,13 @@ this.panel = {
 			var toolbarSeparator = this.toolbarSeparator;
 			var menuSeparator = this.menuSeparator;
 		}
-		
+
 		SidebarUI.triggers.twin.delete('panel');
-		
+
 		if(toolbar._originalParent) {
 			bar.stack.style.height = '';
 			bar.stack.style.width = '';
-			
+
 			if(WINNT && Services.navigator.oscpu.includes('6.')) {
 				bar.toolbar.style.backgroundColor = '';
 				bar.toolbar.style.paddingBottom = '';
@@ -237,15 +237,15 @@ this.panel = {
 			toolbar._originalParent.appendChild(bar.toolbar);
 			toolbar._originalParent = null;
 		}
-		
+
 		while(menu.firstChild) {
 			menu.firstChild.remove();
 		}
-		
+
 		menuSeparator.hidden = true;
 		toolbarSeparator.hidden = true;
 	},
-	
+
 	onLoad: function() {
 		this.panel.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
 		this.view.__defineGetter__('_toggleKeyset', function() { return (this._bar && this._bar.keysetPanel && this._bar.keyset.keycode != 'none') ? this._bar.keyset : null; });
@@ -253,21 +253,21 @@ this.panel = {
 		keydownPanel.setupPanel(this.view);
 		SidebarUI.triggers.barSwitch.set('miniPanel', () => { return this.panel; });
 		SidebarUI.triggers.barSwitch.set('miniPanelView', () => { return this.view; });
-		
+
 		// for compatibility with all the add-ons that use my backbone
 		Listeners.add(this.panel, 'AskingForNodeOwner', this);
-		
+
 		Listeners.add(this.view, 'ViewShowing', this);
 		Listeners.add(this.view, 'ViewHiding', this);
 		Listeners.add(this.viewToolbar, 'DOMMouseScroll', this, true);
 	},
-	
+
 	onUnload: function() {
 		Listeners.remove(this.viewToolbar, 'DOMMouseScroll', this, true);
 		Listeners.remove(this.view, 'ViewShowing', this);
 		Listeners.remove(this.view, 'ViewHiding', this);
 		Listeners.remove(this.panel, 'AskingForNodeOwner', this);
-		
+
 		SidebarUI.triggers.barSwitch.delete('miniPanel');
 		SidebarUI.triggers.barSwitch.delete('miniPanelView');
 		keydownPanel.unsetPanel(this.panel);

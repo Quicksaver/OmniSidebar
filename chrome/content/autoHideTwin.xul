@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <overlay id="autoHideTwin-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-	
-	<hbox id="objName-resizebox-twin" 
+
+	<hbox id="objName-resizebox-twin"
 		onmouseout="objName.autoHide.hidingSidebar(objName.twinSidebar);"
 		ondragenter="objName.autoHide.onDragEnter(objName.twinSidebar);" />
-	
+
 </overlay>

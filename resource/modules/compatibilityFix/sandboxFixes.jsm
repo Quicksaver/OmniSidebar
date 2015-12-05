@@ -2,11 +2,11 @@
 
 Modules.LOADMODULE = function() {
 	Modules.load('compatibilityFix/AddonManager');
-	
+
 	AddonManager.getAddonByID("2.0@disconnect.me", function(addon) {
 		Modules.loadIf('compatibilityFix/disconnect', (addon && addon.isActive));
 	});
-	
+
 	Modules.load('compatibilityFix/prefsMonitor');
 };
 
