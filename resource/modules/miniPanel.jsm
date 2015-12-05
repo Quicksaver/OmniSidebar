@@ -1,4 +1,4 @@
-// VERSION 2.0.2
+// VERSION 2.0.3
 
 this.__defineGetter__('PanelUI', function() { return window.PanelUI; });
 
@@ -147,7 +147,7 @@ this.panel = {
 			y = e.clientY +1;
 		}
 		else if(trigger) {
-			anchor = $ª(trigger, "toolbarbutton-icon", "class") || trigger;
+			anchor = $Âª(trigger, "toolbarbutton-icon", "class") || trigger;
 		}
 		
 		this.panel.openPopup(anchor, position, x, y, false, false, e);
