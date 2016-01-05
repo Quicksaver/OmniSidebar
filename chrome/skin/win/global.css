@@ -2,7 +2,7 @@
 @-moz-document
 	url("chrome://browser/content/places/places.xul"),
 	url("about:addons"),
-	url("chrome://browser/content/devtools/webconsole.xul") {
+	url("chrome://browser/content/devtools/webconsole.xul"), url("chrome://devtools/content/webconsole/webconsole.xul") {
 
 	.inSidebar #placesToolbar {
 		border-top: none !important;

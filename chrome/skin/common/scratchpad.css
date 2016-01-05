@@ -1,5 +1,5 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/devtools/scratchpad.xul") {
+@-moz-document url("chrome://browser/content/devtools/scratchpad.xul"), url("chrome://devtools/content/scratchpad/scratchpad.xul") {
 
 	/* it's not like this works anyway */
 	.inSidebar #sp-menu-close {

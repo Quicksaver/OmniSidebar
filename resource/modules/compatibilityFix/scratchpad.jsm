@@ -1,9 +1,10 @@
-// VERSION 2.0.1
+// VERSION 2.0.2
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
 
 this.scratchpad = {
+	uri: (Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) ? 'chrome://devtools/content/scratchpad/scratchpad.xul' : 'chrome://browser/content/devtools/scratchpad.xul',
 	broadcasterId: objName+'-viewScratchpadSidebar',
 	get broadcaster () { return $(this.broadcasterId); },
 
@@ -14,7 +15,7 @@ this.scratchpad = {
 			case 'SidebarFocusedSync':
 				if(e.target
 				&& e.target.document
-				&& e.target.document.baseURI == 'chrome://browser/content/devtools/scratchpad.xul') {
+				&& e.target.document.baseURI == this.uri) {
 					var params = Cc["@mozilla.org/embedcomp/dialogparam;1"].createInstance(Ci.nsIDialogParamBlock);
 					params.SetNumberStrings(2);
 					params.SetString(0, JSON.stringify(ScratchpadManager._nextUid++));

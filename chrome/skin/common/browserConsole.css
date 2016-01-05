@@ -1,5 +1,5 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-@-moz-document url("chrome://browser/content/devtools/webconsole.xul") {
+@-moz-document url("chrome://browser/content/devtools/webconsole.xul"), url("chrome://devtools/content/webconsole/webconsole.xul") {
 
 	/* toolbars and buttons */
 

@@ -1,9 +1,8 @@
-// VERSION 1.1.9
+// VERSION 1.1.10
 
 Modules.LOADMODULE = function() {
 	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
 		setAttribute(document.documentElement, objName+'-FF44', 'true');
-		Overlays.overlayURI('chrome://'+objPathString+'/content/browserConsole.xul', 'browserConsole44');
 	}
 
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
@@ -63,6 +62,5 @@ Modules.UNLOADMODULE = function() {
 
 	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
 		removeAttribute(document.documentElement, objName+'-FF44');
-		Overlays.removeOverlayURI('chrome://'+objPathString+'/content/browserConsole.xul', 'browserConsole44');
 	}
 };
