@@ -34,6 +34,7 @@
 			<preference id="pref-mainKeysetAccel" name="extensions.omnisidebar.mainKeysetAccel" type="bool"/>
 			<preference id="pref-mainKeysetShift" name="extensions.omnisidebar.mainKeysetShift" type="bool"/>
 			<preference id="pref-mainKeysetAlt" name="extensions.omnisidebar.mainKeysetAlt" type="bool"/>
+			<preference id="pref-mainKeysetCtrl" name="extensions.omnisidebar.mainKeysetCtrl" type="bool"/>
 			<preference id="pref-mainKeysetPanel" name="extensions.omnisidebar.mainKeysetPanel" type="bool"/>
 		</preferences>
 
@@ -182,6 +183,7 @@
 				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetAccel="objName-main" delayPreference="pref-mainKeysetAccel"/>
 				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetAlt="objName-main" delayPreference="pref-mainKeysetAlt"/>
 				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetShift="objName-main" delayPreference="pref-mainKeysetShift"/>
+				<checkbox class="smallindent" helpbox="paneMain-keyset-helptext" keysetCtrl="objName-main" delayPreference="pref-mainKeysetCtrl"/>
 				<menulist class="smallindent" helpbox="paneMain-keyset-helptext" keyset="objName-main" delayPreference="pref-mainKeysetKeycode"/>
 			</hbox>
 			<checkbox dependson="!pref-mainKeysetKeycode:none"

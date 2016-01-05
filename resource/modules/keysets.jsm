@@ -1,4 +1,4 @@
-// VERSION 1.1.0
+// VERSION 1.1.1
 
 this.mainKey = {
 	id: objName+'-key_mainSidebar',
@@ -6,7 +6,8 @@ this.mainKey = {
 	get keycode () { return Prefs.mainKeysetKeycode; },
 	get accel () { return Prefs.mainKeysetAccel; },
 	get shift () { return Prefs.mainKeysetShift; },
-	get alt () { return Prefs.mainKeysetAlt; }
+	get alt () { return Prefs.mainKeysetAlt; },
+	get ctrl () { return Prefs.mainKeysetCtrl; }
 };
 
 this.twinKey = {
@@ -15,7 +16,8 @@ this.twinKey = {
 	get keycode () { return Prefs.twinKeysetKeycode; },
 	get accel () { return Prefs.twinKeysetAccel; },
 	get shift () { return Prefs.twinKeysetShift; },
-	get alt () { return Prefs.twinKeysetAlt; }
+	get alt () { return Prefs.twinKeysetAlt; },
+	get ctrl () { return Prefs.twinKeysetCtrl; }
 };
 
 this.setKeys = function() {
@@ -26,16 +28,25 @@ this.setKeys = function() {
 };
 
 Modules.LOADMODULE = function() {
+	// this is to migrate to the new Keysets object, it can probably be removed once most users have updated to the latest version
+	if(!Prefs.migratedKeysets) {
+		Prefs.migratedKeysets = true;
+		Prefs.mainKeysetKeycode = Keysets.translateFromConstantCode(Prefs.mainKeysetKeycode);
+		Prefs.twinKeysetKeycode = Keysets.translateFromConstantCode(Prefs.twinKeysetKeycode);
+	}
+
 	setKeys();
 
 	Prefs.listen('mainKeysetKeycode', setKeys);
 	Prefs.listen('mainKeysetAccel', setKeys);
 	Prefs.listen('mainKeysetShift', setKeys);
 	Prefs.listen('mainKeysetAlt', setKeys);
+	Prefs.listen('mainKeysetCtrl', setKeys);
 	Prefs.listen('twinKeysetKeycode', setKeys);
 	Prefs.listen('twinKeysetAccel', setKeys);
 	Prefs.listen('twinKeysetShift', setKeys);
 	Prefs.listen('twinKeysetAlt', setKeys);
+	Prefs.listen('twinKeysetCtrl', setKeys);
 	Prefs.listen('twinSidebar', setKeys);
 };
 
@@ -44,10 +55,12 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('mainKeysetAccel', setKeys);
 	Prefs.unlisten('mainKeysetShift', setKeys);
 	Prefs.unlisten('mainKeysetAlt', setKeys);
+	Prefs.unlisten('mainKeysetCtrl', setKeys);
 	Prefs.unlisten('twinKeysetKeycode', setKeys);
 	Prefs.unlisten('twinKeysetAccel', setKeys);
 	Prefs.unlisten('twinKeysetShift', setKeys);
 	Prefs.unlisten('twinKeysetAlt', setKeys);
+	Prefs.unlisten('twinKeysetCtrl', setKeys);
 	Prefs.unlisten('twinSidebar', setKeys);
 
 	Keysets.unregister(mainKey);

@@ -33,6 +33,7 @@
 			<preference id="pref-twinKeysetAccel" name="extensions.omnisidebar.twinKeysetAccel" type="bool"/>
 			<preference id="pref-twinKeysetShift" name="extensions.omnisidebar.twinKeysetShift" type="bool"/>
 			<preference id="pref-twinKeysetAlt" name="extensions.omnisidebar.twinKeysetAlt" type="bool"/>
+			<preference id="pref-twinKeysetCtrl" name="extensions.omnisidebar.twinKeysetCtrl" type="bool"/>
 			<preference id="pref-twinKeysetPanel" name="extensions.omnisidebar.twinKeysetPanel" type="bool"/>
 		</preferences>
 
@@ -177,6 +178,7 @@
 				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetAccel="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetAccel"/>
 				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetAlt="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetAlt"/>
 				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetShift="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetShift"/>
+				<checkbox class="smallindent" helpbox="paneTwin-keyset-helptext" keysetCtrl="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetCtrl"/>
 				<menulist class="smallindent" helpbox="paneTwin-keyset-helptext" keyset="objName-twin" dependson="pref-twinSidebar" delayPreference="pref-twinKeysetKeycode"/>
 			</hbox>
 			<checkbox dependson="pref-twinSidebar,!pref-twinKeysetKeycode:none"
