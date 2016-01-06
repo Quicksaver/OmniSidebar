@@ -7,6 +7,11 @@
 	text-shadow: none;
 }
 
+/* Bugfix: bug 1224713 changes these to white icons, we don't want that since the theme doesn't really apply in undocked sidebars. */
+.sidebar-box[renderabove] #sidebar-header > .close-icon:not(:hover):-moz-lwtheme-brighttext {
+	background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 64, 16, 48);
+}
+
 .sidebar-box:not([glassStyle]) .sidebar-title[TitleButton]:not(:hover) {
 	border: 5px solid rgba(0,0,0,0);
 }

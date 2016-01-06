@@ -21,6 +21,18 @@
 	}
 }
 
+/* Bugfix: bug 1224713 changes these to white icons, we don't want that since the theme doesn't really apply in undocked sidebars. */
+@media not all and (min-resolution: 1.1dppx) {
+	.sidebar-box[renderabove] #sidebar-header > .close-icon:-moz-lwtheme-brighttext {
+		list-style-image: url("chrome://global/skin/icons/close.png");
+	}
+}
+@media (min-resolution: 1.1dppx) {
+	.sidebar-box[renderabove] #sidebar-header > .close-icon:-moz-lwtheme-brighttext {
+		list-style-image: url("chrome://global/skin/icons/close@2x.png");
+	}
+}
+
 @media (-moz-os-version: windows-xp) {
 	.sidebar-title[TitleButton]:hover,
 	.sidebar-title[TitleButton][active] {
