@@ -1,4 +1,4 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.menus = {
 	get viewSidebarMenu () { return $('viewSidebarMenu'); },
@@ -148,6 +148,24 @@ this.menus = {
 				}
 			} else {
 				var newItem = child.cloneNode(true);
+			}
+
+			// The SDK is just aweful here, it creates sidebars using a system that:
+			// a) is completely unique to it, ignoring absolutely every piece of sidebar-related code that already exists in Firefox;
+			// b) is completely closed off, meaning I can't get to it, I can't even know how many sidebars are registered with it.
+			// We try to redirect commands on the new menu items to the original, but that means there's a few things specific to this add-on that won't work,
+			// since the SDK bypasses it entirely.
+			if(child.id.startsWith('jetpack-sidebar-')) {
+				let originalItem = child;
+
+				// Don't register this with Listeners, the entries are constantly removed and recreated.
+				newItem.addEventListener('command', function(e) {
+					if(!e.defaultPrevented) {
+						e.preventDefault();
+						e.stopPropagation();
+						originalItem.doCommand();
+					}
+				}, true);
 			}
 
 			if(menu.id) {
