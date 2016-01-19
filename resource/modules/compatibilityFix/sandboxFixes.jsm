@@ -1,4 +1,4 @@
-// VERSION 1.1.5
+// VERSION 1.1.6
 
 Modules.LOADMODULE = function() {
 	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
@@ -12,11 +12,16 @@ Modules.LOADMODULE = function() {
 		Modules.loadIf('compatibilityFix/disconnect', (addon && addon.isActive));
 	});
 
+	AddonManager.getAddonByID('{77d2ed30-4cd2-11e0-b8af-0800200c9a66}', function(addon) {
+		Modules.loadIf('compatibilityFix/FTDeepDark', (addon && addon.isActive));
+	});
+
 	Modules.load('compatibilityFix/prefsMonitor');
 };
 
 Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/disconnect');
+	Modules.unload('compatibilityFix/FTDeepDark');
 	Modules.unload('compatibilityFix/prefsMonitor');
 	Modules.unload('compatibilityFix/AddonManager');
 

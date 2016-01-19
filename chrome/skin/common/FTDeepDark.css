@@ -1,0 +1,36 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/* ideally, this should be included in FTDeepDark itself */
+
+@-moz-document url("chrome://browser/content/browser.xul") {
+
+	.omnisidebar-toolbar {
+		background: none !important;
+	}
+}
+
+@-moz-document url("about:addons") {
+
+	#addons-page.inSidebar,
+	#addons-page.inSidebar #nav-header,
+	#addons-page.inSidebar #header,
+	#addons-page.inSidebar #categories {
+		background: rgb(40,40,40) !important;
+	}
+
+	#addons-page.inSidebar .main-content {
+		border-top: none !important;
+	}
+
+	#addons-page.inSidebar #back-btn,
+	#addons-page.inSidebar #forward-btn {
+		border-color: rgb(0,0,0) !important;
+	}
+
+	#addons-page.inSidebar #back-btn[disabled="true"],
+	#addons-page.inSidebar #forward-btn[disabled="true"],
+	#addons-page.inSidebar #back-btn:not(:hover):not(:active),
+	#addons-page.inSidebar #forward-btn:not(:hover):not(:active) {
+		background-color: transparent !important;
+	}
+}
