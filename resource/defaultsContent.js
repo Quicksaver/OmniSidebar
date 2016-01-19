@@ -1,10 +1,7 @@
-// VERSION 1.0.0
+// VERSION 2.0.0
 
-Services.scriptloader.loadSubScript("resource://omnisidebar/modules/utils/content.js", this);
-
-this.omnisidebar = this.__contentEnvironment;
-delete this.__contentEnvironment;
-
-this.omnisidebar.objName = 'omnisidebar';
-this.omnisidebar.objPathString = 'omnisidebar';
-this.omnisidebar.init();
+// By using a JSM, we can initialize each individual tab (frame) with our scripts without having to instanciate the same objects with each one.
+(function(frame) {
+	Components.utils.import("resource://omnisidebar/modules/content/utils/ModuleInSandbox.jsm");
+	ModuleInSandbox.init('omnisidebar', frame);
+})(this);

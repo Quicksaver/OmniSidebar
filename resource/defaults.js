@@ -1,4 +1,4 @@
-// VERSION 1.3.2
+// VERSION 1.4.0
 
 objName = 'omnisidebar';
 objPathString = 'omnisidebar';
@@ -89,6 +89,9 @@ prefList = {
 	aboveSquared: false,
 	firstEnabled: true
 };
+
+// If we're initializing in a content process, we don't care about the rest
+if(isContent) { throw 'isContent'; }
 
 paneList = [
 	[ 'paneMain' ],
