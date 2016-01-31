@@ -1,0 +1,60 @@
+<!ENTITY addonsSidebar.label "Stranska vrstica dodatkov">
+<!ENTITY addonsSidebar.title "Dodatki">
+<!ENTITY addonsSidebar.tooltip "Odpre Upravitelja dodatkov v stranski vrstici">
+<!ENTITY addonsSidebar.accesskey "D">
+<!ENTITY bookmarksSidebar.label "Stranska vrstica zaznamkov">
+<!ENTITY bookmarksSidebar.title "Zaznamki">
+<!ENTITY bookmarksSidebar.tooltip "Prikaži moje zaznamke v stranski vrstici">
+<!ENTITY bookmarksSidebar.accesskey "Z">
+<!ENTITY historySidebar.label "Stranska vrstica zgodovine">
+<!ENTITY historySidebar.tooltip "Prikaži nedavno obiskane strani v stranski vrstici">
+<!ENTITY historySidebar.accesskey "o">
+<!ENTITY downloadsSidebar.label "Stranska vrstica prenosov">
+<!ENTITY downloadsSidebar.title "Prenosi">
+<!ENTITY downloadsSidebar.tooltip "Prikaži prenose v stranski vrstici">
+<!ENTITY downloadsSidebar.accesskey "P">
+<!ENTITY DOMInspectorSidebar.label "Pregledovalnik DOM">
+<!ENTITY DOMInspectorSidebar.tooltip "Prikaži Pregledovalnik DOM v stranski vrstici">
+<!ENTITY DOMInspectorSidebar.accesskey "r">
+<!ENTITY PageInfoSidebar.labelB "Podatki o strani">
+<!ENTITY PageInfoSidebar.tooltip "Pokaži podatke o trenutni strani">
+<!ENTITY PageInfoSidebar.accesskey "d">
+<!ENTITY scratchpadSidebar.label "Beležnica">
+<!ENTITY scratchpadSidebar.tooltip "Odpri beležnico v stranski vrstici">
+<!ENTITY scratchpadSidebar.accesskey "B">
+<!ENTITY BlankSidebar.label "Odpri stransko vrstico">
+<!ENTITY URISidebar.tooltip "Vtipkajte mesto za odpiranje v stranski vrstici">
+<!ENTITY URISidebar.buttonLabel "Pojdi">
+<!ENTITY browserConsole.label "Konzola brskalnika">
+<!ENTITY browserConsole.tooltip "Odpri konzolo brskalnika v stranski vrstici">
+<!ENTITY browserConsole.accesskey "K">
+<!ENTITY acceltext.ctrl "Ctrl">
+<!ENTITY acceltext.shift "Shift">
+<!ENTITY acceltext.alt "Alt">
+<!ENTITY acceltext.option "⌥">
+<!ENTITY acceltext.cmd "⌘">
+<!ENTITY acceltext.upArrow "⇧">
+<!ENTITY omnisidebarToolbar.label "Orodna vrstica stranske vrstice">
+<!ENTITY omnisidebarToolbar.accesskey "n">
+<!ENTITY omnisidebarToolbarTwin.label "Dvojna stranska vrstica">
+<!ENTITY omnisidebarToolbarTwin.accesskey "v">
+<!ENTITY omnisidebarOptions.title "Možnosti OmniSidebar">
+<!ENTITY omnisidebarOptions.accesskey "M">
+<!ENTITY omnisidebarToolbar.menuAdd "Dodaj v orodno vrstico stranske vrstice">
+<!ENTITY omnisidebarToolbar.menuMove "Premakni v orodno vrstico stranske vrstice">
+<!ENTITY omnisidebarToolbar.menuRemove "Odstrani iz orodna vrstice stranske vrstice">
+<!ENTITY omnisidebarToolbar.menuMain "Premakni v orodno vrstico">
+<!ENTITY omnisidebarToolbarTwin.menuAdd "Dodaj v orodno vrstico dvojne stranske vrstice">
+<!ENTITY omnisidebarToolbarTwin.menuMove "Premakni v orodno vrstico dvojne stranske vrstice">
+<!ENTITY omnisidebarToolbarTwin.menuRemove "Odstrani iz orodne vrstice dvojne stranske vrstice">
+<!ENTITY omnisidebarToolbarTwin.menuMain "Premakni v orodno vrstico">
+<!ENTITY omnisidebarButton.label "Stranska vrstica">
+<!ENTITY omnisidebarButtonMain.label "Glavna stranska vrstica">
+<!ENTITY omnisidebarButtonTwin.label "Dvojna stranska vrstica">
+<!ENTITY omnisidebarButtonTwin.accesskey "v">
+<!ENTITY omnisidebarButton.tooltip "Odpri stransko vrstico">
+<!ENTITY omnisidebarButtonMain.tooltip "Odpri glavno stransko vrstico">
+<!ENTITY omnisidebarButtonTwin.tooltip "Odpri dvojno stransko vrstico">
+<!ENTITY omnisidebarButtonClose.tooltip "Zapri stransko vrstico">
+<!ENTITY omnisidebarButtonMainClose.tooltip "Zapri glavno stransko vrstico">
+<!ENTITY omnisidebarButtonTwinClose.tooltip "Zapri dvojno stransko vrstico">

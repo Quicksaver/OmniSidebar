@@ -81,6 +81,14 @@
 		</em:localized>
 		<em:localized>
 			<Description>
+				<em:locale>sl</em:locale>
+				<em:name>OmniSidebar</em:name>
+				<em:description>Prikažite zaznamke z eno potezo. Premiknite stransko vrstico na drugo stran. Odprite drugo stransko vrstico samo z klikom na naziv. In več! Ohrani stransko vrstico enostavno in hitro za dostop!</em:description>
+				<em:translator>Peter Klofutar</em:translator>
+			</Description>
+		</em:localized>
+		<em:localized>
+			<Description>
 				<em:locale>sv-SE</em:locale>
 				<em:name>OmniSidebar</em:name>
 				<em:description>Öppna din bokmärkeslista med en enkel gest. Flytta sidopanelen till andra sidan skärmen. Öppna en annan sidopanel genom att klicka på dess rubrik. Allt detta och mer! Håller din sidopanel enkel och snabbåtkomlig!</em:description>

@@ -1,0 +1,71 @@
+<!ENTITY OptMisc.label "Splošno">
+<!ENTITY OptgroupMain.label "Glavna stranska vrstica">
+<!ENTITY OptgroupTwin.label "Dvojna stranska vrstica">
+<!ENTITY Optgroupgen.label "Videz">
+<!ENTITY Optgroupfeatures.label "Značilnosti">
+<!ENTITY Optgroupperformance.label "Zmogljivost">
+<!ENTITY Optsidebars.left.label "Postavi na levo">
+<!ENTITY Optsidebars.right.label "Postavi na desno">
+<!ENTITY Optsidebars.pos.tooltip "Izberite stran stranske vrstice.">
+<!ENTITY Optsidebars.twin.label "Omogoči dvojno stransko vrstico na nasprotni stani">
+<!ENTITY Optsidebars.twin.tooltip "Prikaže drugo neodvisno stransko vrstico na drugi strani.">
+<!ENTITY Optswitchers.label "Klik na rob brskalnika za odpiranje ali zapiranje">
+<!ENTITY Optswitchers.tooltip "Omogoča klik na rob brskalnika za preklop stranske vrstice. To najbolje deluje v razpetem oknu! Rob se bo ob prehodu z miško obarval modro.">
+<!ENTITY OptautoClose.label "Zapri/Skrij stransko vrstico, ko izgubi žarišče">
+<!ENTITY OptautoClose.tooltip "Stranska vrstica se bo samodejno zaprla, ko v njej kliknete na povezavo ali ko kliknete zunaj nje. Če je odsidrana in nastavljena za samodejno skrivanje, bo takoj skrita namesto zaprta.">
+<!ENTITY Optundock.label "Odsidraj iz glavnega okna brskalnika">
+<!ENTITY Optundock.tooltip "Stranska vrstica se bo pojavila s strani nad spletno stranjo">
+<!ENTITY Optautohide.label "Samodejno skrij na stran">
+<!ENTITY Optautohide.tooltip "Stranska vrstica se bo skrila, ko je ne potrebujete več. Preprosto premaknite miško na rob okna za ponovni prikaz.">
+<!ENTITY OptglassStyle.label "Uporabi stekleni slog za vse stranske vrstice">
+<!ENTITY OptglassStyle.tooltip "Poseben slog, ki vsem ploščam stranske vrstice da stekleni videz. Izbirno je lahko prosojen, da lahko ob odsidrani stranski vrstici vidite spletno vsebino.">
+<!ENTITY OptglassStyle.opaque "Motna">
+<!ENTITY OptglassStyle.transparent "Popolnoma prosojna">
+<!ENTITY Optfx.label "Omogoči prehodne učinke">
+<!ENTITY Optfx.tooltip "Prehodne učinke lahko onemogočite za samodejni prikaz ali skritje stranske vrstice, če vam niso všeč ali niso dovolj tekoči.">
+<!ENTITY OptshowDelay.label "Zakasni samodejni prikaz stranske vrstice za (ms):">
+<!ENTITY OptshowDelay.tooltip "Čas zakasnitve med premikom miške na rob in prikazom stranske vrstice.">
+<!ENTITY OpthideDelay.label "Zakasni samodejno skritje stranske vrstice za (ms):">
+<!ENTITY OpthideDelay.tooltip "Čas zakasnitve med premikom miške iz stranske vrstice in skritjem.">
+<!ENTITY OptswitcherAdjust.label "Prilagodi širino dejavnega področja roba (sl. točke):">
+<!ENTITY OptswitcherAdjust.tooltip "Povečate lahko področje roba, ki se odzove na klike in premike miške.">
+<!ENTITY OptkeepPrivate.label "Ohrani stanje stranske vrstice v načinu Zasebnega brskanja">
+<!ENTITY OptkeepPrivate.tooltip.a "Ob vstopu ali izstopu iz načina Zasebnega brskanja bo stranska vrstica ostala odprta z naloženo isto ploščo.">
+<!ENTITY OptkeepPrivate.tooltip.b "Če je to onemogočeno, bo stranska vrstica vedno zaprta ob vstopu v način Zasebnega brskanja in se bo on izstopu vedno vrnila na prej odprto ploščo (preden je bil način Zaseb. brskanja omogočen).">
+<!ENTITY OptkeepPrivate.tooltip.c "Ta možnost je potrebna, če je način Zaseb. brskanja privzeto omogočen ob vsakem zagonu in želite, da se stanje med sejami brskanja ohrani.">
+<!ENTITY OptkeepLoaded.label "Pusti ploščo naloženo, ko se stranska vrstica zapre">
+<!ENTITY OptkeepLoaded.tooltip "Ko zaprete stransko vrstico, bo v ozadju ostala naložena. Ko jo ponovno odprete, bosta npr. trenutni položaj pomikanja in vsebina besedilnih polj ohranjena.">
+<!ENTITY Optgroupalways.label "Vedno odpri v stranski vrstici">
+<!ENTITY Optgroupalways.tooltip "Te plošče se bodo vedno odprle v stranski vrstici, ko se jih sproži z gumbi orodne vrstice ali tipkovno bližnjico.">
+<!ENTITY addonsSidebar.label "Upravitelj dodatkov">
+<!ENTITY omnisidebarBrowserConsole.label "Konzola brskalnika">
+<!ENTITY omnisidebarDMT.label "Prenosi">
+<!ENTITY omnisidebarPageInfo.label "Podatki o strani">
+<!ENTITY omnisidebarScratchpad.label "Beležnica">
+<!ENTITY OptforceOpen.label "Ne zapri stranske vrstice iz">
+<!ENTITY OptforceOpen.tooltip "Ob kliku na enega od teh elementov, ko je plošča stranske vrstice že naložena, bo ostala odprta.">
+<!ENTITY OptforceOpen.toolbars "gumbov orodne vrstice">
+<!ENTITY OptforceOpen.menus "spustnih menijev">
+<!ENTITY Opttoolbar.label "Orodna vrstica">
+<!ENTITY Opttoolbar.tooltip "Vstavi prilagodljivo orodno vrstico na vrh stranske vrstice poleg naziva.">
+<!ENTITY OptGoURI.label "Vključi gumb 'Pojdi'">
+<!ENTITY OptGoURI.tooltip "Gumb 'Pojdi' omogoča nalaganje določenih URI-jev about: in chrome:// v stranski vrstici; ne omogoča nalaganje oddaljenih spletnih strani!">
+<!ENTITY Optshowheadertitle.label "Prikaži naziv stranske vrstice">
+<!ENTITY Optshowheadertitle.tooltip "Na vrhu bo prikazano ime trenutno odprte stranske vrstice.">
+<!ENTITY OpttitleButton.label "Spustni meni stranske vrstice v nazivu">
+<!ENTITY OpttitleButton.tooltip "Kliknite na naziv stranske vrstice za odpiranje pojavnega menija z vsemi razpoložljivimi stranskimi vrsticami, na katere lahko preklopite.">
+<!ENTITY Optshowheaderdock.label "Prikaži gumb za usidranje">
+<!ENTITY Optshowheaderdock.tooltip "Na vrhu stranske vrstice prikaži gumb za hitro usidranje in odsidranje.">
+<!ENTITY Optshowheaderclose.label "Prikaži gumb Zapri">
+<!ENTITY Optshowheaderclose.tooltip "Na vrhu stranske vrstice prikaži gumb za hitro zapiranje.">
+<!ENTITY Optcoloricons.label "Niz ikon gumbov:">
+<!ENTITY Optcoloricons.nochange.label "Privzeti">
+<!ENTITY Optcoloricons.nochange.tooltip "Brez sprememb ikon na orodni vrstici.">
+<!ENTITY Optcoloricons.firefox.label "Firefox">
+<!ENTITY Optcoloricons.firefox.tooltip "Ikone se po možnosti prilagodijo Firefoxovi privzeti temi.">
+<!ENTITY Optcoloricons.color.label "Barviti">
+<!ENTITY Optcoloricons.color.tooltip "Ikone se po možnosti spremenijo v svoje barvite različice.">
+<!ENTITY OptKeysetPanel.label "Odpri mini-ploščo namesto stranske vrstice">
+<!ENTITY OptKeysetPanel.tooltip "Tipkovna bližnjica odpre mini-ploščo z možnostjo izbire dejanja namesto neposrednega odpiranja ali zapiranja stranske vrstice.">
+<!ENTITY OptKeyboardShortcut.caption "Tipkovna bližnjica stranske vrstice">
+<!ENTITY OptKeyboardShortcut.tooltip "Tipkovna bližnjica je najhitrejši način za zapiranje in ponovno odiranje stranske vrstice.">
