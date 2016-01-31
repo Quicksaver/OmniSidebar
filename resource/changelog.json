@@ -1,6 +1,16 @@
 {
-	"current":"1.6.9",
+	"current":"1.6.10",
 	"releases": {
+		"1.6.10":{
+			"date":"January 31, 2016",
+			"notes":[
+				["new","sl locale"],
+				["updated","Significant improvement to memory usage, as well as to browser startup time and when opening new tabs"],
+				["removed","Compatibility with Firefox 43 and below"],
+				["bugfix","Default file name when exporting preferences would have the wrong month"],
+				["bugfix","Some appearance fixes for the addons sidebar with the FT DeepDark theme (may not be perfect) (<a=https://github.com/Quicksaver/OmniSidebar/issues/114>issue #114</a>)"]
+			]
+		},
 		"1.6.9":{
 			"date":"January 10, 2016",
 			"notes":[
