@@ -1,10 +1,6 @@
-// VERSION 1.1.10
+// VERSION 1.1.11
 
 Modules.LOADMODULE = function() {
-	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
-		setAttribute(document.documentElement, objName+'-FF44', 'true');
-	}
-
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
 		Modules.loadIf('compatibilityFix/milewideback', (addon && addon.isActive));
 	});
@@ -58,9 +54,5 @@ Modules.UNLOADMODULE = function() {
 
 	if(UNLOADED) {
 		Modules.unload('compatibilityFix/RTL');
-	}
-
-	if(Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) {
-		removeAttribute(document.documentElement, objName+'-FF44');
 	}
 };

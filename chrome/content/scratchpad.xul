@@ -13,7 +13,7 @@
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
-			sidebarurl="chrome://browser/content/devtools/scratchpad.xul"
+			sidebarurl="chrome://devtools/content/scratchpad/scratchpad.xul"
 			sidebartitle="&scratchpadSidebar.label;"
 			WinLinAcceltext="&acceltext.shift;+&scratchpad.keycode;"
 			MacAcceltext="&acceltext.upArrow;&scratchpad.keycode;"

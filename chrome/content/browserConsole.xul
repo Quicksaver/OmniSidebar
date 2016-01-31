@@ -13,7 +13,7 @@
 			autoCheck="false"
 			type="checkbox"
 			group="sidebar"
-			sidebarurl="chrome://browser/content/devtools/webconsole.xul"
+			sidebarurl="chrome://devtools/content/webconsole/webconsole.xul"
 			sidebartitle="&browserConsole.label;"
 			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&browserConsoleCmd.commandkey;"
 			MacAcceltext="&acceltext.upArrow;&acceltext.cmd;&browserConsoleCmd.commandkey;"

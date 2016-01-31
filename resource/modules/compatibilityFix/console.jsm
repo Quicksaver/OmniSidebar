@@ -1,16 +1,9 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
-if(Services.vc.compare(Services.appinfo.version, "44.0a1") < 0) {
-	XPCOMUtils.defineLazyModuleGetter(this, "DebuggerServer", "resource://gre/modules/devtools/dbg-server.jsm");
-	XPCOMUtils.defineLazyModuleGetter(this, "DebuggerClient", "resource://gre/modules/devtools/dbg-client.jsm");
-	XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://gre/modules/devtools/Loader.jsm");
-	this.__defineGetter__('HUDService', function() { return devtools.require("devtools/webconsole/hudservice"); });
-} else {
-	XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://devtools/shared/Loader.jsm");
-	this.__defineGetter__('DebuggerServer', function() { return devtools.require("devtools/server/main").DebuggerServer; });
-	this.__defineGetter__('DebuggerClient', function() { return devtools.require("devtools/shared/client/main").DebuggerClient; });
-	this.__defineGetter__('HUDService', function() { return devtools.require("devtools/client/webconsole/hudservice"); });
-}
+XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://devtools/shared/Loader.jsm");
+this.__defineGetter__('DebuggerServer', function() { return devtools.require("devtools/server/main").DebuggerServer; });
+this.__defineGetter__('DebuggerClient', function() { return devtools.require("devtools/shared/client/main").DebuggerClient; });
+this.__defineGetter__('HUDService', function() { return devtools.require("devtools/client/webconsole/hudservice"); });
 
 this.sidebarConsole = {
 	broadcasterId: objName+'-viewConsoleSidebar',

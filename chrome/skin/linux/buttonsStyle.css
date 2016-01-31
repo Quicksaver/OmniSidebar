@@ -29,14 +29,9 @@
 	transition-duration: 150ms;
 }
 
-window:not([omnisidebar-FF44]) :-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar toolbarbutton[sdk-button="true"][cui-areatype="toolbar"] > .toolbarbutton-icon {
-	/* XXXgijs box models strike again: this is 16px + 2 * 7px padding + 2 * 1px border (from the rules above) */
-	width: 32px !important;
-}
-
-window[omnisidebar-FF44] :-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon,
-window[omnisidebar-FF44] :-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
-window[omnisidebar-FF44] :-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar #bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar .toolbarbutton-1 > .toolbarbutton-menubutton-button > .toolbarbutton-icon,
+:-moz-any(.sidebar-box:not([glassStyle]), .PanelUI-subView) .omnisidebar-toolbar #bookmarks-menu-button[cui-areatype="toolbar"] > .toolbarbutton-menubutton-dropmarker > .dropmarker-icon {
 	max-width: 32px;
 }
 

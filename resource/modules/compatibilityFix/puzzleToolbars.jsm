@@ -1,4 +1,4 @@
-// VERSION 2.0.1
+// VERSION 2.0.2
 
 this.__defineGetter__('puzzleBars', function() { return window.puzzleBars; });
 
@@ -119,7 +119,7 @@ this.pzt = {
 		delete moveRightBy.pztLateralBar;
 		Timers.cancel('pztRedoWidthsLater');
 
-		if(Prefs._prefObjects['lateral_bar']) {
+		if(Prefs.instances.has('lateral_bar')) {
 			Prefs.unlisten('lateral_bar', this);
 			Prefs.unlisten('lateral_placement', this);
 			Prefs.unlisten('lateral_autohide', this);

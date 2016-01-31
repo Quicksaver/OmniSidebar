@@ -1,10 +1,10 @@
-// VERSION 2.0.2
+// VERSION 2.0.3
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
 
 this.scratchpad = {
-	uri: (Services.vc.compare(Services.appinfo.version, "44.0a1") >= 0) ? 'chrome://devtools/content/scratchpad/scratchpad.xul' : 'chrome://browser/content/devtools/scratchpad.xul',
+	uri: 'chrome://devtools/content/scratchpad/scratchpad.xul',
 	broadcasterId: objName+'-viewScratchpadSidebar',
 	get broadcaster () { return $(this.broadcasterId); },
 
