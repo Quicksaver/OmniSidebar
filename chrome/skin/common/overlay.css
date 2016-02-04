@@ -16,6 +16,11 @@
 	list-style-image: url("chrome://omnisidebar-os/skin/osb-button-toolbar-left.png");
 }
 
+:-moz-any(toolbar, .widget-overflow-list) .toolbarbutton-1.osb-adequate-size > .toolbarbutton-icon {
+	max-width: 18px;
+	margin: 0;
+}
+
 .omnisidebar_switch {
 	position: fixed;
 	background: none;
