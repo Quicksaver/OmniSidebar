@@ -1,6 +1,12 @@
 {
-	"current":"1.6.10",
+	"current":"1.6.11",
 	"releases": {
+		"1.6.11":{
+			"date":"February 5, 2016",
+			"notes":[
+				["bugfix","Button icons would shrink a bit when placed in toolbars other than the navigation bar or the sidebar toolbars"]
+			]
+		},
 		"1.6.10":{
 			"date":"January 31, 2016",
 			"notes":[
