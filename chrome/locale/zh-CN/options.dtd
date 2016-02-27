@@ -6,11 +6,11 @@
 <!ENTITY Optgroupperformance.label "性能">
 <!ENTITY Optsidebars.left.label "放于左侧">
 <!ENTITY Optsidebars.right.label "放于右侧">
-<!ENTITY Optsidebars.pos.tooltip "Choose on which side of the browser window to place the sidebar.">
+<!ENTITY Optsidebars.pos.tooltip "选择将侧栏放置在浏览器窗口的哪一边。">
 <!ENTITY Optsidebars.twin.label "在另一侧启用副侧栏">
-<!ENTITY Optsidebars.twin.tooltip "Gives you a second sidebar on the other side of the window, completely independent from the main sidebar.">
+<!ENTITY Optsidebars.twin.tooltip "在另一侧显示一个与主侧栏完全独立的副侧栏。">
 <!ENTITY Optswitchers.label "点击浏览器边缘打开或关闭">
-<!ENTITY Optswitchers.tooltip "Lets you click on the margin of the window to toggle the sidebar. This is better used in a maximized window! The clickable margin will turn blue when the mouse moves over it.">
+<!ENTITY Optswitchers.tooltip "通过点击窗口边缘切换侧栏，在最大化窗口时使用效果更佳！鼠标光标位于可点击位置时该区域会变为蓝色。">
 <!ENTITY OptautoClose.label "失去焦点时关闭/隐藏侧栏">
 <!ENTITY OptautoClose.tooltip "The sidebar will be automatically closed when you click a link in it, or when you click outside of it for instance. If the sidebar is undocked and set to automatically hide, it will be immediately hidden instead of closed.">
 <!ENTITY Optundock.label "从浏览器窗口分离">
@@ -50,16 +50,16 @@
 <!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
 <!ENTITY OptGoURI.label "包含'前往'按钮">
 <!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
-<!ENTITY Optshowheadertitle.label "Show sidebar title">
+<!ENTITY Optshowheadertitle.label "显示侧栏标题">
 <!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
 <!ENTITY OpttitleButton.label "从标题栏下拉侧栏菜单">
 <!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
-<!ENTITY Optshowheaderdock.label "Show docking button">
+<!ENTITY Optshowheaderdock.label "显示停靠按钮">
 <!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
-<!ENTITY Optshowheaderclose.label "Show close button">
+<!ENTITY Optshowheaderclose.label "显示关闭按钮">
 <!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
 <!ENTITY Optcoloricons.label "按钮图标集:">
-<!ENTITY Optcoloricons.nochange.label "Default">
+<!ENTITY Optcoloricons.nochange.label "默认">
 <!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
 <!ENTITY Optcoloricons.firefox.label "FireFox">
 <!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">

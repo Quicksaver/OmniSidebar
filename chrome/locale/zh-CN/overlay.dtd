@@ -1,22 +1,22 @@
 <!ENTITY addonsSidebar.label "附加组件侧栏">
-<!ENTITY addonsSidebar.title "Add-ons">
+<!ENTITY addonsSidebar.title "附加组件">
 <!ENTITY addonsSidebar.tooltip "在侧栏中打开附加组件管理器">
 <!ENTITY addonsSidebar.accesskey "A">
 <!ENTITY bookmarksSidebar.label "书签侧栏">
-<!ENTITY bookmarksSidebar.title "Bookmarks">
+<!ENTITY bookmarksSidebar.title "书签">
 <!ENTITY bookmarksSidebar.tooltip "在侧栏中显示您的书签">
 <!ENTITY bookmarksSidebar.accesskey "B">
 <!ENTITY historySidebar.label "历史侧栏">
 <!ENTITY historySidebar.tooltip "在侧栏显示您最近浏览的页面">
 <!ENTITY historySidebar.accesskey "H">
-<!ENTITY downloadsSidebar.label "Downloads Sidebar">
+<!ENTITY downloadsSidebar.label "下载侧栏">
 <!ENTITY downloadsSidebar.title "下载">
-<!ENTITY downloadsSidebar.tooltip "Display in the sidebar the Progress of Ongoing Downloads">
+<!ENTITY downloadsSidebar.tooltip "在侧栏中显示下载进度">
 <!ENTITY downloadsSidebar.accesskey "D">
 <!ENTITY DOMInspectorSidebar.label "DOM Inspector">
 <!ENTITY DOMInspectorSidebar.tooltip "在侧栏中打开DOM Inspector">
 <!ENTITY DOMInspectorSidebar.accesskey "O">
-<!ENTITY PageInfoSidebar.labelB "Page Info">
+<!ENTITY PageInfoSidebar.labelB "页面信息">
 <!ENTITY PageInfoSidebar.tooltip "查看当前页面的细节信息">
 <!ENTITY PageInfoSidebar.accesskey "I">
 <!ENTITY scratchpadSidebar.label "代码片段速记器">

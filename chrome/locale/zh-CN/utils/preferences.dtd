@@ -1,13 +1,13 @@
-<!ENTITY preferences.button "Preferences">
-<!ENTITY preferences.undo.label "Undo">
-<!ENTITY preferences.redo.label "Redo">
-<!ENTITY preferences.undoredo.tooltip "Quickly revert any change made to the add-on's preferences, including importing from a file and restoring defaults.">
-<!ENTITY preferences.import.label "Import from file...">
-<!ENTITY preferences.import.tooltip "Load add-on preferences from a previously exported file on your computer.">
-<!ENTITY preferences.export.label "Export to file...">
-<!ENTITY preferences.export.tooltip "Save your add-on preferences into an external file for safekeeping.">
-<!ENTITY preferences.reset.label "Restore defaults">
-<!ENTITY preferences.reset.tooltip.a "All preferences are rolled back to their default values, as if the add-on was fresh installed.">
-<!ENTITY preferences.reset.tooltip.b "Button placements in toolbars are unaffected, to revert those use the Restore Defaults button in Customize view instead.">
-<!ENTITY preferences.jumpto.label "Jump to preference...">
-<!ENTITY preferences.jumpto.tooltip "Type in a word and you'll be taken to the first preference that contains it.">
+<!ENTITY preferences.button "选项">
+<!ENTITY preferences.undo.label "撤销">
+<!ENTITY preferences.redo.label "重做">
+<!ENTITY preferences.undoredo.tooltip "快速恢复对选项所做的任何修改，包括导入设置和还原默认设置。">
+<!ENTITY preferences.import.label "从文件导入…">
+<!ENTITY preferences.import.tooltip "从之前导出的文件中载入扩展的选项设置。">
+<!ENTITY preferences.export.label "导出到文件…">
+<!ENTITY preferences.export.tooltip "把扩展的选项设置保存到一个外部文件作为备份。">
+<!ENTITY preferences.reset.label "还原默认">
+<!ENTITY preferences.reset.tooltip.a "将所有选项恢复到扩展全新安装时的默认值。">
+<!ENTITY preferences.reset.tooltip.b "放到工具栏上的按钮不受影响，要还原这些按钮，请点击 自定义 视图中的还原默认按钮。">
+<!ENTITY preferences.jumpto.label "跳转到选项">
+<!ENTITY preferences.jumpto.tooltip "输入单词后跳转到包含该词的第一个选项。">
