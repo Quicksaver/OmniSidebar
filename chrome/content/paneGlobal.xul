@@ -54,7 +54,6 @@
 					increment="125"
 					pageincrement="375"
 					width="200"
-					preference-editable="true"
 					delayPreference="pref-transparency"/>
 				<label value="&OptglassStyle.opaque;"/>
 			</hbox>

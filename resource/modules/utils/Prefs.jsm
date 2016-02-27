@@ -1,4 +1,4 @@
-// VERSION 2.6.1
+// VERSION 2.6.3
 Modules.UTILS = true;
 Modules.BASEUTILS = true;
 
@@ -27,55 +27,48 @@ Modules.BASEUTILS = true;
 //									The native preference will be returned to its original value when disabling the add-on. If, on alternative,
 //									you want to fully reset the preference instead (by user option for instance), just define a 'resetNative'
 //									bool preference in the initial prefList and toggle it accordingly.
+//									Important: each native preference can only be proxied once globally (all add-ons) at any one time!
 //	cPref - (string) name of our proxy preference as defined in prefList
 //	nPrefName - (string) name of the native preference we want to proxy
 //	nPrefDefaultValue - (string/bool/int) default value this preference has in Firefox.
 //	see setDefaults()
-// unProxyNative(cPref, nPrefName) - undoes proxying a native preference by the above proxyNative() method
+// unProxyNative(nPrefName) - undoes proxying a native preference by the above proxyNative() method
 //	see proxyNative()
 this.Prefs = {
 	instances: new Map(),
-	natives: new Set(),
+	natives: new Map(),
 	cleaningOnShutdown: false,
 
-	setDefaults: function(prefList, branch, trunk) {
+	get _syncBranch() {
+		delete this._syncBranch;
+		this._syncBranch = Services.prefs.getDefaultBranch('services.sync.prefs.sync.');
+		return this._syncBranch;
+	},
+
+	_getBranch: function(branch, trunk, defaults) {
+		let str = '';
+		if(trunk === undefined) {
+			str = 'extensions.';
+		} else if(trunk) {
+			str = trunk+'.';
+		}
 		if(!branch) {
 			branch = objPathString;
 		}
-		if(!trunk && trunk !== '') {
-			trunk = 'extensions';
-		}
+		str += branch+'.';
 
+		return Services.prefs[defaults ? 'getDefaultBranch' : 'getBranch'](str);
+	},
+
+	setDefaults: function(prefList, branch, trunk) {
 		// we assume that a Prefs module has been initiated in the main process at least once, so none of this is actually necessary
 		if(self.isChrome) {
-			var branchString = ((trunk) ? trunk+'.' : '') +branch+'.';
-			var defaultBranch = Services.prefs.getDefaultBranch(branchString);
-			var syncBranch = Services.prefs.getDefaultBranch('services.sync.prefs.sync.');
+			let defaultBranch = this._getBranch(branch, trunk, true);
 
 			for(let pref in prefList) {
 				if(pref.startsWith('NoSync_')) { continue; }
 
-				// When updating from a version with prefs of same name but different type would throw an error and stop.
-				// In this case, we need to clear it before we can set its default value again.
-				var savedPrefType = defaultBranch.getPrefType(pref);
-				var prefType = typeof(prefList[pref]);
-				var compareType = '';
-				switch(savedPrefType) {
-					case defaultBranch.PREF_STRING:
-						compareType = 'string';
-						break;
-					case defaultBranch.PREF_INT:
-						compareType = 'number';
-						break;
-					case defaultBranch.PREF_BOOL:
-						compareType = 'boolean';
-						break;
-					default: break;
-				}
-				if(compareType && prefType != compareType) {
-					defaultBranch.clearUserPref(pref);
-				}
-
+				let prefType = typeof(prefList[pref]);
 				switch(prefType) {
 					case 'string':
 						defaultBranch.setCharPref(pref, prefList[pref]);
@@ -91,8 +84,8 @@ this.Prefs = {
 						break;
 				}
 
-				if(trunk == 'extensions' && branch == objPathString && !prefList['NoSync_'+pref]) {
-					syncBranch.setBoolPref(trunk+'.'+branch+'.'+pref, true);
+				if(trunk === undefined && branch === undefined && !prefList['NoSync_'+pref]) {
+					this._syncBranch.setBoolPref('extensions.'+objPathString+'.'+pref, true);
 				}
 			}
 		}
@@ -100,21 +93,22 @@ this.Prefs = {
 		// We do this separate from the process above because we would get errors sometimes:
 		// setting a pref that has the same string name initially (e.g. "something" and "somethingElse"), it would trigger a change event for "something"
 		// when set*Pref()'ing "somethingElse"
+		let userBranch = this._getBranch(branch, trunk);
 		for(let pref in prefList) {
 			if(pref.startsWith('NoSync_')) { continue; }
 
 			if(!this.instances.has(pref)) {
-				this._setPref(pref, branch, trunk);
+				this._setPref(pref, userBranch);
 			}
 		}
 	},
 
-	_setPref: function(pref, branch, trunk) {
-		let instance = {};
-
-		instance.listeners = new Set();
-		instance.branch = Services.prefs.getBranch(((trunk) ? trunk+'.' : '') +branch+'.');
-		instance.type = instance.branch.getPrefType(pref);
+	_setPref: function(pref, branch) {
+		let instance = {
+			listeners: new Set(),
+			branch: branch,
+			type: branch.getPrefType(pref)
+		};
 
 		switch(instance.type) {
 			case Services.prefs.PREF_STRING:
@@ -217,7 +211,25 @@ this.Prefs = {
 		}
 
 		// We need to keep this preference accessible also from this object like any of our own preferences.
-		this.setDefaults({ [nPrefName]: nPrefDefaultValue }, branch, trunk);
+		// Try to not overwrite a default value if it exists already, only use the passed argument as a backup.
+		let value = nPrefDefaultValue;
+		let defaults = this._getBranch(branch, trunk, true);
+		let type = defaults.getPrefType(nPrefName);
+		try {
+			switch(type) {
+				case Services.prefs.PREF_STRING:
+					value = defaults.getCharPref(nPrefName);
+					break;
+				case Services.prefs.PREF_INT:
+					value = defaults.getIntPref(nPrefName);
+					break;
+				case Services.prefs.PREF_BOOL:
+					value = defaults.getBoolPref(nPrefName);
+					break;
+			}
+		}
+		catch(ex) { /* the preference probably doesn't have a default value, ignore */ }
+		this.setDefaults({ [nPrefName]: value }, branch, trunk);
 
 		let handler = {
 			nPref: nPrefName,
@@ -242,19 +254,17 @@ this.Prefs = {
 			}
 		};
 
-		this.natives.add(handler);
+		this.natives.set(nPrefName, handler);
 		this[nPrefName] = this[cPref];
 		this.listen(cPref, handler);
 		this.listen(nPrefName, handler);
 	},
 
-	unProxyNative: function(cPref, nPrefName) {
-		for(let x of this.natives) {
-			if(x.nPref == nPrefName && x.cPref == cPref) {
-				this.shutdownProxy(x);
-				this.natives.delete(x);
-				break;
-			}
+	unProxyNative: function(nPrefName) {
+		let proxy = this.natives.get(nPrefName);
+		if(proxy) {
+			this.shutdownProxy(proxy);
+			this.natives.delete(proxy);
 		}
 	},
 
@@ -279,7 +289,7 @@ this.Prefs = {
 
 	cleanNatives: function() {
 		// Restore native preferences to their value before our proxy preferences changed them (if applicable).
-		for(let x of this.natives) {
+		for(let x of this.natives.values()) {
 			this.shutdownProxy(x);
 		}
 	}

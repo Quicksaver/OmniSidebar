@@ -1,4 +1,4 @@
-// VERSION 2.4.12
+// VERSION 2.4.14
 Modules.UTILS = true;
 
 // dependsOn - object that adds a dependson attribute functionality to xul preference elements.
@@ -188,6 +188,11 @@ this.delayPreferences = {
 
 		var nodes = $$('[delayPreference]');
 		for(let node of nodes) {
+			// Scales aren't considered "editable elements" by the preference handlers unless they specifically have this attribute.
+			if(node.localName == "scale" && !trueAttribute(node, "preference-editable")) {
+				setAttribute(node, "preference-editable", "true");
+			}
+
 			node._pref = $(node.getAttribute('delayPreference'));
 			node._pref.setElementValue(node);
 
@@ -1034,6 +1039,7 @@ this.controllers = {
 	},
 
 	showFilePicker: function(mode, prefix, aCallback) {
+		let fileExt = '.json';
 		let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
 		fp.defaultExtension = 'json';
 		fp.appendFilter('JSON data', '*.json');
@@ -1041,13 +1047,18 @@ this.controllers = {
 		if(mode == Ci.nsIFilePicker.modeSave) {
 			let date = new Date();
 			let dateStr = date.getFullYear()+'-'+(date.getMonth() +1)+'-'+date.getDate()+'-'+date.getHours()+'-'+date.getMinutes()+'-'+date.getSeconds();
-			fp.defaultString = prefix+'-'+dateStr;
+			fp.defaultString = prefix+'-'+dateStr+fileExt;
 		}
 
 		fp.init(window, null, mode);
 		fp.open(function(aResult) {
 			if(aResult != Ci.nsIFilePicker.returnCancel) {
-				aCallback(fp.file);
+				let aFile = fp.file;
+				// We always make sure we're saving a .json text file, so that it can be recognized and loaded by the add-on.
+				if(mode == Ci.nsIFilePicker.modeSave && !aFile.path.endsWith(fileExt)) {
+					aFile.initWithPath(aFile.path+fileExt);
+				}
+				aCallback(aFile);
 			}
 		});
 	},
