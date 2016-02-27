@@ -5,6 +5,7 @@
 <!ENTITY about.needsupdate "有可用更新！">
 <!ENTITY about.description "查看&quot;发行说明&quot;和&quot;已知问题&quot;。如果您对未来版本有任何建议，请与我联系。">
 <!ENTITY about.descriptionB "这个附加组件是免费的，但修复问题、添加新功能以及确保兼容新版Firefox有时极为艰难，如果您喜欢这个附加组件，请支持其后续开发工作，如链接所说的，&quot;您是能帮我的&quot;！">
+<!ENTITY about.descriptionC "观看关于我与Firefox的网络生活的最新影片，这系列影片专门为了最能支持开发者的你们而录制！只要点击此页面底部跳动的图标，不管喜欢还是讨厌，请分享它。">
 <!ENTITY about.allVersions "显示所有之前版本的说明">
 <!ENTITY about.notifyOnUpdates "下次更新时显示此标签">
 <!ENTITY about.development "开发进度">
@@ -20,3 +21,7 @@
 <!ENTITY about.profile "从我的资料中找它们">
 <!ENTITY about.share "分享！">
 <!ENTITY about.friends "独乐了不如众乐乐，与小伙伴们分享一个酷炫的浏览器吧！">
+<!ENTITY about.hidePromo "X">
+<!ENTITY about.hideThisPromo "有新影片时提示我">
+<!ENTITY about.hideAllPromos "不再显示此类提示">
+<!ENTITY about.clicktowatch "前往 YouTube 观看">

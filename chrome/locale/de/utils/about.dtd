@@ -5,6 +5,7 @@
 <!ENTITY about.needsupdate "Update verfügbar!">
 <!ENTITY about.description "Lesen Sie die Versionsinformationen und bekannten Probleme für diese Version weiter unten. Lassen Sie mich jegliche Probleme wissen, auf die Sie stoßen, oder teilen Sie mir Vorschläge für zukünftige Versionen mit.">
 <!ENTITY about.descriptionB "Das Add-on ist kostenlos, aber das Beheben von Problemen, Hinzufügen von neuen Funktionen und Überprüfen bei jeder Firefox-Veröffentlichung, dass alles erwartungsgemäß funktioniert, ist aufwendig und kann manchmal auch kompliziert sein. Falls Ihnen das Add-on gefällt, so unterstützen Sie bitte die weitere Entwicklung. Wie der Link bereits sagt: &quot;Sie können helfen&quot;!">
+<!ENTITY about.descriptionC "Schauen Sie sich auch die neueste Folge meiner Web-Serie über Firefox im täglichen Leben an. Diese wurde für Sie alle - die unterstützendsten Nutzer, die man sich vorstellen kann - erstellt! Klicken Sie einfach auf das springende Symbol in der unteren Ecke. Egal, ob Sie es lieben oder hassen: Teilen Sie es.">
 <!ENTITY about.allVersions "Alle Versionsinformationen vergangener Veröffentlichungen anzeigen">
 <!ENTITY about.notifyOnUpdates "Diesen Tab beim nächsten Update anzeigen">
 <!ENTITY about.development "Entwicklungsstand">
@@ -20,3 +21,7 @@
 <!ENTITY about.profile "Besuchen Sie dazu mein Profil">
 <!ENTITY about.share "Teilen!">
 <!ENTITY about.friends "Seien Sie nicht die einzige Person mit einem tollen Browser. Lassen Sie Ihre Freunde davon wissen!">
+<!ENTITY about.hidePromo "X">
+<!ENTITY about.hideThisPromo "Nach Erscheinen einer neuen Folge erneut anzeigen">
+<!ENTITY about.hideAllPromos "Derartige Hinweise nicht mehr anzeigen">
+<!ENTITY about.clicktowatch "Auf YouTube ansehen">

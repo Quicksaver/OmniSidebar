@@ -5,6 +5,7 @@
 <!ENTITY about.needsupdate "¡actualización disponible!">
 <!ENTITY about.description "Revise las &quot;Notas de la versión&quot; y los &quot;Problemas conocidos&quot; para esta versión de debajo. Hágame saber cualquier problema que encuentre, o si tiene alguna sugerencia para versiones futuras.">
 <!ENTITY about.descriptionB "Este complemento es gratuito, pero corregir problemas, añadir nuevas características, y asegurarse de que todo funciona con cada nueva versión de Firefox es laborioso y a veces puede ser difícil. Si disfruta del complemento, por favor, apoye su desarrollo continuado. Como dice el enlace, ¡&quot;Usted puede ayudar&quot;!">
+<!ENTITY about.descriptionC "Ver también el último episodio en mi web serie acerca de la vida con un Firefox, hecho para todos vosotros, ¡los mejores usuarios que un desarrollador puede pedir! Apunta al icono que salta en la esquina inferior de esta página. Ámalo. Ódialo. Compártelo.">
 <!ENTITY about.allVersions "Mostrar notas para todas las versiones previas">
 <!ENTITY about.notifyOnUpdates "Mostrarme esta pestaña en la próxima actualización">
 <!ENTITY about.development "Estado del desarrollo">
@@ -20,3 +21,7 @@
 <!ENTITY about.profile "Los encontrará en mi perfil">
 <!ENTITY about.share "¡Compartir!">
 <!ENTITY about.friends "No sea el único con un gran navegador. ¡Haga partícipes a sus amigos de algo estupendo!">
+<!ENTITY about.hidePromo "X">
+<!ENTITY about.hideThisPromo "mostrar de nuevo cuando haya un nuevo episodio">
+<!ENTITY about.hideAllPromos "no mostrarme más promociones como esta">
+<!ENTITY about.clicktowatch "ver en YouTube">
