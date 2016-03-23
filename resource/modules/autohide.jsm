@@ -1,4 +1,4 @@
-// VERSION 2.0.9
+// VERSION 2.0.10
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -523,18 +523,24 @@ this.autoHide = {
 	},
 
 	setHover: function(bar, hover, force) {
-		if(!bar.resizeBox || bar.closed || !bar.above || !bar.autoHide) { return; }
+		if(!bar.resizeBox || !bar.above || !bar.autoHide) { return; }
+
+		if(bar.closed) {
+			bar.resizeBox.hovers = 0;
+			removeAttribute(bar.resizeBox, 'hover');
+			return;
+		}
 
 		if(hover) {
 			bar.resizeBox.hovers++;
 			setAttribute(bar.resizeBox, 'hover', 'true');
 			removeAttribute(bar.box, 'dontReHover');
-			if(force != undefined && typeof(force) == 'number') {
+			if(force !== undefined) {
 				bar.resizeBox.hovers = force;
 			}
 		}
 		else {
-			if(force != undefined && typeof(force) == 'number') {
+			if(force !== undefined) {
 				bar.resizeBox.hovers = force;
 			} else if(bar.resizeBox.hovers > 0) {
 				bar.resizeBox.hovers--;
@@ -546,14 +552,12 @@ this.autoHide = {
 	},
 
 	initialShow: function(bar, delay) {
-		if(!bar.resizeBox || bar.closed || !bar.above || !bar.autoHide) { return; }
-
-		if(bar.box.hidden) {
-			this.setHover(bar, false, 0);
-			return;
-		}
+		if(!bar.resizeBox || !bar.above || !bar.autoHide) { return; }
 
 		this.setHover(bar, true);
+
+		// If the bar is closed, the above setHover will nill the hover status, and the following becomes useless.
+		if(bar.closed) { return; }
 
 		// don't use Timers, because if we use multiple initialShow()'s it would get stuck open
 		// we keep a reference to the timer, because otherwise sometimes it would not trigger (go figure...), hopefully this helps with that
