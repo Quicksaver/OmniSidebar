@@ -1,4 +1,4 @@
-// VERSION 1.8.7
+// VERSION 1.8.9
 
 // This looks for file defaults.js in resource folder, expects:
 //	objName - (string) main object name for the add-on, to be added to window element
@@ -85,6 +85,28 @@ function LOG(str) {
 	if(!str) { str = typeof(str)+': '+str; }
 	console.log(objName+' :: CHROME :: '+str);
 }
+function STEPLOGGER(name) {
+	this.name = name;
+	this.steps = [];
+	this.initTime = new Date().getTime();
+	this.lastTime = this.initTime;
+}
+STEPLOGGER.prototype = {
+	step: function(name) {
+		let time = new Date().getTime();
+		this.steps.push({ name, time: time - this.lastTime});
+		this.lastTime = time;
+	},
+	end: function() {
+		this.step('end');
+		let endTime = new Date().getTime();
+		let report = { name: this.name, total: endTime - this.initTime };
+		for(let x of this.steps) {
+			report[x.name] = x.time;
+		}
+		console.log(report);
+	}
+};
 
 XPCOMUtils.defineLazyServiceGetter(Services, "xulStore", "@mozilla.org/xul/xulstore;1", "nsIXULStore");
 XPCOMUtils.defineLazyServiceGetter(Services, "navigator", "@mozilla.org/network/protocol;1?name=http", "nsIHttpProtocolHandler");
@@ -256,7 +278,21 @@ function startup(aData, aReason) {
 	Modules.load("utils/sandboxUtils");
 
 	if(typeof(startConditions) != 'function' || startConditions(aReason)) {
-		continueStartup(aReason);
+		if(aReason == APP_STARTUP) {
+			continueStartup(aReason);
+		}
+		// In non-e10s, loadFrameScript from this startup can run load content script even before the previous sandboxed content module had a chance to shutdown.
+		// Case: enable add-on (instance A). Disable add-on. Re-enable add-on (instance B).
+		// This has to happen in immediate succession, i.e. when updating add-on, but not only.
+		// Sandbox content B tries to load before sandbox A received the shutdown message, so sandbox B never loads (because A is still loaded).
+		// Then A receives the shutdown message, it shuts down, and we are left with nothing initialized in the child process.
+		// Here's hoping that a delay of 500ms covers the vast majority of cases, edge-cases (ultra-busy CPU during add-on update?) may still suffer from this.
+		// This doesn't seem to happen in e10s, but I'm leaving the delay there as well because why not. Maybe when e10s is norm this can be removed.
+		else {
+			aSync(function() {
+				continueStartup(aReason);
+			}, 500);
+		}
 	}
 }
 
