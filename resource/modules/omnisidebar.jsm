@@ -1,4 +1,4 @@
-// VERSION 3.0.14
+// VERSION 3.0.15
 
 this.mainSidebar = {
 	main: true,
@@ -858,15 +858,7 @@ this.SidebarUI = {
 			if(!sidebarBroadcaster) { return false; } // we're not ready for this yet
 		}
 
-		if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: {
-			bar: bar,
-			commandID: commandID,
-			forceUnload: forceUnload,
-			forceOpen: forceOpen,
-			forceBlank: forceBlank,
-			forceBarSwitch: forceBarSwitch,
-			forceReload: forceReload
-		} })) {
+		if(!dispatch(bar.sidebar, { type: 'beginToggleSidebar', detail: { bar, commandID, forceUnload, forceOpen, forceBlank, forceBarSwitch, forceReload } })) {
 			return false;
 		}
 
