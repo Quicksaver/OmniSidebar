@@ -1,4 +1,4 @@
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.__defineGetter__('Scratchpad', function() { return window.Scratchpad; });
 this.__defineGetter__('ScratchpadManager', function() { return Scratchpad.ScratchpadManager; });
@@ -120,10 +120,22 @@ this.scratchpad = {
 	},
 
 	acceltext: function() {
-		if(this.broadcaster) {
-			var str = this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext').replace('VK_', '');
-			toggleAttribute(this.broadcaster, 'acceltext', Prefs.alwaysScratchpad, str);
+		if(!this.broadcaster) { return; }
+
+		if(!Prefs.alwaysScratchpad) {
+			removeAttribute(this.broadcaster, 'acceltext');
+			return;
 		}
+
+		let str = this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext');
+		if(Services.vc.compare(Services.appinfo.version, "48.0a1") >= 0) {
+			let MenuStrings = Services.strings.createBundle("chrome://devtools/locale/menus.properties");
+			str += MenuStrings.GetStringFromName('scratchpad.keytext');
+		}
+		let parts = str.split('+');
+		parts[parts.length-1] = parts[parts.length-1].toUpperCase();
+		str = parts.join('+');
+		setAttribute(this.broadcaster, 'acceltext', str);
 	},
 
 	// When closing the window, the prompt for the sidebar doesn't appear, so we make our own prompt to make sure we save any changes that need saving
@@ -255,7 +267,11 @@ this.scratchpad = {
 Modules.LOADMODULE = function() {
 	Prefs.setDefaults({ disable_fastload: false }, 'restartless-restart');
 
-	Overlays.overlayWindow(window, 'scratchpad', scratchpad);
+	if(Services.vc.compare(Services.appinfo.version, "48.0a1") >= 0) {
+		Overlays.overlayWindow(window, 'scratchpad', scratchpad);
+	} else {
+		Overlays.overlayWindow(window, 'scratchpadPre48', scratchpad);
+	}
 	Styles.load('scratchpadSidebar', 'scratchpad');
 
 	Prefs.listen('alwaysScratchpad', scratchpad);
@@ -285,4 +301,5 @@ Modules.UNLOADMODULE = function() {
 	}
 
 	Overlays.removeOverlayWindow(window, 'scratchpad');
+	Overlays.removeOverlayWindow(window, 'scratchpadPre48');
 };

@@ -1,4 +1,4 @@
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://devtools/shared/Loader.jsm");
 this.__defineGetter__('DebuggerServer', function() { return devtools.require("devtools/server/main").DebuggerServer; });
@@ -64,7 +64,47 @@ this.sidebarConsole = {
 	},
 
 	toggleAlways: function(enable) {
-		var command = $("Tools:BrowserConsole");
+		// Firefox 48 creates devtools menu items dynamically, rather than hardcode them into the XUL.
+		if(Services.vc.compare(Services.appinfo.version, "48.0a1") >= 0) {
+			Timers.cancel('delayedToggleAlways');
+
+			let menuItem = $('menu_browserConsole');
+			if(!menuItem) {
+				// It may not have been created yet. We usually only have to wait a second or two.
+				Timers.init('delayedToggleAlways', () => { this.toggleAlways(enable); }, 1000);
+				return;
+			}
+			let keyItem = $(menuItem.getAttribute('key'));
+
+			let { menuitems } = devtools.require("devtools/client/menus.js");
+			let consoleItem;
+			for(let item of menuitems) {
+				if(item.id == 'menu_browserConsole') {
+					consoleItem = item;
+					break;
+				}
+			}
+
+			if(enable && !menuItem._alwaysOpenInSidebar) {
+				menuItem.removeEventListener("command", consoleItem.oncommand);
+				keyItem.removeEventListener("command", consoleItem.oncommand);
+				menuItem._alwaysOpenInSidebar = () => {
+					SidebarUI.toggle(this.broadcasterId);
+				};
+				menuItem.addEventListener("command", menuItem._alwaysOpenInSidebar);
+				keyItem.addEventListener("command", menuItem._alwaysOpenInSidebar);
+			}
+			else if(!enable && menuItem._alwaysOpenInSidebar) {
+				menuItem.removeEventListener("command", menuItem._alwaysOpenInSidebar);
+				keyItem.removeEventListener("command", menuItem._alwaysOpenInSidebar);
+				delete menuItem._alwaysOpenInSidebar;
+				menuItem.addEventListener("command", consoleItem.oncommand);
+				keyItem.addEventListener("command", consoleItem.oncommand);
+			}
+			return;
+		}
+
+		let command = $("Tools:BrowserConsole");
 		if(enable) {
 			if(!command.getAttribute(objName+'_backup_oncommand')) {
 				setAttribute(command, objName+'_backup_oncommand', command.getAttribute('oncommand'));
@@ -81,13 +121,22 @@ this.sidebarConsole = {
 	},
 
 	acceltext: function() {
-		if(this.broadcaster) {
-			var str = this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext');
-			var parts = str.split('+');
-			parts[parts.length-1] = parts[parts.length-1].toUpperCase();
-			str = parts.join('+');
-			toggleAttribute(this.broadcaster, 'acceltext', Prefs.alwaysConsole, str);
+		if(!this.broadcaster) { return; }
+
+		if(!Prefs.alwaysConsole) {
+			removeAttribute(this.broadcaster, 'acceltext');
+			return;
 		}
+
+		let str = this.broadcaster.getAttribute((DARWIN) ? 'MacAcceltext' : 'WinLinAcceltext');
+		if(Services.vc.compare(Services.appinfo.version, "48.0a1") >= 0) {
+			let MenuStrings = Services.strings.createBundle("chrome://devtools/locale/menus.properties");
+			str += MenuStrings.GetStringFromName('browserConsoleCmd.key');
+		}
+		let parts = str.split('+');
+		parts[parts.length-1] = parts[parts.length-1].toUpperCase();
+		str = parts.join('+');
+		setAttribute(this.broadcaster, 'acceltext', str);
 	},
 
 	onLoad: function() {
@@ -115,7 +164,11 @@ Modules.LOADMODULE = function() {
 
 	SidebarUI.holdBroadcasters.add(sidebarConsole.broadcasterId);
 
-	Overlays.overlayWindow(window, 'browserConsole', sidebarConsole);
+	if(Services.vc.compare(Services.appinfo.version, "48.0a1") >= 0) {
+		Overlays.overlayWindow(window, 'browserConsole', sidebarConsole);
+	} else {
+		Overlays.overlayWindow(window, 'browserConsolePre48', sidebarConsole);
+	}
 
 	Observers.add(sidebarConsole, 'web-console-destroyed');
 
@@ -124,12 +177,15 @@ Modules.LOADMODULE = function() {
 };
 
 Modules.UNLOADMODULE = function() {
+	Timers.cancel('delayedToggleAlways');
+
 	Listeners.remove(window, 'SidebarFocused', sidebarConsole);
 	Listeners.remove(window, 'ShouldCollapseSidebar', sidebarConsole);
 
 	Observers.remove(sidebarConsole, 'web-console-destroyed');
 
 	Overlays.removeOverlayWindow(window, 'browserConsole');
+	Overlays.removeOverlayWindow(window, 'browserConsolePre48');
 
 	Prefs.unlisten('alwaysConsole', sidebarConsole);
 	sidebarConsole.toggleAlways(false);

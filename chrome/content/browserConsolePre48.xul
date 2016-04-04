@@ -2,6 +2,8 @@
 <!DOCTYPE window [
   <!ENTITY % overlayDTD SYSTEM "chrome://omnisidebar/locale/overlay.dtd">
   %overlayDTD;
+  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
+  %browserDTD;
 ]>
 <overlay id="browserConsole-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
@@ -13,8 +15,8 @@
 			group="sidebar"
 			sidebarurl="chrome://devtools/content/webconsole/webconsole.xul"
 			sidebartitle="&browserConsole.label;"
-			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+"
-			MacAcceltext="&acceltext.upArrow;&acceltext.cmd;"
+			WinLinAcceltext="&acceltext.ctrl;+&acceltext.shift;+&browserConsoleCmd.commandkey;"
+			MacAcceltext="&acceltext.upArrow;&acceltext.cmd;&browserConsoleCmd.commandkey;"
 			oncommand="SidebarUI.toggle(this);" />
 	</broadcasterset>
 
