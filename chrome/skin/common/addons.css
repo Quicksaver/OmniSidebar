@@ -534,4 +534,9 @@
 		.inSidebar #list-view[type="userstyle"] #addon-list-empty[hidden] ~ #userstyle-sorting { display: block; }
 	}
 
+	/* avoid a weird bug where buttons could occupy a second row
+	   https://github.com/Quicksaver/OmniSidebar/issues/122 */
+	.inSidebar #categories #stylishStrings {
+		display: none;
+	}
 }
