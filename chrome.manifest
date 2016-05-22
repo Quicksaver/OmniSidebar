@@ -1,7 +1,6 @@
 content   omnisidebar                    chrome/content/
 resource  omnisidebar                    resource/
 
-locale    omnisidebar-en   en-US         chrome/locale/en-US/
 locale    omnisidebar      en-US         chrome/locale/en-US/
 locale    omnisidebar      de            chrome/locale/de/
 locale    omnisidebar      es-ES         chrome/locale/es-ES/
