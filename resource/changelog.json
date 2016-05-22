@@ -1,6 +1,21 @@
 {
-	"current":"1.6.12",
+	"current":"1.6.13",
 	"releases": {
+		"1.6.13":{
+			"date":"May 22, 2016",
+			"notes":[
+				["removed","Compatibility with Firefox 44 and below, compatibility with Firefox 45 will be maintained for the duration of the ESR 45 life cycle"],
+				["bugfix","(Firefox 48) preferences tab wouldn't work"],
+				["bugfix","(non-e10s) some missing functionality right after updating the add-on until the browser was restarted"],
+				["bugfix","After navigating away from the preferences tab, navigating back (through the back button) wouldn't work"],
+				["bugfix","Potential fix for sidebar being stuck shown when set to automatically hide"],
+				["bugfix","If \"Keep panel loaded when closing the sidebar\" was checked, exiting Firefox with the sidebar closed could reopen it automatically the next time Firefox started (<a=https://github.com/Quicksaver/OmniSidebar/issues/118>issue #118</a>)"],
+				["bugfix","(Firefox 48) browser console and scratchpad weren't working in the sidebar"],
+				["bugfix","Sometimes, with <a=https://addons.mozilla.org/firefox/addon/stylish/>Stylish</a> enabled, the categories in the Add-ons sidebar could spread across two rows (<a=https://github.com/Quicksaver/OmniSidebar/issues/122>issue #122</a>)"],
+				["bugfix","(Firefox 47) could fail to detect customize mode during startup"],
+				["bugfix","Small memory leak when disabling the add-on (thanks to the8472)"]
+			]
+		},
 		"1.6.12":{
 			"date":"February 27, 2016",
 			"notes":[
