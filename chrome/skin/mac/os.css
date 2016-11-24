@@ -27,10 +27,10 @@ toolbarpaletteitem[place="palette"] .sidebarController:not([updscannew]):not([fe
 
 /* Custom Buttons */
 
-#omnisidebar-console_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 126px 36px 108px); }
-#omnisidebar-dominspector_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 144px 36px 126px); }
-.uri-sidebar-button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 162px 36px 144px); }
-#omnisidebar-scratchpad_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 180px 36px 162px); }
+.omnisidebar-toolbar[coloricons="ff"] #omnisidebar-console_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 126px 36px 108px); }
+.omnisidebar-toolbar[coloricons="ff"] #omnisidebar-dominspector_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 144px 36px 126px); }
+.omnisidebar-toolbar[coloricons="ff"] .uri-sidebar-button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 162px 36px 144px); }
+.omnisidebar-toolbar[coloricons="ff"] #omnisidebar-scratchpad_sidebar_button:not([cui-areatype="menu-panel"]):hover { -moz-image-region: rect(18px 180px 36px 162px); }
 
 .omnisidebar-toolbar[coloricons="color"] #omnisidebar-console_sidebar_button:hover { -moz-image-region: rect(0px 126px 18px 108px); }
 .omnisidebar-toolbar[coloricons="color"] #omnisidebar-dominspector_sidebar_button:hover { -moz-image-region: rect(0px 144px 18px 126px); }

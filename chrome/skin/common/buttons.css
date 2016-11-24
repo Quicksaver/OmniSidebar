@@ -6,14 +6,6 @@
 
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 
-/* General toolbar buttons */
-
-/* I might have to review these in the future; they may not be 100% compatible with every toolbar button out there,
-and it would be better if the buttons themselves were made compatible with the new Australis system. */
-.omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-text { display: none !important; }
-.sidebar-box:not([glassStyle]) .omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-icon { max-height: 24px; }
-.sidebar-box[glassStyle] .omnisidebar-toolbar .toolbarbutton-1 .toolbarbutton-icon { max-height: 17px; }
-
 /* OSB Button */
 
 #omnisidebar-button:not([movetoright]),
