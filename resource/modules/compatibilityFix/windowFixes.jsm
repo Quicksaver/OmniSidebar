@@ -2,9 +2,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.1.11
+// VERSION 1.1.12
 
 Modules.LOADMODULE = function() {
+	toggleAttribute(document.documentElement, "FF51", Services.vc.compare(Services.appinfo.version, "51.0a1") >= 0);
+
 	AddonManager.getAddonByID("{dc0fa13c-3dae-73eb-e852-912722c852f9}", function(addon) {
 		Modules.loadIf('compatibilityFix/milewideback', (addon && addon.isActive));
 	});
@@ -55,6 +57,8 @@ Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/bookmarkedItem');
 	Modules.unload('compatibilityFix/puzzleToolbars');
 	Modules.unload('compatibilityFix/findbartweak');
+
+	removeAttribute(document.documentElement, "FF51");
 
 	if(UNLOADED) {
 		Modules.unload('compatibilityFix/RTL');

@@ -99,57 +99,84 @@ toolbarpaletteitem[place="palette"] > #omnisidebar-scratchpad_sidebar_button {
 
 .osb-replace-button { list-style-image: url("chrome://browser/skin/Toolbar.png"); }
 
-.omnisidebar-toolbar[coloricons="color"] .osb-replace-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
-
-.sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"]) .osb-replace-button:-moz-lwtheme-brighttext,
-:-moz-any(#navigator-toolbox, #browser-bottombox) .osb-replace-button:-moz-lwtheme-brighttext {
+.sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"])[brighttext] .osb-replace-button,
+toolbar:not(.omnisidebar-toolbar)[brighttext] .osb-replace-button {
 	list-style-image: url("chrome://browser/skin/Toolbar-inverted.png");
-}
-
-.osb-replace-button[cui-areatype="menu-panel"],
-toolbarpaletteitem[place="palette"] > .osb-replace-button {
-	list-style-image: url("chrome://browser/skin/menuPanel.png");
 }
 
 #omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 216px 18px 198px); }
 
+#omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 144px 18px 126px); }
+
+#omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 180px 18px 162px); }
+
+#omnisidebar-downloads_sidebar_button { -moz-image-region: rect(0px, 198px, 18px, 180px); }
+
+@media (min-resolution: 1.1dppx) {
+	.osb-replace-button { list-style-image: url("chrome://browser/skin/Toolbar@2x.png"); }
+
+	.sidebar-box[glassStyle] .omnisidebar-toolbar:not([coloricons="color"])[brighttext] .osb-replace-button,
+	toolbar:not(.omnisidebar-toolbar)[brighttext] .osb-replace-button {
+		list-style-image: url("chrome://browser/skin/Toolbar-inverted@2x.png");
+	}
+
+	#omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 432px 36px 396px); }
+
+	#omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 288px 36px 252px); }
+
+	#omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 360px 36px 324px); }
+
+	#omnisidebar-downloads_sidebar_button { -moz-image-region: rect(0px, 396px, 36px, 360px); }
+}
+
+.omnisidebar-toolbar[coloricons="color"] .osb-replace-button { list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png"); }
+
 .omnisidebar-toolbar[coloricons="color"] #omnisidebar-addons_sidebar_button { -moz-image-region: rect(0px 72px 18px 54px); }
+
+.omnisidebar-toolbar[coloricons="color"] #omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 18px 18px 0px); }
+
+.omnisidebar-toolbar[coloricons="color"] #omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 36px 18px 18px); }
+
+.omnisidebar-toolbar[coloricons="color"] #omnisidebar-downloads_sidebar_button { -moz-image-region: rect(0px 54px 18px 36px); }
+
+.omnisidebar-toolbar[coloricons="color"] #downloads-button {
+	list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png");
+	-moz-image-region: rect(0px 54px 18px 36px);
+}
+
+window:not([FF51]) .osb-replace-button[cui-areatype="menu-panel"],
+window:not([FF51]) toolbarpaletteitem[place="palette"] > .osb-replace-button {
+	list-style-image: url("chrome://browser/skin/menuPanel.png");
+}
+
+window[FF51] .osb-replace-button[cui-areatype="menu-panel"],
+window[FF51] toolbarpaletteitem[place="palette"] > .osb-replace-button {
+	list-style-image: url(chrome://browser/skin/menuPanel.svg);
+}
+
+window[FF51] .osb-replace-button[cui-areatype="menu-panel"][panel-multiview-anchor=true] > .toolbarbutton-icon {
+	filter: url(chrome://global/skin/filters.svg#fill);
+	fill: currentColor;
+}
 
 #omnisidebar-addons_sidebar_button[cui-areatype="menu-panel"],
 toolbarpaletteitem[place="palette"] > #omnisidebar-addons_sidebar_button {
 	-moz-image-region: rect(0px 288px 32px 256px);
 }
 
-#omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 144px 18px 126px); }
-
-.omnisidebar-toolbar[coloricons="color"] #omnisidebar-bookmarks_sidebar_button { -moz-image-region: rect(0px 18px 18px 0px); }
-
 #omnisidebar-bookmarks_sidebar_button[cui-areatype="menu-panel"],
 toolbarpaletteitem[place="palette"] > #omnisidebar-bookmarks_sidebar_button {
 	-moz-image-region: rect(0px 160px 32px 128px);
 }
-
-#omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 180px 18px 162px); }
-
-.omnisidebar-toolbar[coloricons="color"] #omnisidebar-history_sidebar_button { -moz-image-region: rect(0px 36px 18px 18px); }
 
 #omnisidebar-history_sidebar_button[cui-areatype="menu-panel"],
 toolbarpaletteitem[place="palette"] > #omnisidebar-history_sidebar_button {
 	-moz-image-region: rect(0px 224px 32px 192px);
 }
 
-#omnisidebar-downloads_sidebar_button { -moz-image-region: rect(0px, 198px, 18px, 180px); }
-
-.omnisidebar-toolbar[coloricons="color"] #omnisidebar-downloads_sidebar_button { -moz-image-region: rect(0px 54px 18px 36px); }
-
 #omnisidebar-downloads_sidebar_button[cui-areatype="menu-panel"],
 toolbarpaletteitem[place="palette"] > #omnisidebar-downloads_sidebar_button {
 	-moz-image-region: rect(0px, 256px, 32px, 224px);
-}
-
-.omnisidebar-toolbar[coloricons="color"] #downloads-button {
-	list-style-image: url("chrome://omnisidebar/skin/custom-buttons-color.png");
-	-moz-image-region: rect(0px 54px 18px 36px);
 }
 
 /* Buttons from other add-ons */
