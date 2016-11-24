@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.3
+// VERSION 2.0.4
 
 this.__defineGetter__('PanelUI', function() { return window.PanelUI; });
 
@@ -25,11 +25,23 @@ this.panel = {
 	handleEvent: function(e) {
 		switch(e.type) {
 			case 'popupshowing':
-				// Linux still opens the context menu when it should open only our panel
-				if(!customizing && e.explicitOriginalTarget
-				&& (e.explicitOriginalTarget == mainSidebar.button || e.explicitOriginalTarget == twinSidebar.button)) {
-					e.preventDefault();
-					e.stopPropagation();
+				switch(e.target) {
+					case contextMenu:
+						// Linux still opens the context menu when it should open only our panel
+						if(!customizing && e.explicitOriginalTarget
+						&& (e.explicitOriginalTarget == mainSidebar.button || e.explicitOriginalTarget == twinSidebar.button)) {
+							e.preventDefault();
+							e.stopPropagation();
+						}
+						break;
+
+					default:
+						// Firefox really doesn't like it when something opens menus anchored to a panel.
+						if(this.panel && this.panel.state == 'open') {
+							e.preventDefault();
+							e.stopPropagation();
+						}
+						break;
 				}
 				break;
 
@@ -282,11 +294,11 @@ this.panel = {
 };
 
 Modules.LOADMODULE = function() {
-	Listeners.add(contextMenu, 'popupshowing', panel, true);
+	Listeners.add(window, 'popupshowing', panel, true);
 	Overlays.overlayWindow(window, "miniPanel", panel);
 };
 
 Modules.UNLOADMODULE = function() {
 	Overlays.removeOverlayWindow(window, "miniPanel");
-	Listeners.remove(contextMenu, 'popupshowing', panel, true);
+	Listeners.remove(window, 'popupshowing', panel, true);
 };
