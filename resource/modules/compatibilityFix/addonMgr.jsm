@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.addonMgr = {
 	broadcasterId: objName+'-viewAddonSidebar',
@@ -42,14 +42,25 @@ this.addonMgr = {
 
 	toggleAlways: function(enable) {
 		if(enable) {
-			toCode.modify(window, 'window.BrowserOpenAddonsMgr', [
-				['var newLoad = !switchToTabHavingURI("about:addons", true);',
-					 'var newLoad = !window.switchToTabHavingURI("about:addons", false);'
-					+'if(newLoad) {'
-					+"	SidebarUI.toggle('omnisidebar-viewAddonSidebar');"
-					+'}'
-				]
-			]);
+			if(Services.vc.compare(Services.appinfo.version, "48.0a1") < 0) {
+				toCode.modify(window, 'window.BrowserOpenAddonsMgr', [
+					['var newLoad = !switchToTabHavingURI("about:addons", true);',
+						 'var newLoad = !window.switchToTabHavingURI("about:addons", false);'
+						+'if(newLoad) {'
+						+"	SidebarUI.toggle('omnisidebar-viewAddonSidebar');"
+						+'}'
+					]
+				]);
+			} else {
+				toCode.modify(window, 'window.BrowserOpenAddonsMgr', [
+					['switchToTabHavingURI("about:addons", true);',
+						 'let newLoad = !window.switchToTabHavingURI("about:addons", false);'
+						+'if(newLoad) {'
+						+"	SidebarUI.toggle('omnisidebar-viewAddonSidebar');"
+						+'}'
+					]
+				]);
+			}
 		} else {
 			toCode.revert(window, 'window.BrowserOpenAddonsMgr');
 		}
