@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.5
+// VERSION 2.0.6
 
 XPCOMUtils.defineLazyModuleGetter(this, "devtools", "resource://devtools/shared/Loader.jsm");
 this.__defineGetter__('DebuggerServer', function() { return devtools.require("devtools/server/main").DebuggerServer; });
@@ -29,15 +29,27 @@ this.sidebarConsole = {
 				DebuggerServer.allowChromeProcess = true;
 
 				let client = new DebuggerClient(DebuggerServer.connectPipe());
-				client.connect(function() {
-					client.getProcess().then(function(aResponse) {
+				if(Services.vc.compare(Services.appinfo.version, "47.0a1") < 0) {
+					client.connect(function() {
+						client.getProcess().then(function(aResponse) {
+							// Set chrome:false in order to attach to the target
+							// (i.e. send an `attach` request to the chrome actor)
+							devtools.TargetFactory.forRemoteTab({ form: aResponse.form, client: client, chrome: false }).then(function(target) {
+								HUDService.openBrowserConsole(target, e.target, e.target);
+							});
+						});
+					});
+				} else {
+					client.connect().then(function() {
+						return client.getProcess();
+					}).then(function(aResponse) {
 						// Set chrome:false in order to attach to the target
 						// (i.e. send an `attach` request to the chrome actor)
 						devtools.TargetFactory.forRemoteTab({ form: aResponse.form, client: client, chrome: false }).then(function(target) {
 							HUDService.openBrowserConsole(target, e.target, e.target);
 						});
 					});
-				});
+				}
 				break;
 
 			case 'ShouldCollapseSidebar':
@@ -164,8 +176,6 @@ Modules.LOADMODULE = function() {
 	Prefs.listen('alwaysConsole', sidebarConsole);
 	sidebarConsole.toggleAlways(Prefs.alwaysConsole);
 
-	Styles.load('browserConsole', 'browserConsole');
-
 	SidebarUI.holdBroadcasters.add(sidebarConsole.broadcasterId);
 
 	if(Services.vc.compare(Services.appinfo.version, "48.0a1") >= 0) {
@@ -194,11 +204,8 @@ Modules.UNLOADMODULE = function() {
 	Prefs.unlisten('alwaysConsole', sidebarConsole);
 	sidebarConsole.toggleAlways(false);
 
-	if(UNLOADED) {
-		if(UNLOADED != APP_SHUTDOWN) {
-			if(mainSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(mainSidebar); }
-			if(twinSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(twinSidebar); }
-		}
-		Styles.unload('browserConsole');
+	if(UNLOADED && UNLOADED != APP_SHUTDOWN) {
+		if(mainSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(mainSidebar); }
+		if(twinSidebar.command == sidebarConsole.broadcasterId) { SidebarUI.close(twinSidebar); }
 	}
 };
