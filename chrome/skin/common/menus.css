@@ -40,3 +40,17 @@ see https://github.com/Quicksaver/OmniSidebar/issues/66 */
 #omnisidebar-panelView-toolbarContainer autorepeatbutton[disabled="true"] {
 	opacity: 0;
 }
+
+panelview:not([mainview]) #omnisidebar-panelView-toolbarContainer .toolbarbutton-text,
+.cui-widget-panel #omnisidebar-panel-toolbarContainer toolbarbutton > .toolbarbutton-text {
+	display: none;
+}
+
+#omnisidebar-panelView-toolbarContainer {
+	--arrowpanel-dimmed: transparent;
+	--arrowpanel-dimmed-further: transparent;
+}
+
+panelview #omnisidebar-panelView-toolbarContainer .toolbarbutton-1:-moz-any(:not([disabled]):-moz-any([open],:hover:active),[checked=true]) {
+	box-shadow: none;
+}
