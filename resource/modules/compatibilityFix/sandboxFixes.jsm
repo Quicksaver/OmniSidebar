@@ -2,7 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.1.7
+// VERSION 1.1.8
+
+this.isSocial = Services.vc.compare(Services.appinfo.version, "51.0a1") < 0;
 
 Modules.LOADMODULE = function() {
 	Modules.load('compatibilityFix/AddonManager');

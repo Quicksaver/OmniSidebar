@@ -32,6 +32,7 @@
 			sidebartitle="&BlankSidebar.label;"
 			oncommand="SidebarUI.toggle(this);" />
 
+		<!-- remove in FF51+ -->
 		<broadcaster id="objName-viewSocialSidebar"
 			label=""
 			autoCheck="false"
@@ -84,6 +85,7 @@
 
 	<vbox id="sidebar-box" persist="width" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
+	<!-- remove in FF51+ -->
 	<vbox id="social-sidebar-box" waitForSS="chrome://objPathString/skin/overlay.css"/>
 	<splitter id="social-sidebar-splitter" waitForSS="chrome://objPathString/skin/overlay.css"/>
 

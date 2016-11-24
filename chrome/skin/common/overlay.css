@@ -56,6 +56,7 @@ window[inDOMFullscreen] .omnisidebar_switch {
 	visibility: collapse !important;
 }
 
+/* remove in FF51+ */
 /* hide the social sidebar, since we use our own for it */
 #social-sidebar-box,
 #social-sidebar-splitter,

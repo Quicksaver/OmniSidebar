@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 3.0.15
+// VERSION 3.0.16
 
 this.mainSidebar = {
 	main: true,
@@ -20,7 +20,7 @@ this.mainSidebar = {
 	holdFocused: false,
 	get command () { return this.box && this.box.getAttribute('sidebarcommand'); },
 	set command (v) { return setAttribute(this.box, 'sidebarcommand', v); },
-	get isSocial () { return !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
+	get isSocial () { return isSocial && !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
 	get isOpen () {
 		if(this.isSocial) { return true; }
 
@@ -179,7 +179,7 @@ this.twinSidebar = {
 	holdFocused: false,
 	get command () { return this.box && this.box.getAttribute('sidebarcommand'); },
 	set command (v) { return setAttribute(this.box, 'sidebarcommand', v); },
-	get isSocial () { return !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
+	get isSocial () { return isSocial && !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
 	get isOpen () {
 		if(this.isSocial) { return true; }
 
@@ -1157,7 +1157,7 @@ Modules.LOADMODULE = function() {
 	window.SidebarUI = SidebarUI;
 
 	Modules.load('webPanels');
-	Modules.load('social');
+	Modules.loadIf('social', isSocial);
 
 	// I guess some add-ons can set these, they override the css set ones so we have to erase them
 	mainSidebar.sidebar.style.maxWidth = '';

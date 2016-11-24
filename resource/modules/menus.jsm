@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.4
+// VERSION 2.0.5
 
 this.menus = {
 	get viewSidebarMenu () { return $('viewSidebarMenu'); },
@@ -67,6 +67,7 @@ this.menus = {
 		}
 	},
 
+	/* remove in FF51+ */
 	socialStatusArea: {
 		get menu () { return $('social-statusarea-popup'); },
 
@@ -141,7 +142,7 @@ this.menus = {
 		}
 
 		// Populate with Social API entries
-		if(SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: this.viewSidebarMenu }); }
+		if(isSocial && SocialSidebar.populateSidebarMenu) { SocialSidebar.populateSidebarMenu({ target: this.viewSidebarMenu }); }
 
 		for(let child of this.viewSidebarMenu.childNodes) {
 			// PanelUI styling is mostly done with toolbarbutton elements, so if I want to use the native styling, I have to use these nodes as well
@@ -182,10 +183,11 @@ this.menus = {
 	},
 
 	menuItemsCheck: function(menu) {
-		var mainMenu = (menu == this.viewSidebarMenu);
+		let mainMenu = (menu == this.viewSidebarMenu);
+		if(!isSocial && mainMenu) { return; }
 
 		for(let child of menu.childNodes) {
-			if(!child.getAttribute('observes')) {
+			if(isSocial && !child.getAttribute('observes')) {
 				child.hidden = !SocialSidebar.canShow;
 				if(child.getAttribute('origin')) {
 					if(child.getAttribute('oncommand').includes('show')) {
@@ -295,7 +297,9 @@ Modules.LOADMODULE = function() {
 	Listeners.add(menus.contextMenu.menu, 'popupshowing', menus.contextMenu);
 	Listeners.add(menus.viewMenu.menu, 'popupshown', menus.viewMenu);
 	Listeners.add(menus.customizeMenu.menu, 'popupshown', menus.customizeMenu);
-	Listeners.add(menus.socialStatusArea.menu, 'popupshowing', menus.socialStatusArea);
+	if(isSocial) {
+		Listeners.add(menus.socialStatusArea.menu, 'popupshowing', menus.socialStatusArea);
+	}
 
 	SidebarUI.triggers.twin.set('viewTwinSidebarMenuMenu', function() { return $(objName+'-viewTwinSidebarMenuMenu'); });
 	SidebarUI.triggers.twin.set('menuTitleTwin', function() { return $(objName+'-openTwinSidebarMenu'); });
@@ -329,11 +333,15 @@ Modules.UNLOADMODULE = function() {
 	Listeners.remove(menus.contextMenu.menu, 'popupshowing', menus.contextMenu);
 	Listeners.remove(menus.viewMenu.menu, 'popupshown', menus.viewMenu);
 	Listeners.remove(menus.customizeMenu.menu, 'popupshown', menus.customizeMenu);
-	Listeners.remove(menus.socialStatusArea.menu, 'popupshowing', menus.socialStatusArea);
+	if(isSocial) {
+		Listeners.remove(menus.socialStatusArea.menu, 'popupshowing', menus.socialStatusArea);
+	}
 
 	// ensure the menu is properly reset when unloading
 	menus.menuItemsCheck(menus.viewSidebarMenu);
-	if(menus.socialStatusArea.menu) { menus.menuItemsCheck(menus.socialStatusArea.menu); }
+	if(isSocial && menus.socialStatusArea.menu) {
+		menus.menuItemsCheck(menus.socialStatusArea.menu);
+	}
 
 	menus.toggleMenuButton();
 	menus.toggleMenuButtonTwin();

@@ -6,6 +6,7 @@
 @-moz-document url("chrome://browser/content/browser.xul") {
 
 	#sidebar-box:not(.sidebar-box),
+	/* remove social stuff in FF51+ */
 	#social-sidebar-box,
 	#social-sidebar-splitter,
 	.social-toggle-sidebar-menuitem {
