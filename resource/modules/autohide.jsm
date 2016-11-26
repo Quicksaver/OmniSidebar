@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.10
+// VERSION 2.0.11
 
 this.autoHide = {
 	handleEvent: function(e) {
@@ -10,11 +10,6 @@ this.autoHide = {
 			// handles mousing over the sidebar switch
 			case 'endToggleSidebar':
 				e.detail.bar.toggleSwitcher();
-				break;
-
-			case 'SidebarFocusedSync':
-				// visibility:hidden makes it impossible to use .focus() within the sidebar (bookmarks/history)
-				setAttribute(e.detail.bar.resizeBox, 'SidebarFocused', 'true');
 				break;
 
 			case 'SidebarFocused':
@@ -26,8 +21,6 @@ this.autoHide = {
 				if(!Prefs.noInitialShow || bar.autoHideInit) {
 					this.initialShow(bar, 1000);
 				}
-
-				removeAttribute(bar.resizeBox, 'SidebarFocused');
 				break;
 
 			case 'startSidebarResize':
@@ -635,7 +628,6 @@ Modules.LOADMODULE = function() {
 
 	Listeners.add(window, 'endToggleSidebar', autoHide);
 	Listeners.add(window, 'SidebarFocused', autoHide);
-	Listeners.add(window, 'SidebarFocusedSync', autoHide);
 	Listeners.add(window, 'startSidebarResize', autoHide);
 	Listeners.add(window, 'endSidebarResize', autoHide);
 	Listeners.add(window, 'popupshowing', autoHide);
@@ -648,7 +640,6 @@ Modules.LOADMODULE = function() {
 Modules.UNLOADMODULE = function() {
 	Listeners.remove(window, 'endToggleSidebar', autoHide);
 	Listeners.remove(window, 'SidebarFocused', autoHide);
-	Listeners.remove(window, 'SidebarFocusedSync', autoHide);
 	Listeners.remove(window, 'startSidebarResize', autoHide);
 	Listeners.remove(window, 'endSidebarResize', autoHide);
 	Listeners.remove(window, 'popupshowing', autoHide);
