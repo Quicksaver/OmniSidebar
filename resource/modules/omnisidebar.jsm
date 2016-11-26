@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 3.0.17
+// VERSION 3.0.18
 
 this.mainSidebar = {
 	main: true,
@@ -19,7 +19,7 @@ this.mainSidebar = {
 	contentFocused: false,
 	get command () { return this.box && this.box.getAttribute('sidebarcommand'); },
 	set command (v) { return setAttribute(this.box, 'sidebarcommand', v); },
-	get isSocial () { return isSocial && !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
+	get isSocial () { return isSocial && (!this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box))); },
 	get isOpen () {
 		if(this.isSocial) { return true; }
 
@@ -177,7 +177,7 @@ this.twinSidebar = {
 	contentFocused: false,
 	get command () { return this.box && this.box.getAttribute('sidebarcommand'); },
 	set command (v) { return setAttribute(this.box, 'sidebarcommand', v); },
-	get isSocial () { return isSocial && !this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box)); },
+	get isSocial () { return isSocial && (!this.box || this.box.getAttribute('origin') || (typeof(Social) != 'undefined' && isAncestor(Social.browser, this.box))); },
 	get isOpen () {
 		if(this.isSocial) { return true; }
 
