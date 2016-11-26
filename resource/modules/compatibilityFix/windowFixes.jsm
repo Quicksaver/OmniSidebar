@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 1.1.12
+// VERSION 1.1.13
 
 Modules.LOADMODULE = function() {
 	toggleAttribute(document.documentElement, "FF51", Services.vc.compare(Services.appinfo.version, "51.0a1") >= 0);
@@ -13,10 +13,6 @@ Modules.LOADMODULE = function() {
 
 	AddonManager.getAddonByID("edgewise@software.donnapaul.net", function(addon) {
 		Modules.loadIf('compatibilityFix/edgewise', (addon && addon.isActive));
-	});
-
-	AddonManager.getAddonByID("isreaditlater@ideashower.com", function(addon) {
-		Modules.loadIf('compatibilityFix/pocket', (addon && addon.isActive));
 	});
 
 	AddonManager.getAddonByID("autopager@mozilla.org", function(addon) {
@@ -44,7 +40,6 @@ Modules.LOADMODULE = function() {
 Modules.UNLOADMODULE = function() {
 	Modules.unload('compatibilityFix/milewideback');
 	Modules.unload('compatibilityFix/edgewise');
-	Modules.unload('compatibilityFix/pocket');
 	Modules.unload('compatibilityFix/autoPager');
 	Modules.unload('compatibilityFix/treestyletab');
 	Modules.unload('compatibilityFix/console');
