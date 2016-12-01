@@ -1,6 +1,27 @@
 {
-	"current":"1.6.13",
+	"current":"1.6.14",
 	"releases": {
+		"1.6.14":{
+			"date":"December 1, 2016",
+			"notes":[
+				["changed","When the add-on is automatically updated, it now shows a less intrusive notification toaster message linking to the release notes; as before, this can still be disabled in the About page in the add-on's preferences"],
+				["changed","Button style in the sidebar toolbar, to better fit the current Firefox default theme"],
+				["updated","it and zn-CN locales"],
+				["removed","Compatibility code for very old Read-it-Later (Pocket) add-on"],
+				["bugfix","In small windows, the add-on's preferences page could overflow and lose its scrollbars, where some content would be inaccessible"],
+				["bugfix","Compatibility with <e=tab-mix-plus>Tab Mix Plus</e>; setting a shortcut to one reserved (but unused) by Tab Mix Plus's session related features at startup wouldn't work"],
+				["bugfix","In a few cases (multi-window + e10s + sometimes) the add-on could fail to fully initialize"],
+				["bugfix","(Firefox 51) add-on would barely work at all because of the removal of the Social Sidebar from Firefox (<i=137>)"],
+				["bugfix","(Firefox 51) certain button icons were not appearing"],
+				["bugfix","The Browser Console would not work in the sidebar"],
+				["bugfix","Prevent menu popups from opening anchored to the mini panel, the browser doesn't seem to like that at all (<i=128>)"],
+				["bugfix","The option to always open the add-ons manager in the sidebar was not working (<i=129>)"],
+				["bugfix","With the sidebar auto-hiding, opening it would often not show it immediately or focus it search box for the bookmarks and history sidebars (<i=136>)"],
+				["bugfix","The Discovery view was not working in the add-ons sidebar (<i=140>)"],
+				["general","Added MPL license headers to source files"],
+				["","Other minor fixes"]
+			]
+		},
 		"1.6.13":{
 			"date":"May 22, 2016",
 			"notes":[
