@@ -12,60 +12,60 @@
 <!ENTITY Optswitchers.label "点击浏览器边缘打开或关闭">
 <!ENTITY Optswitchers.tooltip "通过点击窗口边缘切换侧栏，在最大化窗口时使用效果更佳！鼠标光标位于可点击位置时该区域会变为蓝色。">
 <!ENTITY OptautoClose.label "失去焦点时关闭/隐藏侧栏">
-<!ENTITY OptautoClose.tooltip "The sidebar will be automatically closed when you click a link in it, or when you click outside of it for instance. If the sidebar is undocked and set to automatically hide, it will be immediately hidden instead of closed.">
+<!ENTITY OptautoClose.tooltip "侧栏将在点击链接时或点击侧栏之外时自动关闭。如果侧栏已经与浏览器窗口分离并设置为自动隐藏，那么侧栏不会关闭，而是隐藏。">
 <!ENTITY Optundock.label "从浏览器窗口分离">
-<!ENTITY Optundock.tooltip "The sidebar will be shown popping out from the side, above the webpage, rather than next to it">
+<!ENTITY Optundock.tooltip "在网页出现弹出窗口时，侧栏将从侧边出现并在网页内容上显示窗口，以取代在旁边显示的方式。">
 <!ENTITY Optautohide.label "自动隐藏到边缘">
-<!ENTITY Optautohide.tooltip "The sidebar will roll out of view when it's not needed. Simply move the mouse to the margin of the window and it will roll back out again.">
+<!ENTITY Optautohide.tooltip "侧栏在不需要时自动隐藏。只要将鼠标移动到浏览器窗口边缘侧栏便会再度显示。">
 <!ENTITY OptglassStyle.label "对所有侧栏应用玻璃样式">
-<!ENTITY OptglassStyle.tooltip "A special style that gives all of your sidebar panels a glassed look. It can optionally be made see-through, so if for example the sidebar is undocked, you can see the web content behind it.">
+<!ENTITY OptglassStyle.tooltip "一个赋予侧边栏玻璃化外观的样式。这一样式可以是透明的，这样一来（举个例子），当侧栏出现时，可以看到其覆盖下的网页内容。">
 <!ENTITY OptglassStyle.opaque "不透明">
 <!ENTITY OptglassStyle.transparent "完全透明">
 <!ENTITY Optfx.label "启用过渡效果">
-<!ENTITY Optfx.tooltip "You can disable the transition effects for automatically showing or hiding the sidebar if you dislike them or if they aren't very smooth for you.">
+<!ENTITY Optfx.tooltip "当你觉得你喜欢侧栏自动隐藏或显示时的过渡动画或者这一动画不流畅时可以禁用。">
 <!ENTITY OptshowDelay.label "侧栏自动显示延时(毫秒):">
-<!ENTITY OptshowDelay.tooltip "Amount of time to wait between moving the mouse to the margin and showing the sidebar.">
+<!ENTITY OptshowDelay.tooltip "鼠标移至浏览器边缘以显示侧栏时的等待延时">
 <!ENTITY OpthideDelay.label "侧栏自动隐藏延时(毫秒):">
-<!ENTITY OpthideDelay.tooltip "Amount of time to wait between moving the mouse out of the sidebar and hiding it.">
+<!ENTITY OpthideDelay.tooltip "鼠标移出浏览器边缘以隐藏侧栏时的等待延时">
 <!ENTITY OptswitcherAdjust.label "调整激活区域宽度(像素):">
-<!ENTITY OptswitcherAdjust.tooltip "You can increase the size of the margin area that is reactive to clicks and mouse movement.">
+<!ENTITY OptswitcherAdjust.tooltip "可以增加用于点击或移动鼠标激活侧栏的边缘面积">
 <!ENTITY OptkeepPrivate.label "隐私浏览模式沿用侧栏状态">
-<!ENTITY OptkeepPrivate.tooltip.a "When entering or exiting Private Browsing Mode (PBM), the sidebar will stay open with the same panel loaded.">
-<!ENTITY OptkeepPrivate.tooltip.b "If this is disabled, the sidebar will always be closed when entering PBM, and will always return to the previously opened panel (before PBM was enabled) when exiting it.">
-<!ENTITY OptkeepPrivate.tooltip.c "This preference is necessary if PBM is enabled by default on every startup and you want the sidebar state to be remembered between browsing sessions.">
+<!ENTITY OptkeepPrivate.tooltip.a "进入或推出隐私模式时，侧栏保持开启并保留载入内容。">
+<!ENTITY OptkeepPrivate.tooltip.b "如果这一选项警用，进入隐私模式时侧栏保持关闭；退出隐私模式时返回（进入隐私模式之前）已打开的面板内容。">
+<!ENTITY OptkeepPrivate.tooltip.c "这一选项在隐私模式随浏览器启动而默认激活时时必需的，并且侧栏状态在不同会话中会被保留">
 <!ENTITY OptkeepLoaded.label "关闭侧栏后仍保持面板载入状态">
-<!ENTITY OptkeepLoaded.tooltip "When you close the sidebar it will stay loaded in the background. For instance, when you re-open it, its current scrolling position or any textbox contents will be remembered.">
+<!ENTITY OptkeepLoaded.tooltip "关闭侧栏时在后台保持载入状态。例如，当重新打开时，当前的滚动条位置及文本内容将保留">
 <!ENTITY Optgroupalways.label "总是在侧栏中打开">
-<!ENTITY Optgroupalways.tooltip "These panels will always open in the sidebar when triggered from their own toolbar buttons or keyboard shortcuts.">
+<!ENTITY Optgroupalways.tooltip "当从工具栏按钮或键盘快捷键启动时，这些面板将始终在侧栏打开">
 <!ENTITY addonsSidebar.label "附加组件管理器">
 <!ENTITY omnisidebarBrowserConsole.label "浏览器控制台">
 <!ENTITY omnisidebarDMT.label "下载">
 <!ENTITY omnisidebarPageInfo.label "页面信息">
 <!ENTITY omnisidebarScratchpad.label "代码片段速记器">
 <!ENTITY OptforceOpen.label "不要关闭侧栏从">
-<!ENTITY OptforceOpen.tooltip "When clicking one of these elements for a sidebar panel already loaded, it will stay open rather than close it.">
+<!ENTITY OptforceOpen.tooltip "当点击下列元素之一时，若侧栏已经载入，那么侧栏保持开启，不再关闭">
 <!ENTITY OptforceOpen.toolbars "侧栏工具栏中的按钮">
 <!ENTITY OptforceOpen.menus "下拉菜单">
 <!ENTITY Opttoolbar.label "侧栏工具栏">
-<!ENTITY Opttoolbar.tooltip "Inserts a customizable toolbar at the top of the sidebar, next to its title.">
+<!ENTITY Opttoolbar.tooltip "在侧栏标题旁边可以放入自定义的图标">
 <!ENTITY OptGoURI.label "包含'前往'按钮">
-<!ENTITY OptGoURI.tooltip "The 'Go' button lets you load specific about: and chrome:// URI's in the sidebar; it will not let you load remote webpages!">
+<!ENTITY OptGoURI.tooltip "”前往“按钮让你在侧栏中载入特定的about:以及chrome://一类URL，但不载入远程页面">
 <!ENTITY Optshowheadertitle.label "显示侧栏标题">
-<!ENTITY Optshowheadertitle.tooltip "The currently opened sidebar's name is shown at the top.">
+<!ENTITY Optshowheadertitle.tooltip "当前打开的侧栏名称显示于顶部">
 <!ENTITY OpttitleButton.label "从标题栏下拉侧栏菜单">
-<!ENTITY OpttitleButton.tooltip "Click the sidebar's title to open a popup menu with all the available sidebars that you can switch to.">
+<!ENTITY OpttitleButton.tooltip "点击侧栏标题可打开一个带有所有可切换的侧栏的弹出菜单、">
 <!ENTITY Optshowheaderdock.label "显示停靠按钮">
-<!ENTITY Optshowheaderdock.tooltip "Show a button at the top of the sidebar to quickly dock and undock it.">
+<!ENTITY Optshowheaderdock.tooltip "于侧栏顶部显示一个快速切换侧栏是否与浏览器窗口分离的按钮">
 <!ENTITY Optshowheaderclose.label "显示关闭按钮">
-<!ENTITY Optshowheaderclose.tooltip "Show a button at the top of the sidebar to quickly close it.">
+<!ENTITY Optshowheaderclose.tooltip "于侧栏顶部显示一个关闭侧栏的按钮">
 <!ENTITY Optcoloricons.label "按钮图标集:">
 <!ENTITY Optcoloricons.nochange.label "默认">
-<!ENTITY Optcoloricons.nochange.tooltip "No change is made to the icons in the toolbar.">
+<!ENTITY Optcoloricons.nochange.tooltip "工具栏中的这一图标没有变化">
 <!ENTITY Optcoloricons.firefox.label "FireFox">
-<!ENTITY Optcoloricons.firefox.tooltip "The icons in the toolbar are changed so that they fit in with the firefox default theme whenever possible.">
+<!ENTITY Optcoloricons.firefox.tooltip "工具栏中的图标已被修改以在任何适当时候适应Firefox默认主题">
 <!ENTITY Optcoloricons.color.label "多彩">
-<!ENTITY Optcoloricons.color.tooltip "The icons in the toolbar are changed to their colorful versions whenever possible.">
+<!ENTITY Optcoloricons.color.tooltip "工具栏中的图标已在任何适当时候切换至多彩版本">
 <!ENTITY OptKeysetPanel.label "打开迷你面板而非侧栏">
-<!ENTITY OptKeysetPanel.tooltip "The keyboard shortcut opens the mini panel giving you a choice of possible actions, instead of opening or closing the sidebar directly.">
+<!ENTITY OptKeysetPanel.tooltip "这个键盘快捷键不会直接打开或关闭侧栏，而是打开一个微型面板，提供所有可能的选择。">
 <!ENTITY OptKeyboardShortcut.caption "侧栏键盘快捷键">
-<!ENTITY OptKeyboardShortcut.tooltip "The keyboard shortcut is the quickest way to close and re-open the sidebar.">
+<!ENTITY OptKeyboardShortcut.tooltip "键盘快捷键是关闭或重新打开侧栏的最快速方法。">

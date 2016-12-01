@@ -7,6 +7,7 @@
 <!ENTITY about.descriptionC "观看关于我与Firefox的网络生活的最新影片，这系列影片专门为了最能支持开发者的你们而录制！只要点击此页面底部跳动的图标，不管喜欢还是讨厌，请分享它。">
 <!ENTITY about.allVersions "显示所有之前版本的说明">
 <!ENTITY about.notifyOnUpdates "下次更新时显示此标签">
+<!ENTITY about.silentUpdates "Don't notify me on the next update">
 <!ENTITY about.development "开发进度">
 <!ENTITY about.helpdevelopment "您能帮助我">
 <!ENTITY about.information "更多信息">
