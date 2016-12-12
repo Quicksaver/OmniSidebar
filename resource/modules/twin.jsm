@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.0.0
+// VERSION 2.0.1
 
 this.twin = {
 	observe: function(aSubject, aTopic, aData) {
@@ -79,11 +79,8 @@ this.twin = {
 
 		switcher.disable(twinSidebar);
 
-		for(let id of SidebarUI.dontSaveBroadcasters) {
-			if(twinSidebar.command == id) {
-				SidebarUI.close(twinSidebar);
-				break;
-			}
+		if(SidebarUI.dontSaveBroadcasters.has(twinSidebar.command)) {
+			SidebarUI.close(twinSidebar);
 		}
 
 		this.unsetBroadcasters();

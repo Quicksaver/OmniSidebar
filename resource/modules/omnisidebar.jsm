@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 3.0.18
+// VERSION 3.0.19
 
 this.mainSidebar = {
 	main: true,
@@ -482,15 +482,10 @@ this.setLastCommand = function(bar) {
 	&& $(bar.command)
 	&& $(bar.command).localName == 'broadcaster'
 	&& !trueAttribute($(bar.command), 'disabled')) {
-		var saveCommand = true;
-		for(let id of SidebarUI.dontSaveBroadcasters) {
-			if(id == bar.command) {
-				saveCommand = false;
-				break;
-			}
-		}
-		if(saveCommand) {
-			bar.state = bar.command;
+		let command = bar.command;
+		let save = !SidebarUI.dontSaveBroadcasters.has(command);
+		if(save) {
+			bar.state = command;
 		}
 		setClass(bar);
 		aSync(function() { setClass(bar); });
@@ -1113,11 +1108,8 @@ this.onUnload = function() {
 	mainSidebar.loaded = false;
 	switcher.disable(mainSidebar);
 
-	for(let id of SidebarUI.dontSaveBroadcasters) {
-		if(mainSidebar.command == id) {
-			SidebarUI.close(mainSidebar);
-			return;
-		}
+	if(SidebarUI.dontSaveBroadcasters.has(mainSidebar.command)) {
+		SidebarUI.close(mainSidebar);
 	}
 };
 
