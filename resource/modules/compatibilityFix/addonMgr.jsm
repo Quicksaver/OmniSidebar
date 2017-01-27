@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-// VERSION 2.1.0
+// VERSION 2.1.1
 
 this.addonMgr = {
 	broadcasterId: objName+'-viewAddonSidebar',
@@ -69,20 +69,21 @@ this.addonMgr = {
 							let browser = view && view._browser;
 							if(browser && browser.contentDocument == aSubject) {
 								let unwrap = XPCNativeWrapper.unwrap(browser.contentWindow);
-								let history = unwrap.history;
-								if(history._replaceState) { return; }
 
 								// Setting the history state in the new discovery page fails in the sidebar, but it is (or seems to be) inconsequential there.
-								history._replaceState = history.replaceState;
-								history.replaceState = function() {
-									try {
-										return this._replaceState.apply(this, arguments);
-									}
-									catch(exx) {
-										// Don't block initialization of the discovery page if this fails in the sidebar.
-										return this.state || {};
-									}
-								};
+								let history = unwrap.history;
+								if(!history._replaceState) {
+									history._replaceState = history.replaceState;
+									history.replaceState = function() {
+										try {
+											return this._replaceState.apply(this, arguments);
+										}
+										catch(exx) {
+											// Don't block initialization of the discovery page if this fails in the sidebar.
+											return this.state || {};
+										}
+									};
+								}
 							}
 						}
 					}
